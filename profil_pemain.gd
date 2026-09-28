@@ -16,7 +16,7 @@ signal profil_berubah
 const BERKAS := "user://profil.cfg"
 const BERKAS_SEMENTARA := "user://profil.cfg.tmp"
 const BERKAS_CADANGAN := "user://profil.cfg.bak"
-const VERSI := 2 # Fase 4: + role_terakhir, jebakan_role (A), xp_role/build_solo/arena (B, belum dipakai)
+const VERSI := 2 # Fase 4: + role_terakhir, jebakan_role (A), xp_role/build_solo/arena (B, T19: sudah dipakai sejak B-c/B-e -- lihat catat_akhir_match/build_solo/build_arena)
 
 # --- XP & Crowns per pertandingan ---
 const XP_PER_GILIRAN := 5
@@ -92,10 +92,11 @@ var _rng := RandomNumberGenerator.new()
 # --- Fase 4 Langkah A: role elemen ---
 var role_terakhir := ""        # "" = belum pernah pilih role -> layar ROLE minta memilih
 var jebakan_role := {}         # role -> Array jenis jebakan tambahan yang terakhir dipilih untuk role itu
-# --- Fase 4 Langkah B: belum dipakai kode mana pun, disiapkan supaya berkas VERSI 2
-# tidak perlu diubah lagi saat pohon skill ditulis. ---
+# --- Fase 4 Langkah B: disiapkan Langkah A supaya berkas VERSI 2 tidak perlu
+# diubah lagi -- T19 (B-f, 14.19): SUDAH dipakai sejak B-c (arena, layar lobby
+# ROLE) & B-e (xp_role/build_solo, catat_akhir_match & layar pohon skill). ---
 var xp_role := {}              # role -> XP Role
-var build_solo := {}           # role -> {node_id: level}
+var build_solo := {}           # role -> {"preset": "balanced"|"attack"|"defense"|"custom", "node": {...}} (P7)
 var arena := {}                # role -> {"preset": "balanced"|"attack"|"defense"|"custom", "node": {...}}
 
 func _ready() -> void:

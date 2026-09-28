@@ -179,7 +179,7 @@ static func logika_ai_fase_awal(main_node: Node, slot: int = 1) -> void:
 			if not k["id"].begins_with("pedang"): bisa_dipakai.append(k)
 	if bisa_dipakai.size() > 0:
 		if main_node.mesin_acak.randi_range(1, 100) <= 40:
-			var kartu_dipilih = bisa_dipakai[randi() % bisa_dipakai.size()]
+			var kartu_dipilih = bisa_dipakai[main_node.mesin_acak.randi_range(0, bisa_dipakai.size() - 1)] # K23 (B-f, 14.19): randi() global -> mesin_acak (host-only, tidak desync, tapi harus ikut aturan RNG proyek)
 			var indeks_asal = main_node.daftar_pemain[slot].inventaris_kartu.find(kartu_dipilih)
 			main_node.daftar_pemain[slot].inventaris_kartu.remove_at(indeks_asal)
 

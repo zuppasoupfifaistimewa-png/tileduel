@@ -43,6 +43,21 @@ const FAKTOR_NILAI_TANAH := 0.5
 # ini (cegah T5, Sacred terbuang di petak Lv0 murah).
 const AMBANG_MENARA_SACRED := 1
 
+# P13 (B-f, 14.19/T16, Opus menyetel tanpa persetujuan -- K11): AI sekarang
+# membaca build SUNGGUHAN pemasangnya (_angka_jebakan, pemain_role.gd/B-b) saat
+# menilai korban -- sebelum ini _nilai_korban/_nilai_tanah selalu memakai
+# DataRole.DASAR (Lv0), jadi Attack/Defense/Balanced preset TIDAK berpengaruh
+# ke keputusan AI (efeknya tetap terjadi, cuma tidak ikut dipertimbangkan).
+# Angka awal, boleh disetel U9 (P14).
+const NILAI_LANGKAH_HILANG := 20.0  # angin: whirlwind, per langkah dadu hilang
+const NILAI_KUNCI_KARTU := 20.0     # air: frozen_bubble, per giliran kartu terkunci
+const NILAI_LOW_ROLL := 40.0        # air: frozen_bubble Lv3, LOW ROLL sekali
+const NILAI_BINTANG := 100.0        # air: nilai dasar +1 bintang (high_tide)
+const NILAI_KARTU := 60.0           # petir: nilai 1 kartu dicuri (card_magnet)
+const FAKTOR_ULANG_ULTIMATE := 1.5  # Phoenix (api) / Tornado (angin): korban terulang
+const FAKTOR_DUEL_TAMBAHAN := 0.5   # tanah: hard_rock, per duel TAMBAHAN di atas 1
+const FAKTOR_HP_AWAL := 1.3         # tanah: hard_rock Lv3, +HP awal duel
+
 static func pilih_role_ai(main_node: Node, slot: int) -> String:
 	# Solo (pemain_role.gd _siapkan_role_solo): acak dengan mesin_acak,
 	# utamakan role yang BELUM dipakai slot lain (role boleh kembar kalau
@@ -107,24 +122,40 @@ static func _denda_petak(main_node: Node, posisi: int) -> int:
 		return 600
 	return 100
 
-static func _nilai_korban(main_node: Node, slot: int, lawan: int, elemen: String, posisi: int) -> float:
+static func _nilai_korban(main_node: Node, slot: int, lawan: int, elemen: String, posisi: int, angka: Dictionary) -> float:
 	# D4 (B-d/K17a, 26-09): nilai SATU korban untuk api/angin/air/petir lewat
 	# MEKANIK ASLI yang sama dengan efeknya -- bukan potongan flat lama. Guard
 	# (node ketahanan Lv3 korban) belum terpakai -> korban KEBAL TOTAL (jebakan
 	# akan dibatalkan Guard), SAMA untuk semua elemen -- dicek PALING AWAL.
+	# P13 (B-f, 14.19/T16): angka = main_node._angka_jebakan(slot, elemen) SEKALI
+	# per elemen (dihitung pemanggil, _pilih_elemen_biasa, di luar loop lawan ini)
+	# -- SATU sumber angka build pemasang, sama dipakai efek host (B4).
 	if main_node._guard_boleh(lawan, elemen):
 		return 0.0
 	match elemen:
 		"api":
-			var nilai = float(DataRole.DASAR["bakar_per_giliran"] * DataRole.DASAR["bakar_giliran"])
-			return nilai * (1.0 - DataRole.potongan_tahan(main_node._tahan(lawan, "api")))
+			var pot = 1.0 - DataRole.potongan_tahan(main_node._tahan(lawan, "api"))
+			var nilai = float(angka["bakar_per_giliran"]) * float(angka["bakar_giliran"]) * pot * (1.0 + float(angka["fire_tax"]))
+			if bool(angka.get("phoenix", false)):
+				nilai *= FAKTOR_ULANG_ULTIMATE # Phoenix: jebakan hidup lagi -> korban terulang
+			return nilai
 		"angin":
-			var nilai = DataRole.DASAR["rampas_angin"] * main_node.daftar_pemain[lawan].uang
-			return nilai * (1.0 - DataRole.potongan_tahan(main_node._tahan(lawan, "angin")))
+			var pot = 1.0 - DataRole.potongan_tahan(main_node._tahan(lawan, "angin"))
+			var nilai = float(angka["persen_rampas"]) * main_node.daftar_pemain[lawan].uang * pot * (1.0 + float(angka["bagian_homing"])) \
+				+ NILAI_LANGKAH_HILANG * float(angka["langkah_hilang"])
+			if bool(angka.get("tornado", false)):
+				nilai *= FAKTOR_ULANG_ULTIMATE # Tornado: jebakan hidup lagi -> korban terulang
+			return nilai
 		"air":
 			# Steady Feet sudah masuk lewat _durasi_gelembung (angka TETAP 1
 			# giliran di Lv1+, bukan potongan persen) -- tidak ada potongan lain.
-			return NILAI_GELEMBUNG_PER_GILIRAN * main_node._durasi_gelembung(lawan)
+			var nilai = NILAI_GELEMBUNG_PER_GILIRAN * main_node._durasi_gelembung(lawan)
+			nilai += NILAI_KUNCI_KARTU * float(angka["kunci_kartu"])
+			if bool(angka.get("low_roll_beku", false)):
+				nilai += NILAI_LOW_ROLL
+			var bonus_bintang = NILAI_BINTANG + (100.0 if bool(angka.get("tide_koin", false)) else 0.0)
+			nilai += float(angka["peluang_tide"]) * bonus_bintang
+			return nilai
 		"petir":
 			var info = main_node._paralisis_untuk(lawan)
 			var sisa = int(info["sisa"])
@@ -135,6 +166,9 @@ static func _nilai_korban(main_node: Node, slot: int, lawan: int, elemen: String
 				# lumpuh, K13 -- jebakan tidak lagi mencegah serangan balik penuh).
 				var faktor_denda = 0.5 if bool(info["boleh_fight"]) else 1.0
 				nilai += float(_denda_petak(main_node, posisi)) * faktor_denda
+			nilai += float(angka["koin_hilang"])
+			if main_node.daftar_pemain[lawan].inventaris_kartu.size() > 0:
+				nilai += float(angka["peluang_magnet"]) * NILAI_KARTU
 			return nilai
 	return 0.0
 
@@ -155,9 +189,16 @@ static func _nilai_tanah(main_node: Node, slot: int, posisi: int) -> float:
 	# api/angin/petir/air yang memang menjumlah peluang independen tiap lawan
 	# lewat lintasan papan (tanah tidak punya "peluang lewat", cuma siapa yang
 	# BISA menyerang petak ini kelak).
+	# P13 (B-f, 14.19/T16): angka pemasang SUNGGUHAN (hard_rock/stone_thorns),
+	# dibaca SEKALI (bukan per lawan, sama seperti angka elemen lain di
+	# _pilih_elemen_biasa) -- stone_thorns_ai dulu dihitung ulang manual di sini
+	# (lv_node+NODE_LV), SEKARANG pengali_kalah dari _angka_jebakan (SATU sumber).
+	var angka: Dictionary = main_node._angka_jebakan(slot, "tanah")
 	var base = float(_denda_petak(main_node, posisi)) * FAKTOR_NILAI_TANAH
-	var lv_duri_ai = main_node._lv_node(slot, "stone_thorns")
-	var stone_thorns_ai: float = float(DataRole.NODE_LV["stone_thorns"][lv_duri_ai]) if lv_duri_ai > 0 else float(DataRole.DASAR["pengali_kalah_duel"])
+	base *= (1.0 + FAKTOR_DUEL_TAMBAHAN * float(int(angka["sisa_duel"]) - 1)) # hard_rock: lebih banyak duel bertahan
+	if int(angka["hp_tambahan_awal"]) > 0:
+		base *= FAKTOR_HP_AWAL # hard_rock Lv3: +HP awal duel
+	var stone_thorns_ai: float = float(angka["pengali_kalah"])
 	var total := 0.0
 	var jumlah_lawan := 0
 	for lawan in range(main_node.jumlah_pemain()):
