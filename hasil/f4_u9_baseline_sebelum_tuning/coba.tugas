@@ -1,0 +1,5 @@
+u9s1_api_air_k0_0 1 alam 5000 quick api,air preset=attack,balanced sp=12
+u9s2_0 3 alam 6200 quick air,api,api,api preset=defense,attack,attack,defense sp=12
+u9s3_api_air_k0_0 1 alam 6600 quick api,air lv_semua=20
+u9s4_api_air_0 1 alam 7800 quick api,air lv_semua=1
+u9s5_2p_0 1 alam 8200 quick - role=api,petir level_role=20 mode_build=balanced

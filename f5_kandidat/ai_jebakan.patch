@@ -1,0 +1,15 @@
+--- /home/claude/ai_jebakan.gd	2026-09-26 22:44:38.496073937 +0700
++++ /tmp/claude-0/-home-claude/bc2a37a6-77d5-5593-942f-124ebd210f19/scratchpad/proj_tanpa_uji/ai_jebakan.gd	2026-09-28 09:23:16.579229429 +0700
+@@ -24,10 +24,10 @@
+ # Nilai minimal supaya AI mau memasang jebakan (bagian 6 langkah 4). Angka
+ # awal -- disetel Opus di uji keseimbangan (K11 / U3, target: AI memasang
+ # 2-6 jebakan per Quick 2 pemain).
+-const AMBANG_NILAI := 50.0 # U3: 80 -> 50 (80 = 1,3 jebakan/AI/Quick 2P, di bawah target)
++const AMBANG_NILAI := 40.0 # U3: 80 -> 50 (80 = 1,3 jebakan/AI/Quick 2P, di bawah target)
+ # Peluang AI benar-benar memasang walau nilainya cukup (1-100, mesin_acak) --
+ # supaya AI tidak SELALU memasang begitu nilainya lewat ambang.
+-const AMBANG_PELUANG := 80 # U3: 70 -> 80
++const AMBANG_PELUANG := 90 # U3: 70 -> 80
+ # D4 (B-d/K17a, 26-09): NILAI_PETIR_LUMPUH (150, flat) DIHAPUS -- diganti 2
+ # angka level-sensitif: dasar BERHENTI selalu kena (petir tetap menghentikan
+ # gerakan korban meski Grounded tinggi) + tambahan PER GILIRAN sisa lumpuh

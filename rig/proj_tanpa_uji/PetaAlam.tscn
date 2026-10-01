@@ -1,0 +1,258 @@
+[gd_scene format=3 uid="uid://cham4srdasm5q"]
+
+[ext_resource type="Script" uid="uid://btbnxpictjrw2" path="res://lingkungan_alam.gd" id="1_1bhgj"]
+[ext_resource type="Script" uid="uid://ce3ntygme0quk" path="res://petak_papan.gd" id="1_6u3fk"]
+
+[node name="PetaAlam" type="Node3D" unique_id=1491081222]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1816956562]
+
+[node name="PapanPermainan" type="Node3D" parent="." unique_id=1192785566]
+
+[node name="Petak_0" type="Marker3D" parent="PapanPermainan" unique_id=1395723233]
+script = ExtResource("1_6u3fk")
+petak_selanjutnya = Array[NodePath]([NodePath("../Petak_1")])
+is_start_point = true
+
+[node name="CSGBox3D" type="CSGBox3D" parent="PapanPermainan/Petak_0" unique_id=1788209613]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.1, 0)
+use_collision = true
+size = Vector3(7, 0.2, 7)
+
+[node name="Petak_1" type="Marker3D" parent="PapanPermainan" unique_id=1476269821]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.186499, 0, -0.0005245209)
+script = ExtResource("1_6u3fk")
+petak_selanjutnya = Array[NodePath]([NodePath("../Petak_2")])
+
+[node name="CSGBox3D" type="CSGBox3D" parent="PapanPermainan/Petak_1" unique_id=2075824267]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.018606186, -0.1, 0)
+use_collision = true
+size = Vector3(7, 0.2, 7)
+
+[node name="Petak_2" type="Marker3D" parent="PapanPermainan" unique_id=2061868822]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.384731, 0, 0.0024375916)
+script = ExtResource("1_6u3fk")
+petak_selanjutnya = Array[NodePath]([NodePath("../Petak_3")])
+
+[node name="CSGBox3D" type="CSGBox3D" parent="PapanPermainan/Petak_2" unique_id=1930420149]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.1, 0)
+use_collision = true
+size = Vector3(7, 0.2, 7)
+
+[node name="Petak_3" type="Marker3D" parent="PapanPermainan" unique_id=1023378174]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 21.57901, 0, -0.009776115)
+script = ExtResource("1_6u3fk")
+petak_selanjutnya = Array[NodePath]([NodePath("../Petak_4")])
+
+[node name="CSGBox3D" type="CSGBox3D" parent="PapanPermainan/Petak_3" unique_id=1810600086]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.1, 0)
+use_collision = true
+size = Vector3(7, 0.2, 7)
+
+[node name="Petak_4" type="Marker3D" parent="PapanPermainan" unique_id=1958105151]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 21.528568, 0, -7.2331815)
+script = ExtResource("1_6u3fk")
+petak_selanjutnya = Array[NodePath]([NodePath("../Petak_5")])
+
+[node name="CSGBox3D" type="CSGBox3D" parent="PapanPermainan/Petak_4" unique_id=1770770060]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.08140373, -0.1, 0)
+use_collision = true
+size = Vector3(7, 0.2, 7)
+
+[node name="Petak_5" type="Marker3D" parent="PapanPermainan" unique_id=1938466115]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 21.53368, 0, -14.422524)
+script = ExtResource("1_6u3fk")
+petak_selanjutnya = Array[NodePath]([NodePath("../Petak_6")])
+
+[node name="CSGBox3D" type="CSGBox3D" parent="PapanPermainan/Petak_5" unique_id=2085894611]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.044649124, -0.1, 0.044261932)
+use_collision = true
+size = Vector3(7, 0.2, 7)
+
+[node name="Petak_6" type="Marker3D" parent="PapanPermainan" unique_id=118596449]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 21.560993, 0, -21.546394)
+script = ExtResource("1_6u3fk")
+petak_selanjutnya = Array[NodePath]([NodePath("../Petak_7")])
+
+[node name="CSGBox3D" type="CSGBox3D" parent="PapanPermainan/Petak_6" unique_id=1405864103]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.1, 0)
+use_collision = true
+size = Vector3(7, 0.2, 7)
+
+[node name="Petak_7" type="Marker3D" parent="PapanPermainan" unique_id=1125886941]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.362291, 0, -21.566626)
+script = ExtResource("1_6u3fk")
+petak_selanjutnya = Array[NodePath]([NodePath("../Petak_8")])
+pilihan_warna_permata = 1
+warna_cahaya_permata = Color(0.9372549, 0.99215686, 0.37254903, 1)
+
+[node name="CSGBox3D" type="CSGBox3D" parent="PapanPermainan/Petak_7" unique_id=762484174]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.1, 0)
+use_collision = true
+size = Vector3(7, 0.2, 7)
+
+[node name="Petak_8" type="Marker3D" parent="PapanPermainan" unique_id=1964711979]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.356692, 0, -28.733545)
+script = ExtResource("1_6u3fk")
+petak_selanjutnya = Array[NodePath]([NodePath("../Petak_9")])
+
+[node name="CSGBox3D" type="CSGBox3D" parent="PapanPermainan/Petak_8" unique_id=98662893]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.1, 0)
+use_collision = true
+size = Vector3(7, 0.2, 7)
+
+[node name="Petak_9" type="Marker3D" parent="PapanPermainan" unique_id=959627645]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.337681, 0, -35.89147)
+script = ExtResource("1_6u3fk")
+petak_selanjutnya = Array[NodePath]([NodePath("../Petak_10")])
+
+[node name="CSGBox3D" type="CSGBox3D" parent="PapanPermainan/Petak_9" unique_id=322532197]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.1, 0)
+use_collision = true
+size = Vector3(7, 0.2, 7)
+
+[node name="Petak_10" type="Marker3D" parent="PapanPermainan" unique_id=89168210]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.32386, 0, -43.031742)
+script = ExtResource("1_6u3fk")
+petak_selanjutnya = Array[NodePath]([NodePath("../Petak_11")])
+
+[node name="CSGBox3D" type="CSGBox3D" parent="PapanPermainan/Petak_10" unique_id=535882613]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.1, 0)
+use_collision = true
+size = Vector3(7, 0.2, 7)
+
+[node name="Petak_11" type="Marker3D" parent="PapanPermainan" unique_id=2093325629]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.311203, 0, -50.137115)
+script = ExtResource("1_6u3fk")
+petak_selanjutnya = Array[NodePath]([NodePath("../Petak_12")])
+
+[node name="CSGBox3D" type="CSGBox3D" parent="PapanPermainan/Petak_11" unique_id=401155226]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.1, 0)
+use_collision = true
+size = Vector3(7, 0.2, 7)
+
+[node name="Petak_12" type="Marker3D" parent="PapanPermainan" unique_id=227822861]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.1716003, 0, -50.21036)
+script = ExtResource("1_6u3fk")
+petak_selanjutnya = Array[NodePath]([NodePath("../Petak_13")])
+
+[node name="CSGBox3D" type="CSGBox3D" parent="PapanPermainan/Petak_12" unique_id=1139505351]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.1, 0)
+use_collision = true
+size = Vector3(7, 0.2, 7)
+
+[node name="Petak_13" type="Marker3D" parent="PapanPermainan" unique_id=1735145485]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.07676172, 0, -50.244667)
+script = ExtResource("1_6u3fk")
+petak_selanjutnya = Array[NodePath]([NodePath("../Petak_14")])
+is_petak_kartu = true
+
+[node name="CSGBox3D" type="CSGBox3D" parent="PapanPermainan/Petak_13" unique_id=1422666970]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.1, 0)
+use_collision = true
+size = Vector3(7, 0.2, 7)
+
+[node name="Petak_14" type="Marker3D" parent="PapanPermainan" unique_id=578716205]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.144471, 0, -50.2511)
+script = ExtResource("1_6u3fk")
+petak_selanjutnya = Array[NodePath]([NodePath("../Petak_15")])
+
+[node name="CSGBox3D" type="CSGBox3D" parent="PapanPermainan/Petak_14" unique_id=800500983]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.1, 0)
+use_collision = true
+size = Vector3(7, 0.2, 7)
+
+[node name="Petak_15" type="Marker3D" parent="PapanPermainan" unique_id=994990968]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.1390905, 0, -43.058174)
+script = ExtResource("1_6u3fk")
+petak_selanjutnya = Array[NodePath]([NodePath("../Petak_16")])
+
+[node name="CSGBox3D" type="CSGBox3D" parent="PapanPermainan/Petak_15" unique_id=437407783]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.1, 0)
+use_collision = true
+size = Vector3(7, 0.2, 7)
+
+[node name="Petak_16" type="Marker3D" parent="PapanPermainan" unique_id=2070352311]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.137446, 0, -35.795753)
+script = ExtResource("1_6u3fk")
+petak_selanjutnya = Array[NodePath]([NodePath("../Petak_17")])
+
+[node name="CSGBox3D" type="CSGBox3D" parent="PapanPermainan/Petak_16" unique_id=336843351]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.1, 0)
+use_collision = true
+size = Vector3(7, 0.2, 7)
+
+[node name="Petak_17" type="Marker3D" parent="PapanPermainan" unique_id=829712342]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.1397924, 0, -28.573)
+script = ExtResource("1_6u3fk")
+petak_selanjutnya = Array[NodePath]([NodePath("../Petak_18")])
+
+[node name="CSGBox3D" type="CSGBox3D" parent="PapanPermainan/Petak_17" unique_id=1160288008]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.1, 0)
+use_collision = true
+size = Vector3(7, 0.2, 7)
+
+[node name="Petak_18" type="Marker3D" parent="PapanPermainan" unique_id=1263774720]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.1397924, 0, -21.394638)
+script = ExtResource("1_6u3fk")
+petak_selanjutnya = Array[NodePath]([NodePath("../Petak_19")])
+
+[node name="CSGBox3D" type="CSGBox3D" parent="PapanPermainan/Petak_18" unique_id=1083550068]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.1, 0)
+use_collision = true
+size = Vector3(7, 0.2, 7)
+
+[node name="Petak_19" type="Marker3D" parent="PapanPermainan" unique_id=107604830]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14.261762, 0, -21.408886)
+script = ExtResource("1_6u3fk")
+petak_selanjutnya = Array[NodePath]([NodePath("../Petak_20")])
+
+[node name="CSGBox3D" type="CSGBox3D" parent="PapanPermainan/Petak_19" unique_id=2120101886]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.1, 0)
+use_collision = true
+size = Vector3(7, 0.2, 7)
+
+[node name="Petak_20" type="Marker3D" parent="PapanPermainan" unique_id=1121206077]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14.275467, 0, -14.253745)
+script = ExtResource("1_6u3fk")
+petak_selanjutnya = Array[NodePath]([NodePath("../Petak_21")])
+
+[node name="CSGBox3D" type="CSGBox3D" parent="PapanPermainan/Petak_20" unique_id=1532961698]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.1, 0)
+use_collision = true
+size = Vector3(7, 0.2, 7)
+
+[node name="Petak_21" type="Marker3D" parent="PapanPermainan" unique_id=1085124282]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14.278721, 0, -7.1106167)
+script = ExtResource("1_6u3fk")
+petak_selanjutnya = Array[NodePath]([NodePath("../Petak_22")])
+is_petak_permata = true
+warna_cahaya_permata = Color(0, 0.5019608, 0, 1)
+
+[node name="CSGBox3D" type="CSGBox3D" parent="PapanPermainan/Petak_21" unique_id=997109010]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.1, 0)
+use_collision = true
+size = Vector3(7, 0.2, 7)
+
+[node name="Petak_22" type="Marker3D" parent="PapanPermainan" unique_id=1501061142]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.116033, 0, -7.136221)
+script = ExtResource("1_6u3fk")
+petak_selanjutnya = Array[NodePath]([NodePath("../Petak_23")])
+
+[node name="CSGBox3D" type="CSGBox3D" parent="PapanPermainan/Petak_22" unique_id=1723330556]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.1, 0)
+use_collision = true
+size = Vector3(7, 0.2, 7)
+
+[node name="Petak_23" type="Marker3D" parent="PapanPermainan" unique_id=495483704]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.1025615, 0, -0.01233387)
+script = ExtResource("1_6u3fk")
+petak_selanjutnya = Array[NodePath]([NodePath("../Petak_0")])
+
+[node name="CSGBox3D" type="CSGBox3D" parent="PapanPermainan/Petak_23" unique_id=306557625]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.1, 0)
+use_collision = true
+size = Vector3(7, 0.2, 7)
+
+[node name="LingkunganAlam" type="Node3D" parent="." unique_id=329846275]
+script = ExtResource("1_1bhgj")

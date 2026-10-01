@@ -1,0 +1,21 @@
+== v8: 1198 baris, 1198 sah, 0 gagal/macet/error
+  per role (menang / tampil, 95% CI):
+    air     213/ 480 =  44.4%  [ 40.0 -  48.8]
+    angin   261/ 478 =  54.6%  [ 50.1 -  59.0]
+    api     228/ 480 =  47.5%  [ 43.1 -  52.0]
+    petir   218/ 478 =  45.6%  [ 41.2 -  50.1]
+    tanah   278/ 480 =  57.9%  [ 53.5 -  62.3]
+  per pasangan (baris menang lawan kolom), tanda ! = batas bawah CI > 55%:
+    air    vs angin   51/120 =  42.5% [ 34.0- 51.4]
+    air    vs api     56/120 =  46.7% [ 38.0- 55.6]
+    air    vs petir   61/120 =  50.8% [ 42.0- 59.6]
+    air    vs tanah   45/120 =  37.5% [ 29.4- 46.4]
+    angin  vs api     64/120 =  53.3% [ 44.4- 62.0]
+    angin  vs petir   68/118 =  57.6% [ 48.6- 66.2]
+    angin  vs tanah   60/120 =  50.0% [ 41.2- 58.8]
+    api    vs petir   61/120 =  50.8% [ 42.0- 59.6]
+    api    vs tanah   47/120 =  39.2% [ 30.9- 48.1]
+    petir  vs tanah   50/120 =  41.7% [ 33.2- 50.6]
+  jebakan/AI/pertandingan: rata2 2.22 median 2.0 dalam 2-6: 1495/2396 (62%)  sebaran {0: 369, 1: 528, 2: 479, 3: 545, 4: 249, 5: 167, 6: 55, 7: 4}
+  detik 2 pemain: n=1198 rata2 289.2 (+-5.1 CI95)
+  cara berakhir: {'ronde': 851, 'start': 347}

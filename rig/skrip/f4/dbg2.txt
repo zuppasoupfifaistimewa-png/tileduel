@@ -1,0 +1,589 @@
+[500] DBGJ tolak_boleh fase=awal b=4
+[500] DBGJ tolak_boleh fase=awal b=4
+[500] DBGJ nilai fase=awal api 105.0 b=4
+[500] DBGJ nilai fase=awal api 41.7 b=4
+[500] DBGJ nilai fase=awal api 90.0 b=2
+[500] DBGJ nilai fase=awal  0.0 b=4
+[500] DBGJ tolak_bintang fase=awal b=1 lv2=false
+[500] DBGJ nilai fase=awal api 4.2 b=4
+[500] DBGJ nilai fase=awal api 63.0 b=4
+[500] DBGJ nilai fase=awal api 87.5 b=7
+[500] DBGJ nilai fase=awal api 63.0 b=4
+[500] DBGJ nilai fase=awal api 125.0 b=6
+[500] DBGJ nilai fase=awal  0.0 b=7
+[500] DBGJ nilai fase=awal api 150.0 b=4
+[500] DBGJ nilai fase=awal  0.0 b=7
+[500] DBGJ nilai fase=awal api 150.0 b=3
+[500] SEIMBANG peta=alam seed=500 quick=1 roles=api,air pemenang=0 cara=ronde giliran=16 detik=378.9 pasang=2,4 kena=2,3 kaya=3980,3358
+[501] DBGJ tolak_boleh fase=awal b=4
+[501] DBGJ tolak_boleh fase=awal b=4
+[501] DBGJ nilai fase=awal api 62.5 b=4
+[501] DBGJ nilai fase=awal tanah 60.0 b=4
+[501] DBGJ nilai fase=awal tanah 50.0 b=4
+[501] DBGJ nilai fase=awal tanah 60.0 b=4
+[501] DBGJ nilai fase=awal tanah 50.0 b=7
+[501] DBGJ nilai fase=awal tanah 60.0 b=4
+[501] DBGJ nilai fase=awal api 125.0 b=7
+[501] DBGJ nilai fase=awal petir 100.0 b=7
+[501] DBGJ nilai fase=awal tanah 50.0 b=6
+[501] DBGJ nilai fase=awal petir 100.0 b=6
+[501] DBGJ nilai fase=awal  0.0 b=5
+[501] DBGJ nilai fase=awal  0.0 b=6
+[501] DBGJ nilai fase=awal tanah 60.0 b=5
+[501] SEIMBANG peta=pantai seed=501 quick=1 roles=air,tanah pemenang=1 cara=ronde giliran=16 detik=335.6 pasang=1,2 kena=1,2 kaya=2810,3080
+[502] DBGJ tolak_boleh fase=awal b=4
+[502] DBGJ tolak_boleh fase=awal b=4
+[502] DBGJ nilai fase=awal tanah 60.0 b=4
+[502] DBGJ nilai fase=awal  0.0 b=4
+[502] DBGJ nilai fase=awal tanah 60.0 b=4
+[502] DBGJ nilai fase=awal api 150.0 b=3
+[502] DBGJ nilai fase=awal tanah 60.0 b=4
+[502] DBGJ nilai fase=awal api 145.8 b=6
+[502] DBGJ nilai fase=awal tanah 60.0 b=4
+[502] DBGJ nilai fase=awal api 150.0 b=5
+[502] DBGJ nilai fase=awal tanah 60.0 b=7
+[502] DBGJ nilai fase=awal api 150.0 b=4
+[502] DBGJ nilai fase=awal tanah 180.0 b=6
+[502] DBGJ nilai fase=awal api 125.0 b=7
+[502] DBGJ nilai fase=awal angin 249.0 b=5
+[502] DBGJ nilai fase=awal api 4.2 b=7
+[502] SEIMBANG peta=alam seed=502 quick=1 roles=tanah,petir pemenang=1 cara=ronde giliran=16 detik=360.7 pasang=1,2 kena=0,2 kaya=3540,4020
+[504] DBGJ tolak_boleh fase=awal b=4
+[504] DBGJ tolak_boleh fase=awal b=4
+[504] DBGJ nilai fase=awal angin 198.0 b=4
+[504] DBGJ nilai fase=awal angin 137.5 b=4
+[504] DBGJ nilai fase=awal  0.0 b=4
+[504] DBGJ nilai fase=awal angin 300.6 b=3
+[504] DBGJ nilai fase=awal  0.0 b=7
+[504] DBGJ nilai fase=awal  0.0 b=2
+[504] DBGJ nilai fase=awal  0.0 b=7
+[504] DBGJ nilai fase=awal tanah 50.0 b=2
+[504] DBGJ nilai fase=awal api 145.8 b=7
+[504] DBGJ nilai fase=awal angin 348.6 b=2
+[504] DBGJ nilai fase=awal angin 167.9 b=9
+[504] DBGJ nilai fase=awal angin 348.6 b=5
+[504] DBGJ nilai fase=awal api 25.0 b=8
+[504] DBGJ nilai fase=awal angin 361.9 b=4
+[504] SEIMBANG peta=alam seed=504 quick=1 roles=angin,api pemenang=0 cara=ronde giliran=16 detik=409.9 pasang=2,4 kena=2,3 kaya=3613,3470
+[503] DBGJ tolak_boleh fase=awal b=4
+[503] DBGJ tolak_boleh fase=awal b=4
+[503] DBGJ nilai fase=awal tanah 50.0 b=4
+[503] DBGJ nilai fase=awal tanah 50.0 b=6
+[503] DBGJ nilai fase=awal tanah 50.0 b=4
+[503] DBGJ nilai fase=awal tanah 50.0 b=9
+[503] DBGJ nilai fase=awal tanah 50.0 b=4
+[503] DBGJ nilai fase=awal tanah 150.0 b=8
+[503] DBGJ nilai fase=awal tanah 50.0 b=4
+[503] DBGJ nilai fase=awal angin 175.0 b=8
+[503] DBGJ nilai fase=awal  0.0 b=4
+[503] DBGJ nilai fase=awal tanah 50.0 b=7
+[503] DBGJ nilai fase=awal tanah 50.0 b=7
+[503] DBGJ nilai fase=awal tanah 50.0 b=10
+[503] DBGJ nilai fase=awal tanah 50.0 b=7
+[503] DBGJ nilai fase=awal tanah 50.0 b=10
+[503] SEIMBANG peta=pantai seed=503 quick=1 roles=petir,angin pemenang=1 cara=ronde giliran=16 detik=392.4 pasang=0,1 kena=0,1 kaya=3483,4646
+[505] DBGJ tolak_boleh fase=awal b=4
+[505] DBGJ tolak_boleh fase=awal b=4
+[505] DBGJ nilai fase=awal tanah 50.0 b=4
+[505] DBGJ nilai fase=awal tanah 60.0 b=4
+[505] DBGJ nilai fase=awal tanah 50.0 b=4
+[505] SEIMBANG peta=pantai seed=505 quick=1 roles=api,tanah pemenang=0 cara=start giliran=5 detik=93.0 pasang=0,0 kena=0,0 kaya=4020,2500
+[506] DBGJ tolak_boleh fase=awal b=4
+[506] DBGJ tolak_boleh fase=awal b=4
+[506] DBGJ nilai fase=awal tanah 50.0 b=4
+[506] DBGJ nilai fase=awal angin 47.5 b=4
+[506] DBGJ nilai fase=awal petir 72.2 b=6
+[506] DBGJ nilai fase=awal angin 6.7 b=4
+[506] DBGJ nilai fase=awal petir 83.3 b=6
+[506] DBGJ nilai fase=awal angin 22.9 b=4
+[506] DBGJ nilai fase=awal petir 100.0 b=8
+[506] DBGJ nilai fase=awal petir 66.7 b=7
+[506] DBGJ nilai fase=awal angin 199.5 b=4
+[506] DBGJ nilai fase=awal tanah 50.0 b=9
+[506] DBGJ nilai fase=awal petir 100.0 b=10
+[506] DBGJ nilai fase=awal  0.0 b=6
+[506] SEIMBANG peta=alam seed=506 quick=1 roles=air,petir pemenang=0 cara=ronde giliran=16 detik=302.4 pasang=3,1 kena=3,1 kaya=3747,2730
+[507] DBGJ tolak_boleh fase=awal b=4
+[507] DBGJ tolak_boleh fase=awal b=4
+[507] DBGJ nilai fase=awal tanah 60.0 b=4
+[507] DBGJ nilai fase=awal  0.0 b=4
+[507] DBGJ nilai fase=awal tanah 60.0 b=4
+[507] DBGJ nilai fase=awal angin 261.4 b=4
+[507] DBGJ tolak_boleh fase=awal b=7
+[507] DBGJ nilai fase=awal  0.0 b=3
+[507] DBGJ nilai fase=awal angin 220.0 b=7
+[507] DBGJ nilai fase=awal  0.0 b=3
+[507] DBGJ nilai fase=awal tanah 180.0 b=6
+[507] DBGJ nilai fase=awal angin 39.3 b=3
+[507] DBGJ nilai fase=awal tanah 60.0 b=5
+[507] DBGJ nilai fase=awal  0.0 b=3
+[507] DBGJ nilai fase=awal tanah 60.0 b=8
+[507] DBGJ nilai fase=awal  0.0 b=3
+[507] SEIMBANG peta=pantai seed=507 quick=1 roles=tanah,angin pemenang=0 cara=ronde giliran=16 detik=325.4 pasang=2,1 kena=0,1 kaya=4560,2500
+[508] DBGJ tolak_boleh fase=awal b=4
+[508] DBGJ tolak_boleh fase=awal b=4
+[508] DBGJ nilai fase=awal api 108.3 b=4
+[508] DBGJ nilai fase=awal tanah 50.0 b=4
+[508] DBGJ nilai fase=awal api 108.3 b=3
+[508] DBGJ nilai fase=awal api 78.0 b=6
+[508] DBGJ nilai fase=awal api 41.7 b=5
+[508] DBGJ nilai fase=awal tanah 50.0 b=6
+[508] DBGJ nilai fase=awal  0.0 b=7
+[508] DBGJ nilai fase=awal api 63.0 b=9
+[508] DBGJ nilai fase=awal api 4.2 b=7
+[508] DBGJ nilai fase=awal api 108.0 b=9
+[508] DBGJ nilai fase=awal  0.0 b=10
+[508] DBGJ nilai fase=awal tanah 50.0 b=8
+[508] DBGJ nilai fase=awal  0.0 b=10
+[508] DBGJ nilai fase=awal api 108.0 b=8
+[508] SEIMBANG peta=alam seed=508 quick=1 roles=petir,api pemenang=1 cara=ronde giliran=16 detik=416.3 pasang=2,2 kena=2,1 kaya=2512,4310
+[510] DBGJ tolak_boleh fase=awal b=4
+[510] DBGJ tolak_boleh fase=awal b=4
+[510] DBGJ nilai fase=awal tanah 50.0 b=4
+[510] DBGJ nilai fase=awal api 108.3 b=4
+[510] DBGJ nilai fase=awal tanah 50.0 b=4
+[510] DBGJ nilai fase=awal  0.0 b=3
+[510] DBGJ nilai fase=awal api 108.0 b=7
+[510] DBGJ tolak_boleh fase=awal b=3
+[510] DBGJ nilai fase=awal api 108.0 b=6
+[510] DBGJ nilai fase=awal api 12.5 b=3
+[510] DBGJ nilai fase=awal tanah 50.0 b=8
+[510] DBGJ nilai fase=awal api 12.5 b=5
+[510] DBGJ nilai fase=awal api 108.0 b=8
+[510] DBGJ nilai fase=awal api 50.0 b=8
+[510] DBGJ nilai fase=awal tanah 50.0 b=7
+[510] DBGJ nilai fase=awal api 150.0 b=8
+[510] SEIMBANG peta=alam seed=510 quick=1 roles=api,petir pemenang=0 cara=ronde giliran=16 detik=449.8 pasang=3,2 kena=3,1 kaya=4970,2116
+[509] DBGJ tolak_boleh fase=awal b=4
+[509] DBGJ tolak_boleh fase=awal b=4
+[509] DBGJ nilai fase=awal  0.0 b=4
+[509] DBGJ nilai fase=awal tanah 50.0 b=4
+[509] DBGJ nilai fase=awal  0.0 b=4
+[509] DBGJ nilai fase=awal tanah 50.0 b=4
+[509] DBGJ nilai fase=awal angin 288.0 b=7
+[509] DBGJ nilai fase=awal tanah 50.0 b=4
+[509] DBGJ nilai fase=awal angin 237.6 b=6
+[509] DBGJ tolak_boleh fase=awal b=4
+[509] DBGJ nilai fase=awal petir 291.7 b=5
+[509] DBGJ nilai fase=awal tanah 50.0 b=4
+[509] DBGJ nilai fase=awal angin 3.6 b=7
+[509] DBGJ nilai fase=awal  0.0 b=7
+[509] DBGJ nilai fase=awal api 150.0 b=4
+[509] SEIMBANG peta=pantai seed=509 quick=1 roles=angin,air pemenang=0 cara=ronde giliran=16 detik=366.4 pasang=3,1 kena=2,0 kaya=5430,1620
+[512] DBGJ tolak_boleh fase=awal b=4
+[512] DBGJ tolak_boleh fase=awal b=4
+[512] DBGJ nilai fase=awal api 150.0 b=4
+[512] DBGJ nilai fase=awal tanah 50.0 b=4
+[512] DBGJ nilai fase=awal tanah 60.0 b=4
+[512] DBGJ nilai fase=awal tanah 50.0 b=4
+[512] DBGJ nilai fase=awal api 150.0 b=4
+[512] SEIMBANG peta=alam seed=512 quick=1 roles=tanah,api pemenang=0 cara=start giliran=7 detik=134.8 pasang=1,0 kena=0,0 kaya=4030,3500
+[511] DBGJ tolak_boleh fase=awal b=4
+[511] DBGJ tolak_boleh fase=awal b=4
+[511] DBGJ nilai fase=awal tanah 50.0 b=4
+[511] DBGJ nilai fase=awal angin 342.0 b=4
+[511] DBGJ nilai fase=awal api 62.5 b=4
+[511] DBGJ nilai fase=awal angin 48.0 b=4
+[511] DBGJ nilai fase=awal api 145.8 b=4
+[511] DBGJ nilai fase=awal angin 6.5 b=7
+[511] DBGJ nilai fase=awal api 108.3 b=3
+[511] DBGJ nilai fase=awal angin 311.4 b=7
+[511] DBGJ nilai fase=awal api 62.5 b=5
+[511] DBGJ nilai fase=awal angin 150.2 b=7
+[511] SEIMBANG peta=pantai seed=511 quick=1 roles=air,angin pemenang=1 cara=start giliran=12 detik=259.1 pasang=2,1 kena=2,0 kaya=2630,4600
+[514] DBGJ tolak_boleh fase=awal b=4
+[514] DBGJ tolak_boleh fase=awal b=4
+[514] DBGJ nilai fase=awal angin 138.6 b=4
+[514] DBGJ nilai fase=awal angin 137.5 b=4
+[514] DBGJ nilai fase=awal  0.0 b=3
+[514] SEIMBANG peta=alam seed=514 quick=1 roles=angin,tanah pemenang=0 cara=start giliran=5 detik=100.8 pasang=1,0 kena=0,0 kaya=3510,2500
+[513] DBGJ tolak_boleh fase=awal b=4
+[513] DBGJ tolak_boleh fase=awal b=4
+[513] DBGJ nilai fase=awal  0.0 b=4
+[513] DBGJ nilai fase=awal tanah 50.0 b=4
+[513] DBGJ nilai fase=awal  0.0 b=4
+[513] DBGJ nilai fase=awal tanah 50.0 b=4
+[513] DBGJ nilai fase=awal angin 6.7 b=4
+[513] DBGJ nilai fase=awal tanah 50.0 b=4
+[513] DBGJ nilai fase=awal  0.0 b=4
+[513] DBGJ nilai fase=awal petir 72.2 b=7
+[513] DBGJ nilai fase=awal angin 355.5 b=4
+[513] DBGJ tolak_boleh fase=awal b=10
+[513] DBGJ nilai fase=awal  0.0 b=3
+[513] DBGJ nilai fase=awal  0.0 b=10
+[513] DBGJ nilai fase=awal  0.0 b=3
+[513] DBGJ nilai fase=awal  0.0 b=10
+[513] SEIMBANG peta=pantai seed=513 quick=1 roles=petir,air pemenang=1 cara=ronde giliran=16 detik=348.6 pasang=1,0 kena=1,0 kaya=2677,3332
+[515] DBGJ tolak_boleh fase=awal b=4
+[515] DBGJ tolak_boleh fase=awal b=4
+[515] DBGJ nilai fase=awal  0.0 b=4
+[515] DBGJ nilai fase=awal  0.0 b=4
+[515] DBGJ nilai fase=awal tanah 50.0 b=4
+[515] DBGJ nilai fase=awal angin 205.2 b=4
+[515] DBGJ nilai fase=awal angin 66.7 b=4
+[515] DBGJ nilai fase=awal angin 171.3 b=3
+[515] SEIMBANG peta=pantai seed=515 quick=1 roles=api,angin pemenang=1 cara=start giliran=8 detik=159.7 pasang=0,1 kena=0,1 kaya=2186,4130
+[517] DBGJ tolak_boleh fase=awal b=4
+[517] DBGJ tolak_boleh fase=awal b=4
+[517] DBGJ nilai fase=awal tanah 60.0 b=4
+[517] DBGJ nilai fase=awal tanah 50.0 b=4
+[517] DBGJ nilai fase=awal petir 100.0 b=4
+[517] DBGJ nilai fase=awal tanah 50.0 b=4
+[517] DBGJ nilai fase=awal petir 72.2 b=6
+[517] DBGJ nilai fase=awal tanah 60.0 b=6
+[517] SEIMBANG peta=pantai seed=517 quick=1 roles=tanah,air pemenang=0 cara=start giliran=9 detik=174.1 pasang=1,0 kena=1,0 kaya=5150,2400
+[516] DBGJ tolak_boleh fase=awal b=4
+[516] DBGJ tolak_boleh fase=awal b=4
+[516] DBGJ nilai fase=awal api 87.5 b=4
+[516] DBGJ nilai fase=awal  0.0 b=4
+[516] DBGJ nilai fase=awal api 150.0 b=3
+[516] DBGJ tolak_boleh fase=awal b=4
+[516] DBGJ nilai fase=awal  0.0 b=2
+[516] DBGJ nilai fase=awal api 108.0 b=4
+[516] DBGJ nilai fase=awal api 100.0 b=2
+[516] DBGJ nilai fase=awal api 108.0 b=7
+[516] DBGJ nilai fase=awal api 150.0 b=4
+[516] DBGJ nilai fase=awal petir 8.3 b=6
+[516] DBGJ nilai fase=awal api 150.0 b=3
+[516] DBGJ tolak_boleh fase=awal b=9
+[516] DBGJ nilai fase=awal api 150.0 b=2
+[516] DBGJ nilai fase=awal api 36.0 b=9
+[516] SEIMBANG peta=alam seed=516 quick=1 roles=air,api pemenang=1 cara=ronde giliran=16 detik=473.6 pasang=6,1 kena=5,1 kaya=3734,4570
+[518] DBGJ tolak_boleh fase=awal b=4
+[518] DBGJ tolak_boleh fase=awal b=4
+[518] DBGJ nilai fase=awal  0.0 b=4
+[518] DBGJ nilai fase=awal tanah 60.0 b=4
+[518] DBGJ nilai fase=awal  0.0 b=4
+[518] DBGJ nilai fase=awal angin 240.0 b=4
+[518] DBGJ nilai fase=awal  0.0 b=4
+[518] DBGJ nilai fase=awal angin 154.6 b=3
+[518] DBGJ nilai fase=awal  0.0 b=4
+[518] DBGJ nilai fase=awal tanah 60.0 b=6
+[518] DBGJ nilai fase=awal  0.0 b=7
+[518] DBGJ nilai fase=awal angin 195.0 b=6
+[518] DBGJ tolak_boleh fase=awal b=7
+[518] DBGJ nilai fase=awal  0.0 b=5
+[518] DBGJ nilai fase=awal  0.0 b=7
+[518] DBGJ nilai fase=awal angin 68.8 b=8
+[518] SEIMBANG peta=alam seed=518 quick=1 roles=petir,tanah pemenang=1 cara=ronde giliran=16 detik=362.2 pasang=0,2 kena=0,1 kaya=2600,4010
+[520] DBGJ tolak_boleh fase=awal b=4
+[520] DBGJ tolak_boleh fase=awal b=4
+[520] DBGJ nilai fase=awal api 180.0 b=4
+[520] DBGJ nilai fase=awal api 15.0 b=4
+[520] DBGJ nilai fase=awal api 130.0 b=3
+[520] DBGJ nilai fase=awal api 75.0 b=4
+[520] DBGJ nilai fase=awal api 75.0 b=5
+[520] DBGJ nilai fase=awal  0.0 b=4
+[520] SEIMBANG peta=alam seed=520 quick=1 roles=api,api pemenang=1 cara=start giliran=8 detik=173.1 pasang=2,0 kena=2,0 kaya=3010,3930
+[519] DBGJ tolak_boleh fase=awal b=4
+[519] DBGJ tolak_boleh fase=awal b=4
+[519] DBGJ nilai fase=awal angin 396.0 b=4
+[519] DBGJ nilai fase=awal tanah 50.0 b=4
+[519] DBGJ nilai fase=awal angin 360.0 b=4
+[519] DBGJ nilai fase=awal api 145.8 b=4
+[519] DBGJ nilai fase=awal tanah 50.0 b=7
+[519] DBGJ nilai fase=awal tanah 50.0 b=4
+[519] DBGJ nilai fase=awal tanah 50.0 b=7
+[519] DBGJ nilai fase=awal tanah 50.0 b=7
+[519] DBGJ nilai fase=awal tanah 50.0 b=10
+[519] DBGJ nilai fase=awal tanah 50.0 b=7
+[519] DBGJ nilai fase=awal tanah 150.0 b=10
+[519] DBGJ nilai fase=awal tanah 50.0 b=7
+[519] DBGJ nilai fase=awal tanah 50.0 b=10
+[519] DBGJ nilai fase=awal  0.0 b=7
+[519] SEIMBANG peta=pantai seed=519 quick=1 roles=angin,petir pemenang=0 cara=ronde giliran=16 detik=377.5 pasang=0,0 kena=0,0 kaya=4410,3720
+[522] DBGJ tolak_boleh fase=awal b=4
+[522] DBGJ tolak_boleh fase=awal b=4
+[522] DBGJ nilai fase=awal api 62.5 b=4
+[522] DBGJ nilai fase=awal tanah 60.0 b=4
+[522] DBGJ nilai fase=awal tanah 60.0 b=4
+[522] DBGJ nilai fase=awal api 62.5 b=4
+[522] DBGJ nilai fase=awal api 62.5 b=4
+[522] DBGJ nilai fase=awal tanah 60.0 b=4
+[522] DBGJ nilai fase=awal api 108.3 b=7
+[522] DBGJ nilai fase=awal tanah 60.0 b=4
+[522] DBGJ nilai fase=awal  0.0 b=7
+[522] DBGJ nilai fase=awal tanah 60.0 b=7
+[522] DBGJ nilai fase=awal tanah 60.0 b=7
+[522] DBGJ nilai fase=awal tanah 60.0 b=7
+[522] SEIMBANG peta=alam seed=522 quick=1 roles=tanah,tanah pemenang=1 cara=start giliran=14 detik=356.0 pasang=0,0 kena=0,0 kaya=3110,4500
+[521] DBGJ tolak_boleh fase=awal b=4
+[521] DBGJ tolak_boleh fase=awal b=4
+[521] DBGJ nilai fase=awal angin 330.0 b=4
+[521] DBGJ nilai fase=awal  0.0 b=4
+[521] DBGJ nilai fase=awal angin 285.0 b=6
+[521] DBGJ nilai fase=awal angin 262.2 b=4
+[521] DBGJ tolak_boleh fase=awal b=9
+[521] DBGJ nilai fase=awal  0.0 b=3
+[521] DBGJ nilai fase=awal angin 292.9 b=9
+[521] DBGJ tolak_boleh fase=awal b=6
+[521] DBGJ nilai fase=awal angin 266.9 b=9
+[521] DBGJ nilai fase=awal angin 164.7 b=6
+[521] DBGJ nilai fase=awal  0.0 b=8
+[521] DBGJ nilai fase=awal  0.0 b=6
+[521] DBGJ nilai fase=awal  0.0 b=8
+[521] DBGJ nilai fase=awal angin 4.2 b=6
+[521] SEIMBANG peta=pantai seed=521 quick=1 roles=air,air pemenang=0 cara=ronde giliran=16 detik=314.2 pasang=1,1 kena=1,0 kaya=3120,2930
+[524] DBGJ tolak_boleh fase=awal b=4
+[524] DBGJ tolak_boleh fase=awal b=4
+[524] DBGJ nilai fase=awal tanah 50.0 b=4
+[524] DBGJ nilai fase=awal tanah 50.0 b=4
+[524] DBGJ nilai fase=awal  0.0 b=4
+[524] DBGJ nilai fase=awal tanah 50.0 b=6
+[524] DBGJ nilai fase=awal angin 288.0 b=4
+[524] DBGJ nilai fase=awal tanah 50.0 b=6
+[524] DBGJ nilai fase=awal  0.0 b=7
+[524] DBGJ nilai fase=awal tanah 50.0 b=9
+[524] DBGJ nilai fase=awal tanah 50.0 b=7
+[524] DBGJ nilai fase=awal tanah 50.0 b=9
+[524] DBGJ nilai fase=awal angin 257.4 b=7
+[524] DBGJ nilai fase=awal tanah 50.0 b=9
+[524] DBGJ nilai fase=awal tanah 50.0 b=6
+[524] DBGJ tolak_boleh fase=awal b=10
+[524] SEIMBANG peta=alam seed=524 quick=1 roles=angin,angin pemenang=1 cara=ronde giliran=16 detik=336.7 pasang=1,0 kena=1,0 kaya=3413,3682
+[523] DBGJ tolak_boleh fase=awal b=4
+[523] DBGJ tolak_boleh fase=awal b=4
+[523] DBGJ nilai fase=awal angin 238.3 b=4
+[523] DBGJ nilai fase=awal angin 277.1 b=4
+[523] DBGJ nilai fase=awal angin 98.1 b=3
+[523] DBGJ nilai fase=awal angin 259.6 b=3
+[523] DBGJ nilai fase=awal  0.0 b=2
+[523] DBGJ nilai fase=awal tanah 50.0 b=2
+[523] DBGJ nilai fase=awal tanah 50.0 b=2
+[523] DBGJ nilai fase=awal tanah 50.0 b=2
+[523] DBGJ nilai fase=awal tanah 50.0 b=2
+[523] DBGJ nilai fase=awal angin 99.7 b=2
+[523] DBGJ nilai fase=awal tanah 50.0 b=2
+[523] DBGJ tolak_bintang fase=awal b=1 lv2=false
+[523] DBGJ nilai fase=awal angin 159.4 b=5
+[523] DBGJ tolak_boleh fase=awal b=4
+[523] SEIMBANG peta=pantai seed=523 quick=1 roles=petir,petir pemenang=0 cara=ronde giliran=16 detik=358.8 pasang=3,3 kena=1,3 kaya=2965,2863
+[525] DBGJ tolak_boleh fase=awal b=4
+[525] DBGJ tolak_boleh fase=awal b=4
+[525] DBGJ nilai fase=awal  0.0 b=4
+[525] SEIMBANG peta=pantai seed=525 quick=1 roles=api,air pemenang=0 cara=start giliran=3 detik=62.6 pasang=0,0 kena=0,0 kaya=3000,2500
+[526] DBGJ tolak_boleh fase=awal b=4
+[526] DBGJ tolak_boleh fase=awal b=4
+[526] DBGJ nilai fase=awal tanah 50.0 b=4
+[526] DBGJ nilai fase=awal tanah 60.0 b=4
+[526] DBGJ nilai fase=awal  0.0 b=4
+[526] DBGJ nilai fase=awal tanah 60.0 b=4
+[526] DBGJ nilai fase=awal tanah 50.0 b=4
+[526] DBGJ nilai fase=awal tanah 60.0 b=7
+[526] DBGJ nilai fase=awal tanah 50.0 b=4
+[526] DBGJ nilai fase=awal petir 97.2 b=7
+[526] DBGJ nilai fase=awal  0.0 b=7
+[526] DBGJ nilai fase=awal petir 97.2 b=6
+[526] DBGJ nilai fase=awal tanah 50.0 b=7
+[526] DBGJ nilai fase=awal petir 83.3 b=6
+[526] DBGJ nilai fase=awal tanah 60.0 b=5
+[526] SEIMBANG peta=alam seed=526 quick=1 roles=air,tanah pemenang=1 cara=ronde giliran=16 detik=296.2 pasang=0,2 kena=0,1 kaya=2530,4290
+[527] DBGJ tolak_boleh fase=awal b=4
+[527] DBGJ tolak_boleh fase=awal b=4
+[527] DBGJ nilai fase=awal angin 330.0 b=4
+[527] DBGJ nilai fase=awal api 25.0 b=4
+[527] DBGJ nilai fase=awal angin 191.8 b=3
+[527] DBGJ nilai fase=awal  0.0 b=4
+[527] DBGJ nilai fase=awal angin 196.1 b=2
+[527] DBGJ nilai fase=awal  0.0 b=4
+[527] DBGJ nilai fase=awal tanah 60.0 b=2
+[527] DBGJ nilai fase=awal  0.0 b=4
+[527] DBGJ nilai fase=awal tanah 60.0 b=2
+[527] DBGJ nilai fase=awal  0.0 b=4
+[527] DBGJ tolak_boleh fase=awal b=5
+[527] DBGJ nilai fase=awal api 108.3 b=4
+[527] DBGJ nilai fase=awal tanah 60.0 b=5
+[527] DBGJ nilai fase=awal api 12.5 b=3
+[527] SEIMBANG peta=pantai seed=527 quick=1 roles=tanah,petir pemenang=0 cara=ronde giliran=16 detik=311.5 pasang=2,1 kena=2,0 kaya=3911,2137
+[528] DBGJ tolak_boleh fase=awal b=4
+[528] DBGJ tolak_boleh fase=awal b=4
+[528] DBGJ nilai fase=awal api 150.0 b=4
+[528] DBGJ nilai fase=awal tanah 50.0 b=4
+[528] DBGJ nilai fase=awal api 150.0 b=3
+[528] DBGJ nilai fase=awal tanah 50.0 b=3
+[528] DBGJ nilai fase=awal api 62.5 b=6
+[528] DBGJ nilai fase=awal angin 80.5 b=3
+[528] DBGJ nilai fase=awal tanah 150.0 b=6
+[528] DBGJ nilai fase=awal  0.0 b=6
+[528] DBGJ nilai fase=awal api 125.0 b=5
+[528] DBGJ nilai fase=awal angin 83.2 b=6
+[528] DBGJ nilai fase=awal api 125.0 b=4
+[528] DBGJ nilai fase=awal tanah 50.0 b=5
+[528] DBGJ nilai fase=awal  0.0 b=7
+[528] DBGJ tolak_boleh fase=awal b=0
+[528] SEIMBANG peta=alam seed=528 quick=1 roles=petir,angin pemenang=1 cara=ronde giliran=16 detik=400.1 pasang=2,1 kena=1,1 kaya=3106,3373
+[530] DBGJ tolak_boleh fase=awal b=4
+[530] DBGJ tolak_boleh fase=awal b=4
+[530] DBGJ nilai fase=awal api 180.0 b=4
+[530] DBGJ tolak_boleh fase=awal b=4
+[530] DBGJ nilai fase=awal api 180.0 b=3
+[530] DBGJ nilai fase=awal tanah 60.0 b=4
+[530] DBGJ nilai fase=awal api 50.0 b=2
+[530] DBGJ nilai fase=awal tanah 60.0 b=4
+[530] DBGJ nilai fase=awal api 180.0 b=2
+[530] DBGJ nilai fase=awal  0.0 b=4
+[530] DBGJ nilai fase=awal api 175.0 b=5
+[530] DBGJ nilai fase=awal  0.0 b=7
+[530] DBGJ nilai fase=awal api 175.0 b=5
+[530] DBGJ nilai fase=awal  0.0 b=7
+[530] DBGJ nilai fase=awal tanah 150.0 b=4
+[530] DBGJ nilai fase=awal tanah 60.0 b=7
+[530] SEIMBANG peta=alam seed=530 quick=1 roles=api,tanah pemenang=0 cara=ronde giliran=16 detik=313.8 pasang=4,0 kena=3,0 kaya=3240,2570
+[529] DBGJ tolak_boleh fase=awal b=4
+[529] DBGJ tolak_boleh fase=awal b=4
+[529] DBGJ nilai fase=awal  0.0 b=4
+[529] DBGJ nilai fase=awal tanah 50.0 b=4
+[529] DBGJ nilai fase=awal  0.0 b=4
+[529] DBGJ nilai fase=awal tanah 50.0 b=4
+[529] DBGJ nilai fase=awal  0.0 b=4
+[529] DBGJ nilai fase=awal tanah 50.0 b=4
+[529] DBGJ nilai fase=awal api 41.7 b=4
+[529] DBGJ nilai fase=awal tanah 50.0 b=4
+[529] DBGJ nilai fase=awal api 137.5 b=4
+[529] DBGJ nilai fase=awal api 165.0 b=4
+[529] DBGJ nilai fase=awal  0.0 b=2
+[529] DBGJ nilai fase=awal angin 189.0 b=4
+[529] DBGJ nilai fase=awal api 137.5 b=5
+[529] DBGJ nilai fase=awal api 5.0 b=3
+[529] SEIMBANG peta=pantai seed=529 quick=1 roles=angin,api pemenang=0 cara=ronde giliran=16 detik=327.0 pasang=2,1 kena=0,1 kaya=3071,2300
+[531] DBGJ tolak_boleh fase=awal b=4
+[531] DBGJ tolak_boleh fase=awal b=4
+[531] DBGJ nilai fase=awal  0.0 b=4
+[531] SEIMBANG peta=pantai seed=531 quick=1 roles=air,petir pemenang=0 cara=start giliran=3 detik=61.7 pasang=0,0 kena=0,0 kaya=3500,2500
+[532] DBGJ tolak_boleh fase=awal b=4
+[532] DBGJ tolak_boleh fase=awal b=4
+[532] DBGJ nilai fase=awal angin 330.0 b=4
+[532] DBGJ nilai fase=awal  0.0 b=4
+[532] DBGJ nilai fase=awal angin 235.5 b=3
+[532] DBGJ nilai fase=awal  0.0 b=4
+[532] DBGJ nilai fase=awal angin 155.2 b=2
+[532] DBGJ nilai fase=awal angin 24.2 b=4
+[532] DBGJ nilai fase=awal tanah 60.0 b=5
+[532] DBGJ nilai fase=awal angin 150.8 b=4
+[532] DBGJ nilai fase=awal tanah 60.0 b=5
+[532] DBGJ nilai fase=awal  0.0 b=6
+[532] DBGJ nilai fase=awal angin 125.1 b=5
+[532] DBGJ nilai fase=awal  0.0 b=6
+[532] DBGJ nilai fase=awal angin 129.4 b=5
+[532] DBGJ nilai fase=awal  0.0 b=6
+[532] SEIMBANG peta=alam seed=532 quick=1 roles=tanah,angin pemenang=0 cara=ronde giliran=16 detik=431.5 pasang=3,1 kena=3,1 kaya=4101,2210
+[533] DBGJ tolak_boleh fase=awal b=4
+[533] DBGJ tolak_boleh fase=awal b=4
+[533] DBGJ nilai fase=awal  0.0 b=4
+[533] DBGJ nilai fase=awal  0.0 b=6
+[533] DBGJ nilai fase=awal  0.0 b=4
+[533] DBGJ nilai fase=awal tanah 50.0 b=6
+[533] DBGJ nilai fase=awal  0.0 b=4
+[533] DBGJ nilai fase=awal api 108.0 b=9
+[533] DBGJ tolak_boleh fase=awal b=4
+[533] DBGJ nilai fase=awal tanah 50.0 b=8
+[533] DBGJ nilai fase=awal api 12.5 b=4
+[533] DBGJ nilai fase=awal tanah 50.0 b=8
+[533] DBGJ nilai fase=awal  0.0 b=4
+[533] DBGJ nilai fase=awal tanah 50.0 b=8
+[533] DBGJ nilai fase=awal api 125.0 b=3
+[533] DBGJ nilai fase=awal tanah 50.0 b=8
+[533] SEIMBANG peta=pantai seed=533 quick=1 roles=petir,api pemenang=1 cara=ronde giliran=16 detik=339.6 pasang=0,1 kena=0,0 kaya=2380,3630
+[534] DBGJ tolak_boleh fase=awal b=4
+[534] DBGJ tolak_boleh fase=awal b=4
+[534] DBGJ nilai fase=awal angin 450.0 b=4
+[534] DBGJ tolak_boleh fase=awal b=4
+[534] DBGJ nilai fase=awal  0.0 b=3
+[534] DBGJ nilai fase=awal api 150.0 b=4
+[534] DBGJ tolak_boleh fase=awal b=3
+[534] DBGJ nilai fase=awal  0.0 b=3
+[534] DBGJ nilai fase=awal angin 264.0 b=3
+[534] DBGJ nilai fase=awal tanah 50.0 b=3
+[534] DBGJ nilai fase=awal  0.0 b=6
+[534] DBGJ nilai fase=awal tanah 50.0 b=6
+[534] DBGJ nilai fase=awal  0.0 b=6
+[534] DBGJ tolak_boleh fase=awal b=6
+[534] DBGJ nilai fase=awal angin 27.6 b=6
+[534] DBGJ nilai fase=awal api 137.5 b=6
+[534] SEIMBANG peta=alam seed=534 quick=1 roles=angin,air pemenang=1 cara=ronde giliran=16 detik=412.7 pasang=1,2 kena=1,1 kaya=3029,3459
+[536] DBGJ tolak_boleh fase=awal b=4
+[536] DBGJ tolak_boleh fase=awal b=4
+[536] DBGJ nilai fase=awal api 145.8 b=4
+[536] DBGJ nilai fase=awal angin 28.5 b=4
+[536] DBGJ nilai fase=awal api 87.5 b=2
+[536] DBGJ nilai fase=awal  0.0 b=4
+[536] DBGJ nilai fase=awal api 145.8 b=4
+[536] DBGJ nilai fase=awal  0.0 b=4
+[536] DBGJ nilai fase=awal api 137.5 b=4
+[536] DBGJ nilai fase=awal angin 81.0 b=7
+[536] DBGJ nilai fase=awal tanah 50.0 b=3
+[536] DBGJ nilai fase=awal angin 308.2 b=6
+[536] DBGJ nilai fase=awal tanah 50.0 b=6
+[536] DBGJ nilai fase=awal angin 219.2 b=6
+[536] DBGJ nilai fase=awal tanah 50.0 b=6
+[536] DBGJ nilai fase=awal  0.0 b=6
+[536] SEIMBANG peta=alam seed=536 quick=1 roles=air,angin pemenang=0 cara=ronde giliran=16 detik=407.7 pasang=3,1 kena=3,1 kaya=3861,2428
+[535] DBGJ tolak_boleh fase=awal b=4
+[535] DBGJ tolak_boleh fase=awal b=4
+[535] DBGJ nilai fase=awal tanah 50.0 b=4
+[535] DBGJ nilai fase=awal api 12.5 b=4
+[535] DBGJ nilai fase=awal tanah 50.0 b=4
+[535] DBGJ nilai fase=awal  0.0 b=4
+[535] DBGJ nilai fase=awal tanah 50.0 b=4
+[535] DBGJ nilai fase=awal  0.0 b=4
+[535] DBGJ nilai fase=awal api 90.0 b=4
+[535] DBGJ nilai fase=awal  0.0 b=7
+[535] DBGJ nilai fase=awal tanah 50.0 b=4
+[535] DBGJ nilai fase=awal  0.0 b=7
+[535] DBGJ nilai fase=awal tanah 50.0 b=4
+[535] DBGJ nilai fase=awal  0.0 b=7
+[535] DBGJ nilai fase=awal tanah 50.0 b=4
+[535] DBGJ nilai fase=akhir  0.0 b=4
+[535] DBGJ nilai fase=awal api 145.8 b=7
+[535] SEIMBANG peta=pantai seed=535 quick=1 roles=api,petir pemenang=1 cara=ronde giliran=16 detik=292.3 pasang=0,0 kena=0,0 kaya=2500,3030
+[538] DBGJ tolak_boleh fase=awal b=4
+[538] DBGJ tolak_boleh fase=awal b=4
+[538] DBGJ nilai fase=awal angin 330.0 b=4
+[538] DBGJ nilai fase=awal tanah 50.0 b=4
+[538] DBGJ nilai fase=awal angin 297.0 b=3
+[538] DBGJ tolak_boleh fase=awal b=4
+[538] DBGJ nilai fase=awal  0.0 b=2
+[538] DBGJ nilai fase=awal tanah 50.0 b=4
+[538] DBGJ nilai fase=awal  0.0 b=2
+[538] DBGJ tolak_boleh fase=awal b=7
+[538] DBGJ nilai fase=awal  0.0 b=5
+[538] DBGJ nilai fase=awal tanah 150.0 b=7
+[538] DBGJ nilai fase=awal  0.0 b=7
+[538] DBGJ nilai fase=awal  0.0 b=8
+[538] DBGJ nilai fase=awal  0.0 b=7
+[538] DBGJ nilai fase=awal petir 300.0 b=10
+[538] SEIMBANG peta=alam seed=538 quick=1 roles=petir,air pemenang=1 cara=ronde giliran=16 detik=362.1 pasang=2,2 kena=2,0 kaya=3470,3639
+[537] DBGJ tolak_boleh fase=awal b=4
+[537] DBGJ tolak_boleh fase=awal b=4
+[537] DBGJ nilai fase=awal api 41.7 b=4
+[537] DBGJ nilai fase=awal tanah 50.0 b=4
+[537] DBGJ nilai fase=awal api 108.3 b=4
+[537] DBGJ nilai fase=awal tanah 50.0 b=4
+[537] DBGJ nilai fase=awal api 108.3 b=5
+[537] DBGJ nilai fase=awal tanah 50.0 b=4
+[537] DBGJ nilai fase=awal api 108.3 b=4
+[537] DBGJ nilai fase=awal tanah 50.0 b=3
+[537] DBGJ nilai fase=awal api 87.5 b=6
+[537] DBGJ nilai fase=awal tanah 50.0 b=6
+[537] DBGJ nilai fase=awal  0.0 b=6
+[537] DBGJ nilai fase=awal tanah 50.0 b=6
+[537] DBGJ nilai fase=awal  0.0 b=6
+[537] DBGJ nilai fase=awal tanah 50.0 b=6
+[537] SEIMBANG peta=pantai seed=537 quick=1 roles=tanah,api pemenang=1 cara=ronde giliran=16 detik=339.1 pasang=3,0 kena=3,0 kaya=3020,3410
+[539] DBGJ tolak_boleh fase=awal b=4
+[539] DBGJ tolak_boleh fase=awal b=4
+[539] DBGJ nilai fase=awal angin 75.0 b=4
+[539] DBGJ nilai fase=awal angin 330.0 b=4
+[539] DBGJ nilai fase=awal angin 8.1 b=4
+[539] DBGJ nilai fase=awal angin 205.8 b=4
+[539] DBGJ nilai fase=awal angin 151.2 b=4
+[539] DBGJ nilai fase=awal angin 175.0 b=3
+[539] DBGJ nilai fase=awal  0.0 b=4
+[539] DBGJ nilai fase=awal angin 82.2 b=5
+[539] DBGJ nilai fase=awal  0.0 b=4
+[539] DBGJ nilai fase=awal tanah 60.0 b=4
+[539] DBGJ nilai fase=awal  0.0 b=7
+[539] DBGJ nilai fase=awal tanah 60.0 b=4
+[539] DBGJ nilai fase=awal  0.0 b=7
+[539] DBGJ nilai fase=awal  0.0 b=4
+[539] SEIMBANG peta=pantai seed=539 quick=1 roles=angin,tanah pemenang=1 cara=ronde giliran=16 detik=348.3 pasang=0,3 kena=0,2 kaya=3317,4232

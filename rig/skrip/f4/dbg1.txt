@@ -1,0 +1,87 @@
+DBGJ nilai fase=awal  0.0 b=4
+DBGJ nilai fase=awal  0.0 b=4
+DBGJ nilai fase=awal api 108.0 b=6
+SEIMBANG peta=alam seed=400 quick=1 roles=api,air pemenang=1 cara=start giliran=6 detik=162.6 pasang=1,0 kena=0,0 kaya=2200,3820
+DBGJ nilai fase=awal  0.0 b=4
+DBGJ nilai fase=awal  0.0 b=4
+DBGJ nilai fase=awal  0.0 b=4
+DBGJ nilai fase=awal api 150.0 b=4
+DBGJ nilai fase=awal  0.0 b=4
+DBGJ nilai fase=awal  0.0 b=6
+DBGJ nilai fase=awal petir 275.0 b=7
+DBGJ nilai fase=awal api 41.7 b=6
+DBGJ nilai fase=awal api 45.0 b=6
+DBGJ nilai fase=awal petir 83.3 b=6
+DBGJ nilai fase=awal api 45.0 b=9
+DBGJ nilai fase=awal  0.0 b=6
+DBGJ nilai fase=awal  0.0 b=9
+DBGJ nilai fase=awal  0.0 b=9
+SEIMBANG peta=alam seed=401 quick=1 roles=api,air pemenang=1 cara=ronde giliran=16 detik=337.2 pasang=0,1 kena=0,1 kaya=3600,4070
+DBGJ nilai fase=awal api 108.0 b=4
+DBGJ nilai fase=awal  0.0 b=4
+DBGJ nilai fase=awal  0.0 b=3
+DBGJ nilai fase=awal  0.0 b=4
+DBGJ nilai fase=awal  0.0 b=3
+SEIMBANG peta=alam seed=402 quick=1 roles=api,air pemenang=0 cara=start giliran=7 detik=137.2 pasang=1,0 kena=1,0 kaya=4030,2462
+DBGJ nilai fase=awal  0.0 b=4
+DBGJ nilai fase=awal  0.0 b=4
+DBGJ nilai fase=awal  0.0 b=6
+DBGJ nilai fase=awal api 150.0 b=4
+DBGJ nilai fase=awal api 125.0 b=6
+DBGJ nilai fase=awal api 30.0 b=6
+DBGJ nilai fase=awal api 4.2 b=5
+DBGJ nilai fase=awal api 78.0 b=9
+DBGJ nilai fase=awal petir 300.0 b=9
+DBGJ nilai fase=awal  0.0 b=8
+DBGJ nilai fase=awal api 108.0 b=8
+SEIMBANG peta=alam seed=403 quick=1 roles=api,air pemenang=1 cara=ronde giliran=16 detik=303.5 pasang=2,2 kena=1,1 kaya=3120,3350
+DBGJ nilai fase=awal api 90.0 b=4
+DBGJ nilai fase=awal  0.0 b=4
+DBGJ nilai fase=awal api 108.0 b=3
+DBGJ nilai fase=awal api 12.5 b=4
+DBGJ nilai fase=awal api 9.0 b=2
+DBGJ nilai fase=awal api 62.5 b=4
+DBGJ nilai fase=awal api 78.0 b=5
+DBGJ nilai fase=awal api 41.7 b=4
+DBGJ nilai fase=awal api 9.0 b=5
+DBGJ nilai fase=awal api 78.0 b=5
+DBGJ nilai fase=awal  0.0 b=7
+DBGJ nilai fase=awal  0.0 b=5
+DBGJ nilai fase=awal  0.0 b=7
+SEIMBANG peta=alam seed=404 quick=1 roles=api,air pemenang=0 cara=ronde giliran=16 detik=325.7 pasang=2,0 kena=2,0 kaya=3820,3068
+DBGJ nilai fase=awal  0.0 b=4
+DBGJ nilai fase=awal  0.0 b=4
+DBGJ nilai fase=awal  0.0 b=4
+DBGJ nilai fase=awal  0.0 b=4
+DBGJ nilai fase=awal  0.0 b=4
+DBGJ nilai fase=awal api 41.7 b=4
+DBGJ nilai fase=awal  0.0 b=7
+DBGJ nilai fase=awal api 137.5 b=4
+DBGJ nilai fase=awal api 30.0 b=7
+DBGJ nilai fase=awal api 41.7 b=7
+DBGJ nilai fase=awal api 45.0 b=7
+DBGJ nilai fase=awal  0.0 b=7
+DBGJ nilai fase=awal api 90.0 b=7
+DBGJ nilai fase=awal api 41.7 b=7
+SEIMBANG peta=alam seed=405 quick=1 roles=api,air pemenang=0 cara=ronde giliran=16 detik=315.0 pasang=0,0 kena=0,0 kaya=3540,3240
+DBGJ nilai fase=awal  0.0 b=4
+DBGJ nilai fase=awal api 150.0 b=4
+DBGJ nilai fase=awal  0.0 b=4
+DBGJ nilai fase=awal api 150.0 b=6
+DBGJ nilai fase=awal  0.0 b=4
+DBGJ nilai fase=awal  0.0 b=5
+DBGJ nilai fase=awal  0.0 b=4
+DBGJ nilai fase=awal  0.0 b=5
+DBGJ nilai fase=awal  0.0 b=7
+DBGJ nilai fase=awal api 108.3 b=8
+DBGJ nilai fase=awal  0.0 b=7
+DBGJ nilai fase=awal  0.0 b=7
+DBGJ nilai fase=awal  0.0 b=10
+DBGJ nilai fase=awal  0.0 b=7
+SEIMBANG peta=alam seed=406 quick=1 roles=api,air pemenang=0 cara=ronde giliran=16 detik=348.7 pasang=0,2 kena=0,2 kaya=3520,2920
+DBGJ nilai fase=awal api 78.0 b=4
+DBGJ nilai fase=awal api 108.3 b=4
+DBGJ nilai fase=awal api 150.0 b=4
+DBGJ nilai fase=awal  0.0 b=6
+DBGJ nilai fase=awal api 150.0 b=4
+SEIMBANG peta=alam seed=407 quick=1 roles=api,air pemenang=1 cara=start giliran=8 detik=189.3 pasang=0,1 kena=0,0 kaya=3010,3510

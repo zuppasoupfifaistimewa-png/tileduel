@@ -1,0 +1,7 @@
+Godot Engine v4.7.1.stable.official.a13da4feb - https://godotengine.org
+
+SOLO-ANGIN seed=777 -> koin tersisa { 1: 37, 5: 37, 6: 37, 8: 37 } | uang korban 950 | teks='You found 100 Coins!' | rng_setelah=7312628607906321550
+SOLO-ANGIN seed=1 -> koin tersisa { 1: 75, 8: 75 } | uang korban 950 | teks='You found 100 Coins!' | rng_setelah=-8738384320504433132
+SOLO-ANGIN seed=42 -> koin tersisa { 6: 37, 7: 37 } | uang korban 1024 | teks='You found 100 Coins!' | rng_setelah=-4566380127692459225
+SOLO-ANGIN seed=2026 -> koin tersisa { 8: 75 } | uang korban 1025 | teks='You found 100 Coins!' | rng_setelah=6674853495232719501
+SOLO-ANGIN seed=99999 -> koin tersisa { 5: 75 } | uang korban 1025 | teks='You found 100 Coins!' | rng_setelah=5196044912153111186

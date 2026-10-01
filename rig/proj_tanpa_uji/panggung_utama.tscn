@@ -1,0 +1,129 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://uji_nyata_pemain.gd" id="1_77k2f"]
+[ext_resource type="Material" path="res://WarnaPemain.tres" id="2_jcb7q"]
+[ext_resource type="PackedScene" path="res://beras_uji.tscn" id="2_mnol6"]
+[ext_resource type="Material" path="res://WarnaMusuh.tres" id="3_jcb7q"]
+[ext_resource type="Script" path="res://ui_elemen.gd" id="4_jcb7q"]
+[ext_resource type="Script" path="res://rolet.gd" id="5_ra2f3"]
+
+[node name="PanggungUtama" type="Node3D" unique_id=1037598496]
+
+[node name="Pemain" type="Node3D" parent="." unique_id=992974666]
+transform = Transform3D(-0.010950748, 0, 0.99994004, 0, 1, 0, -0.99994004, 0, -0.010950748, 0, 0, 0)
+script = ExtResource("1_77k2f")
+material_pemain = ExtResource("2_jcb7q")
+material_musuh = ExtResource("3_jcb7q")
+
+[node name="beras" parent="Pemain" unique_id=783941287 instance=ExtResource("2_mnol6")]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1668617439]
+
+[node name="TeksDadu" type="RichTextLabel" parent="CanvasLayer" unique_id=1232758263]
+offset_left = 457.0
+offset_top = 40.0
+offset_right = 815.0
+offset_bottom = 70.0
+bbcode_enabled = true
+text = "Tekan SPASI untuk Melempar Dadu"
+horizontal_alignment = 1
+
+[node name="MenuAksi" type="Panel" parent="CanvasLayer" unique_id=142943177]
+visible = false
+offset_left = 27.0
+offset_top = 34.0
+offset_right = 292.0
+offset_bottom = 309.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/MenuAksi" unique_id=1365290708]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 300.0
+offset_bottom = 300.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TombolBeli" type="Button" parent="CanvasLayer/MenuAksi/VBoxContainer" unique_id=2071780462]
+layout_mode = 2
+text = "Beli Petak"
+
+[node name="TombolBangun" type="Button" parent="CanvasLayer/MenuAksi/VBoxContainer" unique_id=674284831]
+layout_mode = 2
+text = "Bangun Menara (Biaya: 500)"
+
+[node name="TombolSerang" type="Button" parent="CanvasLayer/MenuAksi/VBoxContainer" unique_id=468791012]
+layout_mode = 2
+text = "Serang Petak (Butuh 5 Bintang)"
+
+[node name="TombolTanah" type="Button" parent="CanvasLayer/MenuAksi/VBoxContainer" unique_id=1453331734]
+layout_mode = 2
+text = "Serang Petak (Butuh 5 Bintang)"
+
+[node name="TombolPetir" type="Button" parent="CanvasLayer/MenuAksi/VBoxContainer" unique_id=1400739278]
+layout_mode = 2
+text = "Serang Petak (Butuh 5 Bintang)"
+
+[node name="TombolTutup" type="Button" parent="CanvasLayer/MenuAksi/VBoxContainer" unique_id=1317415724]
+layout_mode = 2
+text = "Akhiri Giliran"
+
+[node name="TeksUang" type="Label" parent="CanvasLayer" unique_id=1009512992]
+offset_left = 39.0
+offset_top = 90.0
+offset_right = 125.0
+offset_bottom = 113.0
+text = "Uang: 1000"
+
+[node name="TeksBintang" type="Label" parent="CanvasLayer" unique_id=754795907]
+offset_left = 946.0
+offset_top = 90.0
+offset_right = 1032.0
+offset_bottom = 113.0
+text = "Uang: 1000"
+
+[node name="Rolet" type="ColorRect" parent="CanvasLayer" unique_id=1097372496]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.5882353)
+script = ExtResource("5_ra2f3")
+
+[node name="UIElemen" type="ColorRect" parent="CanvasLayer" unique_id=1139516491]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.627451)
+script = ExtResource("4_jcb7q")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer" unique_id=991125672]
+visible = false
+offset_right = 40.0
+offset_bottom = 40.0
+bbcode_enabled = true
+text = "[img=28]res://permata/permata_hijau.png[/img]"
+
+[node name="Musuh" type="Node3D" parent="." unique_id=400003477]
+
+[node name="beras" parent="Musuh" unique_id=941430571 instance=ExtResource("2_mnol6")]
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=1570285737]
+transform = Transform3D(0.84357536, -0.31031597, 0.43827486, 1.2907847e-08, 0.81613755, 0.5778577, -0.53701097, -0.48746642, 0.68847346, 4.141835, 3.8164215, 13.839577)
+projection = 1
+size = 25.0
+near = 0.03
+
+[connection signal="pressed" from="CanvasLayer/MenuAksi/VBoxContainer/TombolBeli" to="Pemain" method="_on_tombol_beli_pressed"]
+[connection signal="pressed" from="CanvasLayer/MenuAksi/VBoxContainer/TombolBangun" to="Pemain" method="_on_tombol_bangun_pressed"]
+[connection signal="pressed" from="CanvasLayer/MenuAksi/VBoxContainer/TombolSerang" to="Pemain" method="_on_tombol_serang_pressed"]
+[connection signal="pressed" from="CanvasLayer/MenuAksi/VBoxContainer/TombolTanah" to="Pemain" method="_on_tombol_tanah_pressed"]
+[connection signal="pressed" from="CanvasLayer/MenuAksi/VBoxContainer/TombolPetir" to="Pemain" method="_on_tombol_petir_pressed"]
+[connection signal="pressed" from="CanvasLayer/MenuAksi/VBoxContainer/TombolTutup" to="Pemain" method="_on_tombol_tutup_pressed"]
+

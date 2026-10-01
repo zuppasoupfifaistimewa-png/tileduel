@@ -1,0 +1,16 @@
+Godot Engine v4.7.1.stable.official.a13da4feb - https://godotengine.org
+
+UJI res://pemain.gd -> true
+UJI res://ui_elemen.gd -> true
+UJI res://petak_kartu.gd -> true
+UJI res://petak_papan.gd -> true
+UJI res://jebakan_tanah.gd -> true
+UJI res://jebakan_air.gd -> true
+UJI res://jebakan_angin.gd -> true
+UJI res://koin_tercecer.gd -> true
+UJI res://jebakan_api.gd -> true
+UJI res://jebakan_petir.gd -> true
+UJI res://petak_permata.gd -> true
+UJI res://ui_petak.gd -> true
+UJI res://ui_dinamis.gd -> true
+UJI res://lingkungan_pantai.gd -> true
