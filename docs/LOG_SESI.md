@@ -3,6 +3,19 @@
 Satu entri per sesi, terbaru di atas. Sesi baru tidak bisa membaca percakapan lama, jadi apa pun yang penting
 harus tercatat di sini, di `HANDOFF_LANJUT.md`, atau di RENCANA.
 
+## 2026-10-02 -- sesi Claude Code cloud (Opus 5.5): Fase 5 G8 (keseimbangan + soft-lock bangkrut)
+- Branch kerja: `claude/wonderful-gates-8v431l` (CLAUDE.md & HANDOFF bagian 0 diperbarui; `claude/new-session-e4ogqo` LAMA).
+- Soft-lock "bangkrut tanpa petak" DIPERBAIKI dgn aturan yang sudah ada (hutang dibawa, giliran lanjut; RPC baru `rpc_jual_habis`).
+  Bukti `hasil/g8_bangkrut/` (opsi rig-only `hutang_habis=SLOT`): kode lama MACET; kode baru solo x7 + MP host/client/AI lolos.
+- Jendela Tebak Duel solo +maks 2 dtk saat tombol tebak tampil (`TEBAK_SOLO_TAMBAHAN`), berhenti begitu pemain menebak; bukti `hasil/g8_tebak/`.
+- U9 ulang (K9) benih 50000 LOLOS P14: S1 2P 48.8/54.6/45.6/48.3/52.7; S2 4P 400 pertama air 18.8 -> +400 benih 60000, gabungan 800
+  21.2/27.6/24.3/25.7/25.9; S5 297/331/377 dtk. Angka K3/K5/F5 TIDAK diubah. Kolom rig-only `f5=` (event/bounty/kartu bantuan/hutang).
+- Bounty diklaim 8% pertandingan Quick 2P (duel jarang), kartu bantuan 2-5% -> usulan **K11/K12** (RENCANA_fase5 10.4), menunggu pemilik.
+- Regresi: MP 37/37 (97 SELESAI, 0 masalah), cek_nilai 8/8, cek_muat 26/26, reg10 sama dgn G7 (`hasil/g8_regresi/`).
+- Temuan baru (dipantau): 1x BEDA jebakan Phoenix host vs client (uji MP s821, kode lama, tidak muncul di regresi) -- RENCANA_fase5 10.5.
+- Catatan teknis: rantai regresi A+B dalam satu perintah latar bisa melewati batas 2 jam -> jalankan A dan B sebagai perintah TERPISAH.
+- Langkah berikutnya: pemilik memilih K11/K12 -> (kalau b/c: Sonnet terapkan + U9 S1+S2 ulang benih 70000) -> G9 (Sonnet): bersih-bersih + ZIP b10 + uji HP.
+
 ## 2026-10-02 -- sesi Claude Code cloud (Sonnet 5.5): perbaikan G5 (NO THANKS) + Fase 5 G6 (tombol AI cepat) + G7 (hadiah profil Tebak Duel)
 - Catatan branch: `claude/new-session-e4ogqo` masih di 755644d (sebelum Fase 5); semua pekerjaan G0-G7 ada di `claude/wonderful-gates-8v431l` (sesi ini bekerja & push di sana). Fast-forward `new-session-e4ogqo` ke branch itu kalau mau.
 - Perbaikan G5: NO THANKS pada putar ulang rolet -> tidak ditawari lagi di pertandingan itu (`_putar_ulang_ditolak`); iklan gagal tetap boleh ditawari lagi. Bukti `hasil/g6_ai_cepat/tolak_ringkas.txt` (4 run kalah 4-8x, hanya 1 tawaran; sebelumnya 3/8/5/5).

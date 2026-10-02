@@ -287,5 +287,13 @@ Hutang tanpa petak tidak pernah terjadi di U9 (semua AI) -- jalur 10.1 terutama 
 ### 10.5 Temuan baru (belum diperbaiki)
 - MP s821 (1v1 Classic, host role api dgn Ultimate Phoenix): CEK#12 BEDA -- jebakan api Phoenix di petak 15 masih ada di host
   (`aktif_ulang:0`, sudah selamat sekali) tapi hilang di client, SEBELUM ada penjualan petak (tidak terkait 10.1). Kode lama
-  (B-c C5). Lihat juga hasil regresi MP di bawah.
+  (B-c C5). TIDAK muncul lagi di regresi MP 37 skenario (10.6) -> dipantau; kalau terlihat di uji HP, Opus menganalisis.
+
+### 10.6 Regresi (kode akhir G8, `hasil/g8_regresi/`)
+- MP 37 skenario (`uji_f2_t2_a/b.sh`, A lalu B berurutan): 97 baris SELESAI (sama dgn F6), 0 MACET, 0 scripterr, 0 beda, 0 cek_gagal.
+- Skenario baru: 5 skenario MP bangkrut (10.1) + Tebak solo `tebak_jeda` (10.2).
+- `cek_nilai` 8/8 (390/130/324), `cek_muat_f3` 26/26, `batch_reg10` sama dgn G7 (takeover ok=29, kamera_hud ok=4, 0 gagal, 0 SCRIPT ERROR),
+  `uji_hadiah_tebak` 21/21. `game/` vs rig: 34/35 identik (beda hanya stub `pengelola_iklan.gd`).
+- S1 100 identik dgn G7 TIDAK berlaku lagi (sengaja): perbaikan bangkrut & jendela tebak tidak menyentuh rig semua-AI, tapi pembanding
+  baru = `hasil/g8_u9_b50000/hasil_s1.txt`.
 

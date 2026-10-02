@@ -117,7 +117,8 @@ Tidak ada baris "Guesses" di panel statistik profil (hanya tersimpan di `statist
   21.2/27.6/24.3/25.7/25.9 (S2 400 pertama air 18.8 -> ditambah 400, pola F5), S5 297/331/377 dtk. Angka K3/K5/F5 TIDAK diubah.
   Kolom rig-only `f5=ev/bm/bk/kb/hb` di baris SEIMBANG.
 - Bounty diklaim hanya di 8% pertandingan Quick 2P (duel jarang), kartu bantuan 2-5% -> USULAN K11/K12 (RENCANA_fase5 10.4) menunggu pemilik.
-- Regresi MP 37 skenario + cek_nilai + cek_muat + reg10: lihat 10.6 di RENCANA_fase5 (`hasil/g8_regresi/`).
+- Regresi: MP 37/37 (97 SELESAI, 0 MACET/scripterr/beda/cek_gagal), cek_nilai 8/8, cek_muat 26/26, reg10 sama dgn G7 (`hasil/g8_regresi/`).
+- Temuan baru (dipantau): 1x BEDA jebakan Phoenix host vs client di uji bangkrut MP s821 (tidak terkait G8, tidak muncul di regresi) -- RENCANA_fase5 10.5.
 
 **TEMUAN (dicatat Sonnet 02-10; no. 1 DIPERBAIKI di G8):**
 1. **[DIPERBAIKI G8] Soft-lock bangkrut tanpa petak** (kode LAMA, ada juga di ZIP b9, bukan dari G0-G7): `eksekusi_jual_aset` (`pemain_papan.gd` ~baris 975-1004) -- kalau pemain manusia masih minus sesudah menjual petak TERAKHIR, cabang `else` hanya menulis
@@ -238,7 +239,7 @@ Rig-only lain: `uji_*`, `cek_muat_f3.gd` (alat), dan 5 file proyek yang tidak ad
   (4) coba build rilis sekali; (5) Internal testing -> Production. Bug dari HP/rilis -> Opus menganalisis dulu.
 - **Fase 5 (rencana Opus 02-10, DISETUJUI): `docs/RENCANA_fase5_seru.md`** -- event papan, bounty, kartu bantuan posisi terakhir, Tebak Duel,
   putar ulang rolet (iklan, solo), tombol AI cepat (solo). Status: **DISETUJUI 02-10, pemilik "setuju semua a"**
-  (dicatat di bagian 1 & 9 rencana itu). Berikutnya: **OPUS** mengerjakan G8 (G0-G7 selesai; keseimbangan + regresi MP 37 + keputusan soft-lock bangkrut), lalu Sonnet G9. Baca rencana itu PENUH (pendek, ~200 baris); RENCANA_fase4 hanya untuk rujukan.
+  (dicatat di bagian 1 & 9 rencana itu). G0-G8 SELESAI (G8 Opus 02-10, bagian 10). Berikutnya: (1) pemilik memilih **K11** (bounty Quick) & **K12** (kartu bantuan Quick), RENCANA_fase5 10.4; kalau b/c -> Sonnet menerapkan + U9 S1+S2 ulang di benih BARU (mis. 70000) WAJIB sebelum G9; kalau a/a -> langsung **G9 (Sonnet)**: bersih-bersih (pola F7) + `kiriman/TileDuel_Fase5_b10.zip` (set lengkap) + uji HP (RENCANA_fase5 bagian 6). Baca rencana itu PENUH (~280 baris); RENCANA_fase4 hanya untuk rujukan.
 - Opsional (Sonnet, tidak menghalangi rilis): T22 (rig-only, D1 lebih kuat, RENCANA 14.23); komentar F5 untuk
   `hot_flames`/`fire_tax`/`strong_wind` di `data_role.gd` (komentar saja; ikut kiriman berikutnya).
 - Cara regresi MP di sesi cloud: salin `rig/skrip/jalankan_mp3.sh`, `uji_f2_t2_a/b.sh` ke scratchpad, ganti path

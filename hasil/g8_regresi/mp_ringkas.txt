@@ -1,0 +1,2 @@
+skenario: 37
+baris SELESAI: 97  MACET: 0  scripterr>0: 0  beda>0: 0  cek_gagal>0: 0
