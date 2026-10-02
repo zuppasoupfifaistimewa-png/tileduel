@@ -886,9 +886,13 @@ func _cek_profil_mp() -> void:
 	var menang = p._slot_pemenang_akhir == p.slot_lokal
 	var pengali = (1.0 if p.mode_quick else 1.6) * (1.5 if menang else 1.0)
 	var ok_rumus = not r.is_empty() and r["xp_match"] == roundi(5 * int(st.get("giliran", 0)) * pengali) and r["crowns_match"] == roundi(2 * int(st.get("giliran", 0)) * pengali) and r["xp_penghargaan"] == 15 * peng.size() and r["crowns_penghargaan"] == 10 * peng.size()
-	var xp_tambah = int(r.get("xp_match", 0)) + int(r.get("xp_penghargaan", 0)) + int(r.get("xp_misi", 0))
-	var cr_tambah = int(r.get("crowns_match", 0)) + int(r.get("crowns_penghargaan", 0)) + int(r.get("crowns_misi", 0)) + int(r.get("crowns_naik_level", 0))
+	var xp_tambah = int(r.get("xp_match", 0)) + int(r.get("xp_penghargaan", 0)) + int(r.get("xp_misi", 0)) + int(r.get("xp_tebak", 0))
+	var cr_tambah = int(r.get("crowns_match", 0)) + int(r.get("crowns_penghargaan", 0)) + int(r.get("crowns_misi", 0)) + int(r.get("crowns_tebak", 0)) + int(r.get("crowns_naik_level", 0))
 	var ok_sekali = ProfilPemain.xp_total == _xp0 + xp_tambah and ProfilPemain.crowns == _cr0 + cr_tambah
+	# Fase 5 G7: hadiah Tebak Duel = 5 XP / 3 Crowns per tebakan benar (maks 5) dari stat tebak_benar slot ini (identik di semua HP).
+	var tebak_stat = int(st.get("tebak_benar", 0))
+	var ok_tebak = int(r.get("xp_tebak", -1)) == 5 * mini(tebak_stat, 5) and int(r.get("crowns_tebak", -1)) == 3 * mini(tebak_stat, 5) and int(ProfilPemain.statistik.get("tebak_benar", 0)) == tebak_stat
+	_catat("TEBAK_HADIAH_MP slot=%d tebak_benar_stat=%d xp_tebak=%d crowns_tebak=%d stat_seumur=%d cek=%s" % [p.slot_lokal, tebak_stat, int(r.get("xp_tebak", -1)), int(r.get("crowns_tebak", -1)), int(ProfilPemain.statistik.get("tebak_benar", 0)), "OK" if ok_tebak else "GAGAL"])
 	var c = ConfigFile.new()
 	var ok_berkas = c.load(ProfilPemain.BERKAS) == OK and int(c.get_value("profil", "xp", -1)) == ProfilPemain.xp_total
 	var ok = ok_rumus and ok_sekali and ok_berkas and int(st.get("giliran", 0)) > 0

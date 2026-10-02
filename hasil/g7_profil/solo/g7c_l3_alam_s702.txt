@@ -1,0 +1,5 @@
+IKLAN_KARTU klik=true kartu=0->1 id=pelindung teks='You got SHIELD! Tap Use Card in your turn.' cek=OK
+TEBAK_HADIAH tebak_benar_stat=9 dihitung=5 xp_tebak=25 crowns_tebak=15 stat_seumur=0->9 baris_kartu=true
+PROFIL_CEK OK menang=false quick=false giliran=27 xp=216/216 cr=86/86 peng=[] misi=2 lv=1->4 double=klik=true xp 301->517 semua_peng=3:landlord 1:duel_king,trap_master,lucky_roller 0: 2: 
+TEBAK_RINGKAS tebakan=16 benar=9 cek_ok=16 cek_gagal=0 stat_tebak_benar_slot0=9
+SIM MENANG giliran=108 detik=2651

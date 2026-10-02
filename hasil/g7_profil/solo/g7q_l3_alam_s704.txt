@@ -1,0 +1,5 @@
+IKLAN_KARTU klik=true kartu=0->1 id=dadu_tinggi teks='You got HIGH ROLL! Tap Use Card in your turn.' cek=OK
+TEBAK_HADIAH tebak_benar_stat=0 dihitung=0 xp_tebak=0 crowns_tebak=0 stat_seumur=0->0 baris_kartu=false
+PROFIL_CEK OK menang=true quick=true giliran=5 xp=38/38 cr=15/15 peng=["duel_king", "landlord"] misi=1 lv=1->2 double=klik=true xp 93->161 semua_peng=0:duel_king,landlord 3:landlord 1:trap_master,landlord 2:lucky_roller 
+TEBAK_RINGKAS tebakan=0 benar=0 cek_ok=0 cek_gagal=0 stat_tebak_benar_slot0=0
+SIM MENANG giliran=20 detik=523

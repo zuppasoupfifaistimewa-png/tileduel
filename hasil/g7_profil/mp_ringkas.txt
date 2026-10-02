@@ -1,0 +1,12 @@
+G7 MP: Quick 3P alam (host + 2 client), opsi tebak=1. TEBAK_HADIAH_MP = hadiah tebak tiap device untuk slot-nya sendiri; PROFIL_MP cek=OK = hadiah profil tercatat TEPAT sekali (rumus + tebak) & berkas tersimpan.
+g7mpq_21 c1: slot=1 tebak_benar_stat=0 xp_tebak=0 crowns_tebak=0 stat_seumur=0 cek=OK | xp 0->45 crowns 0->42 cek=OK  scripterr=0
+g7mpq_21 c2: slot=2 tebak_benar_stat=0 xp_tebak=0 crowns_tebak=0 stat_seumur=0 cek=OK | xp 0->20 crowns 0->12 cek=OK  scripterr=0
+g7mpq_21 host: slot=0 tebak_benar_stat=0 xp_tebak=0 crowns_tebak=0 stat_seumur=0 cek=OK | xp 0->30 crowns 0->16 cek=OK  scripterr=0
+g7mpq_22 c1: slot=1 tebak_benar_stat=0 xp_tebak=0 crowns_tebak=0 stat_seumur=0 cek=OK | xp 0->95 crowns 0->73 cek=OK  scripterr=0
+g7mpq_22 c2: slot=2 tebak_benar_stat=0 xp_tebak=0 crowns_tebak=0 stat_seumur=0 cek=OK | xp 0->30 crowns 0->12 cek=OK  scripterr=0
+g7mpq_22 host: slot=0 tebak_benar_stat=0 xp_tebak=0 crowns_tebak=0 stat_seumur=0 cek=OK | xp 0->75 crowns 0->42 cek=OK  scripterr=0
+g7mpq_23 c1: slot=1 tebak_benar_stat=0 xp_tebak=0 crowns_tebak=0 stat_seumur=0 cek=OK | xp 0->35 crowns 0->18 cek=OK  scripterr=0
+g7mpq_23 c2: slot=2 tebak_benar_stat=1 xp_tebak=5 crowns_tebak=3 stat_seumur=1 cek=OK | xp 0->40 crowns 0->21 cek=OK  scripterr=0
+g7mpq_23 host: slot=0 tebak_benar_stat=0 xp_tebak=0 crowns_tebak=0 stat_seumur=0 cek=OK | xp 0->93 crowns 0->65 cek=OK  scripterr=0
+Seed 23: client 2 menebak benar 1x -> +5 XP +3 Crowns di HP-nya saja (stat tebak_benar_per_slot sama di semua device, lihat TEBAK_RINGKAS di mp/*.txt).
+Catatan: Classic MP 3P/4P (g7mp_a/b) berhenti di BATAS_GILIRAN sebelum pertandingan tuntas -> tidak ada hadiah profil; makanya dipakai Quick yang tuntas lewat ronde habis.

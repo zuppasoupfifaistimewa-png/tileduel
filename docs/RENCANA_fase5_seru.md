@@ -1,7 +1,7 @@
 # RENCANA FASE 5: Seru dalam pertandingan
 
 Disusun Opus, 02-10-2026 (sesi Claude Code cloud), setelah membaca kode `game/` (hasil Fase 4 = isi ZIP b9).
-**STATUS: DISETUJUI 02-10 -- pemilik: "setuju semua a" (K1-K10 = a). Rencana DIKUNCI. G0-G6 SELESAI (lihat bagian 9). Berikutnya: G7 profil (Sonnet).**
+**STATUS: DISETUJUI 02-10 -- pemilik: "setuju semua a" (K1-K10 = a). Rencana DIKUNCI. G0-G7 SELESAI (lihat bagian 9). Berikutnya: G8 keseimbangan (OPUS), lalu G9.**
 
 Sumber isi: dokumen "Rancangan Tile Duel: Retensi, Monetisasi & Role Elemen" (Fase 5 = Tebak Duel, event papan,
 bounty, bantuan posisi terakhir, animasi cepat; syarat lolos "semua HP melihat event yang sama") +
@@ -222,6 +222,8 @@ pernah di tengah giliran multiplayer).
 - 02-10 (Sonnet): **G5 SELESAI** (putar ulang rolet solo; `hasil/g5_putar_ulang/`: 8/8 putar ulang cek OK, sekali per pertandingan, NO THANKS/iklan gagal -> boleh ditawari lagi, MP tak terpengaruh, S1 100 G4==G5). Berikutnya G6 (tombol AI cepat).
 - 02-10 (Sonnet): **G5 diperbaiki**: NO THANKS = tidak ditawari lagi di pertandingan itu (iklan gagal tetap boleh); bukti `hasil/g6_ai_cepat/tolak_ringkas.txt`.
 - 02-10 (Sonnet): **G6 SELESAI** (tombol AI cepat solo, profil `[pengaturan] ai_cepat`, 2x hanya giliran AI tanpa layar duel/menu/spanduk event, MP tak terpengaruh; `hasil/g6_ai_cepat/`: `salah=0`, persisten lintas proses, S1 100 G4==G5==G6, cek_nilai 8/8, reg10 sama). Berikutnya G7 (profil).
+- 02-10 (Sonnet): **G7 SELESAI** (hadiah profil Tebak Duel: 5 XP/3 Crowns per tebakan benar maks 5, tidak ikut DOUBLE, baris kartu "Duel guesses", `tebak_benar` di STAT_SEUMUR; `hasil/g7_profil/`: uji unit 21/21, solo penuh PROFIL_CEK OK, MP Quick 3P PROFIL_MP OK, S1 100 G4==G7). Berikutnya G8 (OPUS).
+  TEMUAN untuk Opus: soft-lock bangkrut tanpa petak (kode lama; lihat HANDOFF "TEMUAN").
 - 02-10 (Opus): draf ditulis.
 - 02-10: pemilik menyetujui K1-K10 = a. Rencana dikunci. Berikutnya G0 (Sonnet, sesi baru): refactor `denda_petak()`/
   `harga_beli_*()`/`ronde_event` tanpa perubahan perilaku -> bukti identik di rig (bagian 5).

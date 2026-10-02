@@ -1,0 +1,4 @@
+TEBAK_HADIAH_MP slot=1 tebak_benar_stat=0 xp_tebak=0 crowns_tebak=0 stat_seumur=0 cek=OK
+PROFIL_MP slot=1 menang=true giliran=6 xp 0->95 crowns 0->73 penghargaan=["landlord"] rumus=true sekali=true berkas=true cek=OK
+TEBAK_RINGKAS slot=1 tebakan=0 benar=0 telat_kirim=0 telat_ditolak=0 cek_ok=0 cek_gagal=0 tebak_benar_per_slot=[0, 0, 0]
+SELESAI MENANG peran=client giliran=16 cek_ok=0 cek_gagal=0 kartu_beda=0 detik=287 migrasi=0 cek_ok_migrasi=0 jaringan=client role=api:api+angin+petir:{ "hot_flames": 2, "rock_breaker": 2, "heavy_pockets": 1, "fire_tax": 1, "ULT_api": true },air:air+angin+petir:{ "frozen_bubble": 2, "heat_skin": 2, 

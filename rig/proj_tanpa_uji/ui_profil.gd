@@ -221,18 +221,20 @@ static func _tonton_double(r: Dictionary, canvas: CanvasLayer, lbl_angka: Label,
 		_tulis_baris_role(lbl_role, batang_role, r)
 
 static func _tulis_angka(lbl: Label, r: Dictionary) -> void:
-	var xp = int(r["xp_match"]) + int(r["xp_penghargaan"]) + int(r.get("xp_misi", 0)) + int(r.get("xp_double", 0))
-	var cr = int(r["crowns_match"]) + int(r["crowns_penghargaan"]) + int(r.get("crowns_misi", 0)) \
+	var xp = int(r["xp_match"]) + int(r["xp_penghargaan"]) + int(r.get("xp_misi", 0)) + int(r.get("xp_tebak", 0)) + int(r.get("xp_double", 0))
+	var cr = int(r["crowns_match"]) + int(r["crowns_penghargaan"]) + int(r.get("crowns_misi", 0)) + int(r.get("crowns_tebak", 0)) \
 		+ int(r.get("crowns_naik_level", 0)) + int(r.get("crowns_double", 0))
 	lbl.text = "+%d XP     +%d CROWNS" % [xp, cr]
 
 static func _isi_baris_hadiah(kotak: VBoxContainer, r: Dictionary) -> void:
-	# Paling banyak 3 baris: naik level, misi selesai, penghargaan sendiri.
+	# Paling banyak 3 baris: naik level, tebakan duel (Fase 5 G7), misi selesai, penghargaan sendiri.
 	for anak in kotak.get_children():
 		anak.queue_free()
 	var daftar = []
 	if int(r["level_akhir"]) > int(r["level_awal"]):
 		daftar.append(["LEVEL UP! Lv %d  +%d Crowns" % [int(r["level_akhir"]), int(r.get("crowns_naik_level", 0))], HIJAU])
+	if int(r.get("tebak_dihitung", 0)) > 0:
+		daftar.append(["Duel guesses: %d right  +%d XP  +%d Crowns" % [int(r["tebak_dihitung"]), int(r.get("xp_tebak", 0)), int(r.get("crowns_tebak", 0))], Color.WHITE])
 	for m in r.get("misi_selesai", []):
 		daftar.append(["MISSION DONE: %s" % str(m["teks"]), EMAS])
 	for p in r.get("penghargaan", []):

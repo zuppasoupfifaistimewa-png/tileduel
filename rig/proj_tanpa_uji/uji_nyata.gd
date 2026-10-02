@@ -72,6 +72,7 @@ var cek_profil = false
 var _profil_dicek = false
 var xp0 = -1
 var cr0 = -1
+var tebak_seumur0 = 0 # Fase 5 G7: statistik seumur tebak_benar di awal pertandingan
 # --- Fase 4 U3 (keseimbangan): semua_ai=1 -> slot 0 juga AI; role=api,air,.. per
 # slot (dipasang langsung ke DataPemain sesudah START, tidak diundi); jenis=N jumlah
 # jenis jebakan dibawa tiap slot (bawaan 3 = SLOT_JEBAKAN_MP).
@@ -379,6 +380,7 @@ func _ready():
 	print("START ditekan setelah %.1f dtk; pemain=%d target_permata=%d petak=%d" % [t, p.jumlah_pemain(), p.target_permata_menang, p.rute_papan.size()])
 	xp0 = ProfilPemain.xp_total
 	cr0 = ProfilPemain.crowns
+	tebak_seumur0 = int(ProfilPemain.statistik.get("tebak_benar", 0))
 	if uang0_uji >= 0:
 		p.daftar_pemain[0].uang = uang0_uji
 		p.update_ui_status()
@@ -843,9 +845,18 @@ func _cek_profil_akhir() -> void:
 	var xp_harus = roundi(5 * int(st.get("giliran", 0)) * pengali)
 	var cr_harus = roundi(2 * int(st.get("giliran", 0)) * pengali)
 	hasil.append(["rumus", not r.is_empty() and r["xp_match"] == xp_harus and r["crowns_match"] == cr_harus and r["xp_penghargaan"] == 15 * peng.size() and r["crowns_penghargaan"] == 10 * peng.size()])
-	var xp_tambah = int(r.get("xp_match", 0)) + int(r.get("xp_penghargaan", 0)) + int(r.get("xp_misi", 0))
-	var cr_tambah = int(r.get("crowns_match", 0)) + int(r.get("crowns_penghargaan", 0)) + int(r.get("crowns_misi", 0)) + int(r.get("crowns_naik_level", 0))
+	var xp_tambah = int(r.get("xp_match", 0)) + int(r.get("xp_penghargaan", 0)) + int(r.get("xp_misi", 0)) + int(r.get("xp_tebak", 0))
+	var cr_tambah = int(r.get("crowns_match", 0)) + int(r.get("crowns_penghargaan", 0)) + int(r.get("crowns_misi", 0)) + int(r.get("crowns_tebak", 0)) + int(r.get("crowns_naik_level", 0))
 	hasil.append(["profil", ProfilPemain.xp_total == xp0 + xp_tambah and ProfilPemain.crowns == cr0 + cr_tambah])
+	# Fase 5 G7: hadiah Tebak Duel = 5 XP / 3 Crowns per tebakan benar (maks 5), stat seumur penuh, baris kartu hadiah, tidak ikut DOUBLE.
+	var tebak_stat = int(st.get("tebak_benar", 0))
+	var tebak_hit = mini(tebak_stat, 5)
+	var ok_tebak = int(r.get("tebak_benar", -1)) == tebak_stat and int(r.get("xp_tebak", -1)) == 5 * tebak_hit and int(r.get("crowns_tebak", -1)) == 3 * tebak_hit \
+		and int(ProfilPemain.statistik.get("tebak_benar", 0)) == tebak_seumur0 + tebak_stat
+	hasil.append(["tebak_hadiah", ok_tebak])
+	var teks_baris_tebak = "Duel guesses: %d right  +%d XP  +%d Crowns" % [tebak_hit, 5 * tebak_hit, 3 * tebak_hit]
+	hasil.append(["tebak_baris_kartu", (tebak_hit == 0) != not _cari_label(teks_baris_tebak).is_empty()])
+	print("TEBAK_HADIAH tebak_benar_stat=%d dihitung=%d xp_tebak=%d crowns_tebak=%d stat_seumur=%d->%d baris_kartu=%s" % [tebak_stat, tebak_hit, int(r.get("xp_tebak", -1)), int(r.get("crowns_tebak", -1)), tebak_seumur0, int(ProfilPemain.statistik.get("tebak_benar", 0)), str(not _cari_label(teks_baris_tebak).is_empty())])
 	var c = ConfigFile.new()
 	var ok_berkas = c.load(ProfilPemain.BERKAS) == OK and int(c.get_value("profil", "xp", -1)) == ProfilPemain.xp_total and int(c.get_value("profil", "crowns", -1)) == ProfilPemain.crowns
 	hasil.append(["berkas", ok_berkas])

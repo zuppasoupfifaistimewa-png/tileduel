@@ -1,0 +1,5 @@
+IKLAN_KARTU klik=true kartu=0->1 id=dadu_rendah teks='You got LOW ROLL! Tap Use Card in your turn.' cek=OK
+TEBAK_HADIAH tebak_benar_stat=9 dihitung=5 xp_tebak=25 crowns_tebak=15 stat_seumur=0->9 baris_kartu=true
+PROFIL_CEK OK menang=true quick=false giliran=27 xp=324/324 cr=130/130 peng=["landlord"] misi=2 lv=1->5 double=klik=true xp 404->743 semua_peng=0:landlord 2: 3:trap_master 1:duel_king,lucky_roller 
+TEBAK_RINGKAS tebakan=16 benar=9 cek_ok=16 cek_gagal=0 stat_tebak_benar_slot0=9
+SIM MENANG giliran=105 detik=3014

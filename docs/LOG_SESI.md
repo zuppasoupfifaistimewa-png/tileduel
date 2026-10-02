@@ -3,6 +3,18 @@
 Satu entri per sesi, terbaru di atas. Sesi baru tidak bisa membaca percakapan lama, jadi apa pun yang penting
 harus tercatat di sini, di `HANDOFF_LANJUT.md`, atau di RENCANA.
 
+## 2026-10-02 -- sesi Claude Code cloud (Sonnet 5.5): perbaikan G5 (NO THANKS) + Fase 5 G6 (tombol AI cepat) + G7 (hadiah profil Tebak Duel)
+- Catatan branch: `claude/new-session-e4ogqo` masih di 755644d (sebelum Fase 5); semua pekerjaan G0-G7 ada di `claude/wonderful-gates-8v431l` (sesi ini bekerja & push di sana). Fast-forward `new-session-e4ogqo` ke branch itu kalau mau.
+- Perbaikan G5: NO THANKS pada putar ulang rolet -> tidak ditawari lagi di pertandingan itu (`_putar_ulang_ditolak`); iklan gagal tetap boleh ditawari lagi. Bukti `hasil/g6_ai_cepat/tolak_ringkas.txt` (4 run kalah 4-8x, hanya 1 tawaran; sebelumnya 3/8/5/5).
+- G6 tombol AI cepat (solo) SELESAI: lihat HANDOFF; bukti `hasil/g6_ai_cepat/`. 2x hanya giliran AI tanpa layar duel/menu/spanduk event, profil `[pengaturan] ai_cepat` (bawaan MATI, diingat lintas proses), MP tak terpengaruh.
+  Regresi saklar MATI: S1 100 G4==G5==G6 IDENTIK, cek_nilai 8/8, reg10 sama dgn G5.
+- G7 hadiah profil Tebak Duel SELESAI: lihat HANDOFF; bukti `hasil/g7_profil/`. Uji unit baru `uji_hadiah_tebak.tscn` (rig-only) 21/21, solo penuh & MP Quick 3P OK, S1 100 G4==G7, cek_muat 26/26.
+- Keputusan/temuan: urutan baris kartu hadiah = level up, tebakan, misi, penghargaan. Panel statistik profil TIDAK diberi baris "Guesses" (tidak diminta). TEMUAN LAMA: soft-lock bangkrut tanpa petak (2 dari 8 run Classic) -> HANDOFF "TEMUAN" (Opus/pemilik).
+  Teknis: `ps | grep -c` bernilai exit 1 saat 0 proses -> jangan dirangkai `&&`; Classic MP di rig sering berhenti BATAS_GILIRAN (tanpa hadiah profil) -> uji hadiah MP pakai Quick.
+- Commit: bd05eec (perbaikan G5), 4b4b0d5 (G6), lalu commit penutup G7.
+- Langkah berikutnya: G8 (OPUS: U9 ulang S1/S2/S5, regresi MP 37 skenario, keputusan soft-lock bangkrut & angka Quick bounty/kartu bantuan), G9 (Sonnet: bersih-bersih + ZIP b10 + uji HP).
+  Sesi ini sudah PANJANG (banyak simulasi) -> pemilik diingatkan membuka sesi baru; prompt siap tempel ada di akhir jawaban sesi.
+
 ## 2026-10-02 -- sesi Claude Code cloud (Sonnet 5.5): Fase 5 G4 (Tebak Duel) + G5 (putar ulang rolet)
 - G4 Tebak Duel (solo + MP) SELESAI: lihat HANDOFF (ringkasan kode & bukti), data `hasil/g4_tebak/`. Penonton manusia menebak pemenang duel; stat `tebak_benar` identik di semua device;
   "Too late!" teruji (tebakan sesudah host menutup jendela); migrasi saat duel membuang tebakan tanpa hadiah. Hadiah profil (XP/Crowns) = G7.

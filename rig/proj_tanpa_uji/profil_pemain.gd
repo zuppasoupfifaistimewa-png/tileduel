@@ -26,6 +26,10 @@ const PENGALI_CLASSIC := 1.6
 const BONUS_MENANG := 1.5
 const XP_PENGHARGAAN := 15
 const CROWNS_PENGHARGAAN := 10
+# --- Fase 5 G7: hadiah Tebak Duel (K6) -- per tebakan benar, paling banyak TEBAK_MAKS_HADIAH per pertandingan; TIDAK ikut DOUBLE ---
+const XP_PER_TEBAKAN := 5
+const CROWNS_PER_TEBAKAN := 3
+const TEBAK_MAKS_HADIAH := 5
 # --- Level: Lv L -> L+1 butuh 100 + 25 x (L-1) XP. Tanpa batas. ---
 const XP_LEVEL_AWAL := 100
 const XP_TAMBAH_PER_LEVEL := 25
@@ -61,7 +65,7 @@ const MISI := {
 const HADIAH_MISI := [{"crowns": 20, "xp": 15}, {"crowns": 30, "xp": 25}, {"crowns": 45, "xp": 35}]
 const NAMA_ELEMEN := {"api": "FIRE", "air": "WATER", "tanah": "EARTH", "petir": "LIGHTNING", "angin": "WIND"}
 # Statistik pertandingan yang dijumlahkan ke statistik seumur main.
-const STAT_SEUMUR := ["giliran", "duel_menang", "jebakan_pasang", "jebakan_kena", "petak_beli", "menara_lv2", "permata", "kartu_pakai", "lewat_start"]
+const STAT_SEUMUR := ["giliran", "duel_menang", "jebakan_pasang", "jebakan_kena", "petak_beli", "menara_lv2", "permata", "kartu_pakai", "lewat_start", "tebak_benar"]
 # Filter nama sederhana (boleh ditambah). KATA_KASAR dicari di BAGIAN mana saja nama (setelah
 # spasi dibuang dan angka mirip huruf diganti: 0->o 1->i 3->e 4->a 5->s 7->t @->a $->s);
 # KATA_KASAR_UTUH hanya kalau SAMA dengan satu kata utuh (supaya "Asuka", "Taiga",
@@ -331,6 +335,11 @@ func catat_akhir_match(d: Dictionary) -> Dictionary:
 	var cr_match = roundi(CROWNS_PER_GILIRAN * giliran * pengali)
 	var xp_peng = XP_PENGHARGAAN * peng.size()
 	var cr_peng = CROWNS_PENGHARGAAN * peng.size()
+	# Fase 5 G7: Tebak Duel -- tebakan benar yang dihitung maks TEBAK_MAKS_HADIAH; stat seumur memakai angka penuh.
+	var tebak_benar = int(st.get("tebak_benar", 0))
+	var tebak_dihitung = mini(tebak_benar, TEBAK_MAKS_HADIAH)
+	var xp_tebak = XP_PER_TEBAKAN * tebak_dihitung
+	var cr_tebak = CROWNS_PER_TEBAKAN * tebak_dihitung
 	# Statistik seumur main.
 	for k in STAT_SEUMUR:
 		statistik[k] = int(statistik.get(k, 0)) + int(st.get(k, 0))
@@ -369,13 +378,14 @@ func catat_akhir_match(d: Dictionary) -> Dictionary:
 		xp_role[role] = int(xp_role.get(role, 0)) + xp_role_match
 		role_lv_akhir = int(DataRole.info_level_role(int(xp_role[role]))["level"])
 	var xp_awal = xp_total
-	crowns += cr_match + cr_peng + cr_misi
-	var naik = _tambah_xp(xp_match + xp_peng + xp_misi)
+	crowns += cr_match + cr_peng + cr_misi + cr_tebak
+	var naik = _tambah_xp(xp_match + xp_peng + xp_misi + xp_tebak)
 	simpan()
 	return {
 		"xp_match": xp_match, "crowns_match": cr_match,
 		"xp_penghargaan": xp_peng, "crowns_penghargaan": cr_peng, "penghargaan": peng.duplicate(),
 		"misi_selesai": selesai, "xp_misi": xp_misi, "crowns_misi": cr_misi,
+		"tebak_benar": tebak_benar, "tebak_dihitung": tebak_dihitung, "xp_tebak": xp_tebak, "crowns_tebak": cr_tebak,
 		"level_awal": naik["level_lama"], "level_akhir": naik["level_baru"], "crowns_naik_level": naik["crowns_level"],
 		"xp_total_awal": xp_awal, "xp_total": xp_total,
 		"bisa_double": (xp_match + xp_peng) > 0, "sudah_double": false,

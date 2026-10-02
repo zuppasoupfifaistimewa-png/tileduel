@@ -1,9 +1,9 @@
-# HANDOFF -- lanjutkan proyek Tile Duel (Fase 4 SELESAI; Fase 5: G0-G6 + getaran Earthquake SELESAI, G7 berikutnya)
+# HANDOFF -- lanjutkan proyek Tile Duel (Fase 4 SELESAI; Fase 5: G0-G7 + getaran Earthquake SELESAI, G8 berikutnya = OPUS)
 
 Dokumen ini ditulis 02-10-2026 supaya sesi Claude Code (cloud / web, tanpa CLI) mana pun bisa melanjutkan
 pekerjaan TANPA riwayat percakapan. BACA INI DULU, lalu `docs/RENCANA_fase4_role.md` bagian 14.19 & **14.21-14.24** (paling akhir).
 Diperbarui 02-10 (Opus, sesi Claude Code cloud): **uji HP pemilik dengan `kiriman/TileDuel_FaseB_b9.zip` = "lancar" -> Fase 4 SELESAI** (RENCANA 14.24).
-Berikutnya: pemilik merilis A+B (daftar periksa di bagian 5). **Fase 5: rencana `docs/RENCANA_fase5_seru.md` DISETUJUI 02-10 (K1-K10 = a); G0-G6 + getaran Earthquake SELESAI (Sonnet, 02-10) -> berikutnya Sonnet mengerjakan G7 (profil: XP/Crowns tebak, kartu hadiah, stat seumur).**
+Berikutnya: pemilik merilis A+B (daftar periksa di bagian 5). **Fase 5: rencana `docs/RENCANA_fase5_seru.md` DISETUJUI 02-10 (K1-K10 = a); G0-G7 + getaran Earthquake SELESAI (Sonnet, 02-10) -> berikutnya OPUS mengerjakan G8 (keseimbangan: U9 ulang + regresi MP 37 skenario, lihat RENCANA_fase5 bagian 5 & catatan G8 di bawah), lalu Sonnet G9 (bersih-bersih + ZIP b10 + uji HP).**
 
 **Fase 5 G0 SELESAI (Sonnet, 02-10):** refactor `denda_petak()` / `harga_beli_tanah()` / `harga_beli_menara(lv)` / `ronde_event` di
 `pemain_dasar.gd` (+ semua pemakai di `ai_jebakan/ai_musuh/pemain/pemain_papan/pemain_tampilan`), `game/` & rig identik (34/35, kecuali stub iklan).
@@ -95,6 +95,23 @@ tidak menekannya; tampil HANYA di solo -- `pemain.gd _mulai_transisi_game`). Ket
   tidak menunggu timer jadi aman, tapi kalau di uji HP terasa kurang nyaman tambahkan syaratnya di `_ai_cepat_berlaku()`.
 - Perbaikan G5 yang dikerjakan sebelum G6 (02-10): **NO THANKS pada putar ulang rolet = tidak ditawari lagi di pertandingan itu** (`_putar_ulang_ditolak`, `pemain_duel.gd` + reset di `pemain.gd`); iklan GAGAL tetap boleh ditawari lagi.
   Bukti `hasil/g6_ai_cepat/tolak_ringkas.txt`: 4 run "tolak" (kalah duel 8/5/4/5 kali) -> hanya 1 tawaran & 1 klik per run (sebelumnya 3/8/5/5); iklan gagal tetap 3/5 tawaran; ditonton tetap sekali + cek skor OK.
+
+**Fase 5 G7 SELESAI (Sonnet, 02-10): hadiah profil Tebak Duel.** `profil_pemain.gd`: konstanta `XP_PER_TEBAKAN=5`, `CROWNS_PER_TEBAKAN=3`, `TEBAK_MAKS_HADIAH=5`; `catat_akhir_match` menambah `xp_tebak`/`crowns_tebak` =
+5/3 x `mini(tebak_benar, 5)` ke XP & Crowns (hasil dikembalikan di `tebak_benar`, `tebak_dihitung`, `xp_tebak`, `crowns_tebak`); `"tebak_benar"` masuk `STAT_SEUMUR` (angka PENUH, tidak dibatasi 5). **Tidak ikut DOUBLE**
+(`tambah_double` tetap hanya `xp_match + xp_penghargaan`; `bisa_double` tidak berubah). `ui_profil.gd`: angka atas kartu hadiah (`_tulis_angka`) ikut menjumlah `xp_tebak/crowns_tebak`; baris baru
+"Duel guesses: N right  +X XP  +Y Crowns" di `_isi_baris_hadiah` (urutan: level up, tebakan, misi, penghargaan; maks 3 baris + "+N more rewards"). Berkas profil lama/stat tanpa kunci `tebak_benar` aman (default 0).
+Tidak ada baris "Guesses" di panel statistik profil (hanya tersimpan di `statistik["tebak_benar"]`; tambahkan di `ui_profil.gd` ~baris 402 kalau pemilik mau).
+- Bukti (`hasil/g7_profil/`): uji unit rig-only baru `uji_hadiah_tebak.tscn` 21/21 (N=0,1,3,5,7: hadiah, profil naik tepat, stat seumur penuh; DOUBLE tanpa tebakan; bisa_double false saat giliran 0; muat ulang berkas; berkas lama).
+  Solo penuh Classic 3P/4P x4 + Quick 3P/4P x2 (`profil=1 tebak=1 iklan=1`): `PROFIL_CEK OK` (rumus, profil naik tepat = match+penghargaan+misi+tebak, berkas, muat ulang, kartu YOUR REWARDS, DOUBLE tidak menggandakan tebakan, EXIT) dgn tebak_benar 5/9/9/12 -> dihitung 5
+  (+25 XP +15 Crowns), stat seumur penuh (5/9/9/12), baris kartu tampil; Quick tanpa tebakan -> 0 hadiah, tanpa baris. MP Quick 3P x3 (host + 2 client): `PROFIL_MP cek=OK` di 9/9 device; seed 23: client 2 tebakan benar 1x -> +5 XP +3 Crowns hanya di HP itu, tercatat sekali.
+  Regresi: S1 100 G7 == G4 IDENTIK, `cek_nilai` 8/8, `batch_reg10` sama dgn G5, `cek_muat_f3` 26/26. Rig-only: `uji_nyata.gd` (`PROFIL_CEK` + `tebak_hadiah`/`tebak_baris_kartu`, log `TEBAK_HADIAH`), `uji_robot_mp.gd` (`PROFIL_MP` + log `TEBAK_HADIAH_MP`).
+- BELUM: tampilan baris "Duel guesses" di layar sungguhan (headless) -> uji HP G9. Classic MP 3P/4P di rig berhenti di BATAS_GILIRAN sebelum tuntas (tak ada hadiah profil); jalur hadiah MP diuji lewat Quick 3P.
+
+**TEMUAN (belum dikerjakan; dicatat Sonnet 02-10, keputusan = Opus/pemilik):**
+1. **Soft-lock bangkrut tanpa petak** (kode LAMA, ada juga di ZIP b9, bukan dari G0-G7): `eksekusi_jual_aset` (`pemain_papan.gd` ~baris 975-1004) -- kalau pemain manusia masih minus sesudah menjual petak TERAKHIR, cabang `else` hanya menulis
+   "Still in minus! Tap another tile to sell." dan menunggu ketukan padahal tidak ada petak lagi -> permainan macet (pemeriksaan `punya_aset` hanya di awal, ~baris 1276). Terlihat 2 dari 8 run solo Classic G7 (`hasil/g7_profil/solo_ringkas.txt`, s701 & s723, `SIM MACET`).
+   Event GOLD RUSH (denda x2, G1) membuat hutang lebih besar sehingga lebih sering terjadi. Perlu keputusan aturan (hutang dihapus / pemain tersingkir / dll.) -> Opus, SEBELUM rilis b10.
+2. Catatan G8 (sudah ada di atas): bounty & kartu bantuan hampir tak muncul di Quick; jendela tebak solo ~2,5 dtk ketat; putar ulang rolet menambah peluang menang solo.
 
 ## 0. Aturan tetap dari pemilik proyek (WAJIB)
 1. Balas dalam **Bahasa Indonesia saja**.
@@ -209,7 +226,7 @@ Rig-only lain: `uji_*`, `cek_muat_f3.gd` (alat), dan 5 file proyek yang tidak ad
   (4) coba build rilis sekali; (5) Internal testing -> Production. Bug dari HP/rilis -> Opus menganalisis dulu.
 - **Fase 5 (rencana Opus 02-10, DISETUJUI): `docs/RENCANA_fase5_seru.md`** -- event papan, bounty, kartu bantuan posisi terakhir, Tebak Duel,
   putar ulang rolet (iklan, solo), tombol AI cepat (solo). Status: **DISETUJUI 02-10, pemilik "setuju semua a"**
-  (dicatat di bagian 1 & 9 rencana itu). Berikutnya: **Sonnet** mengerjakan G7 (G0-G6 selesai; profil: hadiah tebak) dst. Baca rencana itu PENUH (pendek, ~200 baris); RENCANA_fase4 hanya untuk rujukan.
+  (dicatat di bagian 1 & 9 rencana itu). Berikutnya: **OPUS** mengerjakan G8 (G0-G7 selesai; keseimbangan + regresi MP 37 + keputusan soft-lock bangkrut), lalu Sonnet G9. Baca rencana itu PENUH (pendek, ~200 baris); RENCANA_fase4 hanya untuk rujukan.
 - Opsional (Sonnet, tidak menghalangi rilis): T22 (rig-only, D1 lebih kuat, RENCANA 14.23); komentar F5 untuk
   `hot_flames`/`fire_tax`/`strong_wind` di `data_role.gd` (komentar saja; ikut kiriman berikutnya).
 - Cara regresi MP di sesi cloud: salin `rig/skrip/jalankan_mp3.sh`, `uji_f2_t2_a/b.sh` ke scratchpad, ganti path
