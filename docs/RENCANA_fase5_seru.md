@@ -1,7 +1,7 @@
 # RENCANA FASE 5: Seru dalam pertandingan
 
 Disusun Opus, 02-10-2026 (sesi Claude Code cloud), setelah membaca kode `game/` (hasil Fase 4 = isi ZIP b9).
-**STATUS: DRAF -- menunggu persetujuan pemilik untuk K1-K10 (bagian 1). Belum ada kode yang ditulis.**
+**STATUS: DISETUJUI 02-10 -- pemilik: "setuju semua a" (K1-K10 = a). Rencana DIKUNCI. Berikutnya: G0 (Sonnet). Belum ada kode yang ditulis.**
 
 Sumber isi: dokumen "Rancangan Tile Duel: Retensi, Monetisasi & Role Elemen" (Fase 5 = Tebak Duel, event papan,
 bounty, bantuan posisi terakhir, animasi cepat; syarat lolos "semua HP melihat event yang sama") +
@@ -32,7 +32,7 @@ Enam fitur kecil di DALAM pertandingan, semuanya sama untuk semua pemain dan tid
 
 Fitur 1-3 mengubah ekonomi pertandingan AI-vs-AI -> keseimbangan role (P14, Fase 4) WAJIB dicek ulang di rig.
 
-## 1. Keputusan (perlu persetujuan pemilik; rekomendasi Opus = pilihan pertama "a")
+## 1. Keputusan (DISETUJUI pemilik 02-10: semua "a" -- yang berlaku = pilihan a di setiap K)
 
 - **K1. Daftar event.** a) GOLD RUSH (denda petak x2), MARKET DAY (harga beli petak & menara -30%), EARTHQUAKE
   (satu menara acak -1 HP, tidak pernah hancur), **STAR SHOWER** (semua pemain +1 bintang, maks 10) -- menggantikan
@@ -212,4 +212,6 @@ pilihan elemen dengan bounty; tombol AI cepat di multiplayer; putar ulang rolet 
 pernah di tengah giliran multiplayer).
 
 ## 9. STATUS
-- 02-10 (Opus): draf ditulis. Menunggu K1-K10.
+- 02-10 (Opus): draf ditulis.
+- 02-10: pemilik menyetujui K1-K10 = a. Rencana dikunci. Berikutnya G0 (Sonnet, sesi baru): refactor `denda_petak()`/
+  `harga_beli_*()`/`ronde_event` tanpa perubahan perilaku -> bukti identik di rig (bagian 5).
