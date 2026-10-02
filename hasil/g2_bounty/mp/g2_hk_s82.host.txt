@@ -1,0 +1,96 @@
+ROBOT host urut=1 mode=3 peta=alam skenario=host_keluar_migrasi
+LOBBY host: klik mode '3 PLAYERS' = true
+LOBBY host: klik peta 'Grassland' = true
+LOBBY host: klik panjang 'QUICK' = true
+LOBBY host: klik MY ROLE = true
+LOBBY host: klik role FIRE = true
+LOBBY host: klik OK = true
+LOBBY host: pemain = [b][color=#3380ff]P1[/color][/b]   HOST (YOU)  [color=#e63333]FIRE[/color] | [b][color=#ff3333]P2[/color][/b]   PLAYER  [color=#3380e6]WATER[/color] | [b][color=#26cc4d]P3[/color][/b]   PLAYER  [color=#996633]EARTH[/color]
+LOBBY host: info = Everyone is here. Press START!
+LOBBY host: START = true
+MASUK_GAME slot_lokal=0 pemain=3 peran_jaringan=host
+START_DITEKAN
+T|YOUR TURN! Choose Action or Roll Dice.
+EVENT ronde=1 aktif= terakhir=
+BOUNTY aktif= terakhir= bintang=[4, 4, 4] stat_bounty=[0, 0, 0]
+G1|pemain|[0,2500,4][0,2500,4][0,2500,4]
+R|dadu
+T|You are rolling dice...
+T|Your Roll: 3
+R|jebakan|TombolTrapApi
+T|Fire Trap set! (Burns victim for 3 turns)
+BOUNTY aktif= terakhir= bintang=[3, 4, 4] stat_bounty=[0, 0, 0]
+R|beli
+T|Waiting for P2...
+G2|musuh|[3,2200,3][0,2500,4][0,2500,4]
+T|You are rolling dice...
+T|P2 Roll: 3
+T|FIRE TRAP! Burning for 3 turns!
+T|Waiting for P2...
+D|32.0|DUEL fase=PILIH_PEMAIN segelM=0 segelP=0 tonton=0 judul='CHOOSE YOUR ELEMENT!'
+D|35.1|DUEL fase=PILIH_PEMAIN segelM=1 segelP=0 tonton=0 judul='P2 CHOSE! YOUR TURN!'
+R|elemen|tanah
+D|35.2|DUEL fase=MENUNGGU_MUSUH segelM=1 segelP=1 tonton=0 judul='P2 ATTACKS! BOTH LOCKED!'
+D|37.1|DUEL fase=SEGEL_KEDUANYA segelM=1 segelP=1 tonton=0 judul='UNLOCKING...'
+D|38.4|DUEL fase=FADE_OUT segelM=1 segelP=1 tonton=0 judul='UNLOCKING...'
+D|39.9|DUEL fase=ANIMASI_CORET segelM=1 segelP=1 tonton=0 judul='ELEMENT WIN! You +3'
+D|41.2|DUEL fase=ANIMASI_HILANG segelM=1 segelP=1 tonton=0 judul='ELEMENT WIN! You +3'
+D|41.6|DUEL fase=ANIMASI_MENANG segelM=1 segelP=1 tonton=0 judul='ELEMENT WIN! You +3'
+D|43.0|DUEL fase=ROLET_PEMAIN segelM=1 segelP=1 tonton=0 judul='SPIN YOUR WHEEL!'
+D|44.9|DUEL fase=ROLET_PEMAIN segelM=1 segelP=1 tonton=0 judul='WHEEL SPINNING...'
+D|49.0|DUEL fase=ROLET_MUSUH segelM=1 segelP=1 tonton=0 judul='P2 WHEEL SPINNING...'
+D|53.2|DUEL fase=RANGKUMAN segelM=1 segelP=1 tonton=0 judul='CALCULATING TOTAL SCORE...'
+D|56.3|DUEL fase=PENGUMUMAN_TRANSISI segelM=1 segelP=1 tonton=0 judul='CALCULATING TOTAL SCORE...'
+D|56.8|DUEL fase=PENGUMUMAN_FINAL segelM=1 segelP=1 tonton=0 judul='P2 WINS THE FIGHT!'
+T|P2 WON! Your tile is stolen!
+D|61.3|(kosong)
+T|You are rolling dice...
+G3|pemain3|[3,2200,3][3,2500,4][0,2500,4]
+T|P3 Roll: 9
+T|P3 set a Wind Trap!
+BOUNTY aktif= terakhir= bintang=[3, 4, 3] stat_bounty=[0, 0, 0]
+T|Waiting for P3...
+T|First to win a duel with LIGHTNING: +1 Star
+EVENT ronde=2 aktif= terakhir=
+BOUNTY aktif=petir terakhir=petir bintang=[3, 4, 3] stat_bounty=[0, 0, 0]
+T|YOUR TURN! Choose Action or Roll Dice.
+G4|pemain|[3,2200,3][3,2500,4][9,2200,3]
+R|dadu
+T|You are rolling dice...
+T|Your Roll: 8
+T|WIND TRAP! Lost 165 Coins!
+T|You found 41 Coins!
+R|jebakan|TombolTrapAngin
+T|Wind Trap set! Wait for victim.
+BOUNTY aktif=petir terakhir=petir bintang=[2, 4, 3] stat_bounty=[0, 0, 0]
+R|beli
+T|P2 is burning! Lost 55 Coins. (2 turns left)
+G5|musuh|[11,1804,2][3,2445,4][9,2200,3]
+T|You are rolling dice...
+T|P2 Roll: 2
+T|P2 found 41 Coins!
+T|P2 set a Wind Trap!
+BOUNTY aktif=petir terakhir=petir bintang=[2, 3, 3] stat_bounty=[0, 0, 0]
+T|Waiting for P2...
+T|You are rolling dice...
+G6|pemain3|[11,1804,2][5,2186,3][9,2200,3]
+T|P3 Roll: 8
+T|WIND TRAP! Lost 165 Coins!
+T|P3 found 55 Coins!
+T|P3 landed on a Card Tile!
+D|131.6|ANIMASI_KARTU judul='CARD REVEALED!' target='Tile Duel' a_target=1.0 a_latar=-1.00 kartu=,, kamera=P3 | TEKS='P3 landed on a Card Tile!'
+D|131.8|ANIMASI_KARTU judul='CARD REVEALED!' target='Tile Duel' a_target=1.0 a_latar=-1.00 kartu=, kamera=P3 | TEKS='P3 landed on a Card Tile!'
+D|131.9|ANIMASI_KARTU judul='CARD REVEALED!' target='Tile Duel' a_target=1.0 a_latar=-1.00 kartu=,,LOW ROLL* kamera=P3 | TEKS='P3 landed on a Card Tile!'
+T|Card saved to Inventory!
+D|134.6|TEKS='Card saved to Inventory!'
+T|P3 found 55 Coins!
+D|138.4|(kosong)
+T|P3 set a Lightning Trap!
+BOUNTY aktif=petir terakhir=petir bintang=[2, 3, 2] stat_bounty=[0, 0, 0]
+T|Waiting for P3...
+T|Everyone gets +1 Star!
+EVENT ronde=3 aktif= terakhir=star_shower
+BOUNTY aktif=petir terakhir=petir bintang=[3, 4, 3] stat_bounty=[0, 0, 0]
+T|YOUR TURN! Choose Action or Roll Dice.
+G7|pemain|[11,1804,3][5,2186,4][17,1845,3]
+SKENARIO: host keluar paksa di giliran 7

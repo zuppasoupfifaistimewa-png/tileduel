@@ -1439,6 +1439,62 @@ func _teks_event(id: String, slot_sasaran: int) -> String:
 			return _nama_slot(slot_sasaran) + "'s tower lost 1 HP!"
 	return ""
 
+# ========================================================
+# BOUNTY (Fase 5 G2) -- host/solo saja; undian lewat mesin_acak
+# ========================================================
+func _bounty_perlu_muncul() -> bool:
+	# Dipanggil dari ganti_giliran (slot 0) SETELAH ronde_event dinaikkan dan event (kalau ada) dimulai.
+	if bounty_elemen != "":
+		return false
+	return ronde_event == BOUNTY_RONDE_PERTAMA or _ronde_jadwal_event()
+
+func _mulai_bounty() -> void:
+	var kandidat: Array = DataRole.ROLE.duplicate()
+	kandidat.erase(bounty_terakhir)
+	bounty_elemen = kandidat[mesin_acak.randi_range(0, kandidat.size() - 1)]
+	bounty_terakhir = bounty_elemen
+	if StatusJaringan.peran_multiplayer == "host":
+		rpc("rpc_bounty", "mulai", bounty_elemen, -1, 0)
+	_tampilkan_bounty("mulai", bounty_elemen, -1)
+	await get_tree().create_timer(1.8).timeout
+
+func _klaim_bounty(slot: int, elemen: String) -> void:
+	# Dipanggil dari eksekusi_dadu_pertarungan (host/solo): pemenang duel yang memakai elemen bounty dapat +1 bintang.
+	# Berlaku juga untuk AI (tanpa logika khusus).
+	if StatusJaringan.peran_multiplayer == "client" or bounty_elemen == "" or elemen != bounty_elemen:
+		return
+	if slot < 0 or slot >= jumlah_pemain():
+		return
+	var elemen_klaim = bounty_elemen
+	bounty_elemen = ""
+	daftar_pemain[slot].bintang = mini(daftar_pemain[slot].bintang + 1, 10)
+	_tambah_stat(slot, "bounty")
+	if StatusJaringan.peran_multiplayer == "host":
+		rpc("rpc_bounty", "klaim", elemen_klaim, slot, daftar_pemain[slot].bintang)
+	_tampilkan_bounty("klaim", elemen_klaim, slot)
+	update_ui_status()
+
+@rpc("authority", "call_remote", "reliable")
+func rpc_bounty(jenis: String, elemen: String, slot: int, bintang_baru: int) -> void:
+	# CLIENT: tampilan + salinan kecil state (siaran state berikutnya menegaskan lagi).
+	if jenis == "mulai":
+		bounty_elemen = elemen
+		bounty_terakhir = elemen
+	elif slot >= 0 and slot < jumlah_pemain():
+		bounty_elemen = ""
+		daftar_pemain[slot].bintang = bintang_baru
+		update_ui_status()
+	_tampilkan_bounty(jenis, elemen, slot)
+
+func _tampilkan_bounty(jenis: String, elemen: String, slot: int) -> void:
+	var nama_elemen = String(DataRole.NAMA.get(elemen, elemen.to_upper()))
+	if jenis == "mulai":
+		UiDinamis.tampilkan_spanduk(self, "BOUNTY!", Color(1.0, 0.4, 0.4))
+		teks_dadu.show()
+		teks_dadu.text = "First to win a duel with %s: +1 Star" % nama_elemen
+	else:
+		UiDinamis.tampilkan_spanduk(self, "BOUNTY CLAIMED!\n%s +1 Star" % _subjek(slot), Color(1.0, 0.85, 0.2))
+
 func _siarkan_pesan_denda(slot_pembayar: int, jumlah: int, kalah_duel: bool, index_petak: int = -1) -> void:
 	# Kirim DATA-nya saja (siapa membayar, berapa), bukan kalimat jadinya —
 	# kalimat aslinya ditulis dari kacamata slot 0 ("ENEMY LOST"), jadi kalau

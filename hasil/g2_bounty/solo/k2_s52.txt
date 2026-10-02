@@ -1,0 +1,43 @@
+EVENT ronde=1 aktif= terakhir=
+BOUNTY ronde=1 aktif= terakhir= klaim_per_slot=[0, 0] bintang=[4, 4]
+EVENT ronde=2 aktif= terakhir=
+BOUNTY ronde=2 aktif=petir terakhir=petir klaim_per_slot=[0, 0] bintang=[4, 4]
+EVENT ronde=3 aktif= terakhir=
+EVENT ronde=4 aktif= terakhir=star_shower
+EVENT ronde=5 aktif= terakhir=star_shower
+EVENT ronde=6 aktif= terakhir=star_shower
+EVENT ronde=7 aktif=market_day terakhir=market_day
+EVENT ronde=8 aktif= terakhir=market_day
+EVENT ronde=9 aktif= terakhir=market_day
+EVENT ronde=10 aktif=gold_rush terakhir=gold_rush
+BOUNTY_KLAIM slot=0 bintang_sebelum=4 bintang_sesudah=5
+BOUNTY ronde=10 aktif= terakhir=petir klaim_per_slot=[1, 0] bintang=[5, 1]
+EVENT ronde=11 aktif= terakhir=gold_rush
+EVENT ronde=12 aktif= terakhir=gold_rush
+EVENT ronde=13 aktif= terakhir=star_shower
+BOUNTY ronde=13 aktif=tanah terakhir=tanah klaim_per_slot=[1, 0] bintang=[6, 2]
+EVENT ronde=14 aktif= terakhir=star_shower
+EVENT ronde=15 aktif= terakhir=star_shower
+EVENT ronde=16 aktif=market_day terakhir=market_day
+EVENT ronde=17 aktif= terakhir=market_day
+EVENT ronde=18 aktif= terakhir=market_day
+EVENT ronde=19 aktif= terakhir=star_shower
+EVENT ronde=20 aktif= terakhir=star_shower
+EVENT ronde=21 aktif= terakhir=star_shower
+BOUNTY_KLAIM slot=1 bintang_sebelum=0 bintang_sesudah=1
+BOUNTY ronde=21 aktif= terakhir=tanah klaim_per_slot=[1, 1] bintang=[3, 1]
+EVENT ronde=22 aktif=gold_rush terakhir=gold_rush
+BOUNTY ronde=22 aktif=api terakhir=api klaim_per_slot=[1, 1] bintang=[3, 1]
+EVENT ronde=23 aktif= terakhir=gold_rush
+EVENT ronde=24 aktif= terakhir=gold_rush
+EVENT ronde=25 aktif= terakhir=star_shower
+EVENT ronde=26 aktif= terakhir=star_shower
+EVENT ronde=27 aktif= terakhir=star_shower
+EVENT ronde=28 aktif=market_day terakhir=market_day
+BOUNTY_KLAIM slot=1 bintang_sebelum=2 bintang_sesudah=3
+BOUNTY ronde=28 aktif= terakhir=api klaim_per_slot=[1, 2] bintang=[7, 3]
+EVENT ronde=29 aktif= terakhir=market_day
+EVENT ronde=30 aktif= terakhir=market_day
+EVENT ronde=31 aktif= terakhir=star_shower
+BOUNTY ronde=31 aktif=angin terakhir=angin klaim_per_slot=[1, 2] bintang=[2, 2]
+SEIMBANG peta=alam seed=52 quick=0 roles=api,angin pemenang=1 cara=batas_kaya giliran=61 detik=1342.3 pasang=4,3 kena=3,3 kaya=3967,8021 rinci=1/564/6/7/0/9,0/0/7/6/0/0 presets=- sacred=0 xprole0=-1

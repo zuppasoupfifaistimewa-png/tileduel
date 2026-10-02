@@ -1,0 +1,11 @@
+EVENT ronde=1 aktif= terakhir=
+BOUNTY ronde=1 aktif= terakhir= klaim_per_slot=[0, 0] bintang=[4, 4]
+EVENT ronde=2 aktif= terakhir=
+BOUNTY ronde=2 aktif=petir terakhir=petir klaim_per_slot=[0, 0] bintang=[4, 4]
+EVENT ronde=3 aktif= terakhir=star_shower
+EVENT ronde=4 aktif= terakhir=star_shower
+EVENT ronde=5 aktif=market_day terakhir=market_day
+EVENT ronde=6 aktif= terakhir=market_day
+EVENT ronde=7 aktif=gold_rush terakhir=gold_rush
+EVENT ronde=8 aktif= terakhir=gold_rush
+SEIMBANG peta=alam seed=16 quick=1 roles=api,petir pemenang=0 cara=ronde giliran=16 detik=338.0 pasang=1,0 kena=1,0 kaya=4358,3870 rinci=0/190/1/0/0/3,0/0/0/1/0/0 presets=- sacred=0 xprole0=-1

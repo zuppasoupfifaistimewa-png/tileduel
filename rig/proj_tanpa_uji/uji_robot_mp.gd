@@ -52,6 +52,8 @@ var ui = null
 var tahap = "awal"
 var jumlah_giliran = 0
 var _sig_event = "" # Fase 5 G1: log EVENT tiap perubahan (ronde_event/aktif/terakhir)
+var _sig_bounty = "" # Fase 5 G2: log BOUNTY tiap perubahan (aktif/terakhir/bintang tiap slot)
+var bounty_pilih = false # Fase 5 G2 (rig-only): robot memilih elemen bounty yang sedang aktif -> klaim pasti terjadi
 var giliran_terakhir = ""
 var teks_terakhir = ""
 var periksa_terakhir = -1
@@ -103,6 +105,7 @@ func _ready():
 		if a.begins_with("keluar="): giliran_keluar = int(a.substr(7))
 		if a.begins_with("keluar_urut="): urut_keluar = int(a.substr(12))
 		if a.begins_with("panjang="): panjang_uji = a.substr(8)
+		if a == "bounty_pilih=1": bounty_pilih = true
 		if a.begins_with("arena="): arena_uji = a.substr(6)
 		if a == "arena_palsu=1": arena_uji = "custom_ilegal" # F0 (B-f, 14.19, U10): alias -- mekanisme SAMA "custom_ilegal" (B-c/C2) yang sudah menguji rpc_role_lobby/build_arena K16, cuma nama argumen sesuai rencana
 		if a.begins_with("role_ai="): role_ai_uji = a.substr(8).split(",") # D6 (B-d, rig-only)
@@ -415,6 +418,11 @@ func _langkah_main(delta) -> void:
 	if sig_event != _sig_event:
 		_sig_event = sig_event
 		_catat("EVENT ronde=%d aktif=%s terakhir=%s" % [p.ronde_event, p.event_aktif, p.event_terakhir])
+	var sig_bounty = "%s|%s|%s" % [p.bounty_elemen, p.bounty_terakhir, str(p.daftar_pemain.map(func(d): return d.bintang))]
+	if sig_bounty != _sig_bounty:
+		_sig_bounty = sig_bounty
+		_catat("BOUNTY aktif=%s terakhir=%s bintang=%s stat_bounty=%s" % [p.bounty_elemen, p.bounty_terakhir,
+			str(p.daftar_pemain.map(func(d): return d.bintang)), str(p.statistik_slot.map(func(st): return int(st.get("bounty", 0))))])
 	if p.giliran_sekarang != giliran_terakhir:
 		giliran_terakhir = p.giliran_sekarang
 		jumlah_giliran += 1
@@ -670,6 +678,7 @@ func _potret() -> Dictionary:
 	s["giliran"] = p.giliran_sekarang
 	s["ronde"] = p.get("ronde_sekarang")
 	s["event"] = [p.ronde_event, p.event_aktif, p.event_terakhir]
+	s["bounty"] = [p.bounty_elemen, p.bounty_terakhir]
 	s["dadu"] = [p.tipe_dadu_slot.slice(0, p.jumlah_pemain()), p.sisa_durasi_dadu_slot.slice(0, p.jumlah_pemain())]
 	s["kontrol"] = []
 	for d in p.daftar_pemain:
@@ -790,6 +799,8 @@ func _robot() -> void:
 		if _pilih_elemen_sejak < 0.0:
 			_pilih_elemen_sejak = detik_total
 		var el = ["api", "air", "angin", "tanah", "petir"][hitung_aksi % 5]
+		if bounty_pilih and p.bounty_elemen != "":
+			el = p.bounty_elemen
 		var t = ui.tombol_elemen[el]
 		if not t.disabled and t.is_visible_in_tree() and detik_total - _pilih_elemen_sejak >= 3.0:
 			_pilih_elemen_sejak = -1.0

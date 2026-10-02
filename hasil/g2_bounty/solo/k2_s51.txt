@@ -1,0 +1,37 @@
+EVENT ronde=1 aktif= terakhir=
+BOUNTY ronde=1 aktif= terakhir= klaim_per_slot=[0, 0] bintang=[4, 4]
+EVENT ronde=2 aktif= terakhir=
+BOUNTY ronde=2 aktif=angin terakhir=angin klaim_per_slot=[0, 0] bintang=[4, 4]
+EVENT ronde=3 aktif= terakhir=
+EVENT ronde=4 aktif= terakhir=earthquake
+EVENT ronde=5 aktif= terakhir=earthquake
+EVENT ronde=6 aktif= terakhir=earthquake
+EVENT ronde=7 aktif= terakhir=star_shower
+EVENT ronde=8 aktif= terakhir=star_shower
+EVENT ronde=9 aktif= terakhir=star_shower
+EVENT ronde=10 aktif=gold_rush terakhir=gold_rush
+EVENT ronde=11 aktif= terakhir=gold_rush
+EVENT ronde=12 aktif= terakhir=gold_rush
+EVENT ronde=13 aktif= terakhir=earthquake
+BOUNTY_KLAIM slot=0 bintang_sebelum=4 bintang_sesudah=5
+BOUNTY ronde=13 aktif= terakhir=angin klaim_per_slot=[1, 0] bintang=[5, 3]
+EVENT ronde=14 aktif= terakhir=earthquake
+EVENT ronde=15 aktif= terakhir=earthquake
+EVENT ronde=16 aktif= terakhir=star_shower
+BOUNTY ronde=16 aktif=tanah terakhir=tanah klaim_per_slot=[1, 0] bintang=[1, 2]
+EVENT ronde=17 aktif= terakhir=star_shower
+EVENT ronde=18 aktif= terakhir=star_shower
+EVENT ronde=19 aktif= terakhir=earthquake
+EVENT ronde=20 aktif= terakhir=earthquake
+EVENT ronde=21 aktif= terakhir=earthquake
+EVENT ronde=22 aktif=market_day terakhir=market_day
+EVENT ronde=23 aktif= terakhir=market_day
+EVENT ronde=24 aktif= terakhir=market_day
+EVENT ronde=25 aktif= terakhir=star_shower
+EVENT ronde=26 aktif= terakhir=star_shower
+EVENT ronde=27 aktif= terakhir=star_shower
+EVENT ronde=28 aktif=market_day terakhir=market_day
+EVENT ronde=29 aktif= terakhir=market_day
+EVENT ronde=30 aktif= terakhir=market_day
+EVENT ronde=31 aktif= terakhir=star_shower
+SEIMBANG peta=alam seed=51 quick=0 roles=api,air pemenang=0 cara=batas_kaya giliran=61 detik=1346.1 pasang=5,1 kena=4,1 kaya=6092,4370 rinci=2/732/7/6/0/11,0/0/6/7/8/0 presets=- sacred=0 xprole0=-1

@@ -1,0 +1,11 @@
+EVENT ronde=1 aktif= terakhir=
+BOUNTY ronde=1 aktif= terakhir= klaim_per_slot=[0, 0] bintang=[4, 4]
+EVENT ronde=2 aktif= terakhir=
+BOUNTY ronde=2 aktif=api terakhir=api klaim_per_slot=[0, 0] bintang=[4, 4]
+EVENT ronde=3 aktif=gold_rush terakhir=gold_rush
+EVENT ronde=4 aktif= terakhir=gold_rush
+EVENT ronde=5 aktif= terakhir=earthquake
+EVENT ronde=6 aktif= terakhir=earthquake
+EVENT ronde=7 aktif=gold_rush terakhir=gold_rush
+EVENT ronde=8 aktif= terakhir=gold_rush
+SEIMBANG peta=alam seed=11 quick=1 roles=api,petir pemenang=1 cara=ronde giliran=16 detik=300.7 pasang=0,3 kena=0,2 kaya=3320,4150 rinci=0/0/0/0/0/3,3/100/0/0/0/0 presets=- sacred=0 xprole0=-1

@@ -1,0 +1,8 @@
+EVENT ronde=1 aktif= terakhir=
+BOUNTY ronde=1 aktif= terakhir= klaim_per_slot=[0, 0, 0, 0] bintang=[4, 4, 4, 4]
+EVENT ronde=2 aktif= terakhir=
+BOUNTY ronde=2 aktif=angin terakhir=angin klaim_per_slot=[0, 0, 0, 0] bintang=[4, 4, 4, 4]
+EVENT ronde=3 aktif= terakhir=
+EVENT ronde=4 aktif= terakhir=star_shower
+EVENT ronde=5 aktif= terakhir=star_shower
+SEIMBANG peta=alam seed=61 quick=0 roles=api,petir,air,angin pemenang=0 cara=start giliran=17 detik=262.1 pasang=0,3,1,2 kena=0,2,1,0 kaya=4195,2700,2200,2335 rinci=0/0/0/0/0/3,3/100/0/0/0/0,0/220/0/0/0/0,0/0/0/0/0/0 presets=- sacred=0 xprole0=-1

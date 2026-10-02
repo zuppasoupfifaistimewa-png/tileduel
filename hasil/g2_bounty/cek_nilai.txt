@@ -1,0 +1,100 @@
+Godot Engine v4.7.1.stable.official.a13da4feb - https://godotengine.org
+
+ERROR: Resource file not found: res://permata/permata_hijau.png (expected type: Texture2D)
+   at: _load (core/io/resource_loader.cpp:325)
+   GDScript backtrace (most recent call first):
+       [0] _ready (res://uji_nyata.gd:253)
+ERROR: Resource file not found: res://Mellow Shore.ogg (expected type: unknown)
+   at: _load (core/io/resource_loader.cpp:325)
+   GDScript backtrace (most recent call first):
+       [0] setup_sistem_audio (res://audio_grafis.gd:44)
+       [1] _ready (res://pemain.gd:78)
+       [2] _ready (res://uji_nyata.gd:254)
+ERROR: File 'Mellow Shore.ogg' tidak ditemukan. Pastikan sudah dimasukkan ke Godot.
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] setup_sistem_audio (res://audio_grafis.gd:51)
+       [1] _ready (res://pemain.gd:78)
+       [2] _ready (res://uji_nyata.gd:254)
+ERROR: Resource file not found: res://Iron Onslaught.ogg (expected type: unknown)
+   at: _load (core/io/resource_loader.cpp:325)
+   GDScript backtrace (most recent call first):
+       [0] setup_sistem_audio (res://audio_grafis.gd:59)
+       [1] _ready (res://pemain.gd:78)
+       [2] _ready (res://uji_nyata.gd:254)
+ERROR: File 'Iron Onslaught.ogg' tidak ditemukan di Godot.
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] setup_sistem_audio (res://audio_grafis.gd:65)
+       [1] _ready (res://pemain.gd:78)
+       [2] _ready (res://uji_nyata.gd:254)
+WARNING: res://PetaAlam.tscn:3 - ext_resource, invalid UID: uid://btbnxpictjrw2 - using text path instead: res://lingkungan_alam.gd
+     at: load (scene/resources/resource_format_text.cpp:501)
+     GDScript backtrace (most recent call first):
+         [0] _ready (res://pemain.gd:115)
+         [1] _ready (res://uji_nyata.gd:254)
+WARNING: res://PetaAlam.tscn:4 - ext_resource, invalid UID: uid://ce3ntygme0quk - using text path instead: res://petak_papan.gd
+     at: load (scene/resources/resource_format_text.cpp:501)
+     GDScript backtrace (most recent call first):
+         [0] _ready (res://pemain.gd:115)
+         [1] _ready (res://uji_nyata.gd:254)
+ERROR: Resource file not found: res://permata/permata_hijau.png (expected type: Texture2D)
+   at: _load (core/io/resource_loader.cpp:325)
+   GDScript backtrace (most recent call first):
+       [0] _ready (res://uji_nyata.gd:254)
+MENU ok: jumlah_ai_dipilih=1
+MENU panjang 'CLASSIC' = true; keterangan='No round limit. Reach START with 3000 coins.'
+MENU peta 'Grassland' klik1=true klik2=true
+MENU role klik FIRE = true
+WARNING: res://PetaAlam.tscn:3 - ext_resource, invalid UID: uid://btbnxpictjrw2 - using text path instead: res://lingkungan_alam.gd
+     at: load (scene/resources/resource_format_text.cpp:501)
+     GDScript backtrace (most recent call first):
+         [0] _siapkan_peta_dan_mulai (res://pemain.gd:1710)
+         [1] _mulai_terjun_ke_game (res://main_menu.gd:323)
+         [2] _mulai_sesudah_role (res://main_menu.gd:437)
+         [3] <anonymous lambda> (res://main_menu.gd:419)
+         [4] <anonymous lambda> (res://ui_role.gd:224)
+         [5] _klik_teks (res://uji_nyata.gd:505)
+         [6] _ready (res://uji_nyata.gd:293)
+WARNING: res://PetaAlam.tscn:4 - ext_resource, invalid UID: uid://ce3ntygme0quk - using text path instead: res://petak_papan.gd
+     at: load (scene/resources/resource_format_text.cpp:501)
+     GDScript backtrace (most recent call first):
+         [0] _siapkan_peta_dan_mulai (res://pemain.gd:1710)
+         [1] _mulai_terjun_ke_game (res://main_menu.gd:323)
+         [2] _mulai_sesudah_role (res://main_menu.gd:437)
+         [3] <anonymous lambda> (res://main_menu.gd:419)
+         [4] <anonymous lambda> (res://ui_role.gd:224)
+         [5] _klik_teks (res://uji_nyata.gd:505)
+         [6] _ready (res://uji_nyata.gd:293)
+ERROR: Resource file not found: res://Mellow Shore.ogg (expected type: unknown)
+   at: _load (core/io/resource_loader.cpp:325)
+   GDScript backtrace (most recent call first):
+       [0] _siapkan_peta_dan_mulai (res://pemain.gd:1717)
+       [1] _mulai_terjun_ke_game (res://main_menu.gd:323)
+       [2] _mulai_sesudah_role (res://main_menu.gd:437)
+       [3] <anonymous lambda> (res://main_menu.gd:419)
+       [4] <anonymous lambda> (res://ui_role.gd:224)
+       [5] _klik_teks (res://uji_nyata.gd:505)
+       [6] _ready (res://uji_nyata.gd:293)
+MENU role START = true
+PANEL_HOW_TO_WIN jumlah=1
+SYARAT | Collect the gem on the board | Pass START with the gems complete to get your salary | Reach START with 3000+ coins to win | Salary at START: +500, +10 per tile you own, +3 stars | Buy a tile, then STOP on it again to build a tower
+ATURAN mode_quick=false batas_ronde=0 target_permata=1 permata_peta=1 rolet_double=false
+START ditekan setelah 0.0 dtk; pemain=2 target_permata=1 petak=24
+ROLE_SLOT api:api+angin petir:petir+air
+CEK_NILAI faktor_fight_tanah_dasar hasil=0.5000 harapan=0.5000 status=OK
+CEK_NILAI faktor_fight_tanah_rb_lv1 hasil=0.7071 harapan=0.7071 status=OK
+CEK_NILAI faktor_fight_tanah_hardrock3_stonethorns3 hasil=0.1000 harapan=0.1000 status=OK
+CEK_NILAI nilai_korban_guard_kebal_api hasil=0.0000 harapan=0.0000 status=OK
+CEK_NILAI nilai_korban_api_potongan_lv1 hasil=135.0000 harapan=135.0000 status=OK
+CEK_NILAI nilai_korban_api_hotflames3_longburn2_vs_heatskin1 hasil=390.0000 harapan=390.0000 status=OK
+CEK_NILAI nilai_korban_angin_homingwind2_uang1000 hasil=130.0000 harapan=130.0000 status=OK
+CEK_NILAI nilai_korban_api_phoenix_x1_5 hasil=324.0000 harapan=324.0000 status=OK
+CEK_NILAI_SELESAI total=8 ok=8 gagal=0
+WARNING: 3 RIDs of type "CanvasItem" were leaked.
+   at: _free_rids (servers/rendering/renderer_canvas_cull.cpp:2735)
+WARNING: 126 ObjectDB instances were leaked at exit (run with `--verbose` for details).
+   at: cleanup (core/object/object.cpp:2536)
+ERROR: 36 RID allocations of type 'PN13RendererDummy14TextureStorage12DummyTextureE' were leaked at exit.
+ERROR: 1 RID allocations of type 'N17RendererSceneCull8InstanceE' were leaked at exit.
+ERROR: 2 RID allocations of type 'PN18TextServerAdvanced12FontAdvancedE' were leaked at exit.

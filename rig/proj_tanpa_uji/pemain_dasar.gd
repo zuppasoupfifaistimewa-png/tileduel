@@ -270,6 +270,13 @@ const EVENT_MULAI_QUICK := 3         # ronde pertama event, lalu tiap 2 ronde (Q
 const EVENT_JEDA_QUICK := 2
 const EVENT_MULAI_CLASSIC := 4       # lalu tiap 3 ronde (Classic)
 const EVENT_JEDA_CLASSIC := 3
+# Bounty (Fase 5 G2): satu target aktif -- pemenang duel pertama dengan elemen itu dapat +1 bintang (maks 10).
+# Pertama muncul di ronde BOUNTY_RONDE_PERTAMA; sesudah diklaim, yang baru muncul di ronde event berikutnya.
+# Ikut siaran state ("bounty") supaya client & host baru (migrasi) sama.
+var bounty_elemen: String = ""       # "" = tidak ada bounty aktif; selain itu id elemen (api/air/tanah/petir/angin)
+var bounty_terakhir: String = ""     # elemen bounty sebelumnya (tidak diundi dua kali berturut-turut)
+var label_bounty: RichTextLabel = null
+const BOUNTY_RONDE_PERTAMA := 2
 var jumlah_permata_peta: int = 0     # permata di peta (target Quick = separuh)
 
 var label_ronde: RichTextLabel = null

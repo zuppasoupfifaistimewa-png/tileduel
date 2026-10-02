@@ -214,6 +214,7 @@ pernah di tengah giliran multiplayer).
 ## 9. STATUS
 - 02-10 (Sonnet): **G0 SELESAI & lolos** (S1 100 baris identik F5, cek_nilai 8/8, reg10 sama; `hasil/g0_refactor/`). Berikutnya G1.
 - 02-10 (Sonnet): **G1 SELESAI** (event papan; bukti `hasil/g1_event/`; label HUD belum dilihat di layar sungguhan; getaran Earthquake tidak dibuat). Berikutnya G2.
+- 02-10 (Sonnet): **G2 SELESAI** (bounty; bukti `hasil/g2_bounty/`: solo 27 run, MP sinkron + klaim + migrasi saat bounty aktif). Berikutnya G3.
 - 02-10 (Opus): draf ditulis.
 - 02-10: pemilik menyetujui K1-K10 = a. Rencana dikunci. Berikutnya G0 (Sonnet, sesi baru): refactor `denda_petak()`/
   `harga_beli_*()`/`ronde_event` tanpa perubahan perilaku -> bukti identik di rig (bagian 5).

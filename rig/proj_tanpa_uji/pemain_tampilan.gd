@@ -397,11 +397,38 @@ func _atur_posisi_label_event() -> void:
 	if not label_event.position.is_equal_approx(Vector2(x, atas)):
 		label_event.position = Vector2(x, atas)
 
+func _teks_label_bounty() -> String:
+	if bounty_elemen == "":
+		return ""
+	return "[center][color=#ff7777]BOUNTY: win a %s duel = +1 Star[/color][/center]" % String(DataRole.NAMA.get(bounty_elemen, bounty_elemen.to_upper()))
+
+func _atur_posisi_label_bounty() -> void:
+	# Fase 5 G2: label bounty di bawah label event (kalau tampil), kalau tidak di bawah label ronde / TeksDadu.
+	if label_bounty == null or teks_dadu == null:
+		return
+	var teks = _teks_label_bounty()
+	var tampil = teks != "" and teks_uang.visible
+	if label_bounty.visible != tampil:
+		label_bounty.visible = tampil
+	if not tampil:
+		return
+	if label_bounty.text != teks:
+		label_bounty.text = teks
+	var atas = teks_dadu.position.y + teks_dadu.size.y + 6.0
+	if label_ronde != null and label_ronde.visible:
+		atas = label_ronde.position.y + label_ronde.size.y + 4.0
+	if label_event != null and label_event.visible:
+		atas = label_event.position.y + label_event.size.y + 4.0
+	var x = teks_dadu.position.x + teks_dadu.size.x * 0.5 - label_bounty.size.x * 0.5
+	if not label_bounty.position.is_equal_approx(Vector2(x, atas)):
+		label_bounty.position = Vector2(x, atas)
+
 func _atur_posisi_label_ronde() -> void:
 	# Tepat di bawah TeksDadu dan sejajar tengahnya. TeksDadu tidak selalu di tengah
 	# layar (di layar lebar seperti 1600x720 ia bergeser ke kiri), jadi label ini
 	# mengikuti TeksDadu, bukan tengah layar.
 	_atur_posisi_label_event()
+	_atur_posisi_label_bounty()
 	if label_ronde == null or not label_ronde.visible or teks_dadu == null:
 		return
 	var x = teks_dadu.position.x + teks_dadu.size.x * 0.5 - label_ronde.size.x * 0.5

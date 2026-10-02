@@ -902,6 +902,8 @@ func _siarkan_state_giliran(slot_index: int) -> void:
 		"ronde": ronde_sekarang,
 		# Fase 5 G1: event papan (host baru & client melanjutkan jadwal/efek yang sama).
 		"event": {"ronde_event": ronde_event, "aktif": event_aktif, "terakhir": event_terakhir},
+		# Fase 5 G2: bounty aktif (host baru & client melanjutkan target yang sama).
+		"bounty": {"elemen": bounty_elemen, "terakhir": bounty_terakhir},
 		# Fase 2: statistik pertandingan per slot (host baru melanjutkan hitungannya).
 		"statistik": statistik_slot.duplicate(true),
 		# Fase 4 (bagian 7): role, jebakan dibawa, build per slot.
@@ -1072,6 +1074,9 @@ func rpc_terima_state_giliran(slot_index: int, data: Dictionary) -> void:
 		ronde_event = int(data["event"]["ronde_event"])
 		event_aktif = String(data["event"]["aktif"])
 		event_terakhir = String(data["event"]["terakhir"])
+	if data.has("bounty"):
+		bounty_elemen = String(data["bounty"]["elemen"])
+		bounty_terakhir = String(data["bounty"]["terakhir"])
 	if data.has("statistik"):
 		statistik_slot = data["statistik"].duplicate(true)
 	if data.has("role"):

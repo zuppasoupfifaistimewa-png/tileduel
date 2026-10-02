@@ -1426,6 +1426,8 @@ func ganti_giliran():
 		event_aktif = ""
 		if _ronde_jadwal_event():
 			await _mulai_event_papan()
+		if _bounty_perlu_muncul():
+			await _mulai_bounty()
 	_tambah_stat(slot, "giliran")
 	giliran_sekarang = _aktor_dari_slot(slot)
 	fase_giliran = "awal"
@@ -1664,6 +1666,8 @@ func _siapkan_peta_dan_mulai(pilihan_peta: String, jumlah_ai: int = 1, quick: bo
 	ronde_event = 1
 	event_aktif = ""
 	event_terakhir = ""
+	bounty_elemen = ""
+	bounty_terakhir = ""
 	_ronde_spanduk = -1
 	_iklan_hutang_terpakai = false
 
@@ -1745,6 +1749,7 @@ func _siapkan_peta_dan_mulai(pilihan_peta: String, jumlah_ai: int = 1, quick: bo
 		label_ronde = UiDinamis.buat_label_ronde(self)
 		_perbarui_label_ronde()
 	label_event = UiDinamis.buat_label_ronde(self, Color(1.0, 0.55, 0.2))
+	label_bounty = UiDinamis.buat_label_ronde(self, Color(1.0, 0.35, 0.35))
 
 	var min_x = 99999.0; var max_x = -99999.0
 	var min_z = 99999.0; var max_z = -99999.0

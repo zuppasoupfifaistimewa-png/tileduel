@@ -1,0 +1,21 @@
+EVENT ronde=1 aktif= terakhir=
+BOUNTY ronde=1 aktif= terakhir= klaim_per_slot=[0, 0, 0, 0] bintang=[4, 4, 4, 4]
+EVENT ronde=2 aktif= terakhir=
+BOUNTY ronde=2 aktif=api terakhir=api klaim_per_slot=[0, 0, 0, 0] bintang=[4, 4, 4, 4]
+EVENT ronde=3 aktif= terakhir=
+EVENT ronde=4 aktif= terakhir=earthquake
+EVENT ronde=5 aktif= terakhir=earthquake
+EVENT ronde=6 aktif= terakhir=earthquake
+BOUNTY ronde=6 aktif= terakhir=api klaim_per_slot=[0, 0, 0, 1] bintang=[6, 6, 2, 3]
+EVENT ronde=7 aktif= terakhir=star_shower
+BOUNTY ronde=7 aktif=tanah terakhir=tanah klaim_per_slot=[0, 0, 0, 1] bintang=[7, 7, 2, 7]
+EVENT ronde=8 aktif= terakhir=star_shower
+EVENT ronde=9 aktif= terakhir=star_shower
+EVENT ronde=10 aktif= terakhir=earthquake
+EVENT ronde=11 aktif= terakhir=earthquake
+EVENT ronde=12 aktif= terakhir=earthquake
+EVENT ronde=13 aktif= terakhir=star_shower
+EVENT ronde=14 aktif= terakhir=star_shower
+EVENT ronde=15 aktif= terakhir=star_shower
+EVENT ronde=16 aktif= terakhir=earthquake
+SEIMBANG peta=alam seed=41 quick=0 roles=api,petir,tanah,air pemenang=1 cara=batas_kaya giliran=61 detik=1281.1 pasang=1,6,6,6 kena=1,4,4,6 kaya=3339,4545,2929,2742 rinci=0/238/2/4/0/7,6/200/4/3/10/0,1/0/3/2/1/0,2/495/2/2/0/0 presets=- sacred=0 xprole0=-1

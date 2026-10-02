@@ -1,0 +1,40 @@
+EVENT ronde=1 aktif= terakhir=
+BOUNTY ronde=1 aktif= terakhir= klaim_per_slot=[0, 0] bintang=[4, 4]
+EVENT ronde=2 aktif= terakhir=
+BOUNTY ronde=2 aktif=angin terakhir=angin klaim_per_slot=[0, 0] bintang=[4, 4]
+EVENT ronde=3 aktif= terakhir=
+EVENT ronde=4 aktif=gold_rush terakhir=gold_rush
+EVENT ronde=5 aktif= terakhir=gold_rush
+EVENT ronde=6 aktif= terakhir=gold_rush
+EVENT ronde=7 aktif= terakhir=star_shower
+EVENT ronde=8 aktif= terakhir=star_shower
+EVENT ronde=9 aktif= terakhir=star_shower
+EVENT ronde=10 aktif=gold_rush terakhir=gold_rush
+EVENT ronde=11 aktif= terakhir=gold_rush
+BOUNTY_KLAIM slot=0 bintang_sebelum=3 bintang_sesudah=4
+BOUNTY ronde=11 aktif= terakhir=angin klaim_per_slot=[1, 0] bintang=[4, 1]
+EVENT ronde=12 aktif= terakhir=gold_rush
+EVENT ronde=13 aktif= terakhir=earthquake
+BOUNTY ronde=13 aktif=api terakhir=api klaim_per_slot=[1, 0] bintang=[4, 1]
+EVENT ronde=14 aktif= terakhir=earthquake
+BOUNTY_KLAIM slot=0 bintang_sebelum=3 bintang_sesudah=4
+BOUNTY ronde=14 aktif= terakhir=api klaim_per_slot=[2, 0] bintang=[4, 4]
+EVENT ronde=15 aktif= terakhir=earthquake
+EVENT ronde=16 aktif= terakhir=star_shower
+BOUNTY ronde=16 aktif=air terakhir=air klaim_per_slot=[2, 0] bintang=[5, 5]
+EVENT ronde=17 aktif= terakhir=star_shower
+EVENT ronde=18 aktif= terakhir=star_shower
+EVENT ronde=19 aktif=market_day terakhir=market_day
+EVENT ronde=20 aktif= terakhir=market_day
+EVENT ronde=21 aktif= terakhir=market_day
+EVENT ronde=22 aktif=gold_rush terakhir=gold_rush
+EVENT ronde=23 aktif= terakhir=gold_rush
+EVENT ronde=24 aktif= terakhir=gold_rush
+EVENT ronde=25 aktif=market_day terakhir=market_day
+EVENT ronde=26 aktif= terakhir=market_day
+EVENT ronde=27 aktif= terakhir=market_day
+EVENT ronde=28 aktif=gold_rush terakhir=gold_rush
+EVENT ronde=29 aktif= terakhir=gold_rush
+EVENT ronde=30 aktif= terakhir=gold_rush
+EVENT ronde=31 aktif=market_day terakhir=market_day
+SEIMBANG peta=alam seed=53 quick=0 roles=api,air pemenang=1 cara=batas_kaya giliran=61 detik=1264.7 pasang=4,2 kena=3,2 kaya=4058,7708 rinci=2/526/6/5/0/5,0/0/5/6/5/0 presets=- sacred=0 xprole0=-1

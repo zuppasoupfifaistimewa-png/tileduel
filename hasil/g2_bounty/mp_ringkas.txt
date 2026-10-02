@@ -1,0 +1,38 @@
+== sinkron s71
+g2_sinkron_s71.host: SELESAI MENANG peran=host giliran=17 cek_ok=10 cek_gagal=0 kartu_beda=0 detik=345 migrasi=0 cek_ok_migrasi=0 jaringan=host role=api:api+angin+petir:{ "hot_flames": 2, "rock_breaker": 2, "heavy_pockets | scripterr=0 | beda=0
+g2_sinkron_s71.c1: SELESAI MENANG peran=client giliran=16 cek_ok=0 cek_gagal=0 kartu_beda=0 detik=339 migrasi=0 cek_ok_migrasi=0 jaringan=client role=api:api+angin+petir:{ "hot_flames": 2, "rock_breaker": 2, "heavy_pock | scripterr=0 | beda=0
+g2_sinkron_s71.c2: SELESAI MENANG peran=client giliran=16 cek_ok=0 cek_gagal=0 kartu_beda=0 detik=339 migrasi=0 cek_ok_migrasi=0 jaringan=client role=api:api+angin+petir:{ "hot_flames": 2, "rock_breaker": 2, "heavy_pock | scripterr=0 | beda=0
+== sinkron s72
+g2_sinkron_s72.host: SELESAI MENANG peran=host giliran=18 cek_ok=14 cek_gagal=0 kartu_beda=0 detik=379 migrasi=0 cek_ok_migrasi=0 jaringan=host role=api:api+angin+petir:{ "hot_flames": 2, "rock_breaker": 2, "heavy_pockets | scripterr=0 | beda=0
+g2_sinkron_s72.c1: SELESAI MENANG peran=client giliran=18 cek_ok=0 cek_gagal=0 kartu_beda=0 detik=373 migrasi=0 cek_ok_migrasi=0 jaringan=client role=api:api+angin+petir:{ "hot_flames": 2, "rock_breaker": 2, "heavy_pock | scripterr=0 | beda=0
+g2_sinkron_s72.c2: SELESAI MENANG peran=client giliran=18 cek_ok=0 cek_gagal=0 kartu_beda=0 detik=373 migrasi=0 cek_ok_migrasi=0 jaringan=client role=api:api+angin+petir:{ "hot_flames": 2, "rock_breaker": 2, "heavy_pock | scripterr=0 | beda=0
+== sinkron s73
+g2_sinkron_s73.host: SELESAI MENANG peran=host giliran=18 cek_ok=14 cek_gagal=0 kartu_beda=0 detik=337 migrasi=0 cek_ok_migrasi=0 jaringan=host role=api:api+angin+petir:{ "hot_flames": 2, "rock_breaker": 2, "heavy_pockets | scripterr=0 | beda=0
+g2_sinkron_s73.c1: SELESAI MENANG peran=client giliran=16 cek_ok=0 cek_gagal=0 kartu_beda=0 detik=331 migrasi=0 cek_ok_migrasi=0 jaringan=client role=api:api+angin+petir:{ "hot_flames": 2, "rock_breaker": 2, "heavy_pock | scripterr=0 | beda=0
+g2_sinkron_s73.c2: SELESAI MENANG peran=client giliran=16 cek_ok=0 cek_gagal=0 kartu_beda=0 detik=331 migrasi=0 cek_ok_migrasi=0 jaringan=client role=api:api+angin+petir:{ "hot_flames": 2, "rock_breaker": 2, "heavy_pock | scripterr=0 | beda=0
+== host keluar s81
+g2_hk_s81.host:  | scripterr=0 | beda=0
+g2_hk_s81.c1: SELESAI MENANG peran=client giliran=11 cek_ok=2 cek_gagal=0 kartu_beda=0 detik=294 migrasi=1 cek_ok_migrasi=2 jaringan=host role=api:api+angin+petir:{ "hot_flames": 2, "rock_breaker": 2, "heavy_pocket | scripterr=0 | beda=0
+g2_hk_s81.c2: SELESAI MENANG peran=client giliran=11 cek_ok=0 cek_gagal=0 kartu_beda=0 detik=288 migrasi=1 cek_ok_migrasi=0 jaringan=client role=api:api+angin+petir:{ "hot_flames": 2, "rock_breaker": 2, "heavy_pock | scripterr=0 | beda=0
+== host keluar s82
+g2_hk_s82.host:  | scripterr=0 | beda=0
+g2_hk_s82.c1: SELESAI MENANG peran=client giliran=18 cek_ok=5 cek_gagal=0 kartu_beda=0 detik=499 migrasi=1 cek_ok_migrasi=5 jaringan=host role=api:api+angin+petir:{ "hot_flames": 2, "rock_breaker": 2, "heavy_pocket | scripterr=0 | beda=0
+g2_hk_s82.c2: SELESAI MENANG peran=client giliran=18 cek_ok=0 cek_gagal=0 kartu_beda=0 detik=493 migrasi=1 cek_ok_migrasi=0 jaringan=client role=api:api+angin+petir:{ "hot_flames": 2, "rock_breaker": 2, "heavy_pock | scripterr=0 | beda=0
+MP_SELESAI
+== sinkron klaim s71
+g2_klaim_s71.host: SELESAI MENANG peran=host giliran=18 cek_ok=10 cek_gagal=0 kartu_beda=0 detik=449 migrasi=0 cek_ok_migrasi=0 jaringan=host role=api:api+angin+petir:{ "hot_flames": 2, "rock_breaker": 2, "heavy_pockets | scripterr=0 | beda=0
+g2_klaim_s71.c1: SELESAI MENANG peran=client giliran=17 cek_ok=0 cek_gagal=0 kartu_beda=0 detik=443 migrasi=0 cek_ok_migrasi=0 jaringan=client role=api:api+angin+petir:{ "hot_flames": 2, "rock_breaker": 2, "heavy_pock | scripterr=0 | beda=0
+g2_klaim_s71.c2: SELESAI MENANG peran=client giliran=17 cek_ok=0 cek_gagal=0 kartu_beda=0 detik=442 migrasi=0 cek_ok_migrasi=0 jaringan=client role=api:api+angin+petir:{ "hot_flames": 2, "rock_breaker": 2, "heavy_pock | scripterr=0 | beda=0
+== sinkron klaim s72
+g2_klaim_s72.host: SELESAI MENANG peran=host giliran=18 cek_ok=16 cek_gagal=0 kartu_beda=0 detik=416 migrasi=0 cek_ok_migrasi=0 jaringan=host role=api:api+angin+petir:{ "hot_flames": 2, "rock_breaker": 2, "heavy_pockets | scripterr=0 | beda=0
+g2_klaim_s72.c1: SELESAI MENANG peran=client giliran=18 cek_ok=0 cek_gagal=0 kartu_beda=0 detik=410 migrasi=0 cek_ok_migrasi=0 jaringan=client role=api:api+angin+petir:{ "hot_flames": 2, "rock_breaker": 2, "heavy_pock | scripterr=0 | beda=0
+g2_klaim_s72.c2: SELESAI MENANG peran=client giliran=18 cek_ok=0 cek_gagal=0 kartu_beda=0 detik=410 migrasi=0 cek_ok_migrasi=0 jaringan=client role=api:api+angin+petir:{ "hot_flames": 2, "rock_breaker": 2, "heavy_pock | scripterr=0 | beda=0
+== host keluar klaim s81
+g2_hkklaim_s81.host:  | scripterr=0 | beda=0
+g2_hkklaim_s81.c1: SELESAI MENANG peran=client giliran=18 cek_ok=5 cek_gagal=0 kartu_beda=0 detik=428 migrasi=1 cek_ok_migrasi=5 jaringan=host role=api:api+angin+petir:{ "hot_flames": 2, "rock_breaker": 2, "heavy_pocket | scripterr=0 | beda=0
+g2_hkklaim_s81.c2: SELESAI MENANG peran=client giliran=18 cek_ok=0 cek_gagal=0 kartu_beda=0 detik=422 migrasi=1 cek_ok_migrasi=0 jaringan=client role=api:api+angin+petir:{ "hot_flames": 2, "rock_breaker": 2, "heavy_pock | scripterr=0 | beda=0
+== host keluar klaim s82
+g2_hkklaim_s82.host:  | scripterr=0 | beda=0
+g2_hkklaim_s82.c1: SELESAI MENANG peran=client giliran=18 cek_ok=5 cek_gagal=0 kartu_beda=0 detik=486 migrasi=1 cek_ok_migrasi=5 jaringan=host role=api:api+angin+petir:{ "hot_flames": 2, "rock_breaker": 2, "heavy_pocket | scripterr=0 | beda=0
+g2_hkklaim_s82.c2: SELESAI MENANG peran=client giliran=18 cek_ok=0 cek_gagal=0 kartu_beda=0 detik=480 migrasi=1 cek_ok_migrasi=0 jaringan=client role=api:api+angin+petir:{ "hot_flames": 2, "rock_breaker": 2, "heavy_pock | scripterr=0 | beda=0
+MP_SELESAI

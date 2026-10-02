@@ -609,6 +609,7 @@ func eksekusi_dadu_pertarungan(hasil_duel: Dictionary, slot_penyerang: int, slot
 	_tambah_stat(slot_menang_duel, "duel_menang")
 	_tambah_stat(slot_pembela if slot_menang_duel == slot_penyerang else slot_penyerang, "duel_kalah")
 	_tambah_stat_elemen(slot_menang_duel, str(hasil_duel.get("elemen_pemenang", "")))
+	_klaim_bounty(slot_menang_duel, str(hasil_duel.get("elemen_pemenang", ""))) # Fase 5 G2
 	if slot_menang_duel == slot_penyerang:
 		_tambah_stat(slot_penyerang, "petak_rebut")
 

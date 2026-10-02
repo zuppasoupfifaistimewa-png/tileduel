@@ -1,0 +1,34 @@
+EVENT ronde=1 aktif= terakhir=
+BOUNTY ronde=1 aktif= terakhir= klaim_per_slot=[0, 0] bintang=[4, 4]
+EVENT ronde=2 aktif= terakhir=
+BOUNTY ronde=2 aktif=tanah terakhir=tanah klaim_per_slot=[0, 0] bintang=[4, 4]
+EVENT ronde=3 aktif= terakhir=
+EVENT ronde=4 aktif= terakhir=earthquake
+EVENT ronde=5 aktif= terakhir=earthquake
+EVENT ronde=6 aktif= terakhir=earthquake
+EVENT ronde=7 aktif=gold_rush terakhir=gold_rush
+EVENT ronde=8 aktif= terakhir=gold_rush
+EVENT ronde=9 aktif= terakhir=gold_rush
+EVENT ronde=10 aktif= terakhir=star_shower
+EVENT ronde=11 aktif= terakhir=star_shower
+EVENT ronde=12 aktif= terakhir=star_shower
+EVENT ronde=13 aktif=market_day terakhir=market_day
+EVENT ronde=14 aktif= terakhir=market_day
+EVENT ronde=15 aktif= terakhir=market_day
+EVENT ronde=16 aktif=gold_rush terakhir=gold_rush
+EVENT ronde=17 aktif= terakhir=gold_rush
+EVENT ronde=18 aktif= terakhir=gold_rush
+EVENT ronde=19 aktif= terakhir=earthquake
+EVENT ronde=20 aktif= terakhir=earthquake
+EVENT ronde=21 aktif= terakhir=earthquake
+EVENT ronde=22 aktif= terakhir=star_shower
+EVENT ronde=23 aktif= terakhir=star_shower
+EVENT ronde=24 aktif= terakhir=star_shower
+EVENT ronde=25 aktif=market_day terakhir=market_day
+EVENT ronde=26 aktif= terakhir=market_day
+EVENT ronde=27 aktif= terakhir=market_day
+EVENT ronde=28 aktif= terakhir=star_shower
+EVENT ronde=29 aktif= terakhir=star_shower
+EVENT ronde=30 aktif= terakhir=star_shower
+EVENT ronde=31 aktif=market_day terakhir=market_day
+SEIMBANG peta=alam seed=54 quick=0 roles=api,air pemenang=0 cara=batas_kaya giliran=61 detik=1073.3 pasang=1,2 kena=1,1 kaya=6050,3676 rinci=1/204/4/1/0/8,0/0/1/4/4/0 presets=- sacred=0 xprole0=-1

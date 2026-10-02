@@ -19,6 +19,9 @@ var uang0_uji = -1 # uang0=N -> uang slot 0 diset N setelah START (memancing hut
 var _spanduk_dicatat = false
 var _teks_ronde_terakhir = ""
 var _sig_event = "" # Fase 5 G1: log EVENT tiap perubahan
+var _sig_bounty = "" # Fase 5 G2: log BOUNTY tiap perubahan (elemen aktif / terakhir / bintang+stat tiap slot)
+var _klaim_bounty_prev: Array = []
+var _bintang_prev: Array = []
 var _foto_akhir = false
 var _foto_hutang = false
 # --- Fase 2 (T4): profil=1 -> periksa hadiah profil di layar akhir, DOUBLE, EXIT ---
@@ -533,6 +536,19 @@ func _process(delta):
 	if sig_event != _sig_event:
 		_sig_event = sig_event
 		print("EVENT ronde=%d aktif=%s terakhir=%s" % [p.ronde_event, p.event_aktif, p.event_terakhir])
+	var klaim_kini: Array = p.statistik_slot.map(func(st): return int(st.get("bounty", 0)))
+	var bintang_kini: Array = p.daftar_pemain.map(func(d): return d.bintang)
+	if _klaim_bounty_prev.size() == klaim_kini.size():
+		for k in range(klaim_kini.size()):
+			if klaim_kini[k] > _klaim_bounty_prev[k]:
+				print("BOUNTY_KLAIM slot=%d bintang_sebelum=%d bintang_sesudah=%d" % [k, _bintang_prev[k], bintang_kini[k]])
+	_klaim_bounty_prev = klaim_kini
+	_bintang_prev = bintang_kini
+	var sig_bounty = "%s|%s|%s" % [p.bounty_elemen, p.bounty_terakhir, str(p.statistik_slot.map(func(st): return int(st.get("bounty", 0))))]
+	if sig_bounty != _sig_bounty:
+		_sig_bounty = sig_bounty
+		print("BOUNTY ronde=%d aktif=%s terakhir=%s klaim_per_slot=%s bintang=%s" % [p.ronde_event, p.bounty_elemen, p.bounty_terakhir,
+			str(p.statistik_slot.map(func(st): return int(st.get("bounty", 0)))), str(p.daftar_pemain.map(func(d): return d.bintang))])
 	# Fase 1: label ronde, spanduk FINAL ROUND, tawaran +300 COINS, foto papan peringkat.
 	if p.label_ronde != null and p.label_ronde.text != _teks_ronde_terakhir:
 		_teks_ronde_terakhir = p.label_ronde.text

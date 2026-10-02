@@ -1,0 +1,11 @@
+EVENT ronde=1 aktif= terakhir=
+BOUNTY ronde=1 aktif= terakhir= klaim_per_slot=[0, 0] bintang=[4, 4]
+EVENT ronde=2 aktif= terakhir=
+BOUNTY ronde=2 aktif=tanah terakhir=tanah klaim_per_slot=[0, 0] bintang=[4, 4]
+EVENT ronde=3 aktif= terakhir=earthquake
+EVENT ronde=4 aktif= terakhir=earthquake
+EVENT ronde=5 aktif= terakhir=star_shower
+EVENT ronde=6 aktif= terakhir=star_shower
+EVENT ronde=7 aktif= terakhir=earthquake
+EVENT ronde=8 aktif= terakhir=earthquake
+SEIMBANG peta=alam seed=12 quick=1 roles=api,air pemenang=1 cara=ronde giliran=16 detik=368.8 pasang=1,2 kena=1,1 kaya=2866,3943 rinci=0/220/0/0/0/5,0/0/0/0/0/0 presets=- sacred=0 xprole0=-1

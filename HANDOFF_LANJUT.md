@@ -1,4 +1,4 @@
-# HANDOFF -- lanjutkan proyek Tile Duel (Fase 4 SELESAI; Fase 5: G0 & G1 SELESAI, G2 berikutnya)
+# HANDOFF -- lanjutkan proyek Tile Duel (Fase 4 SELESAI; Fase 5: G0, G1 & G2 SELESAI, G3 berikutnya)
 
 Dokumen ini ditulis 02-10-2026 supaya sesi Claude Code (cloud / web, tanpa CLI) mana pun bisa melanjutkan
 pekerjaan TANPA riwayat percakapan. BACA INI DULU, lalu `docs/RENCANA_fase4_role.md` bagian 14.19 & **14.21-14.24** (paling akhir).
@@ -18,6 +18,16 @@ Bukti (`hasil/g1_event/`): solo Quick 2P/4P & Classic 2P/4P 0 SCRIPT ERROR, jadw
 host keluar di ronde event (migrasi): event berlanjut (c1 jadi host, ronde 5 gold_rush lanjut tanpa mengulang), cek_ok_migrasi=3, 0 beda; `cek_nilai` 8/8.
 BELUM diverifikasi: tampilan label HUD event (headless tidak merender; cek di uji HP G9) & getaran kamera Earthquake (tidak dibuat). Keseimbangan role
 TIDAK dicek (itu G8, Opus) -- event sudah mengubah ekonomi pertandingan. Berikutnya: **G2 bounty (Sonnet)**.
+
+**Fase 5 G2 SELESAI (Sonnet, 02-10):** bounty. State `bounty_elemen/bounty_terakhir` (+`label_bounty`, `BOUNTY_RONDE_PERTAMA=2`) di `pemain_dasar.gd`;
+`_bounty_perlu_muncul/_mulai_bounty/_klaim_bounty/rpc_bounty/_tampilkan_bounty` di `pemain_papan.gd`; dipanggil dari `ganti_giliran` (slot 0, sesudah event)
+dan `eksekusi_dadu_pertarungan` (`pemain_duel.gd`, klaim = pemenang duel dgn `elemen_pemenang == bounty_elemen` -> +1 bintang maks 10, stat `bounty`);
+siaran state "bounty" (`pemain_jaringan.gd`); label HUD `_atur_posisi_label_bounty` (`pemain_tampilan.gd`); kunci `bounty` di `statistik_kosong`.
+Jadwal: bounty pertama ronde_event 2; sesudah diklaim, yang baru muncul di ronde event berikutnya; elemen diundi `mesin_acak`, tidak sama dgn yang terakhir. AI ikut mengklaim otomatis.
+Bukti (`hasil/g2_bounty/`): solo 27 run (Quick/Classic 2P/4P) 0 SCRIPT ERROR, jadwal benar, klaim selalu tepat +1 bintang;
+MP 3P Quick: sinkron host+2 client identik (urutan BOUNTY sama, cek_gagal=0), klaim teruji (robot rig `bounty_pilih=1`), host keluar saat bounty aktif:
+bounty bertahan di host baru (c1), klaim setelah migrasi tercatat sama di c1 & c2, bounty baru diundi host baru; `cek_nilai` 8/8.
+Rig-only: log `BOUNTY`/`BOUNTY_KLAIM` di `uji_nyata.gd` & `uji_robot_mp.gd` (+ "bounty" di potret), opsi `bounty_pilih=1` di `uji_robot_mp.gd`.
 
 ## 0. Aturan tetap dari pemilik proyek (WAJIB)
 1. Balas dalam **Bahasa Indonesia saja**.
