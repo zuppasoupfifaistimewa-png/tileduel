@@ -2051,12 +2051,72 @@ diterapkan lewat `f5_kandidat/*.patch`, hasil identik byte-per-byte dengan rig).
 - `cek_nilai=1`: 3 harapan diperbarui (dihitung tangan, independen dari kode): api hot_flames3+long_burn2 vs heat_skin1 =
   130x4x0,75 = **390** (dulu 270); angin homing_wind2 uang1000 = 0,10x1000x1,3 = **130** (dulu 150); Phoenix = 90x3x1,2 = **324**
   (dulu 315). Hasil 8/8 OK.
-- Regresi MP U4 (`uji_f2_t2_a/b.sh`, berurutan): **37/37 skenario, 97 baris SELESAI** (F3: 96; satu baris lebih, tidak ada
-  indikasi masalah), 0 MACET, 0 scripterr, 0 beda, 0 cek_gagal, baris AKHIR sama di semua HP.
-- `batch_reg10.sh`: 9 uji 0 gagal. Berkas acuan `rng_r4_*` tidak ada di repo -> pembandingan RNG air/angin tidak bisa dilakukan
+- Regresi MP U4 (`uji_f2_t2_a/b.sh`, berurutan): **37/37 skenario, 97 baris SELESAI** (F3: 96; satu baris lebih = skenario D1,
+  c1 tidak sempat keluar -- variasi timing, BUKAN regresi; lihat 14.23), 0 MACET, 0 scripterr, 0 beda, 0 cek_gagal, baris AKHIR sama di semua HP.
+- `batch_reg10.sh`: ~~9 uji 0 gagal~~ (DIKOREKSI 14.23: 6 uji "gagal: 0", 2 uji tanpa baris kesimpulan, 1 uji 2 SCRIPT ERROR lama). Berkas acuan `rng_r4_*` tidak ada di repo -> pembandingan RNG air/angin tidak bisa dilakukan
   (bukan kegagalan). `uji_tanah2`: 2 SCRIPT ERROR di `jebakan_tanah.gd:87` karena uji lama memanggil dgn node tiruan tanpa
   `_angka_jebakan` -- SUDAH ADA sebelum F6 (file tidak berubah sejak impor), bukan bug produksi.
 - U11 (`uji_tayang_role.tscn`) selesai tanpa SCRIPT ERROR.
 - TIDAK diulang: U9 S1-S5 (angka final sudah dikonfirmasi di benih baru 14.21), foto U7/U5/U6 (tidak ada jalur yang berubah selain
   konstanta angka). Data: `hasil/f6_regresi/`.
 - Berikutnya: F7 (grep debug = 0, sinkron rig, diff bersih), F8 (ZIP 29 .gd + RENCANA).
+
+### 14.23 Tinjauan F6 (4 temuan) + F7 SELESAI + F8 ZIP (Opus, 02-10, sesi Claude Code cloud)
+
+**STATUS: 4 temuan tinjauan F6 dibereskan, F7 SELESAI, F8: `kiriman/TileDuel_FaseB_b9.zip` (29 .gd + RENCANA = 30 file)
+dibuat -> menunggu uji HP pemilik (bagian 10).** Tidak ada angka/logika produksi yang berubah di tahap ini (hanya 2 komentar).
+
+**Temuan 1 -- `uji_pedang` & `uji_cabang_solo` tanpa baris kesimpulan (`hasil/f6_regresi/tinjauan_reg10/`).**
+Log lengkap F6 tidak di-push, jadi dijalankan ulang (cara `batch_reg10.sh`) di DUA salinan rig scratchpad: angka F6 vs angka
+produksi lama (`data_role.gd`/`ai_jebakan.gd` dari 755644d; selisih tepat 8 baris angka). Penyebab: kedua uji MEMANG tidak
+punya baris "SELESAI -- gagal: N" -- hanya mencetak pengamatan lalu quit (exit 0, 0 SCRIPT ERROR); ringkasan F6 hanya
+mengambil baris SELESAI/SCRIPT ERROR. `uji_pedang`: klik pedang ke-1 -> indeks 1 -> `pedang_3` (sesuai `database_efek`:
+inventaris [dadu_rendah, pedang_1, bintang_2, pedang_3, pedang_2]), NO SAVE IT -> -1; lama == baru. `uji_cabang_solo`
+benih 1-10: petak & state RNG lama == baru di ke-10 benih (kedua cabang muncul). `uji_tanah2`: 2 SCRIPT ERROR identik di
+angka lama -> klaim "sudah ada sebelum F6" kini TERBUKTI. Koreksi kalimat 14.22: batch_reg10 = 6 uji "gagal: 0",
+2 uji tanpa kesimpulan (diperiksa manual, benar, identik dgn angka lama), 1 uji SCRIPT ERROR lama. Tidak ada regresi F6.
+
+**Temuan 2 -- set resmi 29 .gd vs 35 .gd di `game/`.** Tiga sumber independen menghasilkan daftar SAMA:
+(a) `rig/skrip/sinkron_tanpa_uji.sh` (28 file rantai/pendukung, 14.15) + `jebakan_dasar.gd` (masuk set di B-c, 14.15);
+(b) `game/` dikurangi 6 file T21; (c) daftar .gd di commit fe39bec (impor b8). Riwayat: Fase 3 = 22 file (termasuk `pengelola_iklan.gd`) -> Langkah A +4
+(`data_role`, `pemain_role`, `ai_jebakan`, `ui_role`) -> Langkah B +3 (`jebakan_tanah/angin/petir`) + `jebakan_dasar`,
+dan `pengelola_iklan.gd` keluar dari set (tidak diubah Fase 4) = 29.
+SET RESMI 29: ai_jebakan, ai_musuh, data_pemain, data_role, jebakan_air, jebakan_angin, jebakan_api, jebakan_dasar,
+jebakan_petir, jebakan_tanah, layar_local_play, main_menu, migrasi_host, pemain, pemain_dasar, pemain_duel,
+pemain_jaringan, pemain_kartu, pemain_papan, pemain_role, pemain_tampilan, petak_kartu, profil_pemain, status_jaringan,
+ui_dinamis, ui_elemen, ui_petak, ui_profil, ui_role (.gd).
+6 file sisa di `game/` (T21): `petak_papan.gd`, `koin_tercecer.gd`, `petak_permata.gd`, `lingkungan_pantai.gd`, `rolet.gd`
+(tidak pernah diubah Fase 4, identik dgn rig; ada di `game/` supaya proyek/rig lengkap) dan `pengelola_iklan.gd` (versi
+produksi asli dengan AdMob, tidak diubah Fase 4; rig memakai stub). Pemilik sudah punya keenamnya di proyeknya -> tidak dikirim.
+Catatan: rig juga memuat 5 file proyek yang TIDAK ada di `game/` (`audio_grafis`, `lingkungan_alam`, `menu_grafis`,
+`mesh_instance_3d`, `validasi_peta`; tidak pernah disentuh fase mana pun) + `cek_muat_f3.gd` (alat rig).
+
+**Temuan 3 -- komentar.** `ai_jebakan.gd` (game & rig, identik): `AMBANG_NILAI` + "F5 r1: 50 -> 40 (jebakan/AI 1,88 < 2,
+P14)", `AMBANG_PELUANG` + "F5 r2: 80 -> 90 (jebakan/AI 1,99 -> 2,18, P14)". Angka tidak disentuh (skrip memastikan bagian
+kode identik). Dicatat, TIDAK diubah (di luar permintaan): komentar `hot_flames`/`fire_tax`/`strong_wind` di `data_role.gd`
+belum menyebut F5 (`homing_wind` sudah).
+
+**Temuan 4 -- 97 vs 96 baris SELESAI (`hasil/f6_regresi/tinjauan_mp_d1/`).** Data per skenario F3 tidak ada di repo, jadi
+dihitung dari desain (jumlah proses dikurangi proses yang dirancang keluar): 36/37 skenario F6 cocok persis; total desain =
+96 = F3. Satu-satunya penyimpangan: **D1 "3P c1 keluar saat pilih elemen"** -- F6 3 baris, desain 2. Penyebab: pemicu keluar
+`client_keluar_duel` bersyarat (`uji_robot_mp.gd:468`: giliran >= 2 DAN c1 peserta duel di fase PILIH_PEMAIN); di D1 c1 hanya
+SEKALI jadi peserta pilih elemen per pertandingan (giliran 24, detik ~485 dari ~570) -- regresi MP berjalan real-time, jadi di
+run F6 kesempatan itu tidak terjadi dan c1 main sampai habis (+1 SELESAI). Bukti: D1 dijalankan ulang dgn kode F6 yang sama
+-> c1 keluar paksa di giliran 24, 2 baris; dgn angka lama -> sama (giliran 24, 2 baris); 0 scripterr/beda/cek_gagal semua.
+Artinya di run F6 jalur D1 TIDAK teruji -- kini tertutup oleh run ulang ini (dengan angka F6).
+- **T22 (baru, rig-only, BELUM dikerjakan):** D1 rapuh (satu kesempatan per pertandingan). Usul: benih/giliran lain yang
+  memberi c1 lebih banyak duel, atau robot mencetak `SKENARIO_TIDAK_TERPICU` di akhir supaya ringkasan langsung menandai.
+
+**F7 SELESAI (`hasil/f7_bersih/F7_cek.txt`).** grep `game/*.gd`: counter sementara (`cek_bd_`, `CEK_BD`, `CEK_C*`, `cek_be_`)
+0, `print*(` 0, `breakpoint` 0, TODO/FIXME/HACK 0, argumen CLI 0; saklar `UJI_DUEL`/`UJI_SERI`/`UJI_SELALU_PEDANG` = false;
+kunci `_tambah_stat` semua dipakai profil (XP/rekap). Sinkron: 34/35 file `game/` identik dgn rig, beda hanya
+`pengelola_iklan.gd` (stub, disengaja). Repo hanya punya SATU rig (`rig/proj_tanpa_uji`; "proj" lama dgn saklar uji tidak
+ikut handoff). Salinan rig (= rig byte-per-byte): `cek_muat_f3` 26/26 OK, `cek_nilai=1` 8/8. Opsional F7 dikerjakan:
+`uji_tanah2.gd` (rig-only) diberi tiruan `_angka_jebakan` -> 0 SCRIPT ERROR, HP 3->4->4->3 sesuai semua harapan.
+
+**F8.** `kiriman/TileDuel_FaseB_b9.zip` = 29 .gd set resmi (dari `game/`) + `RENCANA_fase4_role.md` = 30 file
+(daftar file SAMA dgn commit fe39bec = impor `TileDuel_FaseB_b8.zip` menurut LOG_SESI -- konfirmasi ke-3 Temuan 2; tetapi ISI
+14 dari 29 file berbeda dari fe39bec karena fe39bec masih versi sebelum B-e lengkap, mis. `ui_role.gd` belum punya ARENA P11 --
+jadi JANGAN hanya menyalin file yang berubah di F6). Pemilik: buang unduhan lama, salin KE-29 file ke folder proyek (timpa
+semua), buka Godot, tunggu impor, lalu uji HP bagian 10 (Langkah A + B). Pengingat lama (Fase 3 L5):
+`ID_INTERSTISIAL_ASLI` di `pengelola_iklan.gd` masih kosong -- keputusan pemilik, isi sebelum rilis bila ingin iklan asli.

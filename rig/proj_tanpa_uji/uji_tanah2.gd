@@ -2,6 +2,9 @@ extends Node3D
 var nyawa_petak = [0, 3]
 var pemilik_petak = [-1, 1]
 func update_semua_label_petak(): pass
+# F7 (02-10): tiruan pemain_role._angka_jebakan -- sejak C5 hitung_bonus_hp memanggilnya.
+# Pemasang tanpa build (hard_rock Lv0) -> hp_tambahan_awal 0, jadi bonus tetap +1 dasar.
+func _angka_jebakan(_slot_pemasang: int, _elemen: String) -> Dictionary: return {"hp_tambahan_awal": 0}
 
 func _ready():
 	Engine.time_scale = 6.0

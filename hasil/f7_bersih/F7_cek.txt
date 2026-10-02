@@ -1,0 +1,26 @@
+F7 (02-10) -- pemeriksaan bersih-bersih, dijalankan di repo setelah komentar ai_jebakan.gd disamakan
+
+1) grep counter/debug sementara di game/*.gd (35 file):
+   cek_bd_                                                    : 0
+   CEK_BD                                                     : 0
+   CEK_C[0-9]                                                 : 0
+   cek_be_                                                    : 0
+   ^\s*print\(err\|_debug\|_rich\|_verbose\)\?(               : 0
+   breakpoint                                                 : 0
+   TODO\|FIXME\|HACK                                          : 0
+   get_cmdline_user_args\|get_cmdline_args                    : 0
+   saklar uji (harus false):
+      game/pemain_dasar.gd:103:const UJI_DUEL := false
+      game/pemain_dasar.gd:109:const UJI_SERI := false
+      game/petak_kartu.gd:56:const UJI_SELALU_PEDANG := false
+   kunci _tambah_stat/_catat_stat: semua dipakai profil_pemain.gd (XP/rekap), tidak ada counter sementara
+
+2) sinkron game/ vs rig/proj_tanpa_uji (35 file .gd):
+   BEDA: pengelola_iklan.gd
+   identik: 34 / 35
+   (pengelola_iklan.gd beda DISENGAJA: rig memakai stub iklan -- JANGAN disalin ke game/)
+
+3) cek di salinan rig (scratchpad, = rig byte-per-byte):
+   cek_muat_f3: 26/26 OK, SCRIPT ERROR 0
+   CEK_NILAI_SELESAI total=8 ok=8 gagal=0
+   uji_tanah2 (setelah tiruan _angka_jebakan): SCRIPT ERROR 0; HP 3 -> 4 -> 4 -> 3 di kedua duel (sesuai semua harapan)

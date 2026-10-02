@@ -1,0 +1,37 @@
+f2_a0    proses=2 SELESAI=2 tanpa_SELESAI:           == A0 1v1 (+kartu)
+f2_a1    proses=2 SELESAI=2 tanpa_SELESAI:           == A1 2P+1AI (+kartu)
+f2_a2    proses=2 SELESAI=2 tanpa_SELESAI:           == A2 2P+2AI (+kartu)
+f2_a3    proses=3 SELESAI=3 tanpa_SELESAI:           == A3 3P (+kartu)
+f2_a4    proses=3 SELESAI=3 tanpa_SELESAI:           == A4 3P+1AI (+kartu)
+f2_a5    proses=3 SELESAI=3 tanpa_SELESAI:           == A5 3P+1AI pantai
+f2_a6    proses=2 SELESAI=2 tanpa_SELESAI:           == A6 2P+1AI pantai
+f2_b0    proses=4 SELESAI=4 tanpa_SELESAI:           == B0 4P (+kartu)
+f2_b1    proses=4 SELESAI=4 tanpa_SELESAI:           == B1 4P pantai
+f2_b2    proses=4 SELESAI=3 tanpa_SELESAI: c3:       == B2 4P c3 keluar g8
+f2_b3    proses=4 SELESAI=3 tanpa_SELESAI: c2:       == B3 4P c2 keluar pilih elemen
+f2_b4    proses=4 SELESAI=3 tanpa_SELESAI: host:     == B4 4P host keluar g8 (lanjut sendiri)
+f2_d1    proses=3 SELESAI=3 tanpa_SELESAI:           == D1 3P c1 keluar saat pilih elemen
+f2_d2    proses=2 SELESAI=1 tanpa_SELESAI: c1:       == D2 1v1 c1 keluar saat pilih elemen
+f2_d3    proses=3 SELESAI=2 tanpa_SELESAI: host:     == D3 3P+1AI host keluar saat pilih elemen
+f2_d4    proses=2 SELESAI=1 tanpa_SELESAI: host:     == D4 2P+1AI host keluar saat pilih elemen
+f2_m1    proses=3 SELESAI=2 tanpa_SELESAI: host:     == M1 3P+1AI -> 2P+2AI
+f2_m2    proses=4 SELESAI=3 tanpa_SELESAI: host:     == M2 4P -> 3P+1AI
+f2_m3    proses=4 SELESAI=3 tanpa_SELESAI: host:     == M3 4P, P4 main sendiri
+f2_m4    proses=3 SELESAI=2 tanpa_SELESAI: host:     == M4 rebutan
+f2_m5    proses=4 SELESAI=3 tanpa_SELESAI: host:     == M5 host keluar saat pilih elemen
+f2_m6    proses=4 SELESAI=2 tanpa_SELESAI: host: c1: == M6 migrasi dua kali
+f2_m7    proses=3 SELESAI=3 tanpa_SELESAI:           == M7 hotspot P1 mati, P1 kembali
+f2_m8    proses=4 SELESAI=4 tanpa_SELESAI:           == M8 P1 kembali terlambat
+f2_q1    proses=2 SELESAI=2 tanpa_SELESAI:           == Q1 1v1 alam
+f2_q1n   proses=2 SELESAI=2 tanpa_SELESAI:           == Q1n 1v1 alam (UJI mati)
+f2_q2    proses=2 SELESAI=2 tanpa_SELESAI:           == Q2 2P+1AI pantai
+f2_q3    proses=3 SELESAI=3 tanpa_SELESAI:           == Q3 3P alam
+f2_q4    proses=4 SELESAI=4 tanpa_SELESAI:           == Q4 4P alam
+f2_q4n   proses=4 SELESAI=4 tanpa_SELESAI:           == Q4n 4P pantai (UJI mati)
+f2_q5    proses=4 SELESAI=3 tanpa_SELESAI: host:     == Q5 4P migrasi host g8
+f2_q6    proses=3 SELESAI=3 tanpa_SELESAI:           == Q6 3P+1AI (+kartu)
+f2_q7    proses=3 SELESAI=2 tanpa_SELESAI: c2:       == Q7 3P client keluar g8
+f2_q8    proses=3 SELESAI=3 tanpa_SELESAI:           == Q8 3P+1AI hotspot P1 mati di giliran terakhir
+f2_s1    proses=3 SELESAI=2 tanpa_SELESAI: c2:       == S1 3P c2 keluar g8
+f2_s2    proses=3 SELESAI=2 tanpa_SELESAI: c1:       == S2 3P+1AI c1 keluar g10
+f2_s3    proses=3 SELESAI=2 tanpa_SELESAI: host:     == S3 3P host keluar g8

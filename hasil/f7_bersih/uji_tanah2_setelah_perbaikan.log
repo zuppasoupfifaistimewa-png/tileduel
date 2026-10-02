@@ -1,0 +1,12 @@
+Godot Engine v4.7.1.stable.official.a13da4feb - https://godotengine.org
+
+
+[duel 1] HP sebelum jebakan  : 3
+[duel 1] HP dibaca duel     : 4   (harus 4)
+[duel 1] HP di tengah duel  : 4   (harus tetap 4)
+[duel 1] HP setelah duel    : 3   (harus kembali 3) | jebakan masih ada: true
+
+[duel 2] HP sebelum jebakan  : 3
+[duel 2] HP dibaca duel     : 4   (harus 4)
+[duel 2] HP di tengah duel  : 4   (harus tetap 4)
+[duel 2] HP setelah duel    : 3   (harus kembali 3) | jebakan masih ada: true

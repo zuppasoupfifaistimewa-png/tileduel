@@ -1,0 +1,31 @@
+Tinjauan temuan 4 F6 (02-10): regresi MP F6 = 97 baris SELESAI, F3 = 96. Skenario mana yang menambah satu baris?
+
+Data per skenario F3 TIDAK ada di repo (hanya angka total 96 di RENCANA 14.19). Jadi dihitung dari desain skenario:
+jumlah baris SELESAI yang SEHARUSNYA = jumlah proses dikurangi proses yang dirancang keluar paksa.
+f6_per_skenario.txt = hitungan F6 per skenario (dari t2_f2_semua.out).
+
+Hasil: 36 dari 37 skenario cocok persis dengan desainnya. SATU-SATUNYA yang menyimpang:
+  D1 "3P c1 keluar saat pilih elemen" (client_keluar_duel, urut 1): F6 = 3 baris SELESAI (host, c1, c2),
+  desain = 2 (c1 seharusnya keluar paksa -> tanpa SELESAI). Total desain 37 skenario = 96 = angka F3.
+
+PENYEBAB: pemicu keluar D1 bersyarat (uji_robot_mp.gd:468-471): c1 keluar HANYA kalau giliran >= 2 DAN layar duel
+c1 sedang di fase PILIH_PEMAIN sebagai peserta (bukan penonton). Di D1, c1 sangat jarang jadi peserta duel:
+run ulang menunjukkan c1 hanya SEKALI masuk fase pilih elemen sepanjang pertandingan, di giliran 24 (detik ~485
+dari ~560-583; pertandingan berhenti di BATAS_GILIRAN 30). Regresi MP berjalan real-time (jaringan lokal, robot
+"berpikir" 3 dtk, frame), jadi urutan kejadian bisa bergeser antar-run. Di run F6 kesempatan tunggal itu tidak
+terjadi / terlewat -> c1 bermain sampai habis -> mencetak SELESAI HOST_SELESAI -> +1 baris.
+
+BUKTI bukan akibat angka F6 (run ulang D1 saja, perintah sama persis dgn uji_f2_t2_a.sh, EXTRA="pedang_awal=1 kartu_awal=1"):
+  angka F6  (proj_baru, kode = rig F6 byte-per-byte): c1 "keluar paksa saat PILIH ELEMEN duel (giliran 24)" -> 2 baris SELESAI
+  angka lama (proj_lama, data_role/ai_jebakan dari 755644d):  c1 keluar paksa di giliran 24 -> 2 baris SELESAI
+  Keduanya: scripterr=0, beda=0, cek_gagal=0; host BATAS_GILIRAN, c2 HOST_SELESAI.
+  -> Kode F6 yang SAMA memberi 3 baris (run F6) dan 2 baris (run ulang): variasi timing antar-run, bukan regresi.
+
+CATATAN PENTING: di run F6, D1 TIDAK menguji jalurnya (client keluar saat pilih elemen di 3P). Celah itu kini
+tertutup oleh run ulang ini (jalur terlewati, 0 scripterr/beda/cek_gagal, dengan angka F6). D1 rapuh (hanya satu
+kesempatan per pertandingan) -- usulan untuk nanti (BELUM dikerjakan, rig-only): beri D1 lebih banyak kesempatan
+(mis. benih lain / giliran lebih panjang) atau cetak "SKENARIO_TIDAK_TERPICU" di akhir supaya ringkasan langsung
+menandainya. Lihat RENCANA 14.23 T22.
+
+Berkas: d1_ulang.out (ringkasan pelari), f2_d1_{baru,lama}.{host,c1,c2}.txt (jejak robot lengkap, baris D| = layar duel),
+        f2_d1_{baru,lama}.*.log (stdout; baris derau rig -- aset audio/gambar tidak ada, backtrace -- dibuang).

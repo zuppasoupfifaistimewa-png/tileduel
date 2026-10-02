@@ -1,0 +1,450 @@
+ROBOT client urut=1 mode=0 peta=alam skenario=client_keluar_duel
+LOBBY client1: pemain = [b][color=#3380ff]P1[/color][/b]   HOST  [color=#e63333]FIRE[/color] | [b][color=#ff3333]P2[/color][/b]   PLAYER (YOU) | [b][color=#26cc4d]P3[/color][/b]   [color=#8a8a8a]waiting for player...[/color]
+LOBBY client1: info = Waiting for players to choose a role...
+LOBBY client1: klik MY ROLE = true
+LOBBY client1: klik role WATER = true
+LOBBY client1: klik OK = true
+MASUK_GAME slot_lokal=1 pemain=3 peran_jaringan=client
+START_DITEKAN
+T|Tekan SPASI untuk Melempar Dadu
+G1|pemain|[0,2500,4][0,2500,4][0,2500,4]
+T|Waiting for P1...
+T|P1 Roll: 6
+T|Waiting for P1...
+T|P1 set a Fire Trap!
+T|Waiting for P1...
+G2|musuh|[6,2200,3][0,2500,4][0,2500,4]
+R|dadu
+T|Your Roll: 4
+R|jebakan|TombolTrapAir
+T|Water Trap placed on your spot!
+R|beli
+T|Waiting for P3...
+G3|pemain3|[6,2200,3][4,2200,3][0,2500,4]
+T|P3 Roll: 2
+T|Waiting for P3...
+T|P3 set a Wind Trap!
+T|Waiting for P3...
+T|Waiting for P1...
+G4|pemain|[6,2200,3][4,2200,3][2,2200,3]
+D|49.0|ANIMASI_KARTU judul='P1'S CARDS' target='LOW ROLL for YOU (3 turns)' a_target=0.0 a_latar=0.00 kartu= kamera=P1
+D|49.0|ANIMASI_KARTU judul='P1'S CARDS' target='LOW ROLL for YOU (3 turns)' a_target=0.0 a_latar=0.20 kartu=LOW ROLL,SHIELD,HIGH ROLL,SWORD LV 3,SWORD LV 3,SWORD LV 3 kamera=P1
+D|49.1|ANIMASI_KARTU judul='P1'S CARDS' target='LOW ROLL for YOU (3 turns)' a_target=0.0 a_latar=0.40 kartu=LOW ROLL,SHIELD,HIGH ROLL,SWORD LV 3,SWORD LV 3,SWORD LV 3 kamera=P1
+D|49.1|ANIMASI_KARTU judul='P1'S CARDS' target='LOW ROLL for YOU (3 turns)' a_target=0.0 a_latar=0.60 kartu=LOW ROLL,SHIELD,HIGH ROLL,SWORD LV 3,SWORD LV 3,SWORD LV 3 kamera=P1
+D|49.2|ANIMASI_KARTU judul='P1'S CARDS' target='LOW ROLL for YOU (3 turns)' a_target=0.0 a_latar=0.80 kartu=LOW ROLL,SHIELD,HIGH ROLL,SWORD LV 3,SWORD LV 3,SWORD LV 3 kamera=P1
+D|50.1|ANIMASI_KARTU judul='P1 USED A CARD!' target='LOW ROLL for YOU (3 turns)' a_target=0.0 a_latar=0.80 kartu=LOW ROLL*,SHIELD,HIGH ROLL,SWORD LV 3,SWORD LV 3,SWORD LV 3 kamera=P1
+D|50.3|ANIMASI_KARTU judul='P1 USED A CARD!' target='LOW ROLL for YOU (3 turns)' a_target=0.0 a_latar=0.80 kartu=LOW ROLL* kamera=P1
+D|52.7|ANIMASI_KARTU judul='P1 USED A CARD!' target='LOW ROLL for YOU (3 turns)' a_target=0.2 a_latar=0.80 kartu=LOW ROLL* kamera=P1
+D|52.7|ANIMASI_KARTU judul='P1 USED A CARD!' target='LOW ROLL for YOU (3 turns)' a_target=0.4 a_latar=0.80 kartu=LOW ROLL* kamera=P1
+D|52.8|ANIMASI_KARTU judul='P1 USED A CARD!' target='LOW ROLL for YOU (3 turns)' a_target=0.6 a_latar=0.80 kartu=LOW ROLL* kamera=P1
+D|52.8|ANIMASI_KARTU judul='P1 USED A CARD!' target='LOW ROLL for YOU (3 turns)' a_target=0.8 a_latar=0.80 kartu=LOW ROLL* kamera=P1
+D|52.9|ANIMASI_KARTU judul='P1 USED A CARD!' target='LOW ROLL for YOU (3 turns)' a_target=1.0 a_latar=0.80 kartu=LOW ROLL* kamera=P1
+D|53.9|ANIMASI_KARTU judul='P1 USED A CARD!' target='LOW ROLL for YOU (3 turns)' a_target=0.9 a_latar=0.70 kartu=LOW ROLL* kamera=P2
+D|53.9|ANIMASI_KARTU judul='P1 USED A CARD!' target='LOW ROLL for YOU (3 turns)' a_target=0.8 a_latar=0.60 kartu=LOW ROLL* kamera=P2
+D|54.0|ANIMASI_KARTU judul='P1 USED A CARD!' target='LOW ROLL for YOU (3 turns)' a_target=0.6 a_latar=0.50 kartu=LOW ROLL* kamera=P2
+D|54.0|ANIMASI_KARTU judul='P1 USED A CARD!' target='LOW ROLL for YOU (3 turns)' a_target=0.5 a_latar=0.40 kartu=LOW ROLL* kamera=P2
+D|54.1|ANIMASI_KARTU judul='P1 USED A CARD!' target='LOW ROLL for YOU (3 turns)' a_target=0.4 a_latar=0.30 kartu=LOW ROLL* kamera=P2
+D|54.1|ANIMASI_KARTU judul='P1 USED A CARD!' target='LOW ROLL for YOU (3 turns)' a_target=0.2 a_latar=0.20 kartu=LOW ROLL* kamera=P2
+D|54.2|ANIMASI_KARTU judul='P1 USED A CARD!' target='LOW ROLL for YOU (3 turns)' a_target=0.1 a_latar=0.10 kartu=LOW ROLL* kamera=P2
+D|54.2|ANIMASI_KARTU judul='P1 USED A CARD!' target='LOW ROLL for YOU (3 turns)' a_target=0.0 a_latar=0.00 kartu=LOW ROLL* kamera=P2
+T|P1 inflicted LOW ROLL to You for 3 Turns!
+D|56.7|TEKS='P1 inflicted LOW ROLL to You for 3 Turns!'
+T|Waiting for P1...
+D|57.7|(kosong)
+T|P1 Roll: 4
+T|Waiting for P1...
+T|P1 set a Lightning Trap!
+T|Waiting for P1...
+G5|musuh|[10,1900,2][4,2200,3][2,2200,3]
+R|use_card
+D|72.6|ANIMASI_KARTU judul='YOUR CARDS / Choose one to use!' target='?' a_target=0.0 a_latar=-1.00 kartu=LOW ROLL,SHIELD,HIGH ROLL,SWORD LV 3,SWORD LV 3,SWORD LV 3,CANCEL kamera=P2
+R|pilih_kartu|LOW ROLL
+PAKAI_KARTU slot=1 kartu=LOW ROLL
+D|72.6|(kosong)
+R|target_kartu|Use on P1
+TARGET_KARTU slot=1 Use on P1
+D|72.7|ANIMASI_KARTU judul='YOUR CARDS' target='LOW ROLL for P1 (3 turns)' a_target=0.0 a_latar=0.00 kartu= kamera=P2
+D|72.7|ANIMASI_KARTU judul='YOUR CARDS' target='LOW ROLL for P1 (3 turns)' a_target=0.0 a_latar=0.20 kartu=LOW ROLL,SHIELD,HIGH ROLL,SWORD LV 3,SWORD LV 3,SWORD LV 3 kamera=P2
+D|72.8|ANIMASI_KARTU judul='YOUR CARDS' target='LOW ROLL for P1 (3 turns)' a_target=0.0 a_latar=0.40 kartu=LOW ROLL,SHIELD,HIGH ROLL,SWORD LV 3,SWORD LV 3,SWORD LV 3 kamera=P2
+D|72.8|ANIMASI_KARTU judul='YOUR CARDS' target='LOW ROLL for P1 (3 turns)' a_target=0.0 a_latar=0.60 kartu=LOW ROLL,SHIELD,HIGH ROLL,SWORD LV 3,SWORD LV 3,SWORD LV 3 kamera=P2
+D|72.9|ANIMASI_KARTU judul='YOUR CARDS' target='LOW ROLL for P1 (3 turns)' a_target=0.0 a_latar=0.80 kartu=LOW ROLL,SHIELD,HIGH ROLL,SWORD LV 3,SWORD LV 3,SWORD LV 3 kamera=P2
+D|73.8|ANIMASI_KARTU judul='YOU USED A CARD!' target='LOW ROLL for P1 (3 turns)' a_target=0.0 a_latar=0.80 kartu=LOW ROLL*,SHIELD,HIGH ROLL,SWORD LV 3,SWORD LV 3,SWORD LV 3 kamera=P2
+D|74.0|ANIMASI_KARTU judul='YOU USED A CARD!' target='LOW ROLL for P1 (3 turns)' a_target=0.0 a_latar=0.80 kartu=LOW ROLL* kamera=P2
+D|76.4|ANIMASI_KARTU judul='YOU USED A CARD!' target='LOW ROLL for P1 (3 turns)' a_target=0.2 a_latar=0.80 kartu=LOW ROLL* kamera=P2
+D|76.4|ANIMASI_KARTU judul='YOU USED A CARD!' target='LOW ROLL for P1 (3 turns)' a_target=0.4 a_latar=0.80 kartu=LOW ROLL* kamera=P2
+D|76.5|ANIMASI_KARTU judul='YOU USED A CARD!' target='LOW ROLL for P1 (3 turns)' a_target=0.6 a_latar=0.80 kartu=LOW ROLL* kamera=P2
+D|76.5|ANIMASI_KARTU judul='YOU USED A CARD!' target='LOW ROLL for P1 (3 turns)' a_target=0.8 a_latar=0.80 kartu=LOW ROLL* kamera=P2
+D|76.6|ANIMASI_KARTU judul='YOU USED A CARD!' target='LOW ROLL for P1 (3 turns)' a_target=1.0 a_latar=0.80 kartu=LOW ROLL* kamera=P2
+D|77.6|ANIMASI_KARTU judul='YOU USED A CARD!' target='LOW ROLL for P1 (3 turns)' a_target=0.9 a_latar=0.70 kartu=LOW ROLL* kamera=P1
+D|77.6|ANIMASI_KARTU judul='YOU USED A CARD!' target='LOW ROLL for P1 (3 turns)' a_target=0.8 a_latar=0.60 kartu=LOW ROLL* kamera=P1
+D|77.7|ANIMASI_KARTU judul='YOU USED A CARD!' target='LOW ROLL for P1 (3 turns)' a_target=0.6 a_latar=0.50 kartu=LOW ROLL* kamera=P1
+D|77.7|ANIMASI_KARTU judul='YOU USED A CARD!' target='LOW ROLL for P1 (3 turns)' a_target=0.5 a_latar=0.40 kartu=LOW ROLL* kamera=P1
+D|77.8|ANIMASI_KARTU judul='YOU USED A CARD!' target='LOW ROLL for P1 (3 turns)' a_target=0.4 a_latar=0.30 kartu=LOW ROLL* kamera=P1
+D|77.8|ANIMASI_KARTU judul='YOU USED A CARD!' target='LOW ROLL for P1 (3 turns)' a_target=0.2 a_latar=0.20 kartu=LOW ROLL* kamera=P1
+D|77.9|ANIMASI_KARTU judul='YOU USED A CARD!' target='LOW ROLL for P1 (3 turns)' a_target=0.1 a_latar=0.10 kartu=LOW ROLL* kamera=P1
+D|77.9|ANIMASI_KARTU judul='YOU USED A CARD!' target='LOW ROLL for P1 (3 turns)' a_target=0.0 a_latar=0.00 kartu=LOW ROLL* kamera=P1
+T|You inflicted LOW ROLL to P1 for 3 Turns!
+D|80.4|TEKS='You inflicted LOW ROLL to P1 for 3 Turns!'
+R|dadu
+D|81.4|(kosong)
+T|Your Roll: 1
+R|jebakan|TombolTrapPetir
+T|Lightning Trap set! (Paralyzes victim)
+R|beli
+T|Waiting for P3...
+G6|pemain3|[10,1900,2][5,1900,2][2,2200,3]
+D|90.2|ANIMASI_KARTU judul='P3'S CARDS' target='LOW ROLL for P1 (3 turns)' a_target=0.0 a_latar=0.00 kartu= kamera=P3
+D|90.3|ANIMASI_KARTU judul='P3'S CARDS' target='LOW ROLL for P1 (3 turns)' a_target=0.0 a_latar=0.20 kartu=LOW ROLL,SHIELD,HIGH ROLL,SWORD LV 3,SWORD LV 3,SWORD LV 3 kamera=P3
+D|90.3|ANIMASI_KARTU judul='P3'S CARDS' target='LOW ROLL for P1 (3 turns)' a_target=0.0 a_latar=0.40 kartu=LOW ROLL,SHIELD,HIGH ROLL,SWORD LV 3,SWORD LV 3,SWORD LV 3 kamera=P3
+D|90.4|ANIMASI_KARTU judul='P3'S CARDS' target='LOW ROLL for P1 (3 turns)' a_target=0.0 a_latar=0.60 kartu=LOW ROLL,SHIELD,HIGH ROLL,SWORD LV 3,SWORD LV 3,SWORD LV 3 kamera=P3
+D|90.4|ANIMASI_KARTU judul='P3'S CARDS' target='LOW ROLL for P1 (3 turns)' a_target=0.0 a_latar=0.80 kartu=LOW ROLL,SHIELD,HIGH ROLL,SWORD LV 3,SWORD LV 3,SWORD LV 3 kamera=P3
+D|91.3|ANIMASI_KARTU judul='P3 USED A CARD!' target='LOW ROLL for P1 (3 turns)' a_target=0.0 a_latar=0.80 kartu=LOW ROLL*,SHIELD,HIGH ROLL,SWORD LV 3,SWORD LV 3,SWORD LV 3 kamera=P3
+D|91.6|ANIMASI_KARTU judul='P3 USED A CARD!' target='LOW ROLL for P1 (3 turns)' a_target=0.0 a_latar=0.80 kartu=LOW ROLL* kamera=P3
+D|93.9|ANIMASI_KARTU judul='P3 USED A CARD!' target='LOW ROLL for P1 (3 turns)' a_target=0.2 a_latar=0.80 kartu=LOW ROLL* kamera=P3
+D|94.0|ANIMASI_KARTU judul='P3 USED A CARD!' target='LOW ROLL for P1 (3 turns)' a_target=0.4 a_latar=0.80 kartu=LOW ROLL* kamera=P3
+D|94.0|ANIMASI_KARTU judul='P3 USED A CARD!' target='LOW ROLL for P1 (3 turns)' a_target=0.6 a_latar=0.80 kartu=LOW ROLL* kamera=P3
+D|94.1|ANIMASI_KARTU judul='P3 USED A CARD!' target='LOW ROLL for P1 (3 turns)' a_target=0.8 a_latar=0.80 kartu=LOW ROLL* kamera=P3
+D|94.1|ANIMASI_KARTU judul='P3 USED A CARD!' target='LOW ROLL for P1 (3 turns)' a_target=1.0 a_latar=0.80 kartu=LOW ROLL* kamera=P3
+D|95.1|ANIMASI_KARTU judul='P3 USED A CARD!' target='LOW ROLL for P1 (3 turns)' a_target=0.9 a_latar=0.70 kartu=LOW ROLL* kamera=P1
+D|95.2|ANIMASI_KARTU judul='P3 USED A CARD!' target='LOW ROLL for P1 (3 turns)' a_target=0.8 a_latar=0.60 kartu=LOW ROLL* kamera=P1
+D|95.2|ANIMASI_KARTU judul='P3 USED A CARD!' target='LOW ROLL for P1 (3 turns)' a_target=0.6 a_latar=0.50 kartu=LOW ROLL* kamera=P1
+D|95.3|ANIMASI_KARTU judul='P3 USED A CARD!' target='LOW ROLL for P1 (3 turns)' a_target=0.5 a_latar=0.40 kartu=LOW ROLL* kamera=P1
+D|95.3|ANIMASI_KARTU judul='P3 USED A CARD!' target='LOW ROLL for P1 (3 turns)' a_target=0.4 a_latar=0.30 kartu=LOW ROLL* kamera=P1
+D|95.4|ANIMASI_KARTU judul='P3 USED A CARD!' target='LOW ROLL for P1 (3 turns)' a_target=0.2 a_latar=0.20 kartu=LOW ROLL* kamera=P1
+D|95.4|ANIMASI_KARTU judul='P3 USED A CARD!' target='LOW ROLL for P1 (3 turns)' a_target=0.1 a_latar=0.10 kartu=LOW ROLL* kamera=P1
+D|95.5|ANIMASI_KARTU judul='P3 USED A CARD!' target='LOW ROLL for P1 (3 turns)' a_target=0.0 a_latar=0.00 kartu=LOW ROLL* kamera=P1
+T|P3 inflicted LOW ROLL to P1 for 3 Turns!
+D|98.0|TEKS='P3 inflicted LOW ROLL to P1 for 3 Turns!'
+T|Waiting for P3...
+D|98.9|(kosong)
+T|P3 Roll: 6
+T|TRAPPED! Geyser Eruption!
+T|Landed randomly! Trapped in a Bubble for 2 turns!
+T|Waiting for P3...
+T|Waiting for P1...
+G7|pemain|[10,1900,2][5,1900,2][11,2200,3]
+D|112.8|ANIMASI_KARTU judul='P1'S CARDS' target='+500 COINS for P1' a_target=0.0 a_latar=0.00 kartu= kamera=P1
+D|112.8|ANIMASI_KARTU judul='P1'S CARDS' target='+500 COINS for P1' a_target=0.0 a_latar=0.20 kartu=SHIELD,HIGH ROLL,SWORD LV 3,SWORD LV 3,SWORD LV 3 kamera=P1
+D|112.9|ANIMASI_KARTU judul='P1'S CARDS' target='+500 COINS for P1' a_target=0.0 a_latar=0.40 kartu=SHIELD,HIGH ROLL,SWORD LV 3,SWORD LV 3,SWORD LV 3 kamera=P1
+D|112.9|ANIMASI_KARTU judul='P1'S CARDS' target='+500 COINS for P1' a_target=0.0 a_latar=0.60 kartu=SHIELD,HIGH ROLL,SWORD LV 3,SWORD LV 3,SWORD LV 3 kamera=P1
+D|113.0|ANIMASI_KARTU judul='P1'S CARDS' target='+500 COINS for P1' a_target=0.0 a_latar=0.80 kartu=SHIELD,HIGH ROLL,SWORD LV 3,SWORD LV 3,SWORD LV 3 kamera=P1
+D|113.9|ANIMASI_KARTU judul='P1 USED A CARD!' target='+500 COINS for P1' a_target=0.0 a_latar=0.80 kartu=SHIELD*,HIGH ROLL,SWORD LV 3,SWORD LV 3,SWORD LV 3 kamera=P1
+D|114.1|ANIMASI_KARTU judul='P1 USED A CARD!' target='+500 COINS for P1' a_target=0.0 a_latar=0.80 kartu=SHIELD* kamera=P1
+D|116.5|ANIMASI_KARTU judul='P1 USED A CARD!' target='+500 COINS for P1' a_target=0.2 a_latar=0.80 kartu=SHIELD* kamera=P1
+D|116.5|ANIMASI_KARTU judul='P1 USED A CARD!' target='+500 COINS for P1' a_target=0.4 a_latar=0.80 kartu=SHIELD* kamera=P1
+D|116.6|ANIMASI_KARTU judul='P1 USED A CARD!' target='+500 COINS for P1' a_target=0.6 a_latar=0.80 kartu=SHIELD* kamera=P1
+D|116.6|ANIMASI_KARTU judul='P1 USED A CARD!' target='+500 COINS for P1' a_target=0.8 a_latar=0.80 kartu=SHIELD* kamera=P1
+D|116.7|ANIMASI_KARTU judul='P1 USED A CARD!' target='+500 COINS for P1' a_target=1.0 a_latar=0.80 kartu=SHIELD* kamera=P1
+D|117.7|ANIMASI_KARTU judul='P1 USED A CARD!' target='+500 COINS for P1' a_target=0.9 a_latar=0.70 kartu=SHIELD* kamera=P1
+D|117.7|ANIMASI_KARTU judul='P1 USED A CARD!' target='+500 COINS for P1' a_target=0.8 a_latar=0.60 kartu=SHIELD* kamera=P1
+D|117.8|ANIMASI_KARTU judul='P1 USED A CARD!' target='+500 COINS for P1' a_target=0.6 a_latar=0.50 kartu=SHIELD* kamera=P1
+D|117.8|ANIMASI_KARTU judul='P1 USED A CARD!' target='+500 COINS for P1' a_target=0.5 a_latar=0.40 kartu=SHIELD* kamera=P1
+D|117.9|ANIMASI_KARTU judul='P1 USED A CARD!' target='+500 COINS for P1' a_target=0.4 a_latar=0.30 kartu=SHIELD* kamera=P1
+D|117.9|ANIMASI_KARTU judul='P1 USED A CARD!' target='+500 COINS for P1' a_target=0.2 a_latar=0.20 kartu=SHIELD* kamera=P1
+D|118.0|ANIMASI_KARTU judul='P1 USED A CARD!' target='+500 COINS for P1' a_target=0.1 a_latar=0.10 kartu=SHIELD* kamera=P1
+D|118.0|ANIMASI_KARTU judul='P1 USED A CARD!' target='+500 COINS for P1' a_target=0.0 a_latar=0.00 kartu=SHIELD* kamera=P1
+T|P1 activated a Shield! (Recovered 500 Coins)
+D|120.5|TEKS='P1 activated a Shield! (Recovered 500 Coins)'
+T|Waiting for P1...
+D|121.5|(kosong)
+D|124.7|ANIMASI_KARTU judul='P1'S CARDS' target='HIGH ROLL for YOU (3 turns)' a_target=0.0 a_latar=0.00 kartu= kamera=P1
+D|124.8|ANIMASI_KARTU judul='P1'S CARDS' target='HIGH ROLL for YOU (3 turns)' a_target=0.0 a_latar=0.20 kartu=HIGH ROLL,SWORD LV 3,SWORD LV 3,SWORD LV 3 kamera=P1
+D|124.8|ANIMASI_KARTU judul='P1'S CARDS' target='HIGH ROLL for YOU (3 turns)' a_target=0.0 a_latar=0.40 kartu=HIGH ROLL,SWORD LV 3,SWORD LV 3,SWORD LV 3 kamera=P1
+D|124.9|ANIMASI_KARTU judul='P1'S CARDS' target='HIGH ROLL for YOU (3 turns)' a_target=0.0 a_latar=0.60 kartu=HIGH ROLL,SWORD LV 3,SWORD LV 3,SWORD LV 3 kamera=P1
+D|124.9|ANIMASI_KARTU judul='P1'S CARDS' target='HIGH ROLL for YOU (3 turns)' a_target=0.0 a_latar=0.80 kartu=HIGH ROLL,SWORD LV 3,SWORD LV 3,SWORD LV 3 kamera=P1
+D|125.8|ANIMASI_KARTU judul='P1 USED A CARD!' target='HIGH ROLL for YOU (3 turns)' a_target=0.0 a_latar=0.80 kartu=HIGH ROLL*,SWORD LV 3,SWORD LV 3,SWORD LV 3 kamera=P1
+D|126.1|ANIMASI_KARTU judul='P1 USED A CARD!' target='HIGH ROLL for YOU (3 turns)' a_target=0.0 a_latar=0.80 kartu=HIGH ROLL* kamera=P1
+D|128.4|ANIMASI_KARTU judul='P1 USED A CARD!' target='HIGH ROLL for YOU (3 turns)' a_target=0.2 a_latar=0.80 kartu=HIGH ROLL* kamera=P1
+D|128.5|ANIMASI_KARTU judul='P1 USED A CARD!' target='HIGH ROLL for YOU (3 turns)' a_target=0.4 a_latar=0.80 kartu=HIGH ROLL* kamera=P1
+D|128.5|ANIMASI_KARTU judul='P1 USED A CARD!' target='HIGH ROLL for YOU (3 turns)' a_target=0.6 a_latar=0.80 kartu=HIGH ROLL* kamera=P1
+D|128.6|ANIMASI_KARTU judul='P1 USED A CARD!' target='HIGH ROLL for YOU (3 turns)' a_target=0.8 a_latar=0.80 kartu=HIGH ROLL* kamera=P1
+D|128.6|ANIMASI_KARTU judul='P1 USED A CARD!' target='HIGH ROLL for YOU (3 turns)' a_target=1.0 a_latar=0.80 kartu=HIGH ROLL* kamera=P1
+D|129.6|ANIMASI_KARTU judul='P1 USED A CARD!' target='HIGH ROLL for YOU (3 turns)' a_target=0.9 a_latar=0.70 kartu=HIGH ROLL* kamera=P2
+D|129.7|ANIMASI_KARTU judul='P1 USED A CARD!' target='HIGH ROLL for YOU (3 turns)' a_target=0.8 a_latar=0.60 kartu=HIGH ROLL* kamera=P2
+D|129.7|ANIMASI_KARTU judul='P1 USED A CARD!' target='HIGH ROLL for YOU (3 turns)' a_target=0.6 a_latar=0.50 kartu=HIGH ROLL* kamera=P2
+D|129.8|ANIMASI_KARTU judul='P1 USED A CARD!' target='HIGH ROLL for YOU (3 turns)' a_target=0.5 a_latar=0.40 kartu=HIGH ROLL* kamera=P2
+D|129.8|ANIMASI_KARTU judul='P1 USED A CARD!' target='HIGH ROLL for YOU (3 turns)' a_target=0.4 a_latar=0.30 kartu=HIGH ROLL* kamera=P2
+D|129.9|ANIMASI_KARTU judul='P1 USED A CARD!' target='HIGH ROLL for YOU (3 turns)' a_target=0.2 a_latar=0.20 kartu=HIGH ROLL* kamera=P2
+D|129.9|ANIMASI_KARTU judul='P1 USED A CARD!' target='HIGH ROLL for YOU (3 turns)' a_target=0.1 a_latar=0.10 kartu=HIGH ROLL* kamera=P2
+D|130.0|ANIMASI_KARTU judul='P1 USED A CARD!' target='HIGH ROLL for YOU (3 turns)' a_target=0.0 a_latar=0.00 kartu=HIGH ROLL* kamera=P2
+T|P1 inflicted HIGH ROLL to You for 3 Turns!
+D|132.5|TEKS='P1 inflicted HIGH ROLL to You for 3 Turns!'
+T|Waiting for P1...
+D|133.5|(kosong)
+T|P1 Roll: 1
+T|Waiting for P1...
+T|P1 set a Wind Trap!
+T|Waiting for P1...
+G8|musuh|[11,2100,1][5,1900,2][11,2200,3]
+R|use_card
+D|145.3|ANIMASI_KARTU judul='YOUR CARDS / Choose one to use!' target='?' a_target=0.0 a_latar=-1.00 kartu=SHIELD,HIGH ROLL,SWORD LV 3,SWORD LV 3,SWORD LV 3,CANCEL kamera=P2
+R|pilih_kartu|SHIELD
+PAKAI_KARTU slot=1 kartu=SHIELD
+D|145.4|ANIMASI_KARTU judul='YOUR CARDS' target='+500 COINS for YOU' a_target=0.0 a_latar=0.00 kartu= kamera=P2
+D|145.4|ANIMASI_KARTU judul='YOUR CARDS' target='+500 COINS for YOU' a_target=0.0 a_latar=0.20 kartu=SHIELD,HIGH ROLL,SWORD LV 3,SWORD LV 3,SWORD LV 3 kamera=P2
+D|145.5|ANIMASI_KARTU judul='YOUR CARDS' target='+500 COINS for YOU' a_target=0.0 a_latar=0.40 kartu=SHIELD,HIGH ROLL,SWORD LV 3,SWORD LV 3,SWORD LV 3 kamera=P2
+D|145.5|ANIMASI_KARTU judul='YOUR CARDS' target='+500 COINS for YOU' a_target=0.0 a_latar=0.60 kartu=SHIELD,HIGH ROLL,SWORD LV 3,SWORD LV 3,SWORD LV 3 kamera=P2
+D|145.6|ANIMASI_KARTU judul='YOUR CARDS' target='+500 COINS for YOU' a_target=0.0 a_latar=0.80 kartu=SHIELD,HIGH ROLL,SWORD LV 3,SWORD LV 3,SWORD LV 3 kamera=P2
+D|146.5|ANIMASI_KARTU judul='YOU USED A CARD!' target='+500 COINS for YOU' a_target=0.0 a_latar=0.80 kartu=SHIELD*,HIGH ROLL,SWORD LV 3,SWORD LV 3,SWORD LV 3 kamera=P2
+D|146.7|ANIMASI_KARTU judul='YOU USED A CARD!' target='+500 COINS for YOU' a_target=0.0 a_latar=0.80 kartu=SHIELD* kamera=P2
+D|149.1|ANIMASI_KARTU judul='YOU USED A CARD!' target='+500 COINS for YOU' a_target=0.2 a_latar=0.80 kartu=SHIELD* kamera=P2
+D|149.1|ANIMASI_KARTU judul='YOU USED A CARD!' target='+500 COINS for YOU' a_target=0.4 a_latar=0.80 kartu=SHIELD* kamera=P2
+D|149.2|ANIMASI_KARTU judul='YOU USED A CARD!' target='+500 COINS for YOU' a_target=0.6 a_latar=0.80 kartu=SHIELD* kamera=P2
+D|149.2|ANIMASI_KARTU judul='YOU USED A CARD!' target='+500 COINS for YOU' a_target=0.8 a_latar=0.80 kartu=SHIELD* kamera=P2
+D|149.3|ANIMASI_KARTU judul='YOU USED A CARD!' target='+500 COINS for YOU' a_target=1.0 a_latar=0.80 kartu=SHIELD* kamera=P2
+D|150.3|ANIMASI_KARTU judul='YOU USED A CARD!' target='+500 COINS for YOU' a_target=0.9 a_latar=0.70 kartu=SHIELD* kamera=P2
+D|150.3|ANIMASI_KARTU judul='YOU USED A CARD!' target='+500 COINS for YOU' a_target=0.8 a_latar=0.60 kartu=SHIELD* kamera=P2
+D|150.4|ANIMASI_KARTU judul='YOU USED A CARD!' target='+500 COINS for YOU' a_target=0.6 a_latar=0.50 kartu=SHIELD* kamera=P2
+D|150.4|ANIMASI_KARTU judul='YOU USED A CARD!' target='+500 COINS for YOU' a_target=0.5 a_latar=0.40 kartu=SHIELD* kamera=P2
+D|150.5|ANIMASI_KARTU judul='YOU USED A CARD!' target='+500 COINS for YOU' a_target=0.4 a_latar=0.30 kartu=SHIELD* kamera=P2
+D|150.5|ANIMASI_KARTU judul='YOU USED A CARD!' target='+500 COINS for YOU' a_target=0.2 a_latar=0.20 kartu=SHIELD* kamera=P2
+D|150.6|ANIMASI_KARTU judul='YOU USED A CARD!' target='+500 COINS for YOU' a_target=0.1 a_latar=0.10 kartu=SHIELD* kamera=P2
+D|150.6|ANIMASI_KARTU judul='YOU USED A CARD!' target='+500 COINS for YOU' a_target=0.0 a_latar=0.00 kartu=SHIELD* kamera=P2
+T|Shield activated! (Recovered 500 Coins)
+D|153.1|TEKS='Shield activated! (Recovered 500 Coins)'
+R|use_card
+D|154.1|ANIMASI_KARTU judul='YOUR CARDS / Choose one to use!' target='?' a_target=0.0 a_latar=-1.00 kartu=HIGH ROLL,SWORD LV 3,SWORD LV 3,SWORD LV 3,CANCEL kamera=P2 | TEKS='Shield activated! (Recovered 500 Coins)'
+R|pilih_kartu|HIGH ROLL
+PAKAI_KARTU slot=1 kartu=HIGH ROLL
+D|154.2|TEKS='Shield activated! (Recovered 500 Coins)'
+R|target_kartu|Use on P1
+TARGET_KARTU slot=1 Use on P1
+D|154.2|ANIMASI_KARTU judul='YOUR CARDS' target='HIGH ROLL for P1 (3 turns)' a_target=0.0 a_latar=0.00 kartu= kamera=P2 | TEKS='Shield activated! (Recovered 500 Coins)'
+D|154.3|ANIMASI_KARTU judul='YOUR CARDS' target='HIGH ROLL for P1 (3 turns)' a_target=0.0 a_latar=0.20 kartu=HIGH ROLL,SWORD LV 3,SWORD LV 3,SWORD LV 3 kamera=P2 | TEKS='Shield activated! (Recovered 500 Coins)'
+D|154.3|ANIMASI_KARTU judul='YOUR CARDS' target='HIGH ROLL for P1 (3 turns)' a_target=0.0 a_latar=0.40 kartu=HIGH ROLL,SWORD LV 3,SWORD LV 3,SWORD LV 3 kamera=P2 | TEKS='Shield activated! (Recovered 500 Coins)'
+D|154.4|ANIMASI_KARTU judul='YOUR CARDS' target='HIGH ROLL for P1 (3 turns)' a_target=0.0 a_latar=0.60 kartu=HIGH ROLL,SWORD LV 3,SWORD LV 3,SWORD LV 3 kamera=P2 | TEKS='Shield activated! (Recovered 500 Coins)'
+D|154.4|ANIMASI_KARTU judul='YOUR CARDS' target='HIGH ROLL for P1 (3 turns)' a_target=0.0 a_latar=0.80 kartu=HIGH ROLL,SWORD LV 3,SWORD LV 3,SWORD LV 3 kamera=P2 | TEKS='Shield activated! (Recovered 500 Coins)'
+D|155.3|ANIMASI_KARTU judul='YOU USED A CARD!' target='HIGH ROLL for P1 (3 turns)' a_target=0.0 a_latar=0.80 kartu=HIGH ROLL*,SWORD LV 3,SWORD LV 3,SWORD LV 3 kamera=P2 | TEKS='Shield activated! (Recovered 500 Coins)'
+D|155.6|ANIMASI_KARTU judul='YOU USED A CARD!' target='HIGH ROLL for P1 (3 turns)' a_target=0.0 a_latar=0.80 kartu=HIGH ROLL* kamera=P2 | TEKS='Shield activated! (Recovered 500 Coins)'
+D|157.9|ANIMASI_KARTU judul='YOU USED A CARD!' target='HIGH ROLL for P1 (3 turns)' a_target=0.2 a_latar=0.80 kartu=HIGH ROLL* kamera=P2 | TEKS='Shield activated! (Recovered 500 Coins)'
+D|158.0|ANIMASI_KARTU judul='YOU USED A CARD!' target='HIGH ROLL for P1 (3 turns)' a_target=0.4 a_latar=0.80 kartu=HIGH ROLL* kamera=P2 | TEKS='Shield activated! (Recovered 500 Coins)'
+D|158.0|ANIMASI_KARTU judul='YOU USED A CARD!' target='HIGH ROLL for P1 (3 turns)' a_target=0.6 a_latar=0.80 kartu=HIGH ROLL* kamera=P2 | TEKS='Shield activated! (Recovered 500 Coins)'
+D|158.1|ANIMASI_KARTU judul='YOU USED A CARD!' target='HIGH ROLL for P1 (3 turns)' a_target=0.8 a_latar=0.80 kartu=HIGH ROLL* kamera=P2 | TEKS='Shield activated! (Recovered 500 Coins)'
+D|158.1|ANIMASI_KARTU judul='YOU USED A CARD!' target='HIGH ROLL for P1 (3 turns)' a_target=1.0 a_latar=0.80 kartu=HIGH ROLL* kamera=P2 | TEKS='Shield activated! (Recovered 500 Coins)'
+D|159.1|ANIMASI_KARTU judul='YOU USED A CARD!' target='HIGH ROLL for P1 (3 turns)' a_target=0.9 a_latar=0.70 kartu=HIGH ROLL* kamera=P1 | TEKS='Shield activated! (Recovered 500 Coins)'
+D|159.2|ANIMASI_KARTU judul='YOU USED A CARD!' target='HIGH ROLL for P1 (3 turns)' a_target=0.8 a_latar=0.60 kartu=HIGH ROLL* kamera=P1 | TEKS='Shield activated! (Recovered 500 Coins)'
+D|159.2|ANIMASI_KARTU judul='YOU USED A CARD!' target='HIGH ROLL for P1 (3 turns)' a_target=0.6 a_latar=0.50 kartu=HIGH ROLL* kamera=P1 | TEKS='Shield activated! (Recovered 500 Coins)'
+D|159.3|ANIMASI_KARTU judul='YOU USED A CARD!' target='HIGH ROLL for P1 (3 turns)' a_target=0.5 a_latar=0.40 kartu=HIGH ROLL* kamera=P1 | TEKS='Shield activated! (Recovered 500 Coins)'
+D|159.3|ANIMASI_KARTU judul='YOU USED A CARD!' target='HIGH ROLL for P1 (3 turns)' a_target=0.4 a_latar=0.30 kartu=HIGH ROLL* kamera=P1 | TEKS='Shield activated! (Recovered 500 Coins)'
+D|159.4|ANIMASI_KARTU judul='YOU USED A CARD!' target='HIGH ROLL for P1 (3 turns)' a_target=0.2 a_latar=0.20 kartu=HIGH ROLL* kamera=P1 | TEKS='Shield activated! (Recovered 500 Coins)'
+D|159.4|ANIMASI_KARTU judul='YOU USED A CARD!' target='HIGH ROLL for P1 (3 turns)' a_target=0.1 a_latar=0.10 kartu=HIGH ROLL* kamera=P1 | TEKS='Shield activated! (Recovered 500 Coins)'
+D|159.5|ANIMASI_KARTU judul='YOU USED A CARD!' target='HIGH ROLL for P1 (3 turns)' a_target=0.0 a_latar=0.00 kartu=HIGH ROLL* kamera=P1 | TEKS='Shield activated! (Recovered 500 Coins)'
+T|You inflicted HIGH ROLL to P1 for 3 Turns!
+D|162.0|TEKS='You inflicted HIGH ROLL to P1 for 3 Turns!'
+R|dadu
+D|163.0|(kosong)
+T|Your Roll: 11
+T|FIRE TRAP! Burning for 3 turns!
+T|LIGHTNING TRAP! Paralyzed & Stopped!
+T|P1's Tile! Give Up (Pay 100) or Fight?
+R|menyerah
+T|You gave up. Paid fine: 100 Coins.
+T|Waiting for P3...
+G9|pemain3|[11,2200,1][10,2300,2][11,2200,3]
+T|P3 Roll: 5
+T|Waiting for P3...
+T|Waiting for P1...
+G10|pemain|[11,2200,1][10,2300,2][16,2200,3]
+T|P1 Roll: 10
+T|P1 landed on a Card Tile!
+D|200.7|TEKS='P1 landed on a Card Tile!'
+D|201.5|ANIMASI_KARTU judul='P1 TURN / P1 IS CHOOSING A CARD...' target='Tile Duel' a_target=1.0 a_latar=-1.00 kartu=,, kamera=P1 | TEKS='P1 landed on a Card Tile!'
+D|201.6|ANIMASI_KARTU judul='CARD REVEALED!' target='Tile Duel' a_target=1.0 a_latar=-1.00 kartu=,, kamera=P1 | TEKS='P1 landed on a Card Tile!'
+D|201.8|ANIMASI_KARTU judul='CARD REVEALED!' target='Tile Duel' a_target=1.0 a_latar=-1.00 kartu=, kamera=P1 | TEKS='P1 landed on a Card Tile!'
+D|201.8|ANIMASI_KARTU judul='CARD REVEALED!' target='Tile Duel' a_target=1.0 a_latar=-1.00 kartu=,BLESSING!*, kamera=P1 | TEKS='P1 landed on a Card Tile!'
+D|204.5|TEKS='P1 landed on a Card Tile!'
+T|P1 collected [img=28]res://permata/permata_hijau.png[/img] Gem!
+D|213.3|(kosong)
+T|Waiting for P1...
+T|You are burning! Lost 40 Coins. (2 turns left)
+T|You are paralyzed! Cannot move this turn.
+T|Waiting for P3...
+G11|pemain3|[21,2210,3][10,2260,2][16,2200,3]
+T|P3 Roll: 4
+T|Waiting for P3...
+T|P3 set a Lightning Trap!
+T|Waiting for P3...
+T|Waiting for P1...
+G12|pemain|[21,2210,3][10,2260,2][20,1900,2]
+T|P1 Roll: 10
+T|P1 passed Start! Bonus +530
+T|WIND TRAP! Coins scattered!
+T|LIGHTNING TRAP! Paralyzed & Stopped!
+T|Waiting for P1...
+T|P1 gave up. Paid fine: 100 Coins.
+T|Your dice effect worn off!
+T|You are burning! Lost 40 Coins. (1 turns left)
+G13|musuh|[5,2444,6][10,2320,2][20,1900,2]
+R|dadu
+T|Your Roll: 5
+T|WIND TRAP! Coins scattered!
+T|You found 51 Coins!
+T|You landed on a Card Tile!
+D|270.3|TEKS='You landed on a Card Tile!'
+D|271.1|ANIMASI_KARTU judul='YOUR TURN / CHOOSE A CARD!' target='Tile Duel' a_target=1.0 a_latar=-1.00 kartu=,, kamera=P2 | TEKS='You landed on a Card Tile!'
+R|gacha|0
+D|271.2|ANIMASI_KARTU judul='CARD REVEALED!' target='Tile Duel' a_target=1.0 a_latar=-1.00 kartu=,, kamera=P2 | TEKS='You landed on a Card Tile!'
+D|271.3|ANIMASI_KARTU judul='CARD REVEALED!' target='Tile Duel' a_target=1.0 a_latar=-1.00 kartu=, kamera=P2 | TEKS='You landed on a Card Tile!'
+D|271.4|ANIMASI_KARTU judul='CARD REVEALED!' target='Tile Duel' a_target=1.0 a_latar=-1.00 kartu=UnLucky!,, kamera=P2 | TEKS='You landed on a Card Tile!'
+D|274.1|TEKS='You landed on a Card Tile!'
+T|You found 51 Coins!
+D|276.9|(kosong)
+R|jebakan|TombolTrapAngin
+T|Wind Trap set! Wait for victim.
+R|beli
+T|Waiting for P3...
+G14|pemain3|[5,2444,6][15,1590,1][20,1900,2]
+T|P3 Roll: 5
+T|P3 collected [img=28]res://permata/permata_hijau.png[/img] Gem!
+T|P3 found 77 Coins!
+T|P3 passed Start! Bonus +520
+T|Waiting for P3...
+T|P3 set a Lightning Trap!
+T|Waiting for P3...
+T|P1 dice effect worn off!
+T|P1 is paralyzed! Cannot move this turn.
+T|You are burning! Lost 40 Coins. (0 turns left)
+G15|musuh|[5,2454,6][15,1550,1][1,2197,4]
+R|dadu
+T|Your Roll: 4
+R|beli
+T|Waiting for P3...
+G16|pemain3|[5,2454,6][19,1250,1][1,2197,4]
+T|P3 Roll: 2
+T|P3 found 77 Coins!
+T|Waiting for P3...
+T|P3 set a Wind Trap!
+T|Waiting for P3...
+T|Waiting for P1...
+G17|pemain|[5,2454,6][19,1250,1][3,1974,3]
+T|P1 Roll: 2
+T|P1 found 77 Coins!
+T|Waiting for P1...
+T|P1 set a Fire Trap!
+T|Waiting for P1...
+G18|musuh|[7,2231,5][19,1250,1][3,1974,3]
+R|dadu
+T|Your Roll: 4
+T|LIGHTNING TRAP! Paralyzed & Stopped!
+T|P3's Tile! Give Up (Pay 100) or Fight?
+R|menyerah
+T|You gave up. Paid fine: 100 Coins.
+T|Waiting for P3...
+G19|pemain3|[7,2231,5][20,1150,1][3,2074,3]
+D|349.9|ANIMASI_KARTU judul='P3'S CARDS' target='+500 COINS for P3' a_target=0.0 a_latar=0.00 kartu= kamera=P3
+D|349.9|ANIMASI_KARTU judul='P3'S CARDS' target='+500 COINS for P3' a_target=0.0 a_latar=0.20 kartu=SHIELD,HIGH ROLL,SWORD LV 3,SWORD LV 3,SWORD LV 3 kamera=P3
+D|350.0|ANIMASI_KARTU judul='P3'S CARDS' target='+500 COINS for P3' a_target=0.0 a_latar=0.40 kartu=SHIELD,HIGH ROLL,SWORD LV 3,SWORD LV 3,SWORD LV 3 kamera=P3
+D|350.0|ANIMASI_KARTU judul='P3'S CARDS' target='+500 COINS for P3' a_target=0.0 a_latar=0.60 kartu=SHIELD,HIGH ROLL,SWORD LV 3,SWORD LV 3,SWORD LV 3 kamera=P3
+D|350.1|ANIMASI_KARTU judul='P3'S CARDS' target='+500 COINS for P3' a_target=0.0 a_latar=0.80 kartu=SHIELD,HIGH ROLL,SWORD LV 3,SWORD LV 3,SWORD LV 3 kamera=P3
+D|351.0|ANIMASI_KARTU judul='P3 USED A CARD!' target='+500 COINS for P3' a_target=0.0 a_latar=0.80 kartu=SHIELD*,HIGH ROLL,SWORD LV 3,SWORD LV 3,SWORD LV 3 kamera=P3
+D|351.2|ANIMASI_KARTU judul='P3 USED A CARD!' target='+500 COINS for P3' a_target=0.0 a_latar=0.80 kartu=SHIELD* kamera=P3
+D|353.6|ANIMASI_KARTU judul='P3 USED A CARD!' target='+500 COINS for P3' a_target=0.2 a_latar=0.80 kartu=SHIELD* kamera=P3
+D|353.6|ANIMASI_KARTU judul='P3 USED A CARD!' target='+500 COINS for P3' a_target=0.4 a_latar=0.80 kartu=SHIELD* kamera=P3
+D|353.7|ANIMASI_KARTU judul='P3 USED A CARD!' target='+500 COINS for P3' a_target=0.6 a_latar=0.80 kartu=SHIELD* kamera=P3
+D|353.7|ANIMASI_KARTU judul='P3 USED A CARD!' target='+500 COINS for P3' a_target=0.8 a_latar=0.80 kartu=SHIELD* kamera=P3
+D|353.8|ANIMASI_KARTU judul='P3 USED A CARD!' target='+500 COINS for P3' a_target=1.0 a_latar=0.80 kartu=SHIELD* kamera=P3
+D|354.8|ANIMASI_KARTU judul='P3 USED A CARD!' target='+500 COINS for P3' a_target=0.9 a_latar=0.70 kartu=SHIELD* kamera=P3
+D|354.8|ANIMASI_KARTU judul='P3 USED A CARD!' target='+500 COINS for P3' a_target=0.8 a_latar=0.60 kartu=SHIELD* kamera=P3
+D|354.9|ANIMASI_KARTU judul='P3 USED A CARD!' target='+500 COINS for P3' a_target=0.6 a_latar=0.50 kartu=SHIELD* kamera=P3
+D|354.9|ANIMASI_KARTU judul='P3 USED A CARD!' target='+500 COINS for P3' a_target=0.5 a_latar=0.40 kartu=SHIELD* kamera=P3
+D|355.0|ANIMASI_KARTU judul='P3 USED A CARD!' target='+500 COINS for P3' a_target=0.4 a_latar=0.30 kartu=SHIELD* kamera=P3
+D|355.0|ANIMASI_KARTU judul='P3 USED A CARD!' target='+500 COINS for P3' a_target=0.2 a_latar=0.20 kartu=SHIELD* kamera=P3
+D|355.1|ANIMASI_KARTU judul='P3 USED A CARD!' target='+500 COINS for P3' a_target=0.1 a_latar=0.10 kartu=SHIELD* kamera=P3
+D|355.1|ANIMASI_KARTU judul='P3 USED A CARD!' target='+500 COINS for P3' a_target=0.0 a_latar=0.00 kartu=SHIELD* kamera=P3
+T|P3 activated a Shield! (Recovered 500 Coins)
+D|357.6|TEKS='P3 activated a Shield! (Recovered 500 Coins)'
+T|Waiting for P3...
+D|358.6|(kosong)
+D|358.7|ANIMASI_KARTU judul='P3'S CARDS' target='HIGH ROLL for P1 (3 turns)' a_target=0.0 a_latar=0.00 kartu= kamera=P3
+D|358.8|ANIMASI_KARTU judul='P3'S CARDS' target='HIGH ROLL for P1 (3 turns)' a_target=0.0 a_latar=0.20 kartu=HIGH ROLL,SWORD LV 3,SWORD LV 3,SWORD LV 3 kamera=P3
+D|358.8|ANIMASI_KARTU judul='P3'S CARDS' target='HIGH ROLL for P1 (3 turns)' a_target=0.0 a_latar=0.40 kartu=HIGH ROLL,SWORD LV 3,SWORD LV 3,SWORD LV 3 kamera=P3
+D|358.9|ANIMASI_KARTU judul='P3'S CARDS' target='HIGH ROLL for P1 (3 turns)' a_target=0.0 a_latar=0.60 kartu=HIGH ROLL,SWORD LV 3,SWORD LV 3,SWORD LV 3 kamera=P3
+D|358.9|ANIMASI_KARTU judul='P3'S CARDS' target='HIGH ROLL for P1 (3 turns)' a_target=0.0 a_latar=0.80 kartu=HIGH ROLL,SWORD LV 3,SWORD LV 3,SWORD LV 3 kamera=P3
+D|359.8|ANIMASI_KARTU judul='P3 USED A CARD!' target='HIGH ROLL for P1 (3 turns)' a_target=0.0 a_latar=0.80 kartu=HIGH ROLL*,SWORD LV 3,SWORD LV 3,SWORD LV 3 kamera=P3
+D|360.1|ANIMASI_KARTU judul='P3 USED A CARD!' target='HIGH ROLL for P1 (3 turns)' a_target=0.0 a_latar=0.80 kartu=HIGH ROLL* kamera=P3
+D|362.4|ANIMASI_KARTU judul='P3 USED A CARD!' target='HIGH ROLL for P1 (3 turns)' a_target=0.2 a_latar=0.80 kartu=HIGH ROLL* kamera=P3
+D|362.5|ANIMASI_KARTU judul='P3 USED A CARD!' target='HIGH ROLL for P1 (3 turns)' a_target=0.4 a_latar=0.80 kartu=HIGH ROLL* kamera=P3
+D|362.5|ANIMASI_KARTU judul='P3 USED A CARD!' target='HIGH ROLL for P1 (3 turns)' a_target=0.6 a_latar=0.80 kartu=HIGH ROLL* kamera=P3
+D|362.6|ANIMASI_KARTU judul='P3 USED A CARD!' target='HIGH ROLL for P1 (3 turns)' a_target=0.8 a_latar=0.80 kartu=HIGH ROLL* kamera=P3
+D|362.6|ANIMASI_KARTU judul='P3 USED A CARD!' target='HIGH ROLL for P1 (3 turns)' a_target=1.0 a_latar=0.80 kartu=HIGH ROLL* kamera=P3
+D|363.6|ANIMASI_KARTU judul='P3 USED A CARD!' target='HIGH ROLL for P1 (3 turns)' a_target=0.9 a_latar=0.70 kartu=HIGH ROLL* kamera=P1
+D|363.7|ANIMASI_KARTU judul='P3 USED A CARD!' target='HIGH ROLL for P1 (3 turns)' a_target=0.8 a_latar=0.60 kartu=HIGH ROLL* kamera=P1
+D|363.7|ANIMASI_KARTU judul='P3 USED A CARD!' target='HIGH ROLL for P1 (3 turns)' a_target=0.6 a_latar=0.50 kartu=HIGH ROLL* kamera=P1
+D|363.8|ANIMASI_KARTU judul='P3 USED A CARD!' target='HIGH ROLL for P1 (3 turns)' a_target=0.5 a_latar=0.40 kartu=HIGH ROLL* kamera=P1
+D|363.8|ANIMASI_KARTU judul='P3 USED A CARD!' target='HIGH ROLL for P1 (3 turns)' a_target=0.4 a_latar=0.30 kartu=HIGH ROLL* kamera=P1
+D|363.9|ANIMASI_KARTU judul='P3 USED A CARD!' target='HIGH ROLL for P1 (3 turns)' a_target=0.2 a_latar=0.20 kartu=HIGH ROLL* kamera=P1
+D|363.9|ANIMASI_KARTU judul='P3 USED A CARD!' target='HIGH ROLL for P1 (3 turns)' a_target=0.1 a_latar=0.10 kartu=HIGH ROLL* kamera=P1
+D|364.0|ANIMASI_KARTU judul='P3 USED A CARD!' target='HIGH ROLL for P1 (3 turns)' a_target=0.0 a_latar=0.00 kartu=HIGH ROLL* kamera=P1
+T|P3 inflicted HIGH ROLL to P1 for 3 Turns!
+D|366.5|TEKS='P3 inflicted HIGH ROLL to P1 for 3 Turns!'
+T|Waiting for P3...
+D|367.4|(kosong)
+T|P3 Roll: 5
+T|P3 found 51 Coins!
+T|FIRE TRAP! Burning for 3 turns!
+T|Waiting for P3...
+T|P3 set a Wind Trap!
+T|Waiting for P3...
+T|Waiting for P1...
+G20|pemain|[7,2231,5][20,1150,1][8,2325,2]
+T|P1 Roll: 11
+T|WIND TRAP! Coins scattered!
+T|P1 found 55 Coins!
+T|P1 landed on a Card Tile!
+D|399.1|TEKS='P1 landed on a Card Tile!'
+D|399.9|ANIMASI_KARTU judul='P1 TURN / P1 IS CHOOSING A CARD...' target='Tile Duel' a_target=1.0 a_latar=-1.00 kartu=,, kamera=P1 | TEKS='P1 landed on a Card Tile!'
+D|399.9|ANIMASI_KARTU judul='CARD REVEALED!' target='Tile Duel' a_target=1.0 a_latar=-1.00 kartu=,, kamera=P1 | TEKS='P1 landed on a Card Tile!'
+D|400.1|ANIMASI_KARTU judul='CARD REVEALED!' target='Tile Duel' a_target=1.0 a_latar=-1.00 kartu=, kamera=P1 | TEKS='P1 landed on a Card Tile!'
+D|400.2|ANIMASI_KARTU judul='CARD REVEALED!' target='Tile Duel' a_target=1.0 a_latar=-1.00 kartu=CURSE,, kamera=P1 | TEKS='P1 landed on a Card Tile!'
+D|402.9|TEKS='P1 landed on a Card Tile!'
+T|WIND TRAP! Coins scattered!
+D|405.6|(kosong)
+T|P1 found 39 Coins!
+T|P1 found 55 Coins!
+T|P1 found 39 Coins!
+T|Waiting for P1...
+T|P1 set a Wind Trap!
+T|Waiting for P1...
+T|You are paralyzed! Cannot move this turn.
+T|P3 is burning! Lost 80 Coins. (2 turns left)
+T|Waiting for P3...
+G21|pemain3|[18,1814,3][20,1150,1][8,2245,2]
+T|P3 Roll: 1
+T|Waiting for P3...
+T|P3 set a Lightning Trap!
+T|Waiting for P3...
+T|Waiting for P1...
+G22|pemain|[18,1814,3][20,1150,1][9,1945,1]
+T|P1 Roll: 10
+T|P1 found 51 Coins!
+T|P1 collected [img=28]res://permata/permata_hijau.png[/img] Gem!
+T|P1 found 55 Coins!
+T|P1 passed Start! Bonus +550
+T|LIGHTNING TRAP! Paralyzed & Stopped!
+T|Waiting for P1...
+T|P1 gave up. Paid fine: 100 Coins.
+G23|musuh|[1,2370,6][20,1150,1][9,2045,1]
+R|dadu
+T|Your Roll: 2
+T|You collected [img=28]res://permata/permata_hijau.png[/img] Gem!
+R|beli
+T|P3 is burning! Lost 80 Coins. (1 turns left)
+T|Waiting for P3...
+G24|pemain3|[1,2390,6][22,850,1][9,1965,1]
+T|P3 Roll: 6
+T|P3 landed on a Card Tile!
+D|475.9|TEKS='P3 landed on a Card Tile!'
+D|476.7|ANIMASI_KARTU judul='P3 TURN / P3 IS CHOOSING A CARD...' target='Tile Duel' a_target=1.0 a_latar=-1.00 kartu=,, kamera=P3 | TEKS='P3 landed on a Card Tile!'
+D|476.7|ANIMASI_KARTU judul='CARD REVEALED!' target='Tile Duel' a_target=1.0 a_latar=-1.00 kartu=,, kamera=P3 | TEKS='P3 landed on a Card Tile!'
+D|476.9|ANIMASI_KARTU judul='CARD REVEALED!' target='Tile Duel' a_target=1.0 a_latar=-1.00 kartu=, kamera=P3 | TEKS='P3 landed on a Card Tile!'
+D|477.0|ANIMASI_KARTU judul='CARD REVEALED!' target='Tile Duel' a_target=1.0 a_latar=-1.00 kartu=,,SHIELD* kamera=P3 | TEKS='P3 landed on a Card Tile!'
+D|479.6|ANIMASI_KARTU judul='P3 INVENTORY FULL! / P3 IS DISCARDING 1 CARD...' target='?' a_target=0.0 a_latar=-1.00 kartu=SWORD LV 3,SWORD LV 3,SWORD LV 3,SHIELD kamera=P3 | TEKS='P3 landed on a Card Tile!'
+D|479.7|ANIMASI_KARTU judul='CARD DISCARDED!' target='?' a_target=0.0 a_latar=-1.00 kartu=SWORD LV 3,SWORD LV 3,SWORD LV 3,SHIELD kamera=P3 | TEKS='P3 landed on a Card Tile!'
+D|480.0|ANIMASI_KARTU judul='CARD DISCARDED!' target='?' a_target=0.0 a_latar=-1.00 kartu=SWORD LV 3,SWORD LV 3,SHIELD kamera=P3 | TEKS='P3 landed on a Card Tile!'
+D|480.5|TEKS='P3 landed on a Card Tile!'
+T|Waiting for P3...
+D|483.8|(kosong)
+D|483.9|KARTU_UI pedang=2 judul='ATTACK PHASE! / P3 is choosing a Sword Card...'
+D|483.9|KARTU_UI pedang=2 judul='P3 SAVED THE SWORD CARD! / No bonus this time'
+D|485.4|DUEL fase=PILIH_PEMAIN segelM=0 segelP=0 tonton=0 judul='CHOOSE YOUR ELEMENT!' | KARTU_UI pedang=2 judul='P3 SAVED THE SWORD CARD! / No bonus this time'
+SKENARIO: client1 keluar paksa saat PILIH ELEMEN duel (giliran 24)

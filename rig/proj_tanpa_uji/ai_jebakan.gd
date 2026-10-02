@@ -24,10 +24,10 @@ const HITUNG_2D6 := {2: 1, 3: 2, 4: 3, 5: 4, 6: 5, 7: 6, 8: 5, 9: 4, 10: 3, 11: 
 # Nilai minimal supaya AI mau memasang jebakan (bagian 6 langkah 4). Angka
 # awal -- disetel Opus di uji keseimbangan (K11 / U3, target: AI memasang
 # 2-6 jebakan per Quick 2 pemain).
-const AMBANG_NILAI := 40.0 # U3: 80 -> 50 (80 = 1,3 jebakan/AI/Quick 2P, di bawah target)
+const AMBANG_NILAI := 40.0 # U3: 80 -> 50 (80 = 1,3 jebakan/AI/Quick 2P, di bawah target); F5 r1: 50 -> 40 (jebakan/AI 1,88 < 2, P14)
 # Peluang AI benar-benar memasang walau nilainya cukup (1-100, mesin_acak) --
 # supaya AI tidak SELALU memasang begitu nilainya lewat ambang.
-const AMBANG_PELUANG := 90 # U3: 70 -> 80
+const AMBANG_PELUANG := 90 # U3: 70 -> 80; F5 r2: 80 -> 90 (jebakan/AI 1,99 -> 2,18, P14)
 # D4 (B-d/K17a, 26-09): NILAI_PETIR_LUMPUH (150, flat) DIHAPUS -- diganti 2
 # angka level-sensitif: dasar BERHENTI selalu kena (petir tetap menghentikan
 # gerakan korban meski Grounded tinggi) + tambahan PER GILIRAN sisa lumpuh
