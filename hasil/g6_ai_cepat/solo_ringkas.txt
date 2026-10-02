@@ -1,0 +1,18 @@
+G6 tombol AI cepat (solo). Rig: uji_nyata.gd opsi ai_cepat=1 (robot menekan >>: hidup di awal, mati giliran 24, hidup lagi 34), ai_cepat=0 (ukur saja, tombol tidak ditekan), ai_cepat=ingat (tidak menekan; HOME dipakai ulang -> profil harus sudah hidup).
+Skala dasar rig = 4.0. Harapan per frame: 2x (8.0) hanya jika profil hidup + giliran AI + tak ada layar duel/menu aksi/spanduk event; selain itu Quick 1,5x / Classic 1x. 'salah' = selisih >= 3 frame berturut-turut.
+'frame' = frame permainan yang dijalankan (--fixed-fps 60): makin sedikit = makin cepat waktu nyata di HP (ukuran kecepatan; run ON vs OFF tidak persis sama lintasannya karena pemain manusia robot tidak deterministik).
+
+g6ac_l1_alam_s601: mode=1 klik=3 profil_akhir=true berkas_akhir=true frame=12725 frame_2x=4146 frame_beda=50 salah=0 beruntun_maks=2 giliran=61 detik_game=1125 detik_nyata=11.6 err=0
+g6ac_l1_alam_s602: mode=1 klik=3 profil_akhir=true berkas_akhir=true frame=14473 frame_2x=3284 frame_beda=57 salah=0 beruntun_maks=2 giliran=61 detik_game=1184 detik_nyata=13.6 err=0
+g6ac_l3_alam_s611: mode=1 klik=3 profil_akhir=true berkas_akhir=true frame=16147 frame_2x=5757 frame_beda=39 salah=0 beruntun_maks=1 giliran=61 detik_game=1460 detik_nyata=15.0 err=0
+g6ac0_l1_alam_s601: mode=0 klik=0 profil_akhir=false berkas_akhir=false frame=15781 frame_2x=0 frame_beda=0 salah=0 beruntun_maks=0 giliran=61 detik_game=1052 detik_nyata=13.8 err=0
+g6ac0_l3_alam_s611: mode=0 klik=0 profil_akhir=false berkas_akhir=false frame=21313 frame_2x=0 frame_beda=0 salah=0 beruntun_maks=0 giliran=61 detik_game=1421 detik_nyata=18.9 err=0
+g6acA_l1_alam_s603: mode=1 klik=3 profil_akhir=true berkas_akhir=true frame=15000 frame_2x=3638 frame_beda=53 salah=0 beruntun_maks=2 giliran=61 detik_game=1243 detik_nyata=13.3 err=0
+g6acB_l1_alam_s603: mode=ingat klik=0 profil_akhir=true berkas_akhir=true frame=13532 frame_2x=4912 frame_beda=57 salah=0 beruntun_maks=1 giliran=61 detik_game=1230 detik_nyata=11.3 err=0
+g6acq_l1_alam_s621: mode=1 klik=1 profil_akhir=true berkas_akhir=true frame=2473 frame_2x=1412 frame_beda=17 salah=0 beruntun_maks=1 giliran=16 detik_game=294 detik_nyata=2.6 err=0
+g6acq_l3_pantai_s622: mode=1 klik=1 profil_akhir=true berkas_akhir=true frame=2775 frame_2x=2166 frame_beda=9 salah=0 beruntun_maks=1 giliran=20 detik_game=350 detik_nyata=6.2 err=0
+g6acq0_l3_pantai_s622: mode=0 klik=0 profil_akhir=false berkas_akhir=false frame=3654 frame_2x=0 frame_beda=2 salah=0 beruntun_maks=1 giliran=20 detik_game=365 detik_nyata=7.8 err=0
+
+Persisten: g6acA (HOME tetap, robot menekan >> -> berkas profil.cfg [pengaturan] ai_cepat=true) lalu g6acB (proses BARU, HOME sama, tanpa klik): tombol terlihat dgn profil_awal=true & berkas_awal=true, frame_2x>0.
+Toggle: g6ac* mode=1 klik=3 (hidup, mati, hidup) -- tiap klik berkas profil.cfg ikut berubah (lihat baris AI_CEPAT klik ke-N di solo/*.txt).
+Pembanding mati: g6ac0* frame_2x=0 frame_beda=0 (Classic) / 2 (Quick, streak 1).

@@ -1,0 +1,12 @@
+G6 pengaman MULTIPLAYER: profil ai_cepat=true di SEMUA device (opsi ai_cepat=1 di uji_robot_mp.gd), tombol >> harus TIDAK pernah terlihat & Engine.time_scale TIDAK pernah 2x (6.0).
+g6mp_a.c1: peran=client profil=true frame=12539 frame_2x=0 frame_tombol_terlihat=0 | SELESAI HOST_SELESAI peran=client giliran=31 cek_ok=0 cek_gagal=0 kartu_beda=0 detik=634 migrasi=0 cek_ok_migrasi=0 jari scripterr=0
+g6mp_a.c2: peran=client profil=true frame=12540 frame_2x=0 frame_tombol_terlihat=0 | SELESAI HOST_SELESAI peran=client giliran=31 cek_ok=0 cek_gagal=0 kartu_beda=0 detik=634 migrasi=0 cek_ok_migrasi=0 jari scripterr=0
+g6mp_a.host: peran=host profil=true frame=12552 frame_2x=0 frame_tombol_terlihat=0 | SELESAI BATAS_GILIRAN peran=host giliran=31 cek_ok=18 cek_gagal=0 kartu_beda=0 detik=635 migrasi=0 cek_ok_migrasi=0 jari scripterr=0
+g6mp_b.c1: peran=client profil=true frame=4882 frame_2x=0 frame_tombol_terlihat=0 | SELESAI MENANG peran=client giliran=19 cek_ok=0 cek_gagal=0 kartu_beda=0 detik=369 migrasi=0 cek_ok_migrasi=0 jaringan=c scripterr=0
+g6mp_b.host: peran=host profil=true frame=5000 frame_2x=0 frame_tombol_terlihat=0 | SELESAI MENANG peran=host giliran=20 cek_ok=4 cek_gagal=0 kartu_beda=0 detik=376 migrasi=0 cek_ok_migrasi=0 jaringan=hos scripterr=0
+g6mp_a = 3 PLAYERS + 1 AI Classic alam (host+2 client, giliran 30); g6mp_b = 2 PLAYERS + 2 AI Quick pantai (host+1 client).
+
+Regresi MP saklar MATI: g6mp_off = 3 PLAYERS Classic alam + tebak=1 (host+2 client):
+g6mp_off.c1: SELESAI MENANG peran=client giliran=18 cek_ok=0 cek_gagal=0 kartu_beda=0 detik=386 migrasi=0 cek_ok_migrasi=0 jaringan=c | TEBAK_RINGKAS slot=1 tebakan=1 benar=0 telat_kirim=0 telat_ditolak=0 cek_ok=1 cek_gagal=0 tebak_benar_per_slot=[0, 0, 1] scripterr=0
+g6mp_off.c2: SELESAI MENANG peran=client giliran=18 cek_ok=0 cek_gagal=0 kartu_beda=0 detik=386 migrasi=0 cek_ok_migrasi=0 jaringan=c | TEBAK_RINGKAS slot=2 tebakan=2 benar=1 telat_kirim=0 telat_ditolak=0 cek_ok=2 cek_gagal=0 tebak_benar_per_slot=[0, 0, 1] scripterr=0
+g6mp_off.host: SELESAI MENANG peran=host giliran=19 cek_ok=14 cek_gagal=0 kartu_beda=0 detik=393 migrasi=0 cek_ok_migrasi=0 jaringan=ho | TEBAK_RINGKAS slot=0 tebakan=0 benar=0 telat_kirim=0 telat_ditolak=0 cek_ok=0 cek_gagal=0 tebak_benar_per_slot=[0, 0, 1] scripterr=0

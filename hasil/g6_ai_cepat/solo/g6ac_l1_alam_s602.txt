@@ -1,0 +1,8 @@
+ATURAN mode_quick=false batas_ronde=0 target_permata=1 permata_peta=1 rolet_double=false
+AI_CEPAT_TOMBOL terlihat=true teks='>>' profil_awal=false berkas_awal=false
+AI_CEPAT klik ke-1 giliran=0 profil=true berkas=true
+AI_CEPAT klik ke-2 giliran=24 profil=false berkas=false
+AI_CEPAT klik ke-3 giliran=34 profil=true berkas=true
+SEIMBANG peta=alam seed=602 quick=0 roles=api,air pemenang=1 cara=batas_kaya giliran=61 detik=1183.8 pasang=6,0 kena=5,0 kaya=5175,6411 rinci=4/909/3/6/0/11,0/0/6/3/12/0 presets=- sacred=0 xprole0=-1
+AI_CEPAT_RINGKAS mode=1 klik=3 profil_akhir=true berkas_akhir=true frame=14473 frame_2x=3284 frame_beda=57 salah=0 beruntun_maks=2 giliran=61 detik_game=1184 detik_nyata=13.6
+SIM BATAS_GILIRAN giliran=61 detik=1184

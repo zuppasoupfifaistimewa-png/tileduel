@@ -11,6 +11,7 @@ extends "res://pemain_jaringan.gd"
 signal siap_mulai_diklik
 
 var _giliran_berjalan: bool = false  # sejak START ditekan semua (kecepatan 1,5x)
+var _pengumuman_papan_berjalan: bool = false  # Fase 5 G6: spanduk event/bounty antar-ronde sedang tampil (tombol AI cepat tidak mempercepatnya)
 
 # --- SISTEM CABANG & VALIDASI ---
 signal arah_cabang_terpilih(node_tujuan)
@@ -200,6 +201,8 @@ func _mulai_transisi_game():
 
 	# ---> TAMBAHKAN BARIS INI <---
 	tombol_seting.show() 
+	if StatusJaringan.peran_multiplayer == "" and tombol_ai_cepat != null:
+		tombol_ai_cepat.show() # Fase 5 G6: solo saja
 	
 	# Panel penjelasan syarat kemenangan. Di multiplayer kedua device harus
 	# menekan START dulu -- kalau tidak, host sudah melempar dadu sementara layar
@@ -1429,10 +1432,12 @@ func ganti_giliran():
 	if slot == 0:
 		ronde_event += 1 # Fase 5: penghitung ronde untuk jadwal event (semua mode; ronde_sekarang hanya Quick)
 		event_aktif = ""
+		_pengumuman_papan_berjalan = true
 		if _ronde_jadwal_event():
 			await _mulai_event_papan()
 		if _bounty_perlu_muncul():
 			await _mulai_bounty()
+		_pengumuman_papan_berjalan = false
 	_tambah_stat(slot, "giliran")
 	giliran_sekarang = _aktor_dari_slot(slot)
 	fase_giliran = "awal"
@@ -1579,17 +1584,39 @@ func cek_game_over(): return false
 # ========================================================
 # QUICK MATCH (Fase 1): ronde, kekayaan, kecepatan 1,5x
 # ========================================================
+func _ai_cepat_berlaku() -> bool:
+	# Fase 5 G6 (tombol >>): SOLO saja, saklar profil hidup, sekarang giliran AI, dan tidak ada layar yang
+	# butuh pemain (duel/tebak duel, menu aksi). Layar pemain tampil -> kecepatan lama (Quick 1,5x / Classic 1x).
+	if StatusJaringan.peran_multiplayer != "" or not ProfilPemain.ai_cepat:
+		return false
+	if not _giliran_berjalan or _permainan_selesai or _pengumuman_papan_berjalan:
+		return false
+	if not _is_ai(_slot_dari_aktor(giliran_sekarang)):
+		return false
+	if ui_elemen != null and ui_elemen.visible:
+		return false
+	if menu_aksi != null and menu_aksi.visible:
+		return false
+	return true
+
 func _atur_kecepatan_permainan() -> void:
 	# QUICK MATCH: 1,5x selama giliran berjalan normal; panel yang menghentikan
 	# permainan kembali 1x (batas waktu jaringan di sana memakai jam permainan).
-	# Classic TIDAK PERNAH menyentuh Engine.time_scale (rig & uji lama tetap sama).
-	if not mode_quick:
+	# Classic TIDAK PERNAH menyentuh Engine.time_scale (rig & uji lama tetap sama) --
+	# kecuali tombol AI cepat (Fase 5 G6) pernah menyala di pertandingan ini.
+	var ai_cepat = _ai_cepat_berlaku()
+	if not mode_quick and not ai_cepat and StatusJaringan.skala_waktu_dasar < 0.0:
 		return
 	if StatusJaringan.skala_waktu_dasar < 0.0:
 		StatusJaringan.skala_waktu_dasar = Engine.time_scale # 1 di HP, 3 di rig uji
-	var cepat = _giliran_berjalan and not _permainan_selesai and not _migrasi_berjalan \
-		and not _mode_jaringan_putus and not _panel_putus_terbuka
-	var target = StatusJaringan.skala_waktu_dasar * (KECEPATAN_QUICK if cepat else 1.0)
+	var kali = 1.0
+	if mode_quick:
+		var cepat = _giliran_berjalan and not _permainan_selesai and not _migrasi_berjalan \
+			and not _mode_jaringan_putus and not _panel_putus_terbuka
+		kali = KECEPATAN_QUICK if cepat else 1.0
+	if ai_cepat:
+		kali = KECEPATAN_AI_CEPAT # Quick juga 2x (bukan 1,5x)
+	var target = StatusJaringan.skala_waktu_dasar * kali
 	if not is_equal_approx(Engine.time_scale, target):
 		Engine.time_scale = target
 

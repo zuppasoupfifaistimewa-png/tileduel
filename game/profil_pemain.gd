@@ -98,6 +98,8 @@ var jebakan_role := {}         # role -> Array jenis jebakan tambahan yang terak
 var xp_role := {}              # role -> XP Role
 var build_solo := {}           # role -> {"preset": "balanced"|"attack"|"defense"|"custom", "node": {...}} (P7)
 var arena := {}                # role -> {"preset": "balanced"|"attack"|"defense"|"custom", "node": {...}}
+# --- Fase 5 G6: tombol AI cepat (solo). Bagian "pengaturan" tidak ada di berkas lama -> nilai bawaan false; VERSI tidak perlu naik. ---
+var ai_cepat := false          # true = giliran AI berjalan 2x selama tidak ada layar untuk pemain (solo saja)
 
 func _ready() -> void:
 	_rng.randomize()
@@ -143,6 +145,7 @@ func muat() -> void:
 	build_solo = bs if bs is Dictionary else {}
 	var ar = c.get_value("role", "arena", {})
 	arena = ar if ar is Dictionary else {}
+	ai_cepat = bool(c.get_value("pengaturan", "ai_cepat", false)) # Fase 5 G6
 
 func _baca_berkas(jalur: String):
 	# ConfigFile yang sah (terbaca & punya id), atau null.
@@ -171,6 +174,7 @@ func simpan() -> void:
 	c.set_value("role", "xp", xp_role)
 	c.set_value("role", "build_solo", build_solo)
 	c.set_value("role", "arena", arena)
+	c.set_value("pengaturan", "ai_cepat", ai_cepat) # Fase 5 G6
 	var err = c.save(BERKAS_SEMENTARA)
 	if err != OK:
 		push_warning("Profil gagal disimpan (kode %d)." % err)
@@ -200,6 +204,14 @@ func _profil_baru() -> void:
 	xp_role = {}
 	build_solo = {}
 	arena = {}
+	ai_cepat = false
+	simpan()
+
+func atur_ai_cepat(nilai: bool) -> void:
+	# Fase 5 G6: pilihan tombol AI cepat diingat di profil.
+	if ai_cepat == nilai:
+		return
+	ai_cepat = nilai
 	simpan()
 
 func _nama_bawaan() -> String:

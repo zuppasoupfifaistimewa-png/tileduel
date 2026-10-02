@@ -55,6 +55,7 @@ var tombol_trap_batal: Button
 
 # ---> TAMBAHKAN BARIS INI <---
 var tombol_seting: Button 
+var tombol_ai_cepat: Button  # Fase 5 G6: tombol >> (solo saja)
 
 var target_kamera: Node3D
 var geser_kamera = Vector3.ZERO
@@ -254,6 +255,7 @@ const SYARAT_KOIN_MENANG := 3000        # dipakai syarat menang DAN panel HOW TO
 
 # --- QUICK MATCH (Fase 1) ---
 const KECEPATAN_QUICK := 1.5
+const KECEPATAN_AI_CEPAT := 2.0     # Fase 5 G6: giliran AI saat tombol >> aktif (solo; Quick juga 2x, bukan 1,5x)
 var mode_quick: bool = false
 var batas_ronde: int = 0             # 0 = tanpa batas (Classic)
 var ronde_sekarang: int = 1

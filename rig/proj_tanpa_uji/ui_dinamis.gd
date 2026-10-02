@@ -36,6 +36,28 @@ static func upgrade_ke_richtext(node_lama, gaya):
 
 	return node_lama
 
+static func ganti_ai_cepat(main_node: Node) -> void:
+	# Fase 5 G6: ketuk tombol >> = hidup/mati; pilihan diingat di profil.
+	ProfilPemain.atur_ai_cepat(not ProfilPemain.ai_cepat)
+	perbarui_tombol_ai_cepat(main_node)
+
+static func perbarui_tombol_ai_cepat(main_node: Node) -> void:
+	# Mati = abu-abu seperti tombol seting; hidup = emas.
+	var tombol = main_node.tombol_ai_cepat
+	if tombol == null:
+		return
+	var hidup = ProfilPemain.ai_cepat
+	var gaya = StyleBoxFlat.new()
+	gaya.bg_color = Color(0.5, 0.35, 0.05, 0.9) if hidup else Color(0.1, 0.1, 0.15, 0.8)
+	gaya.set_corner_radius_all(10)
+	gaya.set_border_width_all(2)
+	gaya.border_color = Color(1.0, 0.85, 0.2) if hidup else Color(0.8, 0.8, 0.8)
+	for nama_gaya in ["normal", "hover", "pressed"]:
+		tombol.add_theme_stylebox_override(nama_gaya, gaya)
+	tombol.add_theme_color_override("font_color", Color(1.0, 0.9, 0.3) if hidup else Color.WHITE)
+	tombol.add_theme_color_override("font_hover_color", Color(1.0, 0.9, 0.3) if hidup else Color.WHITE)
+	tombol.add_theme_color_override("font_pressed_color", Color(1.0, 0.9, 0.3) if hidup else Color.WHITE)
+
 static func buka_menu_jeda(main_node: Node) -> void:
 	var canvas_jeda = CanvasLayer.new()
 	canvas_jeda.layer = 105 # Pastikan di atas layer gameplay biasa
@@ -1012,6 +1034,20 @@ static func setup_ui_elegan(main_node: Node) -> void:
 
 	var canvas_utama = main_node.teks_dadu.get_parent()
 	canvas_utama.add_child(main_node.tombol_seting)
+
+	# Fase 5 G6: tombol AI cepat ">>" di kiri tombol seting (hanya tampil di solo; lihat pemain.gd _mulai_transisi_game).
+	main_node.tombol_ai_cepat = Button.new()
+	main_node.tombol_ai_cepat.text = ">>"
+	main_node.tombol_ai_cepat.custom_minimum_size = Vector2(50, 50)
+	main_node.tombol_ai_cepat.add_theme_font_size_override("font_size", 24)
+	main_node.tombol_ai_cepat.focus_mode = Control.FOCUS_NONE # Spasi (lempar dadu) tidak boleh menekan tombol ini
+	main_node.tombol_ai_cepat.set_anchors_preset(Control.PRESET_TOP_RIGHT)
+	main_node.tombol_ai_cepat.position = Vector2(-130, 20)
+	main_node.tombol_ai_cepat.tooltip_text = "Fast AI turns"
+	main_node.tombol_ai_cepat.hide()
+	main_node.tombol_ai_cepat.pressed.connect(ganti_ai_cepat.bind(main_node))
+	canvas_utama.add_child(main_node.tombol_ai_cepat)
+	perbarui_tombol_ai_cepat(main_node)
 
 	main_node.label_fps = Label.new()
 	main_node.label_fps.set_anchors_preset(Control.PRESET_TOP_LEFT)

@@ -30,6 +30,18 @@ var _bantuan_prev: Array = []   # Fase 5 G3: stat kartu_bantuan per slot (log KA
 # putar_tolak=1 -> klik NO THANKS; iklan_gagal=1 -> stub: tersedia tapi gagal ditonton ("No ad right now.").
 var putar_tolak = false
 var iklan_gagal = false
+# --- Fase 5 G6 (rig-only): tombol AI cepat. ai_cepat=1 -> robot menekan tombol >> (hidup di awal, mati di giliran 24, hidup lagi di 34);
+# ai_cepat=0 -> tombol tidak ditekan (kecepatan tetap diukur: tidak boleh ada 2x); ai_cepat=ingat -> tidak menekan, profil (HOME dipakai ulang) sudah hidup.
+var ai_cepat_uji := ""
+var _ac_klik := 0
+var _ac_mulai_ms := -1
+var _ac_frame := 0
+var _ac_frame_2x := 0
+var _ac_beda := 0
+var _ac_beruntun := 0
+var _ac_beruntun_maks := 0
+var _ac_salah := 0
+var _ac_tombol_dicatat := false
 var _putar_tawar_prev = false
 var _putar_tawaran = 0
 var _putar_klik = 0
@@ -251,6 +263,7 @@ func _ready():
 		if a == "tebak=1": tebak_uji = true # Fase 5 G4
 		if a == "putar_tolak=1": putar_tolak = true # Fase 5 G5
 		if a == "iklan_gagal=1": iklan_gagal = true # Fase 5 G5
+		if a.begins_with("ai_cepat="): ai_cepat_uji = a.substr(9) # Fase 5 G6
 		if a == "semua_ai=1": semua_ai = true
 		if a.begins_with("role="): role_uji = Array(a.substr(5).split(","))
 		if a.begins_with("jenis="): jenis_uji = int(a.substr(6))
@@ -506,6 +519,8 @@ func _tulis_dan_keluar(alasan: String) -> void:
 	if tebak_uji:
 		var stat_tebak = p.statistik_slot[p.slot_lokal].get("tebak_benar", 0) if p != null and p.statistik_slot.size() > p.slot_lokal else -1
 		print("TEBAK_RINGKAS tebakan=%d benar=%d cek_ok=%d cek_gagal=%d stat_tebak_benar_slot%d=%d" % [_tebak_total, _tebak_benar_total, _tebak_cek_ok, _tebak_cek_gagal, p.slot_lokal if p != null else -1, int(stat_tebak)])
+	if ai_cepat_uji != "":
+		print("AI_CEPAT_RINGKAS mode=%s klik=%d profil_akhir=%s berkas_akhir=%s frame=%d frame_2x=%d frame_beda=%d salah=%d beruntun_maks=%d giliran=%d detik_game=%.0f detik_nyata=%.1f" % [ai_cepat_uji, _ac_klik, str(ProfilPemain.ai_cepat), _berkas_ai_cepat(), _ac_frame, _ac_frame_2x, _ac_beda, _ac_salah, _ac_beruntun_maks, jumlah_giliran, detik_total, (Time.get_ticks_msec() - _ac_mulai_ms) / 1000.0 if _ac_mulai_ms >= 0 else -1.0])
 	super(alasan)
 
 func _hitung_sacred() -> int: # F0 (B-f, 14.19): pemindai papan, dipakai baris SEIMBANG
@@ -637,6 +652,8 @@ func _process(delta):
 		_urus_tebak()
 	if iklan_uji:
 		_urus_putar_ulang()
+	if ai_cepat_uji != "":
+		_urus_ai_cepat()
 	var g_lama = jumlah_giliran
 	super(delta)
 	if jumlah_giliran != g_lama and jumlah_giliran % 20 == 0:
@@ -696,6 +713,50 @@ func _urus_putar_ulang() -> void:
 				_putar_skor_m = -1
 				_putar_skor_baru = -1
 	_putar_menang_prev = menang_kini
+
+func _berkas_ai_cepat() -> String:
+	# Nilai ai_cepat yang SUNGGUH tersimpan di user://profil.cfg ("?" = berkas tidak terbaca).
+	var c = ConfigFile.new()
+	if c.load("user://profil.cfg") != OK:
+		return "?"
+	return str(bool(c.get_value("pengaturan", "ai_cepat", false)))
+
+func _urus_ai_cepat() -> void:
+	# Fase 5 G6 (rig-only). (1) Robot menekan tombol >> (mode "1"). (2) Tiap frame cocokkan Engine.time_scale dengan keadaan:
+	# 2x hanya kalau profil hidup + giliran AI + tidak ada layar duel/menu aksi/spanduk event; selain itu kecepatan lama
+	# (Quick 1,5x, Classic 1x). Selisih >= 3 frame berturut-turut dihitung SALAH (1-2 frame = urutan _process, wajar).
+	# (3) Waktu nyata dicatat untuk membandingkan jalan biasa vs AI cepat.
+	if _ac_mulai_ms < 0:
+		_ac_mulai_ms = Time.get_ticks_msec()
+	var tombol = p.tombol_ai_cepat
+	if tombol != null and tombol.is_visible_in_tree() and not _ac_tombol_dicatat:
+		_ac_tombol_dicatat = true
+		print("AI_CEPAT_TOMBOL terlihat=true teks='%s' profil_awal=%s berkas_awal=%s" % [tombol.text, str(ProfilPemain.ai_cepat), _berkas_ai_cepat()])
+	if ai_cepat_uji == "1" and tombol != null and tombol.is_visible_in_tree():
+		var harus_hidup = jumlah_giliran < 24 or jumlah_giliran >= 34
+		if ProfilPemain.ai_cepat != harus_hidup:
+			tombol.pressed.emit()
+			_ac_klik += 1
+			print("AI_CEPAT klik ke-%d giliran=%d profil=%s berkas=%s" % [_ac_klik, jumlah_giliran, str(ProfilPemain.ai_cepat), _berkas_ai_cepat()])
+	if not p.get("_giliran_berjalan"):
+		return
+	var selesai = bool(p.get("_permainan_selesai"))
+	var layar = (ui != null and ui.visible) or p.menu_aksi.visible
+	var slot_kini = p._slot_dari_aktor(p.giliran_sekarang)
+	var harap_2x = ProfilPemain.ai_cepat and not selesai and not p._pengumuman_papan_berjalan and p._is_ai(slot_kini) and not layar
+	var harap = _escala_diag * 2.0 if harap_2x else _escala_diag * (1.5 if p.mode_quick and not selesai else 1.0)
+	_ac_frame += 1
+	if is_equal_approx(Engine.time_scale, _escala_diag * 2.0):
+		_ac_frame_2x += 1
+	if is_equal_approx(Engine.time_scale, harap):
+		_ac_beruntun = 0
+	else:
+		_ac_beda += 1
+		_ac_beruntun += 1
+		_ac_beruntun_maks = maxi(_ac_beruntun_maks, _ac_beruntun)
+		if _ac_beruntun == 3:
+			_ac_salah += 1
+			print("AI_CEPAT_SALAH giliran=%d skala=%.2f harap=%.2f profil=%s slot=%d selesai=%s layar=%s spanduk=%s" % [jumlah_giliran, Engine.time_scale, harap, str(ProfilPemain.ai_cepat), slot_kini, str(selesai), str(layar), str(p._pengumuman_papan_berjalan)])
 
 func _urus_tebak() -> void:
 	# Fase 5 G4 (rig-only): robot penonton. Menebak ~0.6 dtk setelah tombol muncul

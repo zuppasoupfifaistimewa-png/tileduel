@@ -54,6 +54,11 @@ var jumlah_giliran = 0
 var _sig_event = "" # Fase 5 G1: log EVENT tiap perubahan (ronde_event/aktif/terakhir)
 var _sig_bounty = "" # Fase 5 G2: log BOUNTY tiap perubahan (aktif/terakhir/bintang tiap slot)
 var _sig_bantuan = "" # Fase 5 G3: log KARTU_BANTUAN tiap perubahan (stat kartu_bantuan + isi inventaris per slot)
+# Fase 5 G6 (rig-only): ai_cepat=1 -> profil dihidupkan; di multiplayer tombol >> TIDAK boleh muncul dan Engine.time_scale TIDAK boleh 2x (6.0 = 3.0 x 2).
+var ai_cepat_uji = false
+var _acmp_frame = 0
+var _acmp_2x = 0
+var _acmp_tombol = 0
 var kaya_awal = false # Fase 5 G3 (rig-only): host mulai +3000 koin -> pemain lain tertinggal >= 1000 -> kartu bantuan muncul saat lewat START
 var _kaya_diberikan = false
 # --- Fase 5 G4 (rig-only): tebak=1 -> robot penonton menebak tiap duel yang ditonton (selang-seling penyerang/pembela)
@@ -132,6 +137,7 @@ func _ready():
 		if a == "tebak=1": tebak_uji = true # Fase 5 G4
 		if a == "tebak_telat=1": tebak_telat_uji = true; tebak_uji = true # Fase 5 G4
 		if a == "kaya_awal=1": kaya_awal = true
+		if a == "ai_cepat=1": ai_cepat_uji = true # Fase 5 G6
 		if a.begins_with("arena="): arena_uji = a.substr(6)
 		if a == "arena_palsu=1": arena_uji = "custom_ilegal" # F0 (B-f, 14.19, U10): alias -- mekanisme SAMA "custom_ilegal" (B-c/C2) yang sudah menguji rpc_role_lobby/build_arena K16, cuma nama argumen sesuai rencana
 		if a.begins_with("role_ai="): role_ai_uji = a.substr(8).split(",") # D6 (B-d, rig-only)
@@ -143,6 +149,8 @@ func _ready():
 	process_mode = Node.PROCESS_MODE_ALWAYS
 	Engine.max_fps = 60
 	Engine.time_scale = 3.0
+	if ai_cepat_uji:
+		ProfilPemain.atur_ai_cepat(true) # Fase 5 G6
 	seed(benih * 101 + urut)
 	_xp0 = ProfilPemain.xp_total
 	_cr0 = ProfilPemain.crowns
@@ -206,6 +214,8 @@ func _akhiri(alasan: String) -> void:
 		_catat("CEK_BD %s" % str(totbd))
 	if tebak_uji and p != null:
 		_catat("TEBAK_RINGKAS slot=%d tebakan=%d benar=%d telat_kirim=%d telat_ditolak=%d cek_ok=%d cek_gagal=%d tebak_benar_per_slot=%s" % [p.slot_lokal, _tebak_total, _tebak_benar_total, _tebak_telat_kirim, _tebak_telat_ditolak, _tebak_cek_ok, _tebak_cek_gagal, str(p.statistik_slot.map(func(st): return int(st.get("tebak_benar", 0))))])
+	if ai_cepat_uji:
+		_catat("AI_CEPAT_MP_RINGKAS peran=%s profil=%s frame=%d frame_2x=%d frame_tombol_terlihat=%d" % [peran, str(ProfilPemain.ai_cepat), _acmp_frame, _acmp_2x, _acmp_tombol])
 	_catat("SELESAI %s peran=%s giliran=%d cek_ok=%d cek_gagal=%d kartu_beda=%d detik=%.0f migrasi=%d cek_ok_migrasi=%d jaringan=%s role=%s" % [alasan, peran, jumlah_giliran, cek_ok, cek_gagal, kartu_beda, detik_total, migrasi_selesai, cek_ok_migrasi, StatusJaringan.peran_multiplayer, ",".join(cetak_role)])
 	_tulis_log()
 	get_tree().quit()
@@ -328,6 +338,10 @@ func _process(delta):
 	detik_total += delta
 	var adegan = get_tree().current_scene
 	if adegan == null: return
+	if ai_cepat_uji and p != null:
+		_acmp_frame += 1
+		if is_equal_approx(Engine.time_scale, 6.0): _acmp_2x += 1
+		if p.tombol_ai_cepat != null and p.tombol_ai_cepat.visible: _acmp_tombol += 1
 	if tahap == "awal":
 		if adegan.get_script() != null and adegan.get_script().resource_path.ends_with("layar_local_play.gd"):
 			tahap = "lobby"

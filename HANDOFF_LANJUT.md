@@ -1,9 +1,9 @@
-# HANDOFF -- lanjutkan proyek Tile Duel (Fase 4 SELESAI; Fase 5: G0-G5 + getaran Earthquake SELESAI, G6 berikutnya)
+# HANDOFF -- lanjutkan proyek Tile Duel (Fase 4 SELESAI; Fase 5: G0-G6 + getaran Earthquake SELESAI, G7 berikutnya)
 
 Dokumen ini ditulis 02-10-2026 supaya sesi Claude Code (cloud / web, tanpa CLI) mana pun bisa melanjutkan
 pekerjaan TANPA riwayat percakapan. BACA INI DULU, lalu `docs/RENCANA_fase4_role.md` bagian 14.19 & **14.21-14.24** (paling akhir).
 Diperbarui 02-10 (Opus, sesi Claude Code cloud): **uji HP pemilik dengan `kiriman/TileDuel_FaseB_b9.zip` = "lancar" -> Fase 4 SELESAI** (RENCANA 14.24).
-Berikutnya: pemilik merilis A+B (daftar periksa di bagian 5). **Fase 5: rencana `docs/RENCANA_fase5_seru.md` DISETUJUI 02-10 (K1-K10 = a); G0-G5 + getaran Earthquake SELESAI (Sonnet, 02-10) -> berikutnya Sonnet mengerjakan G6 (tombol AI cepat, solo), lalu G7 (profil: XP/Crowns tebak, kartu hadiah, stat seumur).**
+Berikutnya: pemilik merilis A+B (daftar periksa di bagian 5). **Fase 5: rencana `docs/RENCANA_fase5_seru.md` DISETUJUI 02-10 (K1-K10 = a); G0-G6 + getaran Earthquake SELESAI (Sonnet, 02-10) -> berikutnya Sonnet mengerjakan G7 (profil: XP/Crowns tebak, kartu hadiah, stat seumur).**
 
 **Fase 5 G0 SELESAI (Sonnet, 02-10):** refactor `denda_petak()` / `harga_beli_tanah()` / `harga_beli_menara(lv)` / `ronde_event` di
 `pemain_dasar.gd` (+ semua pemakai di `ai_jebakan/ai_musuh/pemain/pemain_papan/pemain_tampilan`), `game/` & rig identik (34/35, kecuali stub iklan).
@@ -79,6 +79,22 @@ peserta (tumpuk di tengah layar tonton, "WHO WINS? TAP ONE!"); satu ketukan, tid
   3P/4P (lawan=2): 0 tawaran (tidak ada duel manusia). 0 SCRIPT ERROR. Regresi: S1 100 (semua_ai) G4 vs G5 IDENTIK (`reg/s1_100_g5.txt`), `cek_nilai` 8/8, `batch_reg10` sama dgn G4, MP 3P Classic + 4P Quick sinkron (lihat `mp_ringkas.txt`).
 - BELUM: dialog & animasi putar ulang di layar sungguhan (headless) + iklan AdMob sungguhan -> uji HP G9; `Engine.time_scale` Quick 1,5x TIDAK dikembalikan 1x saat dialog tampil (tidak ada timer yang menunggu, dan tawaran hutang juga begitu) -- tambahkan kalau uji HP bermasalah.
   Untuk G8 (Opus): putar ulang menaikkan peluang menang pemain solo yang menonton iklan (disengaja, "kekuatan boleh di solo"); keseimbangan role di rig tidak terpengaruh (rig/AI-vs-AI tidak punya penawar).
+
+**Fase 5 G6 SELESAI (Sonnet, 02-10): tombol AI cepat (solo).** Tombol ">>" kecil di HUD kanan atas (di kiri tombol ⚙; `tombol_ai_cepat`, dibuat di `ui_dinamis.gd` `setup_ui_elegan`, `focus_mode = NONE` supaya Spasi
+tidak menekannya; tampil HANYA di solo -- `pemain.gd _mulai_transisi_game`). Ketuk = hidup/mati (`UiDinamis.ganti_ai_cepat` -> `ProfilPemain.atur_ai_cepat`); tombol emas = hidup, abu-abu = mati; **bawaan MATI**.
+- Pilihan diingat di profil: `ProfilPemain.ai_cepat`, berkas `profil.cfg` bagian `[pengaturan] ai_cepat` (dibaca `get_value(..., false)` -> berkas lama aman, `VERSI` tidak dinaikkan karena `muat()` tidak memeriksanya).
+- Kecepatan: `_ai_cepat_berlaku()` + `_atur_kecepatan_permainan()` (`pemain.gd`); konstanta `KECEPATAN_AI_CEPAT=2.0` (`pemain_dasar.gd`). 2x (Quick juga 2x, bukan 1,5x) hanya kalau: SOLO, saklar hidup, `_giliran_berjalan`, belum selesai,
+  giliran slot AI, `ui_elemen` (duel / tebak duel) TIDAK tampil, `menu_aksi` TIDAK tampil, dan bukan saat spanduk event/bounty antar-ronde (`_pengumuman_papan_berjalan`, diset di `ganti_giliran` slot 0). Selain itu kecepatan lama
+  (Quick 1,5x, Classic 1x). Classic yang tidak pernah menyalakan tombol TIDAK menyentuh `Engine.time_scale` (sama seperti dulu); sesudah pernah menyala, `StatusJaringan.skala_waktu_dasar` mengembalikan 1x.
+- Multiplayer: tombol tersembunyi dan `_ai_cepat_berlaku()` selalu false (`peran_multiplayer != ""`) walau profil `ai_cepat=true`.
+- Bukti (`hasil/g6_ai_cepat/`): rig-only `uji_nyata.gd` opsi `ai_cepat=1|0|ingat` (robot menekan >>, pencocokan `Engine.time_scale` tiap frame vs keadaan, baca berkas profil.cfg; log `AI_CEPAT*`) + `uji_robot_mp.gd` opsi `ai_cepat=1`.
+  Solo Classic 2P x3, 4P x1, Quick 2P & 4P: `salah=0` (selisih >= 3 frame berturut-turut), 0 SCRIPT ERROR; klik toggle hidup->mati->hidup, berkas profil ikut berubah tiap klik; proses BARU dgn HOME yang sama: tombol langsung hidup tanpa klik
+  (`profil_awal=true`); pembanding mati `frame_2x=0`. Frame lebih sedikit ~19-24% di run yang separuh waktunya hidup (4P Classic 16147 vs 21313; Quick 4P 2775 vs 3654). MP (3P+1AI Classic, 2P+2AI Quick) dgn profil hidup di semua device: `frame_2x=0`, tombol tak pernah terlihat, cek_gagal=0.
+  Regresi saklar MATI (bawaan): S1 100 pertandingan G6 vs G4 vs G5 IDENTIK (`reg/s1_100_g6.txt`), `cek_nilai` 8/8, `batch_reg10` sama dgn G5, MP 3P Classic + tebak sinkron (`tebak_benar_per_slot` identik di 3 device).
+- BELUM: posisi/gaya tombol di layar sungguhan (headless) -> uji HP G9 (posisi `(-130, 20)` kanan atas, ukuran 50x50 -- boleh digeser). Dialog yang butuh pemain di giliran AI selain duel/menu aksi (mis. tawaran hutang, jual aset) tetap berjalan 2x;
+  tidak menunggu timer jadi aman, tapi kalau di uji HP terasa kurang nyaman tambahkan syaratnya di `_ai_cepat_berlaku()`.
+- Perbaikan G5 yang dikerjakan sebelum G6 (02-10): **NO THANKS pada putar ulang rolet = tidak ditawari lagi di pertandingan itu** (`_putar_ulang_ditolak`, `pemain_duel.gd` + reset di `pemain.gd`); iklan GAGAL tetap boleh ditawari lagi.
+  Bukti `hasil/g6_ai_cepat/tolak_ringkas.txt`: 4 run "tolak" (kalah duel 8/5/4/5 kali) -> hanya 1 tawaran & 1 klik per run (sebelumnya 3/8/5/5); iklan gagal tetap 3/5 tawaran; ditonton tetap sekali + cek skor OK.
 
 ## 0. Aturan tetap dari pemilik proyek (WAJIB)
 1. Balas dalam **Bahasa Indonesia saja**.
@@ -193,7 +209,7 @@ Rig-only lain: `uji_*`, `cek_muat_f3.gd` (alat), dan 5 file proyek yang tidak ad
   (4) coba build rilis sekali; (5) Internal testing -> Production. Bug dari HP/rilis -> Opus menganalisis dulu.
 - **Fase 5 (rencana Opus 02-10, DISETUJUI): `docs/RENCANA_fase5_seru.md`** -- event papan, bounty, kartu bantuan posisi terakhir, Tebak Duel,
   putar ulang rolet (iklan, solo), tombol AI cepat (solo). Status: **DISETUJUI 02-10, pemilik "setuju semua a"**
-  (dicatat di bagian 1 & 9 rencana itu). Berikutnya: **Sonnet** mengerjakan G6 (G0-G5 selesai; tombol AI cepat, solo) dst. Baca rencana itu PENUH (pendek, ~200 baris); RENCANA_fase4 hanya untuk rujukan.
+  (dicatat di bagian 1 & 9 rencana itu). Berikutnya: **Sonnet** mengerjakan G7 (G0-G6 selesai; profil: hadiah tebak) dst. Baca rencana itu PENUH (pendek, ~200 baris); RENCANA_fase4 hanya untuk rujukan.
 - Opsional (Sonnet, tidak menghalangi rilis): T22 (rig-only, D1 lebih kuat, RENCANA 14.23); komentar F5 untuk
   `hot_flames`/`fire_tax`/`strong_wind` di `data_role.gd` (komentar saja; ikut kiriman berikutnya).
 - Cara regresi MP di sesi cloud: salin `rig/skrip/jalankan_mp3.sh`, `uji_f2_t2_a/b.sh` ke scratchpad, ganti path
