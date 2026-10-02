@@ -46,7 +46,7 @@ def tulis(path, baris):
 def main():
     out = sys.argv[1] if len(sys.argv) > 1 else "."
     os.makedirs(out, exist_ok=True)
-    benih = 5000
+    benih = int(sys.argv[2]) if len(sys.argv) > 2 else 5000  # F5 (02-10): argumen ke-2 = benih awal (konfirmasi = benih BARU)
 
     # --- S1: Arena 2P, 10 pasangan x 60 benih x 2 kursi = 1200 ---
     s1 = []

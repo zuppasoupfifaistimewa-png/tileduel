@@ -306,7 +306,7 @@ const NODE_LV := {
 	"card_magnet": {1: 0.25, 2: 0.5, 3: 0.75}, # peluang curi 1 kartu korban
 	# angin
 	"strong_wind": {1: 0.11, 2: 0.12, 3: 0.13}, # persen rampas (14.1: dasar angin 10% -> 18% Lv1 terlalu melompat)
-	"homing_wind": {1: 0.2, 2: 0.4, 3: 0.6}, # bagian rampasan -> pemasang langsung
+	"homing_wind": {1: 0.15, 2: 0.3, 3: 0.45}, # bagian rampasan -> pemasang langsung (F5 r5: .2/.4/.6 -> .15/.3/.45, angin konsisten ~55.6% 2P & 28.9% 4P)
 	"whirlwind": {1: 1, 2: 2, 3: 3}, # langkah dadu hilang
 }
 
