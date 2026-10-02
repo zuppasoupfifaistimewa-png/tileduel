@@ -54,6 +54,16 @@ func _ready() -> void:
 	P.muat()
 	gagal += _cek("baru id terisi (16 hex)", P.id.length() == 16)
 	gagal += _cek("baru respect/mvp 0", P.respect == 0 and P.mvp_total == 0)
+	# 5) G2: hitung_mvp -- penghargaan terbanyak; seri -> pemenang (baris pertama); masih seri -> slot terkecil
+	var papan_a = [{"slot": 2, "penghargaan": ["a"]}, {"slot": 0, "penghargaan": ["a", "b"]}, {"slot": 1, "penghargaan": ["a", "b"]}]
+	gagal += _cek("mvp terbanyak (seri 2, pemenang bukan salah satunya) -> slot terkecil", P.hitung_mvp(papan_a) == 0)
+	var papan_b = [{"slot": 1, "penghargaan": ["a", "b"]}, {"slot": 0, "penghargaan": ["a", "b"]}]
+	gagal += _cek("mvp seri -> pemenang", P.hitung_mvp(papan_b) == 1)
+	var papan_c = [{"slot": 1, "penghargaan": []}, {"slot": 0, "penghargaan": []}]
+	gagal += _cek("mvp tanpa penghargaan -> pemenang", P.hitung_mvp(papan_c) == 1)
+	var papan_d = [{"slot": 1, "penghargaan": ["a"]}, {"slot": 0, "penghargaan": ["a", "b", "c"]}, {"slot": 2, "penghargaan": []}]
+	gagal += _cek("mvp jelas terbanyak", P.hitung_mvp(papan_d) == 0)
+	gagal += _cek("mvp papan kosong -> -1", P.hitung_mvp([]) == -1)
 	print("PROFIL_V3 gagal=", gagal)
 	get_tree().quit()
 

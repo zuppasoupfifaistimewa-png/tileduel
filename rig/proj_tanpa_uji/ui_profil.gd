@@ -114,6 +114,43 @@ static func teks_penghargaan(daftar: Array) -> String:
 	return "  ".join(nama_nama)
 
 # ------------------------------------------------------------
+# FASE 6: KARTU PROFIL pemain lain + TOAST
+# ------------------------------------------------------------
+static func tampilkan_kartu_profil(induk: Node, d: Dictionary, lapisan: int = 130) -> void:
+	# Kartu kecil dari data profil lobby ({"nama","level","respect","mvp_total","role"}); data kosong = tidak tampil.
+	if d.is_empty() or not is_instance_valid(induk) or not induk.is_inside_tree():
+		return
+	var kanvas = _layar_gelap(induk, lapisan)
+	var isi = _kartu_tengah(kanvas, false)
+	isi.add_child(_label(str(d.get("nama", "?")), 34, EMAS))
+	isi.add_child(_label("Level %d" % int(d.get("level", 1)), 24))
+	isi.add_child(_label("Respect: %d" % int(d.get("respect", 0)), 22, HIJAU))
+	isi.add_child(_label("MVP awards: %d" % int(d.get("mvp_total", 0)), 22, EMAS))
+	var role = str(d.get("role", ""))
+	if role != "" and DataRole.ROLE.has(role):
+		isi.add_child(_label("Role: " + DataRole.nama_role(role), 22, DataRole.warna_role(role)))
+	var tutup = _tombol("CLOSE", Color(0.5, 0.5, 0.55), Vector2(220, 56))
+	tutup.pressed.connect(func(): kanvas.queue_free())
+	isi.add_child(tutup)
+
+static func tampilkan_toast(induk: Node, teks: String) -> void:
+	# Pesan singkat di atas layar (muncul ~2,5 dtk), tidak menahan ketukan.
+	if not is_instance_valid(induk) or not induk.is_inside_tree():
+		return
+	var kanvas = CanvasLayer.new()
+	kanvas.layer = 135
+	var l = _label(teks, 26, HIJAU)
+	l.set_anchors_preset(Control.PRESET_CENTER_TOP)
+	l.offset_top = 40
+	l.grow_horizontal = Control.GROW_DIRECTION_BOTH
+	kanvas.add_child(l)
+	induk.get_tree().current_scene.add_child(kanvas)
+	var tw = l.create_tween()
+	tw.tween_interval(1.8)
+	tw.tween_property(l, "modulate:a", 0.0, 0.7)
+	tw.tween_callback(func(): kanvas.queue_free())
+
+# ------------------------------------------------------------
 # KARTU HADIAH (kolom kanan papan peringkat)
 # ------------------------------------------------------------
 static func buat_kartu_hadiah(_main_node: Node, r: Dictionary, canvas: CanvasLayer) -> Control:

@@ -557,7 +557,7 @@ func _langkah_main(delta) -> void:
 			# Beri waktu client menampilkan layar akhirnya sendiri (replay, iklan stub).
 			await get_tree().create_timer(6.0).timeout
 			rpc("rpc_uji_selesai")
-		await get_tree().create_timer(2.0).timeout
+		await get_tree().create_timer(6.0 if skenario == "respect" else 2.0).timeout
 		_akhiri("MENANG")
 		return
 	if detik_diam > 150.0:
@@ -933,6 +933,41 @@ func _catat_akhir() -> void:
 	_catat_profil_nama("akhir")
 	_catat("AKHIR alasan=%s pemenang=%d ronde=%d/%d papan=%s" % [p._alasan_akhir, p._slot_pemenang_akhir, p.ronde_sekarang, p.batas_ronde, str(p._papan_skor_akhir)])
 	_cek_profil_mp()
+	_catat("MVP_UJI slot_mvp=%d saya=%s mvp_total=%d" % [ProfilPemain.hitung_mvp(p._papan_skor_akhir), str(ProfilPemain.hitung_mvp(p._papan_skor_akhir) == p.slot_lokal), ProfilPemain.mvp_total])
+	if skenario == "respect":
+		_respect_uji()
+
+func _respect_uji() -> void:
+	# Fase 6 G2 (rig-only, skenario "respect"): tiap HP memberi Respect SEKALI ke tiap lawan MANUSIA, lalu mencoba kirim ganda
+	# (penjaga lokal + paksa lewat RPC / _host_proses_respect). Harapan: respect saya naik TEPAT sebanyak lawan manusia (1 per lawan),
+	# AI / diri sendiri ditolak.
+	var awal = ProfilPemain.respect
+	var manusia = []
+	var ditolak_benar = true
+	for s in range(p.jumlah_pemain()):
+		if s == p.slot_lokal:
+			continue
+		if p.bisa_beri_respect(s):
+			manusia.append(s)
+		elif p.kirim_respect(s):
+			ditolak_benar = false # AI / bukan manusia tidak boleh bisa dikirimi
+	var rinci = []
+	for s in manusia:
+		var pertama = p.kirim_respect(s)
+		var kedua_lokal = p.kirim_respect(s)
+		if StatusJaringan.peran_multiplayer == "host":
+			var kedua_host = p._host_proses_respect(p.slot_lokal, s)
+			rinci.append("%d:%s/%s/%s" % [s, str(pertama), str(kedua_lokal), str(kedua_host)])
+		else:
+			p.rpc_id(1, "rpc_zrespect_kirim", s) # kirim ganda PAKSA (melewati penjaga lokal) -- host harus menolak
+			rinci.append("%d:%s/%s/paksa" % [s, str(pertama), str(kedua_lokal)])
+	var diri = p.kirim_respect(p.slot_lokal)
+	if StatusJaringan.peran_multiplayer == "host":
+		diri = diri or p._host_proses_respect(p.slot_lokal, p.slot_lokal)
+	await get_tree().create_timer(3.0).timeout
+	var akhir = ProfilPemain.respect
+	var ok = (akhir - awal == manusia.size()) and ditolak_benar and not diri
+	_catat("RESPECT_UJI slot=%d lawan_manusia=%s kirim=%s diri_ditolak=%s ai_ditolak=%s respect %d->%d diharapkan=+%d cek=%s" % [p.slot_lokal, str(manusia), str(rinci), str(not diri), str(ditolak_benar), awal, akhir, manusia.size(), "OK" if ok else "GAGAL"])
 
 func _catat_profil_nama(kapan: String) -> void:
 	# Fase 6: nama/level tiap slot menurut HP ini -- HARUS sama di semua HP (dan tetap sama sesudah migrasi host).

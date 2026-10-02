@@ -397,6 +397,7 @@ func _buat_panel_lobby() -> void:
 	kanan.add_child(_label_lobby("PLAYERS", 20))
 	label_pemain_lobby = RichTextLabel.new()
 	label_pemain_lobby.bbcode_enabled = true
+	label_pemain_lobby.meta_clicked.connect(_buka_kartu_lobby)
 	label_pemain_lobby.fit_content = true
 	label_pemain_lobby.scroll_active = false
 	label_pemain_lobby.custom_minimum_size = Vector2(360, 150)
@@ -506,6 +507,8 @@ func _segarkan_lobby() -> void:
 		var peer_di_slot = -1
 		if s == 0:
 			var teks_h = _teks_profil(1)
+			if teks_h != "":
+				teks_h = "[url=1]%s[/url]" % teks_h # Fase 6 G2: ketuk nama -> kartu profil
 			nama = (teks_h if teks_h != "" else "HOST") + (" (YOU)" if host else "") + ("" if teks_h == "" else " [color=#8a8a8a]HOST[/color]")
 			peer_di_slot = 1
 		elif jenis[s] == "ai":
@@ -516,6 +519,8 @@ func _segarkan_lobby() -> void:
 				var milik_saya = (not host) and peer_di_slot == id_saya
 				saya_dapat_slot = saya_dapat_slot or milik_saya
 				var teks_p = _teks_profil(peer_di_slot)
+				if teks_p != "":
+					teks_p = "[url=%d]%s[/url]" % [peer_di_slot, teks_p]
 				nama = (teks_p if teks_p != "" else "PLAYER") + (" (YOU)" if milik_saya else "")
 			else:
 				nama = "[color=#8a8a8a]waiting for player...[/color]"
@@ -652,7 +657,7 @@ func rpc_role_lobby(role: String, jebakan: Array, build: Dictionary) -> void:
 # ========================================================
 func _profil_saya() -> Dictionary:
 	return {"nama": ProfilPemain.nama, "level": ProfilPemain.level_sekarang(),
-		"respect": ProfilPemain.respect, "mvp_total": ProfilPemain.mvp_total}
+		"respect": ProfilPemain.respect, "mvp_total": ProfilPemain.mvp_total, "role": ProfilPemain.role_terakhir}
 
 func _angka_aman(v, maks: int, minimal: int = 0) -> int:
 	# Client bisa mengirim apa saja: bukan angka -> minimal.
@@ -666,7 +671,16 @@ func _profil_sah(d: Dictionary, id_peer: int) -> Dictionary:
 	if typeof(d.get("nama", "")) != TYPE_STRING or ProfilPemain.cek_nama(nama) != "":
 		nama = "Player%d" % (1000 + id_peer % 9000)
 	return {"nama": nama, "level": _angka_aman(d.get("level", 1), 999, 1),
-		"respect": _angka_aman(d.get("respect", 0), 999999), "mvp_total": _angka_aman(d.get("mvp_total", 0), 999999)}
+		"respect": _angka_aman(d.get("respect", 0), 999999), "mvp_total": _angka_aman(d.get("mvp_total", 0), 999999),
+		"role": _role_aman(d.get("role", ""))}
+
+func _role_aman(v) -> String:
+	# Client bisa mengirim apa saja: hanya id role yang dikenal.
+	return v if typeof(v) == TYPE_STRING and DataRole.ROLE.has(v) else ""
+
+func _buka_kartu_lobby(meta) -> void:
+	# Fase 6 G2: ketuk nama pemain di daftar lobby -> kartu profil (data dari profil_peer).
+	UiProfil.tampilkan_kartu_profil(self, profil_peer.get(int(str(meta)), {}))
 
 func _tunggu_profil(id_peer: int) -> void:
 	# HOST: peer yang tidak mengirim profil dalam batas waktu = HP versi lama -> diputus.

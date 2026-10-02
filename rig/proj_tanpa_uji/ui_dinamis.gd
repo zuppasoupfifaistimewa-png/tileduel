@@ -606,6 +606,7 @@ static func _panel_papan_skor(main_node: Node, menang: bool, papan_skor: Array, 
 	kolom_kiri.size_flags_vertical = Control.SIZE_SHRINK_BEGIN
 	dua_kolom.add_child(kolom_kiri)
 
+	var slot_mvp: int = ProfilPemain.hitung_mvp(papan_skor)
 	for i in range(papan_skor.size()):
 		var data = papan_skor[i]
 		var slot_baris = int(data["slot"])
@@ -625,7 +626,11 @@ static func _panel_papan_skor(main_node: Node, menang: bool, papan_skor: Array, 
 		baris.add_theme_color_override("font_color", Color(1.0, 0.85, 0.2) if i == 0 else Color.WHITE)
 		baris.add_theme_color_override("font_outline_color", Color.BLACK)
 		baris.add_theme_constant_override("outline_size", 6)
-		kolom_kiri.add_child(baris)
+		if nm_mp != "":
+			# Fase 6 G2: multiplayer -- ketuk baris = kartu profil; lawan manusia punya tombol RESPECT.
+			kolom_kiri.add_child(_baris_pemain_mp(main_node, slot_baris, baris, banyak))
+		else:
+			kolom_kiri.add_child(baris)
 
 		var detail = Label.new()
 		if quick:
@@ -637,6 +642,16 @@ static func _panel_papan_skor(main_node: Node, menang: bool, papan_skor: Array, 
 		detail.add_theme_color_override("font_color", Color(0.75, 0.75, 0.8))
 		kolom_kiri.add_child(detail)
 
+		# Fase 6 G2: MVP = penghargaan terbanyak (seri -> pemenang), dihitung sama di semua HP.
+		if slot_baris == slot_mvp:
+			var lbl_mvp = Label.new()
+			lbl_mvp.text = "MVP"
+			lbl_mvp.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+			lbl_mvp.add_theme_font_size_override("font_size", 20)
+			lbl_mvp.add_theme_color_override("font_color", Color(1.0, 0.6, 0.15))
+			lbl_mvp.add_theme_color_override("font_outline_color", Color.BLACK)
+			lbl_mvp.add_theme_constant_override("outline_size", 5)
+			kolom_kiri.add_child(lbl_mvp)
 		# Fase 2: penghargaan akhir milik pemain di baris ini (juga AI).
 		var daftar_penghargaan: Array = data.get("penghargaan", [])
 		if not daftar_penghargaan.is_empty():
@@ -671,6 +686,41 @@ static func _panel_papan_skor(main_node: Node, menang: bool, papan_skor: Array, 
 	canvas.add_child(btn_exit)
 
 	main_node.get_tree().current_scene.add_child(canvas)
+
+static func _baris_pemain_mp(main_node: Node, slot_baris: int, baris: Label, banyak: bool) -> Control:
+	# Fase 6 G2: baris peringkat multiplayer = tombol datar (ketuk -> kartu profil) + tombol RESPECT untuk lawan manusia.
+	var kotak = HBoxContainer.new()
+	kotak.alignment = BoxContainer.ALIGNMENT_CENTER
+	kotak.add_theme_constant_override("separation", 12)
+	var nama = Button.new()
+	nama.flat = true
+	nama.text = baris.text
+	nama.add_theme_font_size_override("font_size", baris.get_theme_font_size("font_size"))
+	for k in ["font_color", "font_hover_color", "font_pressed_color", "font_focus_color"]:
+		nama.add_theme_color_override(k, baris.get_theme_color("font_color"))
+	nama.add_theme_color_override("font_outline_color", Color.BLACK)
+	nama.add_theme_constant_override("outline_size", 6)
+	nama.pressed.connect(func():
+		var d: Dictionary = {}
+		if slot_baris == main_node.slot_lokal:
+			d = {"nama": ProfilPemain.nama, "level": ProfilPemain.level_sekarang(), "respect": ProfilPemain.respect,
+				"mvp_total": ProfilPemain.mvp_total, "role": ProfilPemain.role_terakhir}
+		elif slot_baris < StatusJaringan.profil_slot.size():
+			d = StatusJaringan.profil_slot[slot_baris]
+		UiProfil.tampilkan_kartu_profil(main_node, d, 140))
+	kotak.add_child(nama)
+	if main_node.bisa_beri_respect(slot_baris):
+		var r = Button.new()
+		r.text = "RESPECT"
+		r.custom_minimum_size = Vector2(130, 40 if banyak else 46)
+		r.add_theme_font_size_override("font_size", 18)
+		_gaya_tombol(r, Color(0.2, 0.6, 0.3))
+		r.pressed.connect(func():
+			if main_node.kirim_respect(slot_baris):
+				r.disabled = true
+				r.text = "SENT")
+		kotak.add_child(r)
+	return kotak
 
 static func tampilkan_panel_lawan_keluar(main_node: Node) -> void:
 	# Muncul di device yang MASIH hidup ketika lawannya keluar/putus koneksi.

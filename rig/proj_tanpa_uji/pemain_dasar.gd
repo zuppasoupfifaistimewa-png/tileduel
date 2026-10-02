@@ -303,6 +303,9 @@ const KARTU_BANTUAN_MAKS_INVENTARIS := 3
 # ikut baris papan skor di akhir pertandingan.
 var statistik_slot: Array = []
 var _hadiah_akhir_diproses: bool = false  # hadiah profil sudah dicatat (sekali per pertandingan)
+var _respect_terkirim: Dictionary = {}   # Fase 6: slot target -> true (Respect yang saya kirim di laga ini)
+var _respect_pasangan: Dictionary = {}   # HOST: "pengirim>target" -> true (satu Respect per pasangan per laga)
+var _respect_diterima: Dictionary = {}   # slot pengirim -> true (Respect yang sudah saya terima di laga ini)
 var _ringkasan_hadiah: Dictionary = {}    # hasil ProfilPemain.catat_akhir_match untuk layar akhir
 
 # --- MIGRASI HOST: host keluar -> pemain lain lanjut BERSAMA (lihat bagian MIGRASI HOST) ---
@@ -651,6 +654,9 @@ func _reset_statistik() -> void:
 	if statistik_slot.size() > 0:
 		statistik_slot[0]["giliran"] = 1 # giliran pertama P1 tidak lewat ganti_giliran
 	_hadiah_akhir_diproses = false
+	_respect_terkirim.clear()
+	_respect_pasangan.clear()
+	_respect_diterima.clear()
 	_ringkasan_hadiah = {}
 
 func _tambah_stat(slot: int, kunci: String, n: int = 1) -> void:

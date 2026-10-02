@@ -1714,6 +1714,75 @@ func _akhiri_karena_ronde_habis() -> void:
 	_alasan_akhir = "ronde_koin" if hasil["koin"] else "ronde"
 	await _akhiri_permainan(hasil["slot"])
 
+# --- Fase 6 G2: RESPECT (layar akhir multiplayer) ---
+# Alur: tombol -> kirim_respect -> (client) RPC ke HOST -> host memvalidasi & meneruskan ke target -> target +1 Respect.
+# Dua RPC baru SENGAJA bernama "rpc_zrespect_*": Godot mengurutkan RPC satu node menurut nama, nama yang jatuh
+# SESUDAH semua RPC lama (terakhir: rpc_umumkan) tidak menggeser nomor RPC lama. Beri nama RPC baru berikutnya awalan "rpc_z".
+func bisa_beri_respect(slot: int) -> bool:
+	# Hanya lawan MANUSIA di multiplayer (bukan AI / slot yang diambil alih AI setelah pemain keluar).
+	if StatusJaringan.peran_multiplayer == "" or slot == slot_lokal or slot < 0 or slot >= jumlah_pemain():
+		return false
+	return daftar_pemain[slot].jenis_kontrol != DataPemain.JenisKontrol.AI and _nama_manusia(slot) != ""
+
+func kirim_respect(slot_target: int) -> bool:
+	# Dipanggil tombol RESPECT di layar akhir. Satu kali per lawan per laga (ketukan ganda ditolak di sini).
+	if not (_permainan_selesai or _akhir_diterima) or not bisa_beri_respect(slot_target) or _respect_terkirim.has(slot_target):
+		return false
+	_respect_terkirim[slot_target] = true
+	if StatusJaringan.peran_multiplayer == "host":
+		_host_proses_respect(slot_lokal, slot_target)
+	else:
+		rpc_id(1, "rpc_zrespect_kirim", slot_target)
+	return true
+
+func _host_proses_respect(slot_pengirim: int, slot_target: int) -> bool:
+	# HOST: validasi (laga selesai, keduanya manusia & beda, belum pernah per pasangan) lalu teruskan ke target.
+	if not (_permainan_selesai or _akhir_diterima) or slot_pengirim == slot_target:
+		return false
+	if slot_pengirim < 0 or slot_pengirim >= jumlah_pemain() or slot_target < 0 or slot_target >= jumlah_pemain():
+		return false
+	if daftar_pemain[slot_pengirim].jenis_kontrol == DataPemain.JenisKontrol.AI or daftar_pemain[slot_target].jenis_kontrol == DataPemain.JenisKontrol.AI:
+		return false
+	var kunci = "%d>%d" % [slot_pengirim, slot_target]
+	if _respect_pasangan.has(kunci):
+		return false # kirim ganda ditolak
+	var peer_target = -1
+	if slot_target != slot_lokal:
+		peer_target = _peer_slot(slot_target)
+		if peer_target <= 0:
+			return false
+	_respect_pasangan[kunci] = true
+	if peer_target < 0:
+		_terima_respect(slot_pengirim)
+	else:
+		rpc_id(peer_target, "rpc_zrespect_terima", slot_pengirim)
+	return true
+
+@rpc("any_peer", "call_remote", "reliable")
+func rpc_zrespect_kirim(slot_target: int) -> void:
+	# Diterima HOST dari client (pengirim ditentukan dari id peer, bukan dari kiriman).
+	if StatusJaringan.peran_multiplayer != "host" or _migrasi_berjalan:
+		return
+	var slot_pengirim = _slot_dari_peer(multiplayer.get_remote_sender_id())
+	if slot_pengirim < 0:
+		return
+	_host_proses_respect(slot_pengirim, slot_target)
+
+@rpc("authority", "call_remote", "reliable")
+func rpc_zrespect_terima(slot_pengirim: int) -> void:
+	# Diterima TARGET dari host.
+	if multiplayer.get_remote_sender_id() != 1:
+		return
+	_terima_respect(slot_pengirim)
+
+func _terima_respect(slot_pengirim: int) -> void:
+	# Satu Respect per pengirim per laga (penjaga kedua di sisi penerima).
+	if slot_pengirim < 0 or slot_pengirim >= jumlah_pemain() or slot_pengirim == slot_lokal or _respect_diterima.has(slot_pengirim):
+		return
+	_respect_diterima[slot_pengirim] = true
+	ProfilPemain.tambah_respect()
+	UiProfil.tampilkan_toast(self, "%s gave you Respect!" % _nama_slot(slot_pengirim))
+
 func _proses_hadiah_akhir(slot_pemenang: int, papan_skor: Array) -> void:
 	# Hadiah profil untuk pemain di HP ini, SEKALI per pertandingan, langsung tersimpan
 	# (sebelum animasi/menunggu replay -- HP yang ditutup di layar akhir tetap dapat).
@@ -1721,6 +1790,9 @@ func _proses_hadiah_akhir(slot_pemenang: int, papan_skor: Array) -> void:
 		return
 	_hadiah_akhir_diproses = true
 	_ringkasan_hadiah = ProfilPemain.catat_akhir_match(_data_akhir_profil(slot_pemenang, papan_skor))
+	# Fase 6 G2: MVP dihitung lokal dari papan skor (sama di semua HP); +1 mvp_total kalau saya MVP.
+	if ProfilPemain.hitung_mvp(papan_skor) == slot_lokal:
+		ProfilPemain.catat_mvp()
 
 func _data_akhir_profil(slot_pemenang: int, papan_skor: Array) -> Dictionary:
 	var stat_lokal = {}

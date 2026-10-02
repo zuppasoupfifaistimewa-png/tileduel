@@ -308,6 +308,25 @@ func hitung_penghargaan(papan: Array) -> Dictionary:
 	_beri_tertinggi(hasil, papan, "lucky_roller", func(b): return [_rata_dadu(b)], 0.0)
 	return hasil
 
+func hitung_mvp(papan: Array) -> int:
+	# Fase 6: slot MVP = penghargaan terbanyak di laga itu; seri -> pemenang (baris pertama papan),
+	# masih seri -> slot terkecil. Hanya membaca papan (penghargaan sama di semua HP -> hasil sama).
+	var terbaik = -1
+	var calon: Array = []
+	for baris in papan:
+		var n = (baris.get("penghargaan", []) as Array).size()
+		if n > terbaik:
+			terbaik = n
+			calon = [int(baris["slot"])]
+		elif n == terbaik:
+			calon.append(int(baris["slot"]))
+	if calon.is_empty():
+		return -1
+	if papan.size() > 0 and calon.has(int(papan[0]["slot"])):
+		return int(papan[0]["slot"])
+	calon.sort()
+	return calon[0]
+
 func _beri_tertinggi(hasil: Dictionary, papan: Array, id_penghargaan: String, nilai: Callable, minimal: float) -> void:
 	# nilai(baris) -> [utama, penentu...]; dibandingkan berurutan. Utama < minimal = tidak ikut.
 	var terbaik = []
