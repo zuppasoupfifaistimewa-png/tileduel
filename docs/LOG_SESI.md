@@ -9,7 +9,8 @@ harus tercatat di sini, di `HANDOFF_LANJUT.md`, atau di RENCANA.
 - `kiriman/TileDuel_Fase5_b10.zip` dibuat PERTAMA dari `game/` (29 .gd, 13 berbeda dari b9) lalu commit+push (3507b38). Bersih-bersih minimal: 34/35 identik dgn rig, `UJI_*` false, tanpa `print`/TODO -> .gd tidak berubah, ZIP/cek_muat/cek_nilai tidak diulang.
 - Sisa uji: 11 `godot.log` terlacak di `rig/proj_tanpa_uji/sim/home_*`; `git rm` ditolak izin sesi, TIDAK dihapus (pemilik: `git rm -r rig/proj_tanpa_uji/sim`).
 - Daftar uji HP ditulis di RENCANA_fase5 bagian 6; HANDOFF & RENCANA bagian 9 diperbarui.
-- Langkah berikutnya: pemilik uji HP dgn b10 (HP + laptop untuk MP, semua build sama); bug -> Opus. Lalu rilis; fase berikutnya (Fase 6+) = rencana baru (Opus).
+- Uji HP b10 oleh pemilik: LANCAR (dilaporkan 02-10) -> Fase 5 SELESAI.
+- Langkah berikutnya: sesi Opus menyusun rencana Fase 6-9 (hemat kredit, ~US$28 total); pemilik merilis A+B+Fase 5.
 
 ## 2026-10-02 -- sesi Claude Code cloud (Opus 5.5): Fase 5 G8 (keseimbangan + soft-lock bangkrut)
 - Branch kerja: `claude/wonderful-gates-8v431l` (CLAUDE.md & HANDOFF bagian 0 diperbarui; `claude/new-session-e4ogqo` LAMA).

@@ -1,4 +1,4 @@
-# HANDOFF -- lanjutkan proyek Tile Duel (Fase 4 SELESAI; Fase 5: G0-G9 SELESAI; berikutnya uji HP pemilik dgn `kiriman/TileDuel_Fase5_b10.zip`)
+# HANDOFF -- lanjutkan proyek Tile Duel (Fase 4 SELESAI; Fase 5 SELESAI: G0-G9 + uji HP b10 LANCAR (02-10); berikutnya rilis A+B+Fase 5, lalu rencana Fase 6-9 oleh Opus)
 
 Dokumen ini ditulis 02-10-2026 supaya sesi Claude Code (cloud / web, tanpa CLI) mana pun bisa melanjutkan
 pekerjaan TANPA riwayat percakapan. BACA INI DULU, lalu `docs/RENCANA_fase4_role.md` bagian 14.19 & **14.21-14.24** (paling akhir).
@@ -243,7 +243,8 @@ Rig-only lain: `uji_*`, `cek_muat_f3.gd` (alat), dan 5 file proyek yang tidak ad
 - **G9 SELESAI (Sonnet, 02-10):** K11 = a, K12 = a (RENCANA_fase5 bagian 9). `kiriman/TileDuel_Fase5_b10.zip` = 29 .gd resmi dari `game/` akhir G8 (13 berbeda dari b9; 6 file pendukung tidak dikirim, tidak berubah sejak b9).
   Bersih-bersih minimal: `game/` 34/35 identik dgn rig (beda hanya stub iklan), `UJI_*` false, tanpa `print`/TODO -> tidak ada .gd `game/` berubah, ZIP tidak dibuat ulang; `cek_muat`/`cek_nilai`/regresi MP/U9 TIDAK diulang (sengaja, hemat kredit; hasil G8 masih berlaku).
   SISA: 11 `godot.log` terlacak di `rig/proj_tanpa_uji/sim/home_*` (sampah uji) -- penghapusan ditolak izin sesi, hapus dgn `git rm -r rig/proj_tanpa_uji/sim` bila mau.
-  **BERIKUTNYA (pemilik): uji HP b10** (RENCANA_fase5 bagian 6) lalu rilis A+B+Fase 5 (daftar periksa rilis di atas, plus `ID_INTERSTISIAL_ASLI`). Bug dari HP -> Opus dulu.
+  **UJI HP b10 LANCAR (02-10, laporan pemilik) -> Fase 5 SELESAI; `game/` = isi ZIP b10, jangan ubah kecuali ada bug.**
+  **BERIKUTNYA: sesi OPUS menyusun rencana Fase 6-9 (hemat kredit); pemilik merilis A+B+Fase 5** (daftar periksa rilis di atas, plus `ID_INTERSTISIAL_ASLI`). Bug dari HP -> Opus dulu.
 - Opsional (Sonnet, tidak menghalangi rilis): T22 (rig-only, D1 lebih kuat, RENCANA 14.23); komentar F5 untuk
   `hot_flames`/`fire_tax`/`strong_wind` di `data_role.gd` (komentar saja; ikut kiriman berikutnya).
 - Cara regresi MP di sesi cloud: salin `rig/skrip/jalankan_mp3.sh`, `uji_f2_t2_a/b.sh` ke scratchpad, ganti path
