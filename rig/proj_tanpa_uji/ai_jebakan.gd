@@ -34,7 +34,7 @@ const AMBANG_PELUANG := 90 # U3: 70 -> 80
 # (GROUNDED_LV: Lv0 sisa=2 giliran -> 75+75x1=150 SAMA seperti dulu; Lv1/2/3
 # sisa=1 giliran -> 75+75x0=75, separuh, sesuai T4/K13).
 const NILAI_PETIR_BERHENTI := 75.0
-const NILAI_PETIR_LEWAT_GILIRAN := 75.0
+const NILAI_PETIR_LEWAT_GILIRAN := 150.0 # F5 r4: 75 -> 150 (giliran hilang di Quick bernilai tempo besar; AI api dulu tidak pernah pakai petir vs petir)
 # Nilai korban air per giliran melayang di gelembung (tidak beraksi, tidak dapat gaji).
 const NILAI_GELEMBUNG_PER_GILIRAN := 75.0
 # Nilai jebakan tanah = denda petak x ini (bagian 6 langkah 3).
@@ -54,7 +54,7 @@ const NILAI_KUNCI_KARTU := 20.0     # air: frozen_bubble, per giliran kartu terk
 const NILAI_LOW_ROLL := 40.0        # air: frozen_bubble Lv3, LOW ROLL sekali
 const NILAI_BINTANG := 100.0        # air: nilai dasar +1 bintang (high_tide)
 const NILAI_KARTU := 60.0           # petir: nilai 1 kartu dicuri (card_magnet)
-const FAKTOR_ULANG_ULTIMATE := 1.5  # Phoenix (api) / Tornado (angin): korban terulang
+const FAKTOR_ULANG_ULTIMATE := 1.2  # F5 r4: 1.5 -> 1.2 -- Phoenix (api) / Tornado (angin): korban terulang
 const FAKTOR_DUEL_TAMBAHAN := 0.5   # tanah: hard_rock, per duel TAMBAHAN di atas 1
 const FAKTOR_HP_AWAL := 1.3         # tanah: hard_rock Lv3, +HP awal duel
 
