@@ -1981,9 +1981,66 @@ bukan sisa rig.
   wajib diulang penuh sebelum F8 kalau F5 mengubah `ai_jebakan.gd`/`ai_musuh.gd` (biaya rendah dibanding
   U9, tapi krusial utk cek regresi jaringan).
 
-**STATUS: F5 BERJALAN, DIJEDA 02-10 (Opus 28-09, serah-terima ke repo GitHub).**
+**STATUS LAMA (ditimpa 14.21 di bawah): F5 BERJALAN, DIJEDA 02-10 (Opus 28-09, serah-terima ke repo GitHub).**
 - Penyetelan dilakukan di salinan rig (`proj_tanpa_uji`), PRODUKSI BELUM DIUBAH. Hasil S1 (Quick 2P, 1200) per putaran, win-rate air/angin/api/petir/tanah (%) & jebakan/AI:
   baseline 47.7/57.5/42.9/51.7/50.2 & 1.88; r1 47.5/54.2/42.9/54.0/51.5 & 1.99; r2 48.1/56.0/44.6/51.9/49.4 & 2.18; r3 PARSIAL (633/1200, proses mati saat jeda).
 - Perubahan: r1 AMBANG_NILAI 50->40, hot_flames 70/80/90->75/90/105, strong_wind .12/.14/.16->.11/.12/.13; r2 AMBANG_PELUANG 80->90, hot_flames->80/100/120, fire_tax .25/.5/.75->.5/.75/1.0; r3 hot_flames->90/110/130, homing_wind .25/.5/.75->.2/.4/.6.
 - Sisa: angin ~56% (batas atas), pasangan api vs petir ~34% (petir "wajib" di 2P). S2 (4P) belum diuji ulang. Rincian & cara melanjutkan: `HANDOFF_LANJUT.md` di repo. Catatan 14.21 (lama -> baru, alasan) BELUM ditulis -- tugas akhir F5.
 - Insiden: rantai r1 otomatis lanjut ke S2 saat file `.gd` sudah diubah untuk r2 -> data S2-r1 tercemar, dibuang (tidak dipakai).
+
+### 14.21 F5 SELESAI -- angka final penyetelan U9 (Opus, 02-10, sesi Claude Code cloud + Godot 4.7.1)
+
+**STATUS: F5 SELESAI. Semua syarat P14 LOLOS di benih BARU (20000; S4 ditambah 30000 & 40000). PRODUKSI (`game/`)
+BELUM DIUBAH -- angka final ada di `rig/proj_tanpa_uji/` & `f5_kandidat/*.patch`; penerapan = F6 (Sonnet).**
+
+Lingkungan: rig dijalankan ulang di sesi cloud (Godot 4.7.1 headless, 4 inti, PARALEL=4). Determinisme dibuktikan:
+pertandingan benih 5000/5001 identik dengan baris r3 lama (mesin lama); `cek_nilai=1` dgn angka produksi 8/8 OK.
+r3 dilanjutkan sampai 1200/1200 (air 48.3 / angin 54.6 / api 45.2 / petir 51.9 / tanah 50.0, jebakan/AI 2.18) --
+satu-satunya gagal: pasangan api vs petir 34.2% (petir batas bawah CI 57.0 > 55).
+
+**Diagnosis api vs petir (uji diagnosis di SALINAN rig, tidak memakai benih konfirmasi):**
+- Penguatan api r1-r3 menaikkan api vs angin/tanah (43->51%, 42->52%) tapi api vs petir/air (pemilik heat_skin)
+  TURUN (38->34%, 48->44%): potongan persen heat_skin menelan kenaikan bakaran.
+- D1 (heat_skin vs api = 0): api>petir hanya 34.2 -> 37.5% (api>air 44.2 -> 52.5%). heat_skin BUKAN penyebab utama.
+- Data r3: vs petir, AI api HANYA memasang jebakan api (pasang 1.9 = pasang role 1.9) walau membawa angin+petir
+  (`jebakan_bawaan_ai` = [api, angin, petir]). Nilai AI jebakan api ~445 (bakar x giliran x (1+fire_tax) x Phoenix 1.5
+  x role 1.2, dipotong heat_skin) vs jebakan petir 150 -- padahal petir TIDAK punya grounded. Api menguras koin petir
+  LEBIH banyak (192 vs 94) tapi kalah ~350 koin: petir menang lewat TEMPO (lumpuh + sewa petak), bukan koin.
+- D2 (AI api tidak memakai api vs pemilik heat_skin): api>petir 34.2 -> 45.8%. -> masalah = penilaian AI (tuas 1).
+
+**Perubahan angka (produksi `game/` -> final), semuanya di `data_role.gd` NODE_LV & konstanta `ai_jebakan.gd`:**
+| Konstanta | Produksi | Final | Putaran | Alasan |
+|---|---|---|---|---|
+| `AMBANG_NILAI` (ai_jebakan) | 50 | 40 | r1 | jebakan/AI 1.88 < 2 (P14) |
+| `AMBANG_PELUANG` (ai_jebakan) | 80 | 90 | r2 | idem -> 2.18 |
+| `NILAI_PETIR_LEWAT_GILIRAN` (ai_jebakan) | 75 | 150 | r4 | giliran hilang = tempo besar di Quick; AI api kini memakai petir vs petir |
+| `FAKTOR_ULANG_ULTIMATE` (ai_jebakan) | 1.5 | 1.2 | r4 | Phoenix/Tornado jarang kena korban ke-2 di 2P; nilai api terlalu tinggi |
+| `hot_flames` | 70/80/90 | 90/110/130 | r1-r3 | api lemah (42.9%) vs non-heat_skin |
+| `fire_tax` | .25/.5/.75 | .5/.75/1.0 | r2 | idem |
+| `strong_wind` | .12/.14/.16 | .11/.12/.13 | r1 | angin 57.5% |
+| `homing_wind` | .25/.5/.75 | .15/.3/.45 | r3 (.2/.4/.6), r5 | angin konsisten ~55.6% 2P & 28.9% 4P (bias nyata, 5 pengukuran) |
+TIDAK diubah: `DASAR`, `PRESET`/`PRESET_URUTAN_JEBAKAN`, `BOBOT_TAHAN_AI`, K17-K19, node lain.
+
+**Hasil S1 (2P) per putaran, benih 5000 (air/angin/api/petir/tanah %, jebakan/AI):** baseline 47.7/57.5/42.9/51.7/50.2,
+1.88 | r1 47.5/54.2/42.9/54.0/51.5, 1.99 | r2 48.1/56.0/44.6/51.9/49.4, 2.18 | r3 48.3/54.6/45.2/51.9/50.0, 2.18 |
+r4 47.3/55.8/47.7/49.6/49.6, 2.14 (api>petir 42.5%, semua syarat lolos). S2 r4 (4P): 24.2/28.9/20.4/26.2/25.6.
+
+**KONFIRMASI benih BARU 20000 (angka final r5, belum pernah dipakai menyetel) -- `hasil/f5_konfirmasi_b20000/`:**
+- S1 Quick 2P (1200): 50.2/49.8/46.5/48.1/55.4 -- tiap role 44-56 OK; 0 pasangan "!" (api>petir 40.0%, petir batas
+  bawah 51.1); 0 sel wajib/mati; jebakan/AI 2.12 OK; panjang 291.4 dtk (<= 318.1) OK.
+- S2 Quick 4P (400): 22.7/27.6/21.1/26.7/27.4 -- tiap role 20-30 OK; panjang 389.5 (<= 463.8) OK.
+- S3 solo Lv20 2P (1200): 44.8/50.8/54.2/51.0/49.2 -- OK; 0 pasangan "!"; jebakan/AI 2.15.
+- S4 solo Lv1 2P: benih 20000 (400) 53.8/**56.2**/47.5/**41.9**/50.6 (CI +-7.7, 2 role di luar band) -> sebelum
+  menyentuh DASAR, sampel ditambah 800 (benih 30000 & 40000, `hasil/f5_s4_tambahan/`). GABUNGAN 1200:
+  48.8/55.2/46.9/47.7/51.5 -- OK, 0 pasangan "!". -> syarat "ketimpangan juga di S4" TIDAK terpenuhi, DASAR tidak diubah.
+- S5 panjang (240, Lv20 Balanced): 2P 264.0 / 3P 306.0 / 4P 386.5 dtk -- semua <= patokan +15% OK.
+- XP Role: rata2 ~150-160 XP/Quick (xprole0) -> Lv15 (5.950 XP) ~40 pertandingan, Lv20 (10.450 XP) ~70 -- dalam
+  15-60 untuk Lv15, tidak perlu K baru.
+- Dipantau (lolos, tapi dekat batas): angin di Lv1 ~55% (S4); air di Lv20 44.8% (S3); api di 4P ~21%.
+
+**Langkah berikutnya -- F6 (Sonnet):** terapkan HANYA baris angka di atas ke `game/data_role.gd` & `game/ai_jebakan.gd`
+(aturan 0.2; perbarui komentar "U3/F5"); perbarui 3 harapan `cek_nilai` di `rig/proj_tanpa_uji/uji_nyata.gd`
+(api_hotflames3_longburn2_vs_heatskin1, angin_homingwind2_uang1000, api_phoenix_x1_5) ke angka final; `cek_nilai=1`
+8/8; regresi MP 37 skenario WAJIB (ai_jebakan.gd berubah); `batch_reg10.sh`; U11. Lalu F7 (grep debug = 0, sinkron
+rig, diff bersih) & F8 (ZIP 29 .gd + RENCANA).
+

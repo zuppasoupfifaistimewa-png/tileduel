@@ -1,6 +1,6 @@
---- /home/claude/ai_jebakan.gd	2026-09-26 22:44:38.496073937 +0700
-+++ /tmp/claude-0/-home-claude/bc2a37a6-77d5-5593-942f-124ebd210f19/scratchpad/proj_tanpa_uji/ai_jebakan.gd	2026-09-28 09:23:16.579229429 +0700
-@@ -24,10 +24,10 @@
+--- game/ai_jebakan.gd	2026-10-01 23:12:49.000000000 +0000
++++ rig/proj_tanpa_uji/ai_jebakan.gd	2026-10-02 00:36:56.922113766 +0000
+@@ -24,17 +24,17 @@
  # Nilai minimal supaya AI mau memasang jebakan (bagian 6 langkah 4). Angka
  # awal -- disetel Opus di uji keseimbangan (K11 / U3, target: AI memasang
  # 2-6 jebakan per Quick 2 pemain).
@@ -13,3 +13,20 @@
  # D4 (B-d/K17a, 26-09): NILAI_PETIR_LUMPUH (150, flat) DIHAPUS -- diganti 2
  # angka level-sensitif: dasar BERHENTI selalu kena (petir tetap menghentikan
  # gerakan korban meski Grounded tinggi) + tambahan PER GILIRAN sisa lumpuh
+ # (GROUNDED_LV: Lv0 sisa=2 giliran -> 75+75x1=150 SAMA seperti dulu; Lv1/2/3
+ # sisa=1 giliran -> 75+75x0=75, separuh, sesuai T4/K13).
+ const NILAI_PETIR_BERHENTI := 75.0
+-const NILAI_PETIR_LEWAT_GILIRAN := 75.0
++const NILAI_PETIR_LEWAT_GILIRAN := 150.0 # F5 r4: 75 -> 150 (giliran hilang di Quick bernilai tempo besar; AI api dulu tidak pernah pakai petir vs petir)
+ # Nilai korban air per giliran melayang di gelembung (tidak beraksi, tidak dapat gaji).
+ const NILAI_GELEMBUNG_PER_GILIRAN := 75.0
+ # Nilai jebakan tanah = denda petak x ini (bagian 6 langkah 3).
+@@ -54,7 +54,7 @@
+ const NILAI_LOW_ROLL := 40.0        # air: frozen_bubble Lv3, LOW ROLL sekali
+ const NILAI_BINTANG := 100.0        # air: nilai dasar +1 bintang (high_tide)
+ const NILAI_KARTU := 60.0           # petir: nilai 1 kartu dicuri (card_magnet)
+-const FAKTOR_ULANG_ULTIMATE := 1.5  # Phoenix (api) / Tornado (angin): korban terulang
++const FAKTOR_ULANG_ULTIMATE := 1.2  # F5 r4: 1.5 -> 1.2 -- Phoenix (api) / Tornado (angin): korban terulang
+ const FAKTOR_DUEL_TAMBAHAN := 0.5   # tanah: hard_rock, per duel TAMBAHAN di atas 1
+ const FAKTOR_HP_AWAL := 1.3         # tanah: hard_rock Lv3, +HP awal duel
+ 

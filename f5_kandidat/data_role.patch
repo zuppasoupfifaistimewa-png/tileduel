@@ -1,5 +1,5 @@
---- /home/claude/data_role.gd	2026-09-26 19:00:24.395230727 +0700
-+++ /tmp/claude-0/-home-claude/bc2a37a6-77d5-5593-942f-124ebd210f19/scratchpad/proj_tanpa_uji/data_role.gd	2026-09-28 10:14:22.500090409 +0700
+--- game/data_role.gd	2026-10-01 23:12:49.000000000 +0000
++++ rig/proj_tanpa_uji/data_role.gd	2026-10-02 01:07:32.585546474 +0000
 @@ -289,8 +289,8 @@
  
  const NODE_LV := {
@@ -18,7 +18,7 @@
 -	"strong_wind": {1: 0.12, 2: 0.14, 3: 0.16}, # persen rampas (14.1: dasar angin 10% -> 18% Lv1 terlalu melompat)
 -	"homing_wind": {1: 0.25, 2: 0.5, 3: 0.75}, # bagian rampasan -> pemasang langsung
 +	"strong_wind": {1: 0.11, 2: 0.12, 3: 0.13}, # persen rampas (14.1: dasar angin 10% -> 18% Lv1 terlalu melompat)
-+	"homing_wind": {1: 0.2, 2: 0.4, 3: 0.6}, # bagian rampasan -> pemasang langsung
++	"homing_wind": {1: 0.15, 2: 0.3, 3: 0.45}, # bagian rampasan -> pemasang langsung (F5 r5: .2/.4/.6 -> .15/.3/.45, angin konsisten ~55.6% 2P & 28.9% 4P)
  	"whirlwind": {1: 1, 2: 2, 3: 3}, # langkah dadu hilang
  }
  
