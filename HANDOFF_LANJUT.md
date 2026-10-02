@@ -19,8 +19,15 @@ Diperbarui 02-10 (Opus, sesi Claude Code cloud): **F5 SELESAI, semua syarat P14 
    HANDOFF_LANJUT.md (status + langkah berikutnya) dan push ke GitHub (branch `claude/new-session-e4ogqo`),
    bersama data hasil tahap itu. Pekerjaan tidak boleh hanya ada di satu sesi/container.
 7. (02-10) JANGAN jalankan dua rantai simulasi bersamaan, dan JANGAN ubah file apa pun di `rig/` (terutama
-   `rig/proj_tanpa_uji/*.gd`) selama simulasi masih berjalan. Cek `pgrep -f Godot_v4` kosong dulu sebelum
-   mengubah angka atau memulai rantai baru.
+   `rig/proj_tanpa_uji/*.gd`) selama simulasi masih berjalan. Cek `ps -eo comm | grep -c ^Godot` = 0 dulu sebelum
+   mengubah angka atau memulai rantai baru (`pgrep -f Godot_v4` keliru: cocok dengan baris perintahnya sendiri).
+8. (02-10) Pantau panjang sesi. Kalau sesi sudah panjang (satu tahap selesai & ter-push, puluhan panggilan alat /
+   beberapa hasil simulasi panjang, konteks mulai diringkas otomatis, atau tahap berikutnya cocok untuk model lain):
+   INGATKAN pemilik untuk membuka sesi baru, setelah memastikan semua sudah di-push, dan beri prompt siap tempel
+   (lihat dokumen "Tile Duel -- Panduan Sesi Kerja": https://claude.ai/code/artifact/bc2bfff0-d4f6-4ff0-89ed-16dd35ecbe48).
+9. (02-10) Sesi baru TIDAK bisa membaca percakapan lama. Jadi di akhir tiap sesi: tambah ringkasan (tanggal, model,
+   yang dikerjakan, keputusan, commit terakhir, langkah berikutnya) ke `docs/LOG_SESI.md` lalu push. Sesi baru membaca
+   `CLAUDE.md` -> `HANDOFF_LANJUT.md` -> `docs/LOG_SESI.md`.
 
 ## 1. Isi repo
 | Folder | Isi |
