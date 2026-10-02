@@ -1,4 +1,4 @@
-# HANDOFF -- lanjutkan proyek Tile Duel (Fase 4 SELESAI; Fase 5 SELESAI: G0-G9 + uji HP b10 LANCAR (02-10); rencana Fase 6-9 DISETUJUI 02-10 (`docs/RENCANA_fase6_9.md`); berikutnya Fase 6 G0+G1 (Sonnet))
+# HANDOFF -- lanjutkan proyek Tile Duel (Fase 4 SELESAI; Fase 5 SELESAI: G0-G9 + uji HP b10 LANCAR (02-10); rencana Fase 6-9 DISETUJUI 02-10 (`docs/RENCANA_fase6_9.md`); Fase 6 G0+G1 SELESAI (02-10); berikutnya Fase 6 G2 (Sonnet))
 
 Dokumen ini ditulis 02-10-2026 supaya sesi Claude Code (cloud / web, tanpa CLI) mana pun bisa melanjutkan
 pekerjaan TANPA riwayat percakapan. BACA INI DULU, lalu `docs/RENCANA_fase4_role.md` bagian 14.19 & **14.21-14.24** (paling akhir).
@@ -245,6 +245,10 @@ Rig-only lain: `uji_*`, `cek_muat_f3.gd` (alat), dan 5 file proyek yang tidak ad
   SISA: 11 `godot.log` terlacak di `rig/proj_tanpa_uji/sim/home_*` (sampah uji) -- penghapusan ditolak izin sesi, hapus dgn `git rm -r rig/proj_tanpa_uji/sim` bila mau.
   **UJI HP b10 LANCAR (02-10, laporan pemilik) -> Fase 5 SELESAI; `game/` = isi ZIP b10, jangan ubah kecuali ada bug.**
   **BERIKUTNYA: sesi OPUS menyusun rencana Fase 6-9 (hemat kredit); pemilik merilis A+B+Fase 5** (daftar periksa rilis di atas, plus `ID_INTERSTISIAL_ASLI`). Bug dari HP -> Opus dulu.
+- **FASE 6 G0+G1 SELESAI (Sonnet, 02-10; rincian RENCANA_fase6_9 bagian 9, bukti `hasil/g6_profil/`):** profil VERSI 3 (`respect`, `mvp_total`; uji headless 18/18), penjaga versi lobby BARU
+  (`VERSI_PROTOKOL=2`, `rpc_sosial_profil`/`rpc_tolak_versi` -- nama RPC baru harus jatuh SESUDAH `rpc_role_lobby` secara abjad), profil lobby -> `StatusJaringan.profil_slot` (semua HP), nama+level tampil di lobby/teks/papan/akhir.
+  `game/` & rig identik (beda hanya stub iklan); rig-only: `uji_profil_v3.gd/.tscn`, `uji_robot_mp.gd` (nama "Bot ..." + log `PROFIL_NAMA`). Subset MP 1v1 / 3P client keluar / 4P migrasi host: 0 beda, 0 SCRIPT ERROR; `cek_muat_f3` 26/26. `game/` BERUBAH (8 .gd) -> ZIP b11 dibuat di G3.
+  **BERIKUTNYA: sesi SONNET Fase 6 G2** (MVP + Respect + kartu profil; RENCANA_fase6_9 bagian 1 F6.3-F6.5) + MP subset sama + 1 skenario Respect.
 - **RENCANA FASE 6-9 DISETUJUI (Opus, 02-10): `docs/RENCANA_fase6_9.md`** -- pemilik "setuju semua a" (K1-K15). Tujuan: retensi.
   F6 identitas MP ringan (nama/level, MVP, Respect, penjaga versi) -> F7 toko Crowns + Remove Ads (regresi MP 37 SEKALI di F7 G5)
   -> F8 event mingguan offline + mastery -> F9 misi/taruhan Tebak Duel + penutup. Kredit ~US$25, perkiraan ~23.5 (urutan pangkas: bagian 6).

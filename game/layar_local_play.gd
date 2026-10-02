@@ -58,6 +58,14 @@ var peta_lobby: String = "alam"
 # mesin_acak, yang belum ada sampai panggung_utama.tscn dimuat).
 var role_peer: Dictionary = {}
 var role_ai_lobby: Dictionary = {}
+# Fase 6: profil tiap peer di lobby (peer_id -> {"nama","level","respect","mvp_total"}). Diisi HOST dari
+# rpc_profil_lobby (divalidasi), disalin ke client lewat rpc_info_lobby. Peer BARU masuk urutan_client hanya
+# setelah profilnya sah (= penjaga versi: client versi lama tidak pernah mengirimnya -> ditendang).
+var profil_peer: Dictionary = {}
+const BATAS_WAKTU_PROFIL := 4.0       # host: client yang tidak mengirim profil sebanyak ini dianggap versi lama
+const BATAS_WAKTU_SAMBUTAN := 6.0     # client: host yang tidak mengirim info lobby sebanyak ini dianggap versi lama
+const TEKS_UPDATE := "Please update the game to play together."
+var _info_lobby_diterima := false
 var tombol_role_saya: Button
 var _rng_lobby := RandomNumberGenerator.new()
 # QUICK MATCH / CLASSIC (Fase 1): dipilih host, pilihan terakhir diingat.
@@ -245,6 +253,7 @@ func _jadi_host() -> void:
 	urutan_client.clear()
 	role_peer.clear()
 	role_ai_lobby.clear()
+	profil_peer = {1: _profil_saya()}
 	_tampilkan_lobby()
 
 func _jadi_client(ip_host: String) -> void:
@@ -281,18 +290,21 @@ func _saat_pemain_lain_gabung(id_peer: int) -> void:
 		return
 	# Belum pindah scene: pemain yang gabung masuk LOBBY dulu. Host yang memilih
 	# mode & peta lalu menekan START (lihat _mulai_dari_lobby).
-	if not urutan_client.has(id_peer):
-		urutan_client.append(id_peer)
-	_segarkan_lobby()
-	_kirim_info_lobby()
+	# Fase 6: peer baru BELUM masuk urutan_client -- baru setelah rpc_profil_lobby sah.
+	# Tidak mengirim profil dalam BATAS_WAKTU_PROFIL = HP versi lama -> ditendang.
+	_tunggu_profil(id_peer)
 
 func _saat_berhasil_connect() -> void:
 	if sudah_pindah_scene:
 		return
 	# Client menunggu di lobby sampai host menekan START.
-	label_status.text = "Connected!"
+	# Fase 6: lobby baru tampil saat info lobby pertama dari host tiba (rpc_info_lobby);
+	# sebelum itu kirim versi + profil. Host versi lama tidak membalas -> pesan update.
+	label_status.text = "Connected! Joining..."
 	mode_saat_ini = "lobby_client"
-	_tampilkan_lobby()
+	_info_lobby_diterima = false
+	rpc_id(1, "rpc_sosial_profil", StatusJaringan.VERSI_PROTOKOL, _profil_saya())
+	_tunggu_sambutan_host()
 
 func _saat_gagal_connect() -> void:
 	label_status.text = "Connection failed. Tap Refresh to try again."
@@ -314,6 +326,8 @@ func _bersihkan_semua() -> void:
 		multiplayer.multiplayer_peer = null
 	role_peer.clear()
 	role_ai_lobby.clear()
+	profil_peer.clear()
+	_info_lobby_diterima = false
 
 # ========================================================
 # LOBBY MULTIPLAYER (2-4 pemain)
@@ -491,7 +505,8 @@ func _segarkan_lobby() -> void:
 		var nama = ""
 		var peer_di_slot = -1
 		if s == 0:
-			nama = "HOST" + (" (YOU)" if host else "")
+			var teks_h = _teks_profil(1)
+			nama = (teks_h if teks_h != "" else "HOST") + (" (YOU)" if host else "") + ("" if teks_h == "" else " [color=#8a8a8a]HOST[/color]")
 			peer_di_slot = 1
 		elif jenis[s] == "ai":
 			nama = "AI"
@@ -500,7 +515,8 @@ func _segarkan_lobby() -> void:
 				peer_di_slot = urutan_client[ke]
 				var milik_saya = (not host) and peer_di_slot == id_saya
 				saya_dapat_slot = saya_dapat_slot or milik_saya
-				nama = "PLAYER" + (" (YOU)" if milik_saya else "")
+				var teks_p = _teks_profil(peer_di_slot)
+				nama = (teks_p if teks_p != "" else "PLAYER") + (" (YOU)" if milik_saya else "")
 			else:
 				nama = "[color=#8a8a8a]waiting for player...[/color]"
 			ke += 1
@@ -628,6 +644,98 @@ func rpc_role_lobby(role: String, jebakan: Array, build: Dictionary) -> void:
 	_segarkan_lobby()
 	_kirim_info_lobby()
 
+# ========================================================
+# Fase 6: PROFIL & PENJAGA VERSI di lobby.
+# Dua RPC baru SENGAJA bernama "rpc_sosial_profil" & "rpc_tolak_versi": Godot mengurutkan RPC satu
+# skrip menurut nama, jadi nama yang jatuh SESUDAH "rpc_role_lobby" tidak menggeser nomor RPC lama
+# (HP versi lama tidak salah memanggil fungsi lain). Beri nama RPC baru di skrip ini dgn awalan huruf > "r".
+# ========================================================
+func _profil_saya() -> Dictionary:
+	return {"nama": ProfilPemain.nama, "level": ProfilPemain.level_sekarang(),
+		"respect": ProfilPemain.respect, "mvp_total": ProfilPemain.mvp_total}
+
+func _angka_aman(v, maks: int, minimal: int = 0) -> int:
+	# Client bisa mengirim apa saja: bukan angka -> minimal.
+	if typeof(v) != TYPE_INT and typeof(v) != TYPE_FLOAT:
+		return minimal
+	return clampi(int(v), minimal, maks)
+
+func _profil_sah(d: Dictionary, id_peer: int) -> Dictionary:
+	# HOST: validasi ulang profil kiriman client (nama disaring seperti di layar profil, angka dibatasi).
+	var nama = str(d.get("nama", "")).strip_edges()
+	if typeof(d.get("nama", "")) != TYPE_STRING or ProfilPemain.cek_nama(nama) != "":
+		nama = "Player%d" % (1000 + id_peer % 9000)
+	return {"nama": nama, "level": _angka_aman(d.get("level", 1), 999, 1),
+		"respect": _angka_aman(d.get("respect", 0), 999999), "mvp_total": _angka_aman(d.get("mvp_total", 0), 999999)}
+
+func _tunggu_profil(id_peer: int) -> void:
+	# HOST: peer yang tidak mengirim profil dalam batas waktu = HP versi lama -> diputus.
+	await get_tree().create_timer(BATAS_WAKTU_PROFIL).timeout
+	if mode_saat_ini == "host" and peer_jaringan and not sudah_pindah_scene and not urutan_client.has(id_peer) \
+			and multiplayer.get_peers().has(id_peer):
+		peer_jaringan.disconnect_peer(id_peer)
+
+func _tunggu_sambutan_host() -> void:
+	# CLIENT: host yang tidak mengirim info lobby = HP host versi lama (atau protokol beda).
+	await get_tree().create_timer(BATAS_WAKTU_SAMBUTAN).timeout
+	if mode_saat_ini == "lobby_client" and not _info_lobby_diterima and not sudah_pindah_scene:
+		_tolak_versi_lokal()
+
+func _tolak_versi_lokal() -> void:
+	mode_saat_ini = ""
+	_sembunyikan_lobby()
+	label_status.text = TEKS_UPDATE + "\nTap Refresh to try again."
+	if peer_jaringan:
+		peer_jaringan.close()
+		peer_jaringan = null
+		multiplayer.multiplayer_peer = null
+
+@rpc("any_peer", "call_remote", "reliable")
+func rpc_sosial_profil(versi: int, data: Dictionary) -> void:
+	# Diterima HOST: client memperkenalkan diri (versi protokol + profil).
+	if mode_saat_ini != "host" or sudah_pindah_scene:
+		return
+	var sender = multiplayer.get_remote_sender_id()
+	if sender <= 0:
+		return
+	if versi != StatusJaringan.VERSI_PROTOKOL:
+		rpc_id(sender, "rpc_tolak_versi", TEKS_UPDATE)
+		if peer_jaringan:
+			peer_jaringan.disconnect_peer(sender) # tanpa now=true: pesan di atas terkirim dulu
+		return
+	profil_peer[sender] = _profil_sah(data, sender)
+	if not urutan_client.has(sender):
+		urutan_client.append(sender)
+	_segarkan_lobby()
+	_kirim_info_lobby()
+
+@rpc("authority", "call_remote", "reliable")
+func rpc_tolak_versi(teks: String) -> void:
+	# Diterima CLIENT: host menolak (versi beda).
+	if sudah_pindah_scene:
+		return
+	_tolak_versi_lokal()
+	label_status.text = teks + "\nTap Refresh to try again."
+
+func _bangun_profil_slot(jenis: Array, peer_slot: Dictionary) -> Array:
+	# slot -> profil (host & client yang sudah sah); AI/tidak ada = {}.
+	var hasil: Array = []
+	hasil.resize(jenis.size())
+	for s in range(jenis.size()):
+		hasil[s] = {}
+	for peer in peer_slot:
+		var s = int(peer_slot[peer])
+		if s >= 0 and s < hasil.size() and profil_peer.has(peer):
+			hasil[s] = profil_peer[peer]
+	return hasil
+
+func _teks_profil(peer_id: int) -> String:
+	# "Nama Lv5" untuk daftar lobby (sudah dibersihkan bbcode); kosong kalau profil belum ada.
+	var d: Dictionary = profil_peer.get(peer_id, {})
+	if d.is_empty():
+		return ""
+	return "%s [color=#9fd4ff]Lv%d[/color]" % [str(d["nama"]).replace("[", "(").replace("]", ")"), int(d["level"])]
+
 func _pilih_peta_lobby(peta: String) -> void:
 	if mode_saat_ini != "host":
 		return
@@ -647,13 +755,17 @@ func _kirim_info_lobby() -> void:
 	# HOST: kabari semua client isi lobby terbaru.
 	if mode_saat_ini != "host" or peer_jaringan == null:
 		return
-	rpc("rpc_info_lobby", indeks_mode_lobby, peta_lobby, urutan_client, quick_lobby, role_peer, role_ai_lobby)
+	# Fase 6: hanya ke client yang profilnya sudah sah (client versi lama tidak menerima RPC yang tak dikenalnya).
+	for p in urutan_client:
+		rpc_id(p, "rpc_info_lobby", indeks_mode_lobby, peta_lobby, urutan_client, quick_lobby, role_peer, role_ai_lobby, profil_peer)
 
 @rpc("authority", "call_remote", "reliable")
-func rpc_info_lobby(indeks_mode: int, peta: String, urutan: Array, quick: bool, role_peer_baru: Dictionary, role_ai_baru: Dictionary) -> void:
+func rpc_info_lobby(indeks_mode: int, peta: String, urutan: Array, quick: bool, role_peer_baru: Dictionary, role_ai_baru: Dictionary, profil_peer_baru: Dictionary) -> void:
 	# Diterima di CLIENT.
 	if sudah_pindah_scene:
 		return
+	_info_lobby_diterima = true
+	profil_peer = profil_peer_baru
 	indeks_mode_lobby = clampi(indeks_mode, 0, MODE_LOBBY.size() - 1)
 	peta_lobby = peta
 	urutan_client = urutan
@@ -671,12 +783,16 @@ func _saat_pemain_keluar_lobby(id_peer: int) -> void:
 		return
 	urutan_client.erase(id_peer)
 	role_peer.erase(id_peer)
+	profil_peer.erase(id_peer)
 	_segarkan_lobby()
 	_kirim_info_lobby()
 
 func _saat_host_keluar_lobby() -> void:
 	# CLIENT: host menutup lobby sebelum START -> cari permainan lagi.
 	if mode_saat_ini != "lobby_client" or sudah_pindah_scene:
+		return
+	if not _info_lobby_diterima:
+		_tolak_versi_lokal() # diputus sebelum sempat masuk lobby = penjaga versi
 		return
 	mode_saat_ini = "host_hilang"
 	_sembunyikan_lobby()
@@ -708,8 +824,13 @@ func _mulai_dari_lobby() -> void:
 	peer_jaringan.refuse_new_connections = true
 	# Nomor acak permainan ini -- dipakai migrasi host kalau host keluar nanti.
 	var id_sesi = randi_range(1, 2000000000)
-	rpc("rpc_mulai_dari_lobby", jenis, peer_slot, peta_lobby, id_sesi, quick_lobby, role_slot)
-	_masuk_permainan("host", jenis, peer_slot, peta_lobby, id_sesi, quick_lobby, role_slot)
+	for p in multiplayer.get_peers():
+		if not urutan_client.has(p):
+			peer_jaringan.disconnect_peer(p) # belum kirim profil (versi lama) -> tidak ikut
+	var profil_slot = _bangun_profil_slot(jenis, peer_slot)
+	for p in urutan_client:
+		rpc_id(p, "rpc_mulai_dari_lobby", jenis, peer_slot, peta_lobby, id_sesi, quick_lobby, role_slot, profil_slot)
+	_masuk_permainan("host", jenis, peer_slot, peta_lobby, id_sesi, quick_lobby, role_slot, profil_slot)
 
 func _bangun_role_slot(jenis: Array, peer_slot: Dictionary) -> Array:
 	# slot -> {"role", "jebakan", "build"} akhir yang dikirim ke semua HP (bagian
@@ -764,14 +885,14 @@ func _bangun_role_slot(jenis: Array, peer_slot: Dictionary) -> Array:
 	return hasil
 
 @rpc("authority", "call_remote", "reliable")
-func rpc_mulai_dari_lobby(jenis: Array, peer_slot: Dictionary, peta: String, id_sesi: int, quick: bool, role_slot: Array) -> void:
+func rpc_mulai_dari_lobby(jenis: Array, peer_slot: Dictionary, peta: String, id_sesi: int, quick: bool, role_slot: Array, profil_slot: Array) -> void:
 	# Diterima di CLIENT: host menekan START.
 	if sudah_pindah_scene:
 		return
 	sudah_pindah_scene = true
-	_masuk_permainan("client", jenis, peer_slot, peta, id_sesi, quick, role_slot)
+	_masuk_permainan("client", jenis, peer_slot, peta, id_sesi, quick, role_slot, profil_slot)
 
-func _masuk_permainan(peran: String, jenis: Array, peer_slot: Dictionary, peta: String, id_sesi: int, quick: bool, role_slot: Array) -> void:
+func _masuk_permainan(peran: String, jenis: Array, peer_slot: Dictionary, peta: String, id_sesi: int, quick: bool, role_slot: Array, profil_slot: Array) -> void:
 	mode_saat_ini = "terhubung"
 	label_info_lobby.text = "Starting..."
 	tombol_mulai_lobby.disabled = true
@@ -787,4 +908,5 @@ func _masuk_permainan(peran: String, jenis: Array, peer_slot: Dictionary, peta: 
 	# Fase 4 (A6/bagian 7): role semua slot -- disalin ke DataPemain di
 	# pemain_role.gd _siapkan_role_semua (HOST) sesudah scene ini pindah.
 	StatusJaringan.role_slot = role_slot
+	StatusJaringan.profil_slot = profil_slot # Fase 6: nama + level tiap slot (salinan di semua HP -> aman untuk migrasi host)
 	get_tree().change_scene_to_file("res://panggung_utama.tscn")

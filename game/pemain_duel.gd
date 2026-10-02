@@ -176,6 +176,11 @@ func _atur_nama_duel(slot_a: int, slot_d: int) -> void:
 	if tonton and jumlah_pemain() <= 2:
 		nama_p = "P%d" % (sisi_p + 1)
 		nama_m = "P%d" % (sisi_m + 1)
+	# Fase 6: multiplayer -> nama pemain asli (huruf besar, gaya label duel).
+	if _nama_manusia(sisi_p) != "" and tonton:
+		nama_p = _nama_manusia(sisi_p).to_upper()
+	if _nama_manusia(sisi_m) != "":
+		nama_m = _nama_manusia(sisi_m).to_upper()
 	ui_elemen.atur_sudut_pandang(nama_p, nama_m, tonton)
 
 func _jalankan_duel(slot_a: int, slot_d: int, nyawa_kandang: int, bonus_pedang: int) -> Dictionary:

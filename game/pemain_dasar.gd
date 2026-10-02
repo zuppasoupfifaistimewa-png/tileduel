@@ -385,9 +385,24 @@ func _material_slot(slot: int) -> StandardMaterial3D:
 		_material_slot_cadangan[slot] = m
 	return _material_slot_cadangan[slot]
 
+func _nama_manusia(slot: int, dengan_level: bool = false) -> String:
+	# Fase 6: nama pemain MANUSIA di multiplayer dari profil lobby ("" = solo / AI / tidak ada profil).
+	# Sama di semua HP (StatusJaringan.profil_slot dikirim host saat START).
+	if StatusJaringan.peran_multiplayer == "" or slot < 0 or slot >= StatusJaringan.profil_slot.size():
+		return ""
+	var d = StatusJaringan.profil_slot[slot]
+	if not (d is Dictionary) or (d as Dictionary).is_empty():
+		return ""
+	var nama = str(d.get("nama", ""))
+	return "%s Lv%d" % [nama, int(d.get("level", 1))] if dengan_level else nama
+
 func _nama_slot(slot: int) -> String:
 	# Nama pemain lain di teks. Permainan 2 pemain tetap "Enemy" seperti dulu;
 	# 3-4 pemain memakai "P1".."P4" (P1 biru, P2 merah, P3 hijau, P4 kuning).
+	# Fase 6: multiplayer dgn profil -> nama pemain aslinya.
+	var nm = _nama_manusia(slot)
+	if nm != "":
+		return nm
 	if jumlah_pemain() <= 2:
 		return "Enemy"
 	return "P%d" % (slot + 1)
@@ -401,7 +416,8 @@ func _nama_ui(slot: int) -> String:
 	# permainan 2 pemain -> layar itu tetap memakai kalimat lamanya ("ENEMY ...").
 	if jumlah_pemain() <= 2:
 		return ""
-	return "P%d" % (slot + 1)
+	var nm = _nama_manusia(slot) # Fase 6
+	return nm if nm != "" else "P%d" % (slot + 1)
 
 func _aktor_ui_kartu(slot: int) -> String:
 	# petak_kartu.gd mengenal dua sisi: "pemain" = pemain di device ini, "musuh"

@@ -612,6 +612,9 @@ static func _panel_papan_skor(main_node: Node, menang: bool, papan_skor: Array, 
 		var nama = "YOU" if slot_baris == main_node.slot_lokal else "ENEMY"
 		if main_node.daftar_pemain.size() > 2:
 			nama = "YOU (P%d)" % (slot_baris + 1) if slot_baris == main_node.slot_lokal else "P%d" % (slot_baris + 1)
+		var nm_mp: String = main_node._nama_manusia(slot_baris, true) # Fase 6: nama + level lawan manusia
+		if nm_mp != "" and slot_baris != main_node.slot_lokal:
+			nama = nm_mp
 		var baris = Label.new()
 		if quick:
 			baris.text = "%d.  %s  —  %d total" % [i + 1, nama, int(data.get("kekayaan", data["uang"]))]

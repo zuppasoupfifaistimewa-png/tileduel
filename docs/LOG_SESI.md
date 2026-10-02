@@ -3,6 +3,15 @@
 Satu entri per sesi, terbaru di atas. Sesi baru tidak bisa membaca percakapan lama, jadi apa pun yang penting
 harus tercatat di sini, di `HANDOFF_LANJUT.md`, atau di RENCANA.
 
+## 2026-10-02 -- sesi Claude Code cloud (Sonnet 5.5): Fase 6 G0 + G1
+- Branch `claude/wonderful-gates-8v431l-ewjtrm` (di-fast-forward ke 4d7117a, rencana Fase 6-9). Hemat kredit: hanya baca dokumen yang disebut + kode lobby/profil.
+- G0: `profil_pemain.gd` VERSI 3 (`respect`, `mvp_total`), uji headless 18/18 (`hasil/g6_profil/uji_profil_v3.txt`), `cek_muat_f3` 26/26.
+- Temuan F6.6: lobby TIDAK punya penjaga versi -> dibuat (`VERSI_PROTOKOL`, `rpc_sosial_profil`, `rpc_tolak_versi`, timeout 4 dtk host / 6 dtk client, info lobby hanya ke client sah).
+  Aturan: RPC baru di `layar_local_play.gd` bernama abjad SESUDAH `rpc_role_lobby` supaya nomor RPC lama tidak bergeser.
+- G1: profil lobby -> `StatusJaringan.profil_slot` (semua HP, aman untuk migrasi), nama+level tampil di lobby/teks/papan skor/layar akhir.
+- Bukti: MP subset 1v1 Quick, 3P client keluar, 4P host keluar+migrasi (diulang dgn log nama sesudah migrasi): 0 beda, 0 SCRIPT ERROR, nama sama di semua HP. U9/MP 37 tidak diulang (akhir F7).
+- Belum: tampilan layar sungguhan & jalur TOLAK versi (uji nyata di G3 dgn 2 HP). Langkah berikutnya: sesi Sonnet Fase 6 G2 (MVP + Respect + kartu profil).
+
 ## 2026-10-02 -- sesi Claude Code cloud (Opus 5.5): rencana Fase 6-9
 - Branch `claude/wonderful-gates-8v431l` (mulai b22f27b). Hemat kredit (~US$25 tersisa): hanya baca dokumen, tanpa simulasi, `game/`/`rig/` tidak diubah.
 - Jawaban pemilik: tujuan retensi; Remove Ads di Fase 7; event mingguan offline; Fase 6 sosial ringan.

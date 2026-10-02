@@ -44,6 +44,7 @@ var arena_uji = ""
 # jangkauan = jatuh balik ke pemilihan bawaan (variasi per device), TIDAK error.
 var role_ai_uji: Array = []
 var _akhir_dicatat = false
+var _nama_dicatat := false # Fase 6
 var _xp0 = 0   # Fase 2: profil di awal (HOME tiap proses terpisah -> biasanya 0)
 var _cr0 = 0
 
@@ -157,6 +158,11 @@ func _ready():
 	Engine.time_scale = 3.0
 	if ai_cepat_uji:
 		ProfilPemain.atur_ai_cepat(true) # Fase 5 G6
+	# Fase 6 (rig-only): identitas berbeda per robot -> lobby/papan harus menampilkan nama + level yang benar.
+	ProfilPemain.nama = "Bot %s%d" % [peran, urut]
+	ProfilPemain.xp_total = 150 * (urut + 1) # level 2-3 (100 + 20 per level)
+	ProfilPemain.respect = urut + 1
+	ProfilPemain.mvp_total = urut
 	seed(benih * 101 + urut)
 	_xp0 = ProfilPemain.xp_total
 	_cr0 = ProfilPemain.crowns
@@ -222,6 +228,8 @@ func _akhiri(alasan: String) -> void:
 		_catat("TEBAK_RINGKAS slot=%d tebakan=%d benar=%d telat_kirim=%d telat_ditolak=%d cek_ok=%d cek_gagal=%d tebak_benar_per_slot=%s" % [p.slot_lokal, _tebak_total, _tebak_benar_total, _tebak_telat_kirim, _tebak_telat_ditolak, _tebak_cek_ok, _tebak_cek_gagal, str(p.statistik_slot.map(func(st): return int(st.get("tebak_benar", 0))))])
 	if ai_cepat_uji:
 		_catat("AI_CEPAT_MP_RINGKAS peran=%s profil=%s frame=%d frame_2x=%d frame_tombol_terlihat=%d" % [peran, str(ProfilPemain.ai_cepat), _acmp_frame, _acmp_2x, _acmp_tombol])
+	if p != null and is_instance_valid(p) and migrasi_selesai > 0:
+		_catat_profil_nama("sesudah_migrasi") # Fase 6: nama tetap benar sesudah host pindah
 	_catat("SELESAI %s peran=%s giliran=%d cek_ok=%d cek_gagal=%d kartu_beda=%d detik=%.0f migrasi=%d cek_ok_migrasi=%d jaringan=%s role=%s" % [alasan, peran, jumlah_giliran, cek_ok, cek_gagal, kartu_beda, detik_total, migrasi_selesai, cek_ok_migrasi, StatusJaringan.peran_multiplayer, ",".join(cetak_role)])
 	_tulis_log()
 	get_tree().quit()
@@ -506,6 +514,9 @@ func _langkah_main(delta) -> void:
 		teks_terakhir = teks
 		jejak.append("T|" + teks.replace("\n", " / "))
 		detik_diam = 0.0
+	if not _nama_dicatat:
+		_nama_dicatat = true
+		_catat_profil_nama("awal")
 	var sig_event = "%d|%s|%s" % [p.ronde_event, p.event_aktif, p.event_terakhir]
 	if sig_event != _sig_event:
 		_sig_event = sig_event
@@ -919,8 +930,16 @@ func _catat_akhir() -> void:
 	if _akhir_dicatat or p == null:
 		return
 	_akhir_dicatat = true
+	_catat_profil_nama("akhir")
 	_catat("AKHIR alasan=%s pemenang=%d ronde=%d/%d papan=%s" % [p._alasan_akhir, p._slot_pemenang_akhir, p.ronde_sekarang, p.batas_ronde, str(p._papan_skor_akhir)])
 	_cek_profil_mp()
+
+func _catat_profil_nama(kapan: String) -> void:
+	# Fase 6: nama/level tiap slot menurut HP ini -- HARUS sama di semua HP (dan tetap sama sesudah migrasi host).
+	var nm = []
+	for s in range(p.jumlah_pemain()):
+		nm.append("%s/%s/%s" % [p._nama_manusia(s), p._nama_manusia(s, true), UiProfil.nama_slot_papan(p, s)])
+	_catat("PROFIL_NAMA %s slot_lokal=%d profil_slot=%s tampil=%s" % [kapan, p.slot_lokal, str(StatusJaringan.profil_slot), str(nm)])
 
 func _cek_profil_mp() -> void:
 	# Fase 2: tiap HP mencatat hadiah untuk slot_lokal-nya sendiri, TEPAT sekali (juga sesudah migrasi).

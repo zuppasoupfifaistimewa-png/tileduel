@@ -16,7 +16,7 @@ signal profil_berubah
 const BERKAS := "user://profil.cfg"
 const BERKAS_SEMENTARA := "user://profil.cfg.tmp"
 const BERKAS_CADANGAN := "user://profil.cfg.bak"
-const VERSI := 2 # Fase 4: + role_terakhir, jebakan_role (A), xp_role/build_solo/arena (B, T19: sudah dipakai sejak B-c/B-e -- lihat catat_akhir_match/build_solo/build_arena)
+const VERSI := 3 # Fase 6: + respect, mvp_total. Fase 4: + role_terakhir, jebakan_role (A), xp_role/build_solo/arena (B, T19: sudah dipakai sejak B-c/B-e -- lihat catat_akhir_match/build_solo/build_arena)
 
 # --- XP & Crowns per pertandingan ---
 const XP_PER_GILIRAN := 5
@@ -104,6 +104,9 @@ var build_solo := {}           # role -> {"preset": "balanced"|"attack"|"defense
 var arena := {}                # role -> {"preset": "balanced"|"attack"|"defense"|"custom", "node": {...}}
 # --- Fase 5 G6: tombol AI cepat (solo). Bagian "pengaturan" tidak ada di berkas lama -> nilai bawaan false; VERSI tidak perlu naik. ---
 var ai_cepat := false          # true = giliran AI berjalan 2x selama tidak ada layar untuk pemain (solo saja)
+# --- Fase 6 (VERSI 3): identitas multiplayer. Berkas VERSI 1/2 tidak punya bagian "sosial" -> 0. ---
+var respect := 0               # Respect yang pernah diterima dari pemain lain
+var mvp_total := 0             # berapa kali jadi MVP di akhir laga
 
 func _ready() -> void:
 	_rng.randomize()
@@ -150,6 +153,8 @@ func muat() -> void:
 	var ar = c.get_value("role", "arena", {})
 	arena = ar if ar is Dictionary else {}
 	ai_cepat = bool(c.get_value("pengaturan", "ai_cepat", false)) # Fase 5 G6
+	respect = maxi(0, int(c.get_value("sosial", "respect", 0))) # Fase 6
+	mvp_total = maxi(0, int(c.get_value("sosial", "mvp_total", 0)))
 
 func _baca_berkas(jalur: String):
 	# ConfigFile yang sah (terbaca & punya id), atau null.
@@ -179,6 +184,8 @@ func simpan() -> void:
 	c.set_value("role", "build_solo", build_solo)
 	c.set_value("role", "arena", arena)
 	c.set_value("pengaturan", "ai_cepat", ai_cepat) # Fase 5 G6
+	c.set_value("sosial", "respect", respect) # Fase 6
+	c.set_value("sosial", "mvp_total", mvp_total)
 	var err = c.save(BERKAS_SEMENTARA)
 	if err != OK:
 		push_warning("Profil gagal disimpan (kode %d)." % err)
@@ -209,6 +216,18 @@ func _profil_baru() -> void:
 	build_solo = {}
 	arena = {}
 	ai_cepat = false
+	respect = 0
+	mvp_total = 0
+	simpan()
+
+func tambah_respect() -> void:
+	# Fase 6: dipanggil saat pemain lain memberi Respect.
+	respect += 1
+	simpan()
+
+func catat_mvp() -> void:
+	# Fase 6: dipanggil sekali per laga bila saya MVP.
+	mvp_total += 1
 	simpan()
 
 func atur_ai_cepat(nilai: bool) -> void:

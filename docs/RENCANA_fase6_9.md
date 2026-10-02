@@ -205,3 +205,16 @@ itu + HANDOFF 0 & 5 + entri LOG teratas; gabungkan beberapa G dalam satu sesi se
 ## 9. STATUS
 - 02-10 (Opus): draf disusun dari jawaban pemilik (retensi, Remove Ads F7, event offline, sosial ringan).
 - 02-10 (pemilik): **setuju semua a** (K1-K15 = a). "Kerajaan Crowns" (K7) hanya disebut sekilas di rencana Fase 2 tanpa rancangan -> dibatalkan, digantikan toko. Berikutnya: Fase 6 G0+G1 (Sonnet).
+- 02-10 (Sonnet): **F6 G0 + G1 SELESAI** (bukti `hasil/g6_profil/`).
+  - G0: `profil_pemain.gd` VERSI 3 (+ `respect`, `mvp_total`, bagian berkas "sosial"; `tambah_respect()`/`catat_mvp()` untuk G2). `id` sudah terisi sejak Fase 2.
+    Uji headless `uji_profil_v3.gd` (rig-only) 18/18: profil v2 dimuat -> field baru 0, data lama utuh; v3 simpan/muat; nilai rusak -> 0; profil baru. `cek_muat_f3` 26/26.
+  - Temuan F6.6: SEBELUMNYA TIDAK ADA penjaga versi (lobby menerima client mana pun). Dibuat: `StatusJaringan.VERSI_PROTOKOL = 2`; client kirim `rpc_sosial_profil(versi, profil)` begitu tersambung; host MENOLAK versi beda
+    (`rpc_tolak_versi` + putus) dan memutus peer yang tidak mengirim profil dalam 4 dtk (= HP versi lama); host hanya mengirim info lobby/START ke client yang sudah sah; client yang tidak dapat info lobby dalam 6 dtk
+    (host versi lama) atau diputus sebelum masuk lobby menampilkan "Please update the game to play together." Dua RPC baru SENGAJA bernama `rpc_s...`/`rpc_t...` (urutan abjad SESUDAH `rpc_role_lobby`) supaya nomor RPC lama tidak bergeser.
+    ATURAN untuk RPC baru berikutnya di skrip yang sama: beri nama yang jatuh sesudah semua RPC lama (abjad). `rpc_info_lobby` +param profil, `rpc_mulai_dari_lobby` +param profil_slot -> perlu build sama di semua HP.
+  - G1: profil sah (nama disaring ulang `cek_nama`, angka dibatasi) disalin ke semua peer lewat `rpc_info_lobby`; saat START host membangun `profil_slot` (per slot, AI = {}) -> `StatusJaringan.profil_slot` di SEMUA HP
+    (jadi host pengganti saat migrasi sudah punya). Tampil: lobby ("Nama Lv3"), teks permainan (`_nama_slot`/`_nama_ui`/`_nama_layar`/label duel), papan skor & layar akhir ("Nama Lv3"); solo/AI tidak berubah ("P2", "Enemy").
+  - Bukti MP subset (rig `uji_robot_mp.gd`: robot memakai nama "Bot <peran><urut>", level 3-5; log `PROFIL_NAMA`): 1v1 Quick (cek_ok=7), 3P client keluar (cek_ok=8), 4P host keluar -> migrasi (cek_ok_migrasi=14),
+    semua 0 SCRIPT ERROR, 0 beda; nama+level sama di semua HP dan tetap benar sesudah migrasi. U9 & MP 37 TIDAK diulang (akhir F7).
+  - Migrasi (M2 diulang dgn log `PROFIL_NAMA sesudah_migrasi`): nama/level 4 slot identik di host baru (c1), c2, c3 sebelum & sesudah migrasi, cek_ok_migrasi=16.
+  - BELUM: tampilan di layar sungguhan (headless) + jalur TOLAK versi (belum ada robot yang mengirim versi salah; jalur kode sederhana, uji nyata = 2 HP beda build di G3) -> G3. Berikutnya: **G2 (Sonnet): MVP + Respect + kartu profil**.

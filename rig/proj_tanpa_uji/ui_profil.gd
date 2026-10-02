@@ -100,6 +100,9 @@ static func nama_slot_papan(main_node: Node, slot: int) -> String:
 	# Nama seperti di papan peringkat: YOU / ENEMY (2 pemain), YOU / Pn (3-4 pemain).
 	if slot == int(main_node.slot_lokal):
 		return "YOU"
+	var nm: String = main_node._nama_manusia(slot, true) # Fase 6: "Nama Lv5" di multiplayer
+	if nm != "":
+		return nm
 	if main_node.daftar_pemain.size() <= 2:
 		return "ENEMY"
 	return "P%d" % (slot + 1)
