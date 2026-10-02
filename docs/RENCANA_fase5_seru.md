@@ -224,6 +224,68 @@ pernah di tengah giliran multiplayer).
 - 02-10 (Sonnet): **G6 SELESAI** (tombol AI cepat solo, profil `[pengaturan] ai_cepat`, 2x hanya giliran AI tanpa layar duel/menu/spanduk event, MP tak terpengaruh; `hasil/g6_ai_cepat/`: `salah=0`, persisten lintas proses, S1 100 G4==G5==G6, cek_nilai 8/8, reg10 sama). Berikutnya G7 (profil).
 - 02-10 (Sonnet): **G7 SELESAI** (hadiah profil Tebak Duel: 5 XP/3 Crowns per tebakan benar maks 5, tidak ikut DOUBLE, baris kartu "Duel guesses", `tebak_benar` di STAT_SEUMUR; `hasil/g7_profil/`: uji unit 21/21, solo penuh PROFIL_CEK OK, MP Quick 3P PROFIL_MP OK, S1 100 G4==G7). Berikutnya G8 (OPUS).
   TEMUAN untuk Opus: soft-lock bangkrut tanpa petak (kode lama; lihat HANDOFF "TEMUAN").
+- 02-10 (Opus): **G8 SELESAI** -- soft-lock bangkrut diperbaiki, jendela tebak solo diperlebar, U9 ulang LOLOS P14 (benih 50000/60000), regresi MP 37 + skenario baru. Rincian & usulan K11/K12: bagian 10. Berikutnya: keputusan pemilik K11/K12, lalu G9 (Sonnet).
 - 02-10 (Opus): draf ditulis.
 - 02-10: pemilik menyetujui K1-K10 = a. Rencana dikunci. Berikutnya G0 (Sonnet, sesi baru): refactor `denda_petak()`/
   `harga_beli_*()`/`ronde_event` tanpa perubahan perilaku -> bukti identik di rig (bagian 5).
+
+## 10. G8 (Opus, 02-10) -- hasil & usulan
+
+### 10.1 Soft-lock "bangkrut tanpa petak" (HANDOFF TEMUAN 1) -- DIPERBAIKI
+- Aturan yang SUDAH ada dipakai: kalau sesudah menjual petak TERAKHIR uang masih minus -> sama seperti cabang
+  "No more tiles! You carry the debt." di `sita_aset_untuk_hutang`: hutang dibawa, giliran lanjut.
+- Kode (`pemain_papan.gd`, game + rig identik): `eksekusi_jual_aset` cabang baru `elif not _punya_petak(slot)` ->
+  `mode_jual_aset/mode_membidik = false`, teks `_teks_bawa_hutang(slot)`, host mengirim `rpc_jual_habis(slot)` (RPC BARU,
+  client menutup mode jual & menampilkan teks yang sama dari sudut pandangnya), tunggu 2,5 dtk, `ganti_giliran()`.
+  Fungsi bantu baru `_punya_petak`, `_teks_bawa_hutang` (dipakai juga oleh cabang lama di `sita_aset_untuk_hutang`).
+  AI (`_ai_jual_sampai_lunas`) sudah benar sejak dulu ("accepts debt"), tidak diubah.
+- Bukti (`hasil/g8_bangkrut/`, opsi rig-only `hutang_habis=SLOT`: begitu SLOT punya >= 2 petak, uangnya dibuat minus melebihi
+  nilai jual semua petaknya -> denda berikutnya memaksa jalur ini). Kode LAMA s801 -> `SIM MACET giliran=9` ("Still in minus! Tap
+  another tile" tanpa petak). Kode BARU: solo 2P Classic x4 (s801-804, hingga 4x hutang dibawa per run), Quick 2P + iklan +300
+  (iklan ditonton, tetap minus, jual habis, dibawa), Classic + iklan, slot AI 3P; MP: host bangkrut (1v1), client bangkrut (1v1 &
+  3P c2 Classic), AI bangkrut (2P+1AI): di SEMUA device "No more tiles! ..." lalu `mode_jual=false`, giliran lanjut, 0 SCRIPT ERROR,
+  0 MACET. (3P Quick s823: hutang dipasang tapi pertandingan habis sebelum ada denda -- tidak menguji jalur.)
+- Catatan: build MP harus sama di semua HP (RPC baru `rpc_jual_habis`).
+
+### 10.2 Jendela Tebak Duel solo (catatan G4) -- DIPERLEBAR
+- `_tonton_ai_pilih_elemen` (`pemain_duel.gd`): kalau tombol tebak tampil (manusia lokal bukan peserta), penyerang AI "berpikir"
+  tambahan maks `TEBAK_SOLO_TAMBAHAN = 2.0` dtk (`pemain_dasar.gd`), BERHENTI begitu pemain menebak. Tanpa penonton manusia
+  (rig semua AI, MP) tidak berubah. Jendela: tidak menebak 2,5 -> ~5,3 dtk game (Quick ~3,5 dtk nyata); menebak cepat
+  -> jendela ~3,3 dtk (permainan hanya ~0,8 dtk lebih lama). Rig `tebak_jeda=3.0` (dulu pasti "Too late!") kini diterima, cek OK.
+  Bukti `hasil/g8_tebak/`.
+
+### 10.3 U9 ulang (K9) -- LOLOS P14 (angka K3/K5 & role F5 TIDAK diubah)
+| | air | angin | api | petir | tanah | catatan |
+|---|---|---|---|---|---|---|
+| F5 konfirmasi S1 2P (b20000) | 50.2 | 49.8 | 46.5 | 48.1 | 55.4 | jebakan/AI 2.12, 291 dtk |
+| **G8 S1 2P (1200, b50000)** | 48.8 | 54.6 | 45.6 | 48.3 | 52.7 | 0 pasangan !, 0 sel wajib/mati, jebakan/AI 2.18, 298 dtk |
+| F5 konfirmasi S2 4P | 22.7 | 27.6 | 21.1 | 26.7 | 27.4 | |
+| G8 S2 4P (400, b50000) | **18.8** | 26.6 | 25.8 | 28.3 | 24.9 | air di bawah 20 (CI 14.7-23.6) |
+| G8 S2 4P tambahan (400, b60000) | 23.4 | 28.6 | 23.0 | 23.1 | 27.0 | |
+| **G8 S2 4P gabungan 800** | 21.2 | 27.6 | 24.3 | 25.7 | 25.9 | lolos (pola F5: S4 tambahan digabung) |
+- S5 panjang (240, robot slot 0, TIDAK menebak -> jendela tebak terpanjang): 2P/3P/4P = 297 / 331 / 377 dtk (batas 318 / 400 / 464).
+- Dipantau: air 4P 21.2 (dekat batas bawah; air x defense 4P rendah sejak F5: 17.7 -> 14.9), angin 2P 54.6.
+- Kolom rig-only baru `f5=ev/bm/bk/kb/hb` di baris SEIMBANG (event, bounty muncul, bounty diklaim, kartu bantuan, hutang dibawa).
+  Data: `hasil/g8_u9_b50000/`, `hasil/g8_u9_s2_tambahan/`.
+
+### 10.4 Bounty & kartu bantuan di Quick (catatan G2/G3) -- DATA + USULAN (keputusan pemilik)
+| U9 (semua AI) | event/match | bounty muncul | bounty DIKLAIM (% match) | duel dimenangkan/match | kartu bantuan (% match) |
+|---|---|---|---|---|---|
+| S1 Quick 2P (1200) | 2.58 | 1.05 | 8% | 0.48 | 5.2% |
+| S2 Quick 4P (800) | 1.65 | 1.13 | 17-20% | 1.1-1.2 | 2.0-2.8% |
+| S5 Quick 2-4P robot (240) | 2.05 | 1.13 | 20% | 1.11 | 2.9% |
+Penyebab: di Quick duel jarang (2P < 0,5 duel dimenangkan per pertandingan) dan klaim butuh menang duel DENGAN elemen tertentu
+(~1/5); kartu bantuan butuh tertinggal >= 1000 saat lewat START, padahal selisih kekayaan AKHIR Quick 2P median ~900.
+Hutang tanpa petak tidak pernah terjadi di U9 (semua AI) -- jalur 10.1 terutama untuk pemain manusia.
+- **K11 (bounty di Quick).** a) biarkan (bounty terutama fitur Classic; di Quick cuma hiasan); b) **Quick: klaim = menang duel
+  APA PUN** (label "BOUNTY: win a duel"), Classic tetap elemen -- usul Opus; c) tanpa bounty di Quick.
+- **K12 (kartu bantuan di Quick).** a) biarkan 1000 (2-5% pertandingan); b) **Quick: selisih 600** (konstanta baru
+  `KARTU_BANTUAN_SELISIH_QUICK`), Classic tetap 1000 -- usul Opus; c) Quick 400.
+- Kalau b/c dipilih: perubahan kecil (Sonnet), lalu WAJIB U9 S1 + S2 ulang di benih baru (~45 menit) sebelum G9, karena
+  ekonomi Quick berubah.
+
+### 10.5 Temuan baru (belum diperbaiki)
+- MP s821 (1v1 Classic, host role api dgn Ultimate Phoenix): CEK#12 BEDA -- jebakan api Phoenix di petak 15 masih ada di host
+  (`aktif_ulang:0`, sudah selamat sekali) tapi hilang di client, SEBELUM ada penjualan petak (tidak terkait 10.1). Kode lama
+  (B-c C5). Lihat juga hasil regresi MP di bawah.
+

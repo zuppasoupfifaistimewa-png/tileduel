@@ -1,9 +1,9 @@
-# HANDOFF -- lanjutkan proyek Tile Duel (Fase 4 SELESAI; Fase 5: G0-G7 + getaran Earthquake SELESAI, G8 berikutnya = OPUS)
+# HANDOFF -- lanjutkan proyek Tile Duel (Fase 4 SELESAI; Fase 5: G0-G8 SELESAI; berikutnya keputusan pemilik K11/K12, lalu G9 = Sonnet)
 
 Dokumen ini ditulis 02-10-2026 supaya sesi Claude Code (cloud / web, tanpa CLI) mana pun bisa melanjutkan
 pekerjaan TANPA riwayat percakapan. BACA INI DULU, lalu `docs/RENCANA_fase4_role.md` bagian 14.19 & **14.21-14.24** (paling akhir).
 Diperbarui 02-10 (Opus, sesi Claude Code cloud): **uji HP pemilik dengan `kiriman/TileDuel_FaseB_b9.zip` = "lancar" -> Fase 4 SELESAI** (RENCANA 14.24).
-Berikutnya: pemilik merilis A+B (daftar periksa di bagian 5). **Fase 5: rencana `docs/RENCANA_fase5_seru.md` DISETUJUI 02-10 (K1-K10 = a); G0-G7 + getaran Earthquake SELESAI (Sonnet, 02-10) -> berikutnya OPUS mengerjakan G8 (keseimbangan: U9 ulang + regresi MP 37 skenario, lihat RENCANA_fase5 bagian 5 & catatan G8 di bawah), lalu Sonnet G9 (bersih-bersih + ZIP b10 + uji HP).**
+Berikutnya: pemilik merilis A+B (daftar periksa di bagian 5). **Fase 5: rencana `docs/RENCANA_fase5_seru.md` DISETUJUI 02-10 (K1-K10 = a); G0-G7 + getaran Earthquake SELESAI (Sonnet, 02-10); G8 SELESAI (Opus, 02-10, RENCANA_fase5 bagian 10) -> berikutnya pemilik memilih K11 (bounty Quick) & K12 (kartu bantuan Quick), lalu Sonnet G9 (bersih-bersih + ZIP b10 + uji HP).**
 
 **Fase 5 G0 SELESAI (Sonnet, 02-10):** refactor `denda_petak()` / `harga_beli_tanah()` / `harga_beli_menara(lv)` / `ronde_event` di
 `pemain_dasar.gd` (+ semua pemakai di `ai_jebakan/ai_musuh/pemain/pemain_papan/pemain_tampilan`), `game/` & rig identik (34/35, kecuali stub iklan).
@@ -107,8 +107,20 @@ Tidak ada baris "Guesses" di panel statistik profil (hanya tersimpan di `statist
   Regresi: S1 100 G7 == G4 IDENTIK, `cek_nilai` 8/8, `batch_reg10` sama dgn G5, `cek_muat_f3` 26/26. Rig-only: `uji_nyata.gd` (`PROFIL_CEK` + `tebak_hadiah`/`tebak_baris_kartu`, log `TEBAK_HADIAH`), `uji_robot_mp.gd` (`PROFIL_MP` + log `TEBAK_HADIAH_MP`).
 - BELUM: tampilan baris "Duel guesses" di layar sungguhan (headless) -> uji HP G9. Classic MP 3P/4P di rig berhenti di BATAS_GILIRAN sebelum tuntas (tak ada hadiah profil); jalur hadiah MP diuji lewat Quick 3P.
 
-**TEMUAN (belum dikerjakan; dicatat Sonnet 02-10, keputusan = Opus/pemilik):**
-1. **Soft-lock bangkrut tanpa petak** (kode LAMA, ada juga di ZIP b9, bukan dari G0-G7): `eksekusi_jual_aset` (`pemain_papan.gd` ~baris 975-1004) -- kalau pemain manusia masih minus sesudah menjual petak TERAKHIR, cabang `else` hanya menulis
+**Fase 5 G8 SELESAI (Opus, 02-10; rincian RENCANA_fase5 bagian 10):**
+- Soft-lock bangkrut tanpa petak DIPERBAIKI (`pemain_papan.gd`: `eksekusi_jual_aset` cabang `elif not _punya_petak(slot)` -> hutang dibawa,
+  giliran lanjut; RPC baru `rpc_jual_habis`; bantu `_punya_petak`/`_teks_bawa_hutang`). Bukti `hasil/g8_bangkrut/`: kode lama MACET, kode baru solo x7
+  + MP host/client(1v1, 3P)/AI lolos, 0 SCRIPT ERROR. Opsi rig-only `hutang_habis=SLOT` (`uji_nyata.gd`, `uji_robot_mp.gd`).
+- Jendela Tebak Duel solo: +maks 2 dtk (`TEBAK_SOLO_TAMBAHAN`, `pemain_duel._tonton_ai_pilih_elemen`), hanya saat tombol tebak tampil, berhenti begitu
+  pemain menebak. Bukti `hasil/g8_tebak/` (opsi rig-only `tebak_jeda=N`).
+- U9 ulang benih 50000 (+S2 tambahan 60000) LOLOS P14: S1 2P 48.8/54.6/45.6/48.3/52.7 (air/angin/api/petir/tanah), S2 4P gabungan 800
+  21.2/27.6/24.3/25.7/25.9 (S2 400 pertama air 18.8 -> ditambah 400, pola F5), S5 297/331/377 dtk. Angka K3/K5/F5 TIDAK diubah.
+  Kolom rig-only `f5=ev/bm/bk/kb/hb` di baris SEIMBANG.
+- Bounty diklaim hanya di 8% pertandingan Quick 2P (duel jarang), kartu bantuan 2-5% -> USULAN K11/K12 (RENCANA_fase5 10.4) menunggu pemilik.
+- Regresi MP 37 skenario + cek_nilai + cek_muat + reg10: lihat 10.6 di RENCANA_fase5 (`hasil/g8_regresi/`).
+
+**TEMUAN (dicatat Sonnet 02-10; no. 1 DIPERBAIKI di G8):**
+1. **[DIPERBAIKI G8] Soft-lock bangkrut tanpa petak** (kode LAMA, ada juga di ZIP b9, bukan dari G0-G7): `eksekusi_jual_aset` (`pemain_papan.gd` ~baris 975-1004) -- kalau pemain manusia masih minus sesudah menjual petak TERAKHIR, cabang `else` hanya menulis
    "Still in minus! Tap another tile to sell." dan menunggu ketukan padahal tidak ada petak lagi -> permainan macet (pemeriksaan `punya_aset` hanya di awal, ~baris 1276). Terlihat 2 dari 8 run solo Classic G7 (`hasil/g7_profil/solo_ringkas.txt`, s701 & s723, `SIM MACET`).
    Event GOLD RUSH (denda x2, G1) membuat hutang lebih besar sehingga lebih sering terjadi. Perlu keputusan aturan (hutang dihapus / pemain tersingkir / dll.) -> Opus, SEBELUM rilis b10.
 2. Catatan G8 (sudah ada di atas): bounty & kartu bantuan hampir tak muncul di Quick; jendela tebak solo ~2,5 dtk ketat; putar ulang rolet menambah peluang menang solo.
