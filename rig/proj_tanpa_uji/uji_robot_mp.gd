@@ -60,6 +60,11 @@ var _acmp_frame = 0
 var _acmp_2x = 0
 var _acmp_tombol = 0
 var kaya_awal = false # Fase 5 G3 (rig-only): host mulai +3000 koin -> pemain lain tertinggal >= 1000 -> kartu bantuan muncul saat lewat START
+var hutang_habis_slot := -1 # Fase 5 G8 (rig-only): hutang_habis=SLOT -> paksa jalur "petak terakhir terjual, masih minus"
+var _hb_teks_terakhir := ""
+var _hb_bawa := 0
+var _hb_pasang := 0
+var _hb_giliran_bawa := -1
 var _kaya_diberikan = false
 # --- Fase 5 G4 (rig-only): tebak=1 -> robot penonton menebak tiap duel yang ditonton (selang-seling penyerang/pembela)
 # dan mencocokkan stat tebak_benar + teks "Good guess!"/"Wrong guess." dengan pemenang duel sebenarnya (log TEBAK_*).
@@ -137,6 +142,7 @@ func _ready():
 		if a == "tebak=1": tebak_uji = true # Fase 5 G4
 		if a == "tebak_telat=1": tebak_telat_uji = true; tebak_uji = true # Fase 5 G4
 		if a == "kaya_awal=1": kaya_awal = true
+		if a.begins_with("hutang_habis="): hutang_habis_slot = int(a.substr(13)) # Fase 5 G8
 		if a == "ai_cepat=1": ai_cepat_uji = true # Fase 5 G6
 		if a.begins_with("arena="): arena_uji = a.substr(6)
 		if a == "arena_palsu=1": arena_uji = "custom_ilegal" # F0 (B-f, 14.19, U10): alias -- mekanisme SAMA "custom_ilegal" (B-c/C2) yang sudah menguji rpc_role_lobby/build_arena K16, cuma nama argumen sesuai rencana
@@ -452,6 +458,47 @@ func _jalankan_lobby(lobby) -> void:
 				await _pilih_role_lobby("client%d" % urut)
 
 # ---------------------------------------------------------------- permainan
+func _urus_hutang_habis(cetak: Callable) -> void:
+	# Fase 5 G8 (rig-only, hutang_habis=SLOT): begitu SLOT punya >= 2 petak dan uang >= 0, uangnya dibuat
+	# minus melebihi nilai jual semua petaknya -> denda berikutnya = bangkrut, petak terakhir terjual, masih
+	# minus -> harus "No more tiles! ... carry the debt." dan giliran lanjut (dulu macet). Dipasang ulang
+	# sampai jalur itu terjadi sekali. Host/solo saja yang memasang; semua device mencatat.
+	var s = hutang_habis_slot
+	if s < 0 or s >= p.jumlah_pemain():
+		return
+	var teks = p.teks_dadu.text
+	if teks.begins_with("No more tiles!") and not _hb_teks_terakhir.begins_with("No more tiles!"):
+		_hb_bawa += 1
+		_hb_giliran_bawa = jumlah_giliran
+		cetak.call("HUTANG_BAWA ke-%d teks='%s' giliran=%d uang=%s mode_jual=%s membidik=%s petak_slot=%d" % [_hb_bawa, teks, jumlah_giliran,
+			str(p.daftar_pemain.map(func(d): return d.uang)), str(p.mode_jual_aset), str(p.mode_membidik), _hb_jumlah_petak(s)])
+	_hb_teks_terakhir = teks
+	if _hb_giliran_bawa >= 0 and jumlah_giliran >= _hb_giliran_bawa + 2:
+		cetak.call("HUTANG_LANJUT giliran=%d mode_jual=%s uang=%s" % [jumlah_giliran, str(p.mode_jual_aset), str(p.daftar_pemain.map(func(d): return d.uang))])
+		_hb_giliran_bawa = -1
+	if _hb_bawa > 0 or StatusJaringan.peran_multiplayer == "client":
+		return
+	if p.mode_jual_aset or p.daftar_pemain[s].uang < 0 or _hb_jumlah_petak(s) < 2:
+		return
+	var nilai = 0
+	for i in range(p.rute_papan.size()):
+		if p.pemilik_petak[i] == s:
+			var lv = p.level_menara_petak[i]
+			var n = p.harga_tanah
+			if lv >= 1: n += p.harga_menara_lv1
+			if lv == 2: n += p.harga_menara_lv2
+			nilai += int(n * 0.7)
+	p.daftar_pemain[s].uang = -nilai - 1000
+	p.update_ui_status()
+	_hb_pasang += 1
+	cetak.call("HUTANG_PASANG ke-%d slot=%d petak=%d nilai_jual=%d uang=%d giliran=%d" % [_hb_pasang, s, _hb_jumlah_petak(s), nilai, p.daftar_pemain[s].uang, jumlah_giliran])
+
+func _hb_jumlah_petak(s: int) -> int:
+	var n = 0
+	for i in range(p.rute_papan.size()):
+		if p.pemilik_petak[i] == s: n += 1
+	return n
+
 func _langkah_main(delta) -> void:
 	detik_diam += delta
 	var teks = p.teks_dadu.text
@@ -472,6 +519,7 @@ func _langkah_main(delta) -> void:
 		_sig_bounty = sig_bounty
 		_catat("BOUNTY aktif=%s terakhir=%s bintang=%s stat_bounty=%s" % [p.bounty_elemen, p.bounty_terakhir,
 			str(p.daftar_pemain.map(func(d): return d.bintang)), str(p.statistik_slot.map(func(st): return int(st.get("bounty", 0))))])
+	_urus_hutang_habis(func(t): _catat(t))
 	if p.giliran_sekarang != giliran_terakhir:
 		giliran_terakhir = p.giliran_sekarang
 		jumlah_giliran += 1

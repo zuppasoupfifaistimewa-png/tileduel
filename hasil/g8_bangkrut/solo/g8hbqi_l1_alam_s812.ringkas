@@ -1,0 +1,8 @@
+HUTANG_PASANG ke-1 slot=0 petak=2 nilai_jual=420 uang=-1420 giliran=5
+IKLAN_HUTANG klik ke-1 uang=-1520
+IKLAN_HUTANG uang -1520 -> -1220 cek=OK
+HUTANG_BAWA ke-1 teks='No more tiles! You carry the debt.' giliran=7 uang=[-800, 2310] mode_jual=false membidik=false petak_slot=0
+HUTANG_LANJUT giliran=9 mode_jual=false uang=[-800, 2010]
+HUTANG_BAWA ke-2 teks='No more tiles! You carry the debt.' giliran=13 uang=[-400, 1610] mode_jual=false membidik=false petak_slot=0
+HUTANG_LANJUT giliran=15 mode_jual=false uang=[-400, 1149]
+SIM MENANG giliran=16 detik=270

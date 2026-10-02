@@ -1,0 +1,458 @@
+MULAI-NYATA pemain=3 seed=813 peta=pantai
+KARAKTER|0|Pemain|pos=(1.3, 0.0, 1.3)|warna=3380ff
+KARAKTER|1|Musuh|pos=(-1.3, 0.0, -1.3)|warna=ff3333
+KARAKTER|2|Pemain3|pos=(1.3, 0.0, -1.3)|warna=26cc4d
+T|YOUR TURN! Choose Action or Roll Dice.
+G1|pemain|awal|[0,2500,4,g0,p0,b0,k0][0,2500,4,g0,p0,b0,k0][0,2500,4,g0,p0,b0,k0]|o:-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1|xyz:(1.3, 0.0, 1.3);(-1.3, 0.0, -1.3);(1.3, 0.0, -1.3)
+R|dadu
+T|You are rolling dice...
+T|Your Roll: 5
+R|cabang|0
+R|beli
+T|P2 TURN! P2 is thinking...
+G2|musuh|awal|[5,2200,4,g0,p0,b0,k0][0,2500,4,g0,p0,b0,k0][0,2500,4,g0,p0,b0,k0]|o:-1,-1,-1,-1,-1,0,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1|xyz:(46.9, 0.0, 0.0);(1.3, 0.0, 1.3);(-1.3, 0.0, -1.3)
+T|P2 is rolling dice...
+T|P2 Roll: 3
+T|P2 bought this tile!
+T|P3 TURN! P3 is thinking...
+G3|pemain3|awal|[5,2200,4,g0,p0,b0,k0][3,2200,4,g0,p0,b0,k0][0,2500,4,g0,p0,b0,k0]|o:-1,-1,-1,1,-1,0,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1|xyz:(46.9, 0.0, 0.0);(28.0, 0.0, 0.0);(0.0, 0.0, 0.0)
+T|P3 is rolling dice...
+T|P3 Roll: 4
+T|P3 bought this tile!
+T|First to win a duel with EARTH: +1 Star
+T|YOUR TURN! Choose Action or Roll Dice.
+G4|pemain|awal|[5,2200,4,g0,p0,b0,k0][3,2200,4,g0,p0,b0,k0][21,2200,4,g0,p0,b0,k0]|o:-1,-1,-1,1,-1,0,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,2,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1|xyz:(46.9, 0.0, 0.0);(28.0, 0.0, 0.0);(18.6, 0.0, -18.9)
+R|dadu
+T|You are rolling dice...
+T|Your Roll: 8
+T|You collected [img=28]res://permata/permata_kuning.png[/img] Gem!
+R|jebakan|TombolTrapAngin
+T|Wind Trap set! Wait for victim.
+R|beli
+T|P2 TURN! P2 is thinking...
+G5|musuh|awal|[13,1900,3,g0,p0,b0,k0][3,2200,4,g0,p0,b0,k0][21,2200,4,g0,p0,b0,k0]|o:-1,-1,-1,1,-1,0,-1,-1,-1,-1,-1,-1,-1,0,-1,-1,-1,-1,-1,-1,-1,2,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1|xyz:(65.6, 0.0, 19.0);(28.0, 0.0, 0.0);(18.6, 0.0, -18.9)
+T|P2 set a Lightning Trap!
+T|P2 is rolling dice...
+T|P2 Roll: 9
+T|P2 collected [img=28]res://permata/permata_kuning.png[/img] Gem!
+T|P2 bought this tile!
+T|P3 TURN! P3 is thinking...
+G6|pemain3|awal|[13,1900,3,g0,p0,b0,k0][12,-1420,3,g0,p0,b0,k0][21,2200,4,g0,p0,b0,k0]|o:-1,-1,-1,1,-1,0,-1,-1,-1,-1,-1,-1,1,0,-1,-1,-1,-1,-1,-1,-1,2,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1|xyz:(65.6, 0.0, 19.0);(75.0, 0.0, 19.0);(18.6, 0.0, -18.9)
+T|P3 set a Lightning Trap!
+T|P3 is rolling dice...
+T|P3 Roll: 2
+T|P3 bought this tile!
+T|YOUR TURN! Choose Action or Roll Dice.
+G7|pemain|awal|[13,1900,3,g0,p0,b0,k0][12,-1420,3,g0,p0,b0,k0][23,1900,3,g0,p0,b0,k0]|o:-1,-1,-1,1,-1,0,-1,-1,-1,-1,-1,-1,1,0,-1,-1,-1,-1,-1,-1,-1,2,-1,2,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1|xyz:(65.6, 0.0, 19.0);(75.0, 0.0, 19.0);(-0.1, 0.0, -18.8)
+R|dadu
+T|You are rolling dice...
+T|Your Roll: 5
+R|beli
+T|P2 TURN! P2 is thinking...
+G8|musuh|awal|[18,1600,3,g0,p0,b0,k0][12,-1420,3,g0,p0,b0,k0][23,1900,3,g0,p0,b0,k0]|o:-1,-1,-1,1,-1,0,-1,-1,-1,-1,-1,-1,1,0,-1,-1,-1,-1,0,-1,-1,2,-1,2,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1|xyz:(18.6, 0.0, 19.1);(75.0, 0.0, 19.0);(-0.1, 0.0, -18.8)
+T|P2 is rolling dice...
+T|P2 Roll: 11
+T|WIND TRAP! Lost -142 Coins!
+T|P2 found -71 Coins!
+T|LIGHTNING TRAP! Paralyzed & Stopped!
+T|P2 lands on P3's tile! P2 is thinking...
+T|P2 gave up. Paid fine: 100 Coins.
+T|P2 BANKRUPT! Money is minus.
+T|P2 is picking a tile to sell...
+T|P2 sells best tile for 210 Coins!
+T|P2 is picking a tile to sell...
+T|P2 sells best tile for 210 Coins!
+T|No more tiles! P2 accepts debt.
+T|P3 TURN! P3 is thinking...
+G9|pemain3|awal|[18,1600,3,g0,p0,b0,k0][21,-1029,3,g0,p2,b0,k0][23,2000,3,g0,p0,b0,k0]|o:-1,-1,-1,-1,-1,0,-1,-1,-1,-1,-1,-1,-1,0,-1,-1,-1,-1,0,-1,-1,2,-1,2,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1|xyz:(18.6, 0.0, 19.1);(18.6, 0.0, -19.0);(-0.1, 0.0, -18.8)
+T|P3 set a Lightning Trap!
+T|P3 is rolling dice...
+T|P3 Roll: 11
+T|P3 landed on a Card Tile!
+T|Card saved to Inventory!
+T|P3 collected [img=28]res://permata/permata_hijau.png[/img] Gem!
+T|P3 found -71 Coins!
+T|P3 bought this tile!
+T|Tile fees x2 this round!
+T|YOUR TURN! Choose Action or Roll Dice.
+G10|pemain|awal|[18,1600,3,g0,p0,b0,k0][21,-1029,3,g0,p2,b0,k0][34,1629,2,g0,p0,b0,k1]|o:-1,-1,-1,-1,-1,0,-1,-1,-1,-1,-1,-1,-1,0,-1,-1,-1,-1,0,-1,-1,2,-1,2,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,2,-1,-1|xyz:(18.6, 0.0, 19.1);(18.6, 0.0, -19.0);(-0.1, 0.0, 28.1)
+R|dadu
+T|You are rolling dice...
+T|Your Roll: 9
+R|cabang|0
+T|LIGHTNING TRAP! Paralyzed & Stopped!
+R|akhiri
+T|P2 is paralyzed! Cannot move this turn.
+G11|musuh|awal|[3,1550,3,g0,p2,b0,k0][21,-1029,3,g0,p1,b0,k0][34,1629,2,g0,p0,b0,k1]|o:-1,-1,-1,-1,-1,0,-1,-1,-1,-1,-1,-1,-1,0,-1,-1,-1,-1,0,-1,-1,2,-1,2,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,2,-1,-1|xyz:(27.9, 0.0, 0.0);(18.6, 0.0, -19.0);(-0.1, 0.0, 28.1)
+T|P3 TURN! P3 is thinking...
+G12|pemain3|awal|[3,1550,3,g0,p2,b0,k0][21,-1029,3,g0,p1,b0,k0][34,1629,2,g0,p0,b0,k1]|o:-1,-1,-1,-1,-1,0,-1,-1,-1,-1,-1,-1,-1,0,-1,-1,-1,-1,0,-1,-1,2,-1,2,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,2,-1,-1|xyz:(27.9, 0.0, 0.0);(18.6, 0.0, -19.0);(-0.1, 0.0, 28.1)
+T|P3 set an Earth Trap!
+T|P3 is rolling dice...
+T|P3 Roll: 10
+T|SALARY FAILED! Need 2 unique gems!
+T|P3 bought this tile!
+T|You are paralyzed! Cannot move this turn.
+G13|pemain|awal|[3,1550,3,g0,p1,b0,k0][21,-1029,3,g0,p1,b0,k0][7,1329,1,g0,p0,b0,k1]|o:-1,-1,-1,-1,-1,0,-1,2,-1,-1,-1,-1,-1,0,-1,-1,-1,-1,0,-1,-1,2,-1,2,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,2,-1,-1|xyz:(27.9, 0.0, 0.0);(18.6, 0.0, -19.0);(65.7, 0.0, 0.0)
+T|P2 TURN! P2 is thinking...
+G14|musuh|awal|[3,1550,3,g0,p1,b0,k0][21,-1029,3,g0,p0,b0,k0][7,1329,1,g0,p0,b0,k1]|o:-1,-1,-1,-1,-1,0,-1,2,-1,-1,-1,-1,-1,0,-1,-1,-1,-1,0,-1,-1,2,-1,2,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,2,-1,-1|xyz:(28.0, 0.0, 0.0);(18.6, 0.0, -19.0);(65.7, 0.0, 0.0)
+T|P2 is rolling dice...
+T|P2 Roll: 7
+T|LIGHTNING TRAP! Paralyzed & Stopped!
+T|P2 lands on P3's tile! P2 is thinking...
+T|P2 gave up. Paid fine: 100 Coins.
+T|P2 BANKRUPT! Money is minus.
+T|No more tiles! P2 accepts debt.
+T|P3 TURN! P3 is thinking...
+G15|pemain3|awal|[3,1550,3,g0,p1,b0,k0][23,-1129,3,g0,p2,b0,k0][7,1429,1,g0,p0,b0,k1]|o:-1,-1,-1,-1,-1,0,-1,2,-1,-1,-1,-1,-1,0,-1,-1,-1,-1,0,-1,-1,2,-1,2,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,2,-1,-1|xyz:(28.0, 0.0, 0.0);(-0.2, 0.0, -19.0);(65.7, 0.0, 0.0)
+T|P3 is rolling dice...
+T|P3 Roll: 9
+T|P3 collected [img=28]res://permata/permata_kuning.png[/img] Gem!
+T|P3 bought this tile!
+T|YOUR TURN! Choose Action or Roll Dice.
+G16|pemain|awal|[3,1550,3,g0,p0,b0,k0][23,-1129,3,g0,p2,b0,k0][16,1129,1,g0,p0,b0,k1]|o:-1,-1,-1,-1,-1,0,-1,2,-1,-1,-1,-1,-1,0,-1,-1,2,-1,0,-1,-1,2,-1,2,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,2,-1,-1|xyz:(28.0, 0.0, 0.0);(-0.2, 0.0, -19.0);(37.4, 0.0, 19.1)
+R|dadu
+T|You are rolling dice...
+T|Your Roll: 4
+T|P3's Tile! Give Up (Pay 100) or Fight?
+R|menyerah
+T|You gave up. Paid fine: 100 Coins.
+T|P2 is paralyzed! Cannot move this turn.
+G17|musuh|awal|[7,1450,3,g0,p0,b0,k0][23,-1129,3,g0,p1,b0,k0][16,1229,1,g0,p0,b0,k1]|o:-1,-1,-1,-1,-1,0,-1,2,-1,-1,-1,-1,-1,0,-1,-1,2,-1,0,-1,-1,2,-1,2,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,2,-1,-1|xyz:(65.7, 0.0, 0.0);(-0.2, 0.0, -19.0);(37.4, 0.0, 19.1)
+T|P3 TURN! P3 is thinking...
+G18|pemain3|awal|[7,1450,3,g0,p0,b0,k0][23,-1129,3,g0,p1,b0,k0][16,1229,1,g0,p0,b0,k1]|o:-1,-1,-1,-1,-1,0,-1,2,-1,-1,-1,-1,-1,0,-1,-1,2,-1,0,-1,-1,2,-1,2,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,2,-1,-1|xyz:(65.7, 0.0, 0.0);(-0.2, 0.0, -19.0);(37.4, 0.0, 19.1)
+T|P3 is rolling dice...
+T|P3 Roll: 4
+T|P3 stops on Branch Tile. Turn ends.
+T|Tiles and towers -30% this round!
+T|YOUR TURN! Choose Action or Roll Dice.
+G19|pemain|awal|[7,1450,3,g0,p0,b0,k0][23,-1129,3,g0,p1,b0,k0][2,1229,1,g0,p0,b0,k1]|o:-1,-1,-1,-1,-1,0,-1,2,-1,-1,-1,-1,-1,0,-1,-1,2,-1,0,-1,-1,2,-1,2,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,2,-1,-1|xyz:(65.7, 0.0, 0.0);(-0.2, 0.0, -19.0);(18.6, 0.0, 0.0)
+R|dadu
+T|You are rolling dice...
+T|Your Roll: 4
+T|Passed [img=28]res://permata/permata_kuning.png[/img]!
+R|beli
+T|P2 TURN! P2 is thinking...
+G20|musuh|awal|[11,1240,3,g0,p0,b0,k0][23,-1129,3,g0,p0,b0,k0][2,1229,1,g0,p0,b0,k1]|o:-1,-1,-1,-1,-1,0,-1,2,-1,-1,-1,0,-1,0,-1,-1,2,-1,0,-1,-1,2,-1,2,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,2,-1,-1|xyz:(84.5, 0.0, 19.0);(-0.2, 0.0, -19.0);(18.6, 0.0, 0.0)
+T|P2 set a Lightning Trap!
+T|P2 is rolling dice...
+T|P2 Roll: 2
+T|P2 landed on a Card Tile!
+T|Card saved to Inventory!
+T|P2 set a Lightning Trap!
+T|P3 TURN! P3 is thinking...
+G21|pemain3|awal|[11,1240,3,g0,p0,b0,k0][25,-1129,1,g0,p0,b0,k1][2,1229,1,g0,p0,b0,k1]|o:-1,-1,-1,-1,-1,0,-1,2,-1,-1,-1,0,-1,0,-1,-1,2,-1,0,-1,-1,2,-1,2,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,2,-1,-1|xyz:(84.5, 0.0, 19.0);(-18.8, 0.0, -19.0);(18.6, 0.0, 0.0)
+T|P3 is rolling dice...
+T|P3 Roll: 10
+T|LIGHTNING TRAP! Paralyzed & Stopped!
+T|P3 is paralyzed. End turn.
+T|YOUR TURN! Choose Action or Roll Dice.
+G22|pemain|awal|[11,1240,3,g0,p0,b0,k0][25,-1129,1,g0,p0,b0,k1][23,1179,1,g0,p1,b0,k1]|o:-1,-1,-1,-1,-1,0,-1,2,-1,-1,-1,0,-1,0,-1,-1,2,-1,0,-1,-1,2,-1,2,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,2,-1,-1|xyz:(84.5, 0.0, 19.0);(-18.8, 0.0, -19.0);(-0.1, 0.0, -18.9)
+R|dadu
+T|You are rolling dice...
+T|Your Roll: 5
+T|P3's Tile! Give Up (Pay 100) or Fight?
+R|menyerah
+T|You gave up. Paid fine: 100 Coins.
+T|P2 TURN! P2 is thinking...
+G23|musuh|awal|[16,1140,3,g0,p0,b0,k0][25,-1129,1,g0,p0,b0,k1][23,1279,1,g0,p1,b0,k1]|o:-1,-1,-1,-1,-1,0,-1,2,-1,-1,-1,0,-1,0,-1,-1,2,-1,0,-1,-1,2,-1,2,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,2,-1,-1|xyz:(37.3, 0.0, 19.1);(-18.8, 0.0, -19.0);(-0.1, 0.0, -18.9)
+T|P2 is rolling dice...
+T|P2 Roll: 6
+T|P2 collected [img=28]res://permata/permata_hijau.png[/img] Gem!
+T|P2 ends turn.
+T|P3 TURN! P3 is thinking...
+G24|pemain3|awal|[16,1140,3,g0,p0,b0,k0][31,-1129,1,g0,p0,b0,k1][23,1279,1,g0,p0,b0,k1]|o:-1,-1,-1,-1,-1,0,-1,2,-1,-1,-1,0,-1,0,-1,-1,2,-1,0,-1,-1,2,-1,2,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,2,-1,-1|xyz:(37.3, 0.0, 19.1);(-18.9, 0.0, 37.4);(-0.1, 0.0, -18.9)
+T|P3 is rolling dice...
+T|P3 Roll: 2
+T|P3 landed on a Card Tile!
+T|Card saved to Inventory!
+T|LIGHTNING TRAP! Paralyzed & Stopped!
+T|P3 is paralyzed. End turn.
+T|YOUR TURN! Choose Action or Roll Dice.
+G25|pemain|awal|[16,1140,3,g0,p0,b0,k0][31,-1129,1,g0,p0,b0,k1][25,1229,1,g0,p1,b0,k2]|o:-1,-1,-1,-1,-1,0,-1,2,-1,-1,-1,0,-1,0,-1,-1,2,-1,0,-1,-1,2,-1,2,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,2,-1,-1|xyz:(37.3, 0.0, 19.1);(-18.9, 0.0, 37.4);(-18.8, 0.0, -19.0)
+R|dadu
+T|You are rolling dice...
+T|Your Roll: 9
+R|cabang|1
+T|You landed on a Card Tile!
+R|gacha|2
+T|Card Effect Applied!
+R|akhiri
+T|P2 TURN! P2 is thinking...
+G26|musuh|awal|[24,840,3,g0,p0,b0,k0][31,-1129,1,g0,p0,b0,k1][25,1229,1,g0,p1,b0,k2]|o:-1,-1,-1,-1,-1,0,-1,2,-1,-1,-1,0,-1,0,-1,-1,2,-1,0,-1,-1,2,-1,2,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,2,-1,-1|xyz:(-9.5, 0.0, -18.8);(-18.9, 0.0, 37.4);(-18.8, 0.0, -19.0)
+T|P2 is rolling dice...
+T|P2 Roll: 3
+T|P2 lands on P3's tile! P2 is thinking...
+T|P2 gave up. Paid fine: 100 Coins.
+T|P2 BANKRUPT! Money is minus.
+T|No more tiles! P2 accepts debt.
+T|P3 TURN! P3 is thinking...
+G27|pemain3|awal|[24,840,3,g0,p0,b0,k0][34,-1229,1,g0,p0,b0,k1][25,1329,1,g0,p0,b0,k2]|o:-1,-1,-1,-1,-1,0,-1,2,-1,-1,-1,0,-1,0,-1,-1,2,-1,0,-1,-1,2,-1,2,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,2,-1,-1|xyz:(-9.5, 0.0, -18.8);(-0.1, 0.0, 28.0);(-18.8, 0.0, -19.0)
+T|P3 is rolling dice...
+T|P3 Roll: 8
+T|Passed [img=28]res://permata/permata_hijau.png[/img]!
+T|P3 bought this tile!
+T|P3's tower lost 1 HP!
+T|YOUR TURN! Choose Action or Roll Dice.
+G28|pemain|awal|[24,840,3,g0,p0,b0,k0][34,-1229,1,g0,p0,b0,k1][33,1029,1,g0,p0,b0,k2]|o:-1,-1,-1,-1,-1,0,-1,2,-1,-1,-1,0,-1,0,-1,-1,2,-1,0,-1,-1,2,-1,2,-1,-1,-1,-1,-1,-1,-1,-1,-1,2,2,-1,-1|xyz:(-9.5, 0.0, -18.8);(-0.1, 0.0, 28.0);(-0.1, 0.0, 37.3)
+R|dadu
+T|You are rolling dice...
+T|Your Roll: 9
+T|You collected [img=28]res://permata/permata_hijau.png[/img] Gem!
+T|P3's Tile! Give Up (Pay 100) or Fight?
+R|menyerah
+T|You gave up. Paid fine: 100 Coins.
+T|P2 TURN! P2 is thinking...
+G29|musuh|awal|[33,740,3,g0,p0,b0,k0][34,-1229,1,g0,p0,b0,k1][33,1129,1,g0,p0,b0,k2]|o:-1,-1,-1,-1,-1,0,-1,2,-1,-1,-1,0,-1,0,-1,-1,2,-1,0,-1,-1,2,-1,2,-1,-1,-1,-1,-1,-1,-1,-1,-1,2,2,-1,-1|xyz:(1.2, 0.0, 38.8);(-0.1, 0.0, 28.0);(-1.4, 0.0, 36.0)
+T|P2 is rolling dice...
+T|P2 Roll: 8
+T|P2 passed Start! Bonus +500
+T|P2 got SWORD LV 1
+T|P2 lands on your tile! P2 is thinking...
+T|P2 gave up. Paid fine: 100 Coins.
+T|P2 BANKRUPT! Money is minus.
+T|No more tiles! P2 accepts debt.
+T|P3 TURN! P3 is thinking...
+G30|pemain3|awal|[33,840,3,g0,p0,b0,k0][5,-829,4,g0,p0,b0,k2][33,1129,1,g0,p0,b0,k2]|o:-1,-1,-1,-1,-1,0,-1,2,-1,-1,-1,0,-1,0,-1,-1,2,-1,0,-1,-1,2,-1,2,-1,-1,-1,-1,-1,-1,-1,-1,-1,2,2,-1,-1|xyz:(1.2, 0.0, 38.8);(46.9, 0.0, -0.1);(-1.4, 0.0, 36.0)
+T|P3 is rolling dice...
+T|P3 Roll: 11
+T|P3 passed Start! Bonus +560
+T|P3 builds a tower!
+T|YOUR TURN! Choose Action or Roll Dice.
+G31|pemain|awal|[33,840,3,g0,p0,b0,k0][5,-829,4,g0,p0,b0,k2][7,1189,4,g0,p0,b0,k2]|o:-1,-1,-1,-1,-1,0,-1,2,-1,-1,-1,0,-1,0,-1,-1,2,-1,0,-1,-1,2,-1,2,-1,-1,-1,-1,-1,-1,-1,-1,-1,2,2,-1,-1|xyz:(-0.1, 0.0, 37.5);(46.9, 0.0, -0.1);(65.7, 0.0, -0.2)
+R|dadu
+T|You are rolling dice...
+T|Your Roll: 12
+T|You passed Start! Bonus +540
+R|cabang|1
+T|You landed on a Card Tile!
+R|gacha|2
+T|Card saved to Inventory!
+R|beli
+T|P2 TURN! P2 is thinking...
+G32|musuh|awal|[25,1080,6,g0,p0,b0,k1][5,-829,4,g0,p0,b0,k2][7,1189,4,g0,p0,b0,k2]|o:-1,-1,-1,-1,-1,0,-1,2,-1,-1,-1,0,-1,0,-1,-1,2,-1,0,-1,-1,2,-1,2,-1,0,-1,-1,-1,-1,-1,-1,-1,2,2,-1,-1|xyz:(-18.8, 0.0, -18.8);(46.9, 0.0, -0.1);(65.7, 0.0, -0.2)
+T|P2 is rolling dice...
+T|P2 Roll: 4
+T|P2 ends turn.
+T|P3 TURN! P3 is thinking...
+G33|pemain3|awal|[25,1080,6,g0,p0,b0,k1][9,-829,4,g0,p0,b0,k2][7,1189,4,g0,p0,b0,k2]|o:-1,-1,-1,-1,-1,0,-1,2,-1,-1,-1,0,-1,0,-1,-1,2,-1,0,-1,-1,2,-1,2,-1,0,-1,-1,-1,-1,-1,-1,-1,2,2,-1,-1|xyz:(-18.8, 0.0, -18.8);(84.5, 0.0, -0.1);(65.7, 0.0, -0.2)
+T|P3 is rolling dice...
+T|P3 Roll: 8
+T|P3 collected [img=28]res://permata/permata_kuning.png[/img] Gem!
+T|P3 bought this tile!
+T|YOUR TURN! Choose Action or Roll Dice.
+G34|pemain|awal|[25,1080,6,g0,p0,b0,k1][9,-829,4,g0,p0,b0,k2][15,889,4,g0,p0,b0,k2]|o:-1,-1,-1,-1,-1,0,-1,2,-1,-1,-1,0,-1,0,-1,2,2,-1,0,-1,-1,2,-1,2,-1,0,-1,-1,-1,-1,-1,-1,-1,2,2,-1,-1|xyz:(-18.8, 0.0, -18.8);(84.5, 0.0, -0.1);(46.8, 0.0, 18.8)
+R|dadu
+T|You are rolling dice...
+T|Your Roll: 4
+T|You collected [img=28]res://permata/permata_hijau.png[/img] Gem!
+R|jebakan|TombolTrapAngin
+T|Wind Trap set! Wait for victim.
+R|beli
+T|P2 TURN! P2 is thinking...
+G35|musuh|awal|[29,780,5,g0,p0,b0,k1][9,-829,4,g0,p0,b0,k2][15,889,4,g0,p0,b0,k2]|o:-1,-1,-1,-1,-1,0,-1,2,-1,-1,-1,0,-1,0,-1,2,2,-1,0,-1,-1,2,-1,2,-1,0,-1,-1,-1,0,-1,-1,-1,2,2,-1,-1|xyz:(-18.9, 0.0, 18.7);(84.5, 0.0, -0.1);(46.8, 0.0, 18.8)
+T|P2 is rolling dice...
+T|P2 Roll: 5
+T|P2 collected [img=28]res://permata/permata_kuning.png[/img] Gem!
+T|P2 ends turn.
+T|P3 TURN! P3 is thinking...
+G36|pemain3|awal|[29,780,5,g0,p0,b0,k1][14,-829,4,g0,p0,b0,k2][15,889,4,g0,p0,b0,k2]|o:-1,-1,-1,-1,-1,0,-1,2,-1,-1,-1,0,-1,0,-1,2,2,-1,0,-1,-1,2,-1,2,-1,0,-1,-1,-1,0,-1,-1,-1,2,2,-1,-1|xyz:(-18.9, 0.0, 18.7);(56.1, 0.0, 18.9);(46.8, 0.0, 18.8)
+T|P3 is rolling dice...
+T|P3 Roll: 9
+T|P3 bought this tile!
+T|Tile fees x2 this round!
+T|YOUR TURN! Choose Action or Roll Dice.
+G37|pemain|awal|[29,780,5,g0,p0,b0,k1][14,-829,4,g0,p0,b0,k2][6,589,4,g0,p0,b0,k2]|o:-1,-1,-1,-1,-1,0,2,2,-1,-1,-1,0,-1,0,-1,2,2,-1,0,-1,-1,2,-1,2,-1,0,-1,-1,-1,0,-1,-1,-1,2,2,-1,-1|xyz:(-18.9, 0.0, 18.7);(56.1, 0.0, 18.9);(56.4, 0.0, -0.2)
+R|dadu
+T|You are rolling dice...
+T|Your Roll: 8
+T|SALARY FAILED! Need 2 unique gems!
+R|akhiri
+T|P2 TURN! P2 is thinking...
+G38|musuh|awal|[0,780,5,g0,p0,b0,k1][14,-829,4,g0,p0,b0,k2][6,589,4,g0,p0,b0,k2]|o:-1,-1,-1,-1,-1,0,2,2,-1,-1,-1,0,-1,0,-1,2,2,-1,0,-1,-1,2,-1,2,-1,0,-1,-1,-1,0,-1,-1,-1,2,2,-1,-1|xyz:(-0.1, 0.0, 0.0);(56.1, 0.0, 18.9);(56.4, 0.0, -0.2)
+T|P2 set a Lightning Trap!
+T|P2 is rolling dice...
+T|P2 Roll: 8
+T|P2 set a Lightning Trap!
+T|P3 TURN! P3 is thinking...
+G39|pemain3|awal|[0,780,5,g0,p0,b0,k1][4,-829,2,g0,p0,b0,k2][6,589,4,g0,p0,b0,k2]|o:-1,-1,-1,-1,-1,0,2,2,-1,-1,-1,0,-1,0,-1,2,2,-1,0,-1,-1,2,-1,2,-1,0,-1,-1,-1,0,-1,-1,-1,2,2,-1,-1|xyz:(-0.1, 0.0, 0.0);(37.4, 0.0, -0.1);(56.4, 0.0, -0.2)
+T|P3 set a Lightning Trap!
+T|P3 is rolling dice...
+T|P3 Roll: 6
+T|Passed [img=28]res://permata/permata_kuning.png[/img]!
+T|P3 bought this tile!
+T|YOUR TURN! Choose Action or Roll Dice.
+G40|pemain|awal|[0,780,5,g0,p0,b0,k1][4,-829,2,g0,p0,b0,k2][12,289,3,g0,p0,b0,k2]|o:-1,-1,-1,-1,-1,0,2,2,-1,-1,-1,0,2,0,-1,2,2,-1,0,-1,-1,2,-1,2,-1,0,-1,-1,-1,0,-1,-1,-1,2,2,-1,-1|xyz:(-0.1, 0.0, 0.0);(37.4, 0.0, -0.1);(75.0, 0.0, 18.8)
+R|serang|6
+T|Launching long range attack!
+T|Attack Hit! P3's tile HP left: 2
+R|dadu
+T|You are rolling dice...
+T|Your Roll: 3
+R|cabang|1
+R|beli
+T|P2 TURN! P2 is thinking...
+G41|musuh|awal|[20,480,0,g0,p0,b0,k1][4,-829,2,g0,p0,b0,k2][12,289,3,g0,p0,b0,k2]|o:-1,-1,-1,-1,-1,0,2,2,-1,-1,-1,0,2,0,-1,2,2,-1,0,-1,0,2,-1,2,-1,0,-1,-1,-1,0,-1,-1,-1,2,2,-1,-1|xyz:(18.6, 0.0, -9.5);(37.4, 0.0, -0.1);(75.0, 0.0, 18.8)
+T|P2 is rolling dice...
+T|P2 Roll: 5
+T|LIGHTNING TRAP! Paralyzed & Stopped!
+T|P2 lands on P3's tile! P2 is thinking...
+T|P2 gave up. Paid fine: 100 Coins.
+T|P2 BANKRUPT! Money is minus.
+T|No more tiles! P2 accepts debt.
+T|P3 TURN! P3 is thinking...
+G42|pemain3|awal|[20,480,0,g0,p0,b0,k1][6,-929,2,g0,p2,b0,k2][12,389,3,g0,p0,b0,k2]|o:-1,-1,-1,-1,-1,0,2,2,-1,-1,-1,0,2,0,-1,2,2,-1,0,-1,0,2,-1,2,-1,0,-1,-1,-1,0,-1,-1,-1,2,2,-1,-1|xyz:(18.6, 0.0, -9.5);(56.3, 0.0, -0.2);(75.0, 0.0, 18.8)
+T|P3 set a Lightning Trap!
+T|P3 is rolling dice...
+T|P3 Roll: 7
+T|LIGHTNING TRAP! Paralyzed & Stopped!
+T|P3 is paralyzed. End turn.
+T|YOUR TURN! Choose Action or Roll Dice.
+G43|pemain|awal|[20,480,0,g0,p0,b0,k1][6,-929,2,g0,p2,b0,k2][14,339,2,g0,p1,b0,k2]|o:-1,-1,-1,-1,-1,0,2,2,-1,-1,-1,0,2,0,-1,2,2,-1,0,-1,0,2,-1,2,-1,0,-1,-1,-1,0,-1,-1,-1,2,2,-1,-1|xyz:(18.6, 0.0, -9.5);(56.3, 0.0, -0.2);(56.1, 0.0, 18.7)
+R|dadu
+T|You are rolling dice...
+T|Your Roll: 12
+T|You landed on a Card Tile!
+R|gacha|2
+T|Card saved to Inventory!
+T|Passed [img=28]res://permata/permata_hijau.png[/img]!
+R|beli
+T|P2 is paralyzed! Cannot move this turn.
+G44|musuh|awal|[32,180,0,g0,p0,b0,k2][6,-929,2,g0,p1,b0,k2][14,339,2,g0,p1,b0,k2]|o:-1,-1,-1,-1,-1,0,2,2,-1,-1,-1,0,2,0,-1,2,2,-1,0,-1,0,2,-1,2,-1,0,-1,-1,-1,0,-1,-1,0,2,2,-1,-1|xyz:(-9.5, 0.0, 37.5);(56.3, 0.0, -0.2);(56.1, 0.0, 18.7)
+T|P3 TURN! P3 is thinking...
+G45|pemain3|awal|[32,180,0,g0,p0,b0,k2][6,-929,2,g0,p1,b0,k2][14,339,2,g0,p0,b0,k2]|o:-1,-1,-1,-1,-1,0,2,2,-1,-1,-1,0,2,0,-1,2,2,-1,0,-1,0,2,-1,2,-1,0,-1,-1,-1,0,-1,-1,0,2,2,-1,-1|xyz:(-9.5, 0.0, 37.5);(56.3, 0.0, -0.2);(56.1, 0.0, 18.7)
+T|P3 set a Lightning Trap!
+T|P3 is rolling dice...
+T|P3 Roll: 3
+T|P3 saves money and skips this tile.
+T|Tiles and towers -30% this round!
+T|YOUR TURN! Choose Action or Roll Dice.
+G46|pemain|awal|[32,180,0,g0,p0,b0,k2][6,-929,2,g0,p1,b0,k2][17,339,1,g0,p0,b0,k2]|o:-1,-1,-1,-1,-1,0,2,2,-1,-1,-1,0,2,0,-1,2,2,-1,0,-1,0,2,-1,2,-1,0,-1,-1,-1,0,-1,-1,0,2,2,-1,-1|xyz:(-9.5, 0.0, 37.5);(56.3, 0.0, -0.2);(28.0, 0.0, 18.7)
+R|dadu
+T|You are rolling dice...
+T|Your Roll: 3
+R|akhiri
+T|P2 TURN! P2 is thinking...
+G47|musuh|awal|[35,180,0,g0,p0,b0,k2][6,-929,2,g0,p0,b0,k2][17,339,1,g0,p0,b0,k2]|o:-1,-1,-1,-1,-1,0,2,2,-1,-1,-1,0,2,0,-1,2,2,-1,0,-1,0,2,-1,2,-1,0,-1,-1,-1,0,-1,-1,0,2,2,-1,-1|xyz:(-0.1, 0.0, 18.7);(56.3, 0.0, -0.2);(28.0, 0.0, 18.7)
+T|P2 set a Lightning Trap!
+T|P2 is rolling dice...
+T|P2 Roll: 8
+T|Passed [img=28]res://permata/permata_kuning.png[/img]!
+T|LIGHTNING TRAP! Paralyzed & Stopped!
+T|P2 lands on P3's tile! P2 is thinking...
+T|P2 gave up. Paid fine: 100 Coins.
+T|P2 BANKRUPT! Money is minus.
+T|No more tiles! P2 accepts debt.
+T|P3 TURN! P3 is thinking...
+G48|pemain3|awal|[35,180,0,g0,p0,b0,k2][12,-1029,1,g0,p2,b0,k2][17,439,1,g0,p0,b0,k2]|o:-1,-1,-1,-1,-1,0,2,2,-1,-1,-1,0,2,0,-1,2,2,-1,0,-1,0,2,-1,2,-1,0,-1,-1,-1,0,-1,-1,0,2,2,-1,-1|xyz:(-0.1, 0.0, 18.7);(75.0, 0.0, 18.7);(28.0, 0.0, 18.7)
+T|P3 is rolling dice...
+T|P3 Roll: 9
+T|P3 landed on a Card Tile!
+T|Card Effect Applied!
+T|P3 lands on your tile! P3 is thinking...
+D|881.0|DUEL fase=MENUNGGU_MUSUH segelM=0 segelP=0 tonton=0 judul='P3 ATTACKS! P3 IS THINKING...'
+R|elemen|air
+D|883.1|DUEL fase=SEGEL_KEDUANYA segelM=1 segelP=1 tonton=0 judul='UNLOCKING...'
+D|884.3|DUEL fase=FADE_OUT segelM=1 segelP=1 tonton=0 judul='UNLOCKING...'
+D|885.9|DUEL fase=ANIMASI_CORET segelM=1 segelP=1 tonton=0 judul='ELEMENT LOSE! P3 +3'
+D|887.2|DUEL fase=ANIMASI_HILANG segelM=1 segelP=1 tonton=0 judul='ELEMENT LOSE! P3 +3'
+D|887.6|DUEL fase=ANIMASI_MENANG segelM=1 segelP=1 tonton=0 judul='ELEMENT LOSE! P3 +3'
+D|889.0|DUEL fase=ROLET_PEMAIN segelM=1 segelP=1 tonton=0 judul='SPIN YOUR WHEEL!'
+D|891.0|DUEL fase=ROLET_PEMAIN segelM=1 segelP=1 tonton=0 judul='WHEEL SPINNING...'
+D|895.1|DUEL fase=ROLET_MUSUH segelM=1 segelP=1 tonton=0 judul='P3 WHEEL SPINNING...'
+D|899.4|DUEL fase=RANGKUMAN segelM=1 segelP=1 tonton=0 judul='CALCULATING TOTAL SCORE...'
+D|902.4|DUEL fase=PENGUMUMAN_TRANSISI segelM=1 segelP=1 tonton=0 judul='CALCULATING TOTAL SCORE...'
+D|902.9|DUEL fase=PENGUMUMAN_FINAL segelM=1 segelP=1 tonton=0 judul='P3 WINS THE FIGHT!'
+T|P3 WON! Your tile is stolen!
+T|YOUR TURN! Choose Action or Roll Dice.
+G49|pemain|awal|[35,180,0,g0,p0,b0,k2][12,-1029,1,g0,p2,b0,k2][25,1439,1,g0,p0,b0,k2]|o:-1,-1,-1,-1,-1,0,2,2,-1,-1,-1,0,2,0,-1,2,2,-1,0,-1,0,2,-1,2,-1,2,-1,-1,-1,0,-1,-1,0,2,2,-1,-1|xyz:(-0.1, 0.0, 18.7);(75.0, 0.0, 18.7);(-18.8, 0.0, -19.1)
+R|dadu
+T|You are rolling dice...
+T|Your Roll: 10
+T|SALARY FAILED! Need 2 unique gems!
+R|cabang|0
+T|LIGHTNING TRAP! Paralyzed & Stopped!
+R|akhiri
+T|P2 is paralyzed! Cannot move this turn.
+G50|musuh|awal|[4,130,0,g0,p2,b0,k2][12,-1029,1,g0,p1,b0,k2][25,1439,1,g0,p0,b0,k2]|o:-1,-1,-1,-1,-1,0,2,2,-1,-1,-1,0,2,0,-1,2,2,-1,0,-1,0,2,-1,2,-1,2,-1,-1,-1,0,-1,-1,0,2,2,-1,-1|xyz:(37.3, 0.0, 0.0);(74.9, 0.0, 18.7);(-18.8, 0.0, -19.1)
+T|P3 TURN! P3 is thinking...
+G51|pemain3|awal|[4,130,0,g0,p2,b0,k2][12,-1029,1,g0,p1,b0,k2][25,1439,1,g0,p0,b0,k2]|o:-1,-1,-1,-1,-1,0,2,2,-1,-1,-1,0,2,0,-1,2,2,-1,0,-1,0,2,-1,2,-1,2,-1,-1,-1,0,-1,-1,0,2,2,-1,-1|xyz:(37.3, 0.0, 0.0);(74.9, 0.0, 18.7);(-18.8, 0.0, -19.1)
+T|P3 is rolling dice...
+T|P3 Roll: 9
+T|P3 collected [img=28]res://permata/permata_hijau.png[/img] Gem!
+T|WIND TRAP! Lost 107 Coins!
+T|P3 found 26 Coins!
+T|P3 builds a tower!
+T|You are paralyzed! Cannot move this turn.
+G52|pemain|awal|[4,130,0,g0,p1,b0,k2][12,-1029,1,g0,p1,b0,k2][34,884,1,g0,p0,b0,k2]|o:-1,-1,-1,-1,-1,0,2,2,-1,-1,-1,0,2,0,-1,2,2,-1,0,-1,0,2,-1,2,-1,2,-1,-1,-1,0,-1,-1,0,2,2,-1,-1|xyz:(37.3, 0.0, 0.1);(74.9, 0.0, 18.7);(-0.1, 0.0, 27.8)
+T|P2 TURN! P2 is thinking...
+G53|musuh|awal|[4,130,0,g0,p1,b0,k2][12,-1029,1,g0,p0,b0,k2][34,884,1,g0,p0,b0,k2]|o:-1,-1,-1,-1,-1,0,2,2,-1,-1,-1,0,2,0,-1,2,2,-1,0,-1,0,2,-1,2,-1,2,-1,-1,-1,0,-1,-1,0,2,2,-1,-1|xyz:(37.4, 0.0, 0.0);(74.9, 0.0, 18.7);(-0.1, 0.0, 27.8)
+T|P2 is rolling dice...
+T|P2 Roll: 7
+T|LIGHTNING TRAP! Paralyzed & Stopped!
+T|P2 is paralyzed. End turn.
+T|P3 TURN! P3 is thinking...
+G54|pemain3|awal|[4,130,0,g0,p1,b0,k2][14,-1029,1,g0,p2,b0,k2][34,884,1,g0,p0,b0,k2]|o:-1,-1,-1,-1,-1,0,2,2,-1,-1,-1,0,2,0,-1,2,2,-1,0,-1,0,2,-1,2,-1,2,-1,-1,-1,0,-1,-1,0,2,2,-1,-1|xyz:(37.4, 0.0, 0.0);(56.0, 0.0, 18.6);(-0.1, 0.0, 27.8)
+T|P3 is rolling dice...
+T|P3 Roll: 11
+T|P3 passed Start! Bonus +600
+T|P3 found 26 Coins!
+T|LIGHTNING TRAP! Paralyzed & Stopped!
+T|P3 is paralyzed. End turn.
+T|Everyone gets +1 Star!
+T|YOUR TURN! Choose Action or Roll Dice.
+G55|pemain|awal|[4,130,1,g0,p0,b0,k2][14,-1029,2,g0,p2,b0,k2][6,1460,5,g0,p1,b0,k2]|o:-1,-1,-1,-1,-1,0,2,2,-1,-1,-1,0,2,0,-1,2,2,-1,0,-1,0,2,-1,2,-1,2,-1,-1,-1,0,-1,-1,0,2,2,-1,-1|xyz:(37.4, 0.0, 0.0);(56.0, 0.0, 18.6);(56.4, 0.0, -0.4)
+R|dadu
+T|You are rolling dice...
+T|Your Roll: 2
+T|P3's Tile! Give Up (Pay 100) or Fight?
+R|menyerah
+T|You gave up. Paid fine: 100 Coins.
+T|P2 is paralyzed! Cannot move this turn.
+G56|musuh|awal|[6,30,1,g0,p0,b0,k2][14,-1029,2,g0,p1,b0,k2][6,1560,5,g0,p1,b0,k2]|o:-1,-1,-1,-1,-1,0,2,2,-1,-1,-1,0,2,0,-1,2,2,-1,0,-1,0,2,-1,2,-1,2,-1,-1,-1,0,-1,-1,0,2,2,-1,-1|xyz:(57.6, 0.0, 1.3);(56.0, 0.0, 18.6);(55.1, 0.0, -1.7)
+T|P3 TURN! P3 is thinking...
+G57|pemain3|awal|[6,30,1,g0,p0,b0,k2][14,-1029,2,g0,p1,b0,k2][6,1560,5,g0,p0,b0,k2]|o:-1,-1,-1,-1,-1,0,2,2,-1,-1,-1,0,2,0,-1,2,2,-1,0,-1,0,2,-1,2,-1,2,-1,-1,-1,0,-1,-1,0,2,2,-1,-1|xyz:(57.6, 0.0, 1.3);(56.0, 0.0, 18.7);(55.1, 0.0, -1.7)
+T|P3 attacks from far away!
+T|P3 shoots your tile! HP left: 2
+T|P3 is rolling dice...
+T|P3 Roll: 5
+T|P3 collected [img=28]res://permata/permata_kuning.png[/img] Gem!
+T|P3 lands on your tile! P3 is thinking...
+D|1036.9|DUEL fase=MENUNGGU_MUSUH segelM=0 segelP=0 tonton=0 judul='P3 ATTACKS! P3 IS THINKING...'
+R|elemen|angin
+D|1038.9|DUEL fase=SEGEL_KEDUANYA segelM=1 segelP=1 tonton=0 judul='UNLOCKING...'
+D|1040.2|DUEL fase=FADE_OUT segelM=1 segelP=1 tonton=0 judul='UNLOCKING...'
+D|1041.7|DUEL fase=ANIMASI_CORET segelM=1 segelP=1 tonton=0 judul='ELEMENT DRAW! (+0)'
+D|1043.1|DUEL fase=ANIMASI_HILANG segelM=1 segelP=1 tonton=0 judul='ELEMENT DRAW! (+0)'
+D|1043.5|DUEL fase=ANIMASI_MENANG segelM=1 segelP=1 tonton=0 judul='ELEMENT DRAW! (+0)'
+D|1044.9|DUEL fase=ROLET_PEMAIN segelM=1 segelP=1 tonton=0 judul='SPIN YOUR WHEEL!'
+D|1046.9|DUEL fase=ROLET_PEMAIN segelM=1 segelP=1 tonton=0 judul='WHEEL SPINNING...'
+D|1051.0|DUEL fase=ROLET_MUSUH segelM=1 segelP=1 tonton=0 judul='P3 WHEEL SPINNING...'
+D|1055.3|DUEL fase=RANGKUMAN segelM=1 segelP=1 tonton=0 judul='CALCULATING TOTAL SCORE...'
+D|1058.3|DUEL fase=PENGUMUMAN_TRANSISI segelM=1 segelP=1 tonton=0 judul='CALCULATING TOTAL SCORE...'
+D|1058.8|DUEL fase=PENGUMUMAN_FINAL segelM=1 segelP=1 tonton=0 judul='P3 WINS THE FIGHT!'
+T|P3 WON! Your tile is stolen!
+T|YOUR TURN! Choose Action or Roll Dice.
+G58|pemain|awal|[6,30,1,g0,p0,b0,k2][14,-1029,2,g0,p1,b0,k2][11,1560,0,g0,p0,b0,k1]|o:-1,-1,-1,-1,-1,0,2,2,-1,-1,-1,2,2,0,-1,2,2,-1,0,-1,0,2,-1,2,-1,2,-1,-1,-1,0,-1,-1,0,2,2,-1,-1|xyz:(56.3, 0.0, 0.0);(56.0, 0.0, 18.7);(84.5, 0.0, 18.6)
+R|dadu
+T|You are rolling dice...
+T|Your Roll: 4
+T|You collected [img=28]res://permata/permata_kuning.png[/img] Gem!
+R|akhiri
+T|P2 TURN! P2 is thinking...
+G59|musuh|awal|[10,30,1,g0,p0,b0,k2][14,-1029,2,g0,p0,b0,k2][11,1560,0,g0,p0,b0,k1]|o:-1,-1,-1,-1,-1,0,2,2,-1,-1,-1,2,2,0,-1,2,2,-1,0,-1,0,2,-1,2,-1,2,-1,-1,-1,0,-1,-1,0,2,2,-1,-1|xyz:(84.4, 0.0, 9.5);(56.0, 0.0, 18.7);(84.5, 0.0, 18.6)
+T|P2 set a Lightning Trap!
+T|P2 is rolling dice...
+T|P2 Roll: 11
+T|P2 found 26 Coins!
+T|P2 landed on a Card Tile!
+T|Card Effect Applied!
+T|P2 stops on Card Tile. Turn ends.
+T|P3 TURN! P3 is thinking...
+G60|pemain3|awal|[10,30,1,g0,p0,b0,k2][24,-503,1,g0,p0,b0,k2][11,1560,0,g0,p0,b0,k1]|o:-1,-1,-1,-1,-1,0,2,2,-1,-1,-1,2,2,0,-1,2,2,-1,0,-1,0,2,-1,2,-1,2,-1,-1,-1,0,-1,-1,0,2,2,-1,-1|xyz:(84.4, 0.0, 9.5);(-9.6, 0.0, -19.2);(84.5, 0.0, 18.6)
+T|P3 is rolling dice...
+T|P3 Roll: 12
+T|LIGHTNING TRAP! Paralyzed & Stopped!
+T|P3 is paralyzed. End turn.
+T|YOUR TURN! Choose Action or Roll Dice.
+G61|pemain|awal|[10,30,1,g0,p0,b0,k2][24,-503,1,g0,p0,b0,k2][14,1510,0,g0,p1,b0,k1]|o:-1,-1,-1,-1,-1,0,2,2,-1,-1,-1,2,2,0,-1,2,2,-1,0,-1,0,2,-1,2,-1,2,-1,-1,-1,0,-1,-1,0,2,2,-1,-1|xyz:(84.4, 0.0, 9.5);(-9.6, 0.0, -19.2);(56.1, 0.0, 18.5)
+SELESAI|BATAS_GILIRAN|G61|pemain|awal|[10,30,1,g0,p0,b0,k2][24,-503,1,g0,p0,b0,k2][14,1510,0,g0,p1,b0,k1]|o:-1,-1,-1,-1,-1,0,2,2,-1,-1,-1,2,2,0,-1,2,2,-1,0,-1,0,2,-1,2,-1,2,-1,-1,-1,0,-1,-1,0,2,2,-1,-1|xyz:(84.4, 0.0, 9.5);(-9.6, 0.0, -19.2);(56.1, 0.0, 18.5)

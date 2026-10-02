@@ -1001,11 +1001,31 @@ func eksekusi_jual_aset(target_index):
 			rpc("rpc_jual_selesai")
 		await get_tree().create_timer(1.5).timeout
 		if not cek_game_over(): ganti_giliran()
+	elif not _punya_petak(slot):
+		# Fase 5 G8: petak TERAKHIR sudah terjual tapi uang masih minus -> sama seperti cabang
+		# "No more tiles!" di sita_aset_untuk_hutang: hutang dibawa, giliran lanjut (dulu macet
+		# menunggu ketukan "Tap another tile" padahal tidak ada petak lagi).
+		mode_jual_aset = false
+		mode_membidik = false
+		teks_dadu.text = _teks_bawa_hutang(slot)
+		if StatusJaringan.peran_multiplayer == "host":
+			rpc("rpc_jual_habis", slot)
+		await get_tree().create_timer(2.5).timeout
+		if not cek_game_over(): ganti_giliran()
 	else: 
 		teks_dadu.text = _teks_lanjut_jual(slot == slot_lokal, slot)
 		mode_membidik = (slot == slot_lokal)
 		if StatusJaringan.peran_multiplayer == "host" and slot != slot_lokal and daftar_pemain[slot].id_jaringan > 1:
 			rpc_id(daftar_pemain[slot].id_jaringan, "rpc_minta_jual_aset", slot)
+
+func _punya_petak(slot: int) -> bool:
+	for i in range(rute_papan.size()):
+		if pemilik_petak[i] == slot:
+			return true
+	return false
+
+func _teks_bawa_hutang(slot: int) -> String:
+	return "No more tiles! " + ("You carry the debt." if slot == slot_lokal else _nama_slot(slot) + " carries the debt.")
 
 func _teks_hasil_jual(milik_sendiri: bool, harga: int, slot_penjual: int = 1) -> String:
 	if milik_sendiri:
@@ -1048,6 +1068,15 @@ func rpc_efek_jual(target_index: int, slot: int, harga_jual: int, uang_baru: int
 	update_semua_label_petak()
 	teks_dadu.show()
 	teks_dadu.text = _teks_hasil_jual(slot == slot_lokal, harga_jual, slot)
+
+@rpc("authority", "call_remote", "reliable")
+func rpc_jual_habis(slot: int) -> void:
+	# Diterima di CLIENT (Fase 5 G8): petak habis terjual, uang masih minus -> hutang dibawa,
+	# mode jual ditutup di layar ini juga (giliran berikutnya menyusul lewat siaran state).
+	mode_jual_aset = false
+	mode_membidik = false
+	teks_dadu.show()
+	teks_dadu.text = _teks_bawa_hutang(slot)
 
 @rpc("authority", "call_remote", "reliable")
 func rpc_jual_selesai() -> void:
@@ -1286,7 +1315,7 @@ func sita_aset_untuk_hutang(aktor):
 			if StatusJaringan.peran_multiplayer == "host" and slot_hutang != slot_lokal and daftar_pemain[slot_hutang].id_jaringan > 1:
 				rpc_id(daftar_pemain[slot_hutang].id_jaringan, "rpc_minta_jual_aset", slot_hutang)
 		else:
-			teks_dadu.text = "No more tiles! " + ("You carry the debt." if slot_hutang == slot_lokal else _nama_slot(slot_hutang) + " carries the debt.")
+			teks_dadu.text = _teks_bawa_hutang(slot_hutang)
 			await get_tree().create_timer(2.5).timeout
 			if not cek_game_over(): ganti_giliran()
 

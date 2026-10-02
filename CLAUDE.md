@@ -14,7 +14,8 @@ Panduan untuk pemilik: https://claude.ai/code/artifact/bc2bfff0-d4f6-4ff0-89ed-1
 - Beri arahan kapan ganti model: Opus = arsitektur / penyetelan keseimbangan / bug membingungkan;
   Sonnet = menulis kode dari rencana yang disepakati, cek diff, tambalan kecil.
 - RNG game lewat `mesin_acak`, bukan `randi()`. Fungsi `ai_*.gd` hanya membaca state.
-- Akhir tiap tahap: perbarui `HANDOFF_LANJUT.md` + data hasil, lalu push ke branch `claude/new-session-e4ogqo`.
+- Akhir tiap tahap: perbarui `HANDOFF_LANJUT.md` + data hasil, lalu push ke branch `claude/wonderful-gates-8v431l`
+  (branch kerja sejak Fase 5; `claude/new-session-e4ogqo` sudah LAMA, jangan dipakai).
 - Satu rantai simulasi saja; jangan ubah `rig/` selama simulasi berjalan
   (cek `ps -eo comm | grep -c ^Godot` = 0).
 - Pantau panjang sesi: kalau sudah panjang, INGATKAN pemilik membuka sesi baru (setelah semua ter-push) dan

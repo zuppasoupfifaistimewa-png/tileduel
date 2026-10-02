@@ -1,0 +1,494 @@
+MULAI-NYATA pemain=2 seed=804 peta=alam
+KARAKTER|0|Pemain|pos=(0.0, 0.0, 0.0)|warna=3380ff
+KARAKTER|1|Musuh|pos=(0.0, 0.0, 0.0)|warna=ff3333
+T|YOUR TURN! Choose Action or Roll Dice.
+G1|pemain|awal|[0,2500,4,g0,p0,b0,k0][0,2500,4,g0,p0,b0,k0]|o:-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1|xyz:(0.0, 0.0, 0.0);(0.0, 0.0, 0.0)
+R|dadu
+T|You are rolling dice...
+T|Your Roll: 1
+R|beli
+T|ENEMY TURN! Enemy is thinking...
+G2|musuh|awal|[1,2200,4,g0,p0,b0,k0][0,2500,4,g0,p0,b0,k0]|o:-1,0,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1|xyz:(7.2, 0.0, 0.0);(0.0, 0.0, 0.0)
+T|Enemy is rolling dice...
+T|Enemy Roll: 5
+T|Enemy bought this tile!
+T|First to win a duel with WATER: +1 Star
+T|YOUR TURN! Choose Action or Roll Dice.
+G3|pemain|awal|[1,2200,4,g0,p0,b0,k0][5,2200,4,g0,p0,b0,k0]|o:-1,0,-1,-1,-1,1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1|xyz:(7.2, 0.0, 0.0);(21.5, 0.0, -14.4)
+R|dadu
+T|You are rolling dice...
+T|Your Roll: 5
+R|beli
+T|ENEMY TURN! Enemy is thinking...
+G4|musuh|awal|[6,-1420,4,g0,p0,b0,k0][5,2200,4,g0,p0,b0,k0]|o:-1,0,-1,-1,-1,1,0,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1|xyz:(21.6, 0.0, -21.5);(21.5, 0.0, -14.4)
+T|Enemy is rolling dice...
+T|Enemy Roll: 5
+T|Enemy bought this tile!
+T|YOUR TURN! Choose Action or Roll Dice.
+G5|pemain|awal|[6,-1420,4,g0,p0,b0,k0][10,1900,4,g0,p0,b0,k0]|o:-1,0,-1,-1,-1,1,0,-1,-1,-1,1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1|xyz:(21.6, 0.0, -21.5);(14.3, 0.0, -43.0)
+R|dadu
+T|You are rolling dice...
+T|Your Roll: 1
+R|akhiri
+T|ENEMY TURN! Enemy is thinking...
+G6|musuh|awal|[7,-1420,4,g0,p0,b0,k0][10,1900,4,g0,p0,b0,k0]|o:-1,0,-1,-1,-1,1,0,-1,-1,-1,1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1|xyz:(14.4, 0.0, -21.6);(14.3, 0.0, -43.0)
+T|Enemy set a Lightning Trap!
+T|Enemy is rolling dice...
+T|Enemy Roll: 5
+T|Enemy landed on a Card Tile!
+T|Card Effect Applied!
+T|Enemy bought this tile!
+T|Tiles and towers -30% this round!
+T|YOUR TURN! Choose Action or Roll Dice.
+G7|pemain|awal|[7,-1420,4,g0,p0,b0,k0][15,2100,3,g0,p0,b0,k0]|o:-1,0,-1,-1,-1,1,0,-1,-1,-1,1,-1,-1,-1,-1,1,-1,-1,-1,-1,-1,-1,-1,-1|xyz:(14.4, 0.0, -21.6);(-7.1, 0.0, -43.1)
+R|dadu
+T|You are rolling dice...
+T|Your Roll: 1
+R|akhiri
+T|ENEMY TURN! Enemy is thinking...
+G8|musuh|awal|[8,-1420,4,g0,p0,b0,k0][15,2100,3,g0,p0,b0,k0]|o:-1,0,-1,-1,-1,1,0,-1,-1,-1,1,-1,-1,-1,-1,1,-1,-1,-1,-1,-1,-1,-1,-1|xyz:(14.4, 0.0, -28.7);(-7.1, 0.0, -43.1)
+T|Enemy is rolling dice...
+T|Enemy Roll: 3
+T|Enemy bought this tile!
+T|YOUR TURN! Choose Action or Roll Dice.
+G9|pemain|awal|[8,-1420,4,g0,p0,b0,k0][18,1890,3,g0,p0,b0,k0]|o:-1,0,-1,-1,-1,1,0,-1,-1,-1,1,-1,-1,-1,-1,1,-1,-1,1,-1,-1,-1,-1,-1|xyz:(14.4, 0.0, -28.7);(-7.1, 0.0, -21.4)
+R|dadu
+T|You are rolling dice...
+T|Your Roll: 6
+T|LIGHTNING TRAP! Paralyzed & Stopped!
+T|Enemy Tile! Give Up (Pay 100) or Fight?
+R|menyerah
+T|You gave up. Paid fine: 100 Coins.
+T|YOU BANKRUPT! Money is minus.
+T|TAP YOUR TILE TO SELL (30% Discount)
+R|jual|1
+T|Tile sold: +210 Coins!
+T|Still in minus! Tap another tile to sell.
+R|jual|6
+T|Tile sold: +210 Coins!
+T|No more tiles! You carry the debt.
+T|ENEMY TURN! Enemy is thinking...
+G10|musuh|awal|[10,-1100,4,g0,p2,b0,k0][18,1990,3,g0,p0,b0,k0]|o:-1,-1,-1,-1,-1,1,-1,-1,-1,-1,1,-1,-1,-1,-1,1,-1,-1,1,-1,-1,-1,-1,-1|xyz:(14.2, 0.0, -43.0);(-7.1, 0.0, -21.4)
+T|Enemy is rolling dice...
+T|Enemy Roll: 2
+T|Enemy bought this tile!
+T|You are paralyzed! Cannot move this turn.
+G11|pemain|awal|[10,-1100,4,g0,p1,b0,k0][20,1690,3,g0,p0,b0,k0]|o:-1,-1,-1,-1,-1,1,-1,-1,-1,-1,1,-1,-1,-1,-1,1,-1,-1,1,-1,1,-1,-1,-1|xyz:(14.2, 0.0, -43.0);(-14.3, 0.0, -14.3)
+T|ENEMY TURN! Enemy is thinking...
+G12|musuh|awal|[10,-1100,4,g0,p1,b0,k0][20,1690,3,g0,p0,b0,k0]|o:-1,-1,-1,-1,-1,1,-1,-1,-1,-1,1,-1,-1,-1,-1,1,-1,-1,1,-1,1,-1,-1,-1|xyz:(14.3, 0.0, -43.0);(-14.3, 0.0, -14.3)
+T|Enemy is rolling dice...
+T|Enemy Roll: 6
+T|Enemy collected [img=28]res://permata/permata_hijau.png[/img] Gem!
+T|Enemy passed Start! Bonus +550
+T|Enemy bought this tile!
+T|Tile fees x2 this round!
+T|YOUR TURN! Choose Action or Roll Dice.
+G13|pemain|awal|[10,-1100,4,g0,p0,b0,k0][2,1940,6,g0,p0,b0,k0]|o:-1,-1,1,-1,-1,1,-1,-1,-1,-1,1,-1,-1,-1,-1,1,-1,-1,1,-1,1,-1,-1,-1|xyz:(14.3, 0.0, -43.0);(14.4, 0.0, 0.0)
+R|dadu
+T|You are rolling dice...
+T|Your Roll: 6
+T|You landed on a Card Tile!
+R|gacha|2
+T|Card Effect Applied!
+R|akhiri
+T|ENEMY TURN! Enemy is thinking...
+G14|musuh|awal|[16,-1100,6,g0,p0,b0,k0][2,1940,6,g0,p0,b0,k0]|o:-1,-1,1,-1,-1,1,-1,-1,-1,-1,1,-1,-1,-1,-1,1,-1,-1,1,-1,1,-1,-1,-1|xyz:(-7.2, 0.0, -35.8);(14.4, 0.0, 0.0)
+T|Enemy is rolling dice...
+T|Enemy Roll: 6
+T|Enemy bought this tile!
+T|YOUR TURN! Choose Action or Roll Dice.
+G15|pemain|awal|[16,-1100,6,g0,p0,b0,k0][8,1640,6,g0,p0,b0,k0]|o:-1,-1,1,-1,-1,1,-1,-1,1,-1,1,-1,-1,-1,-1,1,-1,-1,1,-1,1,-1,-1,-1|xyz:(-7.2, 0.0, -35.8);(14.4, 0.0, -28.7)
+R|dadu
+T|You are rolling dice...
+T|Your Roll: 5
+T|You collected [img=28]res://permata/permata_hijau.png[/img] Gem!
+R|akhiri
+T|ENEMY TURN! Enemy is thinking...
+G16|musuh|awal|[21,-1100,6,g0,p0,b0,k0][8,1640,6,g0,p0,b0,k0]|o:-1,-1,1,-1,-1,1,-1,-1,1,-1,1,-1,-1,-1,-1,1,-1,-1,1,-1,1,-1,-1,-1|xyz:(-14.3, 0.0, -7.1);(14.4, 0.0, -28.7)
+T|Enemy is rolling dice...
+T|Enemy Roll: 2
+T|Enemy builds a tower!
+T|YOUR TURN! Choose Action or Roll Dice.
+G17|pemain|awal|[21,-1100,6,g0,p0,b0,k0][10,1140,6,g0,p0,b0,k0]|o:-1,-1,1,-1,-1,1,-1,-1,1,-1,1,-1,-1,-1,-1,1,-1,-1,1,-1,1,-1,-1,-1|xyz:(-14.3, 0.0, -7.1);(14.3, 0.0, -43.0)
+R|serang|2
+T|Launching long range attack!
+T|Attack Hit! Enemy tile HP left: 2
+R|dadu
+T|You are rolling dice...
+T|Your Roll: 3
+T|You passed Start! Bonus +500
+T|You got HIGH ROLL
+R|akhiri
+T|ENEMY TURN! Enemy is thinking...
+G18|musuh|awal|[0,-600,4,g0,p0,b0,k1][10,1140,6,g0,p0,b0,k0]|o:-1,-1,1,-1,-1,1,-1,-1,1,-1,1,-1,-1,-1,-1,1,-1,-1,1,-1,1,-1,-1,-1|xyz:(0.0, 0.0, 0.0);(14.3, 0.0, -43.0)
+T|Enemy is rolling dice...
+T|Enemy Roll: 1
+T|Enemy bought this tile!
+T|Enemy's tower lost 1 HP!
+T|YOUR TURN! Choose Action or Roll Dice.
+G19|pemain|awal|[0,-600,4,g0,p0,b0,k1][11,840,6,g0,p0,b0,k0]|o:-1,-1,1,-1,-1,1,-1,-1,1,-1,1,1,-1,-1,-1,1,-1,-1,1,-1,1,-1,-1,-1|xyz:(0.0, 0.0, 0.0);(14.3, 0.0, -50.1)
+R|dadu
+T|You are rolling dice...
+T|Your Roll: 4
+R|akhiri
+T|ENEMY TURN! Enemy is thinking...
+G20|musuh|awal|[4,-600,4,g0,p0,b0,k1][11,840,6,g0,p0,b0,k0]|o:-1,-1,1,-1,-1,1,-1,-1,1,-1,1,1,-1,-1,-1,1,-1,-1,1,-1,1,-1,-1,-1|xyz:(21.5, 0.0, -7.2);(14.3, 0.0, -50.1)
+T|Enemy is rolling dice...
+T|Enemy Roll: 4
+T|Enemy landed on a Card Tile!
+T|Card saved to Inventory!
+T|Enemy builds a tower!
+T|YOUR TURN! Choose Action or Roll Dice.
+G21|pemain|awal|[4,-600,4,g0,p0,b0,k1][15,340,6,g0,p0,b0,k1]|o:-1,-1,1,-1,-1,1,-1,-1,1,-1,1,1,-1,-1,-1,1,-1,-1,1,-1,1,-1,-1,-1|xyz:(21.5, 0.0, -7.2);(-7.1, 0.0, -43.1)
+R|dadu
+T|You are rolling dice...
+T|Your Roll: 1
+T|Enemy Tile! Give Up (Pay 100) or Fight?
+R|lawan
+D|293.7|DUEL fase=MENUNGGU_MUSUH segelM=0 segelP=0 tonton=0 judul='YOU ATTACK! ENEMY IS THINKING...'
+R|elemen|petir
+D|295.7|DUEL fase=SEGEL_KEDUANYA segelM=1 segelP=1 tonton=0 judul='UNLOCKING...'
+D|297.0|DUEL fase=FADE_OUT segelM=1 segelP=1 tonton=0 judul='UNLOCKING...'
+D|298.5|DUEL fase=ANIMASI_CORET segelM=1 segelP=1 tonton=0 judul='ELEMENT LOSE! Enemy +3'
+D|299.9|DUEL fase=ANIMASI_HILANG segelM=1 segelP=1 tonton=0 judul='ELEMENT LOSE! Enemy +3'
+D|300.3|DUEL fase=ANIMASI_MENANG segelM=1 segelP=1 tonton=0 judul='ELEMENT LOSE! Enemy +3'
+D|301.7|DUEL fase=ROLET_PEMAIN segelM=1 segelP=1 tonton=0 judul='SPIN YOUR WHEEL!'
+D|303.7|DUEL fase=ROLET_PEMAIN segelM=1 segelP=1 tonton=0 judul='WHEEL SPINNING...'
+D|307.7|DUEL fase=ROLET_MUSUH segelM=1 segelP=1 tonton=0 judul='ENEMY WHEEL SPINNING...'
+D|312.1|DUEL fase=RANGKUMAN segelM=1 segelP=1 tonton=0 judul='CALCULATING TOTAL SCORE...'
+D|315.1|DUEL fase=PENGUMUMAN_TRANSISI segelM=1 segelP=1 tonton=0 judul='CALCULATING TOTAL SCORE...'
+D|315.5|DUEL fase=PENGUMUMAN_FINAL segelM=1 segelP=1 tonton=0 judul='ENEMY WINS THE FIGHT!'
+T|YOU LOST THE FIGHT! Extra fine: 120 Coins.
+T|YOU BANKRUPT! Money is minus.
+T|No more tiles! You carry the debt.
+T|ENEMY TURN! Enemy is thinking...
+G22|musuh|awal|[5,-720,4,g0,p0,b0,k1][15,460,6,g0,p0,b0,k1]|o:-1,-1,1,-1,-1,1,-1,-1,1,-1,1,1,-1,-1,-1,1,-1,-1,1,-1,1,-1,-1,-1|xyz:(21.5, 0.0, -14.4);(-7.1, 0.0, -43.1)
+T|Enemy is rolling dice...
+T|Enemy Roll: 5
+T|Enemy ends turn.
+T|YOUR TURN! Choose Action or Roll Dice.
+G23|pemain|awal|[5,-720,4,g0,p0,b0,k1][20,460,6,g0,p0,b0,k1]|o:-1,-1,1,-1,-1,1,-1,-1,1,-1,1,1,-1,-1,-1,1,-1,-1,1,-1,1,-1,-1,-1|xyz:(21.5, 0.0, -14.4);(-14.3, 0.0, -14.3)
+R|dadu
+T|You are rolling dice...
+T|Your Roll: 4
+R|akhiri
+T|ENEMY TURN! Enemy is thinking...
+G24|musuh|awal|[9,-720,4,g0,p0,b0,k1][20,460,6,g0,p0,b0,k1]|o:-1,-1,1,-1,-1,1,-1,-1,1,-1,1,1,-1,-1,-1,1,-1,-1,1,-1,1,-1,-1,-1|xyz:(14.3, 0.0, -35.9);(-14.3, 0.0, -14.3)
+T|Enemy is rolling dice...
+T|Enemy Roll: 4
+T|Enemy collected [img=28]res://permata/permata_hijau.png[/img] Gem!
+T|Enemy passed Start! Bonus +580
+T|Enemy rests at Start (Safe Zone).
+T|Tiles and towers -30% this round!
+T|YOUR TURN! Choose Action or Roll Dice.
+G25|pemain|awal|[9,-720,4,g0,p0,b0,k1][0,1040,9,g0,p0,b0,k1]|o:-1,-1,1,-1,-1,1,-1,-1,1,-1,1,1,-1,-1,-1,1,-1,-1,1,-1,1,-1,-1,-1|xyz:(14.3, 0.0, -35.9);(0.0, 0.0, 0.0)
+R|dadu
+T|You are rolling dice...
+T|Your Roll: 5
+T|You landed on a Card Tile!
+R|gacha|2
+T|Card Effect Applied!
+R|akhiri
+T|ENEMY TURN! Enemy is thinking...
+G26|musuh|awal|[14,-220,4,g0,p0,b0,k1][0,1040,9,g0,p0,b0,k1]|o:-1,-1,1,-1,-1,1,-1,-1,1,-1,1,1,-1,-1,-1,1,-1,-1,1,-1,1,-1,-1,-1|xyz:(-7.2, 0.0, -50.3);(0.0, 0.0, 0.0)
+T|Shield activated! (Recovered 500 Coins)
+T|Enemy is rolling dice...
+T|Enemy Roll: 2
+T|Enemy builds a tower!
+T|YOUR TURN! Choose Action or Roll Dice.
+G27|pemain|awal|[14,-220,4,g0,p0,b0,k1][2,1190,9,g0,p0,b0,k0]|o:-1,-1,1,-1,-1,1,-1,-1,1,-1,1,1,-1,-1,-1,1,-1,-1,1,-1,1,-1,-1,-1|xyz:(-7.2, 0.0, -50.3);(14.4, 0.0, 0.0)
+R|dadu
+T|You are rolling dice...
+T|Your Roll: 2
+R|akhiri
+T|ENEMY TURN! Enemy is thinking...
+G28|musuh|awal|[16,-220,4,g0,p0,b0,k1][2,1190,9,g0,p0,b0,k0]|o:-1,-1,1,-1,-1,1,-1,-1,1,-1,1,1,-1,-1,-1,1,-1,-1,1,-1,1,-1,-1,-1|xyz:(-7.2, 0.0, -35.8);(14.4, 0.0, 0.0)
+T|Enemy is rolling dice...
+T|Enemy Roll: 2
+T|Enemy bought this tile!
+T|YOUR TURN! Choose Action or Roll Dice.
+G29|pemain|awal|[16,-220,4,g0,p0,b0,k1][4,890,9,g0,p0,b0,k0]|o:-1,-1,1,-1,1,1,-1,-1,1,-1,1,1,-1,-1,-1,1,-1,-1,1,-1,1,-1,-1,-1|xyz:(-7.2, 0.0, -35.8);(21.5, 0.0, -7.2)
+R|dadu
+T|You are rolling dice...
+T|Your Roll: 2
+T|Enemy Tile! Give Up (Pay 100) or Fight?
+R|lawan
+D|439.9|DUEL fase=MENUNGGU_MUSUH segelM=0 segelP=0 tonton=0 judul='YOU ATTACK! ENEMY IS THINKING...'
+R|elemen|petir
+D|442.0|DUEL fase=SEGEL_KEDUANYA segelM=1 segelP=1 tonton=0 judul='UNLOCKING...'
+D|443.3|DUEL fase=FADE_OUT segelM=1 segelP=1 tonton=0 judul='UNLOCKING...'
+D|444.8|DUEL fase=ANIMASI_CORET segelM=1 segelP=1 tonton=0 judul='ELEMENT DRAW! (+0)'
+D|446.1|DUEL fase=ANIMASI_HILANG segelM=1 segelP=1 tonton=0 judul='ELEMENT DRAW! (+0)'
+D|446.5|DUEL fase=ANIMASI_MENANG segelM=1 segelP=1 tonton=0 judul='ELEMENT DRAW! (+0)'
+D|448.0|DUEL fase=ROLET_PEMAIN segelM=1 segelP=1 tonton=0 judul='SPIN YOUR WHEEL!'
+D|450.0|DUEL fase=ROLET_PEMAIN segelM=1 segelP=1 tonton=0 judul='WHEEL SPINNING...'
+D|454.1|DUEL fase=ROLET_MUSUH segelM=1 segelP=1 tonton=0 judul='ENEMY WHEEL SPINNING...'
+D|458.4|DUEL fase=RANGKUMAN segelM=1 segelP=1 tonton=0 judul='CALCULATING TOTAL SCORE...'
+D|461.4|DUEL fase=PENGUMUMAN_TRANSISI segelM=1 segelP=1 tonton=0 judul='CALCULATING TOTAL SCORE...'
+D|461.9|DUEL fase=PENGUMUMAN_FINAL segelM=1 segelP=1 tonton=0 judul='YOU WIN THE FIGHT!'
+T|FIGHT WON! This tile is now yours!
+T|ENEMY TURN! Enemy is thinking...
+G30|musuh|awal|[18,-220,4,g0,p0,b0,k1][4,890,9,g0,p0,b0,k0]|o:-1,-1,1,-1,1,1,-1,-1,1,-1,1,1,-1,-1,-1,1,-1,-1,0,-1,1,-1,-1,-1|xyz:(-7.2, 0.0, -21.4);(21.5, 0.0, -7.2)
+T|Enemy attacks from far away!
+T|Enemy shoots your tile! HP left: 2
+T|Enemy is rolling dice...
+T|Enemy Roll: 4
+T|Enemy builds a tower!
+T|Enemy's tower lost 1 HP!
+T|YOUR TURN! Choose Action or Roll Dice.
+G31|pemain|awal|[18,-220,4,g0,p0,b0,k1][8,390,4,g0,p0,b0,k0]|o:-1,-1,1,-1,1,1,-1,-1,1,-1,1,1,-1,-1,-1,1,-1,-1,0,-1,1,-1,-1,-1|xyz:(-7.2, 0.0, -21.4);(14.4, 0.0, -28.7)
+R|dadu
+T|You are rolling dice...
+T|Your Roll: 6
+T|You collected [img=28]res://permata/permata_hijau.png[/img] Gem!
+T|You passed Start! Bonus +510
+T|You got HIGH ROLL
+R|akhiri
+T|ENEMY TURN! Enemy is thinking...
+G32|musuh|awal|[0,290,7,g0,p0,b0,k2][8,390,4,g0,p0,b0,k0]|o:-1,-1,1,-1,1,1,-1,-1,1,-1,1,1,-1,-1,-1,1,-1,-1,0,-1,1,-1,-1,-1|xyz:(0.0, 0.0, 0.0);(14.4, 0.0, -28.7)
+T|Enemy is rolling dice...
+T|Enemy Roll: 2
+T|Enemy ends turn.
+T|YOUR TURN! Choose Action or Roll Dice.
+G33|pemain|awal|[0,290,7,g0,p0,b0,k2][10,390,4,g0,p0,b0,k0]|o:-1,-1,1,-1,1,1,-1,-1,1,-1,1,1,-1,-1,-1,1,-1,-1,0,-1,1,-1,-1,-1|xyz:(0.0, 0.0, 0.0);(14.3, 0.0, -43.0)
+R|dadu
+T|You are rolling dice...
+T|Your Roll: 3
+R|akhiri
+T|ENEMY TURN! Enemy is thinking...
+G34|musuh|awal|[3,290,7,g0,p0,b0,k2][10,390,4,g0,p0,b0,k0]|o:-1,-1,1,-1,1,1,-1,-1,1,-1,1,1,-1,-1,-1,1,-1,-1,0,-1,1,-1,-1,-1|xyz:(21.5, 0.0, 0.0);(14.3, 0.0, -43.0)
+T|Enemy is rolling dice...
+T|Enemy Roll: 4
+T|Enemy landed on a Card Tile!
+T|Card saved to Inventory!
+T|Enemy saves money and skips this tile.
+T|YOUR TURN! Choose Action or Roll Dice.
+G35|pemain|awal|[3,290,7,g0,p0,b0,k2][14,390,4,g0,p0,b0,k1]|o:-1,-1,1,-1,1,1,-1,-1,1,-1,1,1,-1,-1,-1,1,-1,-1,0,-1,1,-1,-1,-1|xyz:(21.5, 0.0, 0.0);(-7.1, 0.0, -50.3)
+R|dadu
+T|You are rolling dice...
+T|Your Roll: 6
+R|jebakan|TombolTrapApi
+T|Fire Trap set! (Burns victim for 3 turns)
+R|akhiri
+T|ENEMY TURN! Enemy is thinking...
+G36|musuh|awal|[9,290,6,g0,p0,b0,k2][14,390,4,g0,p0,b0,k1]|o:-1,-1,1,-1,1,1,-1,-1,1,-1,1,1,-1,-1,-1,1,-1,-1,0,-1,1,-1,-1,-1|xyz:(14.3, 0.0, -35.9);(-7.1, 0.0, -50.3)
+T|Enemy set a Lightning Trap!
+T|Enemy is rolling dice...
+T|Enemy Roll: 3
+T|Enemy saves money and skips this tile.
+T|Tile fees x2 this round!
+T|YOUR TURN! Choose Action or Roll Dice.
+G37|pemain|awal|[9,290,6,g0,p0,b0,k2][17,390,3,g0,p0,b0,k1]|o:-1,-1,1,-1,1,1,-1,-1,1,-1,1,1,-1,-1,-1,1,-1,-1,0,-1,1,-1,-1,-1|xyz:(14.3, 0.0, -35.9);(-7.1, 0.0, -28.6)
+R|dadu
+T|You are rolling dice...
+T|Your Roll: 5
+T|You landed on a Card Tile!
+R|gacha|2
+T|Card saved to Inventory!
+T|LIGHTNING TRAP! Paralyzed & Stopped!
+R|akhiri
+T|ENEMY TURN! Enemy is thinking...
+G38|musuh|awal|[14,290,6,g0,p2,b0,k3][17,390,3,g0,p0,b0,k1]|o:-1,-1,1,-1,1,1,-1,-1,1,-1,1,1,-1,-1,-1,1,-1,-1,0,-1,1,-1,-1,-1|xyz:(-7.3, 0.0, -50.2);(-7.1, 0.0, -28.6)
+T|Enemy set a Lightning Trap!
+T|Enemy is rolling dice...
+T|Enemy Roll: 3
+T|Enemy set a Lightning Trap!
+T|You are paralyzed! Cannot move this turn.
+G39|pemain|awal|[14,290,6,g0,p1,b0,k3][20,390,1,g0,p0,b0,k1]|o:-1,-1,1,-1,1,1,-1,-1,1,-1,1,1,-1,-1,-1,1,-1,-1,0,-1,1,-1,-1,-1|xyz:(-7.3, 0.0, -50.2);(-14.3, 0.0, -14.3)
+T|ENEMY TURN! Enemy is thinking...
+G40|musuh|awal|[14,290,6,g0,p1,b0,k3][20,390,1,g0,p0,b0,k1]|o:-1,-1,1,-1,1,1,-1,-1,1,-1,1,1,-1,-1,-1,1,-1,-1,0,-1,1,-1,-1,-1|xyz:(-7.2, 0.0, -50.2);(-14.3, 0.0, -14.3)
+T|Enemy is rolling dice...
+T|Enemy Roll: 3
+T|Enemy collected [img=28]res://permata/permata_hijau.png[/img] Gem!
+T|Enemy bought this tile!
+T|YOUR TURN! Choose Action or Roll Dice.
+G41|pemain|awal|[14,290,6,g0,p0,b0,k3][23,90,1,g0,p0,b0,k1]|o:-1,-1,1,-1,1,1,-1,-1,1,-1,1,1,-1,-1,-1,1,-1,-1,0,-1,1,-1,-1,1|xyz:(-7.2, 0.0, -50.2);(-7.1, 0.0, 0.0)
+R|dadu
+T|You are rolling dice...
+T|Your Roll: 4
+T|LIGHTNING TRAP! Paralyzed & Stopped!
+R|akhiri
+T|ENEMY TURN! Enemy is thinking...
+G42|musuh|awal|[17,290,6,g0,p2,b0,k3][23,90,1,g0,p0,b0,k1]|o:-1,-1,1,-1,1,1,-1,-1,1,-1,1,1,-1,-1,-1,1,-1,-1,0,-1,1,-1,-1,1|xyz:(-7.3, 0.0, -28.6);(-7.1, 0.0, 0.0)
+T|Enemy is rolling dice...
+T|Enemy Roll: 5
+T|Enemy passed Start! Bonus +590
+T|Enemy builds a tower!
+T|Tiles and towers -30% this round!
+T|You are paralyzed! Cannot move this turn.
+G43|pemain|awal|[17,290,6,g0,p1,b0,k3][4,180,4,g0,p0,b0,k1]|o:-1,-1,1,-1,1,1,-1,-1,1,-1,1,1,-1,-1,-1,1,-1,-1,0,-1,1,-1,-1,1|xyz:(-7.3, 0.0, -28.5);(21.5, 0.0, -7.2)
+T|ENEMY TURN! Enemy is thinking...
+G44|musuh|awal|[17,290,6,g0,p1,b0,k3][4,180,4,g0,p0,b0,k1]|o:-1,-1,1,-1,1,1,-1,-1,1,-1,1,1,-1,-1,-1,1,-1,-1,0,-1,1,-1,-1,1|xyz:(-7.3, 0.0, -28.6);(21.5, 0.0, -7.2)
+T|Enemy is rolling dice...
+T|Enemy Roll: 5
+T|FIRE TRAP! Burning for 3 turns!
+T|Enemy ends turn.
+T|YOUR TURN! Choose Action or Roll Dice.
+G45|pemain|awal|[17,290,6,g0,p0,b0,k3][9,180,4,g0,p0,b3,k1]|o:-1,-1,1,-1,1,1,-1,-1,1,-1,1,1,-1,-1,-1,1,-1,-1,0,-1,1,-1,-1,1|xyz:(-7.3, 0.0, -28.6);(14.3, 0.0, -35.9)
+R|serang|2
+T|Launching long range attack!
+T|Attack Hit! Enemy tile HP left: 2
+R|dadu
+T|You are rolling dice...
+T|Your Roll: 3
+T|LIGHTNING TRAP! Paralyzed & Stopped!
+T|Enemy Tile! Give Up (Pay 100) or Fight?
+R|menyerah
+T|You gave up. Paid fine: 100 Coins.
+T|Enemy is burning! Lost 68 Coins. (2 turns left)
+G46|musuh|awal|[20,190,1,g0,p2,b0,k3][9,212,4,g0,p0,b2,k1]|o:-1,-1,1,-1,1,1,-1,-1,1,-1,1,1,-1,-1,-1,1,-1,-1,0,-1,1,-1,-1,1|xyz:(-14.5, 0.0, -14.3);(14.3, 0.0, -35.9)
+T|ENEMY TURN! Enemy is thinking...
+T|Enemy is rolling dice...
+T|Enemy Roll: 6
+T|Enemy landed on a Card Tile!
+T|Card Effect Applied!
+T|Enemy ends turn.
+T|You are paralyzed! Cannot move this turn.
+G47|pemain|awal|[20,190,1,g0,p1,b0,k3][15,712,4,g0,p0,b2,k1]|o:-1,-1,1,-1,1,1,-1,-1,1,-1,1,1,-1,-1,-1,1,-1,-1,0,-1,1,-1,-1,1|xyz:(-14.5, 0.0, -14.2);(-7.1, 0.0, -43.1)
+T|Enemy is burning! Lost 68 Coins. (1 turns left)
+G48|musuh|awal|[20,190,1,g0,p1,b0,k3][15,644,4,g0,p0,b1,k1]|o:-1,-1,1,-1,1,1,-1,-1,1,-1,1,1,-1,-1,-1,1,-1,-1,0,-1,1,-1,-1,1|xyz:(-14.5, 0.0, -14.3);(-7.1, 0.0, -43.1)
+T|ENEMY TURN! Enemy is thinking...
+T|Enemy is rolling dice...
+T|Enemy Roll: 3
+T|Enemy lands on your tile! Enemy is thinking...
+D|749.3|DUEL fase=MENUNGGU_MUSUH segelM=0 segelP=0 tonton=0 judul='ENEMY ATTACKS! ENEMY IS THINKING...'
+R|elemen|api
+D|751.4|DUEL fase=SEGEL_KEDUANYA segelM=1 segelP=1 tonton=0 judul='UNLOCKING...'
+D|752.7|DUEL fase=FADE_OUT segelM=1 segelP=1 tonton=0 judul='UNLOCKING...'
+D|754.2|DUEL fase=ANIMASI_CORET segelM=1 segelP=1 tonton=0 judul='ELEMENT WIN! You +3'
+D|755.5|DUEL fase=ANIMASI_HILANG segelM=1 segelP=1 tonton=0 judul='ELEMENT WIN! You +3'
+D|755.9|DUEL fase=ANIMASI_MENANG segelM=1 segelP=1 tonton=0 judul='ELEMENT WIN! You +3'
+D|757.3|DUEL fase=ROLET_PEMAIN segelM=1 segelP=1 tonton=0 judul='SPIN YOUR WHEEL!'
+D|759.3|DUEL fase=ROLET_PEMAIN segelM=1 segelP=1 tonton=0 judul='WHEEL SPINNING...'
+D|763.4|DUEL fase=ROLET_MUSUH segelM=1 segelP=1 tonton=0 judul='ENEMY WHEEL SPINNING...'
+D|767.7|DUEL fase=RANGKUMAN segelM=1 segelP=1 tonton=0 judul='CALCULATING TOTAL SCORE...'
+D|770.7|DUEL fase=PENGUMUMAN_TRANSISI segelM=1 segelP=1 tonton=0 judul='CALCULATING TOTAL SCORE...'
+D|771.2|DUEL fase=PENGUMUMAN_FINAL segelM=1 segelP=1 tonton=0 judul='ENEMY WINS THE FIGHT!'
+T|ENEMY WON! Your tile is stolen!
+T|Enemy's tower lost 1 HP!
+T|YOUR TURN! Choose Action or Roll Dice.
+G49|pemain|awal|[20,190,1,g0,p0,b0,k3][18,644,4,g0,p0,b1,k0]|o:-1,-1,1,-1,1,1,-1,-1,1,-1,1,1,-1,-1,-1,1,-1,-1,1,-1,1,-1,-1,1|xyz:(-14.5, 0.0, -14.3);(-7.1, 0.0, -21.4)
+R|dadu
+T|You are rolling dice...
+T|Your Roll: 2
+T|You collected [img=28]res://permata/permata_hijau.png[/img] Gem!
+R|akhiri
+T|Enemy is burning! Lost 68 Coins. (0 turns left)
+G50|musuh|awal|[22,190,1,g0,p0,b0,k3][18,576,4,g0,p0,b0,k0]|o:-1,-1,1,-1,1,1,-1,-1,1,-1,1,1,-1,-1,-1,1,-1,-1,1,-1,1,-1,-1,1|xyz:(-7.3, 0.0, -7.1);(-7.1, 0.0, -21.4)
+T|ENEMY TURN! Enemy is thinking...
+T|Enemy is rolling dice...
+T|Enemy Roll: 4
+T|Enemy collected [img=28]res://permata/permata_hijau.png[/img] Gem!
+T|Enemy bought this tile!
+T|YOUR TURN! Choose Action or Roll Dice.
+G51|pemain|awal|[22,190,1,g0,p0,b0,k3][22,276,4,g0,p0,b0,k0]|o:-1,-1,1,-1,1,1,-1,-1,1,-1,1,1,-1,-1,-1,1,-1,-1,1,-1,1,-1,1,1|xyz:(-6.0, 0.0, -5.8);(-8.400001, 0.0, -8.400001)
+R|dadu
+T|You are rolling dice...
+T|Your Roll: 3
+T|You passed Start! Bonus +500
+R|beli
+T|ENEMY TURN! Enemy is thinking...
+G52|musuh|awal|[1,390,4,g0,p0,b0,k3][22,276,4,g0,p0,b0,k0]|o:-1,0,1,-1,1,1,-1,-1,1,-1,1,1,-1,-1,-1,1,-1,-1,1,-1,1,-1,1,1|xyz:(7.0, 0.0, 0.0);(-7.1, 0.0, -7.1)
+T|Enemy is rolling dice...
+T|Enemy Roll: 3
+T|Enemy passed Start! Bonus +610
+T|Enemy lands on your tile! Enemy is thinking...
+T|Enemy gave up. Paid fine: 100 Coins.
+T|YOUR TURN! Choose Action or Roll Dice.
+G53|pemain|awal|[1,490,4,g0,p0,b0,k3][1,786,7,g0,p0,b0,k0]|o:-1,0,1,-1,1,1,-1,-1,1,-1,1,1,-1,-1,-1,1,-1,-1,1,-1,1,-1,1,1|xyz:(8.3, 0.0, 1.3);(5.9, 0.0, -1.3)
+R|dadu
+T|You are rolling dice...
+T|Your Roll: 6
+R|jebakan|TombolTrapApi
+T|Fire Trap set! (Burns victim for 3 turns)
+R|beli
+T|ENEMY TURN! Enemy is thinking...
+G54|musuh|awal|[7,190,3,g0,p0,b0,k3][1,786,7,g0,p0,b0,k0]|o:-1,0,1,-1,1,1,-1,0,1,-1,1,1,-1,-1,-1,1,-1,-1,1,-1,1,-1,1,1|xyz:(14.2, 0.0, -21.6);(7.2, 0.0, 0.0)
+T|Enemy attacks from far away!
+T|Enemy shoots your tile! HP left: 2
+T|Enemy is rolling dice...
+T|Enemy Roll: 3
+T|Enemy ends turn.
+T|Tiles and towers -30% this round!
+T|YOUR TURN! Choose Action or Roll Dice.
+G55|pemain|awal|[7,190,3,g0,p0,b0,k3][4,786,2,g0,p0,b0,k0]|o:-1,0,1,-1,1,1,-1,0,1,-1,1,1,-1,-1,-1,1,-1,-1,1,-1,1,-1,1,1|xyz:(14.2, 0.0, -21.6);(21.5, 0.0, -7.2)
+R|dadu
+T|You are rolling dice...
+T|Your Roll: 1
+T|Enemy Tile! Give Up (Pay 300) or Fight?
+R|lawan
+R|pedang|simpan
+D|884.5|DUEL fase=MENUNGGU_MUSUH segelM=0 segelP=0 tonton=0 judul='YOU ATTACK! ENEMY IS THINKING...'
+R|elemen|air
+D|886.5|DUEL fase=SEGEL_KEDUANYA segelM=1 segelP=1 tonton=0 judul='UNLOCKING...'
+D|887.8|DUEL fase=FADE_OUT segelM=1 segelP=1 tonton=0 judul='UNLOCKING...'
+D|889.3|DUEL fase=ANIMASI_CORET segelM=1 segelP=1 tonton=0 judul='ELEMENT WIN! You +3'
+D|890.7|DUEL fase=ANIMASI_HILANG segelM=1 segelP=1 tonton=0 judul='ELEMENT WIN! You +3'
+D|891.1|DUEL fase=ANIMASI_MENANG segelM=1 segelP=1 tonton=0 judul='ELEMENT WIN! You +3'
+D|892.5|DUEL fase=ROLET_PEMAIN segelM=1 segelP=1 tonton=0 judul='SPIN YOUR WHEEL!'
+D|894.5|DUEL fase=ROLET_PEMAIN segelM=1 segelP=1 tonton=0 judul='WHEEL SPINNING...'
+D|898.5|DUEL fase=ROLET_MUSUH segelM=1 segelP=1 tonton=0 judul='ENEMY WHEEL SPINNING...'
+D|902.9|DUEL fase=RANGKUMAN segelM=1 segelP=1 tonton=0 judul='CALCULATING TOTAL SCORE...'
+D|905.9|DUEL fase=PENGUMUMAN_TRANSISI segelM=1 segelP=1 tonton=0 judul='CALCULATING TOTAL SCORE...'
+D|906.3|DUEL fase=PENGUMUMAN_FINAL segelM=1 segelP=1 tonton=0 judul='YOU WIN THE FIGHT!'
+T|FIGHT WON! This tile is now yours!
+T|ENEMY TURN! Enemy is thinking...
+G56|musuh|awal|[8,190,4,g0,p0,b0,k3][4,786,2,g0,p0,b0,k0]|o:-1,0,1,-1,1,1,-1,0,0,-1,1,1,-1,-1,-1,1,-1,-1,1,-1,1,-1,1,1|xyz:(14.2, 0.0, -28.7);(21.5, 0.0, -7.2)
+T|Enemy is rolling dice...
+T|Enemy Roll: 4
+T|FIRE TRAP! Burning for 3 turns!
+T|Enemy lands on your tile! Enemy is thinking...
+D|931.9|DUEL fase=MENUNGGU_MUSUH segelM=0 segelP=0 tonton=0 judul='ENEMY ATTACKS! ENEMY IS THINKING...'
+R|elemen|angin
+D|933.9|DUEL fase=SEGEL_KEDUANYA segelM=1 segelP=1 tonton=0 judul='UNLOCKING...'
+D|935.2|DUEL fase=FADE_OUT segelM=1 segelP=1 tonton=0 judul='UNLOCKING...'
+D|936.7|DUEL fase=ANIMASI_CORET segelM=1 segelP=1 tonton=0 judul='ELEMENT WIN! You +3'
+D|938.1|DUEL fase=ANIMASI_HILANG segelM=1 segelP=1 tonton=0 judul='ELEMENT WIN! You +3'
+D|938.5|DUEL fase=ANIMASI_MENANG segelM=1 segelP=1 tonton=0 judul='ELEMENT WIN! You +3'
+D|939.9|DUEL fase=ROLET_PEMAIN segelM=1 segelP=1 tonton=0 judul='SPIN YOUR WHEEL!'
+D|941.9|DUEL fase=ROLET_PEMAIN segelM=1 segelP=1 tonton=0 judul='WHEEL SPINNING...'
+D|945.9|DUEL fase=ROLET_MUSUH segelM=1 segelP=1 tonton=0 judul='ENEMY WHEEL SPINNING...'
+D|950.3|DUEL fase=RANGKUMAN segelM=1 segelP=1 tonton=0 judul='CALCULATING TOTAL SCORE...'
+D|953.3|DUEL fase=PENGUMUMAN_TRANSISI segelM=1 segelP=1 tonton=0 judul='CALCULATING TOTAL SCORE...'
+D|953.7|DUEL fase=PENGUMUMAN_FINAL segelM=1 segelP=1 tonton=0 judul='SCORE TIED! GET READY FOR TIE-BREAKER...'
+R|koin
+D|955.8|DUEL fase=PENGUMUMAN_FINAL segelM=1 segelP=1 tonton=0 judul='SCORE TIED! CHOOSE YOUR COIN GUESS!'
+T|You guessed HEADS. Flipping coin...
+T|RESULT: HEADS! RIGHT Guess!
+D|962.7|DUEL fase=PENGUMUMAN_FINAL segelM=1 segelP=1 tonton=0 judul='YOU WON THE TIE-BREAKER!'
+T|ENEMY LOST THE FIGHT! Extra fine: 360 Coins.
+T|YOUR TURN! Choose Action or Roll Dice.
+G57|pemain|awal|[8,550,4,g0,p0,b0,k3][8,426,2,g0,p0,b3,k0]|o:-1,0,1,-1,1,1,-1,0,0,-1,1,1,-1,-1,-1,1,-1,-1,1,-1,1,-1,1,1|xyz:(15.5, 0.0, -27.4);(13.1, 0.0, -30.0)
+R|dadu
+T|You are rolling dice...
+T|Your Roll: 4
+R|beli
+T|Enemy is burning! Lost 68 Coins. (2 turns left)
+G58|musuh|awal|[12,250,4,g0,p0,b0,k3][8,358,2,g0,p0,b2,k0]|o:-1,0,1,-1,1,1,-1,0,0,-1,1,1,0,-1,-1,1,-1,-1,1,-1,1,-1,1,1|xyz:(7.0, 0.0, -50.2);(14.4, 0.0, -28.7)
+T|ENEMY TURN! Enemy is thinking...
+T|Enemy is rolling dice...
+T|Enemy Roll: 5
+T|Enemy landed on a Card Tile!
+T|Card saved to Inventory!
+T|Enemy stops on Card Tile. Turn ends.
+T|YOUR TURN! Choose Action or Roll Dice.
+G59|pemain|awal|[12,250,4,g0,p0,b0,k3][13,358,2,g0,p0,b2,k1]|o:-1,0,1,-1,1,1,-1,0,0,-1,1,1,0,-1,-1,1,-1,-1,1,-1,1,-1,1,1|xyz:(7.0, 0.0, -50.2);(0.1, 0.0, -50.2)
+R|dadu
+T|You are rolling dice...
+T|Your Roll: 5
+T|You landed on a Card Tile!
+R|gacha|2
+R|buang
+T|Card saved to Inventory!
+R|akhiri
+T|Enemy is burning! Lost 68 Coins. (1 turns left)
+G60|musuh|awal|[17,250,4,g0,p0,b0,k3][13,290,2,g0,p0,b1,k1]|o:-1,0,1,-1,1,1,-1,0,0,-1,1,1,0,-1,-1,1,-1,-1,1,-1,1,-1,1,1|xyz:(-7.3, 0.0, -28.6);(0.1, 0.0, -50.2)
+T|ENEMY TURN! Enemy is thinking...
+T|Enemy is rolling dice...
+T|Enemy Roll: 4
+T|Enemy set a Lightning Trap!
+T|Your tower lost 1 HP!
+T|First to win a duel with WIND: +1 Star
+T|YOUR TURN! Choose Action or Roll Dice.
+G61|pemain|awal|[17,250,4,g0,p0,b0,k3][17,290,1,g0,p0,b1,k1]|o:-1,0,1,-1,1,1,-1,0,0,-1,1,1,0,-1,-1,1,-1,-1,1,-1,1,-1,1,1|xyz:(-6.0, 0.0, -27.3);(-8.400001, 0.0, -29.9)
+SELESAI|BATAS_GILIRAN|G61|pemain|awal|[17,250,4,g0,p0,b0,k3][17,290,1,g0,p0,b1,k1]|o:-1,0,1,-1,1,1,-1,0,0,-1,1,1,0,-1,-1,1,-1,-1,1,-1,1,-1,1,1|xyz:(-6.0, 0.0, -27.3);(-8.400001, 0.0, -29.9)

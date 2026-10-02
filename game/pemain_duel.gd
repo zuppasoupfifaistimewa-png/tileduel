@@ -239,6 +239,13 @@ func _tonton_ai_pilih_elemen(slot_a: int, slot_d: int) -> void:
 	_tebakan_duel.clear()
 	_tebak_terbuka = true # Fase 5 G4: jendela tebakan = selama kedua segel belum terkunci
 	_buka_tebak_duel(slot_a, slot_d, 0)
+	if _tebak_nomor_lokal >= 0:
+		# Fase 5 G8: tombol tebak tampil -> penyerang "berpikir" lebih lama (maks TEBAK_SOLO_TAMBAHAN dtk),
+		# berhenti begitu pemain menebak. Tanpa penonton manusia (rig semua AI) tidak ada tambahan.
+		var tambahan := 0.0
+		while tambahan < TEBAK_SOLO_TAMBAHAN and not _tebakan_duel.has(slot_lokal):
+			await get_tree().create_timer(0.1).timeout
+			tambahan += 0.1
 	await get_tree().create_timer(1.5).timeout
 	_tampilkan_segel_terkunci(slot_a)
 	await get_tree().create_timer(1.0).timeout

@@ -16,6 +16,11 @@ var panjang_uji = "classic"   # panjang=quick|classic -> tombol QUICK MATCH / CL
 var iklan_uji = false         # iklan=1 -> stub iklan berhadiah "tersedia"; robot menonton FREE CARD & +300
 var klik_iklan_hutang = 0
 var uang0_uji = -1 # uang0=N -> uang slot 0 diset N setelah START (memancing hutang)
+var hutang_habis_slot := -1 # Fase 5 G8 (rig-only): hutang_habis=SLOT -> paksa jalur "petak terakhir terjual, masih minus"
+var _hb_teks_terakhir := ""
+var _hb_bawa := 0
+var _hb_pasang := 0
+var _hb_giliran_bawa := -1
 var _spanduk_dicatat = false
 var _teks_ronde_terakhir = ""
 var _sig_event = "" # Fase 5 G1: log EVENT tiap perubahan
@@ -260,6 +265,7 @@ func _ready():
 		if a.begins_with("panjang="): panjang_uji = a.substr(8)
 		if a == "iklan=1": iklan_uji = true
 		if a.begins_with("uang0="): uang0_uji = int(a.substr(6))
+		if a.begins_with("hutang_habis="): hutang_habis_slot = int(a.substr(13)) # Fase 5 G8
 		if a == "profil=1": cek_profil = true
 		if a == "tebak=1": tebak_uji = true # Fase 5 G4
 		if a == "putar_tolak=1": putar_tolak = true # Fase 5 G5
@@ -656,6 +662,7 @@ func _process(delta):
 		_urus_putar_ulang()
 	if ai_cepat_uji != "":
 		_urus_ai_cepat()
+	_urus_hutang_habis(func(t): print(t))
 	var g_lama = jumlah_giliran
 	super(delta)
 	if jumlah_giliran != g_lama and jumlah_giliran % 20 == 0:
@@ -668,6 +675,47 @@ func _process(delta):
 			jejak.append("D|%.1f|%s" % [detik_total, sig])
 	if awalan_foto != "" and jumlah_giliran != g_lama and jumlah_giliran in [4, 9]:
 		_foto("giliran%d" % jumlah_giliran)
+
+func _urus_hutang_habis(cetak: Callable) -> void:
+	# Fase 5 G8 (rig-only, hutang_habis=SLOT): begitu SLOT punya >= 2 petak dan uang >= 0, uangnya dibuat
+	# minus melebihi nilai jual semua petaknya -> denda berikutnya = bangkrut, petak terakhir terjual, masih
+	# minus -> harus "No more tiles! ... carry the debt." dan giliran lanjut (dulu macet). Dipasang ulang
+	# sampai jalur itu terjadi sekali. Host/solo saja yang memasang; semua device mencatat.
+	var s = hutang_habis_slot
+	if s < 0 or s >= p.jumlah_pemain():
+		return
+	var teks = p.teks_dadu.text
+	if teks.begins_with("No more tiles!") and not _hb_teks_terakhir.begins_with("No more tiles!"):
+		_hb_bawa += 1
+		_hb_giliran_bawa = jumlah_giliran
+		cetak.call("HUTANG_BAWA ke-%d teks='%s' giliran=%d uang=%s mode_jual=%s membidik=%s petak_slot=%d" % [_hb_bawa, teks, jumlah_giliran,
+			str(p.daftar_pemain.map(func(d): return d.uang)), str(p.mode_jual_aset), str(p.mode_membidik), _hb_jumlah_petak(s)])
+	_hb_teks_terakhir = teks
+	if _hb_giliran_bawa >= 0 and jumlah_giliran >= _hb_giliran_bawa + 2:
+		cetak.call("HUTANG_LANJUT giliran=%d mode_jual=%s uang=%s" % [jumlah_giliran, str(p.mode_jual_aset), str(p.daftar_pemain.map(func(d): return d.uang))])
+		_hb_giliran_bawa = -1
+	if _hb_bawa > 0 or StatusJaringan.peran_multiplayer == "client":
+		return
+	if p.mode_jual_aset or p.daftar_pemain[s].uang < 0 or _hb_jumlah_petak(s) < 2:
+		return
+	var nilai = 0
+	for i in range(p.rute_papan.size()):
+		if p.pemilik_petak[i] == s:
+			var lv = p.level_menara_petak[i]
+			var n = p.harga_tanah
+			if lv >= 1: n += p.harga_menara_lv1
+			if lv == 2: n += p.harga_menara_lv2
+			nilai += int(n * 0.7)
+	p.daftar_pemain[s].uang = -nilai - 1000
+	p.update_ui_status()
+	_hb_pasang += 1
+	cetak.call("HUTANG_PASANG ke-%d slot=%d petak=%d nilai_jual=%d uang=%d giliran=%d" % [_hb_pasang, s, _hb_jumlah_petak(s), nilai, p.daftar_pemain[s].uang, jumlah_giliran])
+
+func _hb_jumlah_petak(s: int) -> int:
+	var n = 0
+	for i in range(p.rute_papan.size()):
+		if p.pemilik_petak[i] == s: n += 1
+	return n
 
 func _skor_dari_teks(t: String) -> int:
 	var rx = RegEx.new()
