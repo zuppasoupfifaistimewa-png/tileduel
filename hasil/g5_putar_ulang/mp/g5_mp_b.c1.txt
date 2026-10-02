@@ -1,0 +1,165 @@
+ROBOT client urut=1 mode=0 peta=alam skenario=
+LOBBY client1: pemain = [b][color=#3380ff]P1[/color][/b]   HOST  [color=#e63333]FIRE[/color] | [b][color=#ff3333]P2[/color][/b]   PLAYER (YOU) | [b][color=#26cc4d]P3[/color][/b]   [color=#8a8a8a]waiting for player...[/color] | [b][color=#ffcc1a]P4[/color][/b]   [color=#8a8a8a]waiting for player...[/color]
+LOBBY client1: info = Waiting for players to choose a role...
+LOBBY client1: klik MY ROLE = true
+LOBBY client1: klik role WATER = true
+LOBBY client1: klik OK = true
+MASUK_GAME slot_lokal=1 pemain=4 peran_jaringan=client
+START_DITEKAN
+T|Tekan SPASI untuk Melempar Dadu
+EVENT ronde=1 aktif= terakhir=
+KARTU_BANTUAN stat=[0, 0, 0, 0] inv=[[], [], [], []]
+BOUNTY aktif= terakhir= bintang=[4, 4, 4, 4] stat_bounty=[0, 0, 0, 0]
+G1|pemain|[0,2500,4][0,2500,4][0,2500,4][0,2500,4]
+TEBAK_STAT tebak_benar_per_slot=[0, 0, 0, 0]
+T|Waiting for P1...
+T|P1 Roll: 7
+T|Waiting for P1...
+T|P1 set a Fire Trap!
+BOUNTY aktif= terakhir= bintang=[3, 4, 4, 4] stat_bounty=[0, 0, 0, 0]
+T|Waiting for P1...
+G2|musuh|[7,2200,3][0,2500,4][0,2500,4][0,2500,4]
+R|dadu
+T|Your Roll: 10
+R|cabang|0
+T|FIRE TRAP! Burning for 3 turns!
+T|You collected [img=28]res://permata/permata_kuning.png[/img] Gem!
+R|akhiri
+T|Waiting for P3...
+G3|pemain3|[7,2200,3][10,2500,4][0,2500,4][0,2500,4]
+T|P3 Roll: 11
+T|P3 collected [img=28]res://permata/permata_kuning.png[/img] Gem!
+T|Waiting for P3...
+T|P3 set a Wind Trap!
+BOUNTY aktif= terakhir= bintang=[3, 4, 3, 4] stat_bounty=[0, 0, 0, 0]
+T|Waiting for P3...
+T|Waiting for P4...
+G4|pemain4|[7,2200,3][10,2500,4][11,2200,3][0,2500,4]
+T|P4 Roll: 7
+T|Waiting for P4...
+T|P4 gave up. Paid fine: 100 Coins.
+T|First to win a duel with WATER: +1 Star
+BOUNTY aktif=air terakhir=air bintang=[3, 4, 3, 4] stat_bounty=[0, 0, 0, 0]
+T|Waiting for P1...
+EVENT ronde=2 aktif= terakhir=
+G5|pemain|[7,2300,3][10,2500,4][11,2200,3][7,2400,4]
+T|P1 Roll: 2
+T|Waiting for P1...
+T|P1 set a Wind Trap!
+BOUNTY aktif=air terakhir=air bintang=[2, 4, 3, 4] stat_bounty=[0, 0, 0, 0]
+T|Waiting for P1...
+T|You are burning! Lost 55 Coins. (2 turns left)
+G6|musuh|[9,2028,2][10,2445,4][11,2200,3][7,2400,4]
+R|dadu
+T|Your Roll: 9
+T|WIND TRAP! Coins scattered!
+T|You found 61 Coins!
+R|jebakan|TombolTrapAngin
+T|Wind Trap set! Wait for victim.
+BOUNTY aktif=air terakhir=air bintang=[2, 3, 3, 4] stat_bounty=[0, 0, 0, 0]
+R|beli
+T|Waiting for P3...
+G7|pemain3|[9,2028,2][19,1962,3][11,2200,3][7,2400,4]
+T|P3 Roll: 12
+T|WIND TRAP! Coins scattered!
+T|Waiting for P3...
+T|P3 set a Lightning Trap!
+BOUNTY aktif=air terakhir=air bintang=[2, 3, 2, 4] stat_bounty=[0, 0, 0, 0]
+T|Waiting for P3...
+T|Waiting for P4...
+G8|pemain4|[9,2028,2][19,1962,3][5,1735,2][7,2400,4]
+T|P4 Roll: 3
+T|WIND TRAP! Coins scattered!
+T|P4 found 60 Coins!
+T|P4 collected [img=28]res://permata/permata_kuning.png[/img] Gem!
+T|Waiting for P4...
+T|Tiles and towers -30% this round!
+T|Waiting for P1...
+EVENT ronde=3 aktif=market_day terakhir=market_day
+G9|pemain|[9,2028,2][19,1962,3][5,1735,2][10,2280,4]
+T|P1 Roll: 4
+T|P1 collected [img=28]res://permata/permata_kuning.png[/img] Gem!
+T|P1 found 55 Coins!
+T|Waiting for P1...
+T|P1 set a Lightning Trap!
+BOUNTY aktif=air terakhir=air bintang=[1, 3, 2, 4] stat_bounty=[0, 0, 0, 0]
+T|Waiting for P1...
+T|You are burning! Lost 55 Coins. (1 turns left)
+G10|musuh|[13,1901,1][19,1907,3][5,1735,2][10,2280,4]
+R|dadu
+T|Your Roll: 6
+T|You found 60 Coins!
+R|cabang|0
+T|LIGHTNING TRAP! Paralyzed & Stopped!
+T|P3's Tile! Give Up (Pay 100) or Fight?
+R|menyerah
+T|You gave up. Paid fine: 100 Coins.
+T|Waiting for P3...
+G11|pemain3|[13,1901,1][5,1867,3][5,1835,2][10,2280,4]
+T|P3 Roll: 6
+T|P3 found 61 Coins!
+T|Passed [img=28]res://permata/permata_kuning.png[/img]!
+T|Waiting for P3...
+T|P3 set a Sacred Earth Trap!
+T|Waiting for P3...
+T|Waiting for P4...
+G12|pemain4|[13,1901,1][5,1867,3][11,1546,2][10,2280,4]
+T|P4 Roll: 12
+T|LIGHTNING TRAP! Paralyzed & Stopped!
+T|Waiting for P4...
+T|P4 gave up. Paid fine: 100 Coins.
+T|Waiting for P1...
+EVENT ronde=4 aktif= terakhir=market_day
+G13|pemain|[13,2001,1][5,1867,3][11,1546,2][13,2180,4]
+T|P1 Roll: 7
+T|Waiting for P1...
+T|You are burning! Lost 55 Coins. (0 turns left)
+T|You are paralyzed! Cannot move this turn.
+T|Waiting for P3...
+G14|pemain3|[2,2029,1][5,1812,3][11,1546,2][13,2180,4]
+T|P3 Roll: 5
+T|Waiting for P3...
+T|P3 set a Lightning Trap!
+BOUNTY aktif=air terakhir=air bintang=[1, 3, 1, 4] stat_bounty=[0, 0, 0, 0]
+T|Waiting for P3...
+T|P4 is paralyzed! Cannot move this turn.
+T|Everyone gets +1 Star!
+T|Waiting for P1...
+EVENT ronde=5 aktif= terakhir=star_shower
+BOUNTY aktif=air terakhir=air bintang=[2, 4, 2, 5] stat_bounty=[0, 0, 0, 0]
+G15|pemain|[2,2029,2][5,1812,4][16,1246,2][13,2180,5]
+T|P1 Roll: 11
+T|Passed [img=28]res://permata/permata_kuning.png[/img]!
+T|Waiting for P1...
+T|P1 set a Fire Trap!
+BOUNTY aktif=air terakhir=air bintang=[1, 4, 2, 5] stat_bounty=[0, 0, 0, 0]
+T|Waiting for P1...
+G16|musuh|[13,1529,1][5,1812,4][16,1246,2][13,2180,5]
+R|dadu
+T|Your Roll: 4
+T|P1's Tile! Give Up (Pay 100) or Fight?
+R|menyerah
+T|You gave up. Paid fine: 100 Coins.
+T|Waiting for P3...
+G17|pemain3|[13,1629,1][9,1712,4][16,1246,2][13,2180,5]
+T|P3 Roll: 10
+T|Waiting for P3...
+T|P3 set a Wind Trap!
+BOUNTY aktif=air terakhir=air bintang=[1, 4, 1, 5] stat_bounty=[0, 0, 0, 0]
+T|Waiting for P3...
+T|Waiting for P4...
+G18|pemain4|[13,1629,1][9,1712,4][8,946,1][13,2180,5]
+T|P4 Roll: 2
+T|Waiting for P4...
+BOUNTY aktif=air terakhir=air bintang=[1, 4, 1, 4] stat_bounty=[0, 0, 0, 0]
+T|TIME UP! P1 is the richest!
+AKHIR alasan=ronde pemenang=0 ronde=5/5 papan=[{ "slot": 0, "uang": 1629, "bintang": 1, "petak": 3, "permata": 1, "kekayaan": 3029, "stat": { "giliran": 5, "dadu_total": 31, "dadu_kali": 5, "duel_menang": 0, "duel_kalah": 0, "menang_elemen": { "api": 0, "air": 0, "tanah": 0, "petir": 0, "angin": 0 }, "petak_rebut": 0, "jebakan_pasang": 4, "jebakan_kena": 3, "koin_jebakan": 405, "petak_beli": 3, "menara_bangun": 1, "menara_lv2": 0, "permata": 1, "lewat_start": 0, "kartu_pakai": 0, "bounty": 0, "kartu_bantuan": 0, "tebak_benar": 0, "putar_ulang": 0, "jebakan_role_pasang": 2, "jebakan_role_kena": 1 }, "penghargaan": ["trap_master"] }, { "slot": 2, "uang": 946, "bintang": 1, "petak": 4, "permata": 1, "kekayaan": 2646, "stat": { "giliran": 5, "dadu_total": 44, "dadu_kali": 5, "duel_menang": 0, "duel_kalah": 0, "menang_elemen": { "api": 0, "air": 0, "tanah": 0, "petir": 0, "angin": 0 }, "petak_rebut": 0, "jebakan_pasang": 5, "jebakan_kena": 2, "koin_jebakan": 244, "petak_beli": 4, "menara_bangun": 1, "menara_lv2": 0, "permata": 1, "lewat_start": 0, "kartu_pakai": 0, "bounty": 0, "kartu_bantuan": 0, "tebak_benar": 0, "putar_ulang": 0, "tahan_kurangi": 1, "jebakan_role_pasang": 1 }, "penghargaan": ["landlord", "lucky_roller"] }, { "slot": 3, "uang": 1880, "bintang": 4, "petak": 1, "permata": 1, "kekayaan": 2180, "stat": { "giliran": 5, "dadu_total": 24, "dadu_kali": 4, "duel_menang": 0, "duel_kalah": 0, "menang_elemen": { "api": 0, "air": 0, "tanah": 0, "petir": 0, "angin": 0 }, "petak_rebut": 0, "jebakan_pasang": 1, "jebakan_kena": 0, "koin_jebakan": 0, "petak_beli": 1, "menara_bangun": 0, "menara_lv2": 0, "permata": 1, "lewat_start": 0, "kartu_pakai": 0, "bounty": 0, "kartu_bantuan": 0, "tebak_benar": 0, "putar_ulang": 0, "jebakan_role_pasang": 1 }, "penghargaan": [] }, { "slot": 1, "uang": 1712, "bintang": 4, "petak": 1, "permata": 1, "kekayaan": 2012, "stat": { "giliran": 5, "dadu_total": 29, "dadu_kali": 4, "duel_menang": 0, "duel_kalah": 0, "menang_elemen": { "api": 0, "air": 0, "tanah": 0, "petir": 0, "angin": 0 }, "petak_rebut": 0, "jebakan_pasang": 1, "jebakan_kena": 1, "koin_jebakan": 165, "petak_beli": 1, "menara_bangun": 0, "menara_lv2": 0, "permata": 1, "lewat_start": 0, "kartu_pakai": 0, "bounty": 0, "kartu_bantuan": 0, "tebak_benar": 0, "putar_ulang": 0, "tahan_kurangi": 4 }, "penghargaan": [] }]
+PROFIL_MP slot=1 menang=false giliran=5 xp 0->25 crowns 0->10 penghargaan=[] rumus=true sekali=true berkas=true cek=OK
+CEK_BD_JEBAKAN_AI s=0 role=api jebakan=api+angin+petir build={ "hot_flames": 2, "rock_breaker": 2, "heavy_pockets": 1, "fire_tax": 1, "ULT_api": true }
+CEK_BD_JEBAKAN_AI s=1 role=air jebakan=air+angin+petir build={ "frozen_bubble": 2, "heat_skin": 2, "rock_breaker": 1, "rapid_current": 1, "ULT_air": true }
+CEK_BD_JEBAKAN_AI s=2 role=tanah jebakan=tanah+angin+petir build={ "hard_rock": 2, "grounded": 2, "heavy_pockets": 1, "fortress": 1, "ULT_tanah": true }
+CEK_BD_JEBAKAN_AI s=3 role=petir jebakan=petir+angin+air build={ "shock": 2, "heat_skin": 2, "steady_feet": 1, "card_magnet": 1, "ULT_petir": true }
+CEK_C5 { "cek_c5_guard": 0, "cek_c5_tornado": 0, "cek_c5_phoenix": 0, "cek_c5_rockbreaker0": 0 }
+CEK_BD { "cek_bd_sacred": 0, "cek_bd_guard_nol": 0, "cek_bd_fight_faktor": 0, "cek_bd_benteng_lewati": 0, "cek_bd_benteng_tahan_ai": 0 }
+TEBAK_RINGKAS slot=1 tebakan=0 benar=0 telat_kirim=0 telat_ditolak=0 cek_ok=0 cek_gagal=0 tebak_benar_per_slot=[0, 0, 0, 0]
+SELESAI MENANG peran=client giliran=18 cek_ok=0 cek_gagal=0 kartu_beda=0 detik=334 migrasi=0 cek_ok_migrasi=0 jaringan=client role=api:api+angin+petir:{ "hot_flames": 2, "rock_breaker": 2, "heavy_pockets": 1, "fire_tax": 1, "ULT_api": true },air:air+angin+petir:{ "frozen_bubble": 2, "heat_skin": 2, "rock_breaker": 1, "rapid_current": 1, "ULT_air": true },tanah:tanah+angin+petir:{ "hard_rock": 2, "grounded": 2, "heavy_pockets": 1, "fortress": 1, "ULT_tanah": true },petir:petir+angin+air:{ "shock": 2, "heat_skin": 2, "steady_feet": 1, "card_magnet": 1, "ULT_petir": true }

@@ -1,0 +1,9 @@
+== g5_mp_a
+g5_mp_a.host: SELESAI BATAS_GILIRAN peran=host giliran=31 cek_ok=18 cek_gagal=0 kartu_beda=0 detik=462 migrasi=0 cek_ok_migrasi=0 jaringan=host | slot=0 tebakan=1 benar=1 telat_kirim=0 telat_ditolak=0 cek_ok=1 cek_gagal=0 tebak_benar_per_slot=[1, 0, 0]
+g5_mp_a.c1: SELESAI HOST_SELESAI peran=client giliran=28 cek_ok=0 cek_gagal=0 kartu_beda=0 detik=461 migrasi=0 cek_ok_migrasi=0 jaringan=client | slot=1 tebakan=0 benar=0 telat_kirim=0 telat_ditolak=0 cek_ok=0 cek_gagal=0 tebak_benar_per_slot=[1, 0, 0]
+g5_mp_a.c2: SELESAI HOST_SELESAI peran=client giliran=28 cek_ok=0 cek_gagal=0 kartu_beda=0 detik=461 migrasi=0 cek_ok_migrasi=0 jaringan=client | slot=2 tebakan=0 benar=0 telat_kirim=1 telat_ditolak=1 cek_ok=0 cek_gagal=0 tebak_benar_per_slot=[1, 0, 0]
+== g5_mp_b
+g5_mp_b.host: SELESAI MENANG peran=host giliran=20 cek_ok=15 cek_gagal=0 kartu_beda=0 detik=340 migrasi=0 cek_ok_migrasi=0 jaringan=host | slot=0 tebakan=0 benar=0 telat_kirim=0 telat_ditolak=0 cek_ok=0 cek_gagal=0 tebak_benar_per_slot=[0, 0, 0, 0]
+g5_mp_b.c1: SELESAI MENANG peran=client giliran=18 cek_ok=0 cek_gagal=0 kartu_beda=0 detik=334 migrasi=0 cek_ok_migrasi=0 jaringan=client | slot=1 tebakan=0 benar=0 telat_kirim=0 telat_ditolak=0 cek_ok=0 cek_gagal=0 tebak_benar_per_slot=[0, 0, 0, 0]
+g5_mp_b.c2: SELESAI MENANG peran=client giliran=18 cek_ok=0 cek_gagal=0 kartu_beda=0 detik=333 migrasi=0 cek_ok_migrasi=0 jaringan=client | slot=2 tebakan=0 benar=0 telat_kirim=0 telat_ditolak=0 cek_ok=0 cek_gagal=0 tebak_benar_per_slot=[0, 0, 0, 0]
+g5_mp_b.c3: SELESAI MENANG peran=client giliran=18 cek_ok=0 cek_gagal=0 kartu_beda=0 detik=334 migrasi=0 cek_ok_migrasi=0 jaringan=client | slot=3 tebakan=0 benar=0 telat_kirim=0 telat_ditolak=0 cek_ok=0 cek_gagal=0 tebak_benar_per_slot=[0, 0, 0, 0]

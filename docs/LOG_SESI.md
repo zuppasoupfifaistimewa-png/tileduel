@@ -3,13 +3,18 @@
 Satu entri per sesi, terbaru di atas. Sesi baru tidak bisa membaca percakapan lama, jadi apa pun yang penting
 harus tercatat di sini, di `HANDOFF_LANJUT.md`, atau di RENCANA.
 
-## 2026-10-02 -- sesi Claude Code cloud (Sonnet 5.5): Fase 5 G4 (Tebak Duel) [+ G5, lihat di bawah kalau sudah ditambahkan]
+## 2026-10-02 -- sesi Claude Code cloud (Sonnet 5.5): Fase 5 G4 (Tebak Duel) + G5 (putar ulang rolet)
 - G4 Tebak Duel (solo + MP) SELESAI: lihat HANDOFF (ringkasan kode & bukti), data `hasil/g4_tebak/`. Penonton manusia menebak pemenang duel; stat `tebak_benar` identik di semua device;
   "Too late!" teruji (tebakan sesudah host menutup jendela); migrasi saat duel membuang tebakan tanpa hadiah. Hadiah profil (XP/Crowns) = G7.
 - Keputusan/temuan: baseline S1 100 dari G0 tidak lagi valid sebagai pembanding (G1-G3 mengubah ekonomi) -> pembanding baru = kode G3 (903965e) vs G4: IDENTIK. Solo dgn pemain manusia tidak
   deterministik kalau run paralel (bukti identik hanya untuk `semua_ai=1`). Jendela tebak solo ~2,5 dtk dicatat KETAT (disetel di uji HP G9).
 - Catatan teknis: `uji_takeover` memakai Control tiruan sebagai `ui_elemen` -> panggilan metode UI baru di `_tutup_ui_jaringan_client` harus dijaga `has_method`. Ikuti pola itu untuk G5+.
-- Commit: titik simpan kode 59d463f, lalu commit penutup G4. Langkah berikutnya: G5 (putar ulang rolet, solo).
+- G5 putar ulang rolet (solo, iklan berhadiah) SELESAI: lihat HANDOFF, data `hasil/g5_putar_ulang/`. Dialog "SO CLOSE!" saat KALAH skor di duel manusia vs AI; ditonton -> hanya rolet pemain diputar ulang, skor dihitung ulang;
+  sekali per pertandingan; ditolak/gagal boleh ditawari lagi; MP tidak pernah. Rig: 8/8 putar ulang cek OK, NO THANKS & iklan gagal teruji (stub rig +`uji_tonton_gagal`), S1 100 G4==G5, cek_nilai 8/8, reg10 sama, MP 3P+4P sinkron.
+- Keputusan/temuan: `jalankan_duel` dipecah (`_teks_panel_pemain`, `_animasi_rolet_pemain`) tanpa mengubah perilaku/urutan rng; `tanya_iklan_hutang` diberi parameter bawaan = nilai lama supaya dialog hutang tidak berubah.
+- Commit: 59d463f (kode G4), 91867f0 (G4 selesai), 14913b0 (G5 titik simpan), lalu commit penutup G5.
+- Langkah berikutnya: G6 tombol AI cepat (Sonnet), lalu G7 profil (hadiah tebak: XP 5 / Crowns 3 per tebakan benar maks 5, kartu hadiah, `STAT_SEUMUR`), G8 (Opus) keseimbangan + regresi MP 37, G9 bersih-bersih + ZIP b10 + uji HP.
+  Sesi ini sudah PANJANG (banyak simulasi) -> pemilik diingatkan membuka sesi baru; prompt siap tempel ada di akhir jawaban sesi.
 
 ## 2026-10-02 -- sesi Claude Code cloud (Sonnet 5.5): Fase 5 G2 + G3 + getaran kamera Earthquake
 - G2 bounty (commit 4deb81c): satu target elemen aktif, +1 bintang untuk pemenang duel pertama dgn elemen itu; siaran state "bounty"; HUD label; AI ikut klaim. Bukti `hasil/g2_bounty/`:
