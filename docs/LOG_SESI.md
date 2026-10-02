@@ -3,6 +3,16 @@
 Satu entri per sesi, terbaru di atas. Sesi baru tidak bisa membaca percakapan lama, jadi apa pun yang penting
 harus tercatat di sini, di `HANDOFF_LANJUT.md`, atau di RENCANA.
 
+## 2026-10-02 -- sesi Claude Code cloud (Sonnet 5.5): F6
+- Dikerjakan: 8 angka final F5 diterapkan ke `game/data_role.gd` & `game/ai_jebakan.gd` (via `f5_kandidat/*.patch`; kini identik
+  dgn rig); 3 harapan `cek_nilai` di `rig/proj_tanpa_uji/uji_nyata.gd` -> 390/130/324 (dihitung tangan) -> 8/8 OK.
+- Verifikasi: regresi MP 37/37 skenario (A lalu B berurutan, 97 baris SELESAI, 0 MACET/scripterr/beda/cek_gagal);
+  `batch_reg10` 0 gagal; U11 (`uji_tayang_role`) OK. `uji_tanah2` 2 SCRIPT ERROR = uji lama (node tiruan), bukan bug produksi.
+- Data: `hasil/f6_regresi/`. Rincian: RENCANA 14.22.
+- Keputusan: tidak mengulang U9 S1-S5 (F5 sudah konfirmasi di benih baru dgn angka yang sama persis); tidak mengubah `rig/skrip/*`
+  (skrip regresi disalin ke scratchpad dengan path disesuaikan).
+- Langkah berikutnya: **F7 (Sonnet)** lalu **F8** -- lihat HANDOFF bagian 5.
+
 ## 2026-09-28 s/d 2026-10-02 -- sesi Claude Code cloud (Sonnet 5 -> Opus 5.5)
 - Konteks: sesi kerja sebelumnya (Cowork, sampai F5 putaran 3) terkunci batas mingguan. Repo GitHub semula kosong.
 - Pemulihan: kode diselamatkan dari `TileDuel_FaseB_b8.zip` + 3 file pasca-F1, lalu diganti seluruhnya oleh

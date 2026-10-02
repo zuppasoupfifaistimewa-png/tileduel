@@ -1,0 +1,154 @@
+== M1 3P+1AI -> 2P+2AI
+f2_m1.host:  | scripterr=0 | beda=0
+f2_m1.c1: SELESAI BATAS_GILIRAN peran=client giliran=41 cek_ok=6 cek_gagal=0 kartu_beda=0 detik=839 migrasi=1 cek_ok_migrasi=6 jaringan=host | scripterr=0 | beda=0
+f2_m1.c2: SELESAI HOST_SELESAI peran=client giliran=39 cek_ok=0 cek_gagal=0 kartu_beda=0 detik=840 migrasi=1 cek_ok_migrasi=0 jaringan=client | scripterr=0 | beda=0
+== M2 4P -> 3P+1AI
+f2_m2.host:  | scripterr=0 | beda=0
+f2_m2.c1: SELESAI BATAS_GILIRAN peran=client giliran=41 cek_ok=14 cek_gagal=0 kartu_beda=0 detik=855 migrasi=1 cek_ok_migrasi=14 jaringan=host | scripterr=0 | beda=0
+f2_m2.c2: SELESAI HOST_SELESAI peran=client giliran=38 cek_ok=0 cek_gagal=0 kartu_beda=0 detik=854 migrasi=1 cek_ok_migrasi=0 jaringan=client | scripterr=0 | beda=0
+f2_m2.c3: SELESAI HOST_SELESAI peran=client giliran=38 cek_ok=0 cek_gagal=0 kartu_beda=0 detik=854 migrasi=1 cek_ok_migrasi=0 jaringan=client | scripterr=0 | beda=0
+== M3 4P, P4 main sendiri
+f2_m3.host:  | scripterr=0 | beda=0
+f2_m3.c1: SELESAI BATAS_GILIRAN peran=client giliran=41 cek_ok=7 cek_gagal=0 kartu_beda=0 detik=856 migrasi=1 cek_ok_migrasi=7 jaringan=host | scripterr=0 | beda=0
+f2_m3.c2: SELESAI HOST_SELESAI peran=client giliran=40 cek_ok=0 cek_gagal=0 kartu_beda=0 detik=855 migrasi=1 cek_ok_migrasi=0 jaringan=client | scripterr=0 | beda=0
+f2_m3.c3: SELESAI LANJUT_SETELAH_HOST_KELUAR peran=client giliran=21 cek_ok=0 cek_gagal=0 kartu_beda=0 detik=380 migrasi=1 cek_ok_migrasi=0 jaringan= | scripterr=0 | beda=0
+== M4 rebutan
+f2_m4.host:  | scripterr=0 | beda=0
+f2_m4.c1: SELESAI MENANG peran=client giliran=23 cek_ok=4 cek_gagal=0 kartu_beda=0 detik=416 migrasi=1 cek_ok_migrasi=4 jaringan=host | scripterr=0 | beda=0
+f2_m4.c2: SELESAI MENANG peran=client giliran=23 cek_ok=0 cek_gagal=0 kartu_beda=0 detik=410 migrasi=1 cek_ok_migrasi=0 jaringan=client | scripterr=0 | beda=0
+== M5 host keluar saat pilih elemen
+f2_m5.host:  | scripterr=0 | beda=0
+f2_m5.c1: SELESAI BATAS_GILIRAN peran=client giliran=41 cek_ok=14 cek_gagal=0 kartu_beda=0 detik=871 migrasi=1 cek_ok_migrasi=14 jaringan=host | scripterr=0 | beda=0
+f2_m5.c2: SELESAI HOST_SELESAI peran=client giliran=36 cek_ok=0 cek_gagal=0 kartu_beda=0 detik=871 migrasi=1 cek_ok_migrasi=0 jaringan=client | scripterr=0 | beda=0
+f2_m5.c3: SELESAI HOST_SELESAI peran=client giliran=36 cek_ok=0 cek_gagal=0 kartu_beda=0 detik=871 migrasi=1 cek_ok_migrasi=0 jaringan=client | scripterr=0 | beda=0
+== M6 migrasi dua kali
+f2_m6.host:  | scripterr=0 | beda=0
+f2_m6.c1:  | scripterr=0 | beda=0
+f2_m6.c2: SELESAI MENANG peran=client giliran=15 cek_ok=1 cek_gagal=0 kartu_beda=0 detik=271 migrasi=2 cek_ok_migrasi=1 jaringan=host | scripterr=0 | beda=0
+f2_m6.c3: SELESAI MENANG peran=client giliran=15 cek_ok=0 cek_gagal=0 kartu_beda=0 detik=265 migrasi=2 cek_ok_migrasi=0 jaringan=client | scripterr=0 | beda=0
+== M7 hotspot P1 mati, P1 kembali
+f2_m7.host: SELESAI BATAS_GILIRAN peran=host giliran=41 cek_ok=18 cek_gagal=0 kartu_beda=0 detik=707 migrasi=1 cek_ok_migrasi=14 jaringan=host | scripterr=0 | beda=0
+f2_m7.c1: SELESAI HOST_SELESAI peran=client giliran=36 cek_ok=0 cek_gagal=0 kartu_beda=0 detik=705 migrasi=1 cek_ok_migrasi=0 jaringan=client | scripterr=0 | beda=0
+f2_m7.c2: SELESAI HOST_SELESAI peran=client giliran=36 cek_ok=0 cek_gagal=0 kartu_beda=0 detik=706 migrasi=1 cek_ok_migrasi=0 jaringan=client | scripterr=0 | beda=0
+== M8 P1 kembali terlambat
+f2_m8.host: SELESAI BATAS_GILIRAN peran=host giliran=41 cek_ok=6 cek_gagal=0 kartu_beda=0 detik=701 migrasi=1 cek_ok_migrasi=0 jaringan= | scripterr=0 | beda=0
+f2_m8.c1: SELESAI BATAS_GILIRAN peran=client giliran=41 cek_ok=14 cek_gagal=0 kartu_beda=0 detik=759 migrasi=1 cek_ok_migrasi=14 jaringan=host | scripterr=0 | beda=0
+f2_m8.c2: SELESAI HOST_SELESAI peran=client giliran=39 cek_ok=0 cek_gagal=0 kartu_beda=0 detik=759 migrasi=1 cek_ok_migrasi=0 jaringan=client | scripterr=0 | beda=0
+f2_m8.c3: SELESAI HOST_SELESAI peran=client giliran=39 cek_ok=0 cek_gagal=0 kartu_beda=0 detik=759 migrasi=1 cek_ok_migrasi=0 jaringan=client | scripterr=0 | beda=0
+== A6 2P+1AI pantai
+f2_a6.host: SELESAI BATAS_GILIRAN peran=host giliran=31 cek_ok=10 cek_gagal=0 kartu_beda=0 detik=531 migrasi=0 cek_ok_migrasi=0 jaringan=host | scripterr=0 | beda=0
+f2_a6.c1: SELESAI HOST_SELESAI peran=client giliran=29 cek_ok=0 cek_gagal=0 kartu_beda=0 detik=530 migrasi=0 cek_ok_migrasi=0 jaringan=client | scripterr=0 | beda=0
+== S1 3P c2 keluar g8
+f2_s1.host: SELESAI BATAS_GILIRAN peran=host giliran=31 cek_ok=12 cek_gagal=0 kartu_beda=0 detik=507 migrasi=0 cek_ok_migrasi=0 jaringan=host | scripterr=0 | beda=0
+f2_s1.c1: SELESAI HOST_SELESAI peran=client giliran=28 cek_ok=0 cek_gagal=0 kartu_beda=0 detik=506 migrasi=0 cek_ok_migrasi=0 jaringan=client | scripterr=0 | beda=0
+f2_s1.c2:  | scripterr=0 | beda=0
+== S2 3P+1AI c1 keluar g10
+f2_s2.host: SELESAI BATAS_GILIRAN peran=host giliran=31 cek_ok=11 cek_gagal=0 kartu_beda=0 detik=550 migrasi=0 cek_ok_migrasi=0 jaringan=host | scripterr=0 | beda=0
+f2_s2.c1:  | scripterr=0 | beda=0
+f2_s2.c2: SELESAI HOST_SELESAI peran=client giliran=28 cek_ok=0 cek_gagal=0 kartu_beda=0 detik=550 migrasi=0 cek_ok_migrasi=0 jaringan=client | scripterr=0 | beda=0
+== S3 3P host keluar g8
+f2_s3.host:  | scripterr=0 | beda=0
+f2_s3.c1: SELESAI MENANG peran=client giliran=19 cek_ok=0 cek_gagal=0 kartu_beda=0 detik=403 migrasi=1 cek_ok_migrasi=0 jaringan= | scripterr=0 | beda=0
+f2_s3.c2: SELESAI LANJUT_SETELAH_HOST_KELUAR peran=client giliran=20 cek_ok=0 cek_gagal=0 kartu_beda=0 detik=308 migrasi=1 cek_ok_migrasi=0 jaringan= | scripterr=0 | beda=0
+== D1 3P c1 keluar saat pilih elemen
+f2_d1.host: SELESAI BATAS_GILIRAN peran=host giliran=31 cek_ok=24 cek_gagal=0 kartu_beda=0 detik=570 migrasi=0 cek_ok_migrasi=0 jaringan=host | scripterr=0 | beda=0
+f2_d1.c1: SELESAI HOST_SELESAI peran=client giliran=27 cek_ok=0 cek_gagal=0 kartu_beda=0 detik=570 migrasi=0 cek_ok_migrasi=0 jaringan=client | scripterr=0 | beda=0
+f2_d1.c2: SELESAI HOST_SELESAI peran=client giliran=27 cek_ok=0 cek_gagal=0 kartu_beda=0 detik=569 migrasi=0 cek_ok_migrasi=0 jaringan=client | scripterr=0 | beda=0
+== D2 1v1 c1 keluar saat pilih elemen
+f2_d2.host: SELESAI BATAS_GILIRAN peran=host giliran=26 cek_ok=1 cek_gagal=0 kartu_beda=0 detik=552 migrasi=0 cek_ok_migrasi=0 jaringan= | scripterr=0 | beda=0
+f2_d2.c1:  | scripterr=0 | beda=0
+== Q1 1v1 alam
+f2_q1.host: SELESAI MENANG peran=host giliran=15 cek_ok=7 cek_gagal=0 kartu_beda=0 detik=255 migrasi=0 cek_ok_migrasi=0 jaringan=host | scripterr=0 | beda=0
+f2_q1.c1: SELESAI MENANG peran=client giliran=13 cek_ok=0 cek_gagal=0 kartu_beda=0 detik=250 migrasi=0 cek_ok_migrasi=0 jaringan=client | scripterr=0 | beda=0
+== Q2 2P+1AI pantai
+f2_q2.host: SELESAI MENANG peran=host giliran=17 cek_ok=5 cek_gagal=0 kartu_beda=0 detik=339 migrasi=0 cek_ok_migrasi=0 jaringan=host | scripterr=0 | beda=0
+f2_q2.c1: SELESAI MENANG peran=client giliran=16 cek_ok=0 cek_gagal=0 kartu_beda=0 detik=332 migrasi=0 cek_ok_migrasi=0 jaringan=client | scripterr=0 | beda=0
+== Q3 3P alam
+f2_q3.host: SELESAI MENANG peran=host giliran=18 cek_ok=10 cek_gagal=0 kartu_beda=0 detik=326 migrasi=0 cek_ok_migrasi=0 jaringan=host | scripterr=0 | beda=0
+f2_q3.c1: SELESAI MENANG peran=client giliran=16 cek_ok=0 cek_gagal=0 kartu_beda=0 detik=320 migrasi=0 cek_ok_migrasi=0 jaringan=client | scripterr=0 | beda=0
+f2_q3.c2: SELESAI MENANG peran=client giliran=16 cek_ok=0 cek_gagal=0 kartu_beda=0 detik=320 migrasi=0 cek_ok_migrasi=0 jaringan=client | scripterr=0 | beda=0
+== Q4 4P alam
+f2_q4.host: SELESAI MENANG peran=host giliran=20 cek_ok=12 cek_gagal=0 kartu_beda=0 detik=380 migrasi=0 cek_ok_migrasi=0 jaringan=host | scripterr=0 | beda=0
+f2_q4.c1: SELESAI MENANG peran=client giliran=19 cek_ok=0 cek_gagal=0 kartu_beda=0 detik=374 migrasi=0 cek_ok_migrasi=0 jaringan=client | scripterr=0 | beda=0
+f2_q4.c2: SELESAI MENANG peran=client giliran=19 cek_ok=0 cek_gagal=0 kartu_beda=0 detik=374 migrasi=0 cek_ok_migrasi=0 jaringan=client | scripterr=0 | beda=0
+f2_q4.c3: SELESAI MENANG peran=client giliran=19 cek_ok=0 cek_gagal=0 kartu_beda=0 detik=374 migrasi=0 cek_ok_migrasi=0 jaringan=client | scripterr=0 | beda=0
+A_SELESAI
+== D3 3P+1AI host keluar saat pilih elemen
+f2_d3.host:  | scripterr=0 | beda=0
+f2_d3.c1: SELESAI LANJUT_SETELAH_HOST_KELUAR peran=client giliran=18 cek_ok=0 cek_gagal=0 kartu_beda=0 detik=343 migrasi=1 cek_ok_migrasi=0 jaringan= | scripterr=0 | beda=0
+f2_d3.c2: SELESAI LANJUT_SETELAH_HOST_KELUAR peran=client giliran=18 cek_ok=0 cek_gagal=0 kartu_beda=0 detik=411 migrasi=1 cek_ok_migrasi=0 jaringan= | scripterr=0 | beda=0
+== D4 2P+1AI host keluar saat pilih elemen
+f2_d4.host:  | scripterr=0 | beda=0
+f2_d4.c1: SELESAI LANJUT_SETELAH_HOST_KELUAR peran=client giliran=18 cek_ok=0 cek_gagal=0 kartu_beda=0 detik=428 migrasi=0 cek_ok_migrasi=0 jaringan= | scripterr=0 | beda=0
+== B0 4P (+kartu)
+f2_b0.host: SELESAI MENANG peran=host giliran=17 cek_ok=24 cek_gagal=0 kartu_beda=0 detik=328 migrasi=0 cek_ok_migrasi=0 jaringan=host | scripterr=0 | beda=0
+f2_b0.c1: SELESAI MENANG peran=client giliran=16 cek_ok=0 cek_gagal=0 kartu_beda=0 detik=321 migrasi=0 cek_ok_migrasi=0 jaringan=client | scripterr=0 | beda=0
+f2_b0.c2: SELESAI MENANG peran=client giliran=16 cek_ok=0 cek_gagal=0 kartu_beda=0 detik=322 migrasi=0 cek_ok_migrasi=0 jaringan=client | scripterr=0 | beda=0
+f2_b0.c3: SELESAI MENANG peran=client giliran=16 cek_ok=0 cek_gagal=0 kartu_beda=0 detik=322 migrasi=0 cek_ok_migrasi=0 jaringan=client | scripterr=0 | beda=0
+== B1 4P pantai
+f2_b1.host: SELESAI BATAS_GILIRAN peran=host giliran=31 cek_ok=24 cek_gagal=0 kartu_beda=0 detik=536 migrasi=0 cek_ok_migrasi=0 jaringan=host | scripterr=0 | beda=0
+f2_b1.c1: SELESAI HOST_SELESAI peran=client giliran=29 cek_ok=0 cek_gagal=0 kartu_beda=0 detik=535 migrasi=0 cek_ok_migrasi=0 jaringan=client | scripterr=0 | beda=0
+f2_b1.c2: SELESAI HOST_SELESAI peran=client giliran=29 cek_ok=0 cek_gagal=0 kartu_beda=0 detik=535 migrasi=0 cek_ok_migrasi=0 jaringan=client | scripterr=0 | beda=0
+f2_b1.c3: SELESAI HOST_SELESAI peran=client giliran=29 cek_ok=0 cek_gagal=0 kartu_beda=0 detik=535 migrasi=0 cek_ok_migrasi=0 jaringan=client | scripterr=0 | beda=0
+== B2 4P c3 keluar g8
+f2_b2.host: SELESAI BATAS_GILIRAN peran=host giliran=31 cek_ok=16 cek_gagal=0 kartu_beda=0 detik=418 migrasi=0 cek_ok_migrasi=0 jaringan=host | scripterr=0 | beda=0
+f2_b2.c1: SELESAI HOST_SELESAI peran=client giliran=28 cek_ok=0 cek_gagal=0 kartu_beda=0 detik=418 migrasi=0 cek_ok_migrasi=0 jaringan=client | scripterr=0 | beda=0
+f2_b2.c2: SELESAI HOST_SELESAI peran=client giliran=28 cek_ok=0 cek_gagal=0 kartu_beda=0 detik=417 migrasi=0 cek_ok_migrasi=0 jaringan=client | scripterr=0 | beda=0
+f2_b2.c3:  | scripterr=0 | beda=0
+== B3 4P c2 keluar pilih elemen
+f2_b3.host: SELESAI MENANG peran=host giliran=19 cek_ok=13 cek_gagal=0 kartu_beda=0 detik=425 migrasi=0 cek_ok_migrasi=0 jaringan=host | scripterr=0 | beda=0
+f2_b3.c1: SELESAI MENANG peran=client giliran=18 cek_ok=0 cek_gagal=0 kartu_beda=0 detik=418 migrasi=0 cek_ok_migrasi=0 jaringan=client | scripterr=0 | beda=0
+f2_b3.c2:  | scripterr=0 | beda=0
+f2_b3.c3: SELESAI MENANG peran=client giliran=18 cek_ok=0 cek_gagal=0 kartu_beda=0 detik=418 migrasi=0 cek_ok_migrasi=0 jaringan=client | scripterr=0 | beda=0
+== B4 4P host keluar g8 (lanjut sendiri)
+f2_b4.host:  | scripterr=0 | beda=0
+f2_b4.c1: SELESAI LANJUT_SETELAH_HOST_KELUAR peran=client giliran=20 cek_ok=0 cek_gagal=0 kartu_beda=0 detik=314 migrasi=1 cek_ok_migrasi=0 jaringan= | scripterr=0 | beda=0
+f2_b4.c2: SELESAI LANJUT_SETELAH_HOST_KELUAR peran=client giliran=20 cek_ok=0 cek_gagal=0 kartu_beda=0 detik=305 migrasi=1 cek_ok_migrasi=0 jaringan= | scripterr=0 | beda=0
+f2_b4.c3: SELESAI LANJUT_SETELAH_HOST_KELUAR peran=client giliran=20 cek_ok=0 cek_gagal=0 kartu_beda=0 detik=291 migrasi=1 cek_ok_migrasi=0 jaringan= | scripterr=0 | beda=0
+== A0 1v1 (+kartu)
+f2_a0.host: SELESAI BATAS_GILIRAN peran=host giliran=31 cek_ok=16 cek_gagal=0 kartu_beda=0 detik=557 migrasi=0 cek_ok_migrasi=0 jaringan=host | scripterr=0 | beda=0
+f2_a0.c1: SELESAI HOST_SELESAI peran=client giliran=23 cek_ok=0 cek_gagal=0 kartu_beda=0 detik=556 migrasi=0 cek_ok_migrasi=0 jaringan=client | scripterr=0 | beda=0
+== A1 2P+1AI (+kartu)
+f2_a1.host: SELESAI MENANG peran=host giliran=9 cek_ok=4 cek_gagal=0 kartu_beda=0 detik=245 migrasi=0 cek_ok_migrasi=0 jaringan=host | scripterr=0 | beda=0
+f2_a1.c1: SELESAI MENANG peran=client giliran=9 cek_ok=0 cek_gagal=0 kartu_beda=0 detik=239 migrasi=0 cek_ok_migrasi=0 jaringan=client | scripterr=0 | beda=0
+== A2 2P+2AI (+kartu)
+f2_a2.host: SELESAI BATAS_GILIRAN peran=host giliran=31 cek_ok=9 cek_gagal=0 kartu_beda=0 detik=718 migrasi=0 cek_ok_migrasi=0 jaringan=host | scripterr=0 | beda=0
+f2_a2.c1: SELESAI HOST_SELESAI peran=client giliran=27 cek_ok=0 cek_gagal=0 kartu_beda=0 detik=718 migrasi=0 cek_ok_migrasi=0 jaringan=client | scripterr=0 | beda=0
+== A3 3P (+kartu)
+f2_a3.host: SELESAI MENANG peran=host giliran=13 cek_ok=16 cek_gagal=0 kartu_beda=0 detik=246 migrasi=0 cek_ok_migrasi=0 jaringan=host | scripterr=0 | beda=0
+f2_a3.c1: SELESAI MENANG peran=client giliran=12 cek_ok=0 cek_gagal=0 kartu_beda=0 detik=240 migrasi=0 cek_ok_migrasi=0 jaringan=client | scripterr=0 | beda=0
+f2_a3.c2: SELESAI MENANG peran=client giliran=12 cek_ok=0 cek_gagal=0 kartu_beda=0 detik=240 migrasi=0 cek_ok_migrasi=0 jaringan=client | scripterr=0 | beda=0
+== A4 3P+1AI (+kartu)
+f2_a4.host: SELESAI MENANG peran=host giliran=21 cek_ok=16 cek_gagal=0 kartu_beda=0 detik=454 migrasi=0 cek_ok_migrasi=0 jaringan=host | scripterr=0 | beda=0
+f2_a4.c1: SELESAI MENANG peran=client giliran=19 cek_ok=0 cek_gagal=0 kartu_beda=0 detik=448 migrasi=0 cek_ok_migrasi=0 jaringan=client | scripterr=0 | beda=0
+f2_a4.c2: SELESAI MENANG peran=client giliran=19 cek_ok=0 cek_gagal=0 kartu_beda=0 detik=448 migrasi=0 cek_ok_migrasi=0 jaringan=client | scripterr=0 | beda=0
+== A5 3P+1AI pantai
+f2_a5.host: SELESAI BATAS_GILIRAN peran=host giliran=31 cek_ok=14 cek_gagal=0 kartu_beda=0 detik=654 migrasi=0 cek_ok_migrasi=0 jaringan=host | scripterr=0 | beda=0
+f2_a5.c1: SELESAI HOST_SELESAI peran=client giliran=29 cek_ok=0 cek_gagal=0 kartu_beda=0 detik=654 migrasi=0 cek_ok_migrasi=0 jaringan=client | scripterr=0 | beda=0
+f2_a5.c2: SELESAI HOST_SELESAI peran=client giliran=29 cek_ok=0 cek_gagal=0 kartu_beda=0 detik=654 migrasi=0 cek_ok_migrasi=0 jaringan=client | scripterr=0 | beda=0
+== Q5 4P migrasi host g8
+f2_q5.host:  | scripterr=0 | beda=0
+f2_q5.c1: SELESAI MENANG peran=client giliran=10 cek_ok=2 cek_gagal=0 kartu_beda=0 detik=195 migrasi=1 cek_ok_migrasi=2 jaringan=host | scripterr=0 | beda=0
+f2_q5.c2: SELESAI MENANG peran=client giliran=10 cek_ok=0 cek_gagal=0 kartu_beda=0 detik=189 migrasi=1 cek_ok_migrasi=0 jaringan=client | scripterr=0 | beda=0
+f2_q5.c3: SELESAI MENANG peran=client giliran=10 cek_ok=0 cek_gagal=0 kartu_beda=0 detik=189 migrasi=1 cek_ok_migrasi=0 jaringan=client | scripterr=0 | beda=0
+== Q6 3P+1AI (+kartu)
+f2_q6.host: SELESAI MENANG peran=host giliran=20 cek_ok=16 cek_gagal=0 kartu_beda=0 detik=460 migrasi=0 cek_ok_migrasi=0 jaringan=host | scripterr=0 | beda=0
+f2_q6.c1: SELESAI MENANG peran=client giliran=19 cek_ok=0 cek_gagal=0 kartu_beda=0 detik=454 migrasi=0 cek_ok_migrasi=0 jaringan=client | scripterr=0 | beda=0
+f2_q6.c2: SELESAI MENANG peran=client giliran=19 cek_ok=0 cek_gagal=0 kartu_beda=0 detik=454 migrasi=0 cek_ok_migrasi=0 jaringan=client | scripterr=0 | beda=0
+== Q7 3P client keluar g8
+f2_q7.host: SELESAI MENANG peran=host giliran=15 cek_ok=8 cek_gagal=0 kartu_beda=0 detik=365 migrasi=0 cek_ok_migrasi=0 jaringan=host | scripterr=0 | beda=0
+f2_q7.c1: SELESAI MENANG peran=client giliran=15 cek_ok=0 cek_gagal=0 kartu_beda=0 detik=358 migrasi=0 cek_ok_migrasi=0 jaringan=client | scripterr=0 | beda=0
+f2_q7.c2:  | scripterr=0 | beda=0
+== Q8 3P+1AI hotspot P1 mati di giliran terakhir
+f2_q8.host: SELESAI MENANG peran=host giliran=20 cek_ok=8 cek_gagal=0 kartu_beda=0 detik=404 migrasi=1 cek_ok_migrasi=0 jaringan=host | scripterr=0 | beda=0
+f2_q8.c1: SELESAI MENANG peran=client giliran=18 cek_ok=0 cek_gagal=0 kartu_beda=0 detik=393 migrasi=1 cek_ok_migrasi=0 jaringan=client | scripterr=0 | beda=0
+f2_q8.c2: SELESAI MENANG peran=client giliran=18 cek_ok=0 cek_gagal=0 kartu_beda=0 detik=393 migrasi=1 cek_ok_migrasi=0 jaringan=client | scripterr=0 | beda=0
+== Q1n 1v1 alam (UJI mati)
+f2_q1n.host: SELESAI MENANG peran=host giliran=11 cek_ok=7 cek_gagal=0 kartu_beda=0 detik=222 migrasi=0 cek_ok_migrasi=0 jaringan=host | scripterr=0 | beda=0
+f2_q1n.c1: SELESAI MENANG peran=client giliran=11 cek_ok=0 cek_gagal=0 kartu_beda=0 detik=216 migrasi=0 cek_ok_migrasi=0 jaringan=client | scripterr=0 | beda=0
+== Q4n 4P pantai (UJI mati)
+f2_q4n.host: SELESAI MENANG peran=host giliran=20 cek_ok=12 cek_gagal=0 kartu_beda=0 detik=364 migrasi=0 cek_ok_migrasi=0 jaringan=host | scripterr=0 | beda=0
+f2_q4n.c1: SELESAI MENANG peran=client giliran=19 cek_ok=0 cek_gagal=0 kartu_beda=0 detik=357 migrasi=0 cek_ok_migrasi=0 jaringan=client | scripterr=0 | beda=0
+f2_q4n.c2: SELESAI MENANG peran=client giliran=19 cek_ok=0 cek_gagal=0 kartu_beda=0 detik=357 migrasi=0 cek_ok_migrasi=0 jaringan=client | scripterr=0 | beda=0
+f2_q4n.c3: SELESAI MENANG peran=client giliran=19 cek_ok=0 cek_gagal=0 kartu_beda=0 detik=357 migrasi=0 cek_ok_migrasi=0 jaringan=client | scripterr=0 | beda=0
+B_SELESAI

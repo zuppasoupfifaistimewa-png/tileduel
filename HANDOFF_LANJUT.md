@@ -1,8 +1,8 @@
-# HANDOFF -- lanjutkan proyek Tile Duel (Fase 4 Langkah B-f, tahap F6)
+# HANDOFF -- lanjutkan proyek Tile Duel (Fase 4 Langkah B-f, tahap F7)
 
 Dokumen ini ditulis 02-10-2026 supaya sesi Claude Code (cloud / web, tanpa CLI) mana pun bisa melanjutkan
-pekerjaan TANPA riwayat percakapan. BACA INI DULU, lalu `docs/RENCANA_fase4_role.md` bagian 14.19 & **14.21** (paling akhir).
-Diperbarui 02-10 (Opus, sesi Claude Code cloud): **F5 SELESAI, semua syarat P14 lolos di benih baru.**
+pekerjaan TANPA riwayat percakapan. BACA INI DULU, lalu `docs/RENCANA_fase4_role.md` bagian 14.19 & **14.21 + 14.22** (paling akhir).
+Diperbarui 02-10 (Sonnet, sesi Claude Code cloud): **F6 SELESAI** (angka final F5 sudah di `game/`, regresi lolos). Berikutnya F7.
 
 ## 0. Aturan tetap dari pemilik proyek (WAJIB)
 1. Balas dalam **Bahasa Indonesia saja**.
@@ -32,15 +32,16 @@ Diperbarui 02-10 (Opus, sesi Claude Code cloud): **F5 SELESAI, semua syarat P14 
 ## 1. Isi repo
 | Folder | Isi |
 |---|---|
-| `game/` | SET PRODUKSI resmi saat ini (semua .gd). F1-F4 sudah diterapkan (P13, K23, T19). **Angka final F5 BELUM diterapkan (tugas F6).** |
+| `game/` | SET PRODUKSI resmi saat ini (semua .gd). F1-F4 sudah diterapkan (P13, K23, T19). **Angka final F5 SUDAH diterapkan (F6, 02-10); `game/data_role.gd` & `ai_jebakan.gd` identik dengan rig.** |
 | `docs/` | `RENCANA_fase4_role.md` = sumber kebenaran tunggal (bagian 14.19 = rencana B-f; status F0-F4 di bagian paling bawah). Plus rencana fase lama & patokan. |
-| `rig/proj_tanpa_uji/` | Proyek Godot lengkap untuk rig simulasi (headless): produksi + `uji_*.gd/.tscn`. **Isinya = produksi + ANGKA FINAL F5 (r5)**, BUKAN produksi murni. Cache `.godot/` tidak di-git -> impor ulang dulu (bagian 4). |
+| `rig/proj_tanpa_uji/` | Proyek Godot lengkap untuk rig simulasi (headless): produksi + `uji_*.gd/.tscn`. **Setelah F6: = `game/` + uji** (diff hanya `pengelola_iklan.gd` stub + berkas `uji_*`). Cache `.godot/` tidak di-git -> impor ulang dulu (bagian 4). |
 | `rig/skrip/` | `f4/uji_seimbang.sh` (pelari), `f4/ringkas_seimbang.py` (ringkasan win-rate + CI), `f4/buat_tugas_u9.py` (pembuat S1-S5), `f4/cek_panggil.py`, `f5_analisa.py`, `f5_pasangan.py`, skrip batch regresi `batch_reg10.sh`, `uji_f2_t2_a/b.sh`, dll. |
 | `hasil/f4_u9_baseline_sebelum_tuning/` | Data S1 (1200, 2P) & S2 (400, 4P) SEBELUM penyetelan (S3 parsial 31 baris -- JANGAN dipakai). |
 | `hasil/f5_putaran/r1..r4/` | Hasil S1 tiap putaran penyetelan (r3 lengkap 1200; r4 + S2 4P). |
 | `hasil/f5_konfirmasi_b20000/` | KONFIRMASI angka final, benih baru 20000: S1-S5 (+ berkas `.tugas`). |
 | `hasil/f5_s4_tambahan/` | S4 tambahan 800 (benih 30000 & 40000) -- digabung dengan S4 benih 20000. |
-| `f5_kandidat/*.patch` | Selisih produksi -> ANGKA FINAL F5 (data_role.gd, ai_jebakan.gd). Panduan F6. |
+| `f5_kandidat/*.patch` | Selisih produksi lama -> ANGKA FINAL F5 (sudah diterapkan di F6). |
+| `hasil/f6_regresi/` | Hasil F6: ringkasan regresi MP 37 skenario, `batch_reg10`, `cek_nilai` 8/8. |
 
 ## 2. Status ringkas (rincian: RENCANA 14.21)
 - F0-F4 selesai. **F5 SELESAI 02-10 (Opus).** Semua syarat P14 lolos di benih BARU 20000:
@@ -58,10 +59,9 @@ Diperbarui 02-10 (Opus, sesi Claude Code cloud): **F5 SELESAI, semua syarat P14 
 - Kunci diagnosis: AI api dulu tidak pernah memakai jebakan petir melawan role petir (penilaian jebakan api terlalu
   tinggi), padahal petir tidak punya grounded. Dipantau: angin Lv1 ~55%, air Lv20 44.8%, api 4P ~21% (lolos, dekat batas).
 
-## 3. PENTING: rig != produksi
-`rig/proj_tanpa_uji/` memakai angka kandidat F5. `game/` memakai angka ASLI. Jangan menyalin angka kandidat ke `game/`
-sebelum lolos konfirmasi benih baru. `pengelola_iklan.gd` di rig sengaja beda (stub iklan untuk uji) -- jangan disalin ke `game/`.
-Setelah angka final disetujui: terapkan HANYA baris yang berubah ke `game/data_role.gd` & `game/ai_jebakan.gd` (aturan 0.2).
+## 3. rig vs produksi (setelah F6)
+`game/` dan rig kini memakai angka final F5. `pengelola_iklan.gd` di rig sengaja beda (stub iklan untuk uji) -- JANGAN disalin ke `game/`.
+Satu-satunya perbedaan lain: `rig/proj_tanpa_uji/uji_nyata.gd` (rig-only) harapan `cek_nilai` sudah 390/130/324.
 
 ## 4. Cara menjalankan rig (headless)
 1. Perlu Godot **4.7.1-stable linux x86_64**. Unduh dari GitHub releases (`godotengine/godot-builds`, tag `4.7.1-stable`) ke
@@ -83,12 +83,15 @@ Setelah angka final disetujui: terapkan HANYA baris yang berubah ke `game/data_r
    Skrip MP (`uji_f2_t2_a/b.sh`, LocalPlay.tscn) TIDAK boleh jalan paralel (port tetap) -- jalankan berurutan.
 
 ## 5. Langkah berikutnya
-- **F6 (Sonnet) -- BERIKUTNYA:** terapkan HANYA baris angka final (bagian 2) ke `game/data_role.gd` & `game/ai_jebakan.gd`
-  (aturan 0.2; panduan = `f5_kandidat/*.patch`; JANGAN salin `pengelola_iklan.gd` rig). Perbarui 3 harapan `cek_nilai` di
-  `rig/proj_tanpa_uji/uji_nyata.gd` ke angka final (lihat RENCANA 14.21) -> `cek_nilai=1` 8/8. Lalu rig = produksi + uji
-  (diff `game/` vs rig hanya `pengelola_iklan.gd`). Regresi MP 37 skenario WAJIB (`uji_f2_t2_a/b.sh`, BERURUTAN, port tetap)
-  karena ai_jebakan.gd berubah; `batch_reg10.sh`; U11.
-- **F7:** grep counter/debug sementara = 0; sinkron rig; diff bersih. **F8:** kirim 29 .gd resmi + RENCANA = 30 file (satu ZIP).
+- **F6 SELESAI (Sonnet, 02-10):** 8 angka final diterapkan ke `game/` (commit 0785152); `cek_nilai=1` 8/8 (390/130/324);
+  regresi MP 37/37 skenario (97 baris SELESAI, 0 MACET/scripterr/beda/cek_gagal); `batch_reg10` 0 gagal; U11 OK.
+  Catatan: `uji_tanah2` memberi 2 SCRIPT ERROR -- uji lama dgn node tiruan tanpa `_angka_jebakan`, SUDAH ADA sebelum F6
+  (`jebakan_tanah.gd` tidak berubah), bukan bug produksi. Rincian: RENCANA 14.22, data: `hasil/f6_regresi/`.
+- **F7 (Sonnet) -- BERIKUTNYA:** grep counter/debug sementara = 0 di `game/`; sinkron rig (diff `game/` vs rig hanya
+  `pengelola_iklan.gd`); diff bersih. Opsional: perbaiki `uji_tanah2.gd` (rig-only) supaya node tiruan punya `_angka_jebakan`.
+- **F8:** kirim 29 .gd resmi + RENCANA = 30 file (satu ZIP) -> siap uji HP pemilik (RENCANA bagian 10 Langkah B).
+- Cara regresi MP di sesi cloud: salin `rig/skrip/jalankan_mp3.sh`, `uji_f2_t2_a/b.sh` ke scratchpad, ganti path
+  (`SP`, `G=/opt/godot/...`, `PROJ=rig/proj_tanpa_uji`); jalankan A lalu B BERURUTAN (~1 jam total di 4 inti).
 
 ## 6. Konteks pengguna
 Akun Claude Pro berakhir pekan ini; pengguna mungkin lanjut dengan akun Free + kredit sesi cloud (khusus Claude Code cloud, via browser).

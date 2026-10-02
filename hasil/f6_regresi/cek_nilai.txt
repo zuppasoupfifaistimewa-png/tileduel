@@ -1,0 +1,1 @@
+cek_nilai=1 (rig, angka final F5): total=8 ok=8 gagal=0 (390 / 130 / 324)

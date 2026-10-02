@@ -2044,3 +2044,19 @@ r4 47.3/55.8/47.7/49.6/49.6, 2.14 (api>petir 42.5%, semua syarat lolos). S2 r4 (
 8/8; regresi MP 37 skenario WAJIB (ai_jebakan.gd berubah); `batch_reg10.sh`; U11. Lalu F7 (grep debug = 0, sinkron
 rig, diff bersih) & F8 (ZIP 29 .gd + RENCANA).
 
+### 14.22 F6 SELESAI -- angka final diterapkan ke produksi + verifikasi (Sonnet, 02-10)
+
+**STATUS: F6 SELESAI.** `game/data_role.gd` & `game/ai_jebakan.gd` kini memuat 8 angka final 14.21 (hanya 8 baris berubah,
+diterapkan lewat `f5_kandidat/*.patch`, hasil identik byte-per-byte dengan rig). Commit 0785152.
+- `cek_nilai=1`: 3 harapan diperbarui (dihitung tangan, independen dari kode): api hot_flames3+long_burn2 vs heat_skin1 =
+  130x4x0,75 = **390** (dulu 270); angin homing_wind2 uang1000 = 0,10x1000x1,3 = **130** (dulu 150); Phoenix = 90x3x1,2 = **324**
+  (dulu 315). Hasil 8/8 OK.
+- Regresi MP U4 (`uji_f2_t2_a/b.sh`, berurutan): **37/37 skenario, 97 baris SELESAI** (F3: 96; satu baris lebih, tidak ada
+  indikasi masalah), 0 MACET, 0 scripterr, 0 beda, 0 cek_gagal, baris AKHIR sama di semua HP.
+- `batch_reg10.sh`: 9 uji 0 gagal. Berkas acuan `rng_r4_*` tidak ada di repo -> pembandingan RNG air/angin tidak bisa dilakukan
+  (bukan kegagalan). `uji_tanah2`: 2 SCRIPT ERROR di `jebakan_tanah.gd:87` karena uji lama memanggil dgn node tiruan tanpa
+  `_angka_jebakan` -- SUDAH ADA sebelum F6 (file tidak berubah sejak impor), bukan bug produksi.
+- U11 (`uji_tayang_role.tscn`) selesai tanpa SCRIPT ERROR.
+- TIDAK diulang: U9 S1-S5 (angka final sudah dikonfirmasi di benih baru 14.21), foto U7/U5/U6 (tidak ada jalur yang berubah selain
+  konstanta angka). Data: `hasil/f6_regresi/`.
+- Berikutnya: F7 (grep debug = 0, sinkron rig, diff bersih), F8 (ZIP 29 .gd + RENCANA).

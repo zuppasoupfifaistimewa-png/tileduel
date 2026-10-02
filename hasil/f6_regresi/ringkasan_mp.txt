@@ -1,0 +1,38 @@
+baris SELESAI: 97  MACET: 0  scripterr>0: 0  beda>0: 0  cek_gagal>0: 0
+f2_a0: AKHIR=0 berbeda=0 OK | 
+f2_a1: AKHIR=2 berbeda=1 OK | penghargaan": ["lucky_roller"] penghargaan": ["trap_master"] penghargaan": ["duel_king", "landlord"] 
+f2_a2: AKHIR=0 berbeda=0 OK | 
+f2_a3: AKHIR=3 berbeda=1 OK | penghargaan": ["trap_master", "landlord", "lucky_roller"] penghargaan": [] penghargaan": [] 
+f2_a4: AKHIR=3 berbeda=1 OK | penghargaan": ["trap_master", "landlord", "lucky_roller"] penghargaan": [] penghargaan": ["duel_king", "landlord"] penghargaan": ["landlord"] 
+f2_a5: AKHIR=0 berbeda=0 OK | 
+f2_a6: AKHIR=0 berbeda=0 OK | 
+f2_b0: AKHIR=4 berbeda=1 OK | penghargaan": ["landlord"] penghargaan": ["trap_master"] penghargaan": [] penghargaan": ["lucky_roller"] 
+f2_b1: AKHIR=0 berbeda=0 OK | 
+f2_b2: AKHIR=0 berbeda=0 OK | 
+f2_b3: AKHIR=3 berbeda=1 OK | penghargaan": ["duel_king", "lucky_roller"] penghargaan": [] penghargaan": ["trap_master", "landlord"] penghargaan": ["duel_king", "landlord"] 
+f2_b4: AKHIR=0 berbeda=0 OK | 
+f2_d1: AKHIR=0 berbeda=0 OK | 
+f2_d2: AKHIR=0 berbeda=0 OK | 
+f2_d3: AKHIR=0 berbeda=0 OK | 
+f2_d4: AKHIR=0 berbeda=0 OK | 
+f2_m1: AKHIR=0 berbeda=0 OK | 
+f2_m2: AKHIR=0 berbeda=0 OK | 
+f2_m3: AKHIR=0 berbeda=0 OK | 
+f2_m4: AKHIR=2 berbeda=1 OK | penghargaan": [] penghargaan": ["duel_king", "lucky_roller"] penghargaan": ["trap_master", "landlord"] penghargaan": ["duel_king", "landlord"] 
+f2_m5: AKHIR=0 berbeda=0 OK | 
+f2_m6: AKHIR=2 berbeda=1 OK | penghargaan": ["lucky_roller"] penghargaan": [] penghargaan": ["trap_master", "landlord"] penghargaan": ["duel_king"] 
+f2_m7: AKHIR=0 berbeda=0 OK | 
+f2_m8: AKHIR=0 berbeda=0 OK | 
+f2_q1: AKHIR=2 berbeda=1 OK | penghargaan": ["lucky_roller"] penghargaan": ["trap_master", "landlord"] 
+f2_q1n: AKHIR=2 berbeda=1 OK | penghargaan": ["trap_master", "lucky_roller"] penghargaan": ["landlord"] 
+f2_q2: AKHIR=2 berbeda=1 OK | penghargaan": ["duel_king", "landlord"] penghargaan": ["trap_master", "landlord"] penghargaan": ["lucky_roller"] 
+f2_q3: AKHIR=3 berbeda=1 OK | penghargaan": ["trap_master", "landlord", "lucky_roller"] penghargaan": [] penghargaan": ["landlord"] 
+f2_q4: AKHIR=4 berbeda=1 OK | penghargaan": ["duel_king", "landlord"] penghargaan": ["duel_king", "lucky_roller"] penghargaan": ["trap_master"] penghargaan": [] 
+f2_q4n: AKHIR=4 berbeda=1 OK | penghargaan": ["landlord", "lucky_roller"] penghargaan": [] penghargaan": [] penghargaan": ["trap_master"] 
+f2_q5: AKHIR=3 berbeda=1 OK | penghargaan": ["lucky_roller"] penghargaan": [] penghargaan": ["trap_master", "landlord"] penghargaan": [] 
+f2_q6: AKHIR=3 berbeda=1 OK | penghargaan": ["duel_king", "trap_master", "landlord"] penghargaan": ["duel_king", "lucky_roller"] penghargaan": [] penghargaan": [] 
+f2_q7: AKHIR=2 berbeda=1 OK | penghargaan": ["duel_king"] penghargaan": ["trap_master", "landlord", "lucky_roller"] penghargaan": [] 
+f2_q8: AKHIR=3 berbeda=1 OK | penghargaan": ["trap_master", "lucky_roller"] penghargaan": ["landlord"] penghargaan": ["duel_king"] penghargaan": [] 
+f2_s1: AKHIR=0 berbeda=0 OK | 
+f2_s2: AKHIR=0 berbeda=0 OK | 
+f2_s3: AKHIR=1 berbeda=1 OK | penghargaan": ["duel_king", "trap_master", "landlord", "lucky_roller"] penghargaan": [] penghargaan": [] 

@@ -1,0 +1,17 @@
+== reg10_uji_cabang_solo.log
+== reg10_uji_kamera_hud_solo.log
+UJI SOLO KAMERA/HUD SELESAI -- gagal: 0
+== reg10_uji_kartu.log
+UJI KARTU SELESAI -- gagal: 0
+== reg10_uji_koin.log
+UJI SELESAI -- total gagal: 0
+== reg10_uji_pedang.log
+== reg10_uji_pedang_tonton.log
+UJI PEDANG TONTON SELESAI -- gagal: 0
+== reg10_uji_solo.log
+UJI SOLO SELESAI -- gagal: 0
+== reg10_uji_takeover.log
+UJI TAKEOVER/SOLO SELESAI -- gagal: 0
+== reg10_uji_tanah2.log
+SCRIPT ERROR: Invalid call. Nonexistent function '_angka_jebakan' in base 'Node3D (uji_tanah2.gd)'.
+SCRIPT ERROR: Invalid call. Nonexistent function '_angka_jebakan' in base 'Node3D (uji_tanah2.gd)'.
