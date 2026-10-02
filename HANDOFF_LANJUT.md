@@ -14,6 +14,12 @@ pekerjaan TANPA riwayat percakapan. BACA INI DULU, lalu `docs/RENCANA_fase4_role
    sekaligus (satu ZIP) dan minta unduhan lama dibuang.
 5. Proyek: game papan 3D Godot 4.7.1 (GDScript) "Tile Duel", sudah rilis di Google Play. Aturan P1: fungsi
    `ai_*.gd` hanya BACA state (tanpa efek samping stat). RNG game HARUS lewat `mesin_acak` (bukan `randi()`).
+6. (02-10) Di AKHIR TIAP TAHAP (tiap putaran F5 selesai dianalisis, tiap fase F6/F7/F8, dst.): perbarui
+   HANDOFF_LANJUT.md (status + langkah berikutnya) dan push ke GitHub (branch `claude/new-session-e4ogqo`),
+   bersama data hasil tahap itu. Pekerjaan tidak boleh hanya ada di satu sesi/container.
+7. (02-10) JANGAN jalankan dua rantai simulasi bersamaan, dan JANGAN ubah file apa pun di `rig/` (terutama
+   `rig/proj_tanpa_uji/*.gd`) selama simulasi masih berjalan. Cek `pgrep -f Godot_v4` kosong dulu sebelum
+   mengubah angka atau memulai rantai baru.
 
 ## 1. Isi repo
 | Folder | Isi |
