@@ -1,7 +1,7 @@
 # RENCANA FASE 5: Seru dalam pertandingan
 
 Disusun Opus, 02-10-2026 (sesi Claude Code cloud), setelah membaca kode `game/` (hasil Fase 4 = isi ZIP b9).
-**STATUS: DISETUJUI 02-10 -- pemilik: "setuju semua a" (K1-K10 = a). Rencana DIKUNCI. G0-G4 SELESAI (lihat bagian 9). Berikutnya: G5 putar ulang rolet (Sonnet).**
+**STATUS: DISETUJUI 02-10 -- pemilik: "setuju semua a" (K1-K10 = a). Rencana DIKUNCI. G0-G5 SELESAI (lihat bagian 9). Berikutnya: G6 tombol AI cepat (Sonnet).**
 
 Sumber isi: dokumen "Rancangan Tile Duel: Retensi, Monetisasi & Role Elemen" (Fase 5 = Tebak Duel, event papan,
 bounty, bantuan posisi terakhir, animasi cepat; syarat lolos "semua HP melihat event yang sama") +
@@ -219,6 +219,7 @@ pernah di tengah giliran multiplayer).
   Catatan G8: bounty & kartu bantuan hampir tak muncul di Quick (lihat HANDOFF) -> K3/K4/K5 mungkin perlu disetel Opus.
 - 02-10 (Sonnet): **G4 SELESAI** (Tebak Duel solo + MP; stat `tebak_benar`; bukti `hasil/g4_tebak/`: robot penonton menebak, stat identik di semua device, "Too late!" teruji, migrasi saat duel bersih; S1 100 G3==G4).
   Hadiah profil = G7 (belum). Jendela tebak solo ~2,5 dtk KETAT -- disetel di uji HP. Berikutnya G5.
+- 02-10 (Sonnet): **G5 SELESAI** (putar ulang rolet solo; `hasil/g5_putar_ulang/`: 8/8 putar ulang cek OK, sekali per pertandingan, NO THANKS/iklan gagal -> boleh ditawari lagi, MP tak terpengaruh, S1 100 G4==G5). Berikutnya G6 (tombol AI cepat).
 - 02-10 (Opus): draf ditulis.
 - 02-10: pemilik menyetujui K1-K10 = a. Rencana dikunci. Berikutnya G0 (Sonnet, sesi baru): refactor `denda_petak()`/
   `harga_beli_*()`/`ronde_event` tanpa perubahan perilaku -> bukti identik di rig (bagian 5).

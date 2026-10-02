@@ -213,12 +213,17 @@ static func tandai_menunggu_lawan(panel: CanvasLayer, teks: String) -> void:
 # FASE 1: TAWARAN IKLAN BERHADIAH SAAT HUTANG (solo)
 # Mengembalikan true kalau pemain memilih menonton iklan.
 # ========================================================
-static func tanya_iklan_hutang(main_node: Node) -> bool:
+static func tanya_putar_ulang(main_node: Node) -> bool:
+	# Fase 5 G5: tawaran putar ulang rolet setelah kalah duel solo (iklan berhadiah).
+	# Latar lebih tipis supaya skor duel di belakangnya tetap terbaca.
+	return await tanya_iklan_hutang(main_node, "SO CLOSE!", Color(0.5, 0.9, 1.0), "Watch an ad to spin your wheel again?", "WATCH AD: SPIN AGAIN", 0.6)
+
+static func tanya_iklan_hutang(main_node: Node, teks_judul: String = "IN DEBT!", warna_judul: Color = Color(1.0, 0.6, 0.3), teks_ket: String = "Watch an ad to get +300 coins?", teks_ya: String = "WATCH AD: +300 COINS", gelap: float = 0.85) -> bool:
 	var canvas = CanvasLayer.new()
 	canvas.layer = 107
 
 	var bg = ColorRect.new()
-	bg.color = Color(0, 0, 0, 0.85)
+	bg.color = Color(0, 0, 0, gelap)
 	bg.set_anchors_preset(Control.PRESET_FULL_RECT)
 	canvas.add_child(bg)
 
@@ -230,23 +235,23 @@ static func tanya_iklan_hutang(main_node: Node) -> bool:
 	canvas.add_child(vbox)
 
 	var judul = Label.new()
-	judul.text = "IN DEBT!"
+	judul.text = teks_judul
 	judul.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	judul.add_theme_font_size_override("font_size", 44)
-	judul.add_theme_color_override("font_color", Color(1.0, 0.6, 0.3))
+	judul.add_theme_color_override("font_color", warna_judul)
 	judul.add_theme_color_override("font_outline_color", Color.BLACK)
 	judul.add_theme_constant_override("outline_size", 8)
 	vbox.add_child(judul)
 
 	var ket = Label.new()
-	ket.text = "Watch an ad to get +300 coins?"
+	ket.text = teks_ket
 	ket.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	ket.add_theme_font_size_override("font_size", 24)
 	vbox.add_child(ket)
 
 	var hasil = [null]
 	var btn_ya = Button.new()
-	btn_ya.text = "WATCH AD: +300 COINS"
+	btn_ya.text = teks_ya
 	btn_ya.custom_minimum_size = Vector2(350, 64)
 	btn_ya.add_theme_font_size_override("font_size", 22)
 	_gaya_tombol(btn_ya, Color(0.75, 0.55, 0.1))

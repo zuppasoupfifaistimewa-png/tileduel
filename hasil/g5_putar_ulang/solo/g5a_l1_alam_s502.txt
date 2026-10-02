@@ -1,0 +1,7 @@
+PUTAR_ULANG_TAWAR ke=1 skor_p=4 skor_m=6
+PUTAR_ULANG klik ke-1 (WATCH AD)
+PUTAR_ULANG_BARU skor_baru=7 skor_m=6
+PUTAR_ULANG_CEK skor_baru=7 skor_m=6 menang_slot=0 putar_ulang_stat=1 cek=OK
+SEIMBANG peta=alam seed=502 quick=0 roles=api,tanah pemenang=1 cara=batas_kaya giliran=61 detik=1018.6 pasang=3,13 kena=3,4 kaya=3450,6628 rinci=2/598/3/1/0/9,8/0/1/3/1/0 presets=- sacred=0 xprole0=-1
+PUTAR_ULANG_RINGKAS tawaran=1 klik=1 cek_ok=1 cek_gagal=0 stat_putar_ulang=1
+SIM BATAS_GILIRAN giliran=61 detik=1019

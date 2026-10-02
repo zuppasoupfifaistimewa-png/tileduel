@@ -49,6 +49,8 @@ func _ready():
 		ui_elemen.koin_lokal_dikunci.connect(_saat_koin_seri_lokal_dipilih)
 	ui_elemen.paksa_seri = UJI_SERI
 	ui_elemen.tebakan_dipilih.connect(_saat_tebakan_dipilih) # Fase 5 G4
+	if StatusJaringan.peran_multiplayer == "":
+		ui_elemen.penawar_putar_ulang = _tawarkan_putar_ulang # Fase 5 G5: hanya solo
 
 	anim_pemain.play("idle")
 	anim_musuh.play("idle")
@@ -1718,6 +1720,7 @@ func _siapkan_peta_dan_mulai(pilihan_peta: String, jumlah_ai: int = 1, quick: bo
 	bounty_terakhir = ""
 	_ronde_spanduk = -1
 	_iklan_hutang_terpakai = false
+	_putar_ulang_terpakai = false
 
 	if StatusJaringan.peran_multiplayer == "":
 		# Solo: 1 pemain manusia (slot 0) + 1-3 lawan AI, dipilih di menu SINGLE PLAYER.

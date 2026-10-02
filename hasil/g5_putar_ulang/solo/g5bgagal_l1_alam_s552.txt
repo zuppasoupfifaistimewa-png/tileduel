@@ -1,0 +1,3 @@
+SEIMBANG peta=alam seed=552 quick=0 roles=api,angin pemenang=0 cara=start giliran=33 detik=626.6 pasang=1,4 kena=1,3 kaya=5202,3545 rinci=0/85/5/0/0/4,0/0/0/5/0/0 presets=- sacred=0 xprole0=-1
+PUTAR_ULANG_RINGKAS tawaran=0 klik=0 cek_ok=0 cek_gagal=0 stat_putar_ulang=0
+SIM MENANG giliran=33 detik=627

@@ -1,0 +1,19 @@
+PUTAR_ULANG_TAWAR ke=1 skor_p=7 skor_m=9
+PUTAR_ULANG klik ke-1 (NO THANKS)
+PUTAR_ULANG_TAWAR ke=2 skor_p=9 skor_m=11
+PUTAR_ULANG klik ke-2 (NO THANKS)
+PUTAR_ULANG_TAWAR ke=3 skor_p=4 skor_m=7
+PUTAR_ULANG klik ke-3 (NO THANKS)
+PUTAR_ULANG_TAWAR ke=4 skor_p=3 skor_m=9
+PUTAR_ULANG klik ke-4 (NO THANKS)
+PUTAR_ULANG_TAWAR ke=5 skor_p=7 skor_m=10
+PUTAR_ULANG klik ke-5 (NO THANKS)
+PUTAR_ULANG_TAWAR ke=6 skor_p=7 skor_m=9
+PUTAR_ULANG klik ke-6 (NO THANKS)
+PUTAR_ULANG_TAWAR ke=7 skor_p=4 skor_m=7
+PUTAR_ULANG klik ke-7 (NO THANKS)
+PUTAR_ULANG_TAWAR ke=8 skor_p=4 skor_m=7
+PUTAR_ULANG klik ke-8 (NO THANKS)
+SEIMBANG peta=alam seed=512 quick=0 roles=api,tanah pemenang=1 cara=batas_kaya giliran=71 detik=1516.3 pasang=3,11 kena=3,8 kaya=3274,9300 rinci=0/373/4/9/4/8,10/0/9/4/3/0 presets=- sacred=0 xprole0=-1
+PUTAR_ULANG_RINGKAS tawaran=8 klik=8 cek_ok=0 cek_gagal=0 stat_putar_ulang=0
+SIM BATAS_GILIRAN giliran=71 detik=1516

@@ -49,6 +49,9 @@ var mode_tonton: bool = false
 # tebak_sisi = tebakan device ini di duel yang sedang tampil: "pemain" / "musuh" /
 # "" (belum menebak, atau tebakannya ditolak host). Dipakai pengumuman akhir duel.
 var tebak_sisi: String = ""
+# Fase 5 G5: diisi pemain.gd HANYA di solo (kosong di multiplayer). Dipanggil di duel
+# manusia vs AI saat pemain KALAH skor: await-nya mengembalikan true = putar ulang rolet pemain.
+var penawar_putar_ulang: Callable
 var tombol_tebak_p: Button
 var tombol_tebak_m: Button
 var teks_tebak: Label
@@ -980,6 +983,24 @@ func siapkan_tonton_pilih_elemen(judul_teks: String) -> void:
 	for btn in tombol_elemen.values(): btn.disabled = true
 	queue_redraw()
 
+func _teks_panel_pemain(nilai: int, bonus: int, siapa_penyerang, nyawa_kandang: int, bonus_pedang: int, skor: int) -> String:
+	# Panel rincian skor sisi pemain (dipakai jalankan_duel & putar ulang rolet, Fase 5 G5).
+	var teks = "[center][b]Wheel Number: " + str(nilai) + "[/b]\nElement Bonus: +" + str(bonus)
+	if siapa_penyerang == "musuh" and nyawa_kandang > 0: teks += "\nTile HP: +" + str(nyawa_kandang)
+	if siapa_penyerang == "pemain" and bonus_pedang > 0: teks += "\nCard Bonus: +" + str(bonus_pedang)
+	teks += "\n\n[color=yellow][b]TOTAL SCORE: " + str(skor) + "[/b][/color][/center]"
+	return teks
+
+func _animasi_rolet_pemain(nilai: int) -> void:
+	# Memutar rolet pemain sampai berhenti di "nilai" (jalankan_duel & putar ulang, Fase 5 G5).
+	var target_index_p = angka_p.find(nilai)
+	var sudut_per_potongan_p = TAU / float(angka_p.size())
+	var target_rad_p = -(target_index_p * sudut_per_potongan_p)
+	var total_rotasi_p = target_rad_p + deg_to_rad(rng.randf_range(-10.0, 10.0)) + (TAU * 5)
+	var tw_rolet_p = create_tween().set_trans(Tween.TRANS_QUART).set_ease(Tween.EASE_OUT)
+	tw_rolet_p.tween_property(self, "rotasi_rolet_p", total_rotasi_p, 3.5)
+	await tw_rolet_p.finished
+
 func jalankan_duel(siapa_penyerang, nyawa_kandang = 0, kamera_node = null, teks_dadu_node = null, bonus_pedang = 0, naskah: Dictionary = {}):
 	# Bagian B2: kalau "naskah" terisi, KEDUA pilihan elemen dan KEDUA angka
 	# rolet sudah ditentukan host -- device ini (host sendiri, atau client yang
@@ -1189,17 +1210,7 @@ func jalankan_duel(siapa_penyerang, nyawa_kandang = 0, kamera_node = null, teks_
 	# Kalau naskah terisi, angkanya sudah ditentukan host -- jangan diacak lagi.
 	var nilai_rolet_final_p = naskah["angka_p"] if not naskah.is_empty() else angka_p[rng.randi_range(0, angka_p.size() - 1)]
 	if not angka_seri.is_empty(): nilai_rolet_final_p = angka_seri[0]
-	var target_index_p = angka_p.find(nilai_rolet_final_p)
-	
-	var sudut_per_potongan_p = TAU / float(angka_p.size())
-	var target_rad_p = -(target_index_p * sudut_per_potongan_p)
-	
-	# Ganti randf_range
-	var total_rotasi_p = target_rad_p + deg_to_rad(rng.randf_range(-10.0, 10.0)) + (TAU * 5)
-	
-	var tw_rolet_p = create_tween().set_trans(Tween.TRANS_QUART).set_ease(Tween.EASE_OUT)
-	tw_rolet_p.tween_property(self, "rotasi_rolet_p", total_rotasi_p, 3.5)
-	await tw_rolet_p.finished
+	await _animasi_rolet_pemain(nilai_rolet_final_p)
 	await get_tree().create_timer(0.5).timeout
 
 	fase_duel = "ROLET_MUSUH"
@@ -1236,10 +1247,7 @@ func jalankan_duel(siapa_penyerang, nyawa_kandang = 0, kamera_node = null, teks_
 	var skor_akhir_m = nilai_rolet_final_m + bonus_musuh + (nyawa_kandang if siapa_penyerang == "pemain" else 0) + (bonus_pedang if siapa_penyerang == "musuh" else 0)
 	
 	# Pemasangan teks dinamis agar UI tidak berlubang (tanpa spasi kosong berlebih)
-	var teks_panel_p = "[center][b]Wheel Number: " + str(nilai_rolet_final_p) + "[/b]\nElement Bonus: +" + str(bonus_pemain)
-	if siapa_penyerang == "musuh" and nyawa_kandang > 0: teks_panel_p += "\nTile HP: +" + str(nyawa_kandang)
-	if siapa_penyerang == "pemain" and bonus_pedang > 0: teks_panel_p += "\nCard Bonus: +" + str(bonus_pedang)
-	teks_panel_p += "\n\n[color=yellow][b]TOTAL SCORE: " + str(skor_akhir_p) + "[/b][/color][/center]"
+	var teks_panel_p = _teks_panel_pemain(nilai_rolet_final_p, bonus_pemain, siapa_penyerang, nyawa_kandang, bonus_pedang, skor_akhir_p)
 	
 	var teks_panel_m = "[center][b]Wheel Number: " + str(nilai_rolet_final_m) + "[/b]\nElement Bonus: +" + str(bonus_musuh)
 	if siapa_penyerang == "pemain" and nyawa_kandang > 0: teks_panel_m += "\nTile HP: +" + str(nyawa_kandang)
@@ -1258,6 +1266,33 @@ func jalankan_duel(siapa_penyerang, nyawa_kandang = 0, kamera_node = null, teks_
 	tw_fade_rolet.tween_property(panel_m, "modulate:a", 1.0, 0.5)
 	
 	await get_tree().create_timer(3.0).timeout
+	
+	# Fase 5 G5: KALAH skor di duel solo (bukan lempar koin) -> tawaran putar ulang rolet pemain
+	# (iklan berhadiah, sekali per pertandingan). Elemen tetap; hanya rolet pemain diputar lagi,
+	# lalu skor dihitung ulang -- bisa menang, seri (lempar koin seperti biasa), atau tetap kalah.
+	if naskah.is_empty() and not mode_tonton and skor_akhir_p < skor_akhir_m and penawar_putar_ulang.is_valid():
+		if await penawar_putar_ulang.call():
+			fase_duel = "ROLET_PEMAIN"
+			panel_p.hide()
+			panel_m.hide()
+			teks_judul.text = "SPINNING AGAIN..."
+			teks_judul.modulate = Color.CYAN
+			alpha_rolet_p = 1.0
+			rotasi_rolet_p = 0.0
+			nilai_rolet_final_p = angka_p[rng.randi_range(0, angka_p.size() - 1)]
+			await _animasi_rolet_pemain(nilai_rolet_final_p)
+			await get_tree().create_timer(0.8).timeout
+			skor_akhir_p = nilai_rolet_final_p + bonus_pemain + (nyawa_kandang if siapa_penyerang == "musuh" else 0) + (bonus_pedang if siapa_penyerang == "pemain" else 0)
+			fase_duel = "RANGKUMAN"
+			alpha_rolet_p = 0.15
+			teks_judul.text = "NEW TOTAL SCORE: " + str(skor_akhir_p)
+			teks_judul.modulate = Color.YELLOW
+			teks_p.text = _teks_panel_pemain(nilai_rolet_final_p, bonus_pemain, siapa_penyerang, nyawa_kandang, bonus_pedang, skor_akhir_p)
+			panel_p.modulate.a = 1.0
+			panel_m.modulate.a = 1.0
+			panel_p.show()
+			panel_m.show()
+			await get_tree().create_timer(3.0).timeout
 	
 	fase_duel = "PENGUMUMAN_TRANSISI"
 	var tw_bersih = create_tween().set_parallel(true)

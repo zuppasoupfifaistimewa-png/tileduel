@@ -26,6 +26,19 @@ var _getar_aktif: bool = false
 var _bantuan_prev: Array = []   # Fase 5 G3: stat kartu_bantuan per slot (log KARTU_BANTUAN)
 # --- Fase 5 G4 (rig-only): tebak=1 -> robot penonton menebak tiap duel yang ditonton, lalu mencocokkan
 # stat tebak_benar & teks "Good guess!"/"Wrong guess." dengan pemenang duel yang sebenarnya (log TEBAK_*).
+# --- Fase 5 G5 (rig-only): iklan=1 (stub iklan tersedia) -> robot menanggapi tawaran "SPIN AGAIN" (kalah skor di duel solo).
+# putar_tolak=1 -> klik NO THANKS; iklan_gagal=1 -> stub: tersedia tapi gagal ditonton ("No ad right now.").
+var putar_tolak = false
+var iklan_gagal = false
+var _putar_tawar_prev = false
+var _putar_tawaran = 0
+var _putar_klik = 0
+var _putar_skor_m = -1            # skor musuh saat tawaran muncul (-1 = tidak ada putar ulang yang menunggu hasil)
+var _putar_skor_baru = -1
+var _putar_menang_prev: Array = []
+var _putar_gagal_teks = false
+var _putar_cek_ok = 0
+var _putar_cek_gagal = 0
 var tebak_uji = false
 var _tebak_sejak = -1.0
 var _tebak_n = 0
@@ -236,6 +249,8 @@ func _ready():
 		if a.begins_with("uang0="): uang0_uji = int(a.substr(6))
 		if a == "profil=1": cek_profil = true
 		if a == "tebak=1": tebak_uji = true # Fase 5 G4
+		if a == "putar_tolak=1": putar_tolak = true # Fase 5 G5
+		if a == "iklan_gagal=1": iklan_gagal = true # Fase 5 G5
 		if a == "semua_ai=1": semua_ai = true
 		if a.begins_with("role="): role_uji = Array(a.substr(5).split(","))
 		if a.begins_with("jenis="): jenis_uji = int(a.substr(6))
@@ -292,6 +307,7 @@ func _ready():
 	print("MENU panjang '%s' = %s; keterangan='%s'" % [nama_panjang, str(_klik_teks(nama_panjang)), menu.label_ket_mode.text])
 	if iklan_uji:
 		PengelolaIklan.uji_rewarded = true
+		PengelolaIklan.uji_tonton_gagal = iklan_gagal # Fase 5 G5
 	mode_quick_uji = (panjang_uji == "quick")
 	if awalan_foto != "":
 		for i in 10: await get_tree().process_frame
@@ -485,6 +501,8 @@ func _tulis_dan_keluar(alasan: String) -> void:
 		if p.get("_permainan_selesai") and not role_uji.is_empty():
 			xprole0 = int(ProfilPemain.xp_role.get(str(role_uji[0]), 0)) - _xprole0_awal
 		print("SEIMBANG peta=%s seed=%d quick=%d roles=%s pemenang=%d cara=%s giliran=%d detik=%.1f pasang=%s kena=%s kaya=%s rinci=%s presets=%s sacred=%d xprole0=%d" % [nama_peta, benih, int(p.mode_quick), ",".join(roles), pm, cara, jumlah_giliran, detik_total, ",".join(pasang), ",".join(kena), ",".join(kaya), ",".join(rinci), presets_teks, _hitung_sacred(), xprole0])
+	if iklan_uji:
+		print("PUTAR_ULANG_RINGKAS tawaran=%d klik=%d cek_ok=%d cek_gagal=%d stat_putar_ulang=%d" % [_putar_tawaran, _putar_klik, _putar_cek_ok, _putar_cek_gagal, int(p.statistik_slot[p.slot_lokal].get("putar_ulang", 0)) if p != null and p.statistik_slot.size() > p.slot_lokal else -1])
 	if tebak_uji:
 		var stat_tebak = p.statistik_slot[p.slot_lokal].get("tebak_benar", 0) if p != null and p.statistik_slot.size() > p.slot_lokal else -1
 		print("TEBAK_RINGKAS tebakan=%d benar=%d cek_ok=%d cek_gagal=%d stat_tebak_benar_slot%d=%d" % [_tebak_total, _tebak_benar_total, _tebak_cek_ok, _tebak_cek_gagal, p.slot_lokal if p != null else -1, int(stat_tebak)])
@@ -617,6 +635,8 @@ func _process(delta):
 		return
 	if tebak_uji:
 		_urus_tebak()
+	if iklan_uji:
+		_urus_putar_ulang()
 	var g_lama = jumlah_giliran
 	super(delta)
 	if jumlah_giliran != g_lama and jumlah_giliran % 20 == 0:
@@ -629,6 +649,53 @@ func _process(delta):
 			jejak.append("D|%.1f|%s" % [detik_total, sig])
 	if awalan_foto != "" and jumlah_giliran != g_lama and jumlah_giliran in [4, 9]:
 		_foto("giliran%d" % jumlah_giliran)
+
+func _skor_dari_teks(t: String) -> int:
+	var rx = RegEx.new()
+	rx.compile("TOTAL SCORE: (\\d+)")
+	var m = rx.search(t)
+	return int(m.get_string(1)) if m != null else -1
+
+func _urus_putar_ulang() -> void:
+	# Fase 5 G5 (rig-only): tawaran putar ulang rolet. Cek: (1) hanya muncul saat skor pemain < skor musuh,
+	# (2) paling banyak SEKALI per pertandingan kalau ditonton (ditolak/gagal boleh muncul lagi),
+	# (3) hasil duel sesuai skor baru (skor baru > musuh -> slot 0 menang; < -> kalah; sama -> koin, bebas).
+	var tawar = not _cari_label("SO CLOSE!").is_empty()
+	if tawar and not _putar_tawar_prev:
+		_putar_tawaran += 1
+		var sp = _skor_dari_teks(ui.teks_p.text)
+		var sm = _skor_dari_teks(ui.teks_m.text)
+		print("PUTAR_ULANG_TAWAR ke=%d skor_p=%d skor_m=%d%s" % [_putar_tawaran, sp, sm, "" if sp < sm else "  GAGAL: bukan kalah skor"])
+		if _putar_klik > 0 and not putar_tolak and not iklan_gagal:
+			print("PUTAR_ULANG GAGAL: ditawarkan lagi padahal sudah dipakai di pertandingan ini")
+		_putar_skor_m = sm
+		_putar_skor_baru = -1
+	_putar_tawar_prev = tawar
+	if tawar:
+		if _klik_teks("NO THANKS" if putar_tolak else "WATCH AD: SPIN AGAIN"):
+			_putar_klik += 1
+			print("PUTAR_ULANG klik ke-%d (%s)" % [_putar_klik, "NO THANKS" if putar_tolak else "WATCH AD"])
+	if iklan_gagal and ui.teks_bantuan.text == "No ad right now." and not _putar_gagal_teks:
+		_putar_gagal_teks = true
+		print("PUTAR_ULANG_GAGAL_TEKS '%s'" % ui.teks_bantuan.text)
+	elif ui.teks_bantuan.text != "No ad right now.":
+		_putar_gagal_teks = false
+	if ui.visible and ui.teks_judul.text.begins_with("NEW TOTAL SCORE: ") and _putar_skor_baru < 0:
+		_putar_skor_baru = int(ui.teks_judul.text.get_slice(": ", 1))
+		print("PUTAR_ULANG_BARU skor_baru=%d skor_m=%d" % [_putar_skor_baru, _putar_skor_m])
+	var menang_kini: Array = p.statistik_slot.map(func(st): return int(st.get("duel_menang", 0)))
+	if _putar_menang_prev.size() == menang_kini.size() and _putar_skor_m >= 0:
+		for s in range(menang_kini.size()):
+			if menang_kini[s] > _putar_menang_prev[s]:
+				if _putar_skor_baru >= 0 and _putar_skor_baru != _putar_skor_m:
+					var harap_slot0 = _putar_skor_baru > _putar_skor_m
+					var cek = ((s == p.slot_lokal) == harap_slot0)
+					if cek: _putar_cek_ok += 1
+					else: _putar_cek_gagal += 1
+					print("PUTAR_ULANG_CEK skor_baru=%d skor_m=%d menang_slot=%d putar_ulang_stat=%d cek=%s" % [_putar_skor_baru, _putar_skor_m, s, int(p.statistik_slot[p.slot_lokal].get("putar_ulang", 0)), "OK" if cek else "GAGAL"])
+				_putar_skor_m = -1
+				_putar_skor_baru = -1
+	_putar_menang_prev = menang_kini
 
 func _urus_tebak() -> void:
 	# Fase 5 G4 (rig-only): robot penonton. Menebak ~0.6 dtk setelah tombol muncul

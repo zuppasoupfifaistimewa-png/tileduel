@@ -32,6 +32,8 @@ var _nomor_duel: int = 0
 var _tebakan_duel: Dictionary = {}  # HOST/SOLO: slot penebak -> slot yang ditebak (duel ini)
 var _tebak_terbuka: bool = false    # HOST/SOLO: jendela tebakan masih terbuka
 var _tebak_nomor_lokal: int = -1    # device INI: nomor duel yang sedang bisa ditebak (-1 = tidak ada)
+# Fase 5 G5: putar ulang rolet setelah kalah duel solo (iklan berhadiah) -- sekali per pertandingan.
+var _putar_ulang_terpakai: bool = false
 # CLIENT: naik setiap kali device ini mengambil alih permainan karena host keluar.
 # Coroutine lama yang masih menunggu klik untuk dikirim ke host jadi tahu diri.
 var _generasi_jaringan: int = 0
@@ -702,6 +704,26 @@ func eksekusi_dadu_pertarungan(hasil_duel: Dictionary, slot_penyerang: int, slot
 		_hasil_duel_petak(slot_penyerang, slot_pembela, true)
 	else:
 		_hasil_duel_petak(slot_penyerang, slot_pembela, false, hasil_duel["poin_sisa"])
+
+func _tawarkan_putar_ulang() -> bool:
+	# Fase 5 G5. SOLO saja: dipanggil ui_elemen (penawar_putar_ulang) saat pemain manusia
+	# KALAH skor di duel lawan AI. true = iklan ditonton sampai habis -> ui_elemen memutar
+	# ulang rolet pemain. Pola _tawarkan_iklan_hutang; tanpa tawaran fungsi ini kembali
+	# tanpa menunggu satu frame pun (jejak uji tidak berubah kalau iklan tidak tersedia).
+	if StatusJaringan.peran_multiplayer != "" or _putar_ulang_terpakai or not PengelolaIklan.rewarded_tersedia():
+		return false
+	var mau = await UiDinamis.tanya_putar_ulang(self)
+	if not mau:
+		return false
+	var dapat = await PengelolaIklan.tonton_rewarded()
+	if not dapat:
+		ui_elemen.teks_bantuan.text = "No ad right now."
+		await get_tree().create_timer(1.5).timeout
+		ui_elemen.teks_bantuan.text = ""
+		return false
+	_putar_ulang_terpakai = true
+	_tambah_stat(slot_lokal, "putar_ulang")
+	return true
 
 func _selesaikan_tanah_setelah_duel(posisi: int) -> void:
 	# B-b bagian 4 (temuan 9): keputusan SESUNGGUHNYA soal jebakan tanah di petak

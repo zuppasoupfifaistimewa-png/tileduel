@@ -1,9 +1,9 @@
-# HANDOFF -- lanjutkan proyek Tile Duel (Fase 4 SELESAI; Fase 5: G0-G4 + getaran Earthquake SELESAI, G5 berikutnya)
+# HANDOFF -- lanjutkan proyek Tile Duel (Fase 4 SELESAI; Fase 5: G0-G5 + getaran Earthquake SELESAI, G6 berikutnya)
 
 Dokumen ini ditulis 02-10-2026 supaya sesi Claude Code (cloud / web, tanpa CLI) mana pun bisa melanjutkan
 pekerjaan TANPA riwayat percakapan. BACA INI DULU, lalu `docs/RENCANA_fase4_role.md` bagian 14.19 & **14.21-14.24** (paling akhir).
 Diperbarui 02-10 (Opus, sesi Claude Code cloud): **uji HP pemilik dengan `kiriman/TileDuel_FaseB_b9.zip` = "lancar" -> Fase 4 SELESAI** (RENCANA 14.24).
-Berikutnya: pemilik merilis A+B (daftar periksa di bagian 5). **Fase 5: rencana `docs/RENCANA_fase5_seru.md` DISETUJUI 02-10 (K1-K10 = a); G0-G4 + getaran Earthquake SELESAI (Sonnet, 02-10) -> berikutnya Sonnet mengerjakan G5 (putar ulang rolet, solo).**
+Berikutnya: pemilik merilis A+B (daftar periksa di bagian 5). **Fase 5: rencana `docs/RENCANA_fase5_seru.md` DISETUJUI 02-10 (K1-K10 = a); G0-G5 + getaran Earthquake SELESAI (Sonnet, 02-10) -> berikutnya Sonnet mengerjakan G6 (tombol AI cepat, solo), lalu G7 (profil: XP/Crowns tebak, kartu hadiah, stat seumur).**
 
 **Fase 5 G0 SELESAI (Sonnet, 02-10):** refactor `denda_petak()` / `harga_beli_tanah()` / `harga_beli_menara(lv)` / `ronde_event` di
 `pemain_dasar.gd` (+ semua pemakai di `ai_jebakan/ai_musuh/pemain/pemain_papan/pemain_tampilan`), `game/` & rig identik (34/35, kecuali stub iklan).
@@ -65,6 +65,20 @@ peserta (tumpuk di tengah layar tonton, "WHO WINS? TAP ONE!"); satu ketukan, tid
   (satu SCRIPT ERROR di `uji_takeover` karena Control tiruan tanpa `batal_tebak` -> dijaga `has_method`, 0 error), `IKLAN_KARTU cek=OK`.
 - Catatan teknis: solo dgn pemain manusia TIDAK deterministik antar-run kalau dijalankan paralel (beban CPU memengaruhi waktu); bukti "identik" hanya valid untuk run `semua_ai=1`.
   MP perlu build yang sama di semua HP (RPC baru: `rpc_kirim_tebakan`, `rpc_tebakan_diterima`, param baru `rpc_duel_dimulai`).
+
+**Fase 5 G5 SELESAI (Sonnet, 02-10): putar ulang rolet (solo, iklan berhadiah).** Di duel manusia vs AI (alur asli `ui_elemen.jalankan_duel`, bukan mode tonton/naskah), kalau skor pemain < skor musuh
+(KALAH skor; seri -> lempar koin biasa, tidak ditawari) muncul dialog "SO CLOSE! Watch an ad to spin your wheel again?" [WATCH AD: SPIN AGAIN] [NO THANKS]. Ditonton sampai habis -> HANYA rolet pemain diputar ulang
+(elemen tetap, angka baru dari `ui_elemen.rng`), skor dihitung ulang ("NEW TOTAL SCORE: x"), lalu alur normal (menang / seri -> lempar koin / tetap kalah). SEKALI per pertandingan (`_putar_ulang_terpakai`, direset di `pemain.gd`);
+ditolak/gagal -> boleh ditawari lagi di kekalahan berikutnya. Ikut batas 8 iklan berhadiah per hari (lewat `PengelolaIklan.rewarded_tersedia()`). Multiplayer TIDAK pernah (`penawar_putar_ulang` hanya diisi saat `peran_multiplayer == ""`).
+- Kode: `ui_elemen.gd` (`penawar_putar_ulang: Callable`; fungsi bantu `_teks_panel_pemain()` & `_animasi_rolet_pemain()` DIPECAH dari `jalankan_duel` -- perilaku & urutan `rng` sama; blok putar ulang sebelum "PENGUMUMAN_TRANSISI"),
+  `pemain_duel.gd` (`_tawarkan_putar_ulang()`, pola `_tawarkan_iklan_hutang`; gagal iklan -> `teks_bantuan` "No ad right now." 1,5 dtk), `ui_dinamis.gd` (`tanya_iklan_hutang` kini punya parameter berisi nilai bawaan LAMA +
+  `tanya_putar_ulang()` memakainya, latar 0,6), `pemain.gd` (sambung penawar + reset flag), `profil_pemain.gd` (kunci `putar_ulang` di `statistik_kosong`; stat dipakai G7/rekap).
+- Bukti (`hasil/g5_putar_ulang/`): rig-only (`uji_nyata.gd`, opsi `iklan=1` stub iklan tersedia; baru `putar_tolak=1` & `iklan_gagal=1`; `pengelola_iklan.gd` STUB rig +`uji_tonton_gagal` -- JANGAN disalin ke `game/`).
+  Solo 2P Classic x8 (`iklan=1`): TIAP run tepat 1 tawaran & 1 klik, 8/8 `PUTAR_ULANG_CEK` OK (skor baru > musuh -> slot 0 menang, < -> kalah), stat `putar_ulang`=1, kekalahan berikutnya (hingga 7 kalah duel di satu run) TIDAK ditawari lagi;
+  3 dari 8 putar ulang berbalik jadi menang; Quick 2P x4: 2 tawaran (1 cek OK, 1 skor baru = skor musuh -> lempar koin tanpa error); NO THANKS x4: ditawari tiap kalah skor (3/8/5/5), stat 0; iklan gagal: ditawari lagi tiap kalah, pesan "No ad right now." muncul (3/3 di s551), stat 0;
+  3P/4P (lawan=2): 0 tawaran (tidak ada duel manusia). 0 SCRIPT ERROR. Regresi: S1 100 (semua_ai) G4 vs G5 IDENTIK (`reg/s1_100_g5.txt`), `cek_nilai` 8/8, `batch_reg10` sama dgn G4, MP 3P Classic + 4P Quick sinkron (lihat `mp_ringkas.txt`).
+- BELUM: dialog & animasi putar ulang di layar sungguhan (headless) + iklan AdMob sungguhan -> uji HP G9; `Engine.time_scale` Quick 1,5x TIDAK dikembalikan 1x saat dialog tampil (tidak ada timer yang menunggu, dan tawaran hutang juga begitu) -- tambahkan kalau uji HP bermasalah.
+  Untuk G8 (Opus): putar ulang menaikkan peluang menang pemain solo yang menonton iklan (disengaja, "kekuatan boleh di solo"); keseimbangan role di rig tidak terpengaruh (rig/AI-vs-AI tidak punya penawar).
 
 ## 0. Aturan tetap dari pemilik proyek (WAJIB)
 1. Balas dalam **Bahasa Indonesia saja**.
@@ -179,7 +193,7 @@ Rig-only lain: `uji_*`, `cek_muat_f3.gd` (alat), dan 5 file proyek yang tidak ad
   (4) coba build rilis sekali; (5) Internal testing -> Production. Bug dari HP/rilis -> Opus menganalisis dulu.
 - **Fase 5 (rencana Opus 02-10, DISETUJUI): `docs/RENCANA_fase5_seru.md`** -- event papan, bounty, kartu bantuan posisi terakhir, Tebak Duel,
   putar ulang rolet (iklan, solo), tombol AI cepat (solo). Status: **DISETUJUI 02-10, pemilik "setuju semua a"**
-  (dicatat di bagian 1 & 9 rencana itu). Berikutnya: **Sonnet** mengerjakan G5 (G0-G4 selesai; putar ulang rolet, solo) dst. Baca rencana itu PENUH (pendek, ~200 baris); RENCANA_fase4 hanya untuk rujukan.
+  (dicatat di bagian 1 & 9 rencana itu). Berikutnya: **Sonnet** mengerjakan G6 (G0-G5 selesai; tombol AI cepat, solo) dst. Baca rencana itu PENUH (pendek, ~200 baris); RENCANA_fase4 hanya untuk rujukan.
 - Opsional (Sonnet, tidak menghalangi rilis): T22 (rig-only, D1 lebih kuat, RENCANA 14.23); komentar F5 untuk
   `hot_flames`/`fire_tax`/`strong_wind` di `data_role.gd` (komentar saja; ikut kiriman berikutnya).
 - Cara regresi MP di sesi cloud: salin `rig/skrip/jalankan_mp3.sh`, `uji_f2_t2_a/b.sh` ke scratchpad, ganti path
