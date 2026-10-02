@@ -1,0 +1,32 @@
+TEBAK_UI 'WHO WINS? TAP ONE!'
+TEBAK_PILIH slot=0 tebak=2 penyerang=2 pembela=1
+TEBAK_UI 'Your guess: P3'
+TEBAK_UI 'Wrong guess.'
+TEBAK_CEK tebak=2 menang=1 benar_diharap=false stat_naik=0 ui='Wrong guess.' cek=OK
+TEBAK_UI 'WHO WINS? TAP ONE!'
+TEBAK_PILIH slot=0 tebak=1 penyerang=3 pembela=1
+TEBAK_UI 'Your guess: P2'
+TEBAK_UI 'Good guess!'
+TEBAK_CEK tebak=1 menang=1 benar_diharap=true stat_naik=1 ui='Good guess!' cek=OK
+TEBAK_UI 'WHO WINS? TAP ONE!'
+TEBAK_PILIH slot=0 tebak=1 penyerang=1 pembela=2
+TEBAK_UI 'Your guess: P2'
+TEBAK_UI 'Good guess!'
+TEBAK_CEK tebak=1 menang=1 benar_diharap=true stat_naik=1 ui='Good guess!' cek=OK
+TEBAK_UI 'WHO WINS? TAP ONE!'
+TEBAK_PILIH slot=0 tebak=1 penyerang=2 pembela=1
+TEBAK_UI 'Your guess: P2'
+TEBAK_UI 'Wrong guess.'
+TEBAK_CEK tebak=1 menang=2 benar_diharap=false stat_naik=0 ui='Wrong guess.' cek=OK
+TEBAK_UI 'WHO WINS? TAP ONE!'
+TEBAK_PILIH slot=0 tebak=3 penyerang=3 pembela=2
+TEBAK_UI 'Your guess: P4'
+TEBAK_UI 'Wrong guess.'
+TEBAK_CEK tebak=3 menang=2 benar_diharap=false stat_naik=0 ui='Wrong guess.' cek=OK
+TEBAK_UI 'WHO WINS? TAP ONE!'
+TEBAK_PILIH slot=0 tebak=1 penyerang=3 pembela=1
+TEBAK_UI 'Your guess: P2'
+TEBAK_UI 'Wrong guess.'
+TEBAK_CEK tebak=1 menang=3 benar_diharap=false stat_naik=0 ui='Wrong guess.' cek=OK
+TEBAK_RINGKAS tebakan=6 benar=2 cek_ok=6 cek_gagal=0 stat_tebak_benar_slot0=2
+SIM BATAS_GILIRAN giliran=81 detik=1553

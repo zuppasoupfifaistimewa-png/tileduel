@@ -1,0 +1,453 @@
+ROBOT client urut=1 mode=0 peta=alam skenario=host_keluar_duel_migrasi
+LOBBY client1: pemain = [b][color=#3380ff]P1[/color][/b]   HOST  [color=#e63333]FIRE[/color] | [b][color=#ff3333]P2[/color][/b]   PLAYER (YOU) | [b][color=#26cc4d]P3[/color][/b]   [color=#8a8a8a]waiting for player...[/color]
+LOBBY client1: info = Waiting for players to choose a role...
+LOBBY client1: klik MY ROLE = true
+LOBBY client1: klik role WATER = true
+LOBBY client1: klik OK = true
+MASUK_GAME slot_lokal=1 pemain=3 peran_jaringan=client
+START_DITEKAN
+T|Tekan SPASI untuk Melempar Dadu
+EVENT ronde=1 aktif= terakhir=
+KARTU_BANTUAN stat=[0, 0, 0] inv=[[], [], []]
+BOUNTY aktif= terakhir= bintang=[4, 4, 4] stat_bounty=[0, 0, 0]
+G1|pemain|[0,2500,4][0,2500,4][0,2500,4]
+TEBAK_STAT tebak_benar_per_slot=[0, 0, 0]
+T|Waiting for P1...
+T|P1 Roll: 1
+T|Waiting for P1...
+T|P1 set a Fire Trap!
+BOUNTY aktif= terakhir= bintang=[3, 4, 4] stat_bounty=[0, 0, 0]
+T|Waiting for P1...
+G2|musuh|[1,2200,3][0,2500,4][0,2500,4]
+R|dadu
+T|Your Roll: 3
+T|FIRE TRAP! Burning for 3 turns!
+R|jebakan|TombolTrapAir
+T|Water Trap placed on your spot!
+BOUNTY aktif= terakhir= bintang=[3, 3, 4] stat_bounty=[0, 0, 0]
+R|beli
+T|Waiting for P3...
+G3|pemain3|[1,2200,3][3,2200,3][0,2500,4]
+T|P3 Roll: 3
+T|TRAPPED! Geyser Eruption!
+T|Landed randomly! Trapped in a Bubble for 2 turns!
+T|Waiting for P3...
+T|First to win a duel with WIND: +1 Star
+BOUNTY aktif=angin terakhir=angin bintang=[3, 3, 4] stat_bounty=[0, 0, 0]
+T|Waiting for P1...
+EVENT ronde=2 aktif= terakhir=
+G4|pemain|[23,2200,3][3,2200,3][7,2500,4]
+T|P1 Roll: 2
+T|SALARY FAILED! Need 1 gem!
+T|Waiting for P1...
+T|P1 set a Wind Trap!
+BOUNTY aktif=angin terakhir=angin bintang=[2, 3, 4] stat_bounty=[0, 0, 0]
+T|Waiting for P1...
+T|You are burning! Lost 55 Coins. (2 turns left)
+G5|musuh|[1,1728,2][3,2145,3][7,2500,4]
+R|dadu
+T|Your Roll: 3
+R|jebakan|TombolTrapAngin
+T|Wind Trap set! Wait for victim.
+BOUNTY aktif=angin terakhir=angin bintang=[2, 2, 4] stat_bounty=[0, 0, 0]
+R|beli
+T|Waiting for P3...
+G6|pemain3|[1,1728,2][6,1845,2][7,2500,4]
+T|P3 Roll: 4
+T|Waiting for P3...
+T|Waiting for P1...
+EVENT ronde=3 aktif= terakhir=
+G7|pemain|[1,1728,2][6,1845,2][11,2500,4]
+T|P1 Roll: 6
+T|WIND TRAP! Coins scattered!
+T|Waiting for P1...
+T|P1 set a Lightning Trap!
+BOUNTY aktif=angin terakhir=angin bintang=[1, 2, 4] stat_bounty=[0, 0, 0]
+T|Waiting for P1...
+T|You are burning! Lost 55 Coins. (1 turns left)
+G8|musuh|[7,1327,1][6,1790,2][11,2500,4]
+R|dadu
+T|Your Roll: 5
+T|LIGHTNING TRAP! Paralyzed & Stopped!
+T|P1's Tile! Give Up (Pay 100) or Fight?
+R|menyerah
+T|You gave up. Paid fine: 100 Coins.
+T|Waiting for P3...
+G9|pemain3|[7,1427,1][7,1690,2][11,2500,4]
+T|P3 Roll: 1
+T|Waiting for P3...
+T|P3 set a Lightning Trap!
+BOUNTY aktif=angin terakhir=angin bintang=[1, 2, 3] stat_bounty=[0, 0, 0]
+T|Waiting for P3...
+T|Tile fees x2 this round!
+T|Waiting for P1...
+EVENT ronde=4 aktif=gold_rush terakhir=gold_rush
+G10|pemain|[7,1427,1][7,1690,2][12,2200,3]
+T|P1 Roll: 3
+T|P1 found 64 Coins!
+T|Waiting for P1...
+T|You are burning! Lost 55 Coins. (0 turns left)
+T|You are paralyzed! Cannot move this turn.
+T|Waiting for P3...
+G11|pemain3|[10,1219,1][7,1635,2][12,2200,3]
+T|P3 Roll: 3
+T|P3 landed on a Card Tile!
+D|153.3|TEKS='P3 landed on a Card Tile!'
+D|154.1|ANIMASI_KARTU judul='P3 TURN / P3 IS CHOOSING A CARD...' target='Tile Duel' a_target=1.0 a_latar=-1.00 kartu=,, kamera=P3 | TEKS='P3 landed on a Card Tile!'
+D|154.2|ANIMASI_KARTU judul='CARD REVEALED!' target='Tile Duel' a_target=1.0 a_latar=-1.00 kartu=,, kamera=P3 | TEKS='P3 landed on a Card Tile!'
+D|154.4|ANIMASI_KARTU judul='CARD REVEALED!' target='Tile Duel' a_target=1.0 a_latar=-1.00 kartu=, kamera=P3 | TEKS='P3 landed on a Card Tile!'
+D|154.5|ANIMASI_KARTU judul='CARD REVEALED!' target='Tile Duel' a_target=1.0 a_latar=-1.00 kartu=SWORD LV 3*,, kamera=P3 | TEKS='P3 landed on a Card Tile!'
+D|157.2|TEKS='P3 landed on a Card Tile!'
+T|Waiting for P3...
+KARTU_BANTUAN stat=[0, 0, 0] inv=[[], [], ["pedang_3"]]
+D|160.7|(kosong)
+T|P3 set a Wind Trap!
+BOUNTY aktif=angin terakhir=angin bintang=[1, 2, 2] stat_bounty=[0, 0, 0]
+T|Waiting for P3...
+T|Waiting for P1...
+EVENT ronde=5 aktif= terakhir=gold_rush
+G12|pemain|[10,1219,1][7,1635,2][15,1900,2]
+T|P1 Roll: 1
+T|Waiting for P1...
+G13|musuh|[11,919,1][7,1635,2][15,1900,2]
+R|dadu
+T|Your Roll: 3
+T|P1's Tile! Give Up (Pay 100) or Fight?
+R|lawan
+T|P1 (host) left the game.
+PANEL_MIGRASI giliran=13 peran_migrasi=cari putus=false
+MIGRASI cari|false| t=0.0
+KLIK BECOME HOST
+MIGRASI host|false| t=1.1
+KLIK START NOW (semua_kembali=true peer=[650745682])
+T|P1 left. AI takes over!
+MIGRASI_SELESAI jaringan=host slot_lokal=1 kontrol=["AI", "MANUSIA_LOKAL", "MANUSIA_JARINGAN"] teks='P1 left. AI takes over!'
+T|P1's Tile! Give Up (Pay 100) or Fight?
+R|menyerah
+T|You gave up. Paid fine: 100 Coins.
+T|You are rolling dice...
+G14|pemain3|[11,1019,1][10,1535,2][15,1900,2]
+T|P3 Roll: 3
+T|P3 found 64 Coins!
+T|P3 set a Lightning Trap!
+BOUNTY aktif=angin terakhir=angin bintang=[1, 2, 1] stat_bounty=[0, 0, 0]
+T|Waiting for P3...
+T|P1 TURN! P1 is thinking...
+EVENT ronde=6 aktif= terakhir=gold_rush
+G15|pemain|[11,1019,1][10,1535,2][18,1664,1]
+T|P1 is rolling dice...
+T|P1 Roll: 6
+T|LIGHTNING TRAP! Paralyzed & Stopped!
+T|P1 lands on P3's tile! P1 is thinking...
+T|P1 gave up. Paid fine: 100 Coins.
+T|YOUR TURN! Choose Action or Roll Dice.
+G16|musuh|[12,919,1][10,1535,2][18,1764,1]
+R|dadu
+T|You are rolling dice...
+T|Your Roll: 3
+T|You landed on a Card Tile!
+D|230.9|ANIMASI_KARTU judul='YOUR TURN / CHOOSE A CARD!' target='Tile Duel' a_target=1.0 a_latar=-1.00 kartu=,, kamera=P2 | TEKS='You landed on a Card Tile!'
+R|gacha|1
+D|231.0|ANIMASI_KARTU judul='CARD REVEALED!' target='Tile Duel' a_target=1.0 a_latar=-1.00 kartu=,, kamera=P2 | TEKS='You landed on a Card Tile!'
+D|231.1|ANIMASI_KARTU judul='CARD REVEALED!' target='Tile Duel' a_target=1.0 a_latar=-1.00 kartu=, kamera=P2 | TEKS='You landed on a Card Tile!'
+D|231.2|ANIMASI_KARTU judul='CARD REVEALED!' target='Tile Duel' a_target=1.0 a_latar=-1.00 kartu=,BLESSING!*, kamera=P2 | TEKS='You landed on a Card Tile!'
+T|Card Effect Applied!
+BOUNTY aktif=angin terakhir=angin bintang=[1, 4, 1] stat_bounty=[0, 0, 0]
+D|233.9|TEKS='Card Effect Applied!'
+R|akhiri
+T|You are rolling dice...
+G17|pemain3|[12,919,1][13,1535,4][18,1764,1]
+D|235.3|(kosong)
+T|P3 Roll: 3
+T|P3 collected [img=28]res://permata/permata_hijau.png[/img] Gem!
+T|Tiles and towers -30% this round!
+EVENT ronde=7 aktif=market_day terakhir=market_day
+T|P1 is paralyzed! Cannot move this turn.
+G18|pemain|[12,919,1][13,1535,4][21,1764,1]
+T|YOUR TURN! Choose Action or Roll Dice.
+G19|musuh|[12,919,1][13,1535,4][21,1764,1]
+R|dadu
+T|You are rolling dice...
+T|Your Roll: 6
+T|WIND TRAP! Lost 153 Coins!
+T|You found 51 Coins!
+T|LIGHTNING TRAP! Paralyzed & Stopped!
+T|P3's Tile! Give Up (Pay 100) or Fight?
+R|menyerah
+T|You gave up. Paid fine: 100 Coins.
+T|Waiting for P3...
+G20|pemain3|[12,919,1][18,1333,4][21,1864,1]
+T|You are rolling dice...
+T|P3 Roll: 2
+T|P3 found 51 Coins!
+T|Waiting for P3...
+T|P1 TURN! P1 is thinking...
+EVENT ronde=8 aktif= terakhir=market_day
+G21|pemain|[12,919,1][18,1333,4][23,1705,1]
+T|P1 is rolling dice...
+T|P1 Roll: 6
+T|P1 landed on a Card Tile!
+D|289.7|ANIMASI_KARTU judul='P1 TURN / CHOOSE A CARD!' target='Tile Duel' a_target=1.0 a_latar=-1.00 kartu=,, kamera=P1 | TEKS='P1 landed on a Card Tile!'
+D|291.3|ANIMASI_KARTU judul='CARD REVEALED!' target='Tile Duel' a_target=1.0 a_latar=-1.00 kartu=,, kamera=P1 | TEKS='P1 landed on a Card Tile!'
+D|291.4|ANIMASI_KARTU judul='CARD REVEALED!' target='Tile Duel' a_target=1.0 a_latar=-1.00 kartu=, kamera=P1 | TEKS='P1 landed on a Card Tile!'
+D|291.5|ANIMASI_KARTU judul='CARD REVEALED!' target='Tile Duel' a_target=1.0 a_latar=-1.00 kartu=UnLucky!,, kamera=P1 | TEKS='P1 landed on a Card Tile!'
+T|Card Effect Applied!
+D|294.2|TEKS='Card Effect Applied!'
+T|P1 lands on P3's tile! P1 is thinking...
+D|301.9|(kosong)
+D|303.5|DUEL fase=MENUNGGU_MUSUH segelM=0 segelP=0 tonton=1 judul='P1 ATTACKS! CHOOSING ELEMENTS...'
+TEBAK_UI 'WHO WINS? TAP ONE!'
+TEBAK_PILIH slot=1 tebak=0 penyerang=0 pembela=2 nomor=1
+TEBAK_UI 'Your guess: P1'
+D|305.5|DUEL fase=MENUNGGU_MUSUH segelM=0 segelP=1 tonton=1 judul='P1 LOCKED IN!'
+D|306.5|DUEL fase=MENUNGGU_MUSUH segelM=1 segelP=1 tonton=1 judul='P1 ATTACKS! BOTH LOCKED!'
+D|308.6|DUEL fase=SEGEL_KEDUANYA segelM=1 segelP=1 tonton=1 judul='UNLOCKING...'
+D|309.8|DUEL fase=FADE_OUT segelM=1 segelP=1 tonton=1 judul='UNLOCKING...'
+D|311.4|DUEL fase=ANIMASI_CORET segelM=1 segelP=1 tonton=1 judul='ELEMENT LOSE! P3 +3'
+D|312.7|DUEL fase=ANIMASI_HILANG segelM=1 segelP=1 tonton=1 judul='ELEMENT LOSE! P3 +3'
+D|313.1|DUEL fase=ANIMASI_MENANG segelM=1 segelP=1 tonton=1 judul='ELEMENT LOSE! P3 +3'
+D|314.5|DUEL fase=ROLET_PEMAIN segelM=1 segelP=1 tonton=1 judul='P1 WHEEL SPINNING...'
+D|319.4|DUEL fase=ROLET_MUSUH segelM=1 segelP=1 tonton=1 judul='P3 WHEEL SPINNING...'
+D|323.8|DUEL fase=RANGKUMAN segelM=1 segelP=1 tonton=1 judul='CALCULATING TOTAL SCORE...'
+D|326.8|DUEL fase=PENGUMUMAN_TRANSISI segelM=1 segelP=1 tonton=1 judul='CALCULATING TOTAL SCORE...'
+D|327.3|DUEL fase=PENGUMUMAN_FINAL segelM=1 segelP=1 tonton=1 judul='P1 WINS THE FIGHT!'
+TEBAK_UI 'Good guess!'
+T|P1 WON! P3's tile is stolen!
+D|331.9|(kosong)
+TEBAK_STAT tebak_benar_per_slot=[0, 1, 0]
+TEBAK_CEK slot=1 tebak=0 menang=0 benar_diharap=true stat_naik=1 ui='Good guess!' cek=OK
+T|You are paralyzed! Cannot move this turn.
+G22|musuh|[18,619,1][18,1333,4][23,1705,1]
+T|Waiting for P3...
+G23|pemain3|[18,619,1][18,1333,4][23,1705,1]
+T|You are rolling dice...
+T|P3 Roll: 1
+BOUNTY aktif=angin terakhir=angin bintang=[1, 4, 4] stat_bounty=[0, 0, 0]
+T|P3 passed Start! Bonus +530
+T|Waiting for P3...
+T|P1 TURN! P1 is thinking...
+EVENT ronde=9 aktif= terakhir=market_day
+G24|pemain|[18,619,1][18,1333,4][0,2235,4]
+T|P1 is rolling dice...
+T|P1 Roll: 5
+T|P1 collected [img=28]res://permata/permata_hijau.png[/img] Gem!
+T|P1 lands on P3's tile! P1 is thinking...
+D|363.5|DUEL fase=MENUNGGU_MUSUH segelM=0 segelP=0 tonton=1 judul='P1 ATTACKS! CHOOSING ELEMENTS...'
+TEBAK_UI 'WHO WINS? TAP ONE!'
+TEBAK_PILIH slot=1 tebak=2 penyerang=0 pembela=2 nomor=2
+TEBAK_UI 'Your guess: P3'
+D|365.6|DUEL fase=MENUNGGU_MUSUH segelM=0 segelP=1 tonton=1 judul='P1 LOCKED IN!'
+D|366.6|DUEL fase=MENUNGGU_MUSUH segelM=1 segelP=1 tonton=1 judul='P1 ATTACKS! BOTH LOCKED!'
+D|368.6|DUEL fase=SEGEL_KEDUANYA segelM=1 segelP=1 tonton=1 judul='UNLOCKING...'
+D|369.9|DUEL fase=FADE_OUT segelM=1 segelP=1 tonton=1 judul='UNLOCKING...'
+D|371.4|DUEL fase=ANIMASI_CORET segelM=1 segelP=1 tonton=1 judul='ELEMENT LOSE! P3 +3'
+D|372.8|DUEL fase=ANIMASI_HILANG segelM=1 segelP=1 tonton=1 judul='ELEMENT LOSE! P3 +3'
+D|373.2|DUEL fase=ANIMASI_MENANG segelM=1 segelP=1 tonton=1 judul='ELEMENT LOSE! P3 +3'
+D|374.6|DUEL fase=ROLET_PEMAIN segelM=1 segelP=1 tonton=1 judul='P1 WHEEL SPINNING...'
+D|379.5|DUEL fase=ROLET_MUSUH segelM=1 segelP=1 tonton=1 judul='P3 WHEEL SPINNING...'
+D|383.8|DUEL fase=RANGKUMAN segelM=1 segelP=1 tonton=1 judul='CALCULATING TOTAL SCORE...'
+D|386.9|DUEL fase=PENGUMUMAN_TRANSISI segelM=1 segelP=1 tonton=1 judul='CALCULATING TOTAL SCORE...'
+D|387.4|DUEL fase=PENGUMUMAN_FINAL segelM=1 segelP=1 tonton=1 judul='P3 WINS THE FIGHT!'
+TEBAK_UI 'Good guess!'
+T|P1 LOST THE FIGHT! Extra fine: 120 Coins.
+D|391.9|(kosong)
+TEBAK_STAT tebak_benar_per_slot=[0, 2, 0]
+TEBAK_CEK slot=1 tebak=2 menang=2 benar_diharap=true stat_naik=1 ui='Good guess!' cek=OK
+T|YOUR TURN! Choose Action or Roll Dice.
+G25|musuh|[23,499,1][18,1333,4][0,2355,4]
+R|dadu
+T|You are rolling dice...
+T|Your Roll: 6
+T|You collected [img=28]res://permata/permata_hijau.png[/img] Gem!
+BOUNTY aktif=angin terakhir=angin bintang=[1, 7, 4] stat_bounty=[0, 0, 0]
+T|You passed Start! Bonus +520
+R|akhiri
+T|Waiting for P3...
+G26|pemain3|[23,499,1][0,1853,7][0,2355,4]
+T|You are rolling dice...
+T|P3 Roll: 2
+T|WIND TRAP! Lost 176 Coins!
+T|Waiting for P3...
+T|P3 set a Wind Trap!
+BOUNTY aktif=angin terakhir=angin bintang=[1, 7, 3] stat_bounty=[0, 0, 0]
+T|Waiting for P3...
+T|Everyone gets +1 Star!
+EVENT ronde=10 aktif= terakhir=star_shower
+BOUNTY aktif=angin terakhir=angin bintang=[2, 8, 4] stat_bounty=[0, 0, 0]
+T|P1 TURN! P1 is thinking...
+G27|pemain|[23,499,2][0,1853,8][2,1879,4]
+T|P1 is rolling dice...
+T|P1 Roll: 6
+BOUNTY aktif=angin terakhir=angin bintang=[5, 8, 4] stat_bounty=[0, 0, 0]
+T|P1 passed Start! Bonus +550
+T|WIND TRAP! Lost 78 Coins!
+T|P1 bought this tile!
+T|YOUR TURN! Choose Action or Roll Dice.
+G28|musuh|[5,671,5][0,1853,8][2,1879,4]
+R|dadu
+T|You are rolling dice...
+T|Your Roll: 1
+T|P1's Tile! Give Up (Pay 300) or Fight?
+R|lawan
+D|457.2|DUEL fase=PILIH_PEMAIN segelM=0 segelP=0 tonton=0 judul='CHOOSE YOUR ELEMENT!'
+D|459.2|DUEL fase=PILIH_PEMAIN segelM=1 segelP=0 tonton=0 judul='P1 CHOSE! YOUR TURN!'
+R|elemen|api
+D|460.3|DUEL fase=MENUNGGU_MUSUH segelM=1 segelP=1 tonton=0 judul='YOU ATTACK! BOTH LOCKED!'
+D|462.3|DUEL fase=SEGEL_KEDUANYA segelM=1 segelP=1 tonton=0 judul='UNLOCKING...'
+D|463.6|DUEL fase=FADE_OUT segelM=1 segelP=1 tonton=0 judul='UNLOCKING...'
+D|465.1|DUEL fase=ANIMASI_CORET segelM=1 segelP=1 tonton=0 judul='ELEMENT LOSE! P1 +3'
+D|466.5|DUEL fase=ANIMASI_HILANG segelM=1 segelP=1 tonton=0 judul='ELEMENT LOSE! P1 +3'
+D|466.9|DUEL fase=ANIMASI_MENANG segelM=1 segelP=1 tonton=0 judul='ELEMENT LOSE! P1 +3'
+D|468.3|DUEL fase=ROLET_PEMAIN segelM=1 segelP=1 tonton=0 judul='SPIN YOUR WHEEL!'
+D|470.3|DUEL fase=ROLET_PEMAIN segelM=1 segelP=1 tonton=0 judul='WHEEL SPINNING...'
+D|474.4|DUEL fase=ROLET_MUSUH segelM=1 segelP=1 tonton=0 judul='P1 WHEEL SPINNING...'
+D|478.7|DUEL fase=RANGKUMAN segelM=1 segelP=1 tonton=0 judul='CALCULATING TOTAL SCORE...'
+D|481.8|DUEL fase=PENGUMUMAN_TRANSISI segelM=1 segelP=1 tonton=0 judul='CALCULATING TOTAL SCORE...'
+D|482.3|DUEL fase=PENGUMUMAN_FINAL segelM=1 segelP=1 tonton=0 judul='SCORE TIED! GET READY FOR TIE-BREAKER...'
+D|484.4|DUEL fase=PENGUMUMAN_FINAL segelM=1 segelP=1 tonton=0 judul='P1 DEFENDS, SO P1 PICKS FIRST...'
+D|485.9|DUEL fase=PENGUMUMAN_FINAL segelM=1 segelP=1 tonton=0 judul='P1 PICKED TAILS! YOU GET HEADS!'
+R|koin
+D|487.5|DUEL fase=PENGUMUMAN_FINAL segelM=1 segelP=1 tonton=0 judul='-'
+T|You guessed HEADS. Flipping coin...
+D|488.1|DUEL fase=PENGUMUMAN_FINAL segelM=1 segelP=1 tonton=0 judul='-' | TEKS='You guessed HEADS. Flipping coin...'
+T|RESULT: TAILS! WRONG Guess!
+D|491.7|DUEL fase=PENGUMUMAN_FINAL segelM=1 segelP=1 tonton=0 judul='-'
+D|494.5|DUEL fase=PENGUMUMAN_FINAL segelM=1 segelP=1 tonton=0 judul='P1 WON THE TIE-BREAKER!'
+T|YOU LOST THE FIGHT! Extra fine: 360 Coins.
+D|497.6|(kosong)
+T|Waiting for P3...
+G29|pemain3|[5,1031,5][1,1493,8][2,1879,4]
+T|You are rolling dice...
+T|P3 Roll: 3
+T|Waiting for P3...
+T|P3 gave up. Paid fine: 100 Coins.
+T|P1 TURN! P1 is thinking...
+EVENT ronde=11 aktif= terakhir=star_shower
+G30|pemain|[5,1131,5][1,1493,8][5,1779,4]
+T|P1 set a Fire Trap!
+BOUNTY aktif=angin terakhir=angin bintang=[4, 8, 4] stat_bounty=[0, 0, 0]
+T|P1 is rolling dice...
+T|P1 Roll: 5
+T|P1 found 44 Coins!
+T|P1 builds a tower!
+T|YOUR TURN! Choose Action or Roll Dice.
+G31|musuh|[10,675,4][1,1493,8][5,1779,4]
+R|dadu
+T|You are rolling dice...
+T|Your Roll: 5
+T|FIRE TRAP! Burning for 3 turns!
+R|jebakan|TombolTrapAir
+T|Water Trap placed on your spot!
+BOUNTY aktif=angin terakhir=angin bintang=[4, 7, 4] stat_bounty=[0, 0, 0]
+R|bangun
+T|Waiting for P3...
+G32|pemain3|[10,675,4][6,993,7][5,1779,4]
+T|You are rolling dice...
+T|P3 Roll: 5
+T|TRAPPED! Geyser Eruption!
+T|Landed randomly! Trapped in a Bubble for 2 turns!
+T|Waiting for P3...
+T|P1 TURN! P1 is thinking...
+EVENT ronde=12 aktif= terakhir=star_shower
+G33|pemain|[10,675,4][6,993,7][11,1779,4]
+T|P1 set a Lightning Trap!
+BOUNTY aktif=angin terakhir=angin bintang=[3, 7, 4] stat_bounty=[0, 0, 0]
+T|P1 is rolling dice...
+T|P1 Roll: 6
+T|P1 found 51 Coins!
+T|P1 found 44 Coins!
+T|P1 landed on a Card Tile!
+D|576.7|ANIMASI_KARTU judul='P1 TURN / CHOOSE A CARD!' target='Tile Duel' a_target=1.0 a_latar=-1.00 kartu=,, kamera=P1 | TEKS='P1 landed on a Card Tile!'
+D|578.2|ANIMASI_KARTU judul='CARD REVEALED!' target='Tile Duel' a_target=1.0 a_latar=-1.00 kartu=,, kamera=P1 | TEKS='P1 landed on a Card Tile!'
+D|578.4|ANIMASI_KARTU judul='CARD REVEALED!' target='Tile Duel' a_target=1.0 a_latar=-1.00 kartu=, kamera=P1 | TEKS='P1 landed on a Card Tile!'
+D|578.4|ANIMASI_KARTU judul='CARD REVEALED!' target='Tile Duel' a_target=1.0 a_latar=-1.00 kartu=,BLESSING!*, kamera=P1 | TEKS='P1 landed on a Card Tile!'
+T|Card Effect Applied!
+BOUNTY aktif=angin terakhir=angin bintang=[5, 7, 4] stat_bounty=[0, 0, 0]
+D|581.1|TEKS='Card Effect Applied!'
+T|P1 bought this tile!
+D|586.5|(kosong)
+T|You are burning! Lost 55 Coins. (2 turns left)
+G34|musuh|[16,498,5][6,938,7][11,1779,4]
+T|YOUR TURN! Choose Action or Roll Dice.
+R|dadu
+T|You are rolling dice...
+T|Your Roll: 3
+R|jebakan|TombolTrapAir
+T|Water Trap placed on your spot!
+BOUNTY aktif=angin terakhir=angin bintang=[5, 6, 4] stat_bounty=[0, 0, 0]
+R|beli
+T|Waiting for P3...
+G35|pemain3|[16,498,5][9,638,6][11,1779,4]
+T|You are rolling dice...
+T|P3 Roll: 4
+T|Waiting for P3...
+T|Your tower lost 1 HP!
+EVENT ronde=13 aktif= terakhir=earthquake
+T|P1 TURN! P1 is thinking...
+G36|pemain|[16,498,5][9,638,6][15,1779,4]
+T|P1 set a Fire Trap!
+BOUNTY aktif=angin terakhir=angin bintang=[4, 6, 4] stat_bounty=[0, 0, 0]
+T|P1 is rolling dice...
+T|P1 Roll: 6
+T|P1 found 44 Coins!
+T|P1 found 26 Coins!
+T|P1 collected [img=28]res://permata/permata_hijau.png[/img] Gem!
+T|P1 found 26 Coins!
+T|P1 bought this tile!
+T|You are burning! Lost 55 Coins. (1 turns left)
+G37|musuh|[22,392,4][9,583,6][15,1779,4]
+T|YOUR TURN! Choose Action or Roll Dice.
+R|dadu
+T|You are rolling dice...
+T|Your Roll: 1
+T|LIGHTNING TRAP! Paralyzed & Stopped!
+T|P1's Tile! Give Up (Pay 300) or Fight?
+R|menyerah
+T|You gave up. Paid fine: 300 Coins.
+T|Waiting for P3...
+G38|pemain3|[22,692,4][10,283,6][15,1779,4]
+T|You are rolling dice...
+T|P3 Roll: 1
+T|FIRE TRAP! Burning for 3 turns!
+T|Waiting for P3...
+T|P3 gave up. Paid fine: 100 Coins.
+T|P1 TURN! P1 is thinking...
+EVENT ronde=14 aktif= terakhir=earthquake
+G39|pemain|[22,792,4][10,283,6][16,1679,4]
+T|P1 set a Fire Trap!
+BOUNTY aktif=angin terakhir=angin bintang=[3, 6, 4] stat_bounty=[0, 0, 0]
+T|P1 is rolling dice...
+T|P1 Roll: 1
+T|P1 lands on P3's tile! P1 is thinking...
+D|683.0|DUEL fase=MENUNGGU_MUSUH segelM=0 segelP=0 tonton=1 judul='P1 ATTACKS! CHOOSING ELEMENTS...'
+TEBAK_UI 'WHO WINS? TAP ONE!'
+TEBAK_PILIH slot=1 tebak=0 penyerang=0 pembela=2 nomor=4
+TEBAK_UI 'Your guess: P1'
+D|685.0|DUEL fase=MENUNGGU_MUSUH segelM=0 segelP=1 tonton=1 judul='P1 LOCKED IN!'
+D|686.0|DUEL fase=MENUNGGU_MUSUH segelM=1 segelP=1 tonton=1 judul='P1 ATTACKS! BOTH LOCKED!'
+D|688.0|DUEL fase=SEGEL_KEDUANYA segelM=1 segelP=1 tonton=1 judul='UNLOCKING...'
+D|689.2|DUEL fase=FADE_OUT segelM=1 segelP=1 tonton=1 judul='UNLOCKING...'
+D|690.7|DUEL fase=ANIMASI_CORET segelM=1 segelP=1 tonton=1 judul='ELEMENT LOSE! P3 +3'
+D|692.0|DUEL fase=ANIMASI_HILANG segelM=1 segelP=1 tonton=1 judul='ELEMENT LOSE! P3 +3'
+D|692.4|DUEL fase=ANIMASI_MENANG segelM=1 segelP=1 tonton=1 judul='ELEMENT LOSE! P3 +3'
+D|693.7|DUEL fase=ROLET_PEMAIN segelM=1 segelP=1 tonton=1 judul='P1 WHEEL SPINNING...'
+D|698.6|DUEL fase=ROLET_MUSUH segelM=1 segelP=1 tonton=1 judul='P3 WHEEL SPINNING...'
+D|702.9|DUEL fase=RANGKUMAN segelM=1 segelP=1 tonton=1 judul='CALCULATING TOTAL SCORE...'
+D|705.9|DUEL fase=PENGUMUMAN_TRANSISI segelM=1 segelP=1 tonton=1 judul='CALCULATING TOTAL SCORE...'
+D|706.4|DUEL fase=PENGUMUMAN_FINAL segelM=1 segelP=1 tonton=1 judul='P3 WINS THE FIGHT!'
+TEBAK_UI 'Wrong guess.'
+T|P1 LOST THE FIGHT! Extra fine: 120 Coins.
+D|711.0|(kosong)
+TEBAK_CEK slot=1 tebak=0 menang=2 benar_diharap=false stat_naik=0 ui='Wrong guess.' cek=OK
+T|You are burning! Lost 55 Coins. (0 turns left)
+G40|musuh|[23,700,3][10,228,6][16,1799,4]
+T|You are paralyzed! Cannot move this turn.
+T|P3 is burning! Lost 110 Coins. (2 turns left)
+G41|pemain3|[23,755,3][10,228,6][16,1689,4]
+CEK_BD_JEBAKAN_AI s=0 role=api jebakan=api+angin+petir build={ "hot_flames": 2, "rock_breaker": 2, "heavy_pockets": 1, "fire_tax": 1, "ULT_api": true }
+CEK_BD_JEBAKAN_AI s=1 role=air jebakan=air+angin+petir build={ "frozen_bubble": 2, "heat_skin": 2, "rock_breaker": 1, "rapid_current": 1, "ULT_air": true }
+CEK_BD_JEBAKAN_AI s=2 role=tanah jebakan=tanah+angin+petir build={ "hard_rock": 2, "grounded": 2, "heavy_pockets": 1, "fortress": 1, "ULT_tanah": true }
+CEK_C5 { "cek_c5_guard": 0, "cek_c5_tornado": 0, "cek_c5_phoenix": 0, "cek_c5_rockbreaker0": 0 }
+CEK_BD { "cek_bd_sacred": 0, "cek_bd_guard_nol": 0, "cek_bd_fight_faktor": 0, "cek_bd_benteng_lewati": 0, "cek_bd_benteng_tahan_ai": 0 }
+TEBAK_RINGKAS slot=1 tebakan=3 benar=2 telat_kirim=0 telat_ditolak=0 cek_ok=3 cek_gagal=0 tebak_benar_per_slot=[0, 2, 0]
+SELESAI BATAS_GILIRAN peran=client giliran=41 cek_ok=7 cek_gagal=0 kartu_beda=0 detik=721 migrasi=1 cek_ok_migrasi=7 jaringan=host role=api:api+angin+petir:{ "hot_flames": 2, "rock_breaker": 2, "heavy_pockets": 1, "fire_tax": 1, "ULT_api": true },air:air+angin+petir:{ "frozen_bubble": 2, "heat_skin": 2, "rock_breaker": 1, "rapid_current": 1, "ULT_air": true },tanah:tanah+angin+petir:{ "hard_rock": 2, "grounded": 2, "heavy_pockets": 1, "fortress": 1, "ULT_tanah": true }

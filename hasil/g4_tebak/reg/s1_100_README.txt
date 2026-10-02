@@ -1,0 +1,1 @@
+S1 100 pertandingan (hasil/g0_refactor/s1_100.tugas, semua_ai): kode G3 (903965e) vs G4 -> sort|diff IDENTIK (100/100). Baseline G0 (hasil_s1_100.txt) memang beda karena event/bounty/kartu bantuan (G1-G3) mengubah ekonomi.

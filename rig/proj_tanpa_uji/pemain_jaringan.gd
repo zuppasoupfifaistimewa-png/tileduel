@@ -348,7 +348,8 @@ func _tutup_ui_jaringan_client() -> void:
 		ui_elemen.terima_pilihan_koin_lawan(sisi)
 		ui_elemen.terima_hasil_koin(sisi)
 	_tebak_nomor_lokal = -1 # Fase 5 G4: tebakan duel yang sedang berjalan dibuang (tanpa hadiah)
-	ui_elemen.batal_tebak()
+	if ui_elemen.has_method("batal_tebak"):
+		ui_elemen.batal_tebak()
 	if not _replay_duel_berjalan:
 		ui_elemen.hide()
 		# Musik duel (dimulai rpc_duel_dimulai/rpc_minta_pilihan_elemen_duel sejak

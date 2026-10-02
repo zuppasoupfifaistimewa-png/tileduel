@@ -1,9 +1,9 @@
-# HANDOFF -- lanjutkan proyek Tile Duel (Fase 4 SELESAI; Fase 5: G0-G3 + getaran Earthquake SELESAI, G4 berikutnya)
+# HANDOFF -- lanjutkan proyek Tile Duel (Fase 4 SELESAI; Fase 5: G0-G4 + getaran Earthquake SELESAI, G5 berikutnya)
 
 Dokumen ini ditulis 02-10-2026 supaya sesi Claude Code (cloud / web, tanpa CLI) mana pun bisa melanjutkan
 pekerjaan TANPA riwayat percakapan. BACA INI DULU, lalu `docs/RENCANA_fase4_role.md` bagian 14.19 & **14.21-14.24** (paling akhir).
 Diperbarui 02-10 (Opus, sesi Claude Code cloud): **uji HP pemilik dengan `kiriman/TileDuel_FaseB_b9.zip` = "lancar" -> Fase 4 SELESAI** (RENCANA 14.24).
-Berikutnya: pemilik merilis A+B (daftar periksa di bagian 5). **Fase 5: rencana `docs/RENCANA_fase5_seru.md` DISETUJUI 02-10 (K1-K10 = a); G0-G3 + getaran Earthquake SELESAI (Sonnet, 02-10) -> berikutnya Sonnet mengerjakan G4 (Tebak Duel).**
+Berikutnya: pemilik merilis A+B (daftar periksa di bagian 5). **Fase 5: rencana `docs/RENCANA_fase5_seru.md` DISETUJUI 02-10 (K1-K10 = a); G0-G4 + getaran Earthquake SELESAI (Sonnet, 02-10) -> berikutnya Sonnet mengerjakan G5 (putar ulang rolet, solo).**
 
 **Fase 5 G0 SELESAI (Sonnet, 02-10):** refactor `denda_petak()` / `harga_beli_tanah()` / `harga_beli_menara(lv)` / `ronde_event` di
 `pemain_dasar.gd` (+ semua pemakai di `ai_jebakan/ai_musuh/pemain/pemain_papan/pemain_tampilan`), `game/` & rig identik (34/35, kecuali stub iklan).
@@ -46,6 +46,25 @@ Untuk G8 (Opus): bounty di Quick hampir tak berarti -- 11 bounty di 11 run Quick
 - BELUM: tampilan spanduk COMEBACK CARD & getaran di layar sungguhan (headless) -> uji HP G9; kekuatan getaran 0.5 tebakan awal, boleh disetel. Rig-only: log `KARTU_BANTUAN`/`GETAR_KAMERA`
   (`uji_nyata.gd`, `uji_robot_mp.gd`), opsi `kaya_awal=1` (`uji_robot_mp.gd`).
 - Untuk G8 (Opus): kartu bantuan hampir tak pernah muncul di Quick (0 kartu di 12 run Quick solo; 5 kartu di 4 run Classic) -- selisih 1000 mungkin terlalu ketat untuk Quick; keputusan keseimbangan.
+
+**Fase 5 G4 SELESAI (Sonnet, 02-10): Tebak Duel (solo + MP).** Pemain MANUSIA yang menonton duel (bukan peserta; 3-4 pemain) mengetuk salah satu dari dua tombol nama
+peserta (tumpuk di tengah layar tonton, "WHO WINS? TAP ONE!"); satu ketukan, tidak bisa diubah, boleh tidak menebak; permainan TIDAK menunggu. Tebakan tidak diperlihatkan ke pemain lain.
+- Kode: `ui_elemen.gd` (sinyal `tebakan_dipilih`, `tombol_tebak_p/m`, `teks_tebak`, `tebak_sisi`, fungsi `tampilkan_tebak/sembunyikan_tombol_tebak/batal_tebak/tebak_telat/_tampilkan_hasil_tebak`;
+  hasil "Good guess!"/"Wrong guess." tampil di pengumuman akhir duel DAN di jalur lempar koin seri), `pemain_duel.gd` (blok "TEBAK DUEL": `_buka_tebak_duel`, `_saat_tebakan_dipilih`, `_catat_tebakan`,
+  `rpc_kirim_tebakan(nomor, slot_ditebak)` any_peer->host, `rpc_tebakan_diterima(nomor, ok)` host->client, `_nilai_tebakan_duel`; `rpc_duel_dimulai` +param `nomor=0`; jendela host =
+  `_tebak_terbuka` (true di awal `_kumpulkan_naskah_duel`, false begitu semua peserta terkunci -> tebakan telat dijawab ok=false -> "Too late!"); solo = `_tonton_ai_pilih_elemen` (~2,5 dtk, 2 segel),
+  `pemain.gd` (sambung sinyal), `pemain_jaringan.gd` (migrasi: `_tutup_ui_jaringan_client` & `_reset_penantian_host` membuang tebakan berjalan, TANPA hadiah), `profil_pemain.gd` (kunci `tebak_benar` di `statistik_kosong`).
+- Stat `tebak_benar` dicatat di host/solo (`_nilai_tebakan_duel` sesudah `_jalankan_duel`) dan ikut siaran state "statistik" -> identik di semua device. Nomor duel (`_nomor_duel`) mencegah tebakan basi dari duel sebelumnya.
+- BELUM (sengaja, tahap lain): hadiah profil (XP 5 / Crowns 3 per tebakan benar, maks 5, baris "Duel guesses", `STAT_SEUMUR`) = G7. Tampilan tombol/teks di layar sungguhan belum dilihat (headless) -> uji HP G9;
+  jendela solo cuma ~2,5 dtk game (Quick 1,5x = ~1,7 dtk nyata) -- sesuai rencana, tapi KETAT; kandidat disetel di uji HP (mis. tambah jeda khusus saat pemain bisa menebak).
+- Bukti (`hasil/g4_tebak/`): rig-only `tebak=1` (`uji_nyata.gd` solo, `uji_robot_mp.gd` MP) = robot penonton menebak selang-seling penyerang/pembela lalu mencocokkan stat `tebak_benar` + teks hasil dgn pemenang sebenarnya (log `TEBAK_*`);
+  `tebak_telat=1` (MP) = client urut genap mengetuk SESUDAH jendela tutup. Solo 16 run (4P Classic alam x8, 3P Classic pantai x4, 4P Quick pantai x4): 0 SCRIPT ERROR, 0 `TEBAK_CEK` gagal (4P Quick hampir tak ada duel AI-vs-AI -> 0 tebakan).
+  MP: 3P Quick (1 tebakan benar), 3P Classic (host 3, c1 5 tebakan/3 benar, c2 7 tebakan TELAT -> 7 ditolak "Too late!"), 4P Classic (4 device: `tebak_benar_per_slot=[1,2,0,3]` identik, 2 telat ditolak), 3P+1AI Classic ([1,1,1,0] identik),
+  host keluar saat pilih elemen (2 seed Classic 3P): migrasi ok, tebakan menggantung dibuang, duel berikutnya bersih, stat identik di host baru & client, cek_ok_migrasi 7-8, 0 beda.
+  Regresi: S1 100 pertandingan (semua_ai) kode G3 vs G4 IDENTIK (baseline G0 sudah tidak berlaku -- G1-G3 mengubah ekonomi; pembanding baru: `hasil/g4_tebak/reg/s1_100_g3_pembanding.txt`), `cek_nilai` 8/8, `batch_reg10` sama dgn G3
+  (satu SCRIPT ERROR di `uji_takeover` karena Control tiruan tanpa `batal_tebak` -> dijaga `has_method`, 0 error), `IKLAN_KARTU cek=OK`.
+- Catatan teknis: solo dgn pemain manusia TIDAK deterministik antar-run kalau dijalankan paralel (beban CPU memengaruhi waktu); bukti "identik" hanya valid untuk run `semua_ai=1`.
+  MP perlu build yang sama di semua HP (RPC baru: `rpc_kirim_tebakan`, `rpc_tebakan_diterima`, param baru `rpc_duel_dimulai`).
 
 ## 0. Aturan tetap dari pemilik proyek (WAJIB)
 1. Balas dalam **Bahasa Indonesia saja**.
@@ -160,8 +179,7 @@ Rig-only lain: `uji_*`, `cek_muat_f3.gd` (alat), dan 5 file proyek yang tidak ad
   (4) coba build rilis sekali; (5) Internal testing -> Production. Bug dari HP/rilis -> Opus menganalisis dulu.
 - **Fase 5 (rencana Opus 02-10, DISETUJUI): `docs/RENCANA_fase5_seru.md`** -- event papan, bounty, kartu bantuan posisi terakhir, Tebak Duel,
   putar ulang rolet (iklan, solo), tombol AI cepat (solo). Status: **DISETUJUI 02-10, pemilik "setuju semua a"**
-  (dicatat di bagian 1 & 9 rencana itu). Berikutnya: **Sonnet** mengerjakan G0 (refactor tanpa perubahan perilaku,
-  harus identik di rig) dst. Baca rencana itu PENUH (pendek, ~200 baris); RENCANA_fase4 hanya untuk rujukan.
+  (dicatat di bagian 1 & 9 rencana itu). Berikutnya: **Sonnet** mengerjakan G5 (G0-G4 selesai; putar ulang rolet, solo) dst. Baca rencana itu PENUH (pendek, ~200 baris); RENCANA_fase4 hanya untuk rujukan.
 - Opsional (Sonnet, tidak menghalangi rilis): T22 (rig-only, D1 lebih kuat, RENCANA 14.23); komentar F5 untuk
   `hot_flames`/`fire_tax`/`strong_wind` di `data_role.gd` (komentar saja; ikut kiriman berikutnya).
 - Cara regresi MP di sesi cloud: salin `rig/skrip/jalankan_mp3.sh`, `uji_f2_t2_a/b.sh` ke scratchpad, ganti path

@@ -1,0 +1,29 @@
+== g4_a
+g4_a.host: SELESAI MENANG peran=host giliran=10 cek_ok=8 cek_gagal=0 kartu_beda=0 detik=248 migrasi=0 cek_ok_migrasi=0 jaringan=host | TEBAK_RINGKAS slot=0 tebakan=0 benar=0 telat_kirim=0 telat_ditolak=0 cek_ok=0 cek_gagal=0 tebak_benar_per_slot=[0, 0, 1]
+g4_a.c1: SELESAI MENANG peran=client giliran=10 cek_ok=0 cek_gagal=0 kartu_beda=0 detik=242 migrasi=0 cek_ok_migrasi=0 jaringan=client | TEBAK_RINGKAS slot=1 tebakan=0 benar=0 telat_kirim=0 telat_ditolak=0 cek_ok=0 cek_gagal=0 tebak_benar_per_slot=[0, 0, 1]
+g4_a.c2: SELESAI MENANG peran=client giliran=10 cek_ok=0 cek_gagal=0 kartu_beda=0 detik=242 migrasi=0 cek_ok_migrasi=0 jaringan=client | TEBAK_RINGKAS slot=2 tebakan=1 benar=1 telat_kirim=0 telat_ditolak=0 cek_ok=1 cek_gagal=0 tebak_benar_per_slot=[0, 0, 1]
+== g4_b
+g4_b.host: SELESAI BATAS_GILIRAN peran=host giliran=61 cek_ok=42 cek_gagal=0 kartu_beda=0 detik=1381 migrasi=0 cek_ok_migrasi=0 jaringan=host | TEBAK_RINGKAS slot=0 tebakan=3 benar=0 telat_kirim=0 telat_ditolak=0 cek_ok=3 cek_gagal=0 tebak_benar_per_slot=[0, 3, 0]
+g4_b.c1: SELESAI HOST_SELESAI peran=client giliran=57 cek_ok=0 cek_gagal=0 kartu_beda=0 detik=1381 migrasi=0 cek_ok_migrasi=0 jaringan=client | TEBAK_RINGKAS slot=1 tebakan=5 benar=3 telat_kirim=0 telat_ditolak=0 cek_ok=5 cek_gagal=0 tebak_benar_per_slot=[0, 3, 0]
+g4_b.c2: SELESAI HOST_SELESAI peran=client giliran=57 cek_ok=0 cek_gagal=0 kartu_beda=0 detik=1380 migrasi=0 cek_ok_migrasi=0 jaringan=client | TEBAK_RINGKAS slot=2 tebakan=0 benar=0 telat_kirim=7 telat_ditolak=7 cek_ok=0 cek_gagal=0 tebak_benar_per_slot=[0, 3, 0]
+== g4_c
+g4_c.host: SELESAI BATAS_GILIRAN peran=host giliran=46 cek_ok=39 cek_gagal=0 kartu_beda=0 detik=760 migrasi=0 cek_ok_migrasi=0 jaringan=host | TEBAK_RINGKAS slot=0 tebakan=1 benar=1 telat_kirim=0 telat_ditolak=0 cek_ok=1 cek_gagal=0 tebak_benar_per_slot=[1, 2, 0, 3]
+g4_c.c1: SELESAI HOST_SELESAI peran=client giliran=44 cek_ok=0 cek_gagal=0 kartu_beda=0 detik=759 migrasi=0 cek_ok_migrasi=0 jaringan=client | TEBAK_RINGKAS slot=1 tebakan=2 benar=2 telat_kirim=0 telat_ditolak=0 cek_ok=2 cek_gagal=0 tebak_benar_per_slot=[1, 2, 0, 3]
+g4_c.c2: SELESAI HOST_SELESAI peran=client giliran=44 cek_ok=0 cek_gagal=0 kartu_beda=0 detik=759 migrasi=0 cek_ok_migrasi=0 jaringan=client | TEBAK_RINGKAS slot=2 tebakan=0 benar=0 telat_kirim=2 telat_ditolak=2 cek_ok=0 cek_gagal=0 tebak_benar_per_slot=[1, 2, 0, 3]
+g4_c.c3: SELESAI HOST_SELESAI peran=client giliran=44 cek_ok=0 cek_gagal=0 kartu_beda=0 detik=759 migrasi=0 cek_ok_migrasi=0 jaringan=client | TEBAK_RINGKAS slot=3 tebakan=3 benar=3 telat_kirim=0 telat_ditolak=0 cek_ok=3 cek_gagal=0 tebak_benar_per_slot=[1, 2, 0, 3]
+== g4_d
+g4_d.host: SELESAI BATAS_GILIRAN peran=host giliran=46 cek_ok=20 cek_gagal=0 kartu_beda=0 detik=850 migrasi=0 cek_ok_migrasi=0 jaringan=host | TEBAK_RINGKAS slot=0 tebakan=2 benar=1 telat_kirim=0 telat_ditolak=0 cek_ok=2 cek_gagal=0 tebak_benar_per_slot=[1, 1, 1, 0]
+g4_d.c1: SELESAI HOST_SELESAI peran=client giliran=43 cek_ok=0 cek_gagal=0 kartu_beda=0 detik=849 migrasi=0 cek_ok_migrasi=0 jaringan=client | TEBAK_RINGKAS slot=1 tebakan=2 benar=1 telat_kirim=0 telat_ditolak=0 cek_ok=2 cek_gagal=0 tebak_benar_per_slot=[1, 1, 1, 0]
+g4_d.c2: SELESAI HOST_SELESAI peran=client giliran=43 cek_ok=0 cek_gagal=0 kartu_beda=0 detik=849 migrasi=0 cek_ok_migrasi=0 jaringan=client | TEBAK_RINGKAS slot=2 tebakan=1 benar=1 telat_kirim=0 telat_ditolak=0 cek_ok=1 cek_gagal=0 tebak_benar_per_slot=[1, 1, 1, 0]
+== g4_e
+g4_e.host: SELESAI MENANG peran=host giliran=9 cek_ok=6 cek_gagal=0 kartu_beda=0 detik=176 migrasi=0 cek_ok_migrasi=0 jaringan=host | TEBAK_RINGKAS slot=0 tebakan=0 benar=0 telat_kirim=0 telat_ditolak=0 cek_ok=0 cek_gagal=0 tebak_benar_per_slot=[0, 0, 0]
+g4_e.c1: SELESAI MENANG peran=client giliran=9 cek_ok=0 cek_gagal=0 kartu_beda=0 detik=170 migrasi=0 cek_ok_migrasi=0 jaringan=client | TEBAK_RINGKAS slot=1 tebakan=0 benar=0 telat_kirim=0 telat_ditolak=0 cek_ok=0 cek_gagal=0 tebak_benar_per_slot=[0, 0, 0]
+g4_e.c2: SELESAI MENANG peran=client giliran=9 cek_ok=0 cek_gagal=0 kartu_beda=0 detik=170 migrasi=0 cek_ok_migrasi=0 jaringan=client | TEBAK_RINGKAS slot=2 tebakan=0 benar=0 telat_kirim=0 telat_ditolak=0 cek_ok=0 cek_gagal=0 tebak_benar_per_slot=[0, 0, 0]
+== g4_f406
+g4_f406.host:  | 
+g4_f406.c1: SELESAI BATAS_GILIRAN peran=client giliran=41 cek_ok=7 cek_gagal=0 kartu_beda=0 detik=721 migrasi=1 cek_ok_migrasi=7 jaringan=host | TEBAK_RINGKAS slot=1 tebakan=3 benar=2 telat_kirim=0 telat_ditolak=0 cek_ok=3 cek_gagal=0 tebak_benar_per_slot=[0, 2, 0]
+g4_f406.c2: SELESAI HOST_SELESAI peran=client giliran=37 cek_ok=0 cek_gagal=0 kartu_beda=0 detik=720 migrasi=1 cek_ok_migrasi=0 jaringan=client | TEBAK_RINGKAS slot=2 tebakan=1 benar=0 telat_kirim=0 telat_ditolak=0 cek_ok=1 cek_gagal=0 tebak_benar_per_slot=[0, 2, 0]
+== g4_f407
+g4_f407.host:  | 
+g4_f407.c1: SELESAI BATAS_GILIRAN peran=client giliran=41 cek_ok=8 cek_gagal=0 kartu_beda=0 detik=705 migrasi=1 cek_ok_migrasi=8 jaringan=host | TEBAK_RINGKAS slot=1 tebakan=2 benar=1 telat_kirim=0 telat_ditolak=0 cek_ok=2 cek_gagal=0 tebak_benar_per_slot=[0, 1, 0]
+g4_f407.c2: SELESAI HOST_SELESAI peran=client giliran=38 cek_ok=0 cek_gagal=0 kartu_beda=0 detik=705 migrasi=1 cek_ok_migrasi=0 jaringan=client | TEBAK_RINGKAS slot=2 tebakan=1 benar=0 telat_kirim=0 telat_ditolak=0 cek_ok=1 cek_gagal=0 tebak_benar_per_slot=[0, 1, 0]

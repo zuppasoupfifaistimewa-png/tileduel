@@ -1,0 +1,2 @@
+TEBAK_RINGKAS tebakan=0 benar=0 cek_ok=0 cek_gagal=0 stat_tebak_benar_slot0=0
+SIM MENANG giliran=20 detik=381

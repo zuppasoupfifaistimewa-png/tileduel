@@ -3,6 +3,14 @@
 Satu entri per sesi, terbaru di atas. Sesi baru tidak bisa membaca percakapan lama, jadi apa pun yang penting
 harus tercatat di sini, di `HANDOFF_LANJUT.md`, atau di RENCANA.
 
+## 2026-10-02 -- sesi Claude Code cloud (Sonnet 5.5): Fase 5 G4 (Tebak Duel) [+ G5, lihat di bawah kalau sudah ditambahkan]
+- G4 Tebak Duel (solo + MP) SELESAI: lihat HANDOFF (ringkasan kode & bukti), data `hasil/g4_tebak/`. Penonton manusia menebak pemenang duel; stat `tebak_benar` identik di semua device;
+  "Too late!" teruji (tebakan sesudah host menutup jendela); migrasi saat duel membuang tebakan tanpa hadiah. Hadiah profil (XP/Crowns) = G7.
+- Keputusan/temuan: baseline S1 100 dari G0 tidak lagi valid sebagai pembanding (G1-G3 mengubah ekonomi) -> pembanding baru = kode G3 (903965e) vs G4: IDENTIK. Solo dgn pemain manusia tidak
+  deterministik kalau run paralel (bukti identik hanya untuk `semua_ai=1`). Jendela tebak solo ~2,5 dtk dicatat KETAT (disetel di uji HP G9).
+- Catatan teknis: `uji_takeover` memakai Control tiruan sebagai `ui_elemen` -> panggilan metode UI baru di `_tutup_ui_jaringan_client` harus dijaga `has_method`. Ikuti pola itu untuk G5+.
+- Commit: titik simpan kode 59d463f, lalu commit penutup G4. Langkah berikutnya: G5 (putar ulang rolet, solo).
+
 ## 2026-10-02 -- sesi Claude Code cloud (Sonnet 5.5): Fase 5 G2 + G3 + getaran kamera Earthquake
 - G2 bounty (commit 4deb81c): satu target elemen aktif, +1 bintang untuk pemenang duel pertama dgn elemen itu; siaran state "bounty"; HUD label; AI ikut klaim. Bukti `hasil/g2_bounty/`:
   solo 27 run 0 error; MP sinkron + klaim (opsi rig `bounty_pilih=1`) identik di semua proses; host keluar saat bounty aktif -> bertahan di host baru, klaim sesudah migrasi sama di c1/c2.

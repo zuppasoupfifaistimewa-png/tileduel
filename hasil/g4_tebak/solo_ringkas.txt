@@ -1,0 +1,16 @@
+t3_l3_alam_s311: SIM BATAS_GILIRAN giliran=81 detik=1553  TEBAK_RINGKAS tebakan=6 benar=2 cek_ok=6 cek_gagal=0 stat_tebak_benar_slot0=2 err=0
+t3_l3_alam_s312: SIM MENANG giliran=51 detik=1222  TEBAK_RINGKAS tebakan=6 benar=5 cek_ok=6 cek_gagal=0 stat_tebak_benar_slot0=5 err=0
+t3_l3_alam_s313: SIM BATAS_GILIRAN giliran=81 detik=2068  TEBAK_RINGKAS tebakan=10 benar=5 cek_ok=10 cek_gagal=0 stat_tebak_benar_slot0=5 err=0
+t3_l3_alam_s314: SIM MENANG giliran=21 detik=466  TEBAK_RINGKAS tebakan=2 benar=1 cek_ok=2 cek_gagal=0 stat_tebak_benar_slot0=1 err=0
+t3_l3_alam_s315: SIM MENANG giliran=75 detik=1569  TEBAK_RINGKAS tebakan=4 benar=1 cek_ok=4 cek_gagal=0 stat_tebak_benar_slot0=1 err=0
+t3_l3_alam_s316: SIM MENANG giliran=47 detik=1046  TEBAK_RINGKAS tebakan=5 benar=4 cek_ok=5 cek_gagal=0 stat_tebak_benar_slot0=4 err=0
+t3_l3_alam_s317: SIM BATAS_GILIRAN giliran=81 detik=1886  TEBAK_RINGKAS tebakan=7 benar=1 cek_ok=7 cek_gagal=0 stat_tebak_benar_slot0=1 err=0
+t3_l3_alam_s318: SIM BATAS_GILIRAN giliran=81 detik=2036  TEBAK_RINGKAS tebakan=6 benar=2 cek_ok=6 cek_gagal=0 stat_tebak_benar_slot0=2 err=0
+t6_l2_pantai_s321: SIM BATAS_GILIRAN giliran=81 detik=1547  TEBAK_RINGKAS tebakan=5 benar=2 cek_ok=5 cek_gagal=0 stat_tebak_benar_slot0=2 err=0
+t6_l2_pantai_s322: SIM BATAS_GILIRAN giliran=81 detik=1644  TEBAK_RINGKAS tebakan=4 benar=2 cek_ok=4 cek_gagal=0 stat_tebak_benar_slot0=2 err=0
+t6_l2_pantai_s323: SIM BATAS_GILIRAN giliran=81 detik=1583  TEBAK_RINGKAS tebakan=5 benar=2 cek_ok=5 cek_gagal=0 stat_tebak_benar_slot0=2 err=0
+t6_l2_pantai_s324: SIM BATAS_GILIRAN giliran=81 detik=1747  TEBAK_RINGKAS tebakan=3 benar=2 cek_ok=3 cek_gagal=0 stat_tebak_benar_slot0=2 err=0
+t6_l3_pantai_s325: SIM MENANG giliran=20 detik=420  TEBAK_RINGKAS tebakan=0 benar=0 cek_ok=0 cek_gagal=0 stat_tebak_benar_slot0=0 err=0
+t6_l3_pantai_s326: SIM MENANG giliran=20 detik=381  TEBAK_RINGKAS tebakan=0 benar=0 cek_ok=0 cek_gagal=0 stat_tebak_benar_slot0=0 err=0
+t6_l3_pantai_s327: SIM MENANG giliran=20 detik=399  TEBAK_RINGKAS tebakan=0 benar=0 cek_ok=0 cek_gagal=0 stat_tebak_benar_slot0=0 err=0
+t6_l3_pantai_s328: SIM MENANG giliran=20 detik=416  TEBAK_RINGKAS tebakan=0 benar=0 cek_ok=0 cek_gagal=0 stat_tebak_benar_slot0=0 err=0
