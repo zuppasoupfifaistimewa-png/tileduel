@@ -1,0 +1,5 @@
+tag=u9s1_api_air_k1_0 peta=pantai seed=20001 quick=1 roles=air,api pemenang=0 cara=start giliran=3 detik=66.6 pasang=0,0 kena=0,0 kaya=3000,2500 rinci=0/0/0/0/0/0,0/0/0/0/0/0 presets=balanced,balanced sacred=0 xprole0=150 err=0 stat=OK
+tag=u9s1_api_air_k0_1 peta=alam seed=20002 quick=1 roles=api,air pemenang=0 cara=ronde giliran=16 detik=320.4 pasang=3,2 kena=3,2 kaya=4060,3395 rinci=3/330/0/0/0/0,0/0/0/0/8/0 presets=balanced,defense sacred=0 xprole0=270 err=0 stat=OK
+tag=u9s1_api_air_k0_0 peta=alam seed=20000 quick=1 roles=api,air pemenang=0 cara=ronde giliran=16 detik=322.5 pasang=3,2 kena=3,2 kaya=4760,3145 rinci=3/275/0/0/0/0,1/0/0/0/8/0 presets=balanced,balanced sacred=0 xprole0=270 err=0 stat=OK
+tag=u9s1_api_air_k0_2 peta=alam seed=20004 quick=1 roles=api,air pemenang=1 cara=ronde giliran=16 detik=291.4 pasang=0,5 kena=0,2 kaya=2280,3750 rinci=0/0/0/1/0/0,1/0/1/0/0/0 presets=attack,attack sacred=0 xprole0=50 err=0 stat=OK
+tag=u9s1_api_air_k1_1 peta=pantai seed=20003 quick=1 roles=air,api pemenang=0 cara=ronde giliran=16 detik=254.6 pasang=3,0 kena=3,0 kaya=3370,2200 rinci=0/0/0/0/0/0,0/0/0/0/0/0 presets=attack,attack sacred=0 xprole0=150 err=0 stat=OK
