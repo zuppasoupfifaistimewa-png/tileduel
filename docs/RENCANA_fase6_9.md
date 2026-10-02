@@ -1,6 +1,6 @@
 # RENCANA FASE 6-9: identitas, toko, event, penutup (Opus, 02-10)
 
-Status: **DRAF -- menunggu persetujuan K pemilik** (bagian 7). Dasar: Fase 5 SELESAI (b22f27b, uji HP b10 lancar).
+Status: **DISETUJUI 02-10 -- pemilik "setuju semua a" (K1-K15 = a)**. Dasar: Fase 5 SELESAI (b22f27b, uji HP b10 lancar).
 Kredit cloud tersisa ~US$25 untuk SEMUA sesi sampai Fase 9 selesai -> rencana ini dibuat hemat (bagian 6).
 
 ## 0. Ringkas
@@ -203,4 +203,5 @@ itu + HANDOFF 0 & 5 + entri LOG teratas; gabungkan beberapa G dalam satu sesi se
 - Pemilik: rilis A+B+Fase 5 bisa jalan paralel; rilis berikutnya disarankan setelah b12 (toko + Remove Ads).
 
 ## 9. STATUS
-- 02-10 (Opus): draf disusun dari jawaban pemilik (retensi, Remove Ads F7, event offline, sosial ringan). Menunggu K1-K15.
+- 02-10 (Opus): draf disusun dari jawaban pemilik (retensi, Remove Ads F7, event offline, sosial ringan).
+- 02-10 (pemilik): **setuju semua a** (K1-K15 = a). "Kerajaan Crowns" (K7) hanya disebut sekilas di rencana Fase 2 tanpa rancangan -> dibatalkan, digantikan toko. Berikutnya: Fase 6 G0+G1 (Sonnet).

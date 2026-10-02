@@ -1,4 +1,4 @@
-# HANDOFF -- lanjutkan proyek Tile Duel (Fase 4 SELESAI; Fase 5 SELESAI: G0-G9 + uji HP b10 LANCAR (02-10); berikutnya rilis A+B+Fase 5, lalu rencana Fase 6-9 oleh Opus)
+# HANDOFF -- lanjutkan proyek Tile Duel (Fase 4 SELESAI; Fase 5 SELESAI: G0-G9 + uji HP b10 LANCAR (02-10); rencana Fase 6-9 DISETUJUI 02-10 (`docs/RENCANA_fase6_9.md`); berikutnya Fase 6 G0+G1 (Sonnet))
 
 Dokumen ini ditulis 02-10-2026 supaya sesi Claude Code (cloud / web, tanpa CLI) mana pun bisa melanjutkan
 pekerjaan TANPA riwayat percakapan. BACA INI DULU, lalu `docs/RENCANA_fase4_role.md` bagian 14.19 & **14.21-14.24** (paling akhir).
@@ -245,6 +245,11 @@ Rig-only lain: `uji_*`, `cek_muat_f3.gd` (alat), dan 5 file proyek yang tidak ad
   SISA: 11 `godot.log` terlacak di `rig/proj_tanpa_uji/sim/home_*` (sampah uji) -- penghapusan ditolak izin sesi, hapus dgn `git rm -r rig/proj_tanpa_uji/sim` bila mau.
   **UJI HP b10 LANCAR (02-10, laporan pemilik) -> Fase 5 SELESAI; `game/` = isi ZIP b10, jangan ubah kecuali ada bug.**
   **BERIKUTNYA: sesi OPUS menyusun rencana Fase 6-9 (hemat kredit); pemilik merilis A+B+Fase 5** (daftar periksa rilis di atas, plus `ID_INTERSTISIAL_ASLI`). Bug dari HP -> Opus dulu.
+- **RENCANA FASE 6-9 DISETUJUI (Opus, 02-10): `docs/RENCANA_fase6_9.md`** -- pemilik "setuju semua a" (K1-K15). Tujuan: retensi.
+  F6 identitas MP ringan (nama/level, MVP, Respect, penjaga versi) -> F7 toko Crowns + Remove Ads (regresi MP 37 SEKALI di F7 G5)
+  -> F8 event mingguan offline + mastery -> F9 misi/taruhan Tebak Duel + penutup. Kredit ~US$25, perkiraan ~23.5 (urutan pangkas: bagian 6).
+  **BERIKUTNYA: sesi SONNET Fase 6 G0+G1** -- baca CLAUDE.md, HANDOFF 0 & 5, LOG teratas, RENCANA_fase6_9 bagian 0, 1, 6, 7 saja.
+  Pemilik (paralel): rilis A+B+Fase 5; siapkan plugin Play Billing & produk `remove_ads` sebelum Fase 7 G4.
 - Opsional (Sonnet, tidak menghalangi rilis): T22 (rig-only, D1 lebih kuat, RENCANA 14.23); komentar F5 untuk
   `hot_flames`/`fire_tax`/`strong_wind` di `data_role.gd` (komentar saja; ikut kiriman berikutnya).
 - Cara regresi MP di sesi cloud: salin `rig/skrip/jalankan_mp3.sh`, `uji_f2_t2_a/b.sh` ke scratchpad, ganti path
