@@ -56,6 +56,26 @@ var _sig_bounty = "" # Fase 5 G2: log BOUNTY tiap perubahan (aktif/terakhir/bint
 var _sig_bantuan = "" # Fase 5 G3: log KARTU_BANTUAN tiap perubahan (stat kartu_bantuan + isi inventaris per slot)
 var kaya_awal = false # Fase 5 G3 (rig-only): host mulai +3000 koin -> pemain lain tertinggal >= 1000 -> kartu bantuan muncul saat lewat START
 var _kaya_diberikan = false
+# --- Fase 5 G4 (rig-only): tebak=1 -> robot penonton menebak tiap duel yang ditonton (selang-seling penyerang/pembela)
+# dan mencocokkan stat tebak_benar + teks "Good guess!"/"Wrong guess." dengan pemenang duel sebenarnya (log TEBAK_*).
+# tebak_telat=1 -> robot dengan urut GENAP (client2, client4) sengaja mengetuk SESUDAH jendela tutup -> host harus menjawab "Too late!".
+var tebak_uji = false
+var tebak_telat_uji = false
+var _tebak_sejak = -1.0
+var _tebak_n = 0
+var _tebak_menunggu = -1
+var _tebak_ui_hasil = ""
+var _tebak_menang_prev: Array = []
+var _tebak_benar_prev = 0
+var _tebak_total = 0
+var _tebak_benar_total = 0
+var _tebak_cek_ok = 0
+var _tebak_cek_gagal = 0
+var _tebak_telat_nomor = -2     # nomor duel yang sudah diketuk telat (jangan dobel)
+var _tebak_telat_kirim = 0
+var _tebak_telat_ditolak = 0
+var _sig_tebak_ui = ""
+var _sig_tebak_stat = ""
 var bounty_pilih = false # Fase 5 G2 (rig-only): robot memilih elemen bounty yang sedang aktif -> klaim pasti terjadi
 var giliran_terakhir = ""
 var teks_terakhir = ""
@@ -109,6 +129,8 @@ func _ready():
 		if a.begins_with("keluar_urut="): urut_keluar = int(a.substr(12))
 		if a.begins_with("panjang="): panjang_uji = a.substr(8)
 		if a == "bounty_pilih=1": bounty_pilih = true
+		if a == "tebak=1": tebak_uji = true # Fase 5 G4
+		if a == "tebak_telat=1": tebak_telat_uji = true; tebak_uji = true # Fase 5 G4
 		if a == "kaya_awal=1": kaya_awal = true
 		if a.begins_with("arena="): arena_uji = a.substr(6)
 		if a == "arena_palsu=1": arena_uji = "custom_ilegal" # F0 (B-f, 14.19, U10): alias -- mekanisme SAMA "custom_ilegal" (B-c/C2) yang sudah menguji rpc_role_lobby/build_arena K16, cuma nama argumen sesuai rencana
@@ -182,6 +204,8 @@ func _akhiri(alasan: String) -> void:
 				total_bd += int(st.get(kunci_bd, 0))
 			totbd[kunci_bd] = total_bd
 		_catat("CEK_BD %s" % str(totbd))
+	if tebak_uji and p != null:
+		_catat("TEBAK_RINGKAS slot=%d tebakan=%d benar=%d telat_kirim=%d telat_ditolak=%d cek_ok=%d cek_gagal=%d tebak_benar_per_slot=%s" % [p.slot_lokal, _tebak_total, _tebak_benar_total, _tebak_telat_kirim, _tebak_telat_ditolak, _tebak_cek_ok, _tebak_cek_gagal, str(p.statistik_slot.map(func(st): return int(st.get("tebak_benar", 0))))])
 	_catat("SELESAI %s peran=%s giliran=%d cek_ok=%d cek_gagal=%d kartu_beda=%d detik=%.0f migrasi=%d cek_ok_migrasi=%d jaringan=%s role=%s" % [alasan, peran, jumlah_giliran, cek_ok, cek_gagal, kartu_beda, detik_total, migrasi_selesai, cek_ok_migrasi, StatusJaringan.peran_multiplayer, ",".join(cetak_role)])
 	_tulis_log()
 	get_tree().quit()
@@ -487,6 +511,8 @@ func _langkah_main(delta) -> void:
 		sudah_putus = true
 		return
 	_amati_duel()
+	if tebak_uji:
+		_urus_tebak()
 	# Skenario keluar TEPAT saat device ini (peserta duel) sedang memilih elemen --
 	# sebelum sempat mengklik (robot baru mengklik setelah "berpikir" 3 dtk).
 	var keluar_duel = (skenario == "client_keluar_duel" and peran == "client" and urut == urut_keluar) or ((skenario == "host_keluar_duel" or skenario == "host_keluar_duel_migrasi") and peran == "host")
@@ -610,6 +636,70 @@ func _amati_duel() -> void:
 	if sig != _sig_duel:
 		_sig_duel = sig
 		jejak.append("D|%.1f|%s" % [detik_total, sig if sig != "" else "(kosong)"])
+
+func _urus_tebak() -> void:
+	# Fase 5 G4 (rig-only): robot penonton. Pada device yang menonton, menebak ~0.6 dtk
+	# setelah tombol muncul (atau, mode telat, mengetuk sesudah jendela tutup), lalu
+	# saat duel selesai (duel_menang slot mana pun naik di state device INI) mencocokkan
+	# stat tebak_benar & teks hasil dengan pemenang sebenarnya.
+	var telat_robot = tebak_telat_uji and (urut % 2 == 0) and peran == "client"
+	var tb = ui.tombol_tebak_p
+	if not telat_robot and tb.is_visible_in_tree():
+		if _tebak_sejak < 0.0:
+			_tebak_sejak = detik_total
+		if detik_total - _tebak_sejak >= 0.6:
+			_tebak_sejak = -1.0
+			var pakai_p = (_tebak_n % 2 == 0)
+			_tebak_n += 1
+			_tebak_menunggu = p._duel_slot_penyerang if pakai_p else p._duel_slot_pembela
+			_tebak_total += 1
+			_catat("TEBAK_PILIH slot=%d tebak=%d penyerang=%d pembela=%d nomor=%d" % [p.slot_lokal, _tebak_menunggu, p._duel_slot_penyerang, p._duel_slot_pembela, p._tebak_nomor_lokal])
+			(ui.tombol_tebak_p if pakai_p else ui.tombol_tebak_m).pressed.emit()
+	elif not tb.is_visible_in_tree():
+		_tebak_sejak = -1.0
+	if telat_robot and p._tebak_nomor_lokal >= 0 and p._tebak_nomor_lokal != _tebak_telat_nomor and ui.visible and ui.tebak_sisi == "" \
+			and ui.fase_duel not in ["PILIH_PEMAIN", "MENUNGGU_MUSUH"] and not tb.is_visible_in_tree():
+		# Jendela sudah tutup (jalankan_duel berjalan di layar ini): ketukan "dalam perjalanan".
+		_tebak_telat_nomor = p._tebak_nomor_lokal
+		_tebak_telat_kirim += 1
+		_tebak_menunggu = -1
+		_catat("TEBAK_TELAT_KIRIM slot=%d nomor=%d fase=%s" % [p.slot_lokal, _tebak_telat_nomor, ui.fase_duel])
+		ui._on_tombol_tebak_ditekan("pemain")
+	var sig_ui = "%d|%s" % [int(ui.teks_tebak.visible), ui.teks_tebak.text]
+	if sig_ui != _sig_tebak_ui:
+		_sig_tebak_ui = sig_ui
+		if ui.teks_tebak.visible:
+			_catat("TEBAK_UI '%s'" % ui.teks_tebak.text)
+			if ui.teks_tebak.text.begins_with("Good") or ui.teks_tebak.text.begins_with("Wrong"):
+				_tebak_ui_hasil = ui.teks_tebak.text
+			elif ui.teks_tebak.text == "Too late!":
+				_tebak_menunggu = -1
+				_tebak_telat_ditolak += 1
+	var benar_per_slot: Array = p.statistik_slot.map(func(st): return int(st.get("tebak_benar", 0)))
+	var sig_stat = str(benar_per_slot)
+	if sig_stat != _sig_tebak_stat:
+		_sig_tebak_stat = sig_stat
+		_catat("TEBAK_STAT tebak_benar_per_slot=%s" % sig_stat)
+	var menang_kini: Array = p.statistik_slot.map(func(st): return int(st.get("duel_menang", 0)))
+	var benar_kini = int(benar_per_slot[p.slot_lokal])
+	if _tebak_menang_prev.size() == menang_kini.size():
+		for s in range(menang_kini.size()):
+			if menang_kini[s] > _tebak_menang_prev[s]:
+				if _tebak_menunggu >= 0:
+					var benar_harap = (s == _tebak_menunggu)
+					var ui_harap = "Good guess!" if benar_harap else "Wrong guess."
+					var cek = (benar_kini - _tebak_benar_prev == (1 if benar_harap else 0)) and _tebak_ui_hasil == ui_harap
+					if cek: _tebak_cek_ok += 1
+					else: _tebak_cek_gagal += 1
+					if benar_harap: _tebak_benar_total += 1
+					_catat("TEBAK_CEK slot=%d tebak=%d menang=%d benar_diharap=%s stat_naik=%d ui='%s' cek=%s" % [p.slot_lokal, _tebak_menunggu, s, str(benar_harap), benar_kini - _tebak_benar_prev, _tebak_ui_hasil, "OK" if cek else "GAGAL"])
+				elif benar_kini > _tebak_benar_prev:
+					_tebak_cek_gagal += 1
+					_catat("TEBAK_CEK slot=%d tanpa tebakan tapi stat naik GAGAL" % p.slot_lokal)
+				_tebak_menunggu = -1
+				_tebak_ui_hasil = ""
+	_tebak_menang_prev = menang_kini
+	_tebak_benar_prev = benar_kini
 
 func _ringkas() -> String:
 	var s = ""

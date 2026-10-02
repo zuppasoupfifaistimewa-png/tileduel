@@ -347,6 +347,8 @@ func _tutup_ui_jaringan_client() -> void:
 		var sisi = "kepala" if randi() % 2 == 0 else "ekor"
 		ui_elemen.terima_pilihan_koin_lawan(sisi)
 		ui_elemen.terima_hasil_koin(sisi)
+	_tebak_nomor_lokal = -1 # Fase 5 G4: tebakan duel yang sedang berjalan dibuang (tanpa hadiah)
+	ui_elemen.batal_tebak()
 	if not _replay_duel_berjalan:
 		ui_elemen.hide()
 		# Musik duel (dimulai rpc_duel_dimulai/rpc_minta_pilihan_elemen_duel sejak
@@ -604,6 +606,8 @@ func _reset_penantian_host() -> void:
 	_koin_seri_wajib.clear()
 	_pilihan_elemen_jaringan.clear()
 	_duel_mengumpulkan = false
+	_tebak_terbuka = false # Fase 5 G4
+	_tebakan_duel.clear()
 	_menunggu_aksi_slot = -1
 	_slot_pemilih_cabang = -1
 	_jawaban_cabang_client = -1

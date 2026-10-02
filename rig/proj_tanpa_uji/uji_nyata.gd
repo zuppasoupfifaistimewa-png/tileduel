@@ -24,6 +24,20 @@ var _klaim_bounty_prev: Array = []
 var _getar_maks: float = 0.0     # Fase 5 (getaran kamera Earthquake): h_offset terbesar selama getaran, dicatat saat selesai
 var _getar_aktif: bool = false
 var _bantuan_prev: Array = []   # Fase 5 G3: stat kartu_bantuan per slot (log KARTU_BANTUAN)
+# --- Fase 5 G4 (rig-only): tebak=1 -> robot penonton menebak tiap duel yang ditonton, lalu mencocokkan
+# stat tebak_benar & teks "Good guess!"/"Wrong guess." dengan pemenang duel yang sebenarnya (log TEBAK_*).
+var tebak_uji = false
+var _tebak_sejak = -1.0
+var _tebak_n = 0
+var _tebak_menunggu = -1          # slot yang ditebak di duel yang belum selesai (-1 = tidak menebak)
+var _tebak_ui_hasil = ""
+var _tebak_menang_prev: Array = []
+var _tebak_benar_prev = 0
+var _tebak_total = 0
+var _tebak_benar_total = 0
+var _tebak_cek_ok = 0
+var _tebak_cek_gagal = 0
+var _sig_tebak_ui = ""
 var _inv_prev: Array = []
 var _bintang_prev: Array = []
 var _foto_akhir = false
@@ -221,6 +235,7 @@ func _ready():
 		if a == "iklan=1": iklan_uji = true
 		if a.begins_with("uang0="): uang0_uji = int(a.substr(6))
 		if a == "profil=1": cek_profil = true
+		if a == "tebak=1": tebak_uji = true # Fase 5 G4
 		if a == "semua_ai=1": semua_ai = true
 		if a.begins_with("role="): role_uji = Array(a.substr(5).split(","))
 		if a.begins_with("jenis="): jenis_uji = int(a.substr(6))
@@ -470,6 +485,9 @@ func _tulis_dan_keluar(alasan: String) -> void:
 		if p.get("_permainan_selesai") and not role_uji.is_empty():
 			xprole0 = int(ProfilPemain.xp_role.get(str(role_uji[0]), 0)) - _xprole0_awal
 		print("SEIMBANG peta=%s seed=%d quick=%d roles=%s pemenang=%d cara=%s giliran=%d detik=%.1f pasang=%s kena=%s kaya=%s rinci=%s presets=%s sacred=%d xprole0=%d" % [nama_peta, benih, int(p.mode_quick), ",".join(roles), pm, cara, jumlah_giliran, detik_total, ",".join(pasang), ",".join(kena), ",".join(kaya), ",".join(rinci), presets_teks, _hitung_sacred(), xprole0])
+	if tebak_uji:
+		var stat_tebak = p.statistik_slot[p.slot_lokal].get("tebak_benar", 0) if p != null and p.statistik_slot.size() > p.slot_lokal else -1
+		print("TEBAK_RINGKAS tebakan=%d benar=%d cek_ok=%d cek_gagal=%d stat_tebak_benar_slot%d=%d" % [_tebak_total, _tebak_benar_total, _tebak_cek_ok, _tebak_cek_gagal, p.slot_lokal if p != null else -1, int(stat_tebak)])
 	super(alasan)
 
 func _hitung_sacred() -> int: # F0 (B-f, 14.19): pemindai papan, dipakai baris SEIMBANG
@@ -597,6 +615,8 @@ func _process(delta):
 		mulai = false
 		_ambil_foto_akhir()
 		return
+	if tebak_uji:
+		_urus_tebak()
 	var g_lama = jumlah_giliran
 	super(delta)
 	if jumlah_giliran != g_lama and jumlah_giliran % 20 == 0:
@@ -609,6 +629,49 @@ func _process(delta):
 			jejak.append("D|%.1f|%s" % [detik_total, sig])
 	if awalan_foto != "" and jumlah_giliran != g_lama and jumlah_giliran in [4, 9]:
 		_foto("giliran%d" % jumlah_giliran)
+
+func _urus_tebak() -> void:
+	# Fase 5 G4 (rig-only): robot penonton. Menebak ~0.6 dtk setelah tombol muncul
+	# (selang-seling penyerang/pembela), lalu saat duel selesai (duel_menang slot
+	# mana pun naik) mencocokkan stat tebak_benar dan teks hasil di layar duel.
+	var tb = ui.tombol_tebak_p
+	if tb.is_visible_in_tree():
+		if _tebak_sejak < 0.0:
+			_tebak_sejak = detik_total
+		if detik_total - _tebak_sejak >= 0.6:
+			_tebak_sejak = -1.0
+			var pakai_p = (_tebak_n % 2 == 0)
+			_tebak_n += 1
+			_tebak_menunggu = p._duel_slot_penyerang if pakai_p else p._duel_slot_pembela
+			_tebak_total += 1
+			print("TEBAK_PILIH slot=%d tebak=%d penyerang=%d pembela=%d" % [p.slot_lokal, _tebak_menunggu, p._duel_slot_penyerang, p._duel_slot_pembela])
+			(ui.tombol_tebak_p if pakai_p else ui.tombol_tebak_m).pressed.emit()
+	else:
+		_tebak_sejak = -1.0
+	var sig_ui = "%d|%s" % [int(ui.teks_tebak.visible), ui.teks_tebak.text]
+	if sig_ui != _sig_tebak_ui:
+		_sig_tebak_ui = sig_ui
+		if ui.teks_tebak.visible:
+			print("TEBAK_UI '%s'" % ui.teks_tebak.text)
+			if ui.teks_tebak.text.begins_with("Good") or ui.teks_tebak.text.begins_with("Wrong"):
+				_tebak_ui_hasil = ui.teks_tebak.text
+	var menang_kini: Array = p.statistik_slot.map(func(st): return int(st.get("duel_menang", 0)))
+	var benar_kini = int(p.statistik_slot[p.slot_lokal].get("tebak_benar", 0))
+	if _tebak_menang_prev.size() == menang_kini.size():
+		for s in range(menang_kini.size()):
+			if menang_kini[s] > _tebak_menang_prev[s]:
+				if _tebak_menunggu >= 0:
+					var benar_harap = (s == _tebak_menunggu)
+					var ui_harap = "Good guess!" if benar_harap else "Wrong guess."
+					var cek = (benar_kini - _tebak_benar_prev == (1 if benar_harap else 0)) and _tebak_ui_hasil == ui_harap
+					if cek: _tebak_cek_ok += 1
+					else: _tebak_cek_gagal += 1
+					if benar_harap: _tebak_benar_total += 1
+					print("TEBAK_CEK tebak=%d menang=%d benar_diharap=%s stat_naik=%d ui='%s' cek=%s" % [_tebak_menunggu, s, str(benar_harap), benar_kini - _tebak_benar_prev, _tebak_ui_hasil, "OK" if cek else "GAGAL"])
+				_tebak_menunggu = -1
+				_tebak_ui_hasil = ""
+	_tebak_menang_prev = menang_kini
+	_tebak_benar_prev = benar_kini
 
 func _cek_uang_setelah_iklan(uang_sebelum: int) -> void:
 	await get_tree().create_timer(0.8).timeout

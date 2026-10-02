@@ -242,7 +242,8 @@ func statistik_kosong() -> Dictionary:
 	return {"giliran": 0, "dadu_total": 0, "dadu_kali": 0, "duel_menang": 0, "duel_kalah": 0,
 		"menang_elemen": {"api": 0, "air": 0, "tanah": 0, "petir": 0, "angin": 0}, "petak_rebut": 0,
 		"jebakan_pasang": 0, "jebakan_kena": 0, "koin_jebakan": 0, "petak_beli": 0, "menara_bangun": 0,
-		"menara_lv2": 0, "permata": 0, "lewat_start": 0, "kartu_pakai": 0, "bounty": 0, "kartu_bantuan": 0}
+		"menara_lv2": 0, "permata": 0, "lewat_start": 0, "kartu_pakai": 0, "bounty": 0, "kartu_bantuan": 0,
+		"tebak_benar": 0}
 
 func _nilai_stat(baris: Dictionary, kunci: String) -> int:
 	var st = baris.get("stat", {})

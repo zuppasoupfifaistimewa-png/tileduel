@@ -12,6 +12,9 @@ signal duel_selesai
 # --- LEMPAR KOIN PENENTU SERI (MULTIPLAYER) ---
 # Naik ke pemain.gd: "pemain di device INI sudah memilih sisi koin, kirimkan".
 signal koin_lokal_dikunci(pilihan)
+# Fase 5 G4 (Tebak Duel): penonton mengetuk salah satu peserta ("pemain" = sisi
+# atas-kanan = penyerang, "musuh" = pembela). Naik ke pemain_duel.gd.
+signal tebakan_dipilih(sisi)
 # Dipancarkan tiap kali pemain.gd menitipkan data koin baru dari jaringan.
 signal data_koin_jaringan_tiba
 # Titipan data koin dari jaringan. WAJIB ditampung, bukan cuma sinyal: kiriman
@@ -41,6 +44,14 @@ var koin_ringan_skala = 0.0
 var nama_sisi_p: String = "YOU"
 var nama_sisi_m: String = "ENEMY"
 var mode_tonton: bool = false
+
+# --- Fase 5 G4: TEBAK DUEL (penonton manusia menebak pemenang) ---
+# tebak_sisi = tebakan device ini di duel yang sedang tampil: "pemain" / "musuh" /
+# "" (belum menebak, atau tebakannya ditolak host). Dipakai pengumuman akhir duel.
+var tebak_sisi: String = ""
+var tombol_tebak_p: Button
+var tombol_tebak_m: Button
+var teks_tebak: Label
 
 var memori_serang_pemain = {"api": 0, "air": 0, "angin": 0, "tanah": 0, "petir": 0}
 var memori_bertahan_pemain = {"api": 0, "air": 0, "angin": 0, "tanah": 0, "petir": 0}
@@ -150,6 +161,7 @@ func _ready():
 	warna_bg_asli = self.color 
 	_setup_ui_dasar()
 	_kalkulasi_posisi_pentagon()
+	_setup_ui_tebak()
 	_setup_audio_mekanik()
 
 func _setup_audio_mekanik():
@@ -375,6 +387,100 @@ func _kalkulasi_posisi_pentagon():
 		btn.pressed.connect(_on_tombol_ditekan.bind(nama))
 		add_child(btn)
 		tombol_elemen[nama] = btn
+
+func _setup_ui_tebak() -> void:
+	# Fase 5 G4: dua tombol nama peserta + satu teks. Tombol hanya muncul lewat
+	# tampilkan_tebak() di layar penonton; ditaruh bertumpuk di tengah (celah
+	# antara kedua pentagon cuma ~240 px di layar 1280 x 720).
+	var gaya = StyleBoxFlat.new()
+	gaya.bg_color = Color(0.2, 0.6, 0.9)
+	gaya.border_width_bottom = 6
+	gaya.border_color = Color(0.1, 0.3, 0.5)
+	gaya.set_corner_radius_all(14)
+	var gaya_tekan = gaya.duplicate()
+	gaya_tekan.bg_color = Color(0.1, 0.4, 0.7)
+	teks_tebak = Label.new()
+	teks_tebak.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	teks_tebak.add_theme_font_size_override("font_size", 28)
+	teks_tebak.add_theme_color_override("font_outline_color", Color.BLACK)
+	teks_tebak.add_theme_constant_override("outline_size", 6)
+	teks_tebak.size = Vector2(500, 40)
+	teks_tebak.position = Vector2(size.x / 2.0 - 250.0, size.y * 0.8)
+	teks_tebak.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	teks_tebak.hide()
+	add_child(teks_tebak)
+	var y_awal = tengah_pemain.y - 40.0
+	for sisi in ["pemain", "musuh"]:
+		var b = Button.new()
+		b.size = Vector2(200, 64)
+		b.position = Vector2(size.x / 2.0 - 100.0, y_awal + (0.0 if sisi == "pemain" else 80.0))
+		b.add_theme_font_size_override("font_size", 30)
+		b.add_theme_color_override("font_color", Color.WHITE)
+		b.add_theme_constant_override("outline_size", 6)
+		b.add_theme_stylebox_override("normal", gaya)
+		b.add_theme_stylebox_override("hover", gaya)
+		b.add_theme_stylebox_override("pressed", gaya_tekan)
+		b.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
+		b.pressed.connect(_on_tombol_tebak_ditekan.bind(sisi))
+		b.hide()
+		add_child(b)
+		if sisi == "pemain":
+			tombol_tebak_p = b
+		else:
+			tombol_tebak_m = b
+
+func tampilkan_tebak(nama_p: String, nama_m: String) -> void:
+	# Layar penonton, fase pilih elemen: ajak pemain menebak pemenang duel.
+	tebak_sisi = ""
+	tombol_tebak_p.text = nama_p
+	tombol_tebak_m.text = nama_m
+	tombol_tebak_p.show()
+	tombol_tebak_m.show()
+	teks_tebak.text = "WHO WINS? TAP ONE!"
+	teks_tebak.modulate = Color(1.0, 1.0, 0.5)
+	teks_tebak.show()
+
+func sembunyikan_tombol_tebak() -> void:
+	# Jendela tebakan tutup: tombol hilang; ajakan yang tidak dijawab ikut hilang,
+	# tapi "Your guess" / "Too late!" tetap sampai duel selesai.
+	tombol_tebak_p.hide()
+	tombol_tebak_m.hide()
+	if tebak_sisi == "" and teks_tebak.text.begins_with("WHO WINS"):
+		teks_tebak.hide()
+
+func batal_tebak() -> void:
+	# Duel dibatalkan (migrasi host): buang semua sisa tampilan & tebakan.
+	tebak_sisi = ""
+	tombol_tebak_p.hide()
+	tombol_tebak_m.hide()
+	teks_tebak.hide()
+
+func tebak_telat() -> void:
+	# Tebakan ditolak (jendela sudah tutup di host).
+	tebak_sisi = ""
+	teks_tebak.text = "Too late!"
+	teks_tebak.modulate = Color(1.0, 0.5, 0.5)
+	teks_tebak.show()
+
+func _on_tombol_tebak_ditekan(sisi: String) -> void:
+	if tebak_sisi != "":
+		return
+	tebak_sisi = sisi
+	tombol_tebak_p.hide()
+	tombol_tebak_m.hide()
+	teks_tebak.text = "Your guess: " + (tombol_tebak_p.text if sisi == "pemain" else tombol_tebak_m.text)
+	teks_tebak.modulate = Color(0.5, 1.0, 1.0)
+	teks_tebak.show()
+	tebakan_dipilih.emit(sisi)
+
+func _tampilkan_hasil_tebak(pemenang: String) -> void:
+	# Pengumuman akhir duel: penonton yang menebak melihat benar / salah.
+	if tebak_sisi == "":
+		return
+	var benar = (tebak_sisi == pemenang)
+	teks_tebak.text = "Good guess!" if benar else "Wrong guess."
+	teks_tebak.modulate = Color(0.4, 1.0, 0.4) if benar else Color(1.0, 0.5, 0.5)
+	teks_tebak.show()
 
 func _process(delta):
 	if visible:
@@ -857,6 +963,7 @@ func siapkan_pilih_elemen(judul_teks: String) -> void:
 	panel_m.hide()
 	panel_tengah.hide()
 	tombol_putar.hide()
+	batal_tebak() # Fase 5 G4: sisa tebakan duel sebelumnya
 
 	teks_judul.text = judul_teks
 	teks_judul.modulate = Color.CYAN
@@ -902,6 +1009,7 @@ func jalankan_duel(siapa_penyerang, nyawa_kandang = 0, kamera_node = null, teks_
 	panel_m.hide()
 	panel_tengah.hide()
 	tombol_putar.hide()
+	sembunyikan_tombol_tebak() # Fase 5 G4: jendela tebakan sudah tutup
 	
 	if siapa_penyerang == "pemain":
 		angka_p = angka_penyerang
@@ -1246,8 +1354,10 @@ func jalankan_duel(siapa_penyerang, nyawa_kandang = 0, kamera_node = null, teks_
 			teks_judul.text = nama_sisi_m + " WON THE TIE-BREAKER!"
 			teks_judul.modulate = Color.RED
 			
+		_tampilkan_hasil_tebak(pemenang_akhir) # Fase 5 G4: jalur koin tidak lewat panel akhir
 		await get_tree().create_timer(3.0).timeout
 
+	_tampilkan_hasil_tebak(pemenang_akhir) # Fase 5 G4
 	if panel_tengah.visible:
 		var warna_teks = "cyan" if pemenang_akhir == "pemain" else "red"
 		var akhir_skor = skor_akhir_p if pemenang_akhir == "pemain" else skor_akhir_m
@@ -1288,6 +1398,7 @@ func jalankan_duel(siapa_penyerang, nyawa_kandang = 0, kamera_node = null, teks_
 		await get_tree().create_timer(4.5).timeout
 
 	cuaca_aktif = ""
+	batal_tebak() # Fase 5 G4: tebakan duel ini sudah dinilai
 	hide()
 	duel_selesai.emit()
 

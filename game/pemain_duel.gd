@@ -26,6 +26,12 @@ var _duel_mengumpulkan: bool = false    # host sedang menunggu pilihan elemen pe
 # HOST: penjaga timer "berpikir" AI (_ai_kunci_elemen_tertunda) supaya timer dari
 # duel SEBELUMNYA tidak nyasar mengunci elemen duel BERIKUTNYA.
 var _nomor_duel: int = 0
+# Fase 5 G4 (Tebak Duel). Penonton manusia menebak pemenang selama fase pilih elemen;
+# permainan TIDAK pernah menunggu tebakan. Dicatat di host/solo, ikut statistik
+# ("tebak_benar") ke semua device lewat siaran state yang sudah ada.
+var _tebakan_duel: Dictionary = {}  # HOST/SOLO: slot penebak -> slot yang ditebak (duel ini)
+var _tebak_terbuka: bool = false    # HOST/SOLO: jendela tebakan masih terbuka
+var _tebak_nomor_lokal: int = -1    # device INI: nomor duel yang sedang bisa ditebak (-1 = tidak ada)
 # CLIENT: naik setiap kali device ini mengambil alih permainan karena host keluar.
 # Coroutine lama yang masih menunggu klik untuk dikirim ke host jadi tahu diri.
 var _generasi_jaringan: int = 0
@@ -146,6 +152,7 @@ func _mulai_duel(slot_a: int) -> void:
 
 	AudioGrafis.mulai_musik_duel(self)
 	var hasil_duel = await _jalankan_duel(slot_a, slot_d, nyawa_petak[posisi], poin_bonus_pedang)
+	_nilai_tebakan_duel(int(hasil_duel["slot_pemenang"])) # Fase 5 G4
 	AudioGrafis.kembali_ke_musik_normal(self)
 	eksekusi_dadu_pertarungan(hasil_duel, slot_a, slot_d)
 
@@ -226,10 +233,14 @@ func _tonton_ai_pilih_elemen(slot_a: int, slot_d: int) -> void:
 	_duel_slot_penyerang = slot_a
 	_duel_slot_pembela = slot_d
 	ui_elemen.siapkan_tonton_pilih_elemen(ui_elemen._kata_serang(ui_elemen.nama_sisi_p) + " CHOOSING ELEMENTS...")
+	_tebakan_duel.clear()
+	_tebak_terbuka = true # Fase 5 G4: jendela tebakan = selama kedua segel belum terkunci
+	_buka_tebak_duel(slot_a, slot_d, 0)
 	await get_tree().create_timer(1.5).timeout
 	_tampilkan_segel_terkunci(slot_a)
 	await get_tree().create_timer(1.0).timeout
 	_tampilkan_segel_terkunci(slot_d)
+	_tebak_terbuka = false
 
 func _naskah_duel_ai(slot_a: int, slot_d: int, nyawa_kandang: int, bonus_pedang: int) -> Dictionary:
 	# SOLO, kedua peserta AI (3-4 pemain): semua keputusan diambil di sini, lalu
@@ -282,6 +293,8 @@ func _kumpulkan_naskah_duel(slot_a: int, slot_d: int, nyawa_kandang: int, bonus_
 	_duel_slot_pembela = slot_d
 	_nomor_duel += 1
 	var nomor_ini = _nomor_duel
+	_tebakan_duel.clear()
+	_tebak_terbuka = true # Fase 5 G4: tutup begitu semua peserta terkunci (di bawah)
 
 	# Permintaan ke client dikirim DULU, sebelum host menunggu kliknya sendiri --
 	# kalau ditaruh setelah await, baris ini tidak akan pernah tercapai selama
@@ -293,9 +306,9 @@ func _kumpulkan_naskah_duel(slot_a: int, slot_d: int, nyawa_kandang: int, bonus_
 	# Device lain yang bukan peserta cuma menonton: kabari duelnya sudah mulai --
 	# layar duel mode tonton dibuka SEJAK AWAL fase pilih elemen (bukan cuma teks).
 	var peserta_jaringan = [_peer_slot(slot_a), _peer_slot(slot_d)]
-	_rpc_ke_klien_kecuali(peserta_jaringan, "rpc_duel_dimulai", [slot_a, slot_d])
+	_rpc_ke_klien_kecuali(peserta_jaringan, "rpc_duel_dimulai", [slot_a, slot_d, nomor_ini])
 	if slot_a != slot_lokal and slot_d != slot_lokal:
-		rpc_duel_dimulai(slot_a, slot_d)
+		rpc_duel_dimulai(slot_a, slot_d, nomor_ini)
 
 	# Host yang IKUT jadi peserta harus sudah membuka layar pilih elemennya
 	# sendiri SEBELUM AI lawannya mulai "berpikir" -- supaya jeda berpikirnya
@@ -329,6 +342,7 @@ func _kumpulkan_naskah_duel(slot_a: int, slot_d: int, nyawa_kandang: int, bonus_
 			await elemen_jaringan_diterima
 	var elemen = {slot_a: _pilihan_elemen_jaringan[slot_a], slot_d: _pilihan_elemen_jaringan[slot_d]}
 	_duel_mengumpulkan = false
+	_tebak_terbuka = false # Fase 5 G4: tebakan yang datang sesudah ini -> "Too late!"
 	ui_elemen.hide()
 
 	# Pool angka_penyerang/angka_pembela tetap (bukan diacak), jadi tinggal
@@ -441,7 +455,7 @@ func _tunggu_pilihan_elemen_lokal() -> String:
 	return await _tunggu_klik_elemen_lokal()
 
 @rpc("authority", "call_remote", "reliable")
-func rpc_duel_dimulai(slot_a: int, slot_d: int) -> void:
+func rpc_duel_dimulai(slot_a: int, slot_d: int, nomor: int = 0) -> void:
 	# Diterima di device PENONTON (bukan peserta duel; host memanggilnya juga
 	# secara lokal kalau HOST sendiri yang menonton) -- duel sudah mulai, peserta
 	# sedang memilih elemen. Sejak baris ini layar duel mode tonton langsung
@@ -457,6 +471,7 @@ func rpc_duel_dimulai(slot_a: int, slot_d: int) -> void:
 		AudioGrafis.mulai_musik_duel(self)
 	_atur_nama_duel(slot_a, slot_d)
 	ui_elemen.siapkan_tonton_pilih_elemen(ui_elemen._kata_serang(ui_elemen.nama_sisi_p) + " CHOOSING ELEMENTS...")
+	_buka_tebak_duel(slot_a, slot_d, nomor) # Fase 5 G4
 
 @rpc("authority", "call_remote", "reliable")
 func rpc_minta_pilihan_elemen_duel(slot_a: int = 1, slot_d: int = 0) -> void:
@@ -516,12 +531,82 @@ func rpc_mulai_replay_duel(nyawa_kandang: int, naskah: Dictionary) -> void:
 	_replay_duel_berjalan = true
 	var siapa_lokal = "pemain" if sisi_p == slot_a else "musuh"
 	await ui_elemen.jalankan_duel(siapa_lokal, nyawa_kandang, kamera, teks_dadu, naskah.get("bonus_pedang", 0), _naskah_lokal(naskah, sisi_p))
+	_tebak_nomor_lokal = -1 # Fase 5 G4
 	AudioGrafis.kembali_ke_musik_normal(self)
 	teks_uang.show()
 	teks_bintang.show()
 	teks_dadu.show()
 	_replay_duel_berjalan = false
 	replay_duel_selesai.emit()
+
+# ========================================================
+# TEBAK DUEL (Fase 5 G4)
+# Pemain MANUSIA yang menonton duel (bukan peserta) boleh menebak pemenangnya:
+# dua tombol nama peserta di layar tonton, satu ketukan, tidak bisa diubah.
+# Jendela tebakan = fase pilih elemen (host menutupnya begitu semua peserta
+# terkunci; solo menutupnya setelah kedua segel muncul). Tebakan yang datang
+# terlambat dijawab host "Too late!". Tebakan benar = stat "tebak_benar" (hadiah
+# profil dihitung di akhir pertandingan). Tebakan tidak diperlihatkan ke pemain lain.
+# ========================================================
+
+func _buka_tebak_duel(slot_a: int, slot_d: int, nomor: int) -> void:
+	# SEMUA device yang membuka layar tonton: kalau pemain di device ini manusia
+	# dan bukan peserta, tombol tebak ditampilkan. nomor = nomor duel di host
+	# (0 di solo -- tidak dipakai).
+	_tebak_nomor_lokal = -1
+	if _is_ai(slot_lokal) or slot_lokal == slot_a or slot_lokal == slot_d:
+		return
+	_tebak_nomor_lokal = nomor
+	ui_elemen.tampilkan_tebak(_nama_slot(slot_a), _nama_slot(slot_d))
+
+func _saat_tebakan_dipilih(sisi: String) -> void:
+	# Tersambung ke ui_elemen.tebakan_dipilih. Di layar penonton sisi "pemain" =
+	# penyerang, "musuh" = pembela.
+	if _tebak_nomor_lokal < 0:
+		ui_elemen.tebak_telat()
+		return
+	var slot_ditebak = _duel_slot_penyerang if sisi == "pemain" else _duel_slot_pembela
+	if StatusJaringan.peran_multiplayer == "client":
+		rpc_id(1, "rpc_kirim_tebakan", _tebak_nomor_lokal, slot_ditebak)
+	elif not _catat_tebakan(slot_lokal, slot_ditebak):
+		ui_elemen.tebak_telat()
+
+func _catat_tebakan(slot_penebak: int, slot_ditebak: int) -> bool:
+	# HOST/SOLO. Sah kalau: jendela masih terbuka, penebak manusia & BUKAN peserta,
+	# belum menebak di duel ini, dan yang ditebak salah satu peserta.
+	if not _tebak_terbuka or slot_penebak < 0 or _is_ai(slot_penebak) or _tebakan_duel.has(slot_penebak):
+		return false
+	if slot_penebak == _duel_slot_penyerang or slot_penebak == _duel_slot_pembela:
+		return false
+	if slot_ditebak != _duel_slot_penyerang and slot_ditebak != _duel_slot_pembela:
+		return false
+	_tebakan_duel[slot_penebak] = slot_ditebak
+	return true
+
+@rpc("any_peer", "call_remote", "reliable")
+func rpc_kirim_tebakan(nomor: int, slot_ditebak: int) -> void:
+	# Diterima di HOST. nomor = nomor duel yang ditebak (menolak tebakan basi dari
+	# duel sebelumnya). Selalu dijawab, supaya client tahu kalau ditolak.
+	if not multiplayer.is_server():
+		return
+	var pengirim = multiplayer.get_remote_sender_id()
+	var ok = (nomor == _nomor_duel) and _catat_tebakan(_slot_dari_peer(pengirim), slot_ditebak)
+	rpc_id(pengirim, "rpc_tebakan_diterima", nomor, ok)
+
+@rpc("authority", "call_remote", "reliable")
+func rpc_tebakan_diterima(nomor: int, ok: bool) -> void:
+	# Diterima di CLIENT: jawaban host. Ditolak = "Too late!" (hanya tampilan).
+	if ok or nomor != _tebak_nomor_lokal:
+		return
+	ui_elemen.tebak_telat()
+
+func _nilai_tebakan_duel(slot_menang: int) -> void:
+	# HOST/SOLO: duel selesai -- tiap tebakan yang tepat dicatat sebagai stat.
+	for s in _tebakan_duel:
+		if int(_tebakan_duel[s]) == slot_menang:
+			_tambah_stat(int(s), "tebak_benar")
+	_tebakan_duel.clear()
+	_tebak_nomor_lokal = -1
 
 # ========================================================
 # LEMPAR KOIN PENENTU SERI (MULTIPLAYER)

@@ -48,6 +48,7 @@ func _ready():
 		# koin, pilihannya diteruskan ke device lawan.
 		ui_elemen.koin_lokal_dikunci.connect(_saat_koin_seri_lokal_dipilih)
 	ui_elemen.paksa_seri = UJI_SERI
+	ui_elemen.tebakan_dipilih.connect(_saat_tebakan_dipilih) # Fase 5 G4
 
 	anim_pemain.play("idle")
 	anim_musuh.play("idle")
