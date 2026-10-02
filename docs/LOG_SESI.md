@@ -3,6 +3,14 @@
 Satu entri per sesi, terbaru di atas. Sesi baru tidak bisa membaca percakapan lama, jadi apa pun yang penting
 harus tercatat di sini, di `HANDOFF_LANJUT.md`, atau di RENCANA.
 
+## 2026-10-02 -- sesi Claude Code cloud (Sonnet 5.5): Fase 5 G9 (ZIP b10)
+- Branch kerja: `claude/wonderful-gates-8v431l` (mulai dari 9f3d049). Mode HEMAT KREDIT (sisa kredit cloud ~US$28, target cukup sampai Fase 9): hanya baca CLAUDE.md, HANDOFF 0 & 4, RENCANA_fase5 bagian 5/6/9/10.
+- Keputusan pemilik: **K11 = a, K12 = a** (bounty & kartu bantuan Quick dibiarkan; angka tidak berubah). U9 & regresi MP 37 TIDAK diulang (kode `game/` sama dgn akhir G8).
+- `kiriman/TileDuel_Fase5_b10.zip` dibuat PERTAMA dari `game/` (29 .gd, 13 berbeda dari b9) lalu commit+push (3507b38). Bersih-bersih minimal: 34/35 identik dgn rig, `UJI_*` false, tanpa `print`/TODO -> .gd tidak berubah, ZIP/cek_muat/cek_nilai tidak diulang.
+- Sisa uji: 11 `godot.log` terlacak di `rig/proj_tanpa_uji/sim/home_*`; `git rm` ditolak izin sesi, TIDAK dihapus (pemilik: `git rm -r rig/proj_tanpa_uji/sim`).
+- Daftar uji HP ditulis di RENCANA_fase5 bagian 6; HANDOFF & RENCANA bagian 9 diperbarui.
+- Langkah berikutnya: pemilik uji HP dgn b10 (HP + laptop untuk MP, semua build sama); bug -> Opus. Lalu rilis; fase berikutnya (Fase 6+) = rencana baru (Opus).
+
 ## 2026-10-02 -- sesi Claude Code cloud (Opus 5.5): Fase 5 G8 (keseimbangan + soft-lock bangkrut)
 - Branch kerja: `claude/wonderful-gates-8v431l` (CLAUDE.md & HANDOFF bagian 0 diperbarui; `claude/new-session-e4ogqo` LAMA).
 - Soft-lock "bangkrut tanpa petak" DIPERBAIKI dgn aturan yang sudah ada (hutang dibawa, giliran lanjut; RPC baru `rpc_jual_habis`).

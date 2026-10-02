@@ -1,9 +1,9 @@
-# HANDOFF -- lanjutkan proyek Tile Duel (Fase 4 SELESAI; Fase 5: G0-G8 SELESAI; berikutnya keputusan pemilik K11/K12, lalu G9 = Sonnet)
+# HANDOFF -- lanjutkan proyek Tile Duel (Fase 4 SELESAI; Fase 5: G0-G9 SELESAI; berikutnya uji HP pemilik dgn `kiriman/TileDuel_Fase5_b10.zip`)
 
 Dokumen ini ditulis 02-10-2026 supaya sesi Claude Code (cloud / web, tanpa CLI) mana pun bisa melanjutkan
 pekerjaan TANPA riwayat percakapan. BACA INI DULU, lalu `docs/RENCANA_fase4_role.md` bagian 14.19 & **14.21-14.24** (paling akhir).
 Diperbarui 02-10 (Opus, sesi Claude Code cloud): **uji HP pemilik dengan `kiriman/TileDuel_FaseB_b9.zip` = "lancar" -> Fase 4 SELESAI** (RENCANA 14.24).
-Berikutnya: pemilik merilis A+B (daftar periksa di bagian 5). **Fase 5: rencana `docs/RENCANA_fase5_seru.md` DISETUJUI 02-10 (K1-K10 = a); G0-G7 + getaran Earthquake SELESAI (Sonnet, 02-10); G8 SELESAI (Opus, 02-10, RENCANA_fase5 bagian 10) -> berikutnya pemilik memilih K11 (bounty Quick) & K12 (kartu bantuan Quick), lalu Sonnet G9 (bersih-bersih + ZIP b10 + uji HP).**
+Berikutnya: pemilik merilis A+B (daftar periksa di bagian 5). **Fase 5: rencana `docs/RENCANA_fase5_seru.md` DISETUJUI 02-10 (K1-K10 = a); G0-G7 + getaran Earthquake SELESAI (Sonnet, 02-10); G8 SELESAI (Opus, 02-10, RENCANA_fase5 bagian 10); pemilik memilih K11 = a, K12 = a (tanpa perubahan angka); G9 SELESAI (Sonnet, 02-10): `kiriman/TileDuel_Fase5_b10.zip` (29 .gd) -> berikutnya pemilik uji HP (daftar: RENCANA_fase5 bagian 6).**
 
 **Fase 5 G0 SELESAI (Sonnet, 02-10):** refactor `denda_petak()` / `harga_beli_tanah()` / `harga_beli_menara(lv)` / `ronde_event` di
 `pemain_dasar.gd` (+ semua pemakai di `ai_jebakan/ai_musuh/pemain/pemain_papan/pemain_tampilan`), `game/` & rig identik (34/35, kecuali stub iklan).
@@ -165,7 +165,7 @@ Tidak ada baris "Guesses" di panel statistik profil (hanya tersimpan di `statist
 | `f5_kandidat/*.patch` | Selisih produksi lama -> ANGKA FINAL F5 (sudah diterapkan di F6). |
 | `hasil/f6_regresi/` | Hasil F6: ringkasan regresi MP 37 skenario, `batch_reg10`, `cek_nilai` 8/8. Tinjauan F6: `tinjauan_reg10/` (temuan 1), `tinjauan_mp_d1/` (temuan 4) -- baca `RINGKAS.txt` masing-masing. |
 | `hasil/f7_bersih/` | F7: `F7_cek.txt` (grep debug, sinkron, cek_muat, cek_nilai) + log `uji_tanah2` setelah diperbaiki. |
-| `kiriman/` | F8: `TileDuel_FaseB_b9.zip` = 29 .gd resmi + `RENCANA_fase4_role.md` (30 file). **Uji HP pemilik lolos (02-10); isi = `game/` saat ini.** |
+| `kiriman/` | `TileDuel_FaseB_b9.zip` (F8; 29 .gd + RENCANA, uji HP lolos) dan **`TileDuel_Fase5_b10.zip` (G9; 29 .gd = `game/` saat ini, komit 3507b38; belum diuji HP)**. |
 
 ## 2. Status ringkas (rincian: RENCANA 14.21)
 - F0-F4 selesai. **F5 SELESAI 02-10 (Opus).** Semua syarat P14 lolos di benih BARU 20000:
@@ -240,6 +240,10 @@ Rig-only lain: `uji_*`, `cek_muat_f3.gd` (alat), dan 5 file proyek yang tidak ad
 - **Fase 5 (rencana Opus 02-10, DISETUJUI): `docs/RENCANA_fase5_seru.md`** -- event papan, bounty, kartu bantuan posisi terakhir, Tebak Duel,
   putar ulang rolet (iklan, solo), tombol AI cepat (solo). Status: **DISETUJUI 02-10, pemilik "setuju semua a"**
   (dicatat di bagian 1 & 9 rencana itu). G0-G8 SELESAI (G8 Opus 02-10, bagian 10). Berikutnya: (1) pemilik memilih **K11** (bounty Quick) & **K12** (kartu bantuan Quick), RENCANA_fase5 10.4; kalau b/c -> Sonnet menerapkan + U9 S1+S2 ulang di benih BARU (mis. 70000) WAJIB sebelum G9; kalau a/a -> langsung **G9 (Sonnet)**: bersih-bersih (pola F7) + `kiriman/TileDuel_Fase5_b10.zip` (set lengkap) + uji HP (RENCANA_fase5 bagian 6). Baca rencana itu PENUH (~280 baris); RENCANA_fase4 hanya untuk rujukan.
+- **G9 SELESAI (Sonnet, 02-10):** K11 = a, K12 = a (RENCANA_fase5 bagian 9). `kiriman/TileDuel_Fase5_b10.zip` = 29 .gd resmi dari `game/` akhir G8 (13 berbeda dari b9; 6 file pendukung tidak dikirim, tidak berubah sejak b9).
+  Bersih-bersih minimal: `game/` 34/35 identik dgn rig (beda hanya stub iklan), `UJI_*` false, tanpa `print`/TODO -> tidak ada .gd `game/` berubah, ZIP tidak dibuat ulang; `cek_muat`/`cek_nilai`/regresi MP/U9 TIDAK diulang (sengaja, hemat kredit; hasil G8 masih berlaku).
+  SISA: 11 `godot.log` terlacak di `rig/proj_tanpa_uji/sim/home_*` (sampah uji) -- penghapusan ditolak izin sesi, hapus dgn `git rm -r rig/proj_tanpa_uji/sim` bila mau.
+  **BERIKUTNYA (pemilik): uji HP b10** (RENCANA_fase5 bagian 6) lalu rilis A+B+Fase 5 (daftar periksa rilis di atas, plus `ID_INTERSTISIAL_ASLI`). Bug dari HP -> Opus dulu.
 - Opsional (Sonnet, tidak menghalangi rilis): T22 (rig-only, D1 lebih kuat, RENCANA 14.23); komentar F5 untuk
   `hot_flames`/`fire_tax`/`strong_wind` di `data_role.gd` (komentar saja; ikut kiriman berikutnya).
 - Cara regresi MP di sesi cloud: salin `rig/skrip/jalankan_mp3.sh`, `uji_f2_t2_a/b.sh` ke scratchpad, ganti path

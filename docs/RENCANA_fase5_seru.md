@@ -194,12 +194,22 @@ Fitur 1-3 mengubah ekonomi pertandingan AI-vs-AI -> keseimbangan role (P14, Fase
   Kalau P14 gagal -> Opus menyetel K3/K5.
 - **G9 (Sonnet).** Bersih-bersih (pola F7) -> kiriman `kiriman/TileDuel_Fase5_b10.zip` (set lengkap) -> uji HP.
 
-## 6. Uji HP pemilik (setelah G9)
-Solo Quick 2P & 4P: tiap event minimal sekali terlihat (spanduk + label), Market Day harga di tombol turun, Gold
-Rush denda di tombol naik; bounty diklaim; kartu bantuan muncul saat tertinggal jauh; Tebak Duel di solo 4P
-(XP tebak di kartu hadiah); kalah duel -> tombol SPIN AGAIN (iklan) -> rolet berputar ulang; tombol ">>".
-Multiplayer HP + laptop: event & bounty SAMA di kedua layar; penonton (3P) bisa menebak; satu device keluar saat
-ronde event -> event tetap. FPS di Very Low tidak turun saat spanduk event.
+## 6. Uji HP pemilik (setelah G9) -- untuk `kiriman/TileDuel_Fase5_b10.zip`
+**Pasang:** buang unduhan lama, TIMPA ke-29 .gd (13 berbeda dari b9; jangan hanya salin sebagian), buka Godot, tunggu impor,
+pasang ke HP. `pengelola_iklan.gd` TIDAK ada di ZIP (iklan interstisial masih ID uji; pemilik putuskan sebelum rilis).
+Multiplayer: SEMUA HP/laptop harus build b10 yang sama (RPC baru: `rpc_kirim_tebakan`, `rpc_tebakan_diterima`, `rpc_jual_habis`, param `rpc_duel_dimulai`).
+**A. Solo Quick 2P & 4P (Classic juga sekali, 4P):**
+1. Event papan: tiap event (Gold Rush, Market Day, Earthquake, Star Shower) minimal sekali terlihat -- spanduk + label HUD; Market Day: harga beli di tombol TURUN;
+   Gold Rush: denda di tombol NAIK; Earthquake: kamera bergetar sebentar lalu diam normal (kekuatan 0,5 = tebakan, boleh disetel); tidak ada getaran di Very Low.
+2. Bounty: elemen bounty tampil di HUD; menang duel dengan elemen itu -> +1 bintang (di Quick jarang terjadi -- K11 = a, bukan bug).
+3. Kartu bantuan: saat tertinggal jauh lewat START -> spanduk "COMEBACK CARD!" + kartu masuk inventaris (di Quick jarang -- K12 = a; lebih mudah dilihat di Classic).
+4. Tebak Duel (solo 3-4P, kamu penonton): dua tombol nama peserta + "WHO WINS? TAP ONE!"; jendela cukup untuk mengetuk (G8 +2 dtk); hasil "Good guess!"/"Wrong guess."; di kartu hadiah akhir ada baris "Duel guesses" (+5 XP/+3 Crowns per benar, maks 5).
+5. Putar ulang rolet: kalah skor duel melawan AI -> dialog "SO CLOSE!..." -> [WATCH AD: SPIN AGAIN] -> rolet berputar ulang sekali; NO THANKS = tidak ditawari lagi di pertandingan itu. Perhatikan iklan berhadiah sungguhan & kecepatan Quick 1,5x saat dialog.
+6. Tombol ">>" (kanan atas, kiri tombol pengaturan): ketuk = emas (hidup) / abu-abu (mati); hidup = giliran AI 2x (tidak saat duel/menu/spanduk); pilihan diingat setelah game ditutup; tombol tidak muncul di multiplayer. Cek posisi/ukuran (50x50) tidak menutupi tombol lain.
+7. (Sulit disengaja) Bangkrut: jual semua petak tapi masih minus -> pesan "No more tiles! You carry the debt." lalu giliran LANJUT (tidak macet).
+**B. Multiplayer (HP + laptop):** event & bounty SAMA di kedua layar; penonton (3P) bisa menebak, tebakan tidak terlihat pemain lain, tebakan telat -> "Too late!"; satu device keluar saat ronde event -> event tetap berjalan di host baru.
+**C. Kinerja:** FPS di Very Low tidak turun saat spanduk event; label HUD (event/bounty/ronde) tidak saling menimpa di layar kecil.
+Bug dari HP -> catat langkah + layar, kirim ke sesi Opus dulu (jangan disetel Sonnet).
 
 ## 7. Arahan model
 Rencana & K = Opus (sekarang). G0-G7 & G9 = Sonnet (kode dari rencana ini). G8 = Opus (keseimbangan).
@@ -225,6 +235,9 @@ pernah di tengah giliran multiplayer).
 - 02-10 (Sonnet): **G7 SELESAI** (hadiah profil Tebak Duel: 5 XP/3 Crowns per tebakan benar maks 5, tidak ikut DOUBLE, baris kartu "Duel guesses", `tebak_benar` di STAT_SEUMUR; `hasil/g7_profil/`: uji unit 21/21, solo penuh PROFIL_CEK OK, MP Quick 3P PROFIL_MP OK, S1 100 G4==G7). Berikutnya G8 (OPUS).
   TEMUAN untuk Opus: soft-lock bangkrut tanpa petak (kode lama; lihat HANDOFF "TEMUAN").
 - 02-10 (Opus): **G8 SELESAI** -- soft-lock bangkrut diperbaiki, jendela tebak solo diperlebar, U9 ulang LOLOS P14 (benih 50000/60000), regresi MP 37 + skenario baru. Rincian & usulan K11/K12: bagian 10. Berikutnya: keputusan pemilik K11/K12, lalu G9 (Sonnet).
+- 02-10 (pemilik): **KEPUTUSAN K11 = a, K12 = a** (bounty & kartu bantuan di Quick dibiarkan; tidak ada perubahan angka -> U9 TIDAK diulang, regresi MP 37 TIDAK diulang karena kode `game/` sama dgn akhir G8).
+- 02-10 (Sonnet): **G9 SELESAI** -- `kiriman/TileDuel_Fase5_b10.zip` (29 .gd = `game/` akhir G8, komit 3507b38). Bersih-bersih minimal: `game/` 34/35 identik dgn rig (beda hanya stub iklan), saklar `UJI_*` false, tanpa `print`/TODO;
+  tidak ada .gd `game/` yang berubah -> ZIP tidak dibuat ulang, `cek_muat`/`cek_nilai` tidak diulang (hasil G8: 26/26 & 8/8). Sisa: 11 `godot.log` terlacak di `rig/proj_tanpa_uji/sim/home_*` (sampah uji; penghapusan ditolak izin sesi -> hapus sendiri: `git rm -r rig/proj_tanpa_uji/sim`). Daftar uji HP: bagian 6. Berikutnya: pemilik uji HP b10.
 - 02-10 (Opus): draf ditulis.
 - 02-10: pemilik menyetujui K1-K10 = a. Rencana dikunci. Berikutnya G0 (Sonnet, sesi baru): refactor `denda_petak()`/
   `harga_beli_*()`/`ronde_event` tanpa perubahan perilaku -> bukti identik di rig (bagian 5).
@@ -281,6 +294,7 @@ Hutang tanpa petak tidak pernah terjadi di U9 (semua AI) -- jalur 10.1 terutama 
   APA PUN** (label "BOUNTY: win a duel"), Classic tetap elemen -- usul Opus; c) tanpa bounty di Quick.
 - **K12 (kartu bantuan di Quick).** a) biarkan 1000 (2-5% pertandingan); b) **Quick: selisih 600** (konstanta baru
   `KARTU_BANTUAN_SELISIH_QUICK`), Classic tetap 1000 -- usul Opus; c) Quick 400.
+- **KEPUTUSAN PEMILIK (02-10): K11 = a, K12 = a** (lihat bagian 9).
 - Kalau b/c dipilih: perubahan kecil (Sonnet), lalu WAJIB U9 S1 + S2 ulang di benih baru (~45 menit) sebelum G9, karena
   ekonomi Quick berubah.
 
