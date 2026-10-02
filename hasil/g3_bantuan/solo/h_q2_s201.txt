@@ -1,0 +1,9 @@
+EVENT ronde=1 aktif= terakhir=
+EVENT ronde=2 aktif= terakhir=
+EVENT ronde=3 aktif= terakhir=star_shower
+EVENT ronde=4 aktif= terakhir=star_shower
+EVENT ronde=5 aktif=market_day terakhir=market_day
+EVENT ronde=6 aktif= terakhir=market_day
+EVENT ronde=7 aktif= terakhir=star_shower
+EVENT ronde=8 aktif= terakhir=star_shower
+SEIMBANG peta=alam seed=201 quick=1 roles=api,tanah pemenang=1 cara=ronde giliran=16 detik=293.2 pasang=3,3 kena=2,2 kaya=2904,3567 rinci=1/295/0/0/0/4,1/0/0/0/2/0 presets=- sacred=0 xprole0=-1

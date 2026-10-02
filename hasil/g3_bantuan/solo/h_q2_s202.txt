@@ -1,0 +1,5 @@
+EVENT ronde=1 aktif= terakhir=
+EVENT ronde=2 aktif= terakhir=
+EVENT ronde=3 aktif=gold_rush terakhir=gold_rush
+EVENT ronde=4 aktif= terakhir=gold_rush
+SEIMBANG peta=alam seed=202 quick=1 roles=api,petir pemenang=0 cara=start giliran=7 detik=133.0 pasang=1,0 kena=1,0 kaya=4140,2855 rinci=0/220/0/0/0/3,0/0/0/0/0/0 presets=- sacred=0 xprole0=-1

@@ -1,0 +1,10 @@
+EVENT ronde=1 aktif= terakhir=
+EVENT ronde=2 aktif= terakhir=
+EVENT ronde=3 aktif= terakhir=star_shower
+EVENT ronde=4 aktif= terakhir=star_shower
+EVENT ronde=5 aktif= terakhir=earthquake
+GETAR_KAMERA maks_h=0.437 akhir_h=0.000 akhir_v=0.000
+EVENT ronde=6 aktif= terakhir=earthquake
+EVENT ronde=7 aktif=gold_rush terakhir=gold_rush
+EVENT ronde=8 aktif= terakhir=gold_rush
+SEIMBANG peta=alam seed=204 quick=1 roles=api,air pemenang=0 cara=ronde giliran=16 detik=289.0 pasang=1,0 kena=1,0 kaya=3140,2736 rinci=1/204/0/0/0/5,0/0/0/0/4/0 presets=- sacred=0 xprole0=-1

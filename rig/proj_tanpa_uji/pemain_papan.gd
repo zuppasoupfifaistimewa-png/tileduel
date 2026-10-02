@@ -1425,6 +1425,8 @@ func _tampilkan_event_papan(id: String, slot_sasaran: int) -> void:
 	UiDinamis.tampilkan_spanduk(self, judul, warna)
 	teks_dadu.show()
 	teks_dadu.text = _teks_event(id, slot_sasaran)
+	if id == "earthquake":
+		_mulai_getar_kamera() # Fase 5: getaran kamera (semua layar; Very Low dilewati)
 
 func _teks_event(id: String, slot_sasaran: int) -> String:
 	match id:

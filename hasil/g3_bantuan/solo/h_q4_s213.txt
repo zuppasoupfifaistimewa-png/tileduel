@@ -1,0 +1,5 @@
+EVENT ronde=1 aktif= terakhir=
+EVENT ronde=2 aktif= terakhir=
+EVENT ronde=3 aktif=market_day terakhir=market_day
+EVENT ronde=4 aktif= terakhir=market_day
+SEIMBANG peta=alam seed=213 quick=1 roles=api,air,petir,angin pemenang=2 cara=start giliran=15 detik=323.3 pasang=1,2,2,1 kena=0,2,2,0 kaya=3423,3310,4058,2200 rinci=1/0/0/0/0/4,0/535/0/1/0/0,2/100/1/0/0/0,0/0/0/0/2/0 presets=- sacred=0 xprole0=-1

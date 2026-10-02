@@ -1,0 +1,67 @@
+ROBOT host urut=1 mode=3 peta=alam skenario=host_keluar_migrasi
+LOBBY host: klik mode '3 PLAYERS' = true
+LOBBY host: klik peta 'Grassland' = true
+LOBBY host: klik panjang 'QUICK' = true
+LOBBY host: klik MY ROLE = true
+LOBBY host: klik role FIRE = true
+LOBBY host: klik OK = true
+LOBBY host: pemain = [b][color=#3380ff]P1[/color][/b]   HOST (YOU)  [color=#e63333]FIRE[/color] | [b][color=#ff3333]P2[/color][/b]   PLAYER  [color=#3380e6]WATER[/color] | [b][color=#26cc4d]P3[/color][/b]   PLAYER  [color=#996633]EARTH[/color]
+LOBBY host: info = Everyone is here. Press START!
+LOBBY host: START = true
+MASUK_GAME slot_lokal=0 pemain=3 peran_jaringan=host
+START_DITEKAN
+T|YOUR TURN! Choose Action or Roll Dice.
+EVENT ronde=1 aktif= terakhir=
+KARTU_BANTUAN stat=[0, 0, 0] inv=[[], [], []]
+BOUNTY aktif= terakhir= bintang=[4, 4, 4] stat_bounty=[0, 0, 0]
+G1|pemain|[0,5500,4][0,2500,4][0,2500,4]
+R|dadu
+T|You are rolling dice...
+T|Your Roll: 9
+R|jebakan|TombolTrapApi
+T|Fire Trap set! (Burns victim for 3 turns)
+BOUNTY aktif= terakhir= bintang=[3, 4, 4] stat_bounty=[0, 0, 0]
+R|beli
+T|Waiting for P2...
+G2|musuh|[9,5200,3][0,2500,4][0,2500,4]
+T|You are rolling dice...
+T|P2 Roll: 12
+T|FIRE TRAP! Burning for 3 turns!
+T|P2 placed a Water Trap!
+BOUNTY aktif= terakhir= bintang=[3, 3, 4] stat_bounty=[0, 0, 0]
+T|Waiting for P2...
+T|You are rolling dice...
+G3|pemain3|[9,5200,3][12,2200,3][0,2500,4]
+T|P3 Roll: 4
+T|P3 set a Wind Trap!
+BOUNTY aktif= terakhir= bintang=[3, 3, 3] stat_bounty=[0, 0, 0]
+T|Waiting for P3...
+T|First to win a duel with WIND: +1 Star
+EVENT ronde=2 aktif= terakhir=
+BOUNTY aktif=angin terakhir=angin bintang=[3, 3, 3] stat_bounty=[0, 0, 0]
+T|YOUR TURN! Choose Action or Roll Dice.
+G4|pemain|[9,5200,3][12,2200,3][4,2200,3]
+R|dadu
+T|You are rolling dice...
+T|Your Roll: 7
+T|TRAPPED! Geyser Eruption!
+T|Landed randomly! Trapped in a Bubble for 2 turns!
+R|akhiri
+T|P2 is burning! Lost 55 Coins. (2 turns left)
+G5|musuh|[17,5228,3][12,2145,3][4,2200,3]
+T|You are rolling dice...
+T|P2 Roll: 6
+T|P2 landed on a Card Tile!
+D|86.7|ANIMASI_KARTU judul='CARD REVEALED!' target='Tile Duel' a_target=1.0 a_latar=-1.00 kartu=,, kamera=P2 | TEKS='P2 landed on a Card Tile!'
+D|86.9|ANIMASI_KARTU judul='CARD REVEALED!' target='Tile Duel' a_target=1.0 a_latar=-1.00 kartu=, kamera=P2 | TEKS='P2 landed on a Card Tile!'
+D|87.0|ANIMASI_KARTU judul='CARD REVEALED!' target='Tile Duel' a_target=1.0 a_latar=-1.00 kartu=,,SWORD LV 2* kamera=P2 | TEKS='P2 landed on a Card Tile!'
+T|Card saved to Inventory!
+KARTU_BANTUAN stat=[0, 0, 0] inv=[[], ["pedang_2"], []]
+D|89.7|TEKS='Card saved to Inventory!'
+T|P2 set a Wind Trap!
+BOUNTY aktif=angin terakhir=angin bintang=[3, 2, 3] stat_bounty=[0, 0, 0]
+D|96.0|(kosong)
+T|Waiting for P2...
+T|You are rolling dice...
+G6|pemain3|[17,5228,3][18,1845,2][4,2200,3]
+SKENARIO: host keluar paksa di giliran 6

@@ -1,7 +1,7 @@
 # RENCANA FASE 5: Seru dalam pertandingan
 
 Disusun Opus, 02-10-2026 (sesi Claude Code cloud), setelah membaca kode `game/` (hasil Fase 4 = isi ZIP b9).
-**STATUS: DISETUJUI 02-10 -- pemilik: "setuju semua a" (K1-K10 = a). Rencana DIKUNCI. Berikutnya: G0 (Sonnet). Belum ada kode yang ditulis.**
+**STATUS: DISETUJUI 02-10 -- pemilik: "setuju semua a" (K1-K10 = a). Rencana DIKUNCI. G0-G3 SELESAI (lihat bagian 9). Berikutnya: G4 Tebak Duel (Sonnet).**
 
 Sumber isi: dokumen "Rancangan Tile Duel: Retensi, Monetisasi & Role Elemen" (Fase 5 = Tebak Duel, event papan,
 bounty, bantuan posisi terakhir, animasi cepat; syarat lolos "semua HP melihat event yang sama") +
@@ -215,6 +215,8 @@ pernah di tengah giliran multiplayer).
 - 02-10 (Sonnet): **G0 SELESAI & lolos** (S1 100 baris identik F5, cek_nilai 8/8, reg10 sama; `hasil/g0_refactor/`). Berikutnya G1.
 - 02-10 (Sonnet): **G1 SELESAI** (event papan; bukti `hasil/g1_event/`; label HUD belum dilihat di layar sungguhan; getaran Earthquake tidak dibuat). Berikutnya G2.
 - 02-10 (Sonnet): **G2 SELESAI** (bounty; bukti `hasil/g2_bounty/`: solo 27 run, MP sinkron + klaim + migrasi saat bounty aktif). Berikutnya G3.
+- 02-10 (Sonnet): **G3 SELESAI** (kartu bantuan; `hasil/g3_bantuan/`) + **getaran kamera Earthquake dibuat** (`h_offset/v_offset`, dilewati di Very Low). Berikutnya G4 (Tebak Duel).
+  Catatan G8: bounty & kartu bantuan hampir tak muncul di Quick (lihat HANDOFF) -> K3/K4/K5 mungkin perlu disetel Opus.
 - 02-10 (Opus): draf ditulis.
 - 02-10: pemilik menyetujui K1-K10 = a. Rencana dikunci. Berikutnya G0 (Sonnet, sesi baru): refactor `denda_petak()`/
   `harga_beli_*()`/`ronde_event` tanpa perubahan perilaku -> bukti identik di rig (bagian 5).

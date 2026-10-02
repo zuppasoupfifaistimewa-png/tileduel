@@ -1,0 +1,21 @@
+EVENT ronde=1 aktif= terakhir=
+EVENT ronde=2 aktif= terakhir=
+EVENT ronde=3 aktif= terakhir=
+EVENT ronde=4 aktif=gold_rush terakhir=gold_rush
+EVENT ronde=5 aktif= terakhir=gold_rush
+EVENT ronde=6 aktif= terakhir=gold_rush
+EVENT ronde=7 aktif=market_day terakhir=market_day
+EVENT ronde=8 aktif= terakhir=market_day
+EVENT ronde=9 aktif= terakhir=market_day
+KARTU_BANTUAN slot=2 kekayaan=[2663, 2588, 1899, 3706] inv_sebelum=1 inv_sesudah=2 kartu=["pedang_3", "pedang_1"]
+EVENT ronde=10 aktif= terakhir=earthquake
+GETAR_KAMERA maks_h=0.406 akhir_h=0.000 akhir_v=0.000
+EVENT ronde=11 aktif= terakhir=earthquake
+EVENT ronde=12 aktif= terakhir=earthquake
+EVENT ronde=13 aktif= terakhir=star_shower
+EVENT ronde=14 aktif= terakhir=star_shower
+EVENT ronde=15 aktif= terakhir=star_shower
+KARTU_BANTUAN slot=2 kekayaan=[3751, 2662, 2062, 3526] inv_sebelum=1 inv_sesudah=2 kartu=["pedang_1", "pelindung"]
+EVENT ronde=16 aktif= terakhir=earthquake
+GETAR_KAMERA maks_h=0.375 akhir_h=0.000 akhir_v=0.000
+SEIMBANG peta=alam seed=232 quick=0 roles=api,petir,tanah,angin pemenang=0 cara=batas_kaya giliran=61 detik=1390.9 pasang=2,9,5,7 kena=2,9,3,7 kaya=3751,2662,2362,3716 rinci=0/301/2/4/3/8,5/730/1/2/0/0,2/305/2/0/7/0,6/1230/5/4/0/0 presets=- sacred=0 xprole0=-1

@@ -53,6 +53,9 @@ var tahap = "awal"
 var jumlah_giliran = 0
 var _sig_event = "" # Fase 5 G1: log EVENT tiap perubahan (ronde_event/aktif/terakhir)
 var _sig_bounty = "" # Fase 5 G2: log BOUNTY tiap perubahan (aktif/terakhir/bintang tiap slot)
+var _sig_bantuan = "" # Fase 5 G3: log KARTU_BANTUAN tiap perubahan (stat kartu_bantuan + isi inventaris per slot)
+var kaya_awal = false # Fase 5 G3 (rig-only): host mulai +3000 koin -> pemain lain tertinggal >= 1000 -> kartu bantuan muncul saat lewat START
+var _kaya_diberikan = false
 var bounty_pilih = false # Fase 5 G2 (rig-only): robot memilih elemen bounty yang sedang aktif -> klaim pasti terjadi
 var giliran_terakhir = ""
 var teks_terakhir = ""
@@ -106,6 +109,7 @@ func _ready():
 		if a.begins_with("keluar_urut="): urut_keluar = int(a.substr(12))
 		if a.begins_with("panjang="): panjang_uji = a.substr(8)
 		if a == "bounty_pilih=1": bounty_pilih = true
+		if a == "kaya_awal=1": kaya_awal = true
 		if a.begins_with("arena="): arena_uji = a.substr(6)
 		if a == "arena_palsu=1": arena_uji = "custom_ilegal" # F0 (B-f, 14.19, U10): alias -- mekanisme SAMA "custom_ilegal" (B-c/C2) yang sudah menguji rpc_role_lobby/build_arena K16, cuma nama argumen sesuai rencana
 		if a.begins_with("role_ai="): role_ai_uji = a.substr(8).split(",") # D6 (B-d, rig-only)
@@ -332,6 +336,9 @@ func _process(delta):
 				if pedang_awal:
 					for _i in 3:
 						d.inventaris_kartu.append({"id": "pedang_3", "tipe_eksekusi": "simpan", "teks": "SWORD LV 3\n+3 ATK\n(Attacker)"})
+		if peran == "host" and kaya_awal and not _kaya_diberikan:
+			_kaya_diberikan = true
+			p.daftar_pemain[0].uang += 3000
 		if _klik_teks("START GAME"):
 			tahap = "main"
 			if peran == "host":
@@ -418,6 +425,10 @@ func _langkah_main(delta) -> void:
 	if sig_event != _sig_event:
 		_sig_event = sig_event
 		_catat("EVENT ronde=%d aktif=%s terakhir=%s" % [p.ronde_event, p.event_aktif, p.event_terakhir])
+	var sig_bantuan = "%s|%s" % [str(p.statistik_slot.map(func(st): return int(st.get("kartu_bantuan", 0)))), str(p.daftar_pemain.map(func(d): return d.inventaris_kartu.map(func(c): return str(c.get("id", "?")))))]
+	if sig_bantuan != _sig_bantuan:
+		_sig_bantuan = sig_bantuan
+		_catat("KARTU_BANTUAN stat=%s inv=%s" % [str(p.statistik_slot.map(func(st): return int(st.get("kartu_bantuan", 0)))), str(p.daftar_pemain.map(func(d): return d.inventaris_kartu.map(func(c): return str(c.get("id", "?")))))])
 	var sig_bounty = "%s|%s|%s" % [p.bounty_elemen, p.bounty_terakhir, str(p.daftar_pemain.map(func(d): return d.bintang))]
 	if sig_bounty != _sig_bounty:
 		_sig_bounty = sig_bounty

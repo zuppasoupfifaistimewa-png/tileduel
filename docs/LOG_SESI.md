@@ -3,6 +3,15 @@
 Satu entri per sesi, terbaru di atas. Sesi baru tidak bisa membaca percakapan lama, jadi apa pun yang penting
 harus tercatat di sini, di `HANDOFF_LANJUT.md`, atau di RENCANA.
 
+## 2026-10-02 -- sesi Claude Code cloud (Sonnet 5.5): Fase 5 G2 + G3 + getaran kamera Earthquake
+- G2 bounty (commit 4deb81c): satu target elemen aktif, +1 bintang untuk pemenang duel pertama dgn elemen itu; siaran state "bounty"; HUD label; AI ikut klaim. Bukti `hasil/g2_bounty/`:
+  solo 27 run 0 error; MP sinkron + klaim (opsi rig `bounty_pilih=1`) identik di semua proses; host keluar saat bounty aktif -> bertahan di host baru, klaim sesudah migrasi sama di c1/c2.
+- G3 kartu bantuan + getaran kamera Earthquake: lihat HANDOFF (ringkasan & bukti); data `hasil/g3_bantuan/`. Regresi `batch_reg10` sama dgn G0, `cek_nilai` 8/8.
+- Keputusan/temuan: Quick membuat bounty & kartu bantuan hampir tak berarti (1 dari 11 bounty diklaim; 0 kartu di 12 run) -> dicatat untuk G8 (Opus), TIDAK disetel di sesi ini.
+  MP perlu build yang sama di semua HP (RPC baru: rpc_event_papan, rpc_bounty, rpc_kartu_bantuan).
+- Catatan teknis: fungsi yang memanggil `_kekayaan_slot` (ada di pemain.gd, ujung rantai) harus ikut di pemain.gd; `_daftar_kartu_hadiah` di pemain_kartu.gd (awal rantai).
+- Langkah berikutnya: G4 Tebak Duel (Sonnet), sesi baru. Pemilik diingatkan membuka sesi baru karena sesi ini sudah panjang (banyak simulasi).
+
 ## 2026-10-02 -- sesi Claude Code cloud (Sonnet 5.5): Fase 5 G0 + G1
 - G0 (refactor `denda_petak`/`harga_beli_*`/`ronde_event`): S1 100 pertandingan benih 20000 IDENTIK baris per baris dgn F5 konfirmasi, cek_nilai 8/8,
   reg10 sama (uji_tanah2 sama dgn log F7). Data `hasil/g0_refactor/`. Commit 131e42c.

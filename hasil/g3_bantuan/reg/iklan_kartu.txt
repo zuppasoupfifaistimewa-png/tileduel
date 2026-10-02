@@ -1,0 +1,1 @@
+IKLAN_KARTU klik=true kartu=0->1 id=dadu_rendah teks='You got LOW ROLL! Tap Use Card in your turn.' cek=OK

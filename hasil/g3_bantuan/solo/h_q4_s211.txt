@@ -1,0 +1,6 @@
+EVENT ronde=1 aktif= terakhir=
+EVENT ronde=2 aktif= terakhir=
+EVENT ronde=3 aktif= terakhir=earthquake
+GETAR_KAMERA maks_h=0.359 akhir_h=0.000 akhir_v=0.000
+EVENT ronde=4 aktif= terakhir=earthquake
+SEIMBANG peta=alam seed=211 quick=1 roles=api,tanah,petir,air pemenang=1 cara=start giliran=14 detik=238.8 pasang=0,3,0,2 kena=0,1,0,1 kaya=3000,4130,2500,2920 rinci=0/0/0/0/0/3,1/0/0/0/0/0,0/0/0/0/0/0,1/0/0/0/0/0 presets=- sacred=0 xprole0=-1

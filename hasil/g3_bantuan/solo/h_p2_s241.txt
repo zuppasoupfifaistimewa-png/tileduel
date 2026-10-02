@@ -1,0 +1,10 @@
+EVENT ronde=1 aktif= terakhir=
+EVENT ronde=2 aktif= terakhir=
+EVENT ronde=3 aktif=market_day terakhir=market_day
+EVENT ronde=4 aktif= terakhir=market_day
+EVENT ronde=5 aktif=gold_rush terakhir=gold_rush
+EVENT ronde=6 aktif= terakhir=gold_rush
+EVENT ronde=7 aktif= terakhir=earthquake
+GETAR_KAMERA maks_h=0.334 akhir_h=0.000 akhir_v=0.000
+EVENT ronde=8 aktif= terakhir=earthquake
+SEIMBANG peta=pantai seed=241 quick=1 roles=api,tanah pemenang=1 cara=ronde giliran=16 detik=249.9 pasang=1,5 kena=0,2 kaya=2300,3040 rinci=1/0/0/0/0/3,3/0/0/0/0/0 presets=- sacred=0 xprole0=-1

@@ -1,0 +1,81 @@
+ROBOT host urut=1 mode=3 peta=alam skenario=host_keluar_migrasi
+LOBBY host: klik mode '3 PLAYERS' = true
+LOBBY host: klik peta 'Grassland' = true
+LOBBY host: klik panjang 'QUICK' = true
+LOBBY host: klik MY ROLE = true
+LOBBY host: klik role FIRE = true
+LOBBY host: klik OK = true
+LOBBY host: pemain = [b][color=#3380ff]P1[/color][/b]   HOST (YOU)  [color=#e63333]FIRE[/color] | [b][color=#ff3333]P2[/color][/b]   PLAYER  [color=#3380e6]WATER[/color] | [b][color=#26cc4d]P3[/color][/b]   PLAYER  [color=#996633]EARTH[/color]
+LOBBY host: info = Everyone is here. Press START!
+LOBBY host: START = true
+MASUK_GAME slot_lokal=0 pemain=3 peran_jaringan=host
+START_DITEKAN
+T|YOUR TURN! Choose Action or Roll Dice.
+EVENT ronde=1 aktif= terakhir=
+KARTU_BANTUAN stat=[0, 0, 0] inv=[[], [], []]
+BOUNTY aktif= terakhir= bintang=[4, 4, 4] stat_bounty=[0, 0, 0]
+G1|pemain|[0,5500,4][0,2500,4][0,2500,4]
+R|dadu
+T|You are rolling dice...
+T|Your Roll: 5
+R|jebakan|TombolTrapApi
+T|Fire Trap set! (Burns victim for 3 turns)
+BOUNTY aktif= terakhir= bintang=[3, 4, 4] stat_bounty=[0, 0, 0]
+R|beli
+T|Waiting for P2...
+G2|musuh|[5,5200,3][0,2500,4][0,2500,4]
+T|You are rolling dice...
+T|P2 Roll: 11
+T|FIRE TRAP! Burning for 3 turns!
+T|P2 placed a Water Trap!
+BOUNTY aktif= terakhir= bintang=[3, 3, 4] stat_bounty=[0, 0, 0]
+T|Waiting for P2...
+T|You are rolling dice...
+G3|pemain3|[5,5200,3][11,2200,3][0,2500,4]
+T|P3 Roll: 5
+T|Waiting for P3...
+D|54.2|DUEL fase=PILIH_PEMAIN segelM=0 segelP=0 tonton=0 judul='CHOOSE YOUR ELEMENT!'
+R|elemen|tanah
+D|57.3|DUEL fase=MENUNGGU_MUSUH segelM=1 segelP=1 tonton=0 judul='P3 ATTACKS! BOTH LOCKED!'
+D|59.3|DUEL fase=SEGEL_KEDUANYA segelM=1 segelP=1 tonton=0 judul='UNLOCKING...'
+D|60.6|DUEL fase=FADE_OUT segelM=1 segelP=1 tonton=0 judul='UNLOCKING...'
+D|62.1|DUEL fase=ANIMASI_CORET segelM=1 segelP=1 tonton=0 judul='ELEMENT WIN! You +3'
+D|63.4|DUEL fase=ANIMASI_HILANG segelM=1 segelP=1 tonton=0 judul='ELEMENT WIN! You +3'
+D|63.7|DUEL fase=ANIMASI_MENANG segelM=1 segelP=1 tonton=0 judul='ELEMENT WIN! You +3'
+D|65.1|DUEL fase=ROLET_PEMAIN segelM=1 segelP=1 tonton=0 judul='SPIN YOUR WHEEL!'
+D|67.0|DUEL fase=ROLET_PEMAIN segelM=1 segelP=1 tonton=0 judul='WHEEL SPINNING...'
+D|71.1|DUEL fase=ROLET_MUSUH segelM=1 segelP=1 tonton=0 judul='P3 WHEEL SPINNING...'
+D|75.4|DUEL fase=RANGKUMAN segelM=1 segelP=1 tonton=0 judul='CALCULATING TOTAL SCORE...'
+D|78.4|DUEL fase=PENGUMUMAN_TRANSISI segelM=1 segelP=1 tonton=0 judul='CALCULATING TOTAL SCORE...'
+D|78.8|DUEL fase=PENGUMUMAN_FINAL segelM=1 segelP=1 tonton=0 judul='YOU WIN THE FIGHT!'
+T|P3 LOST THE FIGHT! Extra fine: 120 Coins.
+D|83.3|(kosong)
+T|First to win a duel with FIRE: +1 Star
+EVENT ronde=2 aktif= terakhir=
+BOUNTY aktif=api terakhir=api bintang=[3, 3, 4] stat_bounty=[0, 0, 0]
+T|YOUR TURN! Choose Action or Roll Dice.
+G4|pemain|[5,5320,3][11,2200,3][5,2380,4]
+R|dadu
+T|You are rolling dice...
+T|Your Roll: 9
+T|TRAPPED! Geyser Eruption!
+T|Landed randomly! Trapped in a Bubble for 2 turns!
+R|akhiri
+T|P2 is burning! Lost 55 Coins. (2 turns left)
+G5|musuh|[15,5348,3][11,2145,3][5,2380,4]
+T|You are rolling dice...
+T|P2 Roll: 7
+T|P2 landed on a Card Tile!
+D|117.7|ANIMASI_KARTU judul='P2 TURN / P2 IS CHOOSING A CARD...' target='Tile Duel' a_target=1.0 a_latar=-1.00 kartu=,, kamera=P2 | TEKS='P2 landed on a Card Tile!'
+D|117.7|ANIMASI_KARTU judul='CARD REVEALED!' target='Tile Duel' a_target=1.0 a_latar=-1.00 kartu=,, kamera=P2 | TEKS='P2 landed on a Card Tile!'
+D|118.0|ANIMASI_KARTU judul='CARD REVEALED!' target='Tile Duel' a_target=1.0 a_latar=-1.00 kartu=, kamera=P2 | TEKS='P2 landed on a Card Tile!'
+D|118.0|ANIMASI_KARTU judul='CARD REVEALED!' target='Tile Duel' a_target=1.0 a_latar=-1.00 kartu=,,UnLucky! kamera=P2 | TEKS='P2 landed on a Card Tile!'
+T|Card Effect Applied!
+D|120.7|TEKS='Card Effect Applied!'
+T|P2 set a Wind Trap!
+BOUNTY aktif=api terakhir=api bintang=[3, 2, 4] stat_bounty=[0, 0, 0]
+D|127.0|(kosong)
+T|Waiting for P2...
+T|You are rolling dice...
+G6|pemain3|[15,5348,3][18,1545,2][5,2380,4]
+SKENARIO: host keluar paksa di giliran 6

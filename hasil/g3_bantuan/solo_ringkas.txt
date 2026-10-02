@@ -1,0 +1,17 @@
+h_q2_s202 exit=0 err=0 parse=0
+h_q2_s204 exit=0 err=0 parse=0
+h_q2_s201 exit=0 err=0 parse=0
+h_q2_s203 exit=0 err=0 parse=0
+h_q2_s205 exit=0 err=0 parse=0
+h_q4_s211 exit=0 err=0 parse=0
+h_q2_s206 exit=0 err=0 parse=0
+h_q4_s212 exit=0 err=0 parse=0
+h_q4_s213 exit=0 err=0 parse=0
+h_q4_s214 exit=0 err=0 parse=0
+h_c2_s222 exit=0 err=0 parse=0
+h_c2_s221 exit=0 err=0 parse=0
+h_c4_s231 exit=0 err=0 parse=0
+h_p2_s241 exit=0 err=0 parse=0
+h_p2_s242 exit=0 err=0 parse=0
+h_c4_s232 exit=0 err=0 parse=0
+BATCH_SELESAI

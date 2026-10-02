@@ -21,6 +21,10 @@ var _teks_ronde_terakhir = ""
 var _sig_event = "" # Fase 5 G1: log EVENT tiap perubahan
 var _sig_bounty = "" # Fase 5 G2: log BOUNTY tiap perubahan (elemen aktif / terakhir / bintang+stat tiap slot)
 var _klaim_bounty_prev: Array = []
+var _getar_maks: float = 0.0     # Fase 5 (getaran kamera Earthquake): h_offset terbesar selama getaran, dicatat saat selesai
+var _getar_aktif: bool = false
+var _bantuan_prev: Array = []   # Fase 5 G3: stat kartu_bantuan per slot (log KARTU_BANTUAN)
+var _inv_prev: Array = []
 var _bintang_prev: Array = []
 var _foto_akhir = false
 var _foto_hutang = false
@@ -544,6 +548,25 @@ func _process(delta):
 				print("BOUNTY_KLAIM slot=%d bintang_sebelum=%d bintang_sesudah=%d" % [k, _bintang_prev[k], bintang_kini[k]])
 	_klaim_bounty_prev = klaim_kini
 	_bintang_prev = bintang_kini
+	if p._getar_kamera_sisa > 0.0:
+		_getar_aktif = true
+		_getar_maks = maxf(_getar_maks, absf(p.kamera.h_offset))
+	elif _getar_aktif:
+		_getar_aktif = false
+		print("GETAR_KAMERA maks_h=%.3f akhir_h=%.3f akhir_v=%.3f" % [_getar_maks, p.kamera.h_offset, p.kamera.v_offset])
+		_getar_maks = 0.0
+	var bantuan_kini: Array = p.statistik_slot.map(func(st): return int(st.get("kartu_bantuan", 0)))
+	var inv_kini: Array = p.daftar_pemain.map(func(d): return d.inventaris_kartu.size())
+	if _bantuan_prev.size() == bantuan_kini.size():
+		for k in range(bantuan_kini.size()):
+			if bantuan_kini[k] > _bantuan_prev[k]:
+				var kaya = []
+				for s in range(p.jumlah_pemain()):
+					kaya.append(p._kekayaan_slot(s))
+				print("KARTU_BANTUAN slot=%d kekayaan=%s inv_sebelum=%d inv_sesudah=%d kartu=%s" % [k, str(kaya), _inv_prev[k], inv_kini[k],
+					str(p.daftar_pemain[k].inventaris_kartu.map(func(c): return str(c.get("id", "?"))))])
+	_bantuan_prev = bantuan_kini
+	_inv_prev = inv_kini
 	var sig_bounty = "%s|%s|%s" % [p.bounty_elemen, p.bounty_terakhir, str(p.statistik_slot.map(func(st): return int(st.get("bounty", 0))))]
 	if sig_bounty != _sig_bounty:
 		_sig_bounty = sig_bounty

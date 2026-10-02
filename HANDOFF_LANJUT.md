@@ -1,9 +1,9 @@
-# HANDOFF -- lanjutkan proyek Tile Duel (Fase 4 SELESAI; Fase 5: G0, G1 & G2 SELESAI, G3 berikutnya)
+# HANDOFF -- lanjutkan proyek Tile Duel (Fase 4 SELESAI; Fase 5: G0-G3 + getaran Earthquake SELESAI, G4 berikutnya)
 
 Dokumen ini ditulis 02-10-2026 supaya sesi Claude Code (cloud / web, tanpa CLI) mana pun bisa melanjutkan
 pekerjaan TANPA riwayat percakapan. BACA INI DULU, lalu `docs/RENCANA_fase4_role.md` bagian 14.19 & **14.21-14.24** (paling akhir).
 Diperbarui 02-10 (Opus, sesi Claude Code cloud): **uji HP pemilik dengan `kiriman/TileDuel_FaseB_b9.zip` = "lancar" -> Fase 4 SELESAI** (RENCANA 14.24).
-Berikutnya: pemilik merilis A+B (daftar periksa di bagian 5). **Fase 5: rencana `docs/RENCANA_fase5_seru.md` DISETUJUI 02-10 (K1-K10 = a) -> berikutnya Sonnet mengerjakan G0.**
+Berikutnya: pemilik merilis A+B (daftar periksa di bagian 5). **Fase 5: rencana `docs/RENCANA_fase5_seru.md` DISETUJUI 02-10 (K1-K10 = a); G0-G3 + getaran Earthquake SELESAI (Sonnet, 02-10) -> berikutnya Sonnet mengerjakan G4 (Tebak Duel).**
 
 **Fase 5 G0 SELESAI (Sonnet, 02-10):** refactor `denda_petak()` / `harga_beli_tanah()` / `harga_beli_menara(lv)` / `ronde_event` di
 `pemain_dasar.gd` (+ semua pemakai di `ai_jebakan/ai_musuh/pemain/pemain_papan/pemain_tampilan`), `game/` & rig identik (34/35, kecuali stub iklan).
@@ -16,7 +16,7 @@ ronde 4,7,10.. tiap 3; tanpa pengulangan berurutan; undian `mesin_acak`). Kode: 
 `buat_label_ronde` +param warna). Rig-only: log `EVENT ...` di `uji_nyata.gd` & `uji_robot_mp.gd` (+ "event" di potret sinkron host-vs-client).
 Bukti (`hasil/g1_event/`): solo Quick 2P/4P & Classic 2P/4P 0 SCRIPT ERROR, jadwal benar; MP 3P Quick: EVENT identik di host+2 client, cek_gagal=0;
 host keluar di ronde event (migrasi): event berlanjut (c1 jadi host, ronde 5 gold_rush lanjut tanpa mengulang), cek_ok_migrasi=3, 0 beda; `cek_nilai` 8/8.
-BELUM diverifikasi: tampilan label HUD event (headless tidak merender; cek di uji HP G9) & getaran kamera Earthquake (tidak dibuat). Keseimbangan role
+BELUM diverifikasi: tampilan label HUD event (headless tidak merender; cek di uji HP G9). (Getaran kamera Earthquake: DIBUAT di sesi G3, lihat bawah.) Keseimbangan role
 TIDAK dicek (itu G8, Opus) -- event sudah mengubah ekonomi pertandingan. Berikutnya: **G2 bounty (Sonnet)**.
 
 **Fase 5 G2 SELESAI (Sonnet, 02-10):** bounty. State `bounty_elemen/bounty_terakhir` (+`label_bounty`, `BOUNTY_RONDE_PERTAMA=2`) di `pemain_dasar.gd`;
@@ -28,6 +28,24 @@ Bukti (`hasil/g2_bounty/`): solo 27 run (Quick/Classic 2P/4P) 0 SCRIPT ERROR, ja
 MP 3P Quick: sinkron host+2 client identik (urutan BOUNTY sama, cek_gagal=0), klaim teruji (robot rig `bounty_pilih=1`), host keluar saat bounty aktif:
 bounty bertahan di host baru (c1), klaim setelah migrasi tercatat sama di c1 & c2, bounty baru diundi host baru; `cek_nilai` 8/8.
 Rig-only: log `BOUNTY`/`BOUNTY_KLAIM` di `uji_nyata.gd` & `uji_robot_mp.gd` (+ "bounty" di potret), opsi `bounty_pilih=1` di `uji_robot_mp.gd`.
+Untuk G8 (Opus): bounty di Quick hampir tak berarti -- 11 bounty di 11 run Quick solo, hanya 1 diklaim (Classic: 39 bounty, 23 diklaim); keputusan keseimbangan, jangan disetel Sonnet.
+
+**Fase 5 G3 + getaran kamera Earthquake SELESAI (Sonnet, 02-10):**
+- G3 kartu bantuan: `pemain.gd` (`_berhak_kartu_bantuan`, `_beri_kartu_bantuan`, `rpc_kartu_bantuan`, `_tampilkan_kartu_bantuan`; dipanggil di `bergerak_maju` setelah efek
+  "passed Start"), `pemain_kartu.gd` (`_daftar_kartu_hadiah()` dipecah dari `_kartu_hadiah_acak()` -- perilaku iklan tak berubah), konstanta `KARTU_BANTUAN_SELISIH=1000` /
+  `KARTU_BANTUAN_MAKS_INVENTARIS=3` (`pemain_dasar.gd`), stat `kartu_bantuan` (`statistik_kosong`). Syarat: kekayaan (`_kekayaan_slot`) PALING rendah (seri = tidak berhak),
+  tertinggal >= 1000 dari yang terkaya, inventaris < 3, saat lewat START dgn gaji cair. Kartu = acak `mesin_acak` dari `KARTU_HADIAH_IKLAN`. Spanduk "COMEBACK CARD!" + "<You/P3> got LOW ROLL".
+  Inventaris sampai ke client lewat siaran state "kartu" (seperti kartu gacha); RPC `rpc_kartu_bantuan` hanya tampilan.
+- Getaran kamera: `_mulai_getar_kamera`/`_perbarui_getar_kamera` (`pemain_tampilan.gd`, dipanggil dari `_process` di `pemain.gd`), konstanta `GETAR_KAMERA_DURASI=0.8` /
+  `GETAR_KAMERA_KUAT=0.5` + `_getar_kamera_sisa` (`pemain_dasar.gd`). Memakai `Camera3D.h_offset/v_offset` (tidak mengganggu posisi kamera yang mengikuti pemain), tanpa pengacak
+  (sin/cos), dipicu di `_tampilkan_event_papan` untuk id "earthquake" (host, solo & client), DILEWATI di Very Low (`AudioGrafis.baca_tingkat() == "sangat_rendah"`).
+- Bukti (`hasil/g3_bantuan/`): solo 16 run (Quick/Classic 2P/4P, alam+pantai) 0 SCRIPT ERROR; 5 kartu bantuan di Classic, semuanya valid (penerima termiskin & tertinggal >= 1000);
+  getaran: `GETAR_KAMERA maks_h` 0.06-0.45, `akhir_h=0` tiap kali (21 kejadian). MP: 4P & 3P Classic + 3P Quick sinkron cek_gagal=0, kartu_beda=0; opsi rig `kaya_awal=1` (host +3000) memaksa kartu:
+  kartu bantuan identik di host+c1+c2 (s402); host keluar -> kartu bantuan diberikan host BARU setelah migrasi, identik di c1 & c2 (s413). `batch_reg10` sama persis dgn G0
+  (takeover ok=29, kamera_hud ok=4, 0 gagal, 0 scripterr), `cek_nilai` 8/8, `IKLAN_KARTU cek=OK` (iklan kartu awal tak berubah).
+- BELUM: tampilan spanduk COMEBACK CARD & getaran di layar sungguhan (headless) -> uji HP G9; kekuatan getaran 0.5 tebakan awal, boleh disetel. Rig-only: log `KARTU_BANTUAN`/`GETAR_KAMERA`
+  (`uji_nyata.gd`, `uji_robot_mp.gd`), opsi `kaya_awal=1` (`uji_robot_mp.gd`).
+- Untuk G8 (Opus): kartu bantuan hampir tak pernah muncul di Quick (0 kartu di 12 run Quick solo; 5 kartu di 4 run Classic) -- selisih 1000 mungkin terlalu ketat untuk Quick; keputusan keseimbangan.
 
 ## 0. Aturan tetap dari pemilik proyek (WAJIB)
 1. Balas dalam **Bahasa Indonesia saja**.

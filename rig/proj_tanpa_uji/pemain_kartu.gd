@@ -54,13 +54,8 @@ func _tonton_iklan_kartu_awal(panel: CanvasLayer) -> void:
 		# Hadiah tetap diberikan walau permainan sudah dimulai.
 		UiDinamis.tampilkan_spanduk(self, "FREE CARD: " + nama, Color(1.0, 0.85, 0.2))
 
-func _kartu_hadiah_acak() -> Dictionary:
+func _daftar_kartu_hadiah() -> Array:
 	# Data kartu diambil dari petak kartu di papan (satu sumber dengan petak_kartu.gd).
-	# Pengacak SENDIRI: bukan mesin_acak (urutan acak permainan tidak bergeser), dan
-	# bukan acak global -- lingkungan_pantai.gd mengunci benih global dengan angka
-	# tetap, jadi di Night Beach "kartu acak" akan selalu sama.
-	var pengacak = RandomNumberGenerator.new()
-	pengacak.randomize()
 	for petak in rute_papan:
 		if petak.get("is_petak_kartu") and petak.get("node_sistem_kartu") != null:
 			var pilihan = []
@@ -68,8 +63,19 @@ func _kartu_hadiah_acak() -> Dictionary:
 				if KARTU_HADIAH_IKLAN.has(k["id"]):
 					pilihan.append(k)
 			if not pilihan.is_empty():
-				return pilihan[pengacak.randi_range(0, pilihan.size() - 1)].duplicate(true)
-	return {}
+				return pilihan
+	return []
+
+func _kartu_hadiah_acak() -> Dictionary:
+	# Hadiah iklan. Pengacak SENDIRI: bukan mesin_acak (urutan acak permainan tidak bergeser), dan
+	# bukan acak global -- lingkungan_pantai.gd mengunci benih global dengan angka
+	# tetap, jadi di Night Beach "kartu acak" akan selalu sama.
+	var pengacak = RandomNumberGenerator.new()
+	pengacak.randomize()
+	var pilihan = _daftar_kartu_hadiah()
+	if pilihan.is_empty():
+		return {}
+	return pilihan[pengacak.randi_range(0, pilihan.size() - 1)].duplicate(true)
 
 func _terapkan_efek_kartu(data: Dictionary, aktor: String):
 	teks_dadu.text = "Card Effect Applied!"

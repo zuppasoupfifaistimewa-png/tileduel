@@ -128,6 +128,7 @@ func _ready():
 func _process(delta):
 	_atur_kecepatan_permainan()
 	_atur_posisi_label_ronde()
+	_perbarui_getar_kamera(delta)
 	# UPDATE ANGKA FPS SECARA REALTIME SETIAP FRAME
 	if label_fps and label_fps.visible:
 		label_fps.text = "FPS: " + str(Engine.get_frames_per_second())
@@ -942,6 +943,7 @@ func bergerak_maju(jumlah_langkah, aktor):
 			_siarkan_lewat_start(petak_selanjutnya, aktor, total_gaji)
 			await label_petak_3d[petak_selanjutnya].mainkan_efek_lewat_start(total_gaji)
 			update_ui_status()
+			await _beri_kartu_bantuan(slot) # Fase 5 G3
 			if sisa_langkah > 0: target_anim.play("run")
 		elif not tujuan_node is PetakPermata and not tujuan_node.is_start_point and not tujuan_node.get("is_petak_kartu"):
 			target_anim.play("idle")
@@ -1605,6 +1607,51 @@ func _kekayaan_slot(slot: int) -> int:
 			if level_menara_petak[i] >= 1: total += harga_menara_lv1
 			if level_menara_petak[i] == 2: total += harga_menara_lv2
 	return total
+
+# ========================================================
+# KARTU BANTUAN POSISI TERAKHIR (Fase 5 G3) -- host/solo saja; undian lewat mesin_acak
+# ========================================================
+func _berhak_kartu_bantuan(slot: int) -> bool:
+	# Kekayaan (rumus Quick) PALING rendah (seri = tidak berhak) dan tertinggal >= KARTU_BANTUAN_SELISIH dari yang terkaya.
+	if daftar_pemain[slot].inventaris_kartu.size() >= KARTU_BANTUAN_MAKS_INVENTARIS:
+		return false
+	var milik = _kekayaan_slot(slot)
+	var terkaya = milik
+	for s in range(jumlah_pemain()):
+		if s == slot:
+			continue
+		var k = _kekayaan_slot(s)
+		if k <= milik:
+			return false
+		terkaya = maxi(terkaya, k)
+	return terkaya - milik >= KARTU_BANTUAN_SELISIH
+
+func _beri_kartu_bantuan(slot: int) -> void:
+	if StatusJaringan.peran_multiplayer == "client" or not _berhak_kartu_bantuan(slot):
+		return
+	var pilihan = _daftar_kartu_hadiah()
+	if pilihan.is_empty():
+		return
+	var kartu: Dictionary = pilihan[mesin_acak.randi_range(0, pilihan.size() - 1)].duplicate(true)
+	daftar_pemain[slot].inventaris_kartu.append(kartu)
+	_tambah_stat(slot, "kartu_bantuan")
+	var nama = str(kartu["teks"]).split("\n")[0]
+	if StatusJaringan.peran_multiplayer == "host":
+		rpc("rpc_kartu_bantuan", slot, nama)
+	_tampilkan_kartu_bantuan(slot, nama)
+	await get_tree().create_timer(1.5).timeout
+
+@rpc("authority", "call_remote", "reliable")
+func rpc_kartu_bantuan(slot: int, nama: String) -> void:
+	# CLIENT: hanya tampilan. Isi inventaris datang lewat siaran state ("kartu").
+	if slot < 0 or slot >= jumlah_pemain():
+		return
+	_tampilkan_kartu_bantuan(slot, nama)
+
+func _tampilkan_kartu_bantuan(slot: int, nama: String) -> void:
+	UiDinamis.tampilkan_spanduk(self, "COMEBACK CARD!", Color(0.4, 0.9, 0.9))
+	teks_dadu.show()
+	teks_dadu.text = "%s got %s" % [_subjek(slot), nama]
 
 func _pemenang_kekayaan() -> Dictionary:
 	# Kekayaan terbesar -> petak terbanyak -> lempar koin (mesin_acak; hanya host/solo).

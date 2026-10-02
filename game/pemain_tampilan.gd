@@ -372,6 +372,24 @@ func update_semua_label_petak():
 			# Bersihkan teks jika petak netral
 			label_petak_3d[i].perbarui_tampilan(-1, 0, 0)
 
+func _mulai_getar_kamera() -> void:
+	# Fase 5: dipanggil saat EARTHQUAKE (di semua layar). Very Low: dilewati.
+	if AudioGrafis.baca_tingkat() == "sangat_rendah":
+		return
+	_getar_kamera_sisa = GETAR_KAMERA_DURASI
+
+func _perbarui_getar_kamera(delta: float) -> void:
+	if _getar_kamera_sisa <= 0.0 or kamera == null:
+		return
+	_getar_kamera_sisa = maxf(0.0, _getar_kamera_sisa - delta)
+	var kuat = GETAR_KAMERA_KUAT * (_getar_kamera_sisa / GETAR_KAMERA_DURASI)
+	var t = Time.get_ticks_msec() * 0.001
+	kamera.h_offset = sin(t * 83.0) * kuat
+	kamera.v_offset = cos(t * 97.0) * kuat
+	if _getar_kamera_sisa <= 0.0:
+		kamera.h_offset = 0.0
+		kamera.v_offset = 0.0
+
 func _teks_label_event() -> String:
 	match event_aktif:
 		"gold_rush": return "[center][color=#ffd633]GOLD RUSH: tile fees x2[/color][/center]"

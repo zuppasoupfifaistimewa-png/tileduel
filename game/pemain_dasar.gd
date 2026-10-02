@@ -270,6 +270,11 @@ const EVENT_MULAI_QUICK := 3         # ronde pertama event, lalu tiap 2 ronde (Q
 const EVENT_JEDA_QUICK := 2
 const EVENT_MULAI_CLASSIC := 4       # lalu tiap 3 ronde (Classic)
 const EVENT_JEDA_CLASSIC := 3
+# Getaran kamera EARTHQUAKE (Fase 5): geser tampilan kamera (Camera3D.h_offset/v_offset) sebentar, tanpa
+# menyentuh posisi kamera yang diikuti; dilewati di Very Low. Murni tampilan -- tanpa pengacak.
+var _getar_kamera_sisa: float = 0.0
+const GETAR_KAMERA_DURASI := 0.8
+const GETAR_KAMERA_KUAT := 0.5
 # Bounty (Fase 5 G2): satu target aktif -- pemenang duel pertama dengan elemen itu dapat +1 bintang (maks 10).
 # Pertama muncul di ronde BOUNTY_RONDE_PERTAMA; sesudah diklaim, yang baru muncul di ronde event berikutnya.
 # Ikut siaran state ("bounty") supaya client & host baru (migrasi) sama.
@@ -283,6 +288,10 @@ var label_ronde: RichTextLabel = null
 
 # --- IKLAN BERHADIAH PILIHAN PEMAIN (Fase 1, solo saja) ---
 const KARTU_HADIAH_IKLAN = ["dadu_rendah", "dadu_tinggi", "pelindung", "pedang_1"]
+# Kartu bantuan posisi terakhir (Fase 5 G3): saat lewat START, pemain dgn kekayaan PALING rendah yang tertinggal
+# >= KARTU_BANTUAN_SELISIH dari yang terkaya dapat 1 kartu acak dari KARTU_HADIAH_IKLAN (inventaris penuh = tidak dapat).
+const KARTU_BANTUAN_SELISIH := 1000
+const KARTU_BANTUAN_MAKS_INVENTARIS := 3
 
 # --- FASE 2: statistik pertandingan per slot (untuk XP, penghargaan, misi) ---
 # Dihitung di device yang menjalankan logika (solo / host), ikut siaran state ke client,

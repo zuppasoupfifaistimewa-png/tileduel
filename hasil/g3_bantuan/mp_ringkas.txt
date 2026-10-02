@@ -1,0 +1,44 @@
+== sinkron 4P classic s301
+g3_sinkron4p_s301.host: SELESAI BATAS_GILIRAN peran=host giliran=45 cek_ok=33 cek_gagal=0 kartu_beda=0 detik=799 migrasi=0 cek_ok_migrasi=0 jaringan=host role=api:api+angin+petir:{ "hot_flames": 2, "rock_breaker": 2, "heavy_ | scripterr=0 | beda=0
+g3_sinkron4p_s301.c1: SELESAI HOST_SELESAI peran=client giliran=44 cek_ok=0 cek_gagal=0 kartu_beda=0 detik=799 migrasi=0 cek_ok_migrasi=0 jaringan=client role=api:api+angin+petir:{ "hot_flames": 2, "rock_breaker": 2, "heav | scripterr=0 | beda=0
+g3_sinkron4p_s301.c2: SELESAI HOST_SELESAI peran=client giliran=44 cek_ok=0 cek_gagal=0 kartu_beda=0 detik=799 migrasi=0 cek_ok_migrasi=0 jaringan=client role=api:api+angin+petir:{ "hot_flames": 2, "rock_breaker": 2, "heav | scripterr=0 | beda=0
+g3_sinkron4p_s301.c3: SELESAI HOST_SELESAI peran=client giliran=44 cek_ok=0 cek_gagal=0 kartu_beda=0 detik=799 migrasi=0 cek_ok_migrasi=0 jaringan=client role=api:api+angin+petir:{ "hot_flames": 2, "rock_breaker": 2, "heav | scripterr=0 | beda=0
+== sinkron 3P classic s302
+g3_sinkron3p_s302.host: SELESAI BATAS_GILIRAN peran=host giliran=41 cek_ok=26 cek_gagal=0 kartu_beda=0 detik=715 migrasi=0 cek_ok_migrasi=0 jaringan=host role=api:api+angin+petir:{ "hot_flames": 2, "rock_breaker": 2, "heavy_ | scripterr=0 | beda=0
+g3_sinkron3p_s302.c1: SELESAI HOST_SELESAI peran=client giliran=37 cek_ok=0 cek_gagal=0 kartu_beda=0 detik=714 migrasi=0 cek_ok_migrasi=0 jaringan=client role=api:api+angin+petir:{ "hot_flames": 2, "rock_breaker": 2, "heav | scripterr=0 | beda=0
+g3_sinkron3p_s302.c2: SELESAI HOST_SELESAI peran=client giliran=37 cek_ok=0 cek_gagal=0 kartu_beda=0 detik=714 migrasi=0 cek_ok_migrasi=0 jaringan=client role=api:api+angin+petir:{ "hot_flames": 2, "rock_breaker": 2, "heav | scripterr=0 | beda=0
+== host keluar 3P classic s303
+g3_hk_s303.host:  | scripterr=0 | beda=0
+g3_hk_s303.c1: SELESAI MENANG peran=client giliran=16 cek_ok=2 cek_gagal=0 kartu_beda=0 detik=288 migrasi=1 cek_ok_migrasi=2 jaringan=host role=api:api+angin+petir:{ "hot_flames": 2, "rock_breaker": 2, "heavy_pocket | scripterr=0 | beda=0
+g3_hk_s303.c2: SELESAI MENANG peran=client giliran=16 cek_ok=0 cek_gagal=0 kartu_beda=0 detik=282 migrasi=1 cek_ok_migrasi=0 jaringan=client role=api:api+angin+petir:{ "hot_flames": 2, "rock_breaker": 2, "heavy_pock | scripterr=0 | beda=0
+== quick 3P s304
+g3_q3_s304.host: SELESAI MENANG peran=host giliran=18 cek_ok=14 cek_gagal=0 kartu_beda=0 detik=370 migrasi=0 cek_ok_migrasi=0 jaringan=host role=api:api+angin+petir:{ "hot_flames": 2, "rock_breaker": 2, "heavy_pockets | scripterr=0 | beda=0
+g3_q3_s304.c1: SELESAI MENANG peran=client giliran=17 cek_ok=0 cek_gagal=0 kartu_beda=0 detik=364 migrasi=0 cek_ok_migrasi=0 jaringan=client role=api:api+angin+petir:{ "hot_flames": 2, "rock_breaker": 2, "heavy_pock | scripterr=0 | beda=0
+g3_q3_s304.c2: SELESAI MENANG peran=client giliran=17 cek_ok=0 cek_gagal=0 kartu_beda=0 detik=364 migrasi=0 cek_ok_migrasi=0 jaringan=client role=api:api+angin+petir:{ "hot_flames": 2, "rock_breaker": 2, "heavy_pock | scripterr=0 | beda=0
+MP_SELESAI
+== kaya sinkron s401
+g3_kaya_s401.host: SELESAI MENANG peran=host giliran=10 cek_ok=8 cek_gagal=0 kartu_beda=0 detik=247 migrasi=0 cek_ok_migrasi=0 jaringan=host role=api:api+angin+petir:{ "hot_flames": 2, "rock_breaker": 2, "heavy_pockets" | scripterr=0 | beda=0
+g3_kaya_s401.c1: SELESAI MENANG peran=client giliran=10 cek_ok=0 cek_gagal=0 kartu_beda=0 detik=241 migrasi=0 cek_ok_migrasi=0 jaringan=client role=api:api+angin+petir:{ "hot_flames": 2, "rock_breaker": 2, "heavy_pock | scripterr=0 | beda=0
+g3_kaya_s401.c2: SELESAI MENANG peran=client giliran=10 cek_ok=0 cek_gagal=0 kartu_beda=0 detik=240 migrasi=0 cek_ok_migrasi=0 jaringan=client role=api:api+angin+petir:{ "hot_flames": 2, "rock_breaker": 2, "heavy_pock | scripterr=0 | beda=0
+== kaya sinkron s402
+g3_kaya_s402.host: SELESAI MENANG peran=host giliran=9 cek_ok=6 cek_gagal=0 kartu_beda=0 detik=192 migrasi=0 cek_ok_migrasi=0 jaringan=host role=api:api+angin+petir:{ "hot_flames": 2, "rock_breaker": 2, "heavy_pockets": | scripterr=0 | beda=0
+g3_kaya_s402.c1: SELESAI MENANG peran=client giliran=9 cek_ok=0 cek_gagal=0 kartu_beda=0 detik=185 migrasi=0 cek_ok_migrasi=0 jaringan=client role=api:api+angin+petir:{ "hot_flames": 2, "rock_breaker": 2, "heavy_pocke | scripterr=0 | beda=0
+g3_kaya_s402.c2: SELESAI MENANG peran=client giliran=9 cek_ok=0 cek_gagal=0 kartu_beda=0 detik=185 migrasi=0 cek_ok_migrasi=0 jaringan=client role=api:api+angin+petir:{ "hot_flames": 2, "rock_breaker": 2, "heavy_pocke | scripterr=0 | beda=0
+== kaya host keluar s403
+g3_kayahk_s403.host:  | scripterr=0 | beda=0
+g3_kayahk_s403.c1: SELESAI MENANG peran=client giliran=8 cek_ok=1 cek_gagal=0 kartu_beda=0 detik=170 migrasi=1 cek_ok_migrasi=1 jaringan=host role=api:api+angin+petir:{ "hot_flames": 2, "rock_breaker": 2, "heavy_pockets | scripterr=0 | beda=0
+g3_kayahk_s403.c2: SELESAI MENANG peran=client giliran=8 cek_ok=0 cek_gagal=0 kartu_beda=0 detik=164 migrasi=1 cek_ok_migrasi=0 jaringan=client role=api:api+angin+petir:{ "hot_flames": 2, "rock_breaker": 2, "heavy_pocke | scripterr=0 | beda=0
+MP_SELESAI
+== kaya hk s411
+g3_kayahk_s411.host:  | scripterr=0 | beda=0
+g3_kayahk_s411.c1: SELESAI MENANG peran=client giliran=13 cek_ok=2 cek_gagal=0 kartu_beda=0 detik=289 migrasi=1 cek_ok_migrasi=2 jaringan=host role=api:api+angin+petir:{ "hot_flames": 2, "rock_breaker": 2, "heavy_pocket | scripterr=0 | beda=0
+g3_kayahk_s411.c2: SELESAI MENANG peran=client giliran=13 cek_ok=0 cek_gagal=0 kartu_beda=0 detik=283 migrasi=1 cek_ok_migrasi=0 jaringan=client role=api:api+angin+petir:{ "hot_flames": 2, "rock_breaker": 2, "heavy_pock | scripterr=0 | beda=0
+== kaya hk s412
+g3_kayahk_s412.host:  | scripterr=0 | beda=0
+g3_kayahk_s412.c1: SELESAI MENANG peran=client giliran=10 cek_ok=1 cek_gagal=0 kartu_beda=0 detik=198 migrasi=1 cek_ok_migrasi=1 jaringan=host role=api:api+angin+petir:{ "hot_flames": 2, "rock_breaker": 2, "heavy_pocket | scripterr=0 | beda=0
+g3_kayahk_s412.c2: SELESAI MENANG peran=client giliran=10 cek_ok=0 cek_gagal=0 kartu_beda=0 detik=192 migrasi=1 cek_ok_migrasi=0 jaringan=client role=api:api+angin+petir:{ "hot_flames": 2, "rock_breaker": 2, "heavy_pock | scripterr=0 | beda=0
+== kaya hk s413
+g3_kayahk_s413.host:  | scripterr=0 | beda=0
+g3_kayahk_s413.c1: SELESAI MENANG peran=client giliran=18 cek_ok=4 cek_gagal=0 kartu_beda=0 detik=428 migrasi=1 cek_ok_migrasi=4 jaringan=host role=api:api+angin+petir:{ "hot_flames": 2, "rock_breaker": 2, "heavy_pocket | scripterr=0 | beda=0
+g3_kayahk_s413.c2: SELESAI MENANG peran=client giliran=18 cek_ok=0 cek_gagal=0 kartu_beda=0 detik=422 migrasi=1 cek_ok_migrasi=0 jaringan=client role=api:api+angin+petir:{ "hot_flames": 2, "rock_breaker": 2, "heavy_pock | scripterr=0 | beda=0
+MP_SELESAI
