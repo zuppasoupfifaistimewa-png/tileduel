@@ -1,0 +1,2 @@
+tag=u9s2_0 peta=alam seed=6200 quick=1 roles=air,api,api,api pemenang=0 cara=start giliran=13 detik=255.1 pasang=3,1,2,2 kena=2,1,1,0 kaya=4230,2400,2483,2910 rinci=0/0/0/0/0/0,1/440/0/0/0/0,2/0/0/0/0/0,1/0/0/0/0/0 presets=defense,attack,attack,defense sacred=0 xprole0=150 err=0 stat=OK
+tag=u9s2_2 peta=alam seed=6202 quick=1 roles=tanah,air,air,api pemenang=0 cara=ronde giliran=20 detik=305.1 pasang=3,2,2,1 kena=2,2,2,1 kaya=3330,2400,2400,2400 rinci=0/0/0/0/0/0,0/0/0/0/0/0,1/0/0/0/0/0,1/270/0/0/0/0 presets=balanced,defense,balanced,defense sacred=0 xprole0=150 err=0 stat=OK
