@@ -289,8 +289,8 @@ const NODE_ULTIMATE_ID := {
 
 const NODE_LV := {
 	# api
-	"hot_flames": {1: 70, 2: 80, 3: 90}, # bakar koin/giliran (14.1: dasar api 60 -> Lv1 60 tidak berpengaruh)
-	"fire_tax": {1: 0.25, 2: 0.5, 3: 0.75}, # bagian bakaran -> pemasang
+	"hot_flames": {1: 90, 2: 110, 3: 130}, # bakar koin/giliran (14.1: dasar api 60 -> Lv1 60 tidak berpengaruh)
+	"fire_tax": {1: 0.5, 2: 0.75, 3: 1.0}, # bagian bakaran -> pemasang
 	"long_burn": {1: 4, 2: 4, 3: 5}, # giliran bakar (Lv2/3 juga larang korban pasang jebakan)
 	# air
 	"rapid_current": {1: 3, 2: 6, 3: 9}, # petak mundur MINIMAL dari START berikut
@@ -305,8 +305,8 @@ const NODE_LV := {
 	"chain_lightning": {1: 0, 2: 1, 3: 2}, # jarak petak lawan lain kena LOW ROLL
 	"card_magnet": {1: 0.25, 2: 0.5, 3: 0.75}, # peluang curi 1 kartu korban
 	# angin
-	"strong_wind": {1: 0.12, 2: 0.14, 3: 0.16}, # persen rampas (14.1: dasar angin 10% -> 18% Lv1 terlalu melompat)
-	"homing_wind": {1: 0.25, 2: 0.5, 3: 0.75}, # bagian rampasan -> pemasang langsung
+	"strong_wind": {1: 0.11, 2: 0.12, 3: 0.13}, # persen rampas (14.1: dasar angin 10% -> 18% Lv1 terlalu melompat)
+	"homing_wind": {1: 0.15, 2: 0.3, 3: 0.45}, # bagian rampasan -> pemasang langsung (F5 r5: .2/.4/.6 -> .15/.3/.45, angin konsisten ~55.6% 2P & 28.9% 4P)
 	"whirlwind": {1: 1, 2: 2, 3: 3}, # langkah dadu hilang
 }
 

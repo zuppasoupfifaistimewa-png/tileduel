@@ -149,37 +149,37 @@ func _jalankan_cek_nilai() -> void:
 	# F1 (B-f, 14.19/P13, T16): 3 kasus BARU -- AI membaca build SUNGGUHAN
 	# pemasangnya (bukan DASAR lagi). Angka target dihitung TANGAN (independen
 	# dari kode yang diuji, sama pola K17/K19 di atas), lihat 14.19/14.20.
-	# Kasus 1: hot_flames Lv3 (90 koin/giliran, tabel NODE_LV data_role.gd) +
+	# Kasus 1: hot_flames Lv3 (130 koin/giliran, tabel NODE_LV data_role.gd) +
 	# long_burn Lv2 (4 giliran) vs korban heat_skin Lv1 (potongan 25%) ->
-	# 90 x 4 x 0,75 x (1+0 fire_tax) = 270.
+	# 130 x 4 x 0,75 x (1+0 fire_tax) = 390 (F6: angka final F5; dulu 90 -> 270).
 	p.daftar_pemain[0].role = "api"
 	p.daftar_pemain[0].build = {"hot_flames": 3, "long_burn": 2}
 	p.daftar_pemain[1].build = {"heat_skin": 1}
 	p.daftar_pemain[1].guard_terpakai = {}
 	var angka_api_p13 = p._angka_jebakan(0, "api")
-	total += 1; ok_n += 1 if _cek1("nilai_korban_api_hotflames3_longburn2_vs_heatskin1", AiJebakan._nilai_korban(p, 0, 1, "api", petak_uji, angka_api_p13), 270.0) else 0
+	total += 1; ok_n += 1 if _cek1("nilai_korban_api_hotflames3_longburn2_vs_heatskin1", AiJebakan._nilai_korban(p, 0, 1, "api", petak_uji, angka_api_p13), 390.0) else 0
 
-	# Kasus 2: angin homing_wind Lv2 (bagian_homing 0,5) + strong_wind Lv0 (pakai
+	# Kasus 2: angin homing_wind Lv2 (bagian_homing 0,3) + strong_wind Lv0 (pakai
 	# DASAR rampas_angin 0,10) vs korban tanpa ketahanan angin, uang=1000 ->
-	# 0,10 x 1000 x (1-0) x (1+0,5) = 150 (langkah_hilang=0 -> suku ke-2 nol).
+	# 0,10 x 1000 x (1-0) x (1+0,3) = 130 (F6: dulu 0,5 -> 150) (langkah_hilang=0 -> suku ke-2 nol).
 	p.daftar_pemain[0].role = "angin"
 	p.daftar_pemain[0].build = {"homing_wind": 2}
 	p.daftar_pemain[1].build = {}
 	p.daftar_pemain[1].guard_terpakai = {}
 	p.daftar_pemain[1].uang = 1000
 	var angka_angin_p13 = p._angka_jebakan(0, "angin")
-	total += 1; ok_n += 1 if _cek1("nilai_korban_angin_homingwind2_uang1000", AiJebakan._nilai_korban(p, 0, 1, "angin", petak_uji, angka_angin_p13), 150.0) else 0
+	total += 1; ok_n += 1 if _cek1("nilai_korban_angin_homingwind2_uang1000", AiJebakan._nilai_korban(p, 0, 1, "angin", petak_uji, angka_angin_p13), 130.0) else 0
 
-	# Kasus 3: Phoenix x1,5 -- hot_flames Lv1 (70 koin/giliran) + long_burn Lv0
+	# Kasus 3: Phoenix x1,5 -- hot_flames Lv1 (90 koin/giliran) + long_burn Lv0
 	# (DASAR 3 giliran) + Ultimate api (ULT_api=true, role HARUS "api" ->
-	# _punya_ultimate), korban tanpa heat_skin -> 70 x 3 x 1 x 1 = 210,
-	# x FAKTOR_ULANG_ULTIMATE (1,5) = 315.
+	# _punya_ultimate), korban tanpa heat_skin -> 90 x 3 x 1 x 1 = 270,
+	# x FAKTOR_ULANG_ULTIMATE (1,2) = 324 (F6: dulu 70/1,5 -> 315).
 	p.daftar_pemain[0].role = "api"
 	p.daftar_pemain[0].build = {"hot_flames": 1, "ULT_api": true}
 	p.daftar_pemain[1].build = {}
 	p.daftar_pemain[1].guard_terpakai = {}
 	var angka_api_phoenix = p._angka_jebakan(0, "api")
-	total += 1; ok_n += 1 if _cek1("nilai_korban_api_phoenix_x1_5", AiJebakan._nilai_korban(p, 0, 1, "api", petak_uji, angka_api_phoenix), 315.0) else 0
+	total += 1; ok_n += 1 if _cek1("nilai_korban_api_phoenix_x1_5", AiJebakan._nilai_korban(p, 0, 1, "api", petak_uji, angka_api_phoenix), 324.0) else 0
 
 	print("CEK_NILAI_SELESAI total=%d ok=%d gagal=%d" % [total, ok_n, total - ok_n])
 
