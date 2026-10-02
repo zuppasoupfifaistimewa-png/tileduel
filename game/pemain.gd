@@ -1721,6 +1721,7 @@ func _siapkan_peta_dan_mulai(pilihan_peta: String, jumlah_ai: int = 1, quick: bo
 	_ronde_spanduk = -1
 	_iklan_hutang_terpakai = false
 	_putar_ulang_terpakai = false
+	_putar_ulang_ditolak = false
 
 	if StatusJaringan.peran_multiplayer == "":
 		# Solo: 1 pemain manusia (slot 0) + 1-3 lawan AI, dipilih di menu SINGLE PLAYER.

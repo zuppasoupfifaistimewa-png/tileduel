@@ -666,8 +666,8 @@ func _urus_putar_ulang() -> void:
 		var sp = _skor_dari_teks(ui.teks_p.text)
 		var sm = _skor_dari_teks(ui.teks_m.text)
 		print("PUTAR_ULANG_TAWAR ke=%d skor_p=%d skor_m=%d%s" % [_putar_tawaran, sp, sm, "" if sp < sm else "  GAGAL: bukan kalah skor"])
-		if _putar_klik > 0 and not putar_tolak and not iklan_gagal:
-			print("PUTAR_ULANG GAGAL: ditawarkan lagi padahal sudah dipakai di pertandingan ini")
+		if _putar_klik > 0 and not iklan_gagal:
+			print("PUTAR_ULANG GAGAL: ditawarkan lagi padahal sudah dipakai/ditolak di pertandingan ini")
 		_putar_skor_m = sm
 		_putar_skor_baru = -1
 	_putar_tawar_prev = tawar

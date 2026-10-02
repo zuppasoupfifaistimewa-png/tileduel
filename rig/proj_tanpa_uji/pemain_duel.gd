@@ -34,6 +34,7 @@ var _tebak_terbuka: bool = false    # HOST/SOLO: jendela tebakan masih terbuka
 var _tebak_nomor_lokal: int = -1    # device INI: nomor duel yang sedang bisa ditebak (-1 = tidak ada)
 # Fase 5 G5: putar ulang rolet setelah kalah duel solo (iklan berhadiah) -- sekali per pertandingan.
 var _putar_ulang_terpakai: bool = false
+var _putar_ulang_ditolak: bool = false  # pemain menekan NO THANKS -> tidak ditawari lagi di pertandingan ini
 # CLIENT: naik setiap kali device ini mengambil alih permainan karena host keluar.
 # Coroutine lama yang masih menunggu klik untuk dikirim ke host jadi tahu diri.
 var _generasi_jaringan: int = 0
@@ -710,10 +711,11 @@ func _tawarkan_putar_ulang() -> bool:
 	# KALAH skor di duel lawan AI. true = iklan ditonton sampai habis -> ui_elemen memutar
 	# ulang rolet pemain. Pola _tawarkan_iklan_hutang; tanpa tawaran fungsi ini kembali
 	# tanpa menunggu satu frame pun (jejak uji tidak berubah kalau iklan tidak tersedia).
-	if StatusJaringan.peran_multiplayer != "" or _putar_ulang_terpakai or not PengelolaIklan.rewarded_tersedia():
+	if StatusJaringan.peran_multiplayer != "" or _putar_ulang_terpakai or _putar_ulang_ditolak or not PengelolaIklan.rewarded_tersedia():
 		return false
 	var mau = await UiDinamis.tanya_putar_ulang(self)
 	if not mau:
+		_putar_ulang_ditolak = true # NO THANKS = jangan tawari lagi (iklan GAGAL di bawah tetap boleh ditawari lagi)
 		return false
 	var dapat = await PengelolaIklan.tonton_rewarded()
 	if not dapat:

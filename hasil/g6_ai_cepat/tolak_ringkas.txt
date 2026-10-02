@@ -1,0 +1,13 @@
+G6 pra-langkah: NO THANKS pada putar ulang rolet -> tidak ditawari lagi di pertandingan itu (iklan GAGAL tetap boleh ditawari lagi).
+Solo 2P Classic alam lawan=1 giliran=70, stub iklan tersedia (iklan=1). Sebelum perbaikan (hasil/g5_putar_ulang/solo_ringkas.txt): NO THANKS s511-514 = tawaran 3/8/5/5.
+
+g6tolak_l1_alam_s511: kalah_duel_slot0=8 tawaran=1 klik=1 teks_gagal=0 putar_ulang_cek_ok=0 putar_ulang_cek_gagal=0 PUTAR_ULANG_GAGAL=0 stat=stat_putar_ulang=0 SCRIPT_ERROR=0
+g6tolak_l1_alam_s512: kalah_duel_slot0=5 tawaran=1 klik=1 teks_gagal=0 putar_ulang_cek_ok=0 putar_ulang_cek_gagal=0 PUTAR_ULANG_GAGAL=0 stat=stat_putar_ulang=0 SCRIPT_ERROR=0
+g6tolak_l1_alam_s513: kalah_duel_slot0=4 tawaran=1 klik=1 teks_gagal=0 putar_ulang_cek_ok=0 putar_ulang_cek_gagal=0 PUTAR_ULANG_GAGAL=0 stat=stat_putar_ulang=0 SCRIPT_ERROR=0
+g6tolak_l1_alam_s514: kalah_duel_slot0=5 tawaran=1 klik=1 teks_gagal=0 putar_ulang_cek_ok=0 putar_ulang_cek_gagal=0 PUTAR_ULANG_GAGAL=0 stat=stat_putar_ulang=0 SCRIPT_ERROR=0
+g6gagal_l1_alam_s521: kalah_duel_slot0=3 tawaran=3 klik=3 teks_gagal=3 putar_ulang_cek_ok=0 putar_ulang_cek_gagal=0 PUTAR_ULANG_GAGAL=0 stat=stat_putar_ulang=0 SCRIPT_ERROR=0
+g6gagal_l1_alam_s522: kalah_duel_slot0=5 tawaran=5 klik=5 teks_gagal=5 putar_ulang_cek_ok=0 putar_ulang_cek_gagal=0 PUTAR_ULANG_GAGAL=0 stat=stat_putar_ulang=0 SCRIPT_ERROR=0
+g6a_l1_alam_s501: kalah_duel_slot0=5 tawaran=1 klik=1 teks_gagal=0 putar_ulang_cek_ok=1 putar_ulang_cek_gagal=0 PUTAR_ULANG_GAGAL=0 stat=stat_putar_ulang=1 SCRIPT_ERROR=0
+g6a_l1_alam_s503: kalah_duel_slot0=5 tawaran=1 klik=1 teks_gagal=0 putar_ulang_cek_ok=1 putar_ulang_cek_gagal=0 PUTAR_ULANG_GAGAL=0 stat=stat_putar_ulang=1 SCRIPT_ERROR=0
+
+Catatan: baris IKLAN_KARTU/IKLAN_HUTANG 'cek=GAGAL' di run iklan_gagal=1 itu WAJAR (stub memang menggagalkan iklan); bukan putar ulang.
