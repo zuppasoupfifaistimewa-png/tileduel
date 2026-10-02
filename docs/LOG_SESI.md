@@ -14,7 +14,8 @@ harus tercatat di sini, di `HANDOFF_LANJUT.md`, atau di RENCANA.
   `docs/RENCANA_fase5_seru.md`: 6 fitur, K1-K10, fakta kode, urutan G0-G9. Temuan: "Storm! (jebakan terlihat)" tidak
   berguna karena semua jebakan sudah terlihat -> usul STAR SHOWER; denda 100/300/600 tertulis di 6 tempat -> G0 refactor
   `denda_petak()`/`harga_beli_*()` dulu (harus identik di rig).
-- Langkah berikutnya: pemilik merilis A+B (b9) dan menyetujui K1-K10 Fase 5; lalu Sonnet mengerjakan G0 (sesi baru).
+- Keputusan: pemilik menyetujui K1-K10 Fase 5 = semua "a" -> rencana dikunci (bagian 1 & 9). Commit: 43defa3 + berikutnya.
+- Langkah berikutnya: pemilik merilis A+B (b9); Sonnet mengerjakan G0 Fase 5 di sesi baru.
 
 ## 2026-10-02 -- sesi Claude Code cloud (Opus 5.5): tinjauan F6 + F7 + F8
 - Dikerjakan: 4 temuan tinjauan F6 (RENCANA 14.23). (1) `uji_pedang`/`uji_cabang_solo` memang tanpa baris kesimpulan;

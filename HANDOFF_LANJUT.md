@@ -1,9 +1,9 @@
-# HANDOFF -- lanjutkan proyek Tile Duel (Fase 4 SELESAI; Fase 5 = draf rencana, menunggu persetujuan K1-K10)
+# HANDOFF -- lanjutkan proyek Tile Duel (Fase 4 SELESAI; Fase 5 rencana DISETUJUI -> G0 oleh Sonnet)
 
 Dokumen ini ditulis 02-10-2026 supaya sesi Claude Code (cloud / web, tanpa CLI) mana pun bisa melanjutkan
 pekerjaan TANPA riwayat percakapan. BACA INI DULU, lalu `docs/RENCANA_fase4_role.md` bagian 14.19 & **14.21-14.24** (paling akhir).
 Diperbarui 02-10 (Opus, sesi Claude Code cloud): **uji HP pemilik dengan `kiriman/TileDuel_FaseB_b9.zip` = "lancar" -> Fase 4 SELESAI** (RENCANA 14.24).
-Berikutnya: pemilik merilis A+B (daftar periksa di bagian 5). **Fase 5: draf rencana `docs/RENCANA_fase5_seru.md` (Opus, 02-10) -> pemilik menyetujui K1-K10 -> Sonnet mulai G0.**
+Berikutnya: pemilik merilis A+B (daftar periksa di bagian 5). **Fase 5: rencana `docs/RENCANA_fase5_seru.md` DISETUJUI 02-10 (K1-K10 = a) -> berikutnya Sonnet mengerjakan G0.**
 
 ## 0. Aturan tetap dari pemilik proyek (WAJIB)
 1. Balas dalam **Bahasa Indonesia saja**.
@@ -116,9 +116,9 @@ Rig-only lain: `uji_*`, `cek_muat_f3.gd` (alat), dan 5 file proyek yang tidak ad
 - **BERIKUTNYA (pemilik): rilis A+B.** Daftar periksa (rincian RENCANA 14.24): (1) isi `ID_INTERSTISIAL_ASLI` atau sengaja
   biarkan iklan uji; (2) naikkan version code; (3) uji pasang-timpa di atas versi Play (profil lama utuh, layar ROLE minta role);
   (4) coba build rilis sekali; (5) Internal testing -> Production. Bug dari HP/rilis -> Opus menganalisis dulu.
-- **Fase 5 (draf, Opus 02-10): `docs/RENCANA_fase5_seru.md`** -- event papan, bounty, kartu bantuan posisi terakhir, Tebak Duel,
-  putar ulang rolet (iklan, solo), tombol AI cepat (solo). Status: menunggu pemilik menyetujui K1-K10 (rekomendasi = "a").
-  Setelah disetujui: catat di bagian 1 & 9 rencana itu, lalu **Sonnet** mengerjakan G0 (refactor tanpa perubahan perilaku,
+- **Fase 5 (rencana Opus 02-10, DISETUJUI): `docs/RENCANA_fase5_seru.md`** -- event papan, bounty, kartu bantuan posisi terakhir, Tebak Duel,
+  putar ulang rolet (iklan, solo), tombol AI cepat (solo). Status: **DISETUJUI 02-10, pemilik "setuju semua a"**
+  (dicatat di bagian 1 & 9 rencana itu). Berikutnya: **Sonnet** mengerjakan G0 (refactor tanpa perubahan perilaku,
   harus identik di rig) dst. Baca rencana itu PENUH (pendek, ~200 baris); RENCANA_fase4 hanya untuk rujukan.
 - Opsional (Sonnet, tidak menghalangi rilis): T22 (rig-only, D1 lebih kuat, RENCANA 14.23); komentar F5 untuk
   `hot_flames`/`fire_tax`/`strong_wind` di `data_role.gd` (komentar saja; ikut kiriman berikutnya).
