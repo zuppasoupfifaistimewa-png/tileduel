@@ -284,6 +284,9 @@ var bounty_elemen: String = ""       # "" = tidak ada bounty aktif; selain itu i
 var bounty_terakhir: String = ""     # elemen bounty sebelumnya (tidak diundi dua kali berturut-turut)
 var label_bounty: RichTextLabel = null
 const BOUNTY_RONDE_PERTAMA := 2
+# Tebak Duel solo (Fase 5 G8): tambahan waktu maks sebelum penyerang AI mengunci, HANYA saat pemain bisa menebak
+# (jendela 2,5 dtk terlalu ketat; berhenti begitu pemain menebak).
+const TEBAK_SOLO_TAMBAHAN := 2.0
 var jumlah_permata_peta: int = 0     # permata di peta (target Quick = separuh)
 
 var label_ronde: RichTextLabel = null

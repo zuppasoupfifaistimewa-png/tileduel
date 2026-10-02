@@ -1,0 +1,10 @@
+TEBAK_UI 'WHO WINS? TAP ONE!'
+TEBAK_JENDELA dtk_game=5.27 tombol=true
+TEBAK_UI 'WHO WINS? TAP ONE!'
+TEBAK_JENDELA dtk_game=5.27 tombol=true
+TEBAK_UI 'WHO WINS? TAP ONE!'
+TEBAK_JENDELA dtk_game=5.27 tombol=true
+TEBAK_UI 'WHO WINS? TAP ONE!'
+TEBAK_JENDELA dtk_game=5.27 tombol=true
+TEBAK_RINGKAS tebakan=0 benar=0 cek_ok=0 cek_gagal=0 stat_tebak_benar_slot0=0
+SIM BATAS_GILIRAN giliran=61 detik=1288

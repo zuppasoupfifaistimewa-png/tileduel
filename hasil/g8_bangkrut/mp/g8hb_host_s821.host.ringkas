@@ -1,0 +1,8 @@
+HUTANG_PASANG ke-1 slot=0 petak=2 nilai_jual=420 uang=-1420 giliran=7
+CEK#12 BEDA dgn client 312801970 (slot 1): jebakan host=["11:JebakanPetir:1:{ \"siluman\": false }", "15:JebakanApi:0:{ \"aktif_ulang\": 0 }", "18:KoinTercecer:<null>:{  }", "1:JebakanAngin:0:{ \"sisa_pindah\": 0 }", "3:JebakanAngin:1:{ \"sisa_pindah\": 0 }", "9:JebakanPetir:1:{ \"siluman\": false }", "9:KoinTercecer:<null>:{  }"] client=["11:JebakanPetir:1:{ \"siluman\": false }", "18:KoinTercece
+HUTANG_PASANG ke-2 slot=0 petak=2 nilai_jual=420 uang=-1420 giliran=23
+HUTANG_BAWA ke-1 teks='No more tiles! You carry the debt.' giliran=25 uang=[-1100, 380] mode_jual=false membidik=false petak_slot=0
+HUTANG_LANJUT giliran=27 mode_jual=false uang=[-1072, 58]
+HUTANG_BAWA ke-2 teks='No more tiles! You carry the debt.' giliran=29 uang=[-1144, 683] mode_jual=false membidik=false petak_slot=0
+HUTANG_LANJUT giliran=31 mode_jual=false uang=[-1144, 137]
+SELESAI BATAS_GILIRAN peran=host giliran=41 cek_ok=16 cek_gagal=1 kartu_beda=0 detik=561 migrasi=0 cek_ok_migrasi=0 jaringan=host role=api:api+angin+petir:{ "hot_flames": 2, "rock_breaker": 2, "heavy_pockets": 1, "fire_tax": 1, "ULT_api": true },air:air+angin+petir:{ "frozen_bubble": 2, "heat_skin": 2, "rock_breaker": 1, "rapid_current": 1, "ULT_air": true }

@@ -1,0 +1,13 @@
+g8hb_host_s821.host: SELESAI BATAS_GILIRAN peran=host giliran=41 cek_ok=16 cek_gagal=1 kartu_beda=0 detik=561 migrasi=0 cek_ok_migrasi=0 jaringan=host role=api:api+angin+petir:{ "hot_flames": 2, "rock
+g8hb_host_s821.c1: SELESAI HOST_SELESAI peran=client giliran=31 cek_ok=0 cek_gagal=0 kartu_beda=0 detik=561 migrasi=0 cek_ok_migrasi=0 jaringan=client role=api:api+angin+petir:{ "hot_flames": 2, "rock
+g8hb_c1_s822.host: SELESAI BATAS_GILIRAN peran=host giliran=41 cek_ok=19 cek_gagal=0 kartu_beda=0 detik=722 migrasi=0 cek_ok_migrasi=0 jaringan=host role=api:api+angin+petir:{ "hot_flames": 2, "rock_b
+g8hb_c1_s822.c1: SELESAI HOST_SELESAI peran=client giliran=39 cek_ok=0 cek_gagal=0 kartu_beda=0 detik=721 migrasi=0 cek_ok_migrasi=0 jaringan=client role=api:api+angin+petir:{ "hot_flames": 2, "rock_b
+g8hb_c2q_s823.host: SELESAI MENANG peran=host giliran=18 cek_ok=12 cek_gagal=0 kartu_beda=0 detik=343 migrasi=0 cek_ok_migrasi=0 jaringan=host role=api:api+angin+petir:{ "hot_flames": 2, "rock_breaker
+g8hb_c2q_s823.c1: SELESAI MENANG peran=client giliran=17 cek_ok=0 cek_gagal=0 kartu_beda=0 detik=337 migrasi=0 cek_ok_migrasi=0 jaringan=client role=api:api+angin+petir:{ "hot_flames": 2, "rock_breake
+g8hb_c2q_s823.c2: SELESAI MENANG peran=client giliran=17 cek_ok=0 cek_gagal=0 kartu_beda=0 detik=337 migrasi=0 cek_ok_migrasi=0 jaringan=client role=api:api+angin+petir:{ "hot_flames": 2, "rock_breake
+g8hb_c2_s824.host: SELESAI BATAS_GILIRAN peran=host giliran=41 cek_ok=22 cek_gagal=0 kartu_beda=0 detik=735 migrasi=0 cek_ok_migrasi=0 jaringan=host role=api:api+angin+petir:{ "hot_flames": 2, "rock_b
+g8hb_c2_s824.c1: SELESAI HOST_SELESAI peran=client giliran=37 cek_ok=0 cek_gagal=0 kartu_beda=0 detik=735 migrasi=0 cek_ok_migrasi=0 jaringan=client role=api:api+angin+petir:{ "hot_flames": 2, "rock_b
+g8hb_c2_s824.c2: SELESAI HOST_SELESAI peran=client giliran=37 cek_ok=0 cek_gagal=0 kartu_beda=0 detik=735 migrasi=0 cek_ok_migrasi=0 jaringan=client role=api:api+angin+petir:{ "hot_flames": 2, "rock_b
+g8hb_ai_s825.host: SELESAI BATAS_GILIRAN peran=host giliran=41 cek_ok=16 cek_gagal=0 kartu_beda=0 detik=778 migrasi=0 cek_ok_migrasi=0 jaringan=host role=api:api+angin+petir:{ "hot_flames": 2, "rock_b
+g8hb_ai_s825.c1: SELESAI HOST_SELESAI peran=client giliran=40 cek_ok=0 cek_gagal=0 kartu_beda=0 detik=778 migrasi=0 cek_ok_migrasi=0 jaringan=client role=api:api+angin+petir:{ "hot_flames": 2, "rock_b
+MP_G8B_SELESAI
