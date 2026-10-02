@@ -9,8 +9,12 @@ harus tercatat di sini, di `HANDOFF_LANJUT.md`, atau di RENCANA.
 - Dicatat: RENCANA 14.24 (Fase 4 SELESAI + daftar periksa rilis: ID interstisial asli, version code, uji pasang-timpa di atas
   versi Play, coba build rilis, Internal testing -> Production) dan HANDOFF (judul, status, bagian 5). Commit isi: 6676d5f.
 - Keputusan: `game/` dibekukan sampai rilis; opsional T22 & komentar F5 `data_role.gd` tetap tidak dikerjakan.
-- Langkah berikutnya: pemilik merilis A+B; sesudahnya Fase 5 (Tebak Duel, event papan, putar ulang rolet) -- rencana disusun
-  Opus, keputusan K-* disetujui pemilik dulu.
+- Lanjutan sesi yang sama (pemilik: "lanjutkan fase 5"): isi Fase 5 dibaca dari dokumen rancangan (Claude Docs) + rencana
+  Fase 1/2; kode duel, giliran, jaringan, denda/harga, jebakan, iklan, kartu, profil dipelajari. Ditulis draf
+  `docs/RENCANA_fase5_seru.md`: 6 fitur, K1-K10, fakta kode, urutan G0-G9. Temuan: "Storm! (jebakan terlihat)" tidak
+  berguna karena semua jebakan sudah terlihat -> usul STAR SHOWER; denda 100/300/600 tertulis di 6 tempat -> G0 refactor
+  `denda_petak()`/`harga_beli_*()` dulu (harus identik di rig).
+- Langkah berikutnya: pemilik merilis A+B (b9) dan menyetujui K1-K10 Fase 5; lalu Sonnet mengerjakan G0 (sesi baru).
 
 ## 2026-10-02 -- sesi Claude Code cloud (Opus 5.5): tinjauan F6 + F7 + F8
 - Dikerjakan: 4 temuan tinjauan F6 (RENCANA 14.23). (1) `uji_pedang`/`uji_cabang_solo` memang tanpa baris kesimpulan;
