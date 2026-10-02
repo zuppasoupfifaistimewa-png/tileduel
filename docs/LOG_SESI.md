@@ -3,6 +3,20 @@
 Satu entri per sesi, terbaru di atas. Sesi baru tidak bisa membaca percakapan lama, jadi apa pun yang penting
 harus tercatat di sini, di `HANDOFF_LANJUT.md`, atau di RENCANA.
 
+## 2026-10-02 -- sesi Claude Code cloud (Opus 5.5): tinjauan F6 + F7 + F8
+- Dikerjakan: 4 temuan tinjauan F6 (RENCANA 14.23). (1) `uji_pedang`/`uji_cabang_solo` memang tanpa baris kesimpulan;
+  dijalankan ulang di salinan rig angka lama (755644d) vs F6 -> keluaran benar & identik; `uji_tanah2` error lama terbukti
+  sebelum F6; kalimat "9 uji 0 gagal" di 14.22 dikoreksi. (2) Daftar 29 .gd resmi ditulis di HANDOFF bagian 5 (tiga sumber
+  cocok) + penjelasan 6 file T21. (3) Komentar F5 `AMBANG_NILAI`/`AMBANG_PELUANG` di `ai_jebakan.gd` game & rig (angka tetap).
+  (4) +1 baris SELESAI = skenario D1 (c1 tidak sempat jadi peserta duel -> tidak keluar); run ulang D1 angka F6 & lama -> 2 baris.
+- F7 SELESAI: grep debug 0, `game/` vs rig 34/35 identik (stub iklan), cek_muat 26/26, cek_nilai 8/8; `uji_tanah2.gd` (rig-only)
+  diperbaiki. F8: `kiriman/TileDuel_FaseB_b9.zip` (29 .gd + RENCANA = 30 file).
+- Keputusan: tidak mengulang regresi MP penuh (hanya D1 yang menyimpang); T22 (D1 lebih kuat) & komentar F5 di `data_role.gd`
+  dicatat sebagai opsional, tidak dikerjakan. Ditemukan: commit fe39bec (b8) berisi versi sebelum B-e lengkap -> pemilik harus
+  menimpa ke-29 file.
+- Data: `hasil/f6_regresi/tinjauan_reg10/`, `hasil/f6_regresi/tinjauan_mp_d1/`, `hasil/f7_bersih/`. Commit isi: 3b84439.
+- Langkah berikutnya: pemilik uji HP (RENCANA bagian 10) dengan ZIP b9; laporan bug -> Opus. Lihat HANDOFF bagian 5.
+
 ## 2026-10-02 -- sesi Claude Code cloud (Sonnet 5.5): F6
 - Dikerjakan: 8 angka final F5 diterapkan ke `game/data_role.gd` & `game/ai_jebakan.gd` (via `f5_kandidat/*.patch`; kini identik
   dgn rig); 3 harapan `cek_nilai` di `rig/proj_tanpa_uji/uji_nyata.gd` -> 390/130/324 (dihitung tangan) -> 8/8 OK.
