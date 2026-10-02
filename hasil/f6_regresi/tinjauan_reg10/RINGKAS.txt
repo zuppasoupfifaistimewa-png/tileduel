@@ -1,0 +1,31 @@
+Tinjauan temuan 1 F6 (02-10): uji_pedang & uji_cabang_solo tanpa baris kesimpulan di reg10_ringkas.txt.
+
+Log lengkap F6 (reg10_*.log) tidak ikut di-push (hanya ringkasan), jadi uji dijalankan ulang di DUA salinan rig
+(scratchpad, rig/ tidak disentuh), cara sama dengan batch_reg10.sh (HOME sementara, timeout 400, --headless):
+  proj_lama = rig/proj_tanpa_uji + data_role.gd & ai_jebakan.gd dari commit 755644d (angka produksi SEBELUM F6;
+              selisih ke proj_baru tepat 8 baris angka F5, dicek diff)
+  proj_baru = rig/proj_tanpa_uji apa adanya (angka F6)
+
+PENYEBAB: kedua uji memang TIDAK PUNYA baris "SELESAI -- gagal: N" (lihat kodenya). Ringkasan F6 hanya mengambil
+baris berisi SELESAI/SCRIPT ERROR, jadi bagian kedua uji ini kosong. Bukan crash: exit=0, 0 SCRIPT ERROR.
+  - uji_pedang.gd: mencetak 3 baris pengamatan lalu quit. Harapan (dihitung dari database_efek petak_kartu.gd:
+    inventaris host = [dadu_rendah, pedang_1, bintang_2, pedang_3, pedang_2], daftar pedang = [pedang_1, pedang_3, pedang_2]):
+      klik pedang ke-1 -> indeks 1 -> host memakai pedang_3, inventaris sesudahnya [dadu_rendah, pedang_1, bintang_2, pedang_2]
+      NO, SAVE IT      -> indeks -1 -> tidak ada
+    HASIL: persis sesuai harapan, lama == baru (diff kosong).
+    Dua baris akhir "WARNING: 3 ObjectDB instances were leaked" / "ERROR: 1 resources still in use at exit" = pesan
+    mesin saat quit (UI di-queue_free lalu langsung quit), BUKAN SCRIPT ERROR; muncul identik di proj_lama.
+  - uji_cabang_solo.gd: mencetak satu baris "CABANG seed=N -> petak P | jejak | rng=STATE" (printerr) lalu quit.
+    Bawaan seed=1 (batch_reg10 tidak memberi seed). Diuji seed 1-10 di kedua salinan:
+    petak 7/4/4/7/7/4/7/4/4/7 (kedua cabang muncul), state RNG lama == baru untuk SEMUA 10 benih (diff kosong).
+  - uji_tanah2 (ikut dicek, klaim F6 belum pernah dibuktikan dgn run): 2 SCRIPT ERROR jebakan_tanah.gd:87 IDENTIK
+    di proj_lama -> terbukti sudah ada sebelum F6.
+
+KESIMPULAN (menggantikan "9 uji 0 gagal" di RENCANA 14.22):
+  batch_reg10 = 9 uji, exit 0 semua. 6 uji punya baris kesimpulan dan semuanya "gagal: 0"
+  (takeover, solo, kartu, koin, pedang_tonton, kamera_hud_solo). 2 uji tanpa baris kesimpulan (pedang, cabang_solo):
+  keluaran diperiksa manual -> benar & identik dengan angka produksi lama. 1 uji (tanah2) 2 SCRIPT ERROR di node tiruan
+  uji lama, identik dengan angka lama. Tidak ada regresi akibat F6.
+
+Berkas: proj_{lama,baru}_uji_pedang.log, proj_{lama,baru}_uji_cabang_solo.log (seed=1, log lengkap),
+        proj_{lama,baru}_cabang_1_10.txt (seed 1-10), proj_{lama,baru}_uji_tanah2.log.

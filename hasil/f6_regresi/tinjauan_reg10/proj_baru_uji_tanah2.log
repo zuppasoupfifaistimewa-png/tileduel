@@ -1,0 +1,22 @@
+Godot Engine v4.7.1.stable.official.a13da4feb - https://godotengine.org
+
+
+[duel 1] HP sebelum jebakan  : 3
+SCRIPT ERROR: Invalid call. Nonexistent function '_angka_jebakan' in base 'Node3D (uji_tanah2.gd)'.
+          at: hitung_bonus_hp (res://jebakan_tanah.gd:87)
+          GDScript backtrace (most recent call first):
+              [0] hitung_bonus_hp (res://jebakan_tanah.gd:87)
+              [1] _ready (res://uji_tanah2.gd:18)
+[duel 1] HP dibaca duel     : 3   (harus 4)
+[duel 1] HP di tengah duel  : 3   (harus tetap 4)
+[duel 1] HP setelah duel    : 3   (harus kembali 3) | jebakan masih ada: true
+
+[duel 2] HP sebelum jebakan  : 3
+SCRIPT ERROR: Invalid call. Nonexistent function '_angka_jebakan' in base 'Node3D (uji_tanah2.gd)'.
+          at: hitung_bonus_hp (res://jebakan_tanah.gd:87)
+          GDScript backtrace (most recent call first):
+              [0] hitung_bonus_hp (res://jebakan_tanah.gd:87)
+              [1] _ready (res://uji_tanah2.gd:18)
+[duel 2] HP dibaca duel     : 3   (harus 4)
+[duel 2] HP di tengah duel  : 3   (harus tetap 4)
+[duel 2] HP setelah duel    : 3   (harus kembali 3) | jebakan masih ada: true

@@ -1,0 +1,10 @@
+CABANG seed=1 -> petak 7 | jejak=[0, 7] | rng=6844932353678761266
+CABANG seed=2 -> petak 4 | jejak=[0, 4] | rng=-4080913995720455397
+CABANG seed=3 -> petak 4 | jejak=[0, 4] | rng=3439983728589879556
+CABANG seed=4 -> petak 7 | jejak=[0, 7] | rng=-7485862620809337107
+CABANG seed=5 -> petak 7 | jejak=[0, 7] | rng=35035103500997846
+CABANG seed=6 -> petak 4 | jejak=[0, 4] | rng=7555932827811332799
+CABANG seed=7 -> petak 7 | jejak=[0, 7] | rng=-3369913521587883864
+CABANG seed=8 -> petak 4 | jejak=[0, 4] | rng=4150984202722451089
+CABANG seed=9 -> petak 4 | jejak=[0, 4] | rng=-6774862146676765574
+CABANG seed=10 -> petak 7 | jejak=[0, 7] | rng=746035577633569379
