@@ -1,8 +1,9 @@
-# HANDOFF -- lanjutkan proyek Tile Duel (Fase 4 Langkah B-f, F8 terkirim -> uji HP pemilik)
+# HANDOFF -- lanjutkan proyek Tile Duel (Fase 4 SELESAI: uji HP b9 lolos -> rilis A+B oleh pemilik)
 
 Dokumen ini ditulis 02-10-2026 supaya sesi Claude Code (cloud / web, tanpa CLI) mana pun bisa melanjutkan
-pekerjaan TANPA riwayat percakapan. BACA INI DULU, lalu `docs/RENCANA_fase4_role.md` bagian 14.19 & **14.21-14.23** (paling akhir).
-Diperbarui 02-10 (Opus, sesi Claude Code cloud): **tinjauan F6 (4 temuan) beres, F7 SELESAI, F8 ZIP dibuat** (`kiriman/TileDuel_FaseB_b9.zip`). Berikutnya: uji HP pemilik.
+pekerjaan TANPA riwayat percakapan. BACA INI DULU, lalu `docs/RENCANA_fase4_role.md` bagian 14.19 & **14.21-14.24** (paling akhir).
+Diperbarui 02-10 (Opus, sesi Claude Code cloud): **uji HP pemilik dengan `kiriman/TileDuel_FaseB_b9.zip` = "lancar" -> Fase 4 SELESAI** (RENCANA 14.24).
+Berikutnya: pemilik merilis A+B (daftar periksa di bagian 5); lalu rencana Fase 5 (Opus).
 
 ## 0. Aturan tetap dari pemilik proyek (WAJIB)
 1. Balas dalam **Bahasa Indonesia saja**.
@@ -43,7 +44,7 @@ Diperbarui 02-10 (Opus, sesi Claude Code cloud): **tinjauan F6 (4 temuan) beres,
 | `f5_kandidat/*.patch` | Selisih produksi lama -> ANGKA FINAL F5 (sudah diterapkan di F6). |
 | `hasil/f6_regresi/` | Hasil F6: ringkasan regresi MP 37 skenario, `batch_reg10`, `cek_nilai` 8/8. Tinjauan F6: `tinjauan_reg10/` (temuan 1), `tinjauan_mp_d1/` (temuan 4) -- baca `RINGKAS.txt` masing-masing. |
 | `hasil/f7_bersih/` | F7: `F7_cek.txt` (grep debug, sinkron, cek_muat, cek_nilai) + log `uji_tanah2` setelah diperbaiki. |
-| `kiriman/` | F8: `TileDuel_FaseB_b9.zip` = 29 .gd resmi + `RENCANA_fase4_role.md` (30 file). |
+| `kiriman/` | F8: `TileDuel_FaseB_b9.zip` = 29 .gd resmi + `RENCANA_fase4_role.md` (30 file). **Uji HP pemilik lolos (02-10); isi = `game/` saat ini.** |
 
 ## 2. Status ringkas (rincian: RENCANA 14.21)
 - F0-F4 selesai. **F5 SELESAI 02-10 (Opus).** Semua syarat P14 lolos di benih BARU 20000:
@@ -110,8 +111,15 @@ Rig-only lain: `uji_*`, `cek_muat_f3.gd` (alat), dan 5 file proyek yang tidak ad
 - **F8 SELESAI (02-10):** `kiriman/TileDuel_FaseB_b9.zip` = 29 .gd + RENCANA = 30 file. Pemilik: buang unduhan lama, TIMPA ke-29
   file (14 berbeda dari commit fe39bec/b8 -- jangan hanya salin yang berubah di F6), buka Godot, tunggu impor, uji HP RENCANA
   bagian 10 (Langkah A + B). `ID_INTERSTISIAL_ASLI` (`pengelola_iklan.gd`) masih kosong -- keputusan pemilik sebelum rilis.
-- **BERIKUTNYA:** tunggu laporan uji HP pemilik. Bug dari HP -> Opus menganalisis dulu. Opsional (rig-only, Sonnet): T22
-  (D1 lebih kuat, RENCANA 14.23); komentar F5 untuk `hot_flames`/`fire_tax`/`strong_wind` di `data_role.gd` (komentar saja).
+- **UJI HP b9 LOLOS (02-10, laporan pemilik: "lancar") -> Fase 4 SELESAI** (RENCANA 14.24). `game/` = isi ZIP b9 (dicek
+  byte-per-byte); jangan ubah `game/` sebelum rilis kecuali ada bug.
+- **BERIKUTNYA (pemilik): rilis A+B.** Daftar periksa (rincian RENCANA 14.24): (1) isi `ID_INTERSTISIAL_ASLI` atau sengaja
+  biarkan iklan uji; (2) naikkan version code; (3) uji pasang-timpa di atas versi Play (profil lama utuh, layar ROLE minta role);
+  (4) coba build rilis sekali; (5) Internal testing -> Production. Bug dari HP/rilis -> Opus menganalisis dulu.
+- **Sesudah rilis: Fase 5 (Opus menyusun rencana)** = Tebak Duel (+XP), event papan (tiap 2 ronde Quick / 3 Classic), putar
+  ulang rolet setelah kalah duel solo (iklan berhadiah). Belum ada `RENCANA_fase5_*.md`; keputusan K-* disetujui pemilik dulu.
+- Opsional (Sonnet, tidak menghalangi rilis): T22 (rig-only, D1 lebih kuat, RENCANA 14.23); komentar F5 untuk
+  `hot_flames`/`fire_tax`/`strong_wind` di `data_role.gd` (komentar saja; ikut kiriman berikutnya).
 - Cara regresi MP di sesi cloud: salin `rig/skrip/jalankan_mp3.sh`, `uji_f2_t2_a/b.sh` ke scratchpad, ganti path
   (`SP`, `G=/opt/godot/...`, `PROJ=rig/proj_tanpa_uji`); jalankan A lalu B BERURUTAN (~1 jam total di 4 inti).
 

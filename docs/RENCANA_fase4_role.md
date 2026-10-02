@@ -2120,3 +2120,25 @@ ikut handoff). Salinan rig (= rig byte-per-byte): `cek_muat_f3` 26/26 OK, `cek_n
 jadi JANGAN hanya menyalin file yang berubah di F6). Pemilik: buang unduhan lama, salin KE-29 file ke folder proyek (timpa
 semua), buka Godot, tunggu impor, lalu uji HP bagian 10 (Langkah A + B). Pengingat lama (Fase 3 L5):
 `ID_INTERSTISIAL_ASLI` di `pengelola_iklan.gd` masih kosong -- keputusan pemilik, isi sebelum rilis bila ingin iklan asli.
+
+### 14.24 Uji HP b9 LOLOS -> Fase 4 SELESAI, siap rilis A+B (Opus, 02-10, sesi Claude Code cloud)
+
+**STATUS: pemilik menguji `kiriman/TileDuel_FaseB_b9.zip` di HP (bagian 10) -> laporan: "lancar", tidak ada bug dilaporkan.
+Fase 4 (Langkah A + B, F0-F8) SELESAI. Berikutnya menurut bagian 11 no. 4: rilis A+B (dikerjakan pemilik).**
+- Laporan pemilik singkat ("lancar"); butir bagian 10 tidak dilaporkan satu per satu.
+- Diperiksa ulang: isi ZIP b9 = `game/` saat ini (29/29 .gd identik byte-per-byte; RENCANA sama s/d 14.23) -> yang diuji
+  pemilik = yang ada di repo. `game/` TIDAK diubah sejak b9; jangan diubah lagi sebelum rilis kecuali ada bug.
+- Daftar periksa rilis (pemilik):
+  1. `ID_INTERSTISIAL_ASLI` (`pengelola_iklan.gd`) masih "" -> build rilis menampilkan interstisial UJI Google (tanpa uang).
+     Isi ID unit interstisial asli dari AdMob kalau ingin pendapatan (rewarded/banner/app open sudah memakai ID asli).
+  2. Naikkan version code (dan version name) di preset ekspor Android -- Play menolak version code yang sama.
+  3. Uji pasang-timpa: pasang build rilis DI ATAS versi Play yang sudah ada di HP (bukan instal bersih) -> profil lama
+     (VERSI 1) harus utuh dan layar ROLE meminta memilih role (U5 lolos di rig; uji HP-nya belum tercatat di sini).
+  4. Coba build RILIS (bukan debug) sekali sebelum unggah: tidak crash saat boot, iklan muncul.
+  5. Unggah ke jalur Internal testing dulu, lalu Production.
+- Opsional (tidak menghalangi rilis; rig/komentar saja): T22 (D1 lebih kuat, 14.23); komentar F5 untuk
+  `hot_flames`/`fire_tax`/`strong_wind` di `data_role.gd` -- kalau dikerjakan, ikut kiriman berikutnya, tidak perlu kirim ulang.
+- Fase berikutnya (menurut rencana lama): **Fase 5** = Tebak Duel (+XP Tebak Duel, `RENCANA_fase2_profil*.md`), event papan
+  tiap 2 ronde Quick / 3 Classic dan putar ulang rolet setelah kalah duel solo dengan iklan rewarded
+  (`RENCANA_fase1_iklan_quick.md` baris 39, 816-817). Belum ada `RENCANA_fase5_*.md` -> perlu rencana baru oleh Opus dari
+  dokumen "Rancangan Tile Duel: Retensi, Monetisasi & Role Elemen", keputusan K-* disetujui pemilik dulu (pola Fase 4).
