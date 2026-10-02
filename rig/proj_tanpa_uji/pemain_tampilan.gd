@@ -372,10 +372,36 @@ func update_semua_label_petak():
 			# Bersihkan teks jika petak netral
 			label_petak_3d[i].perbarui_tampilan(-1, 0, 0)
 
+func _teks_label_event() -> String:
+	match event_aktif:
+		"gold_rush": return "[center][color=#ffd633]GOLD RUSH: tile fees x2[/color][/center]"
+		"market_day": return "[center][color=#66e680]MARKET DAY: -30% prices[/color][/center]"
+	return ""
+
+func _atur_posisi_label_event() -> void:
+	# Fase 5 G1: label event (GOLD RUSH / MARKET DAY) di bawah label ronde (Quick) atau TeksDadu (Classic).
+	if label_event == null or teks_dadu == null:
+		return
+	var teks = _teks_label_event()
+	var tampil = teks != "" and teks_uang.visible
+	if label_event.visible != tampil:
+		label_event.visible = tampil
+	if not tampil:
+		return
+	if label_event.text != teks:
+		label_event.text = teks
+	var atas = teks_dadu.position.y + teks_dadu.size.y + 6.0
+	if label_ronde != null and label_ronde.visible:
+		atas = label_ronde.position.y + label_ronde.size.y + 4.0
+	var x = teks_dadu.position.x + teks_dadu.size.x * 0.5 - label_event.size.x * 0.5
+	if not label_event.position.is_equal_approx(Vector2(x, atas)):
+		label_event.position = Vector2(x, atas)
+
 func _atur_posisi_label_ronde() -> void:
 	# Tepat di bawah TeksDadu dan sejajar tengahnya. TeksDadu tidak selalu di tengah
 	# layar (di layar lebar seperti 1600x720 ia bergeser ke kiri), jadi label ini
 	# mengikuti TeksDadu, bukan tengah layar.
+	_atur_posisi_label_event()
 	if label_ronde == null or not label_ronde.visible or teks_dadu == null:
 		return
 	var x = teks_dadu.position.x + teks_dadu.size.x * 0.5 - label_ronde.size.x * 0.5

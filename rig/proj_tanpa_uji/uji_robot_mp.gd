@@ -51,6 +51,7 @@ var p = null
 var ui = null
 var tahap = "awal"
 var jumlah_giliran = 0
+var _sig_event = "" # Fase 5 G1: log EVENT tiap perubahan (ronde_event/aktif/terakhir)
 var giliran_terakhir = ""
 var teks_terakhir = ""
 var periksa_terakhir = -1
@@ -410,6 +411,10 @@ func _langkah_main(delta) -> void:
 		teks_terakhir = teks
 		jejak.append("T|" + teks.replace("\n", " / "))
 		detik_diam = 0.0
+	var sig_event = "%d|%s|%s" % [p.ronde_event, p.event_aktif, p.event_terakhir]
+	if sig_event != _sig_event:
+		_sig_event = sig_event
+		_catat("EVENT ronde=%d aktif=%s terakhir=%s" % [p.ronde_event, p.event_aktif, p.event_terakhir])
 	if p.giliran_sekarang != giliran_terakhir:
 		giliran_terakhir = p.giliran_sekarang
 		jumlah_giliran += 1
@@ -664,6 +669,7 @@ func _potret() -> Dictionary:
 	s["jebakan"] = jb
 	s["giliran"] = p.giliran_sekarang
 	s["ronde"] = p.get("ronde_sekarang")
+	s["event"] = [p.ronde_event, p.event_aktif, p.event_terakhir]
 	s["dadu"] = [p.tipe_dadu_slot.slice(0, p.jumlah_pemain()), p.sisa_durasi_dadu_slot.slice(0, p.jumlah_pemain())]
 	s["kontrol"] = []
 	for d in p.daftar_pemain:

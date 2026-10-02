@@ -280,12 +280,12 @@ static func tanya_iklan_hutang(main_node: Node) -> bool:
 # ========================================================
 # FASE 1: QUICK MATCH -- label ronde di bawah TeksDadu & spanduk besar
 # ========================================================
-static func buat_label_ronde(main_node: Node) -> RichTextLabel:
+static func buat_label_ronde(main_node: Node, warna_garis: Color = Color(1.0, 0.85, 0.2)) -> RichTextLabel:
 	var gaya = StyleBoxFlat.new()
 	gaya.bg_color = Color(0.05, 0.05, 0.08, 0.85)
 	gaya.set_border_width_all(1)
 	gaya.border_width_bottom = 3
-	gaya.border_color = Color(1.0, 0.85, 0.2)
+	gaya.border_color = warna_garis
 	gaya.set_corner_radius_all(10)
 	gaya.content_margin_left = 16
 	gaya.content_margin_right = 16

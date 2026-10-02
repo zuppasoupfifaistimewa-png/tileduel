@@ -1,0 +1,72 @@
+ROBOT host urut=1 mode=3 peta=pantai skenario=host_keluar_migrasi
+LOBBY host: klik mode '3 PLAYERS' = true
+LOBBY host: klik peta 'Night Beach' = true
+LOBBY host: klik panjang 'QUICK' = true
+LOBBY host: klik MY ROLE = true
+LOBBY host: klik role FIRE = true
+LOBBY host: klik OK = true
+LOBBY host: pemain = [b][color=#3380ff]P1[/color][/b]   HOST (YOU)  [color=#e63333]FIRE[/color] | [b][color=#ff3333]P2[/color][/b]   PLAYER  [color=#3380e6]WATER[/color] | [b][color=#26cc4d]P3[/color][/b]   PLAYER  [color=#996633]EARTH[/color]
+LOBBY host: info = Everyone is here. Press START!
+LOBBY host: START = true
+MASUK_GAME slot_lokal=0 pemain=3 peran_jaringan=host
+START_DITEKAN
+T|Tekan SPASI untuk Melempar Dadu
+EVENT ronde=1 aktif= terakhir=
+G1|pemain|[0,2500,4][0,2500,4][0,2500,4]
+T|YOUR TURN! Choose Action or Roll Dice.
+R|dadu
+T|You are rolling dice...
+T|Your Roll: 3
+R|cabang|0
+R|jebakan|TombolTrapApi
+T|Fire Trap set! (Burns victim for 3 turns)
+R|beli
+T|Waiting for P2...
+G2|musuh|[3,2200,3][0,2500,4][0,2500,4]
+T|You are rolling dice...
+T|P2 Roll: 7
+T|FIRE TRAP! Burning for 3 turns!
+T|Waiting for P2...
+T|P2 placed a Water Trap!
+T|Waiting for P2...
+T|Waiting for P3...
+G3|pemain3|[3,2200,3][7,2200,3][0,2500,4]
+T|You are rolling dice...
+T|P3 Roll: 3
+T|Waiting for P3...
+T|P3 gave up. Paid fine: 100 Coins.
+T|YOUR TURN! Choose Action or Roll Dice.
+EVENT ronde=2 aktif= terakhir=
+G4|pemain|[3,2300,3][7,2200,3][3,2400,4]
+R|dadu
+T|You are rolling dice...
+T|Your Roll: 7
+T|TRAPPED! Geyser Eruption!
+T|Landed randomly! Trapped in a Bubble for 2 turns!
+R|akhiri
+T|P2 is burning! Lost 55 Coins. (2 turns left)
+G5|musuh|[11,2328,3][7,2145,3][3,2400,4]
+T|Waiting for P2...
+T|You are rolling dice...
+T|P2 Roll: 3
+T|P2 collected [img=28]res://permata/permata_kuning.png[/img] Gem!
+T|Waiting for P2...
+T|Waiting for P3...
+G6|pemain3|[11,2328,3][10,2145,3][3,2400,4]
+T|You are rolling dice...
+T|P3 Roll: 8
+T|P3 collected [img=28]res://permata/permata_kuning.png[/img] Gem!
+T|Waiting for P3...
+T|P3 set a Lightning Trap!
+T|Waiting for P3...
+T|Tiles and towers -30% this round!
+EVENT ronde=3 aktif=market_day terakhir=market_day
+T|YOUR TURN! Choose Action or Roll Dice.
+G7|pemain|[11,2328,3][10,2145,3][11,2100,3]
+R|dadu
+T|You are rolling dice...
+T|Your Roll: 9
+R|akhiri
+T|P2 is burning! Lost 55 Coins. (1 turns left)
+G8|musuh|[2,2356,3][10,2090,3][11,2100,3]
+SKENARIO: host keluar paksa di giliran 8

@@ -1,4 +1,4 @@
-# HANDOFF -- lanjutkan proyek Tile Duel (Fase 4 SELESAI; Fase 5: G0 SELESAI, G1 berikutnya)
+# HANDOFF -- lanjutkan proyek Tile Duel (Fase 4 SELESAI; Fase 5: G0 & G1 SELESAI, G2 berikutnya)
 
 Dokumen ini ditulis 02-10-2026 supaya sesi Claude Code (cloud / web, tanpa CLI) mana pun bisa melanjutkan
 pekerjaan TANPA riwayat percakapan. BACA INI DULU, lalu `docs/RENCANA_fase4_role.md` bagian 14.19 & **14.21-14.24** (paling akhir).
@@ -8,6 +8,16 @@ Berikutnya: pemilik merilis A+B (daftar periksa di bagian 5). **Fase 5: rencana 
 **Fase 5 G0 SELESAI (Sonnet, 02-10):** refactor `denda_petak()` / `harga_beli_tanah()` / `harga_beli_menara(lv)` / `ronde_event` di
 `pemain_dasar.gd` (+ semua pemakai di `ai_jebakan/ai_musuh/pemain/pemain_papan/pemain_tampilan`), `game/` & rig identik (34/35, kecuali stub iklan).
 Bukti: S1 100 pertandingan benih 20000 IDENTIK baris per baris dgn F5 konfirmasi; `cek_nilai` 8/8; reg10 sama; data di `hasil/g0_refactor/`.
+
+**Fase 5 G1 SELESAI (Sonnet, 02-10):** event papan (gold_rush / market_day / earthquake / star_shower; Quick ronde 3,5,7.. tiap 2; Classic
+ronde 4,7,10.. tiap 3; tanpa pengulangan berurutan; undian `mesin_acak`). Kode: `pemain_dasar.gd` (state `event_aktif/event_terakhir`, konstanta,
+`denda_petak` x2 & `harga_beli_*` x0,7 dibulatkan 10), `pemain_papan.gd` (`_ronde_jadwal_event`, `_mulai_event_papan`, `rpc_event_papan`, teks),
+`pemain.gd` (dipanggil di `ganti_giliran` slot 0), `pemain_jaringan.gd` (siaran state "event"), `pemain_tampilan.gd`+`ui_dinamis.gd` (label HUD event;
+`buat_label_ronde` +param warna). Rig-only: log `EVENT ...` di `uji_nyata.gd` & `uji_robot_mp.gd` (+ "event" di potret sinkron host-vs-client).
+Bukti (`hasil/g1_event/`): solo Quick 2P/4P & Classic 2P/4P 0 SCRIPT ERROR, jadwal benar; MP 3P Quick: EVENT identik di host+2 client, cek_gagal=0;
+host keluar di ronde event (migrasi): event berlanjut (c1 jadi host, ronde 5 gold_rush lanjut tanpa mengulang), cek_ok_migrasi=3, 0 beda; `cek_nilai` 8/8.
+BELUM diverifikasi: tampilan label HUD event (headless tidak merender; cek di uji HP G9) & getaran kamera Earthquake (tidak dibuat). Keseimbangan role
+TIDAK dicek (itu G8, Opus) -- event sudah mengubah ekonomi pertandingan. Berikutnya: **G2 bounty (Sonnet)**.
 
 ## 0. Aturan tetap dari pemilik proyek (WAJIB)
 1. Balas dalam **Bahasa Indonesia saja**.

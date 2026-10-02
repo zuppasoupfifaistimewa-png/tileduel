@@ -3,6 +3,14 @@
 Satu entri per sesi, terbaru di atas. Sesi baru tidak bisa membaca percakapan lama, jadi apa pun yang penting
 harus tercatat di sini, di `HANDOFF_LANJUT.md`, atau di RENCANA.
 
+## 2026-10-02 -- sesi Claude Code cloud (Sonnet 5.5): Fase 5 G0 + G1
+- G0 (refactor `denda_petak`/`harga_beli_*`/`ronde_event`): S1 100 pertandingan benih 20000 IDENTIK baris per baris dgn F5 konfirmasi, cek_nilai 8/8,
+  reg10 sama (uji_tanah2 sama dgn log F7). Data `hasil/g0_refactor/`. Commit 131e42c.
+- G1 (event papan): lihat HANDOFF (ringkasan lengkap & bukti). Solo 4 mode + MP 3P (sinkron + host keluar saat ronde event) lolos; data `hasil/g1_event/`.
+- Catatan teknis: urutan pewarisan skrip penting -- fungsi yang dipanggil `pemain_tampilan.gd` harus ada di file yang LEBIH AWAL di rantai
+  (label event dipindah dari pemain_papan ke pemain_tampilan setelah Parse Error). Godot 4.7.1 diunduh ke /opt/godot, rig diimpor ulang.
+- Langkah berikutnya: G2 bounty (Sonnet), sesi baru. Setelah G3 (kartu bantuan) cocok minta Opus untuk G8 (keseimbangan) nanti.
+
 ## 2026-10-02 -- sesi Claude Code cloud (Opus 5.5): uji HP b9 lolos -> Fase 4 SELESAI
 - Pemilik melaporkan uji HP dengan `kiriman/TileDuel_FaseB_b9.zip`: "lancar", tanpa bug. Isi ZIP dicek = `game/` saat ini
   (29/29 .gd identik). Tidak ada kode yang diubah di sesi ini.

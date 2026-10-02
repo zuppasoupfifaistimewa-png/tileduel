@@ -1,0 +1,9 @@
+EVENT ronde=1 aktif= terakhir=
+EVENT ronde=2 aktif= terakhir=
+EVENT ronde=3 aktif=gold_rush terakhir=gold_rush
+EVENT ronde=4 aktif= terakhir=gold_rush
+EVENT ronde=5 aktif=market_day terakhir=market_day
+EVENT ronde=6 aktif= terakhir=market_day
+EVENT ronde=7 aktif= terakhir=earthquake
+EVENT ronde=8 aktif= terakhir=earthquake
+SEIMBANG peta=alam seed=777 quick=1 roles=api,air pemenang=0 cara=ronde giliran=16 detik=294.8 pasang=3,1 kena=3,1 kaya=4000,2590 rinci=0/0/1/0/0/0,0/0/0/1/0/0 presets=-,- sacred=0 xprole0=150

@@ -1363,6 +1363,82 @@ func _ambil_permata_setelah_paralisis(aktor: String, petak: Node3D):
 # ========================================================
 # FUNGSI MUNCULKAN TEKS KERUGIAN DARI TUBUH KARAKTER
 # ========================================================
+# ========================================================
+# EVENT PAPAN (Fase 5 G1) -- host/solo saja; undian lewat mesin_acak
+# ========================================================
+func _ronde_jadwal_event() -> bool:
+	var mulai = EVENT_MULAI_QUICK if mode_quick else EVENT_MULAI_CLASSIC
+	var jeda = EVENT_JEDA_QUICK if mode_quick else EVENT_JEDA_CLASSIC
+	return ronde_event >= mulai and (ronde_event - mulai) % jeda == 0
+
+func _mulai_event_papan() -> void:
+	var kandidat: Array = EVENT_DAFTAR.duplicate()
+	kandidat.erase(event_terakhir)
+	var id: String = kandidat[mesin_acak.randi_range(0, kandidat.size() - 1)]
+	event_terakhir = id
+	var slot_sasaran = -1
+	match id:
+		"gold_rush", "market_day":
+			event_aktif = id
+		"earthquake":
+			var petak_menara: Array = []
+			var petak_dimiliki: Array = []
+			for i in range(rute_papan.size()):
+				if status_kepemilikan_petak[i] and pemilik_petak[i] >= 0 and nyawa_petak[i] > 1:
+					petak_dimiliki.append(i)
+					if level_menara_petak[i] >= 1:
+						petak_menara.append(i)
+			var calon = petak_menara if not petak_menara.is_empty() else petak_dimiliki
+			if not calon.is_empty():
+				var petak = calon[mesin_acak.randi_range(0, calon.size() - 1)]
+				nyawa_petak[petak] -= 1
+				slot_sasaran = pemilik_petak[petak]
+				update_semua_label_petak()
+		"star_shower":
+			for d in daftar_pemain:
+				d.bintang = mini(d.bintang + 1, 10)
+			update_ui_status()
+	if StatusJaringan.peran_multiplayer == "host":
+		rpc("rpc_event_papan", id, slot_sasaran)
+	_tampilkan_event_papan(id, slot_sasaran)
+	await get_tree().create_timer(1.8).timeout
+
+@rpc("authority", "call_remote", "reliable")
+func rpc_event_papan(id: String, slot_sasaran: int) -> void:
+	# CLIENT: hanya tampilan. Efeknya (event_aktif, nyawa, bintang) datang lewat siaran state.
+	_tampilkan_event_papan(id, slot_sasaran)
+
+func _tampilkan_event_papan(id: String, slot_sasaran: int) -> void:
+	var judul = ""
+	var warna = Color(1.0, 0.85, 0.2)
+	match id:
+		"gold_rush": judul = "GOLD RUSH!"
+		"market_day":
+			judul = "MARKET DAY!"
+			warna = Color(0.4, 0.9, 0.5)
+		"earthquake":
+			judul = "EARTHQUAKE!"
+			warna = Color(0.85, 0.6, 0.35)
+		"star_shower":
+			judul = "STAR SHOWER!"
+			warna = Color(0.5, 0.8, 1.0)
+	UiDinamis.tampilkan_spanduk(self, judul, warna)
+	teks_dadu.show()
+	teks_dadu.text = _teks_event(id, slot_sasaran)
+
+func _teks_event(id: String, slot_sasaran: int) -> String:
+	match id:
+		"gold_rush": return "Tile fees x2 this round!"
+		"market_day": return "Tiles and towers -30% this round!"
+		"star_shower": return "Everyone gets +1 Star!"
+		"earthquake":
+			if slot_sasaran < 0:
+				return "The ground shakes. No damage."
+			if slot_sasaran == slot_lokal:
+				return "Your tower lost 1 HP!"
+			return _nama_slot(slot_sasaran) + "'s tower lost 1 HP!"
+	return ""
+
 func _siarkan_pesan_denda(slot_pembayar: int, jumlah: int, kalah_duel: bool, index_petak: int = -1) -> void:
 	# Kirim DATA-nya saja (siapa membayar, berapa), bukan kalimat jadinya —
 	# kalimat aslinya ditulis dari kacamata slot 0 ("ENEMY LOST"), jadi kalau

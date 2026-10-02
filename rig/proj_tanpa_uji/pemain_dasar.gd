@@ -133,22 +133,31 @@ var harga_menara_lv2 = 800
 # harga_* di atas = NILAI aset (kekayaan Quick, jual aset). Harga BELI lewat fungsi di bawah
 # (Fase 5 G0: satu pintu supaya event Market Day nanti cukup mengubah di sini).
 func harga_beli_tanah() -> int:
-	return harga_tanah
+	return _harga_event(harga_tanah)
 
 func harga_beli_menara(level_tujuan: int) -> int:
 	# level_tujuan 1 = bangun menara, 2 = upgrade ke Lv.2.
-	return harga_menara_lv1 if level_tujuan == 1 else harga_menara_lv2
+	return _harga_event(harga_menara_lv1 if level_tujuan == 1 else harga_menara_lv2)
+
+func _harga_event(harga: int) -> int:
+	# Fase 5 G1: MARKET DAY -30% (dibulatkan ke 10).
+	if event_aktif == "market_day":
+		return roundi(harga * EVENT_MARKET_FAKTOR / 10.0) * 10
+	return harga
 
 # Denda dasar petak menurut level menaranya (100/300/600). Satu pintu untuk label, tombol, AI & pembayaran
 # (Fase 5 G0; event Gold Rush nanti cukup mengubah di sini).
 func denda_petak(posisi: int) -> int:
-	if posisi < 0 or posisi >= level_menara_petak.size():
-		return 100
-	if level_menara_petak[posisi] == 1:
-		return 300
-	if level_menara_petak[posisi] == 2:
-		return 600
-	return 100
+	var dasar = 100
+	if posisi >= 0 and posisi < level_menara_petak.size():
+		if level_menara_petak[posisi] == 1:
+			dasar = 300
+		elif level_menara_petak[posisi] == 2:
+			dasar = 600
+	# Fase 5 G1: GOLD RUSH -- denda x2.
+	if event_aktif == "gold_rush":
+		return dasar * EVENT_GOLD_RUSH_FAKTOR
+	return dasar
 # ========================================================
 # 2-4 PEMAIN: SLOT & DATA PER SLOT
 # Slot 0 = node ini sendiri (biru), slot 1 = node Musuh (merah), slot 2-3 dibuat
@@ -249,6 +258,18 @@ var mode_quick: bool = false
 var batas_ronde: int = 0             # 0 = tanpa batas (Classic)
 var ronde_sekarang: int = 1
 var ronde_event: int = 1             # Fase 5: naik tiap giliran kembali ke slot 0, SEMUA mode (jadwal event papan)
+# Event papan (Fase 5 G1). event_aktif = "" / "gold_rush" / "market_day" selama SATU ronde; earthquake & star_shower
+# langsung berefek saat dimulai. Ikut siaran state ("event") supaya client & host baru (migrasi) sama.
+var event_aktif: String = ""
+var event_terakhir: String = ""
+var label_event: RichTextLabel = null
+const EVENT_DAFTAR := ["gold_rush", "market_day", "earthquake", "star_shower"]
+const EVENT_GOLD_RUSH_FAKTOR := 2
+const EVENT_MARKET_FAKTOR := 0.7
+const EVENT_MULAI_QUICK := 3         # ronde pertama event, lalu tiap 2 ronde (Quick)
+const EVENT_JEDA_QUICK := 2
+const EVENT_MULAI_CLASSIC := 4       # lalu tiap 3 ronde (Classic)
+const EVENT_JEDA_CLASSIC := 3
 var jumlah_permata_peta: int = 0     # permata di peta (target Quick = separuh)
 
 var label_ronde: RichTextLabel = null

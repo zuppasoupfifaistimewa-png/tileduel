@@ -900,6 +900,8 @@ func _siarkan_state_giliran(slot_index: int) -> void:
 		"dendam": sasaran_dendam_slot.duplicate(),
 		# Quick Match: ronde yang sedang berjalan (label ROUND x/y di semua HP).
 		"ronde": ronde_sekarang,
+		# Fase 5 G1: event papan (host baru & client melanjutkan jadwal/efek yang sama).
+		"event": {"ronde_event": ronde_event, "aktif": event_aktif, "terakhir": event_terakhir},
 		# Fase 2: statistik pertandingan per slot (host baru melanjutkan hitungannya).
 		"statistik": statistik_slot.duplicate(true),
 		# Fase 4 (bagian 7): role, jebakan dibawa, build per slot.
@@ -1066,6 +1068,10 @@ func rpc_terima_state_giliran(slot_index: int, data: Dictionary) -> void:
 		# Quick Match -- spanduk FINAL ROUND muncul sendiri saat ronde terakhir mulai.
 		ronde_sekarang = int(data["ronde"])
 		_perbarui_label_ronde()
+	if data.has("event"):
+		ronde_event = int(data["event"]["ronde_event"])
+		event_aktif = String(data["event"]["aktif"])
+		event_terakhir = String(data["event"]["terakhir"])
 	if data.has("statistik"):
 		statistik_slot = data["statistik"].duplicate(true)
 	if data.has("role"):

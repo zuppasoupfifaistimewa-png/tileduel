@@ -1,0 +1,4 @@
+EVENT ronde=1 aktif= terakhir=
+EVENT ronde=2 aktif= terakhir=
+EVENT ronde=3 aktif= terakhir=star_shower
+SEIMBANG peta=pantai seed=778 quick=1 roles=api,air,angin,petir pemenang=1 cara=start giliran=10 detik=200.8 pasang=2,2,1,1 kena=0,1,1,1 kaya=2400,3716,2280,2500 rinci=0/0/0/0/0/0,0/220/0/0/0/0,0/0/0/0/0/0,1/50/0/0/0/0 presets=-,-,-,- sacred=0 xprole0=50

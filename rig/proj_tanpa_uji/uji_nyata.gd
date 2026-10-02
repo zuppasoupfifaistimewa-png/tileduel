@@ -18,6 +18,7 @@ var klik_iklan_hutang = 0
 var uang0_uji = -1 # uang0=N -> uang slot 0 diset N setelah START (memancing hutang)
 var _spanduk_dicatat = false
 var _teks_ronde_terakhir = ""
+var _sig_event = "" # Fase 5 G1: log EVENT tiap perubahan
 var _foto_akhir = false
 var _foto_hutang = false
 # --- Fase 2 (T4): profil=1 -> periksa hadiah profil di layar akhir, DOUBLE, EXIT ---
@@ -528,6 +529,10 @@ func _process(delta):
 		mulai = false
 		_cek_profil_akhir()
 		return
+	var sig_event = "%d|%s|%s" % [p.ronde_event, p.event_aktif, p.event_terakhir]
+	if sig_event != _sig_event:
+		_sig_event = sig_event
+		print("EVENT ronde=%d aktif=%s terakhir=%s" % [p.ronde_event, p.event_aktif, p.event_terakhir])
 	# Fase 1: label ronde, spanduk FINAL ROUND, tawaran +300 COINS, foto papan peringkat.
 	if p.label_ronde != null and p.label_ronde.text != _teks_ronde_terakhir:
 		_teks_ronde_terakhir = p.label_ronde.text
