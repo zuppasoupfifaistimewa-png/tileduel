@@ -66,9 +66,7 @@ static func logika_ai_fase_awal(main_node: Node, slot: int = 1) -> void:
 		var pemilik = main_node.pemilik_petak[i]
 		if pemilik >= 0 and pemilik != slot:
 			petak_per_lawan[pemilik] = int(petak_per_lawan.get(pemilik, 0)) + 1
-			var denda = 100
-			if main_node.level_menara_petak[i] == 1: denda = 300
-			elif main_node.level_menara_petak[i] == 2: denda = 600
+			var denda = main_node.denda_petak(i)
 			# D5 (B-d/P3, 26-09): Fortress aktif -- jangan dibidik serangan jarak
 			# jauh (T8, syarat identik label "Protected") -- TETAP dihitung utuh
 			# di petak_per_lawan/denda_maksimal_lawan di bawah (strategi beli
@@ -89,9 +87,7 @@ static func logika_ai_fase_awal(main_node: Node, slot: int = 1) -> void:
 
 		elif pemilik == slot:
 			jumlah_petak_sendiri += 1
-			var denda = 100
-			if main_node.level_menara_petak[i] == 1: denda = 300
-			elif main_node.level_menara_petak[i] == 2: denda = 600
+			var denda = main_node.denda_petak(i)
 			# Fase 4 (A4): rock_breaker penantang tidak diketahui di sini -- pakai
 			# kasus terburuk (tanpa rock_breaker) supaya "potensi" tetap perkiraan
 			# maksimum, hanya jebakan tanah milik AI di petak ini yang dihitung.
@@ -104,7 +100,7 @@ static func logika_ai_fase_awal(main_node: Node, slot: int = 1) -> void:
 	for s in petak_per_lawan:
 		if int(petak_per_lawan[s]) > jumlah_petak_lawan: jumlah_petak_lawan = int(petak_per_lawan[s])
 
-	var sisa_uang_simulasi = main_node.daftar_pemain[slot].uang - main_node.harga_tanah
+	var sisa_uang_simulasi = main_node.daftar_pemain[slot].uang - main_node.harga_beli_tanah()
 	if sisa_uang_simulasi >= denda_maksimal_lawan: main_node.ai_probabilitas_beli_tanah = 100
 	else:
 		if jumlah_petak_sendiri >= jumlah_petak_lawan or denda_maksimal_sendiri >= denda_maksimal_lawan:
@@ -302,10 +298,10 @@ static func logika_ai_musuh_setelah_jalan(main_node: Node, slot: int = 1) -> voi
 			main_node._bayar_denda(slot, siapa_punya, 1.0)
 			return
 
-	elif not sudah_dibeli and main_node.daftar_pemain[slot].uang >= main_node.harga_tanah and main_node.daftar_pemain[slot].sisa_paralisis == 0:
+	elif not sudah_dibeli and main_node.daftar_pemain[slot].uang >= main_node.harga_beli_tanah() and main_node.daftar_pemain[slot].sisa_paralisis == 0:
 		var keputusan = main_node.mesin_acak.randi_range(1, 100)
 		if keputusan <= main_node.ai_probabilitas_beli_tanah:
-			main_node.daftar_pemain[slot].uang -= main_node.harga_tanah
+			main_node.daftar_pemain[slot].uang -= main_node.harga_beli_tanah()
 			main_node.status_kepemilikan_petak[posisi] = true
 			main_node.pemilik_petak[posisi] = slot
 			main_node.nyawa_petak[posisi] = 3
@@ -314,8 +310,8 @@ static func logika_ai_musuh_setelah_jalan(main_node: Node, slot: int = 1) -> voi
 			beli_atau_bangun = true
 		else: main_node._umumkan("ai_hemat", slot)
 
-	elif sudah_dibeli and siapa_punya == slot and level_menara == 0 and main_node.daftar_pemain[slot].uang >= main_node.harga_menara_lv1 and _boleh_bangun_menara(main_node, slot) and main_node.daftar_pemain[slot].sisa_paralisis == 0:
-		main_node.daftar_pemain[slot].uang -= main_node.harga_menara_lv1
+	elif sudah_dibeli and siapa_punya == slot and level_menara == 0 and main_node.daftar_pemain[slot].uang >= main_node.harga_beli_menara(1) and _boleh_bangun_menara(main_node, slot) and main_node.daftar_pemain[slot].sisa_paralisis == 0:
+		main_node.daftar_pemain[slot].uang -= main_node.harga_beli_menara(1)
 		main_node.level_menara_petak[posisi] = 1
 		main_node.nyawa_petak[posisi] += 1
 		beli_atau_bangun = true
@@ -325,8 +321,8 @@ static func logika_ai_musuh_setelah_jalan(main_node: Node, slot: int = 1) -> voi
 		main_node._bangun_fisik_menara(posisi, main_node._material_slot(slot), 1)
 		main_node._atur_berhenti_petak(posisi, 0)
 
-	elif sudah_dibeli and siapa_punya == slot and level_menara == 1 and main_node.daftar_pemain[slot].uang >= main_node.harga_menara_lv2 and _boleh_bangun_menara(main_node, slot) and main_node.daftar_pemain[slot].sisa_paralisis == 0:
-		main_node.daftar_pemain[slot].uang -= main_node.harga_menara_lv2
+	elif sudah_dibeli and siapa_punya == slot and level_menara == 1 and main_node.daftar_pemain[slot].uang >= main_node.harga_beli_menara(2) and _boleh_bangun_menara(main_node, slot) and main_node.daftar_pemain[slot].sisa_paralisis == 0:
+		main_node.daftar_pemain[slot].uang -= main_node.harga_beli_menara(2)
 		main_node.level_menara_petak[posisi] = 2
 		main_node.nyawa_petak[posisi] += 1
 		beli_atau_bangun = true

@@ -112,15 +112,8 @@ static func _peluang_lewat(main_node: Node, lawan: int, jarak: int) -> float:
 	return float(7 - jarak) / 6.0
 
 static func _denda_petak(main_node: Node, posisi: int) -> int:
-	# Denda dasar petak ini menurut level menaranya -- pola yang sama dipakai
-	# di beberapa tempat lain (pemain.gd, pemain_tampilan.gd, ai_musuh.gd).
-	if posisi < 0 or posisi >= main_node.level_menara_petak.size():
-		return 100
-	if main_node.level_menara_petak[posisi] == 1:
-		return 300
-	if main_node.level_menara_petak[posisi] == 2:
-		return 600
-	return 100
+	# Denda dasar petak ini (pemain_dasar.gd denda_petak, satu pintu).
+	return main_node.denda_petak(posisi)
 
 static func _nilai_korban(main_node: Node, slot: int, lawan: int, elemen: String, posisi: int, angka: Dictionary) -> float:
 	# D4 (B-d/K17a, 26-09): nilai SATU korban untuk api/angin/air/petir lewat

@@ -1108,7 +1108,7 @@ func periksa_status_petak(slot_index: int = 0):
 	tombol_tutup.show()
 	
 	tombol_beli.text = "Buy Tile"
-	tombol_bangun.text = "Build Tower (500)"
+	tombol_bangun.text = "Build Tower (" + str(harga_beli_menara(1)) + ")"
 	tombol_serang.text = "Attack Tile (Needs 5 Stars)"
 	
 	tombol_beli.disabled = true
@@ -1192,9 +1192,7 @@ func periksa_status_petak(slot_index: int = 0):
 
 	# LOGIKA KONFRONTASI DENGAN PETAK MUSUH (petak milik pemain LAIN mana pun)
 	if fase_giliran == "akhir" and sudah_dibeli and siapa_punya >= 0 and siapa_punya != slot_giliran_ui:
-		var denda = 100
-		if level_menara == 1: denda = 300
-		elif level_menara == 2: denda = 600
+		var denda = denda_petak(daftar_pemain[slot_giliran_ui].posisi_saat_ini)
 
 		fase_giliran = "konfrontasi"
 		slot_lawan_ui = siapa_punya
@@ -1228,7 +1226,7 @@ func periksa_status_petak(slot_index: int = 0):
 	# LOGIKA JUAL BELI DAN UPGRADE BANGUNAN
 	if daftar_pemain[slot_giliran_ui].posisi_saat_ini != 0 and fase_giliran == "akhir":
 		if not sudah_dibeli:
-			if daftar_pemain[slot_giliran_ui].uang >= harga_tanah: tombol_beli.disabled = false
+			if daftar_pemain[slot_giliran_ui].uang >= harga_beli_tanah(): tombol_beli.disabled = false
 		elif sudah_dibeli and siapa_punya == slot_giliran_ui:
 			# Syaratnya BUKAN jumlah putaran papan, melainkan berapa kali pemain
 			# berhenti tepat di petak ini sejak memilikinya (lihat _catat_berhenti_di_petak).
@@ -1236,15 +1234,15 @@ func periksa_status_petak(slot_index: int = 0):
 			var berhenti_ulang = berhenti_di_petak_sendiri[posisi_ui] if posisi_ui < berhenti_di_petak_sendiri.size() else 0
 			if level_menara == 0:
 				if berhenti_ulang >= 1:
-					tombol_bangun.text = "Build Tower (500)"
-					if daftar_pemain[slot_giliran_ui].uang >= harga_menara_lv1: tombol_bangun.disabled = false
+					tombol_bangun.text = "Build Tower (" + str(harga_beli_menara(1)) + ")"
+					if daftar_pemain[slot_giliran_ui].uang >= harga_beli_menara(1): tombol_bangun.disabled = false
 				else:
 					tombol_bangun.text = "Build (Stop Here Again)"
 					tombol_bangun.disabled = true
 			elif level_menara == 1:
 				if berhenti_ulang >= 1:
-					tombol_bangun.text = "Upgrade Lv.2 (800)"
-					if daftar_pemain[slot_giliran_ui].uang >= harga_menara_lv2: tombol_bangun.disabled = false
+					tombol_bangun.text = "Upgrade Lv.2 (" + str(harga_beli_menara(2)) + ")"
+					if daftar_pemain[slot_giliran_ui].uang >= harga_beli_menara(2): tombol_bangun.disabled = false
 				else:
 					tombol_bangun.text = "Upgrade (Stop Here Again)"
 					tombol_bangun.disabled = true
@@ -1423,6 +1421,8 @@ func ganti_giliran():
 			return
 		ronde_sekarang += 1
 		_perbarui_label_ronde()
+	if slot == 0:
+		ronde_event += 1 # Fase 5: penghitung ronde untuk jadwal event (semua mode; ronde_sekarang hanya Quick)
 	_tambah_stat(slot, "giliran")
 	giliran_sekarang = _aktor_dari_slot(slot)
 	fase_giliran = "awal"
@@ -1658,6 +1658,7 @@ func _siapkan_peta_dan_mulai(pilihan_peta: String, jumlah_ai: int = 1, quick: bo
 	# Quick Match (Fase 1): dipilih di menu solo atau oleh host di lobby.
 	mode_quick = quick
 	ronde_sekarang = 1
+	ronde_event = 1
 	_ronde_spanduk = -1
 	_iklan_hutang_terpakai = false
 

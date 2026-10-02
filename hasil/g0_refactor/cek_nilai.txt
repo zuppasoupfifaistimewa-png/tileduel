@@ -1,0 +1,9 @@
+CEK_NILAI faktor_fight_tanah_dasar hasil=0.5000 harapan=0.5000 status=OK
+CEK_NILAI faktor_fight_tanah_rb_lv1 hasil=0.7071 harapan=0.7071 status=OK
+CEK_NILAI faktor_fight_tanah_hardrock3_stonethorns3 hasil=0.1000 harapan=0.1000 status=OK
+CEK_NILAI nilai_korban_guard_kebal_api hasil=0.0000 harapan=0.0000 status=OK
+CEK_NILAI nilai_korban_api_potongan_lv1 hasil=135.0000 harapan=135.0000 status=OK
+CEK_NILAI nilai_korban_api_hotflames3_longburn2_vs_heatskin1 hasil=390.0000 harapan=390.0000 status=OK
+CEK_NILAI nilai_korban_angin_homingwind2_uang1000 hasil=130.0000 harapan=130.0000 status=OK
+CEK_NILAI nilai_korban_api_phoenix_x1_5 hasil=324.0000 harapan=324.0000 status=OK
+CEK_NILAI_SELESAI total=8 ok=8 gagal=0

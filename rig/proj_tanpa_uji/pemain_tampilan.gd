@@ -353,9 +353,7 @@ func _bangun_fisik_menara(posisi_index, _cat_warna, level):
 func update_semua_label_petak():
 	for i in range(rute_papan.size()):
 		if status_kepemilikan_petak[i] and i != 0:
-			var denda = 100
-			if level_menara_petak[i] == 1: denda = 300
-			elif level_menara_petak[i] == 2: denda = 600
+			var denda = denda_petak(i)
 			
 			var siapa_pemilik = pemilik_petak[i]
 			var jumlah_nyawa = nyawa_petak[i]

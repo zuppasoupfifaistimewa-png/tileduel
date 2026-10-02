@@ -1,0 +1,15 @@
+uji_takeover exit=0 gagal=0 ok=29 scripterr=0
+uji_solo exit=0 gagal=0 ok=0 scripterr=0
+uji_kartu exit=0 gagal=0 ok=0 scripterr=0
+uji_koin exit=0 gagal=0 ok=0 scripterr=0
+uji_pedang exit=0 gagal=0 ok=0 scripterr=0
+uji_pedang_tonton exit=0 gagal=0 ok=0 scripterr=0
+uji_tanah2 exit=0 gagal=0 ok=0 scripterr=0
+uji_kamera_hud_solo exit=0 gagal=0 ok=4 scripterr=0
+uji_cabang_solo exit=0 gagal=0 ok=0 scripterr=0
+uji_air_solo exit=0 gagal=0 ok=0 scripterr=0
+uji_angin_solo exit=0 gagal=0 ok=0 scripterr=0
+CEK_NILAI nilai_korban_angin_homingwind2_uang1000 hasil=130.0000 harapan=130.0000 status=OK
+CEK_NILAI nilai_korban_api_phoenix_x1_5 hasil=324.0000 harapan=324.0000 status=OK
+CEK_NILAI_SELESAI total=8 ok=8 gagal=0
+REG_SELESAI

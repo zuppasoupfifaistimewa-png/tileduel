@@ -753,7 +753,7 @@ func _on_tombol_beli_pressed():
 	# Menu disembunyikan selama jeda di bawah: tanpa ini ketukan kedua (Buy lagi, End
 	# Turn, Roll) ikut dijalankan -- petak terbayar dua kali / giliran terlewat.
 	menu_aksi.hide()
-	daftar_pemain[slot_giliran_ui].uang -= harga_tanah
+	daftar_pemain[slot_giliran_ui].uang -= harga_beli_tanah()
 	_tambah_stat(slot_giliran_ui, "petak_beli")
 	status_kepemilikan_petak[daftar_pemain[slot_giliran_ui].posisi_saat_ini] = true
 	pemilik_petak[daftar_pemain[slot_giliran_ui].posisi_saat_ini] = slot_giliran_ui
@@ -784,7 +784,7 @@ func _on_tombol_bangun_pressed():
 	menu_aksi.hide()
 	var level_sekarang = level_menara_petak[daftar_pemain[slot_giliran_ui].posisi_saat_ini]
 	if level_sekarang == 0:
-		daftar_pemain[slot_giliran_ui].uang -= harga_menara_lv1
+		daftar_pemain[slot_giliran_ui].uang -= harga_beli_menara(1)
 		level_menara_petak[daftar_pemain[slot_giliran_ui].posisi_saat_ini] = 1
 		nyawa_petak[daftar_pemain[slot_giliran_ui].posisi_saat_ini] += 1
 		_tambah_stat(slot_giliran_ui, "menara_bangun")
@@ -794,7 +794,7 @@ func _on_tombol_bangun_pressed():
 
 		_bangun_fisik_menara(daftar_pemain[slot_giliran_ui].posisi_saat_ini, material_giliran_ui, 1)
 	elif level_sekarang == 1:
-		daftar_pemain[slot_giliran_ui].uang -= harga_menara_lv2
+		daftar_pemain[slot_giliran_ui].uang -= harga_beli_menara(2)
 		level_menara_petak[daftar_pemain[slot_giliran_ui].posisi_saat_ini] = 2
 		nyawa_petak[daftar_pemain[slot_giliran_ui].posisi_saat_ini] += 1
 		_tambah_stat(slot_giliran_ui, "menara_bangun")
@@ -1224,10 +1224,7 @@ func _tawarkan_iklan_hutang(slot: int) -> bool:
 func _bayar_denda(slot_pembayar: int, slot_penerima: int, pengali) -> void:
 	# Pembayar berdiri di petak milik penerima: menyerah (x1.0) atau kalah duel (x1.2).
 	var posisi = daftar_pemain[slot_pembayar].posisi_saat_ini
-	var level_menara = level_menara_petak[posisi]
-	var denda_dasar = 100
-	if level_menara == 1: denda_dasar = 300
-	elif level_menara == 2: denda_dasar = 600
+	var denda_dasar = denda_petak(posisi)
 	var total_denda = int(denda_dasar * pengali)
 	daftar_pemain[slot_pembayar].uang -= total_denda
 	daftar_pemain[slot_penerima].uang += total_denda
