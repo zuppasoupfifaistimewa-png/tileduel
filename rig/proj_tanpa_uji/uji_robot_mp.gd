@@ -557,7 +557,7 @@ func _langkah_main(delta) -> void:
 			# Beri waktu client menampilkan layar akhirnya sendiri (replay, iklan stub).
 			await get_tree().create_timer(6.0).timeout
 			rpc("rpc_uji_selesai")
-		await get_tree().create_timer(6.0 if skenario == "respect" else 2.0).timeout
+		await get_tree().create_timer(10.0 if skenario == "respect" else 2.0).timeout
 		_akhiri("MENANG")
 		return
 	if detik_diam > 150.0:
@@ -964,7 +964,12 @@ func _respect_uji() -> void:
 	var diri = p.kirim_respect(p.slot_lokal)
 	if StatusJaringan.peran_multiplayer == "host":
 		diri = diri or p._host_proses_respect(p.slot_lokal, p.slot_lokal)
-	await get_tree().create_timer(3.0).timeout
+	# Client lain bisa mencapai layar akhirnya beberapa detik lebih lambat -> tunggu sampai semua Respect tiba (maks 7 dtk).
+	var t = 0.0
+	while t < 7.0 and ProfilPemain.respect - awal < manusia.size():
+		await get_tree().create_timer(0.25).timeout
+		t += 0.25
+	await get_tree().create_timer(1.0).timeout # sisa waktu: kiriman berlebih (kalau ada) sempat tiba
 	var akhir = ProfilPemain.respect
 	var ok = (akhir - awal == manusia.size()) and ditolak_benar and not diri
 	_catat("RESPECT_UJI slot=%d lawan_manusia=%s kirim=%s diri_ditolak=%s ai_ditolak=%s respect %d->%d diharapkan=+%d cek=%s" % [p.slot_lokal, str(manusia), str(rinci), str(not diri), str(ditolak_benar), awal, akhir, manusia.size(), "OK" if ok else "GAGAL"])
