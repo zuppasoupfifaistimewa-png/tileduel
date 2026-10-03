@@ -3,6 +3,13 @@
 Satu entri per sesi, terbaru di atas. Sesi baru tidak bisa membaca percakapan lama, jadi apa pun yang penting
 harus tercatat di sini, di `HANDOFF_LANJUT.md`, atau di RENCANA.
 
+## 2026-10-03 -- sesi Claude Code cloud (Opus 5.5): Fase 7 G0 (katalog & harga toko)
+- Branch `claude/elegant-bohr-tl3fps` (mulai dari 63637bf = ujung `claude/ecstatic-pascal-bo2bno`). Hemat kredit: tanpa simulasi/Godot, hanya baca `profil_pemain.gd` + data hasil lama.
+- Tabel FINAL di RENCANA_fase6_9 bagian 2.1: basis 50 Crowns/laga Quick efektif; 24 barang (8 pawn, 10 title, 6 frame), 150 (~3 laga) s/d 3500 (~70 laga), syarat Lv 5-15 untuk barang mahal, total 27 750.
+- Keputusan: warna bidak = trim (sarung tangan/sepatu), warna badan tetap warna slot; barang awal selalu dimiliki; beli = langsung dipakai; tanpa refund; host hanya validasi id/jenis.
+- `game/` & `rig/` tidak berubah.
+- Langkah berikutnya: Sonnet Fase 7 G1 (data_kosmetik.gd + profil v4 + beli/pakai + uji headless).
+
 ## 2026-10-03 -- sesi Claude Code cloud (Sonnet 5.5): Fase 6 G3 (bersih-bersih + ZIP b11)
 - Branch `claude/ecstatic-pascal-bo2bno` (mulai dari cc398c7). Hemat kredit: tanpa simulasi/Godot; hanya cek grep + sinkron + buat ZIP.
 - Bersih-bersih pola F7: 0 debug/print/TODO, `UJI_*` false, `game/` 34/35 identik dgn rig; .gd `game/` tidak berubah. Bukti `hasil/g6_bersih/G3_cek.txt`.

@@ -98,6 +98,84 @@ lupa acknowledge -> dana kembali otomatis (uji HP wajib cek status setelah 5 men
 
 ### 2.1 Tabel katalog & harga -- diisi Opus di G0 Fase 7
 
+Status: **FINAL (Opus, 03-10, G0)**. Tanpa simulasi; dihitung dari `game/profil_pemain.gd` (konstanta) + panjang laga di
+`hasil/g7_profil/solo_ringkas.txt` & `hasil/g8_u9_b50000/` (Quick 2P: ~5-8 giliran per pemain; Classic: ~21-27, kadang 59).
+
+**Pendapatan Crowns (ekonomi TIDAK diubah di F7):**
+| Sumber | Rumus (profil_pemain.gd) | Quick 2P (~6 giliran) | Classic (~25 giliran) |
+|---|---|---|---|
+| Laga | 2 x giliran x (1.0 Quick / 1.6 Classic) x 1.5 bila menang | 12 kalah / 18 menang | 80 / 120 |
+| Penghargaan | 10 per penghargaan (4 jenis dibagi pemain) | ~7 | ~7 |
+| Tebak Duel | 3 per tebakan benar, maks 5 | ~3 | ~15 |
+| Naik level | 10 x level baru; jangka panjang ~0.4 x XP per laga | ~10-15 | ~60 |
+| **Dasar per laga** | | **~40** | **~160 (waktu ~4x)** |
+| Login 7 hari | 20/30/40/50/60/80/150 = 430/minggu | ~61/hari | |
+| Misi harian | 20 + 30 + 45 bila 3 selesai | <=95/hari | |
+| DOUBLE (iklan) | laga + penghargaan sekali lagi | +~22/laga | |
+- Pemain baru, hari 1, 3 laga Quick: login 20 + misi ~50 + laga/penghargaan ~75 + naik ke Lv2 20 = **~165**.
+- Pemain kasual 4 laga/hari tanpa iklan: (4 x 40 + ~156) / 4 = ~80/laga; 8 laga/hari ~60. **Basis harga = 50 Crowns per laga
+  "efektif"** (sengaja konservatif: tidak semua misi selesai, tanpa iklan). Classic = ~4 laga Quick.
+- Level (XP ~50/laga Quick + XP misi): Lv5 ~8 laga, Lv10 ~30, Lv12 ~40, Lv15 ~60 -> `syarat_level` dipakai sebagai "kunci
+  waktu" untuk barang mahal supaya Crowns lama (tertimbun sejak Fase 2, belum ada tempat belanja) tidak langsung menghabiskan toko.
+
+**Target cek:** termurah 150 = ~3 laga (hari 1 pemain baru ~165 Crowns); termahal 3500 = ~70 laga @50 (44 @80, 88 @40).
+Seluruh katalog = 27 750 Crowns (~550 laga) -> penampung Crowns jangka panjang. Bonus Remove Ads 500 = 1-2 barang murah.
+
+**Warna bidak (jenis `pawn`, 8).** ATURAN: warna BADAN tetap warna slot (biru/merah/hijau/kuning = identitas pemain & warna
+petak milik, `WARNA_SLOT` di `pemain_dasar.gd`) -- kosmetik TIDAK menggantinya. Kosmetik mewarnai bagian BUKAN-badan
+(sarung tangan putih & sepatu abu-abu: material yang dilewati `_warnai_karakter`) = "trim". G3 (Sonnet): tambahkan cabang
+`else` di `_warnai_karakter` dengan warna trim slot itu; cek di model bahwa sarung tangan + sepatu memang terwarnai.
+Kalau ternyata tidak ada material bukan-badan yang layak -> lapor, Opus memutuskan (jangan ganti warna badan).
+| id | nama | warna trim (albedo) | efek material | harga | syarat Lv |
+|---|---|---|---|---|---|
+| pawn_classic | Classic | (asli, tidak diubah) | - | 0 (awal) | - |
+| pawn_shadow | Shadow | #262626 | - | 150 | - |
+| pawn_ocean | Ocean | #1FB5AD | - | 300 | - |
+| pawn_rose | Rose | #FF6FAE | - | 500 | - |
+| pawn_violet | Violet | #7A3CFF | - | 800 | 5 |
+| pawn_lava | Lava | #FF5A00 | emission #FF5A00 x0.6 | 1200 | 8 |
+| pawn_gold | Gold | #FFCC33 | metallic 0.8, roughness 0.3 | 2000 | 12 |
+| pawn_diamond | Diamond | #BFF4FF | metallic 0.6, roughness 0.1, emission #BFF4FF x0.4 | 3500 | 15 |
+
+**Gelar (jenis `title`, 10).** Teks kecil di bawah nama: lobby, papan skor/layar akhir (bila muat), kartu profil.
+| id | teks | harga | syarat Lv |
+|---|---|---|---|
+| title_rookie | Rookie | 0 (awal) | - |
+| title_tile_hunter | Tile Hunter | 150 | - |
+| title_trap_setter | Trap Setter | 300 | - |
+| title_coin_collector | Coin Collector | 400 | - |
+| title_duelist | Duelist | 600 | - |
+| title_storm_caller | Storm Caller | 900 | 5 |
+| title_tower_builder | Tower Builder | 1200 | 8 |
+| title_grand_strategist | Grand Strategist | 1800 | 10 |
+| title_elemental_lord | Elemental Lord | 2600 | 12 |
+| title_tile_legend | Tile Legend | 3500 | 15 |
+(Nama sengaja tidak sama dengan penghargaan akhir DUEL KING / TRAP MASTER / LANDLORD / LUCKY ROLLER.)
+
+**Bingkai kartu profil (jenis `frame`, 6).** StyleBoxFlat panel kartu profil (`UiProfil.tampilkan_kartu_profil`).
+| id | nama | border_color | border lebar | tambahan | harga | syarat Lv |
+|---|---|---|---|---|---|---|
+| frame_plain | Plain | (gaya sekarang) | (sekarang) | - | 0 (awal) | - |
+| frame_bronze | Bronze | #CD7F32 | 3 | - | 250 | - |
+| frame_silver | Silver | #C9D1D9 | 3 | - | 700 | - |
+| frame_emerald | Emerald | #2ECC71 | 4 | - | 1200 | 6 |
+| frame_gold | Gold | #FFCC33 | 5 | shadow #FFCC33 a0.5 size 6 | 2200 | 10 |
+| frame_royal | Royal | #9B59FF | 5 | shadow #FFCC33 a0.6 size 8; corner radius +4 | 3500 | 15 |
+
+**Aturan untuk G1-G3 (Sonnet):**
+- `data_kosmetik.gd`: `const KATALOG := {id: {"jenis", "nama", "harga", "lv", ...data tampilan}}` dengan urutan tabel di atas
+  (= urutan tab toko); `const AWAL := {"pawn": "pawn_classic", "title": "title_rookie", "frame": "frame_plain"}`.
+  Barang `AWAL` dianggap SELALU dimiliki (tidak perlu disimpan; profil v3 -> v4 otomatis punya & memakainya).
+- `beli(id)`: tolak bila id tak dikenal, sudah dimiliki, `level_sekarang() < lv`, atau `crowns < harga`; kurangi Crowns,
+  tambah ke `kosmetik_dimiliki`, LANGSUNG dipakai (equip otomatis), `simpan()` sekali. Tidak ada jual/refund.
+- `pakai(id)`: hanya barang yang dimiliki; jenis diambil dari katalog.
+- Tombol toko: harga + ikon Crowns; kurang Crowns -> "Need N more Crowns"; level kurang -> "Reach Lv N" (terkunci, tetap
+  terlihat sebagai tujuan). Teks pemain bahasa Inggris sederhana.
+- Jaringan (F7.4): kirim 3 id dipakai; host memvalidasi id ada di KATALOG dan jenisnya cocok, jika tidak -> `AWAL`.
+  Kepemilikan TIDAK divalidasi (tidak bisa tanpa server; kosmetik saja, tidak memengaruhi permainan).
+- Harga boleh disetel setelah rilis (konstanta); barang yang sudah dibeli tidak pernah dicabut.
+
+
 ## 3. Fase 8 -- Event mingguan offline + mastery elemen
 **Tujuan:** alasan kembali tiap minggu, tanpa server dan tanpa mengubah keseimbangan.
 
@@ -198,7 +276,7 @@ itu + HANDOFF 0 & 5 + entri LOG teratas; gabungkan beberapa G dalam satu sesi se
 | K15 | 9 | AI cepat & putar ulang rolet di MP | dibatalkan (jaringan + iklan di giliran MP) | ditunda | - |
 
 ## 8. Arahan model
-- Sesi berikut: **Sonnet** -- Fase 6 G0 + G1 (baca: CLAUDE.md, HANDOFF 0 & 5, LOG teratas, bagian 0, 1, 6, 7 rencana ini).
+- Sesi berikut: **Sonnet** -- Fase 7 G1 (+G2 bila sesi masih pendek). Baca: CLAUDE.md, HANDOFF 0 & 5, LOG teratas, bagian 0, 2 (termasuk 2.1), 7 rencana ini. (Fase 6 G0-G3 selesai.)
 - Opus: Fase 7 G0 (harga), bug MP/BEDA yang membingungkan, Fase 8 G3 (opsional), Fase 9 G2 (bersyarat).
 - Pemilik: rilis A+B+Fase 5 bisa jalan paralel; rilis berikutnya disarankan setelah b12 (toko + Remove Ads).
 
@@ -237,3 +315,7 @@ itu + HANDOFF 0 & 5 + entri LOG teratas; gabungkan beberapa G dalam satu sesi se
     7. Profil lama utuh: timpa di atas versi lama -> Crowns/XP/role tidak hilang, Respect & MVP mulai 0.
     Laporkan angka/teks yang aneh; bug -> Opus dulu.
 - 03-10 (pemilik): **uji HP b11 LOLOS** (semua butir daftar berhasil) -> **Fase 6 SELESAI**. Berikutnya: Fase 7 G0 (OPUS: tabel harga katalog, bagian 2.1).
+- 03-10 (Opus): **F7 G0 SELESAI** -- tabel katalog & harga FINAL di bagian 2.1 (tanpa simulasi). Basis 50 Crowns/laga Quick "efektif" (dasar ~40/laga + login ~61/hari + misi <=95/hari).
+  24 barang: pawn 8 (0/150/300/500/800/1200/2000/3500), title 10 (0/150/300/400/600/900/1200/1800/2600/3500), frame 6 (0/250/700/1200/2200/3500); syarat Lv 5-15 pada barang mahal; total 27 750.
+  Keputusan: warna bidak = TRIM (sarung tangan/sepatu), warna badan tetap warna slot (identitas pemain & petak). Barang AWAL selalu dimiliki; beli = langsung dipakai; tanpa refund; host validasi id & jenis saja.
+  Berikutnya: **G1 (Sonnet)** `data_kosmetik.gd` + profil v4 + beli/pakai + uji headless.
