@@ -14,6 +14,7 @@ OK    pakai_semua default = AWAL
 OK    badan = warna slot (biru)
 OK    sepatu = trim Shadow #262626
 OK    salinan classic: sepatu kembali abu asli
+OK    salinan (musuh ber-trim Lava): Shadow #262626 di sepatu, bukan warna slot
 OK    salinan: badan = hijau slot
 OK    model asli tidak tercemar bahan bersama
 OK    Diamond: warna + logam + emisi

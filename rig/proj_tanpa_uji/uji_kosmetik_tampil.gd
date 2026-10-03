@@ -35,13 +35,15 @@ func _ready() -> void:
 	# slot 3-4 menyalin musuh yang trim-nya sudah diwarnai -> classic harus kembali ke bahan asli
 	var musuh = load("res://beras_uji.tscn").instantiate() # seperti game: musuh sudah merah + trim, lalu diduplikat untuk slot 3-4
 	add_child(musuh)
-	pd._warnai_karakter(musuh, Color(1.0, 0.2, 0.2), "pawn_shadow")
+	pd._warnai_karakter(musuh, Color(1.0, 0.2, 0.2), "pawn_lava") # trim jenuh (merah-oranye) jangan dikira badan di salinan
 	var salinan = musuh.duplicate()
 	add_child(salinan)
 	pd._warnai_karakter(salinan, Color(0.2, 0.8, 0.2), "pawn_classic")
 	var kaki2: MeshInstance3D = salinan.get_node("Kaki")
 	var badan2: MeshInstance3D = salinan.get_node("Badan")
 	gagal += _cek("salinan classic: sepatu kembali abu asli", kaki2.get_active_material(0).albedo_color.is_equal_approx(Color(0.4, 0.4, 0.4)))
+	pd._warnai_karakter(salinan, Color(0.2, 0.8, 0.2), "pawn_shadow")
+	gagal += _cek("salinan (musuh ber-trim Lava): Shadow #262626 di sepatu, bukan warna slot", kaki2.get_active_material(0).albedo_color.is_equal_approx(Color("262626")))
 	gagal += _cek("salinan: badan = hijau slot", badan2.get_active_material(0).albedo_color.is_equal_approx(Color(0.2, 0.8, 0.2)))
 	gagal += _cek("model asli tidak tercemar bahan bersama", (load("res://beras_uji.tscn").instantiate().get_node("Kaki") as MeshInstance3D).get_active_material(0).albedo_color.is_equal_approx(Color(0.4, 0.4, 0.4)))
 	var model3 = load("res://beras_uji.tscn").instantiate()

@@ -703,7 +703,10 @@ func _warnai_karakter(model: Node3D, warna_target: Color, id_pawn: String = ""):
 			
 			if mat_asli and mat_asli is StandardMaterial3D:
 				# 3. WAJIB DIDUPLIKAT! Agar warna Pemain & Musuh punya memori sendiri-sendiri
-				var mat_baru = mat_asli.duplicate()
+				# Fase 7 G3: nilai & mulai dari bahan ASLI mesh (karakter slot 3-4 menyalin musuh yang sudah diwarnai;
+				# trim jenuh seperti Lava tidak boleh salah dikira badan).
+				var dasar = mesh.mesh.surface_get_material(i)
+				var mat_baru = (dasar if dasar is StandardMaterial3D else mat_asli).duplicate()
 				
 				var warna_lama = mat_baru.albedo_color
 				
@@ -713,12 +716,8 @@ func _warnai_karakter(model: Node3D, warna_target: Color, id_pawn: String = ""):
 				if warna_lama.r > warna_lama.g + 0.1 and warna_lama.r > warna_lama.b + 0.1:
 					mat_baru.albedo_color = warna_target
 				else:
-					# Fase 7 G3: bagian BUKAN-badan (sarung tangan putih, sepatu abu-abu) = "trim" kosmetik bidak; selalu mulai
-					# dari bahan asli (karakter slot 3-4 menyalin musuh yang trim-nya sudah diwarnai). Badan tetap warna slot.
+					# Fase 7 G3: bagian BUKAN-badan (sarung tangan putih, sepatu abu-abu) = "trim" kosmetik bidak. Badan tetap warna slot.
 					# Hanya bahan putih/abu terang (saturasi rendah, cukup terang): mata/bahan gelap tidak ikut berubah.
-					var dasar = mesh.mesh.surface_get_material(i)
-					if dasar is StandardMaterial3D:
-						mat_baru = dasar.duplicate()
 					if mat_baru.albedo_color.s < 0.2 and mat_baru.albedo_color.v > 0.3:
 						_terapkan_trim(mat_baru, id_pawn)
 					
