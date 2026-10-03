@@ -3,6 +3,11 @@
 Satu entri per sesi, terbaru di atas. Sesi baru tidak bisa membaca percakapan lama, jadi apa pun yang penting
 harus tercatat di sini, di `HANDOFF_LANJUT.md`, atau di RENCANA.
 
+## 2026-10-03 -- sesi Claude Code cloud (Sonnet 5.5): Fase 7 G1 (data kosmetik + profil v4)
+- Branch `claude/elegant-bohr-tl3fps`. `game/data_kosmetik.gd` baru (24 barang persis tabel RENCANA_fase6_9 2.1) + `profil_pemain.gd` VERSI 4 (`kosmetik_dimiliki`, `kosmetik_dipakai`, `beli`/`pakai`/`alasan_tolak_beli`); disalin identik ke `rig/proj_tanpa_uji/`.
+- Bukti (`hasil/g7_kosmetik/`): `uji_kosmetik` 33/33, `uji_profil_v3` 0 gagal (cek VERSI dilonggarkan), `cek_muat_f3` 26/26, 0 SCRIPT ERROR. Tanpa jaringan/RPC. Godot 4.7.1 diunduh ke /opt/godot; `--import` ulang wajib setelah `class_name` baru.
+- Langkah berikutnya: Sonnet Fase 7 G2 (layar SHOP `ui_toko.gd` + tombol menu).
+
 ## 2026-10-03 -- sesi Claude Code cloud (Opus 5.5): Fase 7 G0 (katalog & harga toko)
 - Branch `claude/elegant-bohr-tl3fps` (mulai dari 63637bf = ujung `claude/ecstatic-pascal-bo2bno`). Hemat kredit: tanpa simulasi/Godot, hanya baca `profil_pemain.gd` + data hasil lama.
 - Tabel FINAL di RENCANA_fase6_9 bagian 2.1: basis 50 Crowns/laga Quick efektif; 24 barang (8 pawn, 10 title, 6 frame), 150 (~3 laga) s/d 3500 (~70 laga), syarat Lv 5-15 untuk barang mahal, total 27 750.

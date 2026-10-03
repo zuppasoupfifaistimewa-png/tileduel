@@ -16,7 +16,7 @@ signal profil_berubah
 const BERKAS := "user://profil.cfg"
 const BERKAS_SEMENTARA := "user://profil.cfg.tmp"
 const BERKAS_CADANGAN := "user://profil.cfg.bak"
-const VERSI := 3 # Fase 6: + respect, mvp_total. Fase 4: + role_terakhir, jebakan_role (A), xp_role/build_solo/arena (B, T19: sudah dipakai sejak B-c/B-e -- lihat catat_akhir_match/build_solo/build_arena)
+const VERSI := 4 # Fase 7: + kosmetik_dimiliki, kosmetik_dipakai. Fase 6: + respect, mvp_total. Fase 4: + role_terakhir, jebakan_role (A), xp_role/build_solo/arena (B, T19: sudah dipakai sejak B-c/B-e -- lihat catat_akhir_match/build_solo/build_arena)
 
 # --- XP & Crowns per pertandingan ---
 const XP_PER_GILIRAN := 5
@@ -107,6 +107,9 @@ var ai_cepat := false          # true = giliran AI berjalan 2x selama tidak ada 
 # --- Fase 6 (VERSI 3): identitas multiplayer. Berkas VERSI 1/2 tidak punya bagian "sosial" -> 0. ---
 var respect := 0               # Respect yang pernah diterima dari pemain lain
 var mvp_total := 0             # berapa kali jadi MVP di akhir laga
+# --- Fase 7 (VERSI 4): toko Crowns. Berkas VERSI 1-3 tidak punya bagian "kosmetik" -> kosong (barang AWAL otomatis). ---
+var kosmetik_dimiliki: Array = []   # id barang yang dibeli (barang AWAL tidak disimpan, selalu dimiliki)
+var kosmetik_dipakai := {}          # jenis -> id; jenis yang kosong/rusak = barang AWAL
 
 func _ready() -> void:
 	_rng.randomize()
@@ -155,6 +158,7 @@ func muat() -> void:
 	ai_cepat = bool(c.get_value("pengaturan", "ai_cepat", false)) # Fase 5 G6
 	respect = maxi(0, int(c.get_value("sosial", "respect", 0))) # Fase 6
 	mvp_total = maxi(0, int(c.get_value("sosial", "mvp_total", 0)))
+	_muat_kosmetik(c.get_value("kosmetik", "dimiliki", []), c.get_value("kosmetik", "dipakai", {})) # Fase 7
 
 func _baca_berkas(jalur: String):
 	# ConfigFile yang sah (terbaca & punya id), atau null.
@@ -186,6 +190,8 @@ func simpan() -> void:
 	c.set_value("pengaturan", "ai_cepat", ai_cepat) # Fase 5 G6
 	c.set_value("sosial", "respect", respect) # Fase 6
 	c.set_value("sosial", "mvp_total", mvp_total)
+	c.set_value("kosmetik", "dimiliki", kosmetik_dimiliki) # Fase 7
+	c.set_value("kosmetik", "dipakai", kosmetik_dipakai)
 	var err = c.save(BERKAS_SEMENTARA)
 	if err != OK:
 		push_warning("Profil gagal disimpan (kode %d)." % err)
@@ -218,6 +224,8 @@ func _profil_baru() -> void:
 	ai_cepat = false
 	respect = 0
 	mvp_total = 0
+	kosmetik_dimiliki = []
+	kosmetik_dipakai = {}
 	simpan()
 
 func tambah_respect() -> void:
@@ -229,6 +237,70 @@ func catat_mvp() -> void:
 	# Fase 6: dipanggil sekali per laga bila saya MVP.
 	mvp_total += 1
 	simpan()
+
+# ============================================================
+# KOSMETIK (Fase 7): beli / pakai. Katalog & harga: data_kosmetik.gd.
+# ============================================================
+func _muat_kosmetik(dimiliki, dipakai) -> void:
+	# Data rusak/id tak dikenal dibuang; yang dipakai harus dimiliki & jenisnya cocok.
+	kosmetik_dimiliki = []
+	if dimiliki is Array:
+		for b in dimiliki:
+			var k = str(b)
+			if DataKosmetik.ada(k) and not _awal(k) and not kosmetik_dimiliki.has(k):
+				kosmetik_dimiliki.append(k)
+	kosmetik_dipakai = {}
+	if dipakai is Dictionary:
+		for jenis in DataKosmetik.JENIS:
+			var k = str(dipakai.get(jenis, ""))
+			if k != "" and not _awal(k) and DataKosmetik.jenis_dari(k) == jenis and kosmetik_dimiliki.has(k):
+				kosmetik_dipakai[jenis] = k
+
+func _awal(id_barang: String) -> bool:
+	return DataKosmetik.AWAL.values().has(id_barang)
+
+func punya_kosmetik(id_barang: String) -> bool:
+	return DataKosmetik.ada(id_barang) and (_awal(id_barang) or kosmetik_dimiliki.has(id_barang))
+
+func kosmetik_pakai(jenis: String) -> String:
+	# id yang sedang dipakai untuk jenis itu (AWAL bila belum memilih).
+	return str(kosmetik_dipakai.get(jenis, DataKosmetik.AWAL.get(jenis, "")))
+
+func alasan_tolak_beli(id_barang: String) -> String:
+	# "" = boleh beli; selain itu pesan untuk pemain (bahasa Inggris sederhana) -- dipakai tombol toko (G2).
+	if not DataKosmetik.ada(id_barang):
+		return "Unknown item."
+	if punya_kosmetik(id_barang):
+		return "You already own this."
+	var b: Dictionary = DataKosmetik.KATALOG[id_barang]
+	if level_sekarang() < int(b["lv"]):
+		return "Reach Lv %d" % int(b["lv"])
+	if crowns < int(b["harga"]):
+		return "Need %d more Crowns" % (int(b["harga"]) - crowns)
+	return ""
+
+func beli(id_barang: String) -> String:
+	# "" = berhasil (Crowns berkurang, barang dimiliki & LANGSUNG dipakai, simpan sekali); selain itu alasan tolak.
+	var alasan = alasan_tolak_beli(id_barang)
+	if alasan != "":
+		return alasan
+	crowns = maxi(0, crowns - int(DataKosmetik.KATALOG[id_barang]["harga"]))
+	kosmetik_dimiliki.append(id_barang)
+	kosmetik_dipakai[DataKosmetik.jenis_dari(id_barang)] = id_barang
+	simpan()
+	return ""
+
+func pakai(id_barang: String) -> bool:
+	# Hanya barang yang dimiliki; jenis dari katalog. Barang AWAL = kembali ke bawaan.
+	if not punya_kosmetik(id_barang):
+		return false
+	var jenis = DataKosmetik.jenis_dari(id_barang)
+	if _awal(id_barang):
+		kosmetik_dipakai.erase(jenis)
+	else:
+		kosmetik_dipakai[jenis] = id_barang
+	simpan()
+	return true
 
 func atur_ai_cepat(nilai: bool) -> void:
 	# Fase 5 G6: pilihan tombol AI cepat diingat di profil.

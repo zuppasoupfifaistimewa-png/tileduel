@@ -29,7 +29,7 @@ func _ready() -> void:
 	P.catat_mvp()
 	var c2 = ConfigFile.new()
 	c2.load(P.BERKAS)
-	gagal += _cek("simpan versi=3", int(c2.get_value("profil", "versi", 0)) == 3 and P.VERSI == 3)
+	gagal += _cek("simpan versi=VERSI (>=3)", int(c2.get_value("profil", "versi", 0)) == P.VERSI and P.VERSI >= 3)
 	gagal += _cek("simpan respect=2", int(c2.get_value("sosial", "respect", -1)) == 2)
 	gagal += _cek("simpan mvp=1", int(c2.get_value("sosial", "mvp_total", -1)) == 1)
 	P.respect = 0
