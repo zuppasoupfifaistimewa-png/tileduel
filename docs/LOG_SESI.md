@@ -3,6 +3,13 @@
 Satu entri per sesi, terbaru di atas. Sesi baru tidak bisa membaca percakapan lama, jadi apa pun yang penting
 harus tercatat di sini, di `HANDOFF_LANJUT.md`, atau di RENCANA.
 
+## 2026-10-03 -- sesi Claude Code cloud (Sonnet 5.5): Fase 7 G5 (tombol Remove Ads + regresi MP + ZIP b12)
+- Branch `claude/tile-duel-fase7-g4-autoload-90q9ed` (lanjutan G4, sesi sama). Keputusan pemilik: banner ikut mati; tombol beli di UI. Kredit pemilik sisa ~US$9 saat sesi ini -> hanya satu regresi MP.
+- `ui_toko.gd` baris REMOVE ADS (BUY harga Play / RESTORE; lewat pohon, tahan autoload belum didaftarkan); `uji_toko_iklan` 9/9; `uji_toko`, `cek_nilai` 8/8, `cek_muat_f3` 28/28; tangkapan layar via xvfb muat 720p.
+- Regresi MP 37 skenario: 99 SELESAI, 0 MACET/scripterr/beda/cek_gagal (+2 vs G8 = variasi timing D4/M5). `kiriman/TileDuel_Fase7_b12.zip` 33 .gd (termasuk `pengelola_iklan.gd` yang berubah -- bukan lagi "file pendukung yang tidak dikirim").
+- Pelajaran: node baru dgn nama sama dgn node `queue_free` yang belum terhapus otomatis diganti nama (`@PanelContainer@N`) -> uji jangan mencari lewat nama setelah segarkan, cari lewat teks tombol. Latar `until [ -f ... ]; do sleep 30; done` (run_in_background) dipakai menunggu regresi 1 jam.
+- Langkah berikutnya: pemilik timpa 33 file, daftarkan autoload, pasang plugin billing + produk Play, uji HP (daftar di RENCANA_fase6_9 bagian 9), rilis. Lalu Fase 8.
+
 ## 2026-10-03 -- sesi Claude Code cloud (Sonnet 5.5): Fase 7 G4 (Remove Ads / pengelola_pembelian)
 - Branch kerja `claude/tile-duel-fase7-g4-autoload-90q9ed` (di-fast-forward ke ujung `claude/elegant-bohr-tl3fps` = G3; branch lama itu dibiarkan). Hanya baca dokumen yang diminta + sumber plugin Play Billing di GitHub (satu kali, untuk memastikan nama singleton/sinyal/kunci).
 - `game/pengelola_pembelian.gd` baru (autoload `PengelolaPembelian`, mode stub tanpa plugin, acknowledge, bonus 500 Crowns sekali, restore otomatis, refund mencabut, offline mempertahankan cadangan); `profil_pemain.gd` +`remove_ads`/`bonus_remove_ads_diambil`; `pengelola_iklan.gd` banner ikut mati saat `bebas_iklan`.
