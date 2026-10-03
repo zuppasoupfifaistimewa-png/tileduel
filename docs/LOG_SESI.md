@@ -3,6 +3,10 @@
 Satu entri per sesi, terbaru di atas. Sesi baru tidak bisa membaca percakapan lama, jadi apa pun yang penting
 harus tercatat di sini, di `HANDOFF_LANJUT.md`, atau di RENCANA.
 
+## 2026-10-03 -- sesi Claude Code cloud (Sonnet 5.5): Fase 8 G1 (progres misi event + mastery + beli_event) lalu G2
+- Branch `claude/tile-duel-fase7-g4-autoload-90q9ed`. Kredit pemilik ~US$3 -> sesi hemat. Hanya `profil_pemain.gd` berubah di G1; `uji_event_g1` 0 gagal, uji lama 0 gagal, `cek_muat_f3` 30/30, solo nyata 0 SCRIPT ERROR. Bukti `hasil/g8_event_g1/`. Godot 4.7.1 diunduh ke /opt/godot, `--import` ~8 dtk.
+- Langkah berikutnya: G2 UI (lihat HANDOFF 5 entri "FASE 8 G1").
+
 ## 2026-10-03 -- sesi Claude Code cloud (Opus 5.5): Fase 8 G0 (angka event/mastery + data + profil v5)
 - Branch `claude/tile-duel-fase7-g4-autoload-90q9ed` (lanjutan; CLAUDE.md masih menyebut branch lama). Pemilik: uji HP b12 lolos semua; K9-K12 = a; tanpa U9/regresi MP. Kredit sisa ~US$6 -> sesi dibuat pendek.
 - Temuan: role = elemen, jadi misi "as Fire" memakai `d["role"]`. Nomor minggu ISO diganti hitungan minggu sejak 1970-01-05 (batas Senin sama, putaran tidak meloncat di tahun baru).

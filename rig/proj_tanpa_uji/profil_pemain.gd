@@ -489,6 +489,7 @@ func _banding(a: Array, b: Array) -> int:
 # ============================================================
 func catat_akhir_match(d: Dictionary) -> Dictionary:
 	segarkan_hari()
+	segarkan_event()
 	_double_terpakai = false
 	var st: Dictionary = d.get("stat", {})
 	var menang: bool = bool(d.get("menang", false))
@@ -542,6 +543,13 @@ func catat_akhir_match(d: Dictionary) -> Dictionary:
 		role_lv_awal = int(DataRole.info_level_role(int(xp_role.get(role, 0)))["level"])
 		xp_role[role] = int(xp_role.get(role, 0)) + xp_role_match
 		role_lv_akhir = int(DataRole.info_level_role(int(xp_role[role]))["level"])
+	# Fase 8 G1: misi event (token; berhenti kalau tanggal HP mundur) + mastery elemen (selalu jalan).
+	var misi_ev_selesai: Array = [] if tanggal_mundur() else _majukan_misi_event(st, menang, role)
+	var token_ev = 0
+	for me_s in misi_ev_selesai:
+		token_ev += int(me_s["token"])
+	token_event += token_ev
+	var mastery_naik = _majukan_mastery(st, menang, role)
 	var xp_awal = xp_total
 	crowns += cr_match + cr_peng + cr_misi + cr_tebak
 	var naik = _tambah_xp(xp_match + xp_peng + xp_misi + xp_tebak)
@@ -556,6 +564,7 @@ func catat_akhir_match(d: Dictionary) -> Dictionary:
 		"bisa_double": (xp_match + xp_peng) > 0, "sudah_double": false,
 		"role": role, "xp_role_match": xp_role_match,
 		"role_level_awal": role_lv_awal, "role_level_akhir": role_lv_akhir,
+		"misi_event_selesai": misi_ev_selesai, "token_event_didapat": token_ev, "mastery_naik": mastery_naik,
 	}
 
 func tambah_double(r: Dictionary) -> bool:
@@ -742,6 +751,94 @@ func _majukan_misi(st: Dictionary, menang: bool, jumlah_penghargaan: int) -> Arr
 			var hd = hadiah_misi(m)
 			selesai.append({"teks": teks_misi(m), "xp": int(hd["xp"]), "crowns": int(hd["crowns"])})
 	return selesai
+
+func _majukan_misi_event(st: Dictionary, menang: bool, role: String) -> Array:
+	# Fase 8 G1: kemajuan misi event dari SATU laga tuntas. Hasil: [{"teks", "token"}] yang baru selesai (hadiah di pemanggil).
+	var selesai = []
+	var ev: Dictionary = event_sekarang()
+	var elemen = str(ev["elemen"])
+	var me = st.get("menang_elemen", {})
+	var ms: Array = DataEvent.daftar_misi(minggu_event)
+	for i in range(mini(ms.size(), misi_event.size())):
+		var m = misi_event[i]
+		if not (m is Dictionary) or bool(m.get("selesai", false)):
+			continue
+		var tambah = 0
+		match str(ms[i]["stat"]):
+			"_match_role":
+				tambah = 1 if elemen != "" and role == elemen else 0
+			"_menang_role":
+				tambah = 1 if menang and elemen != "" and role == elemen else 0
+			"_duel_elemen":
+				tambah = int(me.get(elemen, 0)) if me is Dictionary and elemen != "" else 0
+			var kunci:
+				tambah = int(st.get(kunci, 0))
+		if tambah <= 0:
+			continue
+		var target = int(ms[i]["target"])
+		m["progres"] = mini(target, int(m.get("progres", 0)) + tambah)
+		if int(m["progres"]) >= target:
+			m["selesai"] = true
+			selesai.append({"teks": DataEvent.teks_misi(minggu_event, i), "token": int(ms[i]["token"])})
+	return selesai
+
+func _tambah_xp_mastery(elemen: String, n: int, naik: Array) -> void:
+	# Tambah XP mastery satu elemen; tiap level baru -> Crowns, Lv maks -> gelar (dimiliki, tidak otomatis dipakai).
+	if n <= 0 or not DataRole.ROLE.has(elemen):
+		return
+	var lama = DataEvent.level_mastery(xp_mastery(elemen))
+	mastery[elemen] = xp_mastery(elemen) + n
+	var baru = DataEvent.level_mastery(xp_mastery(elemen))
+	for lv in range(lama + 1, baru + 1):
+		var cr = int(DataEvent.CROWNS_LEVEL.get(lv, 0))
+		crowns += cr
+		var gelar = ""
+		if lv >= DataEvent.LEVEL_MAKS:
+			gelar = str(DataEvent.GELAR_MASTERY.get(elemen, ""))
+			if gelar != "" and not kosmetik_dimiliki.has(gelar):
+				kosmetik_dimiliki.append(gelar)
+		naik.append({"elemen": elemen, "level": lv, "crowns": cr, "gelar": gelar})
+
+func _majukan_mastery(st: Dictionary, menang: bool, role: String) -> Array:
+	# Fase 8 G1: XP mastery -- role = elemen: +main, +menang kalau menang; tiap duel menang dgn elemen: +duel.
+	# Selalu jalan (tidak terpengaruh tanggal mundur). Hasil: [{"elemen","level","crowns","gelar"}] level yang baru dicapai.
+	var naik = []
+	var xp_role_el = 0
+	if DataRole.ROLE.has(role):
+		xp_role_el = int(DataEvent.XP_MASTERY["main"]) + (int(DataEvent.XP_MASTERY["menang"]) if menang else 0)
+	var me = st.get("menang_elemen", {})
+	for el in DataRole.ROLE:
+		var n = xp_role_el if el == role else 0
+		if me is Dictionary:
+			n += int(me.get(el, 0)) * int(DataEvent.XP_MASTERY["duel"])
+		_tambah_xp_mastery(el, n, naik)
+	return naik
+
+func alasan_tolak_beli_event(id_barang: String) -> String:
+	# "" = boleh beli dgn Event Tokens; selain itu pesan untuk pemain (dipakai tab EVENT di toko, G2).
+	if not DataKosmetik.ada(id_barang) or DataKosmetik.sumber_dari(id_barang) != "event":
+		return "Unknown item."
+	if punya_kosmetik(id_barang):
+		return "You already own this."
+	if tanggal_mundur():
+		return "Event paused: check your date"
+	var b: Dictionary = DataKosmetik.KATALOG[id_barang]
+	if str(b["event"]) != str(event_sekarang()["id"]):
+		return "Not in this event"
+	if token_event < int(b["token"]):
+		return "Need %d more tokens" % (int(b["token"]) - token_event)
+	return ""
+
+func beli_event(id_barang: String) -> String:
+	# "" = berhasil (token berkurang, barang dimiliki & LANGSUNG dipakai, simpan sekali); selain itu alasan tolak.
+	var alasan = alasan_tolak_beli_event(id_barang)
+	if alasan != "":
+		return alasan
+	token_event = maxi(0, token_event - int(DataKosmetik.KATALOG[id_barang]["token"]))
+	kosmetik_dimiliki.append(id_barang)
+	kosmetik_dipakai[DataKosmetik.jenis_dari(id_barang)] = id_barang
+	simpan()
+	return ""
 
 func boleh_ganti_misi(i: int) -> bool:
 	return not ganti_misi_dipakai and i >= 0 and i < misi.size() and not bool(misi[i].get("selesai", false))
