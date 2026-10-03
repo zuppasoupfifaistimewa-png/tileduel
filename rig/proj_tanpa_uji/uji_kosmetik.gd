@@ -6,13 +6,14 @@ func _ready() -> void:
 	var K = DataKosmetik
 	# 0) katalog sesuai RENCANA 2.1
 	var total := 0
-	for k in K.KATALOG:
+	var toko = K.KATALOG.keys().filter(func(k): return K.sumber_dari(k) == "") # Fase 8: + barang event/mastery di luar toko Crowns
+	for k in toko:
 		total += int(K.KATALOG[k]["harga"])
-	gagal += _cek("katalog 24 barang", K.KATALOG.size() == 24)
+	gagal += _cek("katalog 24 barang", toko.size() == 24)
 	gagal += _cek("8 pawn / 10 title / 6 frame", K.daftar("pawn").size() == 8 and K.daftar("title").size() == 10 and K.daftar("frame").size() == 6)
 	gagal += _cek("total harga 27750", total == 27750)
 	gagal += _cek("AWAL harga 0 & jenis cocok", K.AWAL.size() == 3 and K.AWAL.keys().all(func(j): return int(K.KATALOG[K.AWAL[j]]["harga"]) == 0 and K.jenis_dari(K.AWAL[j]) == j))
-	gagal += _cek("hanya 3 barang harga 0", K.KATALOG.keys().filter(func(k): return int(K.KATALOG[k]["harga"]) == 0).size() == 3)
+	gagal += _cek("hanya 3 barang harga 0", toko.filter(func(k): return int(K.KATALOG[k]["harga"]) == 0).size() == 3)
 	gagal += _cek("sah_untuk_jenis: id salah/jenis salah -> AWAL", K.sah_untuk_jenis("zzz", "pawn") == "pawn_classic" and K.sah_untuk_jenis("title_duelist", "pawn") == "pawn_classic" and K.sah_untuk_jenis("pawn_rose", "pawn") == "pawn_rose")
 	# 1) berkas VERSI 3 (tanpa bagian "kosmetik") -> kosong, data lama utuh
 	var c = ConfigFile.new()
@@ -27,7 +28,7 @@ func _ready() -> void:
 	P.muat()
 	gagal += _cek("v3 data lama utuh", P.xp_total == 777 and P.crowns == 321 and P.nama == "Lama Okay" and P.respect == 4 and P.mvp_total == 2)
 	gagal += _cek("v3 -> kosmetik kosong, AWAL dimiliki & dipakai", P.kosmetik_dimiliki.is_empty() and P.kosmetik_dipakai.is_empty() and P.punya_kosmetik("pawn_classic") and P.kosmetik_pakai("title") == "title_rookie" and P.kosmetik_pakai("frame") == "frame_plain")
-	gagal += _cek("VERSI = 4", P.VERSI == 4)
+	gagal += _cek("VERSI >= 4", P.VERSI >= 4)
 	# 2) beli ditolak
 	P.crowns = 100
 	P.xp_total = 0
@@ -42,7 +43,7 @@ func _ready() -> void:
 	gagal += _cek("beli ganda ditolak, Crowns tetap", P.beli("pawn_shadow") != "" and P.crowns == 4850 and P.kosmetik_dimiliki.size() == 1)
 	var c2 = ConfigFile.new()
 	c2.load(P.BERKAS)
-	gagal += _cek("simpan versi=4 + bagian kosmetik", int(c2.get_value("profil", "versi", 0)) == 4 and c2.get_value("kosmetik", "dimiliki", []) == ["pawn_shadow"] and c2.get_value("kosmetik", "dipakai", {}).get("pawn", "") == "pawn_shadow")
+	gagal += _cek("simpan versi=VERSI + bagian kosmetik", int(c2.get_value("profil", "versi", 0)) == P.VERSI and c2.get_value("kosmetik", "dimiliki", []) == ["pawn_shadow"] and c2.get_value("kosmetik", "dipakai", {}).get("pawn", "") == "pawn_shadow")
 	gagal += _cek("simpan Crowns 4850", int(c2.get_value("profil", "crowns", 0)) == 4850)
 	# 4) syarat level terpenuhi
 	P.xp_total = 1000 # Lv 5+ (100+125+150+175=550 -> Lv5; 1000 -> Lv7)

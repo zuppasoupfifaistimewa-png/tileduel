@@ -206,6 +206,28 @@ Kalau ternyata tidak ada material bukan-badan yang layak -> lapor, Opus memutusk
 **Risiko:** perhitungan minggu di batas tahun (uji G0); profil membengkak (simpan ringkas); pemain ubah tanggal maju
 (dibiarkan -- offline, tidak merugikan orang lain); misi event yang mustahil untuk role/elemen tertentu (G3).
 
+### 3.1 Angka FINAL Fase 8 (Opus G0, 03-10) -- konstanta di `game/data_event.gd` + `data_kosmetik.gd`
+- **Role = elemen** (`DataRole.ROLE` = api/air/tanah/petir/angin), jadi "main sebagai Fire" = role `api` di `d["role"]`.
+- **Minggu:** Senin 00:00 jam HP. Nomor minggu = minggu sejak Senin 1970-01-05 (BUKAN nomor ISO: ISO kembali ke 1 tiap
+  tahun -> `% 6` meloncat di 52/53->1). Batas minggu tetap sama dgn ISO. Putaran: Fire, Water, Wind, Lightning, Earth, Duel.
+  Minggu 2026-09-28..10-04 = **Wind Week**, 10-05 = Lightning (geser urutan = ubah `EVENT`, tanpa efek lain).
+- **Misi event (3/minggu, hadiah token, sekali per minggu):** elemen X: "Finish 5 matches as X" 30, "Win 4 duels with X" 30
+  (stat `menang_elemen[X]`, role apa pun), "Win 2 matches as X" 40. Duel Week: "Guess 5 duels right" 30 (mustahil di 1v1 ->
+  perlu 3+ pemain/AI), "Claim 2 bounties" 30, "Win 8 duels" 40. **= 100 token/minggu penuh.** Token tidak hangus.
+- **Toko event:** 3 barang/event (pawn 60, title 40, frame 80 token = 180); 6 event = 18 barang = 1080 token. Pemain rajin:
+  2 barang di minggu event + sisanya dari tabungan; semua barang ~11 minggu (dua putaran). Barang hanya dijual saat event-nya
+  berjalan (K10=a), di `DataKosmetik.KATALOG` dgn `"sumber": "event"`, `"event"`, `"token"`, `"harga": 0` (toko Crowns
+  hanya menampilkan `sumber` "" lewat `daftar(jenis)`; `beli()` Crowns menolak -> "Event item").
+- **Mastery (K11=a):** XP per elemen per laga tuntas: role = X -> +1, menang +2 lagi; tiap duel menang dgn elemen X +1.
+  Level 1-10, XP total untuk mencapai level: 0/5/12/22/35/55/80/115/160/220 (~70-80 laga dgn role itu ke Lv 10).
+  Crowns saat MENCAPAI Lv 2..10: 30/50/75/100/150/200/250/300/400 = 1555/elemen, 7775 semua (vs toko Crowns 27 750 ->
+  ~+20 Crowns/laga, tidak membanjiri). Lv 10 = gelar "<Elemen> Master" (`title_fire_master` dst., `"sumber": "mastery"`,
+  tidak dijual, diberikan otomatis). TANPA bonus statistik.
+- **Tanggal mundur (K12=a):** `tanggal_maks` = tanggal terbesar yang pernah terlihat; `tanggal_mundur()` -> misi event tidak
+  maju, token/toko event dikunci (G1/G2 wajib memeriksa), misi minggu itu TIDAK di-reset; mastery & misi harian tidak terpengaruh.
+  Akibat yang diterima: tanggal dimajukan jauh lalu dikembalikan -> event berhenti sampai tanggal itu.
+- **Sisa waktu:** `DataEvent.detik_sampai_minggu_baru(Time.get_datetime_dict_from_system())` + `teks_sisa` -> "Ends in 3d 4h".
+
 ## 4. Fase 9 -- Sisa Fase 5 yang murah + penutup
 **Tujuan:** konten kecil tanpa sentuh jaringan/keseimbangan, lalu kiriman akhir yang rapi.
 
@@ -349,3 +371,7 @@ itu + HANDOFF 0 & 5 + entri LOG teratas; gabungkan beberapa G dalam satu sesi se
   - `kiriman/TileDuel_Fase7_b12.zip` = 33 .gd (beda dari b11: +data_kosmetik, +ui_toko, +pengelola_pembelian, +pengelola_iklan [banner], ~layar_local_play, main_menu, pemain, pemain_dasar, profil_pemain, ui_dinamis, ui_profil), byte-per-byte = `game/`.
   - **DAFTAR UJI HP b12:** (1) TOKO: menu utama & PROFILE -> SHOP terbuka; baris REMOVE ADS tidak terpotong, tombol bisa diketuk (HP layar sempit). (2) Beli barang (Crowns cukup): Crowns berkurang, langsung dipakai; barang terkunci menampilkan alasan. (3) Kosmetik di HP teman (2 HP, keduanya b12): warna sarung tangan/sepatu, gelar di lobby/layar akhir, bingkai di kartu profil; badan tetap warna slot; model asli `beras.glb` trim tampak wajar. (4) HP b11 + HP b12 main bersama: tetap bisa (VERSI_PROTOKOL sama), kosmetik b11 = bawaan. (5) REMOVE ADS di build Internal testing, akun penguji lisensi: tombol menampilkan harga; beli -> pesan "Thank you! Ads removed. +500 Crowns", banner hilang, tidak ada interstisial sesudah laga, tidak ada app open saat kembali dari latar; iklan berhadiah (WATCH AD) tetap ada. Cek lagi setelah 5 menit & setelah tutup-buka aplikasi (status tetap, tidak dobel bonus). (6) Reinstall/HP lain + tombol RESTORE: Remove Ads pulih TANPA bonus 500 lagi di pembelian yang sudah di-acknowledge. (7) Batalkan pembayaran: pesan "Purchase cancelled.", tidak ada perubahan. (8) Profil lama utuh setelah timpa. Laporkan angka/teks aneh; bug -> Opus dulu.
   - **Fase 7 selesai di sisi kode; menunggu uji HP pemilik + rilis.** Berikutnya Fase 8 (RENCANA_fase6_9 bagian 3; G0 Opus bila perlu) setelah b12 diuji.
+- 03-10 (Opus): **F8 G0 SELESAI** (bukti `hasil/g8_event/`: `uji_event.txt` 0 gagal (34 cek), `cek_muat_f3.txt` 30/30, `uji_kosmetik.txt` 0 gagal; `uji_profil_v3`, `uji_toko` 0 gagal). Uji HP b12 LOLOS semua (laporan pemilik). Angka FINAL di bagian 3.1.
+  - `game/data_event.gd` BARU (`class_name DataEvent`): 6 event, misi elemen/duel, minggu dari tanggal (Senin; hitung minggu sejak 1970-01-05, aman di 52/53->1), sisa waktu, tabel mastery. `data_kosmetik.gd`: +18 barang event + 5 gelar mastery (`sumber`), `daftar(jenis, sumber="")`, `sumber_dari`, `daftar_event`. `profil_pemain.gd` VERSI 5: `token_event`, `misi_event`, `minggu_event`, `tanggal_maks`, `mastery` (bagian berkas "event"/"mastery"; berkas v4 -> nilai awal, data lama utuh; data rusak disaring), `segarkan_event()` (dipanggil di `_ready`), `tanggal_mundur()`, `event_sekarang()`, `xp_mastery()`; `alasan_tolak_beli` menolak barang event/mastery di toko Crowns.
+  - Rig: file di atas disalin identik; `uji_event.gd/.tscn` (rig-only); `uji_kosmetik` dihitung atas barang toko Crowns saja + cek VERSI pakai `P.VERSI`; `cek_muat_f3` +`data_event.gd`, `data_kosmetik.gd`. Tanpa jaringan/RPC/aturan main.
+  - **G1 (Sonnet) -- tugas persis:** (1) `catat_akhir_match`: `segarkan_event()` di awal; kalau `not tanggal_mundur()` -> `_majukan_misi_event(st, menang, role)` (stat `_match_role`/`_menang_role` = role == elemen event; `_duel_elemen` = `st.menang_elemen[elemen]`; lainnya `st[stat]`), misi selesai -> `token_event += token`; mastery SELALU (tanpa cek tanggal): role sah -> +1 (+2 bila menang) ke `mastery[role]`, tiap elemen `menang_elemen[el]` x1; naik level -> Crowns `CROWNS_LEVEL`, Lv 10 -> gelar `GELAR_MASTERY[el]` masuk `kosmetik_dimiliki` (tidak otomatis dipakai). Kembalikan `misi_event_selesai`, `token_event_didapat`, `mastery_naik` [{elemen, level, crowns, gelar}] di ringkasan. `tambah_double` TIDAK menggandakan token/mastery. (2) `alasan_tolak_beli_event(id)` + `beli_event(id)`: hanya `sumber` "event", `event` == `event_sekarang().id`, tidak `tanggal_mundur()` ("Event paused: check your date"), token cukup ("Need N more tokens"); berhasil = token berkurang, dimiliki, langsung dipakai. (3) uji headless rig `uji_event_g1`: laga palsu solo & MP (role api, menang, menang_elemen) memajukan misi & mastery yang benar; tanggal mundur = misi tidak maju tapi mastery maju; beli event di minggu lain ditolak. Lalu G2 UI (EVENT + tab EVENT di SHOP + mastery di PROFILE).

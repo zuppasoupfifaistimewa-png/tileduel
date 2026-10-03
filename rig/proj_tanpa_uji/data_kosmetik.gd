@@ -36,6 +36,32 @@ const KATALOG := {
 	"frame_emerald": {"jenis": "frame", "nama": "Emerald", "harga": 1200, "lv": 6, "border": Color("2ECC71"), "lebar": 4},
 	"frame_gold": {"jenis": "frame", "nama": "Gold", "harga": 2200, "lv": 10, "border": Color("FFCC33"), "lebar": 5, "bayangan": Color("FFCC33", 0.5), "bayangan_ukuran": 6, "radius_tambah": 0},
 	"frame_royal": {"jenis": "frame", "nama": "Royal", "harga": 3500, "lv": 15, "border": Color("9B59FF"), "lebar": 5, "bayangan": Color("FFCC33", 0.6), "bayangan_ukuran": 8, "radius_tambah": 4},
+	# --- Fase 8 G0: barang TOKO EVENT (dibeli dgn Event Tokens, hanya saat event-nya berjalan; kembali tiap 6 minggu).
+	# "harga" Crowns 0 & "sumber" != "" -> TIDAK dijual di toko Crowns (daftar() hanya sumber ""). Harga token: RENCANA 3.1.
+	"pawn_ember": {"jenis": "pawn", "nama": "Ember", "harga": 0, "lv": 0, "sumber": "event", "event": "fire", "token": 60, "warna": Color("FF3B1F"), "emisi": 0.5},
+	"title_flame_heart": {"jenis": "title", "nama": "Flame Heart", "harga": 0, "lv": 0, "sumber": "event", "event": "fire", "token": 40},
+	"frame_ember": {"jenis": "frame", "nama": "Ember", "harga": 0, "lv": 0, "sumber": "event", "event": "fire", "token": 80, "border": Color("FF5A1F"), "lebar": 4, "bayangan": Color("FF3B1F", 0.5), "bayangan_ukuran": 6},
+	"pawn_tide": {"jenis": "pawn", "nama": "Tide", "harga": 0, "lv": 0, "sumber": "event", "event": "water", "token": 60, "warna": Color("2E7DFF")},
+	"title_wave_rider": {"jenis": "title", "nama": "Wave Rider", "harga": 0, "lv": 0, "sumber": "event", "event": "water", "token": 40},
+	"frame_tide": {"jenis": "frame", "nama": "Tide", "harga": 0, "lv": 0, "sumber": "event", "event": "water", "token": 80, "border": Color("2E9BFF"), "lebar": 4, "bayangan": Color("2E7DFF", 0.5), "bayangan_ukuran": 6},
+	"pawn_breeze": {"jenis": "pawn", "nama": "Breeze", "harga": 0, "lv": 0, "sumber": "event", "event": "wind", "token": 60, "warna": Color("A8F0C8")},
+	"title_sky_dancer": {"jenis": "title", "nama": "Sky Dancer", "harga": 0, "lv": 0, "sumber": "event", "event": "wind", "token": 40},
+	"frame_gale": {"jenis": "frame", "nama": "Gale", "harga": 0, "lv": 0, "sumber": "event", "event": "wind", "token": 80, "border": Color("8FE3BE"), "lebar": 4, "radius_tambah": 6},
+	"pawn_spark": {"jenis": "pawn", "nama": "Spark", "harga": 0, "lv": 0, "sumber": "event", "event": "lightning", "token": 60, "warna": Color("FFE14D"), "emisi": 0.6},
+	"title_thunder_born": {"jenis": "title", "nama": "Thunder Born", "harga": 0, "lv": 0, "sumber": "event", "event": "lightning", "token": 40},
+	"frame_volt": {"jenis": "frame", "nama": "Volt", "harga": 0, "lv": 0, "sumber": "event", "event": "lightning", "token": 80, "border": Color("FFE14D"), "lebar": 4, "bayangan": Color("FFE14D", 0.6), "bayangan_ukuran": 8},
+	"pawn_stone": {"jenis": "pawn", "nama": "Stone", "harga": 0, "lv": 0, "sumber": "event", "event": "earth", "token": 60, "warna": Color("8B6B4A"), "kasar": 0.9},
+	"title_rock_solid": {"jenis": "title", "nama": "Rock Solid", "harga": 0, "lv": 0, "sumber": "event", "event": "earth", "token": 40},
+	"frame_granite": {"jenis": "frame", "nama": "Granite", "harga": 0, "lv": 0, "sumber": "event", "event": "earth", "token": 80, "border": Color("8B6B4A"), "lebar": 6},
+	"pawn_champion": {"jenis": "pawn", "nama": "Champion", "harga": 0, "lv": 0, "sumber": "event", "event": "duel", "token": 60, "warna": Color("E8E8E8"), "logam": 0.9, "kasar": 0.2},
+	"title_duel_champion": {"jenis": "title", "nama": "Duel Champion", "harga": 0, "lv": 0, "sumber": "event", "event": "duel", "token": 40},
+	"frame_arena": {"jenis": "frame", "nama": "Arena", "harga": 0, "lv": 0, "sumber": "event", "event": "duel", "token": 80, "border": Color("E03C3C"), "lebar": 5, "bayangan": Color("E03C3C", 0.5), "bayangan_ukuran": 6},
+	# --- Fase 8 G0: gelar MASTERY (tidak dijual; diberikan saat mastery elemen mencapai Lv 10, DataEvent.GELAR_MASTERY).
+	"title_fire_master": {"jenis": "title", "nama": "Fire Master", "harga": 0, "lv": 0, "sumber": "mastery", "elemen": "api"},
+	"title_water_master": {"jenis": "title", "nama": "Water Master", "harga": 0, "lv": 0, "sumber": "mastery", "elemen": "air"},
+	"title_earth_master": {"jenis": "title", "nama": "Earth Master", "harga": 0, "lv": 0, "sumber": "mastery", "elemen": "tanah"},
+	"title_lightning_master": {"jenis": "title", "nama": "Lightning Master", "harga": 0, "lv": 0, "sumber": "mastery", "elemen": "petir"},
+	"title_wind_master": {"jenis": "title", "nama": "Wind Master", "harga": 0, "lv": 0, "sumber": "mastery", "elemen": "angin"},
 }
 
 static func ada(id_barang: String) -> bool:
@@ -44,11 +70,23 @@ static func ada(id_barang: String) -> bool:
 static func jenis_dari(id_barang: String) -> String:
 	return str(KATALOG[id_barang]["jenis"]) if KATALOG.has(id_barang) else ""
 
-static func daftar(jenis: String) -> Array:
-	# id barang satu jenis, urutan katalog.
+static func daftar(jenis: String, sumber: String = "") -> Array:
+	# id barang satu jenis, urutan katalog. Fase 8: sumber "" = toko Crowns, "event", "mastery".
 	var hasil: Array = []
 	for k in KATALOG:
-		if str(KATALOG[k]["jenis"]) == jenis:
+		if str(KATALOG[k]["jenis"]) == jenis and str(KATALOG[k].get("sumber", "")) == sumber:
+			hasil.append(k)
+	return hasil
+
+static func sumber_dari(id_barang: String) -> String:
+	# Fase 8: "" = toko Crowns, "event" = toko event (token), "mastery" = hadiah mastery Lv 10.
+	return str(KATALOG[id_barang].get("sumber", "")) if KATALOG.has(id_barang) else ""
+
+static func daftar_event(id_event: String) -> Array:
+	# Fase 8: 3 barang toko event untuk satu event (urutan pawn, title, frame).
+	var hasil: Array = []
+	for k in KATALOG:
+		if str(KATALOG[k].get("event", "")) == id_event:
 			hasil.append(k)
 	return hasil
 

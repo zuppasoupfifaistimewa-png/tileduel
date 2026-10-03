@@ -3,6 +3,12 @@
 Satu entri per sesi, terbaru di atas. Sesi baru tidak bisa membaca percakapan lama, jadi apa pun yang penting
 harus tercatat di sini, di `HANDOFF_LANJUT.md`, atau di RENCANA.
 
+## 2026-10-03 -- sesi Claude Code cloud (Opus 5.5): Fase 8 G0 (angka event/mastery + data + profil v5)
+- Branch `claude/tile-duel-fase7-g4-autoload-90q9ed` (lanjutan; CLAUDE.md masih menyebut branch lama). Pemilik: uji HP b12 lolos semua; K9-K12 = a; tanpa U9/regresi MP. Kredit sisa ~US$6 -> sesi dibuat pendek.
+- Temuan: role = elemen, jadi misi "as Fire" memakai `d["role"]`. Nomor minggu ISO diganti hitungan minggu sejak 1970-01-05 (batas Senin sama, putaran tidak meloncat di tahun baru).
+- Dibuat: `game/data_event.gd`, katalog +18 barang event/+5 gelar mastery, profil VERSI 5 + `segarkan_event`/`tanggal_mundur`; `uji_event` 0 gagal, `cek_muat_f3` 30/30. Angka di RENCANA_fase6_9 3.1.
+- Langkah berikutnya: Sonnet G1 (progres misi event + mastery + beli dgn token; tugas persis di RENCANA bagian 9), G2 UI, G4 ZIP b13.
+
 ## 2026-10-03 -- sesi Claude Code cloud (Sonnet 5.5): Fase 7 G5 (tombol Remove Ads + regresi MP + ZIP b12)
 - Branch `claude/tile-duel-fase7-g4-autoload-90q9ed` (lanjutan G4, sesi sama). Keputusan pemilik: banner ikut mati; tombol beli di UI. Kredit pemilik sisa ~US$9 saat sesi ini -> hanya satu regresi MP.
 - `ui_toko.gd` baris REMOVE ADS (BUY harga Play / RESTORE; lewat pohon, tahan autoload belum didaftarkan); `uji_toko_iklan` 9/9; `uji_toko`, `cek_nilai` 8/8, `cek_muat_f3` 28/28; tangkapan layar via xvfb muat 720p.

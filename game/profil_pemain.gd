@@ -16,7 +16,7 @@ signal profil_berubah
 const BERKAS := "user://profil.cfg"
 const BERKAS_SEMENTARA := "user://profil.cfg.tmp"
 const BERKAS_CADANGAN := "user://profil.cfg.bak"
-const VERSI := 4 # Fase 7: + kosmetik_dimiliki, kosmetik_dipakai. Fase 6: + respect, mvp_total. Fase 4: + role_terakhir, jebakan_role (A), xp_role/build_solo/arena (B, T19: sudah dipakai sejak B-c/B-e -- lihat catat_akhir_match/build_solo/build_arena)
+const VERSI := 5 # Fase 8: + token_event, misi_event, minggu_event, tanggal_maks, mastery. Fase 7: + kosmetik_dimiliki, kosmetik_dipakai. Fase 6: + respect, mvp_total. Fase 4: + role_terakhir, jebakan_role (A), xp_role/build_solo/arena (B, T19: sudah dipakai sejak B-c/B-e -- lihat catat_akhir_match/build_solo/build_arena)
 
 # --- XP & Crowns per pertandingan ---
 const XP_PER_GILIRAN := 5
@@ -113,11 +113,18 @@ var kosmetik_dipakai := {}          # jenis -> id; jenis yang kosong/rusak = bar
 # --- Fase 7 G4: Remove Ads. Bagian "pembelian" tidak ada di berkas lama -> false; VERSI tidak perlu naik. ---
 var remove_ads := false             # CADANGAN lokal; sumber kebenaran = query Google Play (PengelolaPembelian)
 var bonus_remove_ads_diambil := false # bonus Crowns Remove Ads hanya sekali per profil
+# --- Fase 8 (VERSI 5): event mingguan + mastery. Berkas VERSI 1-4 tidak punya bagian "event"/"mastery" -> nilai awal. ---
+var token_event := 0                # Event Tokens (tidak hangus)
+var misi_event: Array = []          # 3 x {"progres", "selesai"}; definisi dari DataEvent.daftar_misi(minggu_event)
+var minggu_event := -1              # nomor minggu (DataEvent.minggu_dari_tanggal) milik misi_event; -1 = belum ada
+var tanggal_maks := ""              # tanggal HP terbesar yang pernah terlihat (K12: tanggal mundur -> event berhenti)
+var mastery := {}                   # elemen (DataRole.ROLE) -> XP mastery
 
 func _ready() -> void:
 	_rng.randomize()
 	muat()
 	segarkan_hari()
+	segarkan_event()
 
 # ============================================================
 # SIMPAN / MUAT
@@ -164,6 +171,7 @@ func muat() -> void:
 	_muat_kosmetik(c.get_value("kosmetik", "dimiliki", []), c.get_value("kosmetik", "dipakai", {})) # Fase 7
 	remove_ads = bool(c.get_value("pembelian", "remove_ads", false)) # Fase 7 G4
 	bonus_remove_ads_diambil = bool(c.get_value("pembelian", "bonus_diambil", false))
+	_muat_event(c) # Fase 8
 
 func _baca_berkas(jalur: String):
 	# ConfigFile yang sah (terbaca & punya id), atau null.
@@ -199,6 +207,11 @@ func simpan() -> void:
 	c.set_value("kosmetik", "dipakai", kosmetik_dipakai)
 	c.set_value("pembelian", "remove_ads", remove_ads) # Fase 7 G4
 	c.set_value("pembelian", "bonus_diambil", bonus_remove_ads_diambil)
+	c.set_value("event", "token", token_event) # Fase 8
+	c.set_value("event", "misi", misi_event)
+	c.set_value("event", "minggu", minggu_event)
+	c.set_value("event", "tanggal_maks", tanggal_maks)
+	c.set_value("mastery", "xp", mastery)
 	var err = c.save(BERKAS_SEMENTARA)
 	if err != OK:
 		push_warning("Profil gagal disimpan (kode %d)." % err)
@@ -235,6 +248,11 @@ func _profil_baru() -> void:
 	kosmetik_dipakai = {}
 	remove_ads = false
 	bonus_remove_ads_diambil = false
+	token_event = 0
+	misi_event = []
+	minggu_event = -1
+	tanggal_maks = ""
+	mastery = {}
 	simpan()
 
 func tambah_respect() -> void:
@@ -288,6 +306,11 @@ func alasan_tolak_beli(id_barang: String) -> String:
 		return "Unknown item."
 	if punya_kosmetik(id_barang):
 		return "You already own this."
+	match DataKosmetik.sumber_dari(id_barang): # Fase 8: barang event/mastery tidak dijual dgn Crowns
+		"event":
+			return "Event item"
+		"mastery":
+			return "Reach Mastery Lv %d" % DataEvent.LEVEL_MAKS
 	var b: Dictionary = DataKosmetik.KATALOG[id_barang]
 	if level_sekarang() < int(b["lv"]):
 		return "Reach Lv %d" % int(b["lv"])
@@ -584,6 +607,64 @@ func segarkan_hari() -> void:
 	tanggal_misi = hari
 	ganti_misi_dipakai = false
 	simpan()
+
+# ============================================================
+# EVENT MINGGUAN (Fase 8) -- minggu dari tanggal HP; tanggal mundur -> event berhenti (K12=a)
+# ============================================================
+func _muat_event(c: ConfigFile) -> void:
+	# Data rusak dibuang ke nilai awal; misi yang rusak dibuat ulang oleh segarkan_event().
+	token_event = maxi(0, int(c.get_value("event", "token", 0)))
+	var me = c.get_value("event", "misi", [])
+	misi_event = me if me is Array else []
+	minggu_event = int(c.get_value("event", "minggu", -1))
+	tanggal_maks = str(c.get_value("event", "tanggal_maks", ""))
+	if not DataEvent.tanggal_sah(tanggal_maks):
+		tanggal_maks = ""
+	mastery = {}
+	var ms = c.get_value("mastery", "xp", {})
+	if ms is Dictionary:
+		for el in DataRole.ROLE:
+			if ms.has(el):
+				mastery[el] = maxi(0, int(ms[el]))
+
+func tanggal_mundur() -> bool:
+	# true = tanggal HP lebih awal dari tanggal terbesar yang pernah terlihat: misi event tidak maju,
+	# hadiah event & toko event dikunci sampai tanggal kembali (tanpa hukuman lain).
+	return tanggal_maks != "" and _hari_ini() < tanggal_maks
+
+func _misi_event_sah() -> bool:
+	if misi_event.size() != DataEvent.daftar_misi(minggu_event).size():
+		return false
+	for m in misi_event:
+		if not (m is Dictionary) or not m.has("progres") or not m.has("selesai"):
+			return false
+	return true
+
+func segarkan_event() -> void:
+	# Panggil saat start, sebelum mencatat laga, dan saat membuka layar EVENT. Minggu baru -> 3 misi event baru.
+	var hari = _hari_ini()
+	if not DataEvent.tanggal_sah(hari) or tanggal_mundur():
+		return
+	var berubah = false
+	if hari > tanggal_maks:
+		tanggal_maks = hari
+		berubah = true
+	var minggu = DataEvent.minggu_dari_tanggal(hari)
+	if minggu != minggu_event or not _misi_event_sah():
+		minggu_event = minggu
+		misi_event = []
+		for i in range(DataEvent.daftar_misi(minggu).size()):
+			misi_event.append({"progres": 0, "selesai": false})
+		berubah = true
+	if berubah:
+		simpan()
+
+func event_sekarang() -> Dictionary:
+	# Event minggu misi_event (sama dgn minggu tanggal HP kecuali tanggal mundur).
+	return DataEvent.event_minggu(minggu_event)
+
+func xp_mastery(elemen: String) -> int:
+	return int(mastery.get(elemen, 0))
 
 func _misi_sah() -> bool:
 	for m in misi:
