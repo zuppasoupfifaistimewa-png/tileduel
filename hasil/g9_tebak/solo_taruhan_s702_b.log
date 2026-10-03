@@ -1,0 +1,253 @@
+Godot Engine v4.7.1.stable.official.a13da4feb - https://godotengine.org
+
+ERROR: Resource file not found: res://permata/permata_hijau.png (expected type: Texture2D)
+   at: _load (core/io/resource_loader.cpp:325)
+   GDScript backtrace (most recent call first):
+       [0] _ready (res://uji_nyata.gd:326)
+ERROR: Resource file not found: res://Mellow Shore.ogg (expected type: unknown)
+   at: _load (core/io/resource_loader.cpp:325)
+   GDScript backtrace (most recent call first):
+       [0] setup_sistem_audio (res://audio_grafis.gd:44)
+       [1] _ready (res://pemain.gd:82)
+       [2] _ready (res://uji_nyata.gd:327)
+ERROR: File 'Mellow Shore.ogg' tidak ditemukan. Pastikan sudah dimasukkan ke Godot.
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] setup_sistem_audio (res://audio_grafis.gd:51)
+       [1] _ready (res://pemain.gd:82)
+       [2] _ready (res://uji_nyata.gd:327)
+ERROR: Resource file not found: res://Iron Onslaught.ogg (expected type: unknown)
+   at: _load (core/io/resource_loader.cpp:325)
+   GDScript backtrace (most recent call first):
+       [0] setup_sistem_audio (res://audio_grafis.gd:59)
+       [1] _ready (res://pemain.gd:82)
+       [2] _ready (res://uji_nyata.gd:327)
+ERROR: File 'Iron Onslaught.ogg' tidak ditemukan di Godot.
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] setup_sistem_audio (res://audio_grafis.gd:65)
+       [1] _ready (res://pemain.gd:82)
+       [2] _ready (res://uji_nyata.gd:327)
+WARNING: res://PetaAlam.tscn:3 - ext_resource, invalid UID: uid://btbnxpictjrw2 - using text path instead: res://lingkungan_alam.gd
+     at: load (scene/resources/resource_format_text.cpp:501)
+     GDScript backtrace (most recent call first):
+         [0] _ready (res://pemain.gd:119)
+         [1] _ready (res://uji_nyata.gd:327)
+WARNING: res://PetaAlam.tscn:4 - ext_resource, invalid UID: uid://ce3ntygme0quk - using text path instead: res://petak_papan.gd
+     at: load (scene/resources/resource_format_text.cpp:501)
+     GDScript backtrace (most recent call first):
+         [0] _ready (res://pemain.gd:119)
+         [1] _ready (res://uji_nyata.gd:327)
+ERROR: Resource file not found: res://permata/permata_hijau.png (expected type: Texture2D)
+   at: _load (core/io/resource_loader.cpp:325)
+   GDScript backtrace (most recent call first):
+       [0] _ready (res://uji_nyata.gd:327)
+MENU ok: jumlah_ai_dipilih=3
+MENU panjang 'CLASSIC' = true; keterangan='No round limit. Reach START with 3000 coins.'
+MENU peta 'Grassland' klik1=true klik2=true
+MENU role klik FIRE = true
+WARNING: res://PetaAlam.tscn:3 - ext_resource, invalid UID: uid://btbnxpictjrw2 - using text path instead: res://lingkungan_alam.gd
+     at: load (scene/resources/resource_format_text.cpp:501)
+     GDScript backtrace (most recent call first):
+         [0] _siapkan_peta_dan_mulai (res://pemain.gd:1861)
+         [1] _mulai_terjun_ke_game (res://main_menu.gd:325)
+         [2] _mulai_sesudah_role (res://main_menu.gd:439)
+         [3] <anonymous lambda> (res://main_menu.gd:421)
+         [4] <anonymous lambda> (res://ui_role.gd:224)
+         [5] _klik_teks (res://uji_nyata.gd:591)
+         [6] _ready (res://uji_nyata.gd:368)
+WARNING: res://PetaAlam.tscn:4 - ext_resource, invalid UID: uid://ce3ntygme0quk - using text path instead: res://petak_papan.gd
+     at: load (scene/resources/resource_format_text.cpp:501)
+     GDScript backtrace (most recent call first):
+         [0] _siapkan_peta_dan_mulai (res://pemain.gd:1861)
+         [1] _mulai_terjun_ke_game (res://main_menu.gd:325)
+         [2] _mulai_sesudah_role (res://main_menu.gd:439)
+         [3] <anonymous lambda> (res://main_menu.gd:421)
+         [4] <anonymous lambda> (res://ui_role.gd:224)
+         [5] _klik_teks (res://uji_nyata.gd:591)
+         [6] _ready (res://uji_nyata.gd:368)
+ERROR: Resource file not found: res://Mellow Shore.ogg (expected type: unknown)
+   at: _load (core/io/resource_loader.cpp:325)
+   GDScript backtrace (most recent call first):
+       [0] _siapkan_peta_dan_mulai (res://pemain.gd:1868)
+       [1] _mulai_terjun_ke_game (res://main_menu.gd:325)
+       [2] _mulai_sesudah_role (res://main_menu.gd:439)
+       [3] <anonymous lambda> (res://main_menu.gd:421)
+       [4] <anonymous lambda> (res://ui_role.gd:224)
+       [5] _klik_teks (res://uji_nyata.gd:591)
+       [6] _ready (res://uji_nyata.gd:368)
+MENU role START = true
+PANEL_HOW_TO_WIN jumlah=1
+SYARAT | Collect the gem on the board | Pass START with the gems complete to get your salary | Reach START with 3000+ coins to win | Salary at START: +500, +10 per tile you own, +3 stars | Buy a tile, then STOP on it again to build a tower
+ATURAN mode_quick=false batas_ronde=0 target_permata=1 permata_peta=1 rolet_double=false
+START ditekan setelah 0.0 dtk; pemain=4 target_permata=1 petak=24
+ROLE_SLOT api:api+angin tanah:tanah+petir petir:petir+air air:air+api
+EVENT ronde=1 aktif= terakhir=
+BOUNTY ronde=1 aktif= terakhir= klaim_per_slot=[0, 0, 0, 0] bintang=[4, 4, 4, 4]
+TEBAK_UI 'WHO WINS? TAP ONE!'
+TEBAK_PILIH slot=0 tebak=2 penyerang=2 pembela=1
+TARUHAN_PASANG nominal=10 crowns 500->490 potong=OK
+TEBAK_UI 'Your guess: P3  (bet 10)'
+TEBAK_JENDELA dtk_game=3.27 tombol=true
+TEBAK_UI 'Wrong guess.  -10 Crowns'
+TARUHAN_HASIL 'Wrong guess.  -10 Crowns' crowns 490 harap=490 cek=OK
+TEBAK_CEK tebak=2 menang=1 benar_diharap=false stat_naik=0 ui='Wrong guess.' cek=OK
+EVENT ronde=2 aktif= terakhir=
+BOUNTY ronde=2 aktif=tanah terakhir=tanah klaim_per_slot=[0, 0, 0, 0] bintang=[4, 4, 4, 4]
+JEBAKAN_AI s=1 e=petir petak=6 menara=0 sacred=0
+EVENT ronde=3 aktif= terakhir=
+JEBAKAN_AI s=1 e=petir petak=7 menara=0 sacred=0
+EVENT ronde=4 aktif= terakhir=star_shower
+JEBAKAN_AI s=0 e=api petak=9 menara=0 sacred=0
+JEBAKAN_AI s=1 e=petir petak=13 menara=0 sacred=0
+TEBAK_UI 'WHO WINS? TAP ONE!'
+TEBAK_PILIH slot=0 tebak=2 penyerang=1 pembela=2
+TARUHAN_PASANG nominal=25 crowns 490->465 potong=OK
+TEBAK_UI 'Your guess: P3  (bet 25)'
+TEBAK_JENDELA dtk_game=3.40 tombol=true
+TEBAK_UI 'Good guess!  +25 Crowns'
+TARUHAN_HASIL 'Good guess!  +25 Crowns' crowns 515 harap=515 cek=OK
+TEBAK_CEK tebak=2 menang=2 benar_diharap=true stat_naik=1 ui='Good guess!' cek=OK
+JEBAKAN_AI s=2 e=petir petak=14 menara=0 sacred=0
+EVENT ronde=5 aktif= terakhir=star_shower
+TEBAK_UI 'WHO WINS? TAP ONE!'
+TEBAK_PILIH slot=0 tebak=1 penyerang=1 pembela=2
+TARUHAN_PASANG nominal=50 crowns 515->465 potong=OK
+TEBAK_UI 'Your guess: P2  (bet 50)'
+TEBAK_JENDELA dtk_game=3.40 tombol=true
+TEBAK_UI 'Wrong guess.  -50 Crowns'
+TARUHAN_HASIL 'Wrong guess.  -50 Crowns' crowns 465 harap=465 cek=OK
+TEBAK_CEK tebak=1 menang=2 benar_diharap=false stat_naik=0 ui='Wrong guess.' cek=OK
+JEBAKAN_AI s=2 e=petir petak=17 menara=0 sacred=0
+ERROR: Resource file not found: res://permata/permata_hijau.png (expected type: Texture2D)
+   at: _load (core/io/resource_loader.cpp:325)
+   GDScript backtrace (most recent call first):
+       [0] bergerak_maju (res://pemain.gd:903)
+DIAG_PROGRES giliran=20 detik=406
+EVENT ronde=6 aktif= terakhir=star_shower
+ERROR: Resource file not found: res://permata/permata_hijau.png (expected type: Texture2D)
+   at: _load (core/io/resource_loader.cpp:325)
+   GDScript backtrace (most recent call first):
+       [0] bergerak_maju (res://pemain.gd:903)
+EVENT ronde=7 aktif= terakhir=earthquake
+GETAR_KAMERA maks_h=0.118 akhir_h=0.000 akhir_v=0.000
+JEBAKAN_AI s=1 e=tanah petak=22 menara=0 sacred=0
+TEBAK_UI 'WHO WINS? TAP ONE!'
+TEBAK_PILIH slot=0 tebak=3 penyerang=2 pembela=3
+TEBAK_UI 'Your guess: P4'
+TEBAK_JENDELA dtk_game=3.27 tombol=true
+TEBAK_UI 'Wrong guess.'
+BOUNTY_KLAIM slot=2 bintang_sebelum=6 bintang_sesudah=7
+BOUNTY ronde=7 aktif= terakhir=tanah klaim_per_slot=[0, 0, 1, 0] bintang=[4, 4, 7, 5]
+TEBAK_CEK tebak=3 menang=2 benar_diharap=false stat_naik=0 ui='Wrong guess.' cek=OK
+EVENT ronde=8 aktif= terakhir=earthquake
+EVENT ronde=9 aktif= terakhir=earthquake
+JEBAKAN_AI s=1 e=petir petak=5 menara=0 sacred=0
+EVENT ronde=10 aktif= terakhir=star_shower
+BOUNTY ronde=10 aktif=angin terakhir=angin klaim_per_slot=[0, 0, 1, 0] bintang=[5, 4, 8, 6]
+JEBAKAN_AI s=1 e=petir petak=7 menara=1 sacred=0
+DIAG_PROGRES giliran=40 detik=763
+JEBAKAN_AI s=3 e=air petak=15 menara=0 sacred=0
+EVENT ronde=11 aktif= terakhir=star_shower
+EVENT ronde=12 aktif= terakhir=star_shower
+JEBAKAN_AI s=3 e=air petak=17 menara=0 sacred=0
+ERROR: Resource file not found: res://permata/permata_hijau.png (expected type: Texture2D)
+   at: _load (core/io/resource_loader.cpp:325)
+   GDScript backtrace (most recent call first):
+       [0] bergerak_maju (res://pemain.gd:903)
+KARTU_BANTUAN slot=3 kekayaan=[2280, 3430, 3350, 2206] inv_sebelum=0 inv_sesudah=1 kartu=["dadu_tinggi"]
+TEBAK_UI 'WHO WINS? TAP ONE!'
+TEBAK_PILIH slot=0 tebak=3 penyerang=3 pembela=1
+TARUHAN_PASANG nominal=25 crowns 465->440 potong=OK
+TEBAK_UI 'Your guess: P4  (bet 25)'
+TEBAK_JENDELA dtk_game=3.27 tombol=true
+TEBAK_UI 'Good guess!  +25 Crowns'
+TARUHAN_HASIL 'Good guess!  +25 Crowns' crowns 490 harap=490 cek=OK
+BOUNTY_KLAIM slot=3 bintang_sebelum=7 bintang_sesudah=8
+BOUNTY ronde=12 aktif= terakhir=angin klaim_per_slot=[0, 0, 1, 1] bintang=[0, 3, 3, 8]
+TEBAK_CEK tebak=3 menang=3 benar_diharap=true stat_naik=1 ui='Good guess!' cek=OK
+EVENT ronde=13 aktif=gold_rush terakhir=gold_rush
+BOUNTY ronde=13 aktif=api terakhir=api klaim_per_slot=[0, 0, 1, 1] bintang=[0, 3, 3, 8]
+ERROR: Resource file not found: res://permata/permata_hijau.png (expected type: Texture2D)
+   at: _load (core/io/resource_loader.cpp:325)
+   GDScript backtrace (most recent call first):
+       [0] bergerak_maju (res://pemain.gd:903)
+ERROR: Resource file not found: res://permata/permata_hijau.png (expected type: Texture2D)
+   at: _load (core/io/resource_loader.cpp:325)
+   GDScript backtrace (most recent call first):
+       [0] _render_hud_banyak_pemain (res://pemain_tampilan.gd:564)
+       [1] _render_uang_tampil (res://pemain_tampilan.gd:527)
+       [2] update_ui_status (res://pemain_tampilan.gd:500)
+       [3] bergerak_maju (res://pemain.gd:904)
+JEBAKAN_AI s=0 e=angin petak=1 menara=0 sacred=0
+JEBAKAN_AI s=1 e=petir petak=14 menara=0 sacred=0
+JEBAKAN_AI s=2 e=petir petak=7 menara=1 sacred=0
+JEBAKAN_AI s=3 e=air petak=3 menara=0 sacred=0
+EVENT ronde=14 aktif= terakhir=gold_rush
+JEBAKAN_AI s=1 e=petir petak=16 menara=0 sacred=0
+JEBAKAN_AI s=2 e=petir petak=8 menara=1 sacred=0
+EVENT ronde=15 aktif= terakhir=gold_rush
+DIAG_PROGRES giliran=60 detik=1131
+EVENT ronde=16 aktif=market_day terakhir=market_day
+EVENT ronde=17 aktif= terakhir=market_day
+JEBAKAN_AI s=3 e=air petak=8 menara=1 sacred=0
+TEBAK_UI 'WHO WINS? TAP ONE!'
+TEBAK_PILIH slot=0 tebak=2 penyerang=3 pembela=2
+TARUHAN_PASANG nominal=50 crowns 490->440 potong=OK
+TEBAK_UI 'Your guess: P3  (bet 50)'
+TEBAK_JENDELA dtk_game=3.40 tombol=true
+TEBAK_UI 'Good guess!  +50 Crowns'
+TARUHAN_HASIL 'Good guess!  +50 Crowns' crowns 540 harap=540 cek=OK
+TEBAK_CEK tebak=2 menang=2 benar_diharap=true stat_naik=1 ui='Good guess!' cek=OK
+EVENT ronde=18 aktif= terakhir=market_day
+ERROR: Resource file not found: res://permata/permata_hijau.png (expected type: Texture2D)
+   at: _load (core/io/resource_loader.cpp:325)
+   GDScript backtrace (most recent call first):
+       [0] bergerak_maju (res://pemain.gd:903)
+KARTU_BANTUAN slot=3 kekayaan=[3030, 3930, 3650, 1906] inv_sebelum=0 inv_sesudah=1 kartu=["dadu_tinggi"]
+TEBAK_UI 'WHO WINS? TAP ONE!'
+TEBAK_PILIH slot=0 tebak=3 penyerang=3 pembela=2
+TARUHAN_PASANG nominal=10 crowns 540->530 potong=OK
+TEBAK_UI 'Your guess: P4  (bet 10)'
+TEBAK_JENDELA dtk_game=3.40 tombol=true
+TEBAK_UI 'Wrong guess.  -10 Crowns'
+TARUHAN_HASIL 'Wrong guess.  -10 Crowns' crowns 530 harap=530 cek=OK
+TEBAK_CEK tebak=3 menang=2 benar_diharap=false stat_naik=0 ui='Wrong guess.' cek=OK
+EVENT ronde=19 aktif= terakhir=earthquake
+GETAR_KAMERA maks_h=0.457 akhir_h=0.000 akhir_v=0.000
+ERROR: Resource file not found: res://permata/permata_hijau.png (expected type: Texture2D)
+   at: _load (core/io/resource_loader.cpp:325)
+   GDScript backtrace (most recent call first):
+       [0] bergerak_maju (res://pemain.gd:903)
+TEBAK_UI 'WHO WINS? TAP ONE!'
+TEBAK_PILIH slot=0 tebak=1 penyerang=2 pembela=1
+TEBAK_UI 'Your guess: P2'
+TEBAK_JENDELA dtk_game=3.40 tombol=true
+TEBAK_UI 'Wrong guess.'
+BOUNTY_KLAIM slot=2 bintang_sebelum=1 bintang_sesudah=2
+BOUNTY ronde=19 aktif= terakhir=api klaim_per_slot=[0, 0, 2, 1] bintang=[2, 4, 2, 8]
+TEBAK_CEK tebak=1 menang=2 benar_diharap=false stat_naik=0 ui='Wrong guess.' cek=OK
+JEBAKAN_AI s=3 e=air petak=2 menara=0 sacred=0
+EVENT ronde=20 aktif= terakhir=earthquake
+JEBAKAN_AI s=2 e=petir petak=19 menara=0 sacred=0
+ERROR: Resource file not found: res://permata/permata_hijau.png (expected type: Texture2D)
+   at: _load (core/io/resource_loader.cpp:325)
+   GDScript backtrace (most recent call first):
+       [0] bergerak_maju (res://pemain.gd:903)
+DIAG_PROGRES giliran=80 detik=1552
+JEBAKAN_AI s=3 e=air petak=13 menara=0 sacred=0
+EVENT ronde=21 aktif= terakhir=earthquake
+SEIMBANG peta=alam seed=702 quick=0 roles=api,tanah,petir,air pemenang=1 cara=batas_kaya giliran=81 detik=1577.4 pasang=2,8,5,6 kena=2,7,5,5 kaya=3030,4235,4170,1571 rinci=1/334/1/2/0/9,1/0/2/4/0/0,5/250/6/2/0/0,6/0/2/3/4/0 presets=- sacred=0 xprole0=-1 f5=6/3/3/2/0
+TEBAK_BERUNTUN stat=2
+TARUHAN_RINGKAS dipasang=6 ok=6 gagal=0 crowns_akhir=530
+TEBAK_RINGKAS tebakan=8 benar=3 cek_ok=8 cek_gagal=0 stat_tebak_benar_slot0=3
+STAT_CEK OK duel=<null> kena=19 teks_jebakan=19 | g21 d19 m1 k2 j2 ; g20 d20 m2 k7 j8 ; g20 d16 m6 k5 j5 ; g20 d14 m2 k5 j6 
+SIM BATAS_GILIRAN giliran=81 detik=1577
+WARNING: 3 RIDs of type "CanvasItem" were leaked.
+   at: _free_rids (servers/rendering/renderer_canvas_cull.cpp:2735)
+WARNING: 255 ObjectDB instances were leaked at exit (run with `--verbose` for details).
+   at: cleanup (core/object/object.cpp:2536)
+ERROR: 59 RID allocations of type 'PN13RendererDummy14TextureStorage12DummyTextureE' were leaked at exit.
+ERROR: 1 RID allocations of type 'N17RendererSceneCull8InstanceE' were leaked at exit.
+ERROR: 64 RID allocations of type 'PN18TextServerAdvanced22ShapedTextDataAdvancedE' were leaked at exit.
+ERROR: 2 RID allocations of type 'PN18TextServerAdvanced12FontAdvancedE' were leaked at exit.

@@ -581,6 +581,7 @@ func _saat_tebakan_dipilih(sisi: String) -> void:
 		ui_elemen.tebak_telat()
 		return
 	var slot_ditebak = _duel_slot_penyerang if sisi == "pemain" else _duel_slot_pembela
+	ui_elemen.taruhan_terpasang = ProfilPemain.pasang_taruhan(ui_elemen.taruhan_pilihan) == "" if ui_elemen.taruhan_pilihan > 0 else false # Fase 9 F9.2
 	if StatusJaringan.peran_multiplayer == "client":
 		rpc_id(1, "rpc_kirim_tebakan", _tebak_nomor_lokal, slot_ditebak)
 	elif not _catat_tebakan(slot_lokal, slot_ditebak):
@@ -620,6 +621,13 @@ func _nilai_tebakan_duel(slot_menang: int) -> void:
 	for s in _tebakan_duel:
 		if int(_tebakan_duel[s]) == slot_menang:
 			_tambah_stat(int(s), "tebak_benar")
+			# Fase 9 F9.1: rekor tebakan benar berturut-turut (stat "tebak_beruntun" = nilai terbaik).
+			var urut = int(_tebak_beruntun_slot.get(int(s), 0)) + 1
+			_tebak_beruntun_slot[int(s)] = urut
+			if StatusJaringan.peran_multiplayer != "client" and int(s) < statistik_slot.size():
+				statistik_slot[int(s)]["tebak_beruntun"] = maxi(int(statistik_slot[int(s)].get("tebak_beruntun", 0)), urut)
+		else:
+			_tebak_beruntun_slot[int(s)] = 0
 	_tebakan_duel.clear()
 	_tebak_nomor_lokal = -1
 

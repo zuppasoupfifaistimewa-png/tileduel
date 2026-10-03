@@ -1,0 +1,5 @@
+Fase 9 G0+G1 (Sonnet, 03-10). Bukti:
+- uji_taruhan.txt: 22/22 (taruhan: nominal sah, kurang saldo ditolak, saldo tak pernah negatif, benar +n bersih (x2 kembali), salah -n, batal penuh, batas 10/hari + reset hari baru, simpan-muat, berkas lama tanpa bagian [tebak]; misi: tebak_tiga akumulasi, tebak_beruntun = NILAI TERBAIK bukan jumlah, bobot rendah ~7%/16% dari tingkatnya).
+- solo_taruhan_*.log: solo Classic 3P (robot menebak + memasang taruhan 10/25/50 lewat tombol UI): TARUHAN_PASANG potong=OK, TARUHAN_HASIL "Good guess!  +25 Crowns"/"Wrong guess.  -25 Crowns" saldo tepat; 0 SCRIPT ERROR; TEBAK_BERUNTUN stat sama dgn hitungan ulang dari log (1/1, 2/2).
+- Uji lama 0 gagal: uji_hadiah_tebak, uji_event, uji_event_g1, uji_profil_v3, uji_kosmetik, uji_toko, uji_event_foto; cek_muat_f3 semua OK.
+Tidak diuji: tampilan baris BET di HP nyata (headless), MP nyata (taruhan lokal; stat tebak_beruntun hanya kunci baru dalam dictionary statistik yang sudah disiarkan -> tanpa RPC baru).

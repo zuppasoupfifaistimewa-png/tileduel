@@ -64,6 +64,13 @@ var _putar_gagal_teks = false
 var _putar_cek_ok = 0
 var _putar_cek_gagal = 0
 var tebak_uji = false
+var taruhan_uji = false      # Fase 9: robot memasang taruhan (10/25/50 bergantian) sebelum menebak
+var _tar_n := 0
+var _tar_nominal := 0
+var _tar_crowns0 := 0
+var _tar_ok := 0
+var _tar_gagal := 0
+var _tar_dipasang := 0
 var tebak_jeda_uji := 0.6
 var _tj_buka := -1.0 # Fase 5 G8: detik_total saat jendela tebak (_tebak_terbuka) terbuka
 var _tebak_sejak = -1.0
@@ -277,6 +284,7 @@ func _ready():
 		if a.begins_with("hutang_habis="): hutang_habis_slot = int(a.substr(13)) # Fase 5 G8
 		if a == "profil=1": cek_profil = true
 		if a == "tebak=1": tebak_uji = true # Fase 5 G4
+		if a == "taruhan=1": taruhan_uji = true # Fase 9
 		if a.begins_with("tebak_jeda="): tebak_jeda_uji = float(a.substr(11)) # Fase 5 G8: robot menebak N dtk setelah tombol muncul (bawaan 0.6; >= 99 = tidak pernah)
 		if a == "putar_tolak=1": putar_tolak = true # Fase 5 G5
 		if a == "bebas_iklan=1": bebas_iklan_uji = true # Fase 7 G4
@@ -399,6 +407,7 @@ func _ready():
 	xp0 = ProfilPemain.xp_total
 	cr0 = ProfilPemain.crowns
 	tebak_seumur0 = int(ProfilPemain.statistik.get("tebak_benar", 0))
+	if taruhan_uji: ProfilPemain.crowns = 500 # Fase 9: modal taruhan
 	if uang0_uji >= 0:
 		p.daftar_pemain[0].uang = uang0_uji
 		p.update_ui_status()
@@ -538,6 +547,8 @@ func _tulis_dan_keluar(alasan: String) -> void:
 		print("PUTAR_ULANG_RINGKAS tawaran=%d klik=%d cek_ok=%d cek_gagal=%d stat_putar_ulang=%d" % [_putar_tawaran, _putar_klik, _putar_cek_ok, _putar_cek_gagal, int(p.statistik_slot[p.slot_lokal].get("putar_ulang", 0)) if p != null and p.statistik_slot.size() > p.slot_lokal else -1])
 	if tebak_uji:
 		var stat_tebak = p.statistik_slot[p.slot_lokal].get("tebak_benar", 0) if p != null and p.statistik_slot.size() > p.slot_lokal else -1
+		if p != null and p.statistik_slot.size() > p.slot_lokal: print("TEBAK_BERUNTUN stat=%d" % int(p.statistik_slot[p.slot_lokal].get("tebak_beruntun", 0)))
+		if taruhan_uji: print("TARUHAN_RINGKAS dipasang=%d ok=%d gagal=%d crowns_akhir=%d" % [_tar_dipasang, _tar_ok, _tar_gagal, ProfilPemain.crowns])
 		print("TEBAK_RINGKAS tebakan=%d benar=%d cek_ok=%d cek_gagal=%d stat_tebak_benar_slot%d=%d" % [_tebak_total, _tebak_benar_total, _tebak_cek_ok, _tebak_cek_gagal, p.slot_lokal if p != null else -1, int(stat_tebak)])
 	if ai_cepat_uji != "":
 		print("AI_CEPAT_RINGKAS mode=%s klik=%d profil_akhir=%s berkas_akhir=%s frame=%d frame_2x=%d frame_beda=%d salah=%d beruntun_maks=%d giliran=%d detik_game=%.0f detik_nyata=%.1f" % [ai_cepat_uji, _ac_klik, str(ProfilPemain.ai_cepat), _berkas_ai_cepat(), _ac_frame, _ac_frame_2x, _ac_beda, _ac_salah, _ac_beruntun_maks, jumlah_giliran, detik_total, (Time.get_ticks_msec() - _ac_mulai_ms) / 1000.0 if _ac_mulai_ms >= 0 else -1.0])
@@ -858,7 +869,20 @@ func _urus_tebak() -> void:
 			_tebak_menunggu = p._duel_slot_penyerang if pakai_p else p._duel_slot_pembela
 			_tebak_total += 1
 			print("TEBAK_PILIH slot=%d tebak=%d penyerang=%d pembela=%d" % [p.slot_lokal, _tebak_menunggu, p._duel_slot_penyerang, p._duel_slot_pembela])
+			_tar_nominal = 0
+			if taruhan_uji and _tar_n % 4 != 3: # tiap 4 duel, 1 tanpa taruhan
+				var tbt = ui.tombol_taruhan[_tar_n % 3]
+				if not tbt.disabled:
+					_tar_crowns0 = ProfilPemain.crowns
+					tbt.button_pressed = true
+					_tar_nominal = ProfilPemain.TARUHAN_PILIHAN[_tar_n % 3]
+			_tar_n += 1
 			(ui.tombol_tebak_p if pakai_p else ui.tombol_tebak_m).pressed.emit()
+			if _tar_nominal > 0:
+				var pot = ProfilPemain.crowns == _tar_crowns0 - _tar_nominal
+				_tar_dipasang += 1
+				print("TARUHAN_PASANG nominal=%d crowns %d->%d potong=%s" % [_tar_nominal, _tar_crowns0, ProfilPemain.crowns, "OK" if pot else "GAGAL"])
+				if not pot: _tar_gagal += 1
 	else:
 		_tebak_sejak = -1.0
 	var sig_ui = "%d|%s" % [int(ui.teks_tebak.visible), ui.teks_tebak.text]
@@ -867,7 +891,14 @@ func _urus_tebak() -> void:
 		if ui.teks_tebak.visible:
 			print("TEBAK_UI '%s'" % ui.teks_tebak.text)
 			if ui.teks_tebak.text.begins_with("Good") or ui.teks_tebak.text.begins_with("Wrong"):
-				_tebak_ui_hasil = ui.teks_tebak.text
+				_tebak_ui_hasil = ui.teks_tebak.text.split("  ")[0]
+				if _tar_nominal > 0:
+					var harap = _tar_crowns0 + (_tar_nominal if _tebak_ui_hasil.begins_with("Good") else -_tar_nominal)
+					var oke = ProfilPemain.crowns == harap and ui.teks_tebak.text.contains("Crowns")
+					print("TARUHAN_HASIL '%s' crowns %d harap=%d cek=%s" % [ui.teks_tebak.text, ProfilPemain.crowns, harap, "OK" if oke else "GAGAL"])
+					if oke: _tar_ok += 1
+					else: _tar_gagal += 1
+					_tar_nominal = 0
 	var menang_kini: Array = p.statistik_slot.map(func(st): return int(st.get("duel_menang", 0)))
 	var benar_kini = int(p.statistik_slot[p.slot_lokal].get("tebak_benar", 0))
 	if _tebak_menang_prev.size() == menang_kini.size():

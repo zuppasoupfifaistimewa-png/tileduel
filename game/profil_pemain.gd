@@ -16,7 +16,7 @@ signal profil_berubah
 const BERKAS := "user://profil.cfg"
 const BERKAS_SEMENTARA := "user://profil.cfg.tmp"
 const BERKAS_CADANGAN := "user://profil.cfg.bak"
-const VERSI := 5 # Fase 8: + token_event, misi_event, minggu_event, tanggal_maks, mastery. Fase 7: + kosmetik_dimiliki, kosmetik_dipakai. Fase 6: + respect, mvp_total. Fase 4: + role_terakhir, jebakan_role (A), xp_role/build_solo/arena (B, T19: sudah dipakai sejak B-c/B-e -- lihat catat_akhir_match/build_solo/build_arena)
+const VERSI := 6 # Fase 9: + taruhan_hari, taruhan_jumlah. Fase 8: + token_event, misi_event, minggu_event, tanggal_maks, mastery. Fase 7: + kosmetik_dimiliki, kosmetik_dipakai. Fase 6: + respect, mvp_total. Fase 4: + role_terakhir, jebakan_role (A), xp_role/build_solo/arena (B, T19: sudah dipakai sejak B-c/B-e -- lihat catat_akhir_match/build_solo/build_arena)
 
 # --- XP & Crowns per pertandingan ---
 const XP_PER_GILIRAN := 5
@@ -30,6 +30,9 @@ const CROWNS_PENGHARGAAN := 10
 const XP_PER_TEBAKAN := 5
 const CROWNS_PER_TEBAKAN := 3
 const TEBAK_MAKS_HADIAH := 5
+# --- Fase 9 F9.2: taruhan Crowns Tebak Duel (lokal; Crowns tidak bisa dibeli dengan uang) ---
+const TARUHAN_PILIHAN := [10, 25, 50]
+const TARUHAN_MAKS_HARI := 10
 # --- Level: Lv L -> L+1 butuh 100 + 25 x (L-1) XP. Tanpa batas. ---
 const XP_LEVEL_AWAL := 100
 const XP_TAMBAH_PER_LEVEL := 25
@@ -53,6 +56,7 @@ const MISI := {
 	"pasang_jebakan": {"tingkat": 0, "teks": "Set 3 traps", "target": 3, "stat": "jebakan_pasang"},
 	"beli_petak": {"tingkat": 0, "teks": "Buy 5 tiles", "target": 5, "stat": "petak_beli"},
 	"lewat_start": {"tingkat": 0, "teks": "Pass START 3 times", "target": 3, "stat": "lewat_start"},
+	"tebak_tiga": {"tingkat": 1, "teks": "Guess 3 duels right", "target": 3, "stat": "tebak_benar", "bobot": 1},
 	"menang_match": {"tingkat": 1, "teks": "Win 1 match", "target": 1, "stat": "_menang"},
 	"menang_duel": {"tingkat": 1, "teks": "Win 2 duels", "target": 2, "stat": "duel_menang"},
 	"permata": {"tingkat": 1, "teks": "Collect 2 gems", "target": 2, "stat": "permata"},
@@ -61,6 +65,7 @@ const MISI := {
 	"duel_elemen": {"tingkat": 2, "teks": "Win a duel with %s", "target": 1, "stat": "_elemen"},
 	"kena_jebakan": {"tingkat": 2, "teks": "Catch rivals with your traps 2 times", "target": 2, "stat": "jebakan_kena"},
 	"menara_lv2": {"tingkat": 2, "teks": "Build a Lv 2 tower", "target": 1, "stat": "menara_lv2"},
+	"tebak_beruntun": {"tingkat": 2, "teks": "Guess 2 duels in a row", "target": 2, "stat": "tebak_beruntun", "maks": true, "bobot": 1},
 }
 const HADIAH_MISI := [{"crowns": 20, "xp": 15}, {"crowns": 30, "xp": 25}, {"crowns": 45, "xp": 35}]
 const NAMA_ELEMEN := {"api": "FIRE", "air": "WATER", "tanah": "EARTH", "petir": "LIGHTNING", "angin": "WIND"}
@@ -119,6 +124,10 @@ var misi_event: Array = []          # 3 x {"progres", "selesai"}; definisi dari 
 var minggu_event := -1              # nomor minggu (DataEvent.minggu_dari_tanggal) milik misi_event; -1 = belum ada
 var tanggal_maks := ""              # tanggal HP terbesar yang pernah terlihat (K12: tanggal mundur -> event berhenti)
 var mastery := {}                   # elemen (DataRole.ROLE) -> XP mastery
+# --- Fase 9 (VERSI 6): taruhan Tebak Duel. Berkas lama tidak punya bagian "tebak" -> 0. ---
+var taruhan_hari := ""              # tanggal hitungan taruhan_jumlah
+var taruhan_jumlah := 0             # taruhan yang sudah dipasang pada taruhan_hari (maks TARUHAN_MAKS_HARI)
+var _taruhan_aktif := 0             # taruhan yang sedang berjalan (Crowns sudah dipotong di memori, belum disimpan)
 
 func _ready() -> void:
 	_rng.randomize()
@@ -172,6 +181,9 @@ func muat() -> void:
 	remove_ads = bool(c.get_value("pembelian", "remove_ads", false)) # Fase 7 G4
 	bonus_remove_ads_diambil = bool(c.get_value("pembelian", "bonus_diambil", false))
 	_muat_event(c) # Fase 8
+	taruhan_hari = str(c.get_value("tebak", "taruhan_hari", "")) # Fase 9
+	taruhan_jumlah = clampi(int(c.get_value("tebak", "taruhan_jumlah", 0)), 0, TARUHAN_MAKS_HARI)
+	_taruhan_aktif = 0
 
 func _baca_berkas(jalur: String):
 	# ConfigFile yang sah (terbaca & punya id), atau null.
@@ -212,6 +224,8 @@ func simpan() -> void:
 	c.set_value("event", "minggu", minggu_event)
 	c.set_value("event", "tanggal_maks", tanggal_maks)
 	c.set_value("mastery", "xp", mastery)
+	c.set_value("tebak", "taruhan_hari", taruhan_hari) # Fase 9
+	c.set_value("tebak", "taruhan_jumlah", taruhan_jumlah)
 	var err = c.save(BERKAS_SEMENTARA)
 	if err != OK:
 		push_warning("Profil gagal disimpan (kode %d)." % err)
@@ -253,6 +267,9 @@ func _profil_baru() -> void:
 	minggu_event = -1
 	tanggal_maks = ""
 	mastery = {}
+	taruhan_hari = ""
+	taruhan_jumlah = 0
+	_taruhan_aktif = 0
 	simpan()
 
 func tambah_respect() -> void:
@@ -405,7 +422,7 @@ func statistik_kosong() -> Dictionary:
 		"menang_elemen": {"api": 0, "air": 0, "tanah": 0, "petir": 0, "angin": 0}, "petak_rebut": 0,
 		"jebakan_pasang": 0, "jebakan_kena": 0, "koin_jebakan": 0, "petak_beli": 0, "menara_bangun": 0,
 		"menara_lv2": 0, "permata": 0, "lewat_start": 0, "kartu_pakai": 0, "bounty": 0, "kartu_bantuan": 0,
-		"tebak_benar": 0, "putar_ulang": 0}
+		"tebak_benar": 0, "tebak_beruntun": 0, "putar_ulang": 0}
 
 func _nilai_stat(baris: Dictionary, kunci: String) -> int:
 	var st = baris.get("stat", {})
@@ -595,6 +612,58 @@ func tambah_double(r: Dictionary) -> bool:
 	simpan()
 	return true
 
+# ============================================================
+# TARUHAN TEBAK DUEL (Fase 9 F9.2) -- lokal di HP ini; tanpa RPC
+# pasang: Crowns dipotong di memori (belum disimpan -> HP mati saat duel = tidak rugi);
+# selesai: benar = +2x taruhan, salah = hilang, lalu simpan. batal: kembalikan penuh.
+# ============================================================
+func taruhan_hari_ini() -> int:
+	return taruhan_jumlah if taruhan_hari == _hari_ini() else 0
+
+func alasan_tolak_taruhan(n: int) -> String:
+	if not TARUHAN_PILIHAN.has(n):
+		return "Invalid bet."
+	if _taruhan_aktif > 0:
+		return "Bet already placed."
+	if taruhan_hari_ini() >= TARUHAN_MAKS_HARI:
+		return "Daily bet limit reached."
+	if crowns < n:
+		return "Not enough Crowns."
+	return ""
+
+func pasang_taruhan(n: int) -> String:
+	# "" = berhasil; selain itu alasan tolak.
+	var alasan = alasan_tolak_taruhan(n)
+	if alasan != "":
+		return alasan
+	if taruhan_hari != _hari_ini():
+		taruhan_hari = _hari_ini()
+		taruhan_jumlah = 0
+	taruhan_jumlah += 1
+	crowns -= n
+	_taruhan_aktif = n
+	return ""
+
+func selesai_taruhan(benar: bool) -> int:
+	# Mengembalikan selisih bersih untuk teks: +n (benar) / -n (salah) / 0 (tidak ada taruhan).
+	var n = _taruhan_aktif
+	if n <= 0:
+		return 0
+	_taruhan_aktif = 0
+	if benar:
+		crowns += 2 * n
+	simpan()
+	return n if benar else -n
+
+func batal_taruhan() -> void:
+	# Tebakan ditolak ("Too late!") atau duel dibatalkan: Crowns dan hitungan harian kembali.
+	var n = _taruhan_aktif
+	if n <= 0:
+		return
+	_taruhan_aktif = 0
+	crowns += n
+	taruhan_jumlah = maxi(0, taruhan_jumlah - 1)
+
 func _tambah_statistik(kunci: String, n: int = 1) -> void:
 	statistik[kunci] = int(statistik.get(kunci, 0)) + n
 
@@ -682,10 +751,11 @@ func _misi_sah() -> bool:
 	return true
 
 func _misi_baru(tingkat: int, kecuali: Array) -> Dictionary:
-	var calon = []
+	var calon = [] # misi berbobot rendah ("bobot": 1) masuk sekali, yang lain dua kali
 	for k in MISI:
 		if int(MISI[k]["tingkat"]) == tingkat and not kecuali.has(k):
-			calon.append(k)
+			for _i in range(int(MISI[k].get("bobot", 2))):
+				calon.append(k)
 	if calon.is_empty():
 		for k in MISI:
 			if int(MISI[k]["tingkat"]) == tingkat:
@@ -745,7 +815,10 @@ func _majukan_misi(st: Dictionary, menang: bool, jumlah_penghargaan: int) -> Arr
 				tambah = int(st.get(kunci, 0))
 		if tambah <= 0:
 			continue
-		m["progres"] = mini(target_misi(m), int(m.get("progres", 0)) + tambah)
+		if bool(_definisi(m).get("maks", false)):
+			m["progres"] = mini(target_misi(m), maxi(int(m.get("progres", 0)), tambah)) # nilai terbaik, bukan jumlah
+		else:
+			m["progres"] = mini(target_misi(m), int(m.get("progres", 0)) + tambah)
 		if int(m["progres"]) >= target_misi(m):
 			m["selesai"] = true
 			var hd = hadiah_misi(m)

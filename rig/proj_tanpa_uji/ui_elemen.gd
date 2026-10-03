@@ -55,6 +55,12 @@ var penawar_putar_ulang: Callable
 var tombol_tebak_p: Button
 var tombol_tebak_m: Button
 var teks_tebak: Label
+# Fase 9 F9.2: taruhan Crowns (lokal). taruhan_pilihan = nominal terpilih (0 = tanpa taruhan);
+# taruhan_terpasang = Crowns sudah dipotong untuk tebakan ini (diisi pemain_duel saat tebakan dipilih).
+var taruhan_pilihan: int = 0
+var taruhan_terpasang: bool = false
+var tombol_taruhan: Array = []
+var teks_taruhan: Label
 
 var memori_serang_pemain = {"api": 0, "air": 0, "angin": 0, "tanah": 0, "petir": 0}
 var memori_bertahan_pemain = {"api": 0, "air": 0, "angin": 0, "tanah": 0, "petir": 0}
@@ -431,6 +437,42 @@ func _setup_ui_tebak() -> void:
 			tombol_tebak_p = b
 		else:
 			tombol_tebak_m = b
+	# Fase 9 F9.2: baris taruhan di bawah tombol tebak (ketuk lagi = batal pilih).
+	teks_taruhan = Label.new()
+	teks_taruhan.text = "BET:"
+	teks_taruhan.add_theme_font_size_override("font_size", 24)
+	teks_taruhan.add_theme_color_override("font_outline_color", Color.BLACK)
+	teks_taruhan.add_theme_constant_override("outline_size", 6)
+	teks_taruhan.position = Vector2(size.x / 2.0 - 160.0, y_awal + 170.0)
+	teks_taruhan.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	teks_taruhan.hide()
+	add_child(teks_taruhan)
+	var nominal = ProfilPemain.TARUHAN_PILIHAN
+	for i in range(nominal.size()):
+		var tb = Button.new()
+		tb.toggle_mode = true
+		tb.text = str(nominal[i])
+		tb.size = Vector2(70, 48)
+		tb.position = Vector2(size.x / 2.0 - 90.0 + i * 76.0, y_awal + 160.0)
+		tb.add_theme_font_size_override("font_size", 24)
+		tb.toggled.connect(_on_taruhan_toggled.bind(int(nominal[i])))
+		tb.hide()
+		add_child(tb)
+		tombol_taruhan.append(tb)
+
+func _on_taruhan_toggled(aktif: bool, n: int) -> void:
+	if aktif:
+		taruhan_pilihan = n
+		for tb in tombol_taruhan:
+			if tb.text != str(n):
+				tb.set_pressed_no_signal(false)
+	elif taruhan_pilihan == n:
+		taruhan_pilihan = 0
+
+func _sembunyikan_taruhan() -> void:
+	for tb in tombol_taruhan:
+		tb.hide()
+	teks_taruhan.hide()
 
 func tampilkan_tebak(nama_p: String, nama_m: String) -> void:
 	# Layar penonton, fase pilih elemen: ajak pemain menebak pemenang duel.
@@ -439,6 +481,13 @@ func tampilkan_tebak(nama_p: String, nama_m: String) -> void:
 	tombol_tebak_m.text = nama_m
 	tombol_tebak_p.show()
 	tombol_tebak_m.show()
+	taruhan_pilihan = 0
+	taruhan_terpasang = false
+	teks_taruhan.show()
+	for tb in tombol_taruhan:
+		tb.set_pressed_no_signal(false)
+		tb.disabled = ProfilPemain.alasan_tolak_taruhan(int(tb.text)) != ""
+		tb.show()
 	teks_tebak.text = "WHO WINS? TAP ONE!"
 	teks_tebak.modulate = Color(1.0, 1.0, 0.5)
 	teks_tebak.show()
@@ -448,11 +497,17 @@ func sembunyikan_tombol_tebak() -> void:
 	# tapi "Your guess" / "Too late!" tetap sampai duel selesai.
 	tombol_tebak_p.hide()
 	tombol_tebak_m.hide()
+	_sembunyikan_taruhan()
 	if tebak_sisi == "" and teks_tebak.text.begins_with("WHO WINS"):
 		teks_tebak.hide()
 
 func batal_tebak() -> void:
 	# Duel dibatalkan (migrasi host): buang semua sisa tampilan & tebakan.
+	if taruhan_terpasang: # Fase 9: taruhan yang belum dinilai dikembalikan
+		ProfilPemain.batal_taruhan()
+		taruhan_terpasang = false
+	taruhan_pilihan = 0
+	_sembunyikan_taruhan()
 	tebak_sisi = ""
 	tombol_tebak_p.hide()
 	tombol_tebak_m.hide()
@@ -460,6 +515,9 @@ func batal_tebak() -> void:
 
 func tebak_telat() -> void:
 	# Tebakan ditolak (jendela sudah tutup di host).
+	if taruhan_terpasang:
+		ProfilPemain.batal_taruhan()
+		taruhan_terpasang = false
 	tebak_sisi = ""
 	teks_tebak.text = "Too late!"
 	teks_tebak.modulate = Color(1.0, 0.5, 0.5)
@@ -471,10 +529,13 @@ func _on_tombol_tebak_ditekan(sisi: String) -> void:
 	tebak_sisi = sisi
 	tombol_tebak_p.hide()
 	tombol_tebak_m.hide()
+	_sembunyikan_taruhan()
 	teks_tebak.text = "Your guess: " + (tombol_tebak_p.text if sisi == "pemain" else tombol_tebak_m.text)
 	teks_tebak.modulate = Color(0.5, 1.0, 1.0)
 	teks_tebak.show()
 	tebakan_dipilih.emit(sisi)
+	if taruhan_terpasang:
+		teks_tebak.text += "  (bet %d)" % taruhan_pilihan
 
 func _tampilkan_hasil_tebak(pemenang: String) -> void:
 	# Pengumuman akhir duel: penonton yang menebak melihat benar / salah.
@@ -482,6 +543,10 @@ func _tampilkan_hasil_tebak(pemenang: String) -> void:
 		return
 	var benar = (tebak_sisi == pemenang)
 	teks_tebak.text = "Good guess!" if benar else "Wrong guess."
+	if taruhan_terpasang: # Fase 9 F9.2: benar = taruhan kembali x2, salah = hilang
+		taruhan_terpasang = false
+		var selisih = ProfilPemain.selesai_taruhan(benar)
+		teks_tebak.text += "  %s%d Crowns" % ["+" if selisih > 0 else "-", absi(selisih)]
 	teks_tebak.modulate = Color(0.4, 1.0, 0.4) if benar else Color(1.0, 0.5, 0.5)
 	teks_tebak.show()
 

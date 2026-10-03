@@ -302,6 +302,7 @@ const KARTU_BANTUAN_MAKS_INVENTARIS := 3
 # Dihitung di device yang menjalankan logika (solo / host), ikut siaran state ke client,
 # ikut baris papan skor di akhir pertandingan.
 var statistik_slot: Array = []
+var _tebak_beruntun_slot: Dictionary = {} # HOST/SOLO (Fase 9): slot -> tebakan benar berturut-turut saat ini
 var _hadiah_akhir_diproses: bool = false  # hadiah profil sudah dicatat (sekali per pertandingan)
 var _respect_terkirim: Dictionary = {}   # Fase 6: slot target -> true (Respect yang saya kirim di laga ini)
 var _respect_pasangan: Dictionary = {}   # HOST: "pengirim>target" -> true (satu Respect per pasangan per laga)
@@ -663,6 +664,7 @@ func _teks_narasi(kunci: String, slot: int, angka: int = 0, slot_lain: int = -1)
 # ========================================================
 func _reset_statistik() -> void:
 	statistik_slot = []
+	_tebak_beruntun_slot.clear()
 	for s in range(jumlah_pemain()):
 		statistik_slot.append(ProfilPemain.statistik_kosong())
 	if statistik_slot.size() > 0:

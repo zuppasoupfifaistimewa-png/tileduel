@@ -3,6 +3,12 @@
 Satu entri per sesi, terbaru di atas. Sesi baru tidak bisa membaca percakapan lama, jadi apa pun yang penting
 harus tercatat di sini, di `HANDOFF_LANJUT.md`, atau di RENCANA.
 
+## 2026-10-03 -- sesi Claude Code cloud (Sonnet 5.5): Fase 9 G0 + G1 (misi Tebak Duel, taruhan Crowns, ZIP b14)
+- Branch kerja `claude/kind-turing-b71jzs` (di-fast-forward ke ujung `claude/tile-duel-fase7-g4-autoload-90q9ed` = 2a53f0b, lalu +Fase 9). Kredit pemilik ~US$2 -> semua dikerjakan sekaligus, tanpa G2 Opus & regresi MP.
+- Dibuat: 2 misi harian + stat `tebak_beruntun`, taruhan 10/25/50 (lokal, memori dulu baru simpan, maks 10/hari), profil VERSI 6; UI baris BET di `ui_elemen.gd`. Bukti `hasil/g9_tebak/` (uji_taruhan 22/22, solo robot taruhan, uji lama 0 gagal). `kiriman/TileDuel_Fase9_b14.zip` 35 .gd. Daftar uji HP b14 di HANDOFF 5.
+- Pelajaran: tes misi harus mengisi `tanggal_misi = _hari_ini()` kalau tidak `catat_akhir_match` -> `segarkan_hari` mengganti misi uji. Godot 4.7.1 diunduh ke /opt/godot, `--import` ~10 dtk.
+- Langkah berikutnya: pemilik TIMPA 35 file + uji HP b14 + rilis. Opsional (butuh kredit): Fase 9 G2 Opus (AI bounty + U9 benih baru), tangkapan layar baris BET.
+
 ## 2026-10-03 -- sesi Claude Code cloud (Sonnet 5.5): Fase 8 G1 (progres misi event + mastery + beli_event) lalu G2
 - Branch `claude/tile-duel-fase7-g4-autoload-90q9ed`. Kredit pemilik ~US$3 -> sesi hemat. Hanya `profil_pemain.gd` berubah di G1; `uji_event_g1` 0 gagal, uji lama 0 gagal, `cek_muat_f3` 30/30, solo nyata 0 SCRIPT ERROR. Bukti `hasil/g8_event_g1/`. Godot 4.7.1 diunduh ke /opt/godot, `--import` ~8 dtk.
 - G2 UI: `ui_event.gd` (layar EVENT + MASTERY), tab EVENT di `ui_toko.gd`, tombol EVENT di menu, MASTERY di PROFILE, kartu hadiah; `uji_event_foto` 11/11, `cek_muat_f3` 31/31, tangkapan layar di `hasil/g8_event_g2/`. G4: `kiriman/TileDuel_Fase8_b13.zip` 35 .gd. G3 Opus & regresi MP sengaja dilewati (hemat kredit).
