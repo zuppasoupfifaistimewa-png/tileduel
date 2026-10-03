@@ -3,6 +3,11 @@
 Satu entri per sesi, terbaru di atas. Sesi baru tidak bisa membaca percakapan lama, jadi apa pun yang penting
 harus tercatat di sini, di `HANDOFF_LANJUT.md`, atau di RENCANA.
 
+## 2026-10-03 -- sesi Claude Code cloud (Sonnet 5.5): Fase 7 G2 (layar SHOP)
+- Branch `claude/elegant-bohr-tl3fps`. `game/ui_toko.gd` baru (SHOP: tab Pawn/Title/Frame, BUY/EQUIP, alasan terkunci, pratinjau); tombol SHOP di panel PROFILE (ganti teks lama) dan menu utama (`main_menu.gd` `tombol_toko`); rig identik; `cek_muat_f3.gd` +ui_toko.
+- Bukti (`hasil/g7_kosmetik/`): `uji_toko` 0 gagal, `cek_muat_f3` 27/27, `uji_kosmetik` 33/33, tangkapan layar nyata (xvfb+opengl3) pawn/title/frame. Layout dirapikan dari tangkapan (tinggi daftar 330, pratinjau lebih terang). Tanpa jaringan.
+- Langkah berikutnya: Sonnet Fase 7 G3 (kosmetik tampil di HP sendiri & teman; payload + trim + gelar + bingkai).
+
 ## 2026-10-03 -- sesi Claude Code cloud (Sonnet 5.5): Fase 7 G1 (data kosmetik + profil v4)
 - Branch `claude/elegant-bohr-tl3fps`. `game/data_kosmetik.gd` baru (24 barang persis tabel RENCANA_fase6_9 2.1) + `profil_pemain.gd` VERSI 4 (`kosmetik_dimiliki`, `kosmetik_dipakai`, `beli`/`pakai`/`alasan_tolak_beli`); disalin identik ke `rig/proj_tanpa_uji/`.
 - Bukti (`hasil/g7_kosmetik/`): `uji_kosmetik` 33/33, `uji_profil_v3` 0 gagal (cek VERSI dilonggarkan), `cek_muat_f3` 26/26, 0 SCRIPT ERROR. Tanpa jaringan/RPC. Godot 4.7.1 diunduh ke /opt/godot; `--import` ulang wajib setelah `class_name` baru.

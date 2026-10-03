@@ -370,8 +370,18 @@ static func pasang_di_menu(menu: Node) -> void:
 	tombol.pressed.connect(func(): buka_panel_misi(menu))
 	menu.add_child(tombol)
 
+	var tombol_toko = _tombol("SHOP", Color(0.75, 0.55, 0.1), Vector2(190, 56), 20)
+	tombol_toko.set_anchors_preset(Control.PRESET_TOP_RIGHT)
+	tombol_toko.offset_left = -16 - 190
+	tombol_toko.offset_right = -16
+	tombol_toko.offset_top = 20 + 56 + 8
+	tombol_toko.offset_bottom = 20 + 56 + 8 + 56
+	tombol_toko.pressed.connect(func(): UiToko.buka_toko(menu))
+	menu.add_child(tombol_toko)
+
 	menu.bar_profil = bar
 	menu.tombol_misi = tombol
+	menu.tombol_toko = tombol_toko
 	segarkan_menu(menu)
 
 static func segarkan_menu(menu: Node) -> void:
@@ -432,7 +442,10 @@ static func buka_panel_profil(menu: Node) -> void:
 	baris_lv.add_child(_label("%d/%d XP to Lv %d" % [int(info["xp_dalam"]), int(info["xp_butuh"]), int(info["level"]) + 1], 16, ABU))
 
 	isi.add_child(_label("CROWNS %d" % ProfilPemain.crowns, 24, EMAS))
-	isi.add_child(_label("Crowns will unlock items soon.", 16, ABU))
+	var btn_toko = _tombol("SHOP", Color(0.75, 0.55, 0.1), Vector2(200, 52), 22)
+	btn_toko.size_flags_horizontal = Control.SIZE_SHRINK_CENTER
+	btn_toko.pressed.connect(func(): UiToko.buka_toko(menu))
+	isi.add_child(btn_toko)
 
 	var kisi = GridContainer.new()
 	kisi.columns = 4

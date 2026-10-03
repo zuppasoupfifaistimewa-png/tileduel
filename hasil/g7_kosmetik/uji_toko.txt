@@ -1,0 +1,32 @@
+Godot Engine v4.7.1.stable.official.a13da4feb - https://godotengine.org
+
+TOKO OK    panel SHOP terbuka
+TOKO OK    tab PAWN/TITLE/FRAME ada
+TOKO OK    8 baris pawn (1 EQUIPPED)
+TOKO OK    label Crowns/Lv
+TOKO OK    alasan 'Need 100 more Crowns' (Ocean 300)
+TOKO OK    alasan 'Reach Lv 5' (Violet)
+TOKO OK    beli Shadow: Crowns 50 & dipakai
+TOKO OK    label Crowns diperbarui
+TOKO OK    Shadow = EQUIPPED, Classic = EQUIP
+TOKO OK    EQUIP Classic -> bawaan
+TOKO OK    BUY kurang Crowns ditolak, Crowns tetap
+TOKO OK    pesan penolakan tampil
+TOKO OK    tab TITLE 10 baris
+TOKO OK    tab FRAME 6 baris
+TOKO OK    CLOSE menutup panel
+TOKO OK    pratinjau 24 barang
+TOKO OK    pasang_di_menu: tombol SHOP di menu
+TOKO OK    tombol SHOP menu membuka toko
+TOKO OK    panel Profile punya tombol SHOP
+TOKO OK    SHOP dari Profile membuka toko
+TOKO OK    teks lama 'unlock items soon' hilang
+TOKO gagal=0
+WARNING: 42 RIDs of type "CanvasItem" were leaked.
+   at: _free_rids (servers/rendering/renderer_canvas_cull.cpp:2735)
+WARNING: 165 ObjectDB instances were leaked at exit (run with `--verbose` for details).
+   at: cleanup (core/object/object.cpp:2536)
+ERROR: 1 resources still in use at exit (run with --verbose for details).
+   at: clear (core/io/resource.cpp:822)
+ERROR: 14 RID allocations of type 'PN13RendererDummy14TextureStorage12DummyTextureE' were leaked at exit.
+ERROR: 1 RID allocations of type 'PN18TextServerAdvanced12FontAdvancedE' were leaked at exit.
