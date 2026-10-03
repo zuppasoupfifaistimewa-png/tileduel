@@ -1,4 +1,4 @@
-# HANDOFF -- lanjutkan proyek Tile Duel (Fase 4 SELESAI; Fase 5 SELESAI: G0-G9 + uji HP b10 LANCAR (02-10); rencana Fase 6-9 DISETUJUI 02-10 (`docs/RENCANA_fase6_9.md`); Fase 6 G0+G1+G2 SELESAI (02-10/03-10); berikutnya Fase 6 G3 (Sonnet: bersih-bersih + ZIP b11))
+# HANDOFF -- lanjutkan proyek Tile Duel (Fase 4 SELESAI; Fase 5 SELESAI: G0-G9 + uji HP b10 LANCAR (02-10); rencana Fase 6-9 DISETUJUI 02-10 (`docs/RENCANA_fase6_9.md`); Fase 6 G0+G1+G2 SELESAI (02-10/03-10); berikutnya Fase 6 G3 (Sonnet: bersih-bersih + ZIP b11)) -- TERBARU (03-10): r7 keseimbangan api disalin ke `game/`, `kiriman/TileDuel_Fase9_b16.zip` siap (bagian 5, entri "r7 DISALIN")
 
 Dokumen ini ditulis 02-10-2026 supaya sesi Claude Code (cloud / web, tanpa CLI) mana pun bisa melanjutkan
 pekerjaan TANPA riwayat percakapan. BACA INI DULU, lalu `docs/RENCANA_fase4_role.md` bagian 14.19 & **14.21-14.24** (paling akhir).
@@ -312,7 +312,10 @@ Rig-only lain: `uji_*`, `cek_muat_f3.gd` (alat), dan 5 file proyek yang tidak ad
   F5 tidak menguntungkan petir. **USULAN r7 (menunggu pemilik):** `FAKTOR_API_TAHAN_PANAS` 0.5 di `ai_jebakan.gd` -> uji berpasangan 960 -> konfirmasi 140000.
   **r7 DISETUJUI & DIUJI -> P14 LOLOS (Opus, 03-10; CATATAN butir 7-8):** berpasangan 960: api 38.6 -> 45.3, vs petir 32.9 -> 48.3. Konfirmasi benih 140000:
   S1 45.4/54.6/48.5/48.3/53.1 (air/angin/api/petir/tanah), 0 pasangan "!", 0 sel wajib/mati, jebakan/AI 2.14, 294 dtk; S2 4P 23.1/26.1/21.6/24.7/29.6, 398 dtk.
-  **BERIKUTNYA:** salin `rig/proj_tanpa_uji/ai_jebakan.gd` -> `game/ai_jebakan.gd` (identik; satu-satunya beda = r7; tertunda karena izin sesi) + ZIP b16 (1 file).
+  **r7 DISALIN KE `game/` + ZIP b16 SELESAI (Sonnet, 03-10):** `game/ai_jebakan.gd` = `rig/proj_tanpa_uji/ai_jebakan.gd` (cmp identik; satu-satunya beda dari b15 = r7: konstanta `FAKTOR_API_TAHAN_PANAS := 0.5` + 2 baris di penilaian jebakan api).
+  `game/` kini beda dari rig HANYA di 2 stub (`pengelola_iklan.gd`, `pengelola_pembelian.gd`). **`kiriman/TileDuel_Fase9_b16.zip` = 35 .gd (set LENGKAP, aturan 4; hanya `ai_jebakan.gd` yang berbeda dari b15)**, diverifikasi byte-per-byte dgn `game/`.
+  Tanpa sim/regresi baru (file identik dgn yang sudah lolos P14 di benih 140000; tanpa perubahan jaringan/RPC).
+  **BERIKUTNYA (pemilik): buang unduhan lama, TIMPA ke-35 file b16 (praktis cukup `ai_jebakan.gd`, tetapi kirim set lengkap), uji HP singkat (main solo vs AI api: AI api tidak lagi memasang jebakan api ke lawan petir/air yang punya heat_skin; tidak ada error), lalu rilis. `game/` = isi ZIP b16; jangan ubah kecuali bug.**
   Opsional nanti: api vs tanah 41.7% (bukan heat_skin) -- pantau, belum perlu disetel.
 - **RENCANA FASE 6-9 DISETUJUI (Opus, 02-10): `docs/RENCANA_fase6_9.md`** -- pemilik "setuju semua a" (K1-K15). Tujuan: retensi.
   F6 identitas MP ringan (nama/level, MVP, Respect, penjaga versi) -> F7 toko Crowns + Remove Ads (regresi MP 37 SEKALI di F7 G5)

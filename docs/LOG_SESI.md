@@ -3,6 +3,13 @@
 Satu entri per sesi, terbaru di atas. Sesi baru tidak bisa membaca percakapan lama, jadi apa pun yang penting
 harus tercatat di sini, di `HANDOFF_LANJUT.md`, atau di RENCANA.
 
+## 2026-10-03 -- sesi Claude Code cloud (Sonnet 5.5): r7 disalin ke game/ + ZIP b16
+- Branch `claude/kind-turing-b71jzs` (atas permintaan pemilik; CLAUDE.md & penugasan sesi menyebut branch lain). Dibaca: CLAUDE.md, HANDOFF 0 & 5, LOG teratas.
+- `cp rig/proj_tanpa_uji/ai_jebakan.gd game/ai_jebakan.gd` (cmp identik; diff lama = hanya r7). `game/` vs rig: beda hanya `pengelola_iklan.gd` & `pengelola_pembelian.gd` (stub rig, sengaja).
+- `kiriman/TileDuel_Fase9_b16.zip` = 35 .gd (nama-nama sama dgn b15), diverifikasi byte-per-byte dgn `game/`; beda dari b15 hanya `ai_jebakan.gd`. Tanpa sim baru (Godot tidak dijalankan).
+- Langkah berikutnya: pemilik TIMPA file b16, uji HP singkat, rilis. Bug dari HP -> Opus dulu.
+- Pelajaran: heredoc di dalam `( ... ) &&` memecahkan parser Bash tool -> tulis skrip Python ke scratchpad lalu jalankan.
+
 ## 2026-10-03 -- sesi Claude Code cloud (Opus 5.5): api vs petir -> r7 (AI api vs heat_skin), P14 LOLOS
 - Branch `claude/kind-turing-b71jzs`. Analisis tanpa sim (`rig/skrip/f9_api_petir.py`, 4 benih): tiap kena jebakan petir = api -15..20 poin; AI api hampir selalu pasang jebakan API vs pemilik heat_skin (petir/air); laga dgn jebakan non-api api menang 58% vs 30%. Fitur F5 tidak menguntungkan petir.
 - r7 (disetujui pemilik): `FAKTOR_API_TAHAN_PANAS := 0.5` di `ai_jebakan.gd` (nilai jebakan api x0.5 bila korban punya heat_skin). Berpasangan 960: api 38.6 -> 45.3. Konfirmasi benih 140000 S1+S2: P14 LOLOS semua (CATATAN butir 8).
