@@ -9,6 +9,7 @@ harus tercatat di sini, di `HANDOFF_LANJUT.md`, atau di RENCANA.
 - `kiriman/TileDuel_Fase9_b16.zip` = 35 .gd (nama-nama sama dgn b15), diverifikasi byte-per-byte dgn `game/`; beda dari b15 hanya `ai_jebakan.gd`. Tanpa sim baru (Godot tidak dijalankan).
 - Langkah berikutnya: pemilik TIMPA file b16, uji HP singkat, rilis. Bug dari HP -> Opus dulu.
 - Pelajaran: heredoc di dalam `( ... ) &&` memecahkan parser Bash tool -> tulis skrip Python ke scratchpad lalu jalankan.
+- Pemilik: "Kerajaan Crowns" ditunda lagi (K7 = a tetap berlaku; tidak ada rancangannya di repo). Semua branch lain sudah termuat di `kind-turing` (0 komit tertinggal); branch default `claude/new-session-e4ogqo` tertinggal 48 komit -> `CLAUDE.md` + HANDOFF 0 diperbarui (branch kerja = `kind-turing`) dan dibuat PR ke branch default (Merge oleh pemilik). Folder `rig/proj_tanpa_uji/sim` sengaja dibiarkan.
 
 ## 2026-10-03 -- sesi Claude Code cloud (Opus 5.5): api vs petir -> r7 (AI api vs heat_skin), P14 LOLOS
 - Branch `claude/kind-turing-b71jzs`. Analisis tanpa sim (`rig/skrip/f9_api_petir.py`, 4 benih): tiap kena jebakan petir = api -15..20 poin; AI api hampir selalu pasang jebakan API vs pemilik heat_skin (petir/air); laga dgn jebakan non-api api menang 58% vs 30%. Fitur F5 tidak menguntungkan petir.
