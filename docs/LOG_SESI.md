@@ -7,7 +7,8 @@ harus tercatat di sini, di `HANDOFF_LANJUT.md`, atau di RENCANA.
 - Branch `claude/ecstatic-pascal-bo2bno` (mulai dari cc398c7). Hemat kredit: tanpa simulasi/Godot; hanya cek grep + sinkron + buat ZIP.
 - Bersih-bersih pola F7: 0 debug/print/TODO, `UJI_*` false, `game/` 34/35 identik dgn rig; .gd `game/` tidak berubah. Bukti `hasil/g6_bersih/G3_cek.txt`.
 - `kiriman/TileDuel_Fase6_b11.zip` = 29 .gd resmi (9 berbeda dari b10), diverifikasi byte-per-byte. Daftar uji HP (2 HP: nama, level, MVP, Respect, kartu profil, versi beda ditolak, profil lama utuh) di RENCANA_fase6_9 bagian 9.
-- Langkah berikutnya: pemilik uji HP b11; lalu Opus Fase 7 G0 (harga toko) per RENCANA_fase6_9 bagian 2/8. Bug dari HP -> Opus dulu.
+- Uji HP b11 oleh pemilik: LOLOS (03-10) -> Fase 6 SELESAI.
+- Langkah berikutnya: Opus Fase 7 G0 (harga toko) per RENCANA_fase6_9 bagian 2/8. Bug dari HP -> Opus dulu.
 
 ## 2026-10-03 -- sesi Claude Code cloud (Sonnet 5.5): Fase 6 G2 (MVP + Respect + kartu profil)
 - Branch `claude/ecstatic-pascal-bo2bno` (mulai dari 74996eb). Hemat kredit: hanya baca dokumen yang disebut + kode layar akhir/lobby/RPC.

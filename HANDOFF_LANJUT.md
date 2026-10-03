@@ -255,7 +255,8 @@ Rig-only lain: `uji_*`, `cek_muat_f3.gd` (alat), dan 5 file proyek yang tidak ad
   BELUM teruji: tampilan nyata (tombol RESPECT/kartu/toast di layar HP, tata letak 4 pemain) dan jalur TOLAK versi -> uji 2 HP di G3.
   **FASE 6 G3 SELESAI (Sonnet, 03-10; bukti `hasil/g6_bersih/G3_cek.txt`):** bersih-bersih pola F7 (0 debug/print/TODO, `UJI_*` false, `game/` 34/35 identik dgn rig); .gd `game/` tidak berubah.
   `kiriman/TileDuel_Fase6_b11.zip` = 29 .gd resmi (9 berbeda dari b10). Pemilik: buang unduhan lama, TIMPA ke-29 file, impor, uji 2 HP sesuai daftar di RENCANA_fase6_9 bagian 9 (nama, level, MVP, Respect, kartu profil, versi beda ditolak, profil lama utuh). `game/` = isi ZIP b11; jangan ubah kecuali bug.
-  **BERIKUTNYA: pemilik uji HP b11 -> lapor; lalu sesi OPUS Fase 7 G0 (harga toko Crowns, RENCANA_fase6_9 bagian 2 & 8).** Bug dari HP -> Opus dulu.
+  **UJI HP b11 LOLOS (03-10, laporan pemilik: semua butir daftar berhasil) -> FASE 6 SELESAI; `game/` = isi ZIP b11.**
+  **BERIKUTNYA: sesi OPUS Fase 7 G0** (harga & isi katalog toko Crowns -> tabel di RENCANA_fase6_9 bagian 2.1; baca CLAUDE.md, HANDOFF 0 & 5, LOG teratas, RENCANA_fase6_9 bagian 0, 2, 8; ekonomi Crowns dari `profil_pemain.gd` `catat_akhir_match`/misi/login). Lalu G1-G5 Sonnet. Bug dari HP -> Opus dulu.
 - **RENCANA FASE 6-9 DISETUJUI (Opus, 02-10): `docs/RENCANA_fase6_9.md`** -- pemilik "setuju semua a" (K1-K15). Tujuan: retensi.
   F6 identitas MP ringan (nama/level, MVP, Respect, penjaga versi) -> F7 toko Crowns + Remove Ads (regresi MP 37 SEKALI di F7 G5)
   -> F8 event mingguan offline + mastery -> F9 misi/taruhan Tebak Duel + penutup. Kredit ~US$25, perkiraan ~23.5 (urutan pangkas: bagian 6).

@@ -236,3 +236,4 @@ itu + HANDOFF 0 & 5 + entri LOG teratas; gabungkan beberapa G dalam satu sesi se
     6. Versi beda ditolak: HP dgn build LAMA (b10, atau versi Play) gabung ke room HP b11 (dan sebaliknya) -> muncul "Please update the game to play together." (client lama ke host baru: diputus <=4 dtk; client baru ke host lama: pesan dalam 6 dtk); host b11 tidak ikut macet, bisa membuka room lagi.
     7. Profil lama utuh: timpa di atas versi lama -> Crowns/XP/role tidak hilang, Respect & MVP mulai 0.
     Laporkan angka/teks yang aneh; bug -> Opus dulu.
+- 03-10 (pemilik): **uji HP b11 LOLOS** (semua butir daftar berhasil) -> **Fase 6 SELESAI**. Berikutnya: Fase 7 G0 (OPUS: tabel harga katalog, bagian 2.1).
