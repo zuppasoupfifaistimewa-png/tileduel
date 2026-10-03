@@ -536,7 +536,7 @@ func _segarkan_lobby() -> void:
 				semua_role_terisi = false
 		if role_slot_ini != "":
 			teks_role = "  [color=#%s]%s[/color]" % [DataRole.warna_role(role_slot_ini).to_html(false), DataRole.nama_role(role_slot_ini)]
-		baris.append("[b][color=#%s]P%d[/color][/b]   %s%s" % [UIPetak.warna_slot(s).to_html(false), s + 1, nama, teks_role])
+		baris.append("[b][color=#%s]P%d[/color][/b]   %s%s%s" % [UIPetak.warna_slot(s).to_html(false), s + 1, nama, teks_role, _teks_gelar(peer_di_slot) if peer_di_slot >= 0 else ""])
 	var lebih = urutan_client.size() - _jumlah_client_dibutuhkan()
 	if lebih > 0:
 		baris.append("[color=#ff9955]+%d more player%s connected[/color]" % [lebih, "" if lebih == 1 else "s"])
@@ -657,7 +657,8 @@ func rpc_role_lobby(role: String, jebakan: Array, build: Dictionary) -> void:
 # ========================================================
 func _profil_saya() -> Dictionary:
 	return {"nama": ProfilPemain.nama, "level": ProfilPemain.level_sekarang(),
-		"respect": ProfilPemain.respect, "mvp_total": ProfilPemain.mvp_total, "role": ProfilPemain.role_terakhir}
+		"respect": ProfilPemain.respect, "mvp_total": ProfilPemain.mvp_total, "role": ProfilPemain.role_terakhir,
+		"kosmetik": ProfilPemain.kosmetik_pakai_semua()}
 
 func _angka_aman(v, maks: int, minimal: int = 0) -> int:
 	# Client bisa mengirim apa saja: bukan angka -> minimal.
@@ -672,7 +673,7 @@ func _profil_sah(d: Dictionary, id_peer: int) -> Dictionary:
 		nama = "Player%d" % (1000 + id_peer % 9000)
 	return {"nama": nama, "level": _angka_aman(d.get("level", 1), 999, 1),
 		"respect": _angka_aman(d.get("respect", 0), 999999), "mvp_total": _angka_aman(d.get("mvp_total", 0), 999999),
-		"role": _role_aman(d.get("role", ""))}
+		"role": _role_aman(d.get("role", "")), "kosmetik": DataKosmetik.sah_semua(d.get("kosmetik", {}))}
 
 func _role_aman(v) -> String:
 	# Client bisa mengirim apa saja: hanya id role yang dikenal.
@@ -749,6 +750,14 @@ func _teks_profil(peer_id: int) -> String:
 	if d.is_empty():
 		return ""
 	return "%s [color=#9fd4ff]Lv%d[/color]" % [str(d["nama"]).replace("[", "(").replace("]", ")"), int(d["level"])]
+
+func _teks_gelar(peer_id: int) -> String:
+	# Fase 7 G3: gelar kecil di bawah nama di daftar lobby ("" kalau profil belum ada). Nama gelar dari katalog (aman bbcode).
+	var d: Dictionary = profil_peer.get(peer_id, {})
+	if d.is_empty():
+		return ""
+	var nama_gelar = DataKosmetik.nama_barang(str(DataKosmetik.sah_semua(d.get("kosmetik", {}))["title"]))
+	return "\n        [font_size=15][color=#d8c27a]%s[/color][/font_size]" % nama_gelar if nama_gelar != "" else ""
 
 func _pilih_peta_lobby(peta: String) -> void:
 	if mode_saat_ini != "host":

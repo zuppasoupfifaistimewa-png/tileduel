@@ -629,6 +629,14 @@ static func _panel_papan_skor(main_node: Node, menang: bool, papan_skor: Array, 
 		if nm_mp != "":
 			# Fase 6 G2: multiplayer -- ketuk baris = kartu profil; lawan manusia punya tombol RESPECT.
 			kolom_kiri.add_child(_baris_pemain_mp(main_node, slot_baris, baris, banyak))
+			var gelar: String = main_node._gelar_manusia(slot_baris) # Fase 7 G3: gelar di bawah nama
+			if gelar != "":
+				var lbl_gelar = Label.new()
+				lbl_gelar.text = gelar
+				lbl_gelar.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+				lbl_gelar.add_theme_font_size_override("font_size", 16 if banyak else 18)
+				lbl_gelar.add_theme_color_override("font_color", Color(0.85, 0.76, 0.48))
+				kolom_kiri.add_child(lbl_gelar)
 		else:
 			kolom_kiri.add_child(baris)
 
@@ -704,7 +712,8 @@ static func _baris_pemain_mp(main_node: Node, slot_baris: int, baris: Label, ban
 		var d: Dictionary = {}
 		if slot_baris == main_node.slot_lokal:
 			d = {"nama": ProfilPemain.nama, "level": ProfilPemain.level_sekarang(), "respect": ProfilPemain.respect,
-				"mvp_total": ProfilPemain.mvp_total, "role": ProfilPemain.role_terakhir}
+				"mvp_total": ProfilPemain.mvp_total, "role": ProfilPemain.role_terakhir,
+				"kosmetik": ProfilPemain.kosmetik_pakai_semua()}
 		elif slot_baris < StatusJaringan.profil_slot.size():
 			d = StatusJaringan.profil_slot[slot_baris]
 		UiProfil.tampilkan_kartu_profil(main_node, d, 140))

@@ -57,3 +57,17 @@ static func sah_untuk_jenis(id_barang: String, jenis: String) -> String:
 	if KATALOG.has(id_barang) and str(KATALOG[id_barang]["jenis"]) == jenis:
 		return id_barang
 	return str(AWAL.get(jenis, ""))
+
+static func sah_semua(v) -> Dictionary:
+	# Fase 7 G3: {pawn, title, frame} sah dari data apa pun (client bisa mengirim apa saja) -- tiap jenis lewat
+	# sah_untuk_jenis, jadi id tak dikenal / jenis salah / bukan dictionary = barang AWAL.
+	var hasil := {}
+	for j in JENIS:
+		var id_barang := ""
+		if v is Dictionary and typeof((v as Dictionary).get(j, "")) == TYPE_STRING:
+			id_barang = (v as Dictionary).get(j, "")
+		hasil[j] = sah_untuk_jenis(id_barang, j)
+	return hasil
+
+static func nama_barang(id_barang: String) -> String:
+	return str(KATALOG[id_barang]["nama"]) if KATALOG.has(id_barang) else ""

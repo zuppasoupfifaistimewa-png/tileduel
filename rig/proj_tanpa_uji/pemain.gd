@@ -58,8 +58,8 @@ func _ready():
 	target_kamera = model_pemain 
 	
 	# MEWARNAI KARAKTER SAAT GAME DIMULAI
-	_warnai_karakter(model_pemain, Color(0.2, 0.5, 1.0)) # Pemain jadi Biru
-	_warnai_karakter(model_musuh, Color(1.0, 0.2, 0.2))  # Musuh jadi Merah
+	_warnai_karakter(model_pemain, Color(0.2, 0.5, 1.0), str(_kosmetik_slot(0)["pawn"])) # Pemain jadi Biru (+ trim kosmetik Fase 7)
+	_warnai_karakter(model_musuh, Color(1.0, 0.2, 0.2), str(_kosmetik_slot(1)["pawn"]))  # Musuh jadi Merah
 	# Karakter slot 3-4 (hijau, kuning) dibuat di sini kalau jumlah pemainnya
 	# sudah diketahui (multiplayer). Solo: menyusul setelah jumlah lawan dipilih.
 	_siapkan_slot_pemain(true)

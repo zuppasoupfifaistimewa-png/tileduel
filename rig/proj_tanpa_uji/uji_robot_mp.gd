@@ -165,6 +165,13 @@ func _ready():
 	ProfilPemain.respect = urut + 1
 	respect_awal_uji = ProfilPemain.respect # G2: baseline Respect sebelum laga (Respect bisa tiba sebelum _respect_uji mulai)
 	ProfilPemain.mvp_total = urut
+	# Fase 7 G3 (rig-only): kosmetik berbeda per robot; client3 sengaja mengirim id RUSAK -> host harus menjadikannya AWAL.
+	var kos_uji = {"host1": {"pawn": "pawn_gold", "title": "title_duelist", "frame": "frame_royal"},
+		"client1": {"pawn": "pawn_lava", "title": "title_tile_legend", "frame": "frame_bronze"},
+		"client2": {"pawn": "pawn_shadow", "title": "title_storm_caller", "frame": "frame_gold"},
+		"client3": {"pawn": "zzz", "title": "pawn_rose", "frame": "frame_silver"}}
+	if kos_uji.has("%s%d" % [peran, urut]):
+		ProfilPemain.kosmetik_dipakai = kos_uji["%s%d" % [peran, urut]]
 	seed(benih * 101 + urut)
 	_xp0 = ProfilPemain.xp_total
 	_cr0 = ProfilPemain.crowns
@@ -982,6 +989,21 @@ func _catat_profil_nama(kapan: String) -> void:
 	for s in range(p.jumlah_pemain()):
 		nm.append("%s/%s/%s" % [p._nama_manusia(s), p._nama_manusia(s, true), UiProfil.nama_slot_papan(p, s)])
 	_catat("PROFIL_NAMA %s slot_lokal=%d profil_slot=%s tampil=%s" % [kapan, p.slot_lokal, str(StatusJaringan.profil_slot), str(nm)])
+	# Fase 7 G3: kosmetik tiap slot menurut HP ini (HARUS sama di semua HP, juga sesudah migrasi) + warna trim/badan model nyata.
+	var ko = []
+	for s in range(p.jumlah_pemain()):
+		var k: Dictionary = p._kosmetik_slot(s)
+		var trim = "-"
+		var badan = "-"
+		if s < p.daftar_model.size():
+			for m in (p.daftar_model[s] as Node).find_children("*", "MeshInstance3D", true, false):
+				var c: Color = (m as MeshInstance3D).get_active_material(0).albedo_color
+				if c.s < 0.2 and c.v > 0.3:
+					trim = c.to_html(false)
+				else:
+					badan = c.to_html(false)
+		ko.append("%s/%s/%s/gelar=%s/trim=%s/badan=%s" % [k["pawn"], k["title"], k["frame"], p._gelar_manusia(s), trim, badan])
+	_catat("KOSMETIK_UJI %s slot_lokal=%d %s" % [kapan, p.slot_lokal, str(ko)])
 
 func _cek_profil_mp() -> void:
 	# Fase 2: tiap HP mencatat hadiah untuk slot_lokal-nya sendiri, TEPAT sekali (juga sesudah migrasi).

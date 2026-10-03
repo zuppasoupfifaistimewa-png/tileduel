@@ -78,10 +78,24 @@ static func _layar_gelap(induk: Node, lapisan: int) -> CanvasLayer:
 	induk.add_child(kanvas)
 	return kanvas
 
-static func _kartu_tengah(kanvas: CanvasLayer, atas: bool) -> VBoxContainer:
+static func _gaya_bingkai(id_frame: String) -> StyleBoxFlat:
+	# Fase 7 G3: gaya kartu profil dengan bingkai kosmetik (data tampilan dari DataKosmetik; frame_plain / tak dikenal = gaya biasa).
+	var g = _gaya_kartu()
+	var b: Dictionary = DataKosmetik.KATALOG.get(id_frame, {})
+	if str(b.get("jenis", "")) != "frame" or not b.has("border"):
+		return g
+	g.border_color = b["border"]
+	g.set_border_width_all(int(b["lebar"]))
+	g.set_corner_radius_all(14 + int(b.get("radius_tambah", 0)))
+	if b.has("bayangan"):
+		g.shadow_color = b["bayangan"]
+		g.shadow_size = int(b["bayangan_ukuran"])
+	return g
+
+static func _kartu_tengah(kanvas: CanvasLayer, atas: bool, gaya: StyleBoxFlat = null) -> VBoxContainer:
 	# Kartu di tengah layar (atas = di tengah-ATAS, supaya keyboard HP tidak menutupinya).
 	var kartu = PanelContainer.new()
-	kartu.add_theme_stylebox_override("panel", _gaya_kartu())
+	kartu.add_theme_stylebox_override("panel", gaya if gaya != null else _gaya_kartu())
 	if atas:
 		kartu.set_anchors_preset(Control.PRESET_CENTER_TOP)
 		kartu.offset_top = 16
@@ -117,12 +131,14 @@ static func teks_penghargaan(daftar: Array) -> String:
 # FASE 6: KARTU PROFIL pemain lain + TOAST
 # ------------------------------------------------------------
 static func tampilkan_kartu_profil(induk: Node, d: Dictionary, lapisan: int = 130) -> void:
-	# Kartu kecil dari data profil lobby ({"nama","level","respect","mvp_total","role"}); data kosong = tidak tampil.
+	# Kartu kecil dari data profil lobby ({"nama","level","respect","mvp_total","role","kosmetik"}); data kosong = tidak tampil.
 	if d.is_empty() or not is_instance_valid(induk) or not induk.is_inside_tree():
 		return
 	var kanvas = _layar_gelap(induk, lapisan)
-	var isi = _kartu_tengah(kanvas, false)
+	var kos: Dictionary = DataKosmetik.sah_semua(d.get("kosmetik", {})) # Fase 7 G3: bingkai + gelar
+	var isi = _kartu_tengah(kanvas, false, _gaya_bingkai(str(kos["frame"])))
 	isi.add_child(_label(str(d.get("nama", "?")), 34, EMAS))
+	isi.add_child(_label(DataKosmetik.nama_barang(str(kos["title"])), 20, Color(0.85, 0.76, 0.48)))
 	isi.add_child(_label("Level %d" % int(d.get("level", 1)), 24))
 	isi.add_child(_label("Respect: %d" % int(d.get("respect", 0)), 22, HIJAU))
 	isi.add_child(_label("MVP awards: %d" % int(d.get("mvp_total", 0)), 22, EMAS))

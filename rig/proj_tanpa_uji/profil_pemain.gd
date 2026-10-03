@@ -266,6 +266,13 @@ func kosmetik_pakai(jenis: String) -> String:
 	# id yang sedang dipakai untuk jenis itu (AWAL bila belum memilih).
 	return str(kosmetik_dipakai.get(jenis, DataKosmetik.AWAL.get(jenis, "")))
 
+func kosmetik_pakai_semua() -> Dictionary:
+	# Fase 7 G3: {pawn, title, frame} yang dipakai -- dikirim di profil lobby & dipakai kartu profil sendiri.
+	var hasil := {}
+	for j in DataKosmetik.JENIS:
+		hasil[j] = kosmetik_pakai(j)
+	return hasil
+
 func alasan_tolak_beli(id_barang: String) -> String:
 	# "" = boleh beli; selain itu pesan untuk pemain (bahasa Inggris sederhana) -- dipakai tombol toko (G2).
 	if not DataKosmetik.ada(id_barang):

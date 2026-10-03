@@ -399,6 +399,20 @@ func _nama_manusia(slot: int, dengan_level: bool = false) -> String:
 	var nama = str(d.get("nama", ""))
 	return "%s Lv%d" % [nama, int(d.get("level", 1))] if dengan_level else nama
 
+func _kosmetik_slot(slot: int) -> Dictionary:
+	# Fase 7 G3: {pawn, title, frame} sah untuk slot. Solo: slot 0 = profil sendiri, AI = AWAL.
+	# Multiplayer: dari profil lobby (divalidasi host, sama di semua HP).
+	if StatusJaringan.peran_multiplayer == "":
+		return DataKosmetik.sah_semua(ProfilPemain.kosmetik_pakai_semua() if slot == 0 else {})
+	var d = StatusJaringan.profil_slot[slot] if slot >= 0 and slot < StatusJaringan.profil_slot.size() else {}
+	return DataKosmetik.sah_semua((d as Dictionary).get("kosmetik", {}) if d is Dictionary else {})
+
+func _gelar_manusia(slot: int) -> String:
+	# Teks gelar pemain MANUSIA di multiplayer ("" = solo / AI / tidak ada profil).
+	if _nama_manusia(slot) == "":
+		return ""
+	return DataKosmetik.nama_barang(str(_kosmetik_slot(slot)["title"]))
+
 func _nama_slot(slot: int) -> String:
 	# Nama pemain lain di teks. Permainan 2 pemain tetap "Enemy" seperti dulu;
 	# 3-4 pemain memakai "P1".."P4" (P1 biru, P2 merah, P3 hijau, P4 kuning).
@@ -455,7 +469,7 @@ func _siapkan_slot_pemain(tunda_tambah: bool = false) -> void:
 		daftar_model.append(model)
 		daftar_anim.append(anim)
 		if baru:
-			_warnai_karakter(model, _warna_slot(s))
+			_warnai_karakter(model, _warna_slot(s), str(_kosmetik_slot(s)["pawn"]))
 			if tunda_tambah:
 				get_parent().add_child.call_deferred(node)
 				anim.play.call_deferred("idle")
@@ -675,7 +689,7 @@ func _tambah_stat_elemen(slot: int, elemen: String) -> void:
 # ========================================================
 # FUNGSI BARU: PEWARNAAN KARAKTER OTOMATIS (SMART RECOLOR)
 # ========================================================
-func _warnai_karakter(model: Node3D, warna_target: Color):
+func _warnai_karakter(model: Node3D, warna_target: Color, id_pawn: String = ""):
 	# 1. Cari semua objek jaring (Mesh) di dalam model .glb secara rekursif
 	var daftar_mesh = model.find_children("*", "MeshInstance3D", true)
 	
@@ -698,9 +712,31 @@ func _warnai_karakter(model: Node3D, warna_target: Color):
 				# Syarat ini akan MENGABAIKAN sarung tangan (putih) dan sepatu (abu-abu)
 				if warna_lama.r > warna_lama.g + 0.1 and warna_lama.r > warna_lama.b + 0.1:
 					mat_baru.albedo_color = warna_target
+				else:
+					# Fase 7 G3: bagian BUKAN-badan (sarung tangan putih, sepatu abu-abu) = "trim" kosmetik bidak; selalu mulai
+					# dari bahan asli (karakter slot 3-4 menyalin musuh yang trim-nya sudah diwarnai). Badan tetap warna slot.
+					# Hanya bahan putih/abu terang (saturasi rendah, cukup terang): mata/bahan gelap tidak ikut berubah.
+					var dasar = mesh.mesh.surface_get_material(i)
+					if dasar is StandardMaterial3D:
+						mat_baru = dasar.duplicate()
+					if mat_baru.albedo_color.s < 0.2 and mat_baru.albedo_color.v > 0.3:
+						_terapkan_trim(mat_baru, id_pawn)
 					
 				# 5. Pasang kembali material yang sudah diperbarui secara paksa (override)
 				mesh.set_surface_override_material(i, mat_baru)
+
+func _terapkan_trim(mat: StandardMaterial3D, id_pawn: String) -> void:
+	var b: Dictionary = DataKosmetik.KATALOG.get(id_pawn, {})
+	if not b.has("warna"):
+		return # pawn_classic / tak dikenal: bahan asli
+	mat.albedo_color = b["warna"]
+	if b.has("emisi"):
+		mat.emission_enabled = true
+		mat.emission = b["warna"]
+		mat.emission_energy_multiplier = float(b["emisi"])
+	if b.has("logam"):
+		mat.metallic = float(b["logam"])
+		mat.roughness = float(b["kasar"])
 
 func _teks_kartu_dadu(jenis: String, slot: int, slot_target: int, ada_target: bool) -> String:
 	# "You inflicted LOW ROLL to Enemy for 3 Turns!" -- dari sudut pandang device ini.
