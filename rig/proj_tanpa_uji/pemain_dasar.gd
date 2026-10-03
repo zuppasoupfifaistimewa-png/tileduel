@@ -716,9 +716,9 @@ func _warnai_karakter(model: Node3D, warna_target: Color, id_pawn: String = ""):
 				if warna_lama.r > warna_lama.g + 0.1 and warna_lama.r > warna_lama.b + 0.1:
 					mat_baru.albedo_color = warna_target
 				else:
-					# Fase 7 G3: bagian BUKAN-badan (sarung tangan putih, sepatu abu-abu) = "trim" kosmetik bidak. Badan tetap warna slot.
-					# Hanya bahan putih/abu terang (saturasi rendah, cukup terang): mata/bahan gelap tidak ikut berubah.
-					if mat_baru.albedo_color.s < 0.2 and mat_baru.albedo_color.v > 0.3:
+					# Fase 7 G3: bagian BUKAN-badan (sarung tangan putih, sepatu hitam) = "trim" kosmetik bidak. Badan tetap warna slot.
+					# Hanya bahan tak berwarna (saturasi rendah: tangan putih, sepatu hitam di beras.glb); bahan berwarna lain tidak ikut berubah.
+					if mat_baru.albedo_color.s < 0.2:
 						_terapkan_trim(mat_baru, id_pawn)
 					
 				# 5. Pasang kembali material yang sudah diperbarui secara paksa (override)

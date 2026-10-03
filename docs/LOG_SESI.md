@@ -7,7 +7,7 @@ harus tercatat di sini, di `HANDOFF_LANJUT.md`, atau di RENCANA.
 - Branch `claude/elegant-bohr-tl3fps`. `kosmetik` masuk payload profil lobby (tanpa RPC baru, VERSI_PROTOKOL tetap 2) + validasi host `DataKosmetik.sah_semua`; trim bidak di `_warnai_karakter`; gelar di lobby/layar akhir/kartu profil; bingkai di kartu profil. `game/` berubah 7 .gd (`data_kosmetik`, `profil_pemain`, `layar_local_play`, `pemain`, `pemain_dasar`, `ui_dinamis`, `ui_profil`), rig identik.
 - Bukti (`hasil/g7_tampil/`): `uji_kosmetik_tampil` 33/33, `cek_muat_f3` 27/27, MP Q1 1v1 + M2 4P migrasi host 0 beda/0 SCRIPT ERROR, log `KOSMETIK_UJI` identik semua HP. Regresi 37 skenario TIDAK dijalankan (jatah G5).
 - Bug ditemukan lewat log MP & diperbaiki: slot 3-4 (duplikat musuh) salah mewarnai sepatu ber-trim jenuh dengan warna slot -> penilaian dari bahan asli mesh.
-- **TEMUAN:** model .glb asli tidak ada di repo (rig = stand-in tanpa sarung tangan). Terwarnainya sarung tangan + sepatu di model asli belum terbukti; cek di HP/editor (G5), kalau tidak layak -> Opus.
+- **UPDATE (pemilik kirim beras.glb):** bahan asli = badan merah, tangan putih, sepatu HITAM; filter trim jadi s<0.2; `uji_kosmetik_glb` 4/4 -> terjawab. (Temuan awal:) model .glb asli tidak ada di repo (rig = stand-in tanpa sarung tangan). Terwarnainya sarung tangan + sepatu di model asli belum terbukti; cek di HP/editor (G5), kalau tidak layak -> Opus.
 - Pelajaran rig: Godot di `/opt/godot` (unduh dari godot-builds lolos proxy); `--import` dulu; skrip MP `rig/skrip/jalankan_mp3.sh` disalin ke scratchpad dengan SP/G diganti, `PROJ=rig/proj_tanpa_uji EXTRA="panjang=quick"`; Q1 ~6 mnt, M2 ~5-8 mnt.
 - Langkah berikutnya: Sonnet Fase 7 G4 (`pengelola_pembelian.gd`, Remove Ads).
 

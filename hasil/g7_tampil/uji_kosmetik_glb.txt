@@ -1,0 +1,9 @@
+Godot Engine v4.7.1.stable.official.a13da4feb - https://godotengine.org
+
+bahan asli (albedo Godot): [(0.9063, 0.2478, 0.2478, 1.0), (0.9547, 0.9547, 0.9547, 1.0), (0.1517, 0.1517, 0.1517, 1.0)]
+sesudah pawn_gold: [(0.2, 0.5, 1.0, 1.0), (1.0, 0.8, 0.2, 1.0), (1.0, 0.8, 0.2, 1.0)]
+OK    badan = warna slot (1 bahan)
+OK    tangan + sepatu = trim Gold (2 bahan)
+OK    salinan: trim Shadow 2 bahan, badan hijau 1 bahan
+OK    classic: tangan & sepatu = bahan asli (badan = slot)
+UJI_KOSMETIK_GLB gagal: 0
