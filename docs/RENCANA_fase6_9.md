@@ -248,12 +248,14 @@ Kalau ternyata tidak ada material bukan-badan yang layak -> lapor, Opus memutusk
 | G0 | Sonnet | F9.1 + F9.2 (profil v6 bila perlu: hitungan taruhan harian) | uji headless: saldo tidak pernah negatif, batas harian, x2 benar |
 | G1 | Sonnet | F9.4 + ZIP b14 + daftar uji HP + LOG/HANDOFF akhir | uji HP pemilik |
 | (G2) | Opus | HANYA bila kredit tersisa >= US$5 setelah G1: AI bounty + U9 S1+S2 benih baru | P14 lolos |
+| G2 SELESAI (03-10) | Opus | AI bounty `PELUANG_BOUNTY_AI`=50 (`ai_musuh.gd`), U9 S1+S2 benih 80000 + pembanding kode lama, ZIP b15 | P14 gagal di kode lama JUGA (api 35, angin 60) -> G2 netral, diterima; temuan di bagian 5 |
 
 **Risiko:** taruhan terasa "judi" untuk kebijakan Play -> memakai mata uang game yang TIDAK bisa dibeli dengan uang
 (Crowns tidak dijual di Fase 7 -- pertahankan begitu), jadi aman; misi baru membuat pool misi harian terlalu sering
 Tebak Duel (bobot rendah).
 
 ## 5. Temuan terbuka yang dibawa
+- (03-10, Fase 9 G2) Keseimbangan role di benih 80000 gagal P14 bahkan TANPA G2: S1 api 35.2% / angin 59.8%; S2 angin 33.4% / air 18.8%. U9 terakhir (Fase 5 G8, benih 50000) lolos. Belum diketahui regresi Fase 6-9 atau derau benih -> sesi Opus (cek b10 di `kontrol_api.tugas`, lihat HANDOFF 5). Data `hasil/g9_g2/`.
 - BEDA jebakan Phoenix host vs client (RENCANA_fase5 10.5, s821): dipantau. Regresi MP 37 di Fase 7 G5 sekaligus
   menjadi pengamatan ulang; kalau muncul -> Opus menganalisis sebelum b12 dikirim.
 - 11 `godot.log` sampah di `rig/proj_tanpa_uji/sim/home_*` (pemilik: `git rm -r rig/proj_tanpa_uji/sim`).

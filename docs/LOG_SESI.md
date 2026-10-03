@@ -3,6 +3,13 @@
 Satu entri per sesi, terbaru di atas. Sesi baru tidak bisa membaca percakapan lama, jadi apa pun yang penting
 harus tercatat di sini, di `HANDOFF_LANJUT.md`, atau di RENCANA.
 
+## 2026-10-03 -- sesi Claude Code cloud (Opus 5.5): Fase 9 G2 (AI mengejar bounty + U9 benih 80000, ZIP b15)
+- Branch `claude/kind-turing-b71jzs` (atas permintaan pemilik; CLAUDE.md menyebut `claude/wonderful-gates-8v431l`). Rancangan disetujui pemilik sebelum kode.
+- `AiMusuh.elemen_bounty_ai` + `PELUANG_BOUNTY_AI := 50` (mesin_acak, host/solo); 5 titik pilihan elemen AI memakainya. game/ = rig/ (kecuali 2 stub). `cek_muat_f3` 31/31.
+- U9 S1 (1200) + S2 (400) benih 80000 + pembanding S1 kode lama: angka role SAMA dgn/tanpa G2 -> G2 netral; P14 gagal karena ketimpangan yang sudah ada (api 35, angin 60 di 2P; angin 33, air 19 di 4P). Pemilik pilih (b): terima G2, ZIP b15, temuan ke Opus.
+- Teknik: pecah menang per role "laga tanpa klaim bounty vs dengan klaim" (regex `roles=.. pemenang=.. f5=a/b/c` -> c>0 = klaim) membuktikan penyebab bukan bounty sebelum pembanding dijalankan. Kolom f5 = event/bounty muncul/bounty diklaim/kartu bantuan/hutang.
+- Langkah berikutnya: pemilik TIMPA 35 file b15 + uji HP b14/b15. Sesi Opus: cek b10 pada `hasil/g9_g2/tugas/kontrol_api.tugas` -> regresi atau derau, lalu setel per tuas P14.
+
 ## 2026-10-03 -- sesi Claude Code cloud (Sonnet 5.5): Fase 9 G0 + G1 (misi Tebak Duel, taruhan Crowns, ZIP b14)
 - Branch kerja `claude/kind-turing-b71jzs` (di-fast-forward ke ujung `claude/tile-duel-fase7-g4-autoload-90q9ed` = 2a53f0b, lalu +Fase 9). Kredit pemilik ~US$2 -> semua dikerjakan sekaligus, tanpa G2 Opus & regresi MP.
 - Dibuat: 2 misi harian + stat `tebak_beruntun`, taruhan 10/25/50 (lokal, memori dulu baru simpan, maks 10/hari), profil VERSI 6; UI baris BET di `ui_elemen.gd`. Bukti `hasil/g9_tebak/` (uji_taruhan 22/22, solo robot taruhan, uji lama 0 gagal). `kiriman/TileDuel_Fase9_b14.zip` 35 .gd. Daftar uji HP b14 di HANDOFF 5.
