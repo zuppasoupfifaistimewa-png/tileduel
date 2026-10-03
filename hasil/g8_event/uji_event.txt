@@ -1,0 +1,43 @@
+Godot Engine v4.7.1.stable.official.a13da4feb - https://godotengine.org
+
+EVENT OK    6 event, 3 misi tiap jenis
+EVENT OK    tanggal_sah
+EVENT info: minggu 2026-10-03 = 2960 -> Wind Week; minggu depan -> Lightning Week
+EVENT OK    Sabtu & Minggu satu minggu; Senin minggu baru
+EVENT OK    tanggal < 2000 / rusak -> minggu -1
+EVENT OK    tahun baru 2026->2027 (Kamis 1 Jan): satu minggu
+EVENT OK    tahun 53 minggu (2020->2021) & 2021-01-04 = +1
+EVENT OK    putaran event +1 tiap minggu (lintas tahun)
+EVENT OK    kabisat 2028-02-29 sah, minggu benar
+EVENT OK    sisa: Sabtu 10:00 -> 1d 14h
+EVENT OK    sisa: Senin 00:00 -> 7d 0h
+EVENT OK    sisa: Minggu 23:00 -> 1h 0m
+EVENT OK    mastery level 0->1, 4->1, 5->2, 219->9, 220->10, 9999->10
+EVENT OK    info_mastery Lv2 & maks
+EVENT info: Crowns mastery per elemen = 1555, semua elemen = 7775
+EVENT OK    Crowns mastery Lv2-10 = 1555/elemen
+EVENT OK    teks misi Fire & Duel
+EVENT OK    3 barang (pawn/title/frame) tiap event, harga token 180/event
+EVENT OK    gelar mastery ada di katalog (title, sumber mastery)
+EVENT OK    toko Crowns tetap 8/10/6
+EVENT OK    barang event lolos validasi host
+EVENT OK    v4 data lama utuh
+EVENT OK    v4 -> event/mastery awal
+EVENT OK    segarkan: 3 misi, minggu & tanggal_maks diisi
+EVENT OK    tersimpan VERSI 5
+EVENT OK    Sabtu -> Minggu: progres tetap
+EVENT OK    simpan-muat: token, mastery, progres
+EVENT OK    Minggu -> Senin: misi baru, token tidak hangus
+EVENT OK    31 Des -> 2 Jan (minggu sama): progres tetap
+EVENT OK    -> Senin 4 Jan: misi baru, event berikutnya
+EVENT OK    tanggal mundur terdeteksi
+EVENT OK    mundur: misi/minggu/tanggal_maks tidak berubah
+EVENT OK    tanggal kembali: tidak mundur lagi
+EVENT OK    kembali: progres masih ada
+EVENT OK    maju seminggu: misi baru
+EVENT OK    rusak: token 0, tanggal_maks '', mastery disaring
+EVENT OK    rusak: segarkan membuat misi ulang
+EVENT OK    barang event ditolak di toko Crowns
+EVENT OK    gelar mastery ditolak
+EVENT OK    profil baru: event/mastery awal
+EVENT gagal=0

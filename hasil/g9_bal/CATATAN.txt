@@ -1,0 +1,39 @@
+Fase 9 keseimbangan (Opus, 03-10) -- langkah 1: regresi Fase 6-9 atau derau benih?
+Kode b10 = commit b22f27b (git worktree di scratchpad + --import), rig/proj_tanpa_uji, PARALEL=4.
+1) kontrol_api_b10.txt: hasil/g9_g2/tugas/kontrol_api.tugas (480 laga api, benih 80000):
+   api 169/480 = 35.2% [31.1-39.6] -> 480/480 baris IDENTIK byte dgn hasil/g9_g2/kontrol_s1_kodelama.txt (b14 tanpa G2).
+   => Fase 6-9 (sebelum G2) TIDAK mengubah satu laga pun. BUKAN regresi.
+2) identitas_b50000_40_b10.txt: 40 laga api pertama dari hasil/g8_u9_b50000/s1.tugas -> 40/40 identik dgn hasil_s1.txt lama.
+   => sim deterministik & tidak bergantung lingkungan/tanggal. Kode SAMA: benih 50000 api 45.6%, benih 80000 api 35.2%.
+3) Pecahan api (tanpa sim): defisit merata di semua peta/slot/lawan/preset dan kedua paruh benih (34.6/35.8) -- tidak ada
+   satu penyebab (event/bounty/bantuan) yang menonjol. Selisih 10.4 poin = ~3.3 sigma (SE binomial 480+480).
+   => derau benih yang sangat besar (langka, ~0.1%) ATAU api memang ~40% (gabungan b10 dua benih 388/960 = 40.4% [37.3-43.5]).
+4) s1_b110000.txt (S1 1200, benih BARU 110000, kode HEAD = b15, tugas tugas/s1_b110000.tugas): air 43.8 / angin 54.8 / api 42.1 /
+   petir 55.4 / tanah 54.0; pasangan "!" api vs petir 34.2% (petir batas bawah >55); 0 sel wajib/mati; jebakan/AI 2.19; 300.4 dtk.
+   => P14 GAGAL lagi (api, air < 44; pasangan api-petir). Gabungan 3 benih kode Fase 5+ (50000/80000/110000, 1440 laga per role):
+   air 47.5 / angin 56.4 / api 41.0 / petir 52.1 / tanah 53.1. Api lemah NYATA (bukan derau); angin sedikit di atas 56.
+   (Konfirmasi F5 benih 20000 = kode SEBELUM fitur Fase 5 -> api 46.5; penurunan muncul setelah Fase 5.)
+   Catatan: run pertama gagal 1200/1200 karena PROJ tidak di-set (SP diarahkan ke scratchpad) -- dihapus & diulang.
+5) r6 (rig saja, DIKEMBALIKAN): hot_flames 90/110/130 -> 100/125/150. Uji berpasangan r6_berpasangan.txt (api-subset benih 80000 + 110000,
+   960 laga, benih SAMA dgn pembanding): 80000 35.2 -> 37.5, 110000 42.1 -> 43.1, gabungan 38.6 -> 40.3 (+1.6, < syarat +4).
+   Per lawan (lama->baru /120): 80000 air 37->38 angin 46->51 petir 38->38 tanah 48->53; 110000 air 56->56 angin 57->60 petir 41->41 tanah 48->50.
+   => kekuatan bakar TIDAK menyentuh masalah api vs petir (0 perubahan, 32.9% gabungan). Penyebab utama = matchup api-petir
+      (lihat RENCANA_fase4 F5 r3/r4: petir menang lewat TEMPO lumpuh+sewa, bukan koin; tuas r4 NILAI_PETIR_LEWAT_GILIRAN).
+   Jebakan/AI 2.32; 305.7 dtk. data_role.gd rig dikembalikan = game/ (tidak ada angka produksi berubah).
+6) Analisis api vs petir TANPA sim (Opus, 03-10; rig/skrip/f9_api_petir.py -> analisis_api_petir.txt; 4 benih x 120 laga api-petir):
+   api>petir: 20000 (pra-F5) 40.0 / 50000 42.5 / 80000 31.7 / 110000 34.2 -> pasca-F5 130/360 = 36.1%. Matchup lemah SUDAH ADA sebelum Fase 5.
+   - Tempo petir menentukan: api menang 57% kalau 0x kena jebakan petir, 42% (1x), 22% (2x), 4% (3x+). Jebakan api yg kena petir hampir
+     tidak berpengaruh (0x 34% ... 3x+ 51%). Api tak punya grounded (TAHAN_ROLE api = rock_breaker, heavy_pockets) -> lumpuh penuh 2 giliran.
+   - AI api memasang jebakan non-api (angin/petir) vs petir: 0 -> 84/281 = 30%; 1 -> 24/45 = 53%; 2 -> 22/34 = 65%. Jumlah jebakan API
+     tidak berkorelasi (39/30/36/40%). Nilai AI api (bakar x giliran x (1+tax) x 1.2 x 1.2, potong heat_skin 25-50%) ~320-490 > petir
+     225 -> AI hampir selalu pilih api; padahal koin_jebakan api nyata ~123/kena. (Sesuai D2 F5: tanpa api vs heat_skin -> 34.2 -> 45.8.)
+   - Fitur Fase 5 TIDAK menguntungkan petir: laga dgn klaim bounty api 23/46 = 50%; kartu bantuan jarang (0.03-0.06/laga); hutang 0.
+   - Dua matchup terburuk api (petir 36.1, air 40.6) = dua pemilik heat_skin. api vs tanah 41.7 / angin 45.6 (r6 menaikkan dua ini, bukan petir/air).
+   USULAN r7 (tuas 1 P14, ai_jebakan.gd saja, belum diterapkan): FAKTOR_API_TAHAN_PANAS = 0.5 -> nilai jebakan api x0.5 kalau korban punya heat_skin.
+7) r7 DITERAPKAN di rig (FAKTOR_API_TAHAN_PANAS 0.5, ai_jebakan.gd). Uji berpasangan r7_berpasangan.txt (960, benih sama dgn pembanding):
+   api 38.6 -> 45.3 (+6.7); vs petir 80000 38->60, 110000 41->56 (/120); vs air 37->54, 56->62; vs angin 46->50, 57->57; vs tanah 48->48, 48->48.
+   jebakan/AI 2.26; 295.1 dtk.
+8) KONFIRMASI benih BARU 140000 (tugas_b140000/, kode HEAD + r7): S1 (1200) air 45.4 / angin 54.6 / api 48.5 / petir 48.3 / tanah 53.1
+   -> semua 44-56 OK; 0 pasangan "!" (api>petir 41.7, api>tanah 41.7); 0 sel wajib/mati; jebakan/AI 2.14; 294.0 dtk (<= 318.1).
+   S2 4P (400): air 23.1 / angin 26.1 / api 21.6 / petir 24.7 / tanah 29.6 -> semua 20-30 OK; 397.6 dtk (<= 463.8); jebakan/AI 2.05.
+   => P14 LOLOS. game/ai_jebakan.gd BELUM disalin (izin ditolak pengaman sesi; menunggu pemilik).

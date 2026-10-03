@@ -1,0 +1,52 @@
+Godot Engine v4.7.1.stable.official.a13da4feb - https://godotengine.org
+
+OK    id sah lolos
+OK    id tak dikenal / jenis salah / bukan string -> AWAL
+OK    payload rusak <null> -> AWAL
+OK    payload rusak 5 -> AWAL
+OK    payload rusak x -> AWAL
+OK    payload rusak [] -> AWAL
+OK    payload rusak {  } -> AWAL
+OK    payload rusak { "pawn": <null> } -> AWAL
+OK    _profil_sah: kosmetik tervalidasi host
+OK    _profil_sah: tanpa field kosmetik -> AWAL
+OK    pakai_semua default = AWAL
+OK    badan = warna slot (biru)
+OK    sepatu = trim Shadow #262626
+OK    salinan classic: sepatu kembali abu asli
+OK    salinan (musuh ber-trim Lava): Shadow #262626 di sepatu, bukan warna slot
+OK    salinan: badan = hijau slot
+OK    model asli tidak tercemar bahan bersama
+OK    Diamond: warna + logam + emisi
+OK    tanpa id pawn: sepatu asli
+OK    solo: slot 0 = profil sendiri, slot 1 (AI) = AWAL
+OK    solo: tanpa gelar di teks
+OK    MP: kosmetik per slot dari profil_slot
+OK    MP: gelar manusia
+OK    MP: slot AI / di luar jangkauan aman
+OK    kartu frame_gold: border/lebar/bayangan/radius
+OK    kartu frame_gold: gelar 'Storm Caller' tampil
+OK    kartu frame_royal: border/lebar/bayangan/radius
+OK    kartu frame_royal: gelar 'Storm Caller' tampil
+OK    kartu frame_plain: border/lebar/bayangan/radius
+OK    kartu frame_plain: gelar 'Storm Caller' tampil
+OK    kartu ngawur: border/lebar/bayangan/radius
+OK    kartu ngawur: gelar 'Storm Caller' tampil
+OK    kartu tanpa kosmetik: gelar Rookie, bingkai biasa
+UJI_KOSMETIK_TAMPIL gagal: 0
+ERROR: Parameter "material" is null.
+   at: material_get_instance_shader_parameters (servers/rendering/dummy/storage/material_storage.cpp:264)
+ERROR: Pages in use exist at exit in PagedAllocator: N20RasterizerSceneDummy21GeometryInstanceDummyE
+   at: ~PagedAllocator (./core/templates/paged_allocator.h:170)
+WARNING: Leaked instance dependency: Bug - did not call instance_notify_deleted when freeing.
+   at: ~Dependency (servers/rendering/storage/utilities.cpp:56)
+WARNING: Leaked instance dependency: Bug - did not call instance_notify_deleted when freeing.
+   at: ~Dependency (servers/rendering/storage/utilities.cpp:56)
+WARNING: 19 ObjectDB instances were leaked at exit (run with `--verbose` for details).
+   at: cleanup (core/object/object.cpp:2536)
+ERROR: 9 resources still in use at exit (run with --verbose for details).
+   at: clear (core/io/resource.cpp:822)
+ERROR: 2 RID allocations of type 'N13RendererDummy15MaterialStorage13DummyMaterialE' were leaked at exit.
+ERROR: 1 RID allocations of type 'N13RendererDummy15MaterialStorage11DummyShaderE' were leaked at exit.
+ERROR: 2 RID allocations of type 'N13RendererDummy9DummyMeshE' were leaked at exit.
+ERROR: 2 RID allocations of type 'N17RendererSceneCull8InstanceE' were leaked at exit.

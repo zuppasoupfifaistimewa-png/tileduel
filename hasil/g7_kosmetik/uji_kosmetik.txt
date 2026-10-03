@@ -1,0 +1,36 @@
+Godot Engine v4.7.1.stable.official.a13da4feb - https://godotengine.org
+
+KOSMETIK OK    katalog 24 barang
+KOSMETIK OK    8 pawn / 10 title / 6 frame
+KOSMETIK OK    total harga 27750
+KOSMETIK OK    AWAL harga 0 & jenis cocok
+KOSMETIK OK    hanya 3 barang harga 0
+KOSMETIK OK    sah_untuk_jenis: id salah/jenis salah -> AWAL
+KOSMETIK OK    v3 data lama utuh
+KOSMETIK OK    v3 -> kosmetik kosong, AWAL dimiliki & dipakai
+KOSMETIK OK    VERSI = 4
+KOSMETIK OK    beli kurang Crowns ditolak
+KOSMETIK OK    beli level kurang ditolak (Lv1 < 5)
+KOSMETIK OK    beli id tak dikenal ditolak
+KOSMETIK OK    beli barang AWAL ditolak (sudah dimiliki)
+KOSMETIK OK    beli pawn_shadow ok
+KOSMETIK OK    langsung dipakai
+KOSMETIK OK    beli ganda ditolak, Crowns tetap
+KOSMETIK OK    simpan versi=4 + bagian kosmetik
+KOSMETIK OK    simpan Crowns 4850
+KOSMETIK OK    Lv >= 5
+KOSMETIK OK    beli pawn_violet (Lv5) ok
+KOSMETIK OK    beli title_tile_hunter ok (jenis lain tak mengganggu)
+KOSMETIK OK    pakai pawn_shadow (dimiliki)
+KOSMETIK OK    pakai barang belum dimiliki ditolak
+KOSMETIK OK    pakai id tak dikenal ditolak
+KOSMETIK OK    pakai AWAL = kembali bawaan
+KOSMETIK OK    muat ulang v4 dimiliki
+KOSMETIK OK    muat ulang v4 dipakai
+KOSMETIK OK    muat ulang Crowns & data lama utuh
+KOSMETIK OK    rusak: duplikat/tak dikenal/AWAL dibuang
+KOSMETIK OK    rusak: dipakai tak sah -> bawaan
+KOSMETIK OK    tipe salah -> kosong tanpa crash
+KOSMETIK OK    harga pas Crowns -> 0, tidak negatif
+KOSMETIK OK    profil baru: kosmetik kosong, AWAL
+KOSMETIK gagal=0

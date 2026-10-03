@@ -1,0 +1,8 @@
+TEBAK_UI 'WHO WINS? TAP ONE!'
+TEBAK_PILIH slot=0 tebak=3 penyerang=3 pembela=1
+TEBAK_UI 'Your guess: P4'
+TEBAK_JENDELA dtk_game=4.60 tombol=true
+TEBAK_UI 'Wrong guess.'
+TEBAK_CEK tebak=3 menang=1 benar_diharap=false stat_naik=0 ui='Wrong guess.' cek=OK
+TEBAK_RINGKAS tebakan=1 benar=0 cek_ok=1 cek_gagal=0 stat_tebak_benar_slot0=0
+SIM MENANG giliran=20 detik=447

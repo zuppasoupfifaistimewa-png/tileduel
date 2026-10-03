@@ -1,0 +1,28 @@
+== semua: 400 baris, 400 sah, 0 gagal/macet/error
+  per role (menang / tampil, 95% CI):
+    air      58/ 309 =  18.8%  [ 14.8 -  23.5]
+    angin   110/ 329 =  33.4%  [ 28.6 -  38.7]
+    api      70/ 339 =  20.6%  [ 16.7 -  25.3]
+    petir    81/ 304 =  26.6%  [ 22.0 -  31.9]
+    tanah    81/ 319 =  25.4%  [ 20.9 -  30.4]
+  jebakan/AI/pertandingan: rata2 2.02 median 2.0 dalam 2-6: 1067/1600 (67%)  sebaran {0: 168, 1: 365, 2: 484, 3: 434, 4: 149}
+  detik 4 pemain: n=400 rata2 390.5 (+-11.6 CI95)
+  cara berakhir: {'ronde': 263, 'start': 137}
+  sel role x preset (P14 TAMBAHAN B-f: ! wajib batas bawah CI>55%, x mati batas atas CI<42%):
+   xair    x attack       24/ 107 =  22.4%  [ 15.6 -  31.2]
+   xair    x balanced     12/ 103 =  11.7%  [  6.8 -  19.3]
+   xair    x defense      22/  99 =  22.2%  [ 15.2 -  31.4]
+   xangin  x attack       33/ 109 =  30.3%  [ 22.4 -  39.5]
+    angin  x balanced     40/ 103 =  38.8%  [ 30.0 -  48.5]
+   xangin  x defense      37/ 117 =  31.6%  [ 23.9 -  40.5]
+   xapi    x attack       18/ 107 =  16.8%  [ 10.9 -  25.0]
+   xapi    x balanced     32/ 125 =  25.6%  [ 18.8 -  33.9]
+   xapi    x defense      20/ 107 =  18.7%  [ 12.4 -  27.1]
+   xpetir  x attack       27/ 104 =  26.0%  [ 18.5 -  35.1]
+   xpetir  x balanced     31/ 116 =  26.7%  [ 19.5 -  35.4]
+   xpetir  x defense      23/  84 =  27.4%  [ 19.0 -  37.7]
+   xtanah  x attack       28/ 117 =  23.9%  [ 17.1 -  32.4]
+   xtanah  x balanced     27/ 116 =  23.3%  [ 16.5 -  31.7]
+   xtanah  x defense      26/  86 =  30.2%  [ 21.5 -  40.6]
+  sacred/pertandingan: rata2 0.03 (n=400, dari 400 baris sah)
+  xprole0 slot 0: rata2 136.3 (n=400) -- 0 baris dilewati (tidak tersedia)

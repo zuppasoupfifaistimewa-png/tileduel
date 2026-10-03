@@ -1,0 +1,23 @@
+TARUHAN_CEK versi status=OK 
+TARUHAN_CEK ditolak_nominal status=OK 
+TARUHAN_CEK pasang_benar status=OK 
+TARUHAN_CEK ditolak_ganda status=OK 
+TARUHAN_CEK selesai_benar status=OK 
+TARUHAN_CEK pasang_salah status=OK 
+TARUHAN_CEK tanpa_taruhan_nol status=OK 
+TARUHAN_CEK batal_penuh status=OK 
+TARUHAN_CEK kurang_saldo status=OK 
+TARUHAN_CEK pas_saldo status=OK 
+TARUHAN_CEK saldo_nol_ok status=OK 
+TARUHAN_CEK batas_harian_10 status=OK berhasil=10 crowns=900
+TARUHAN_CEK hari_baru_reset status=OK 
+TARUHAN_CEK muat_ulang status=OK 910/910
+TARUHAN_CEK stat_kunci status=OK 
+TARUHAN_CEK misi_tebak3_2 status=OK 
+TARUHAN_CEK beruntun_1_belum status=OK 
+TARUHAN_CEK tebak3_selesai status=OK 
+TARUHAN_CEK beruntun_bukan_jumlah status=OK dua laga streak 1 tidak boleh = 2
+TARUHAN_CEK beruntun_2_selesai status=OK 
+TARUHAN_CEK bobot_rendah status=OK t1=52/600 t2=94/600
+TARUHAN_CEK berkas_lama status=OK 
+TARUHAN_SELESAI total=22 ok=22 gagal=0

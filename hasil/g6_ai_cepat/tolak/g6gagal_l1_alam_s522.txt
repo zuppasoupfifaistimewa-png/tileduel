@@ -1,0 +1,18 @@
+PUTAR_ULANG_TAWAR ke=1 skor_p=8 skor_m=12
+PUTAR_ULANG klik ke-1 (WATCH AD)
+PUTAR_ULANG_GAGAL_TEKS 'No ad right now.'
+PUTAR_ULANG_TAWAR ke=2 skor_p=4 skor_m=10
+PUTAR_ULANG klik ke-2 (WATCH AD)
+PUTAR_ULANG_GAGAL_TEKS 'No ad right now.'
+PUTAR_ULANG_TAWAR ke=3 skor_p=7 skor_m=9
+PUTAR_ULANG klik ke-3 (WATCH AD)
+PUTAR_ULANG_GAGAL_TEKS 'No ad right now.'
+PUTAR_ULANG_TAWAR ke=4 skor_p=6 skor_m=9
+PUTAR_ULANG klik ke-4 (WATCH AD)
+PUTAR_ULANG_GAGAL_TEKS 'No ad right now.'
+PUTAR_ULANG_TAWAR ke=5 skor_p=7 skor_m=10
+PUTAR_ULANG klik ke-5 (WATCH AD)
+PUTAR_ULANG_GAGAL_TEKS 'No ad right now.'
+SEIMBANG peta=alam seed=522 quick=0 roles=api,petir pemenang=1 cara=batas_kaya giliran=71 detik=1374.1 pasang=5,3 kena=5,3 kaya=1808,8405 rinci=1/469/4/5/0/7,3/150/5/4/4/0 presets=- sacred=0 xprole0=-1
+PUTAR_ULANG_RINGKAS tawaran=5 klik=5 cek_ok=0 cek_gagal=0 stat_putar_ulang=0
+SIM BATAS_GILIRAN giliran=71 detik=1374

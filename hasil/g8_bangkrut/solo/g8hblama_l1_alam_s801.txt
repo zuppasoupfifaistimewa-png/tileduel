@@ -1,0 +1,72 @@
+MULAI-NYATA pemain=2 seed=801 peta=alam
+KARAKTER|0|Pemain|pos=(0.0, 0.0, 0.0)|warna=3380ff
+KARAKTER|1|Musuh|pos=(0.0, 0.0, 0.0)|warna=ff3333
+T|YOUR TURN! Choose Action or Roll Dice.
+G1|pemain|awal|[0,2500,4,g0,p0,b0,k0][0,2500,4,g0,p0,b0,k0]|o:-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1|xyz:(0.0, 0.0, 0.0);(0.0, 0.0, 0.0)
+R|dadu
+T|You are rolling dice...
+T|Your Roll: 2
+R|beli
+T|ENEMY TURN! Enemy is thinking...
+G2|musuh|awal|[2,2200,4,g0,p0,b0,k0][0,2500,4,g0,p0,b0,k0]|o:-1,-1,0,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1|xyz:(14.4, 0.0, 0.0);(0.0, 0.0, 0.0)
+T|Enemy is rolling dice...
+T|Enemy Roll: 2
+T|Enemy lands on your tile! Enemy is thinking...
+T|Enemy gave up. Paid fine: 100 Coins.
+T|First to win a duel with EARTH: +1 Star
+T|YOUR TURN! Choose Action or Roll Dice.
+G3|pemain|awal|[2,2300,4,g0,p0,b0,k0][2,2400,4,g0,p0,b0,k0]|o:-1,-1,0,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1|xyz:(15.7, 0.0, 1.3);(13.1, 0.0, -1.3)
+R|dadu
+T|You are rolling dice...
+T|Your Roll: 4
+R|beli
+T|ENEMY TURN! Enemy is thinking...
+G4|musuh|awal|[6,-1420,4,g0,p0,b0,k0][2,2400,4,g0,p0,b0,k0]|o:-1,-1,0,-1,-1,-1,0,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1|xyz:(21.6, 0.0, -21.5);(14.4, 0.0, 0.0)
+T|Enemy is rolling dice...
+T|Enemy Roll: 6
+T|Enemy bought this tile!
+T|YOUR TURN! Choose Action or Roll Dice.
+G5|pemain|awal|[6,-1420,4,g0,p0,b0,k0][8,2100,4,g0,p0,b0,k0]|o:-1,-1,0,-1,-1,-1,0,-1,1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1|xyz:(21.6, 0.0, -21.5);(14.4, 0.0, -28.7)
+R|dadu
+T|You are rolling dice...
+T|Your Roll: 3
+R|akhiri
+T|ENEMY TURN! Enemy is thinking...
+G6|musuh|awal|[9,-1420,4,g0,p0,b0,k0][8,2100,4,g0,p0,b0,k0]|o:-1,-1,0,-1,-1,-1,0,-1,1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1|xyz:(14.3, 0.0, -35.9);(14.4, 0.0, -28.7)
+T|Enemy set an Earth Trap!
+T|Enemy is rolling dice...
+T|Enemy Roll: 4
+T|Enemy bought this tile!
+T|Enemy's tower lost 1 HP!
+T|YOUR TURN! Choose Action or Roll Dice.
+G7|pemain|awal|[9,-1420,4,g0,p0,b0,k0][12,1800,3,g0,p0,b0,k0]|o:-1,-1,0,-1,-1,-1,0,-1,1,-1,-1,-1,1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1|xyz:(14.3, 0.0, -35.9);(7.2, 0.0, -50.2)
+R|dadu
+T|You are rolling dice...
+T|Your Roll: 1
+R|akhiri
+T|ENEMY TURN! Enemy is thinking...
+G8|musuh|awal|[10,-1420,4,g0,p0,b0,k0][12,1800,3,g0,p0,b0,k0]|o:-1,-1,0,-1,-1,-1,0,-1,1,-1,-1,-1,1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1|xyz:(14.3, 0.0, -43.0);(7.2, 0.0, -50.2)
+T|Enemy set a Lightning Trap!
+T|Enemy is rolling dice...
+T|Enemy Roll: 4
+T|Enemy landed on a Card Tile!
+T|Card saved to Inventory!
+T|Enemy bought this tile!
+T|YOUR TURN! Choose Action or Roll Dice.
+G9|pemain|awal|[10,-1420,4,g0,p0,b0,k0][16,1500,2,g0,p0,b0,k1]|o:-1,-1,0,-1,-1,-1,0,-1,1,-1,-1,-1,1,-1,-1,-1,1,-1,-1,-1,-1,-1,-1,-1|xyz:(14.3, 0.0, -43.0);(-7.1, 0.0, -35.8)
+R|dadu
+T|You are rolling dice...
+T|Your Roll: 4
+T|LIGHTNING TRAP! Paralyzed & Stopped!
+T|Enemy Tile! Give Up (Pay 100) or Fight?
+R|menyerah
+T|You gave up. Paid fine: 100 Coins.
+T|YOU BANKRUPT! Money is minus.
+T|TAP YOUR TILE TO SELL (30% Discount)
+R|jual|2
+T|Tile sold: +210 Coins!
+T|Still in minus! Tap another tile to sell.
+R|jual|6
+T|Tile sold: +210 Coins!
+T|Still in minus! Tap another tile to sell.
+SELESAI|MACET|G9|pemain|konfrontasi|[12,-1100,4,g0,p2,b0,k0][16,1600,2,g0,p0,b0,k1]|o:-1,-1,-1,-1,-1,-1,-1,-1,1,-1,-1,-1,1,-1,-1,-1,1,-1,-1,-1,-1,-1,-1,-1|xyz:(7.1, 0.0, -50.2);(-7.1, 0.0, -35.8)

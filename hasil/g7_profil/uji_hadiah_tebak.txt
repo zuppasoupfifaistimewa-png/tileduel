@@ -1,0 +1,22 @@
+HADIAH_TEBAK_CEK konstanta status=OK 
+HADIAH_TEBAK_CEK hadiah_n0 status=OK xp_tebak=0 crowns_tebak=0 dihitung=0
+HADIAH_TEBAK_CEK profil_naik_n0 status=OK xp 50==50 cr 20==20
+HADIAH_TEBAK_CEK stat_seumur_n0 status=OK seumur=0
+HADIAH_TEBAK_CEK hadiah_n1 status=OK xp_tebak=5 crowns_tebak=3 dihitung=1
+HADIAH_TEBAK_CEK profil_naik_n1 status=OK xp 55==55 cr 43==43
+HADIAH_TEBAK_CEK stat_seumur_n1 status=OK seumur=1
+HADIAH_TEBAK_CEK hadiah_n3 status=OK xp_tebak=15 crowns_tebak=9 dihitung=3
+HADIAH_TEBAK_CEK profil_naik_n3 status=OK xp 65==65 cr 29==29
+HADIAH_TEBAK_CEK stat_seumur_n3 status=OK seumur=4
+HADIAH_TEBAK_CEK hadiah_n5 status=OK xp_tebak=25 crowns_tebak=15 dihitung=5
+HADIAH_TEBAK_CEK profil_naik_n5 status=OK xp 75==75 cr 65==65
+HADIAH_TEBAK_CEK stat_seumur_n5 status=OK seumur=9
+HADIAH_TEBAK_CEK hadiah_n7 status=OK xp_tebak=25 crowns_tebak=15 dihitung=5
+HADIAH_TEBAK_CEK profil_naik_n7 status=OK xp 75==75 cr 35==35
+HADIAH_TEBAK_CEK stat_seumur_n7 status=OK seumur=16
+HADIAH_TEBAK_CEK double_tanpa_tebak status=OK xp_double=50 xp_tebak=20
+HADIAH_TEBAK_CEK bisa_double_tanpa_giliran status=OK bisa_double=false
+HADIAH_TEBAK_CEK muat_ulang status=OK seumur=22
+HADIAH_TEBAK_CEK berkas_lama status=OK 
+HADIAH_TEBAK_CEK stat_tanpa_kunci status=OK 
+HADIAH_TEBAK_SELESAI total=21 ok=21 gagal=0

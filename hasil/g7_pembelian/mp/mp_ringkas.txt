@@ -1,0 +1,3 @@
+skenario: 37
+baris SELESAI: 99  MACET: 0  scripterr>0: 0  beda>0: 0  cek_gagal>0: 0
+pembanding G8: 97 SELESAI; selisih +2 = f2_d4 & f2_m5 (host keluar saat pilih elemen: variasi timing, host tak sempat jadi peserta duel -> main sampai habis; pola D1 RENCANA 14.23)

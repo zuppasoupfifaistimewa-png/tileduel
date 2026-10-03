@@ -1,0 +1,413 @@
+ROBOT host urut=1 mode=0 peta=alam skenario=
+LOBBY host: klik mode '1 VS 1' = true
+LOBBY host: klik peta 'Grassland' = true
+LOBBY host: klik panjang 'CLASSIC' = true
+LOBBY host: klik MY ROLE = true
+LOBBY host: klik role FIRE = true
+LOBBY host: klik OK = true
+LOBBY host: pemain = [b][color=#3380ff]P1[/color][/b]   HOST (YOU)  [color=#e63333]FIRE[/color] | [b][color=#ff3333]P2[/color][/b]   PLAYER  [color=#3380e6]WATER[/color]
+LOBBY host: info = Everyone is here. Press START!
+LOBBY host: START = true
+MASUK_GAME slot_lokal=0 pemain=2 peran_jaringan=host
+START_DITEKAN
+T|YOUR TURN! Choose Action or Roll Dice.
+EVENT ronde=1 aktif= terakhir=
+KARTU_BANTUAN stat=[0, 0] inv=[[], []]
+BOUNTY aktif= terakhir= bintang=[4, 4] stat_bounty=[0, 0]
+G1|pemain|[0,2500,4][0,2500,4]
+R|dadu
+T|You are rolling dice...
+T|Your Roll: 2
+R|jebakan|TombolTrapApi
+T|Fire Trap set! (Burns victim for 3 turns)
+BOUNTY aktif= terakhir= bintang=[3, 4] stat_bounty=[0, 0]
+R|beli
+T|Waiting for opponent...
+G2|musuh|[2,2200,3][0,2500,4]
+T|You are rolling dice...
+T|Enemy Roll: 6
+T|FIRE TRAP! Burning for 3 turns!
+T|Enemy placed a Water Trap!
+BOUNTY aktif= terakhir= bintang=[3, 3] stat_bounty=[0, 0]
+T|Waiting for opponent...
+T|First to win a duel with WATER: +1 Star
+EVENT ronde=2 aktif= terakhir=
+BOUNTY aktif=air terakhir=air bintang=[3, 3] stat_bounty=[0, 0]
+T|YOUR TURN! Choose Action or Roll Dice.
+G3|pemain|[2,2200,3][6,2200,3]
+R|dadu
+T|You are rolling dice...
+T|Your Roll: 4
+T|TRAPPED! Geyser Eruption!
+T|Landed randomly! Trapped in a Bubble for 2 turns!
+R|akhiri
+T|Enemy is burning! Lost 55 Coins. (2 turns left)
+G4|musuh|[16,2228,3][6,2145,3]
+T|You are rolling dice...
+T|Enemy Roll: 6
+T|Enemy set a Wind Trap!
+BOUNTY aktif=air terakhir=air bintang=[3, 2] stat_bounty=[0, 0]
+T|Waiting for opponent...
+T|YOUR TURN! Choose Action or Roll Dice.
+EVENT ronde=3 aktif= terakhir=
+G5|pemain|[16,2228,3][12,1845,2]
+R|dadu
+T|You are rolling dice...
+T|Your Roll: 2
+R|akhiri
+T|Enemy is burning! Lost 55 Coins. (1 turns left)
+G6|musuh|[18,2256,3][12,1790,2]
+T|You are rolling dice...
+T|Enemy Roll: 1
+T|Enemy landed on a Card Tile!
+D|90.2|ANIMASI_KARTU judul='CARD REVEALED!' target='Tile Duel' a_target=1.0 a_latar=-1.00 kartu=,, kamera=P2 | TEKS='Enemy landed on a Card Tile!'
+D|90.4|ANIMASI_KARTU judul='CARD REVEALED!' target='Tile Duel' a_target=1.0 a_latar=-1.00 kartu=, kamera=P2 | TEKS='Enemy landed on a Card Tile!'
+D|90.4|ANIMASI_KARTU judul='CARD REVEALED!' target='Tile Duel' a_target=1.0 a_latar=-1.00 kartu=,,CURSE kamera=P2 | TEKS='Enemy landed on a Card Tile!'
+T|Card Effect Applied!
+BOUNTY aktif=air terakhir=air bintang=[3, 1] stat_bounty=[0, 0]
+D|93.2|TEKS='Card Effect Applied!'
+T|Enemy's tower lost 1 HP!
+EVENT ronde=4 aktif= terakhir=earthquake
+D|94.6|(kosong)
+T|YOUR TURN! Choose Action or Roll Dice.
+G7|pemain|[18,2256,3][13,1790,1]
+R|dadu
+T|You are rolling dice...
+T|Your Roll: 1
+R|jebakan|TombolTrapPetir
+T|Lightning Trap set! (Paralyzes victim)
+BOUNTY aktif=air terakhir=air bintang=[2, 1] stat_bounty=[0, 0]
+R|beli
+HUTANG_PASANG ke-1 slot=0 petak=2 nilai_jual=420 uang=-1420 giliran=7
+T|Enemy is burning! Lost 55 Coins. (0 turns left)
+G8|musuh|[19,-1392,2][13,1735,1]
+T|You are rolling dice...
+T|Enemy Roll: 6
+T|LIGHTNING TRAP! Paralyzed & Stopped!
+T|Enemy gave up. Paid fine: 100 Coins.
+T|YOUR TURN! Choose Action or Roll Dice.
+EVENT ronde=5 aktif= terakhir=earthquake
+G9|pemain|[19,-1292,2][19,1635,1]
+R|dadu
+T|You are rolling dice...
+T|Your Roll: 6
+T|You collected [img=28]res://permata/permata_hijau.png[/img] Gem!
+BOUNTY aktif=air terakhir=air bintang=[5, 1] stat_bounty=[0, 0]
+T|You passed Start! Bonus +520
+T|You got SWORD LV 1
+KARTU_BANTUAN stat=[1, 0] inv=[["pedang_1"], []]
+D|145.0|TEKS='You got SWORD LV 1'
+R|jebakan|TombolTrapApi
+T|Fire Trap set! (Burns victim for 3 turns)
+BOUNTY aktif=air terakhir=air bintang=[4, 1] stat_bounty=[0, 0]
+D|148.0|(kosong)
+R|akhiri
+T|Enemy is paralyzed! Cannot move this turn.
+G10|musuh|[1,-772,4][19,1635,1]
+T|YOUR TURN! Choose Action or Roll Dice.
+EVENT ronde=6 aktif= terakhir=earthquake
+G11|pemain|[1,-772,4][19,1635,1]
+R|dadu
+T|You are rolling dice...
+T|Your Roll: 4
+R|jebakan|TombolTrapApi
+T|Fire Trap set! (Burns victim for 3 turns)
+BOUNTY aktif=air terakhir=air bintang=[3, 1] stat_bounty=[0, 0]
+R|akhiri
+T|You are rolling dice...
+G12|musuh|[5,-772,3][19,1635,1]
+T|Enemy Roll: 3
+T|Enemy collected [img=28]res://permata/permata_hijau.png[/img] Gem!
+T|Waiting for opponent...
+T|Everyone gets +1 Star!
+EVENT ronde=7 aktif= terakhir=star_shower
+BOUNTY aktif=air terakhir=air bintang=[4, 2] stat_bounty=[0, 0]
+T|YOUR TURN! Choose Action or Roll Dice.
+G13|pemain|[5,-772,4][22,1335,2]
+R|dadu
+T|You are rolling dice...
+T|Your Roll: 5
+R|jebakan|TombolTrapAngin
+T|Wind Trap set! Wait for victim.
+BOUNTY aktif=air terakhir=air bintang=[3, 2] stat_bounty=[0, 0]
+R|akhiri
+T|You are rolling dice...
+G14|musuh|[10,-772,3][22,1335,2]
+T|Enemy Roll: 4
+BOUNTY aktif=air terakhir=air bintang=[3, 5] stat_bounty=[0, 0]
+T|Enemy passed Start! Bonus +530
+T|FIRE TRAP! Burning for 3 turns!
+T|Enemy gave up. Paid fine: 100 Coins.
+T|YOUR TURN! Choose Action or Roll Dice.
+EVENT ronde=8 aktif= terakhir=star_shower
+G15|pemain|[10,-672,3][2,1765,5]
+R|dadu
+T|You are rolling dice...
+T|Your Roll: 3
+T|WIND TRAP! Lost 0 Coins!
+T|You landed on a Card Tile!
+D|224.5|ANIMASI_KARTU judul='YOUR TURN / CHOOSE A CARD!' target='Tile Duel' a_target=1.0 a_latar=-1.00 kartu=,, kamera=P1 | TEKS='You landed on a Card Tile!'
+R|gacha|0
+D|224.5|ANIMASI_KARTU judul='CARD REVEALED!' target='Tile Duel' a_target=1.0 a_latar=-1.00 kartu=,, kamera=P1 | TEKS='You landed on a Card Tile!'
+D|224.7|ANIMASI_KARTU judul='CARD REVEALED!' target='Tile Duel' a_target=1.0 a_latar=-1.00 kartu=, kamera=P1 | TEKS='You landed on a Card Tile!'
+D|224.7|ANIMASI_KARTU judul='CARD REVEALED!' target='Tile Duel' a_target=1.0 a_latar=-1.00 kartu=CURSE,, kamera=P1 | TEKS='You landed on a Card Tile!'
+T|Card Effect Applied!
+BOUNTY aktif=air terakhir=air bintang=[2, 5] stat_bounty=[0, 0]
+D|227.5|TEKS='Card Effect Applied!'
+R|akhiri
+T|Enemy is burning! Lost 55 Coins. (2 turns left)
+G16|musuh|[13,-644,2][2,1710,5]
+D|228.9|(kosong)
+T|You are rolling dice...
+T|Enemy Roll: 1
+T|Enemy found 0 Coins!
+T|Enemy set a Wind Trap!
+BOUNTY aktif=air terakhir=air bintang=[2, 4] stat_bounty=[0, 0]
+T|Waiting for opponent...
+T|YOUR TURN! Choose Action or Roll Dice.
+EVENT ronde=9 aktif= terakhir=star_shower
+G17|pemain|[13,-644,2][3,1410,4]
+R|dadu
+T|You are rolling dice...
+T|Your Roll: 2
+R|jebakan|TombolTrapApi
+T|Fire Trap set! (Burns victim for 3 turns)
+BOUNTY aktif=air terakhir=air bintang=[1, 4] stat_bounty=[0, 0]
+R|akhiri
+T|Enemy is burning! Lost 55 Coins. (1 turns left)
+G18|musuh|[15,-616,1][3,1355,4]
+T|You are rolling dice...
+T|Enemy Roll: 6
+T|FIRE TRAP! Burning for 3 turns!
+T|Enemy found 0 Coins!
+T|Enemy set a Lightning Trap!
+BOUNTY aktif=air terakhir=air bintang=[1, 3] stat_bounty=[0, 0]
+T|Waiting for opponent...
+T|Tiles and towers -30% this round!
+EVENT ronde=10 aktif=market_day terakhir=market_day
+T|YOUR TURN! Choose Action or Roll Dice.
+G19|pemain|[15,-616,1][9,1055,3]
+R|dadu
+T|You are rolling dice...
+T|Your Roll: 5
+R|akhiri
+T|Enemy is burning! Lost 55 Coins. (2 turns left)
+G20|musuh|[20,-588,1][9,1000,3]
+T|You are rolling dice...
+T|Enemy Roll: 2
+T|WIND TRAP! Lost 100 Coins!
+T|Enemy found 0 Coins!
+T|Enemy set a Lightning Trap!
+BOUNTY aktif=air terakhir=air bintang=[1, 2] stat_bounty=[0, 0]
+T|Waiting for opponent...
+T|YOUR TURN! Choose Action or Roll Dice.
+EVENT ronde=11 aktif= terakhir=market_day
+G21|pemain|[20,-588,1][11,690,2]
+R|dadu
+T|You are rolling dice...
+T|Your Roll: 5
+T|You collected [img=28]res://permata/permata_hijau.png[/img] Gem!
+T|You found 33 Coins!
+BOUNTY aktif=air terakhir=air bintang=[4, 2] stat_bounty=[0, 0]
+T|You passed Start! Bonus +520
+T|You got SWORD LV 1
+KARTU_BANTUAN stat=[2, 0] inv=[["pedang_1", "pedang_1"], []]
+D|320.0|TEKS='You got SWORD LV 1'
+R|jebakan|TombolTrapAngin
+T|Wind Trap set! Wait for victim.
+BOUNTY aktif=air terakhir=air bintang=[3, 2] stat_bounty=[0, 0]
+D|322.9|(kosong)
+R|akhiri
+T|Enemy is burning! Lost 55 Coins. (1 turns left)
+G22|musuh|[1,-7,3][11,635,2]
+T|You are rolling dice...
+T|Enemy Roll: 4
+T|Enemy landed on a Card Tile!
+D|334.5|ANIMASI_KARTU judul='CARD REVEALED!' target='Tile Duel' a_target=1.0 a_latar=-1.00 kartu=,, kamera=P2 | TEKS='Enemy landed on a Card Tile!'
+D|334.7|ANIMASI_KARTU judul='CARD REVEALED!' target='Tile Duel' a_target=1.0 a_latar=-1.00 kartu=, kamera=P2 | TEKS='Enemy landed on a Card Tile!'
+D|334.8|ANIMASI_KARTU judul='CARD REVEALED!' target='Tile Duel' a_target=1.0 a_latar=-1.00 kartu=,,HIGH ROLL* kamera=P2 | TEKS='Enemy landed on a Card Tile!'
+T|Card saved to Inventory!
+KARTU_BANTUAN stat=[2, 0] inv=[["pedang_1", "pedang_1"], ["dadu_tinggi"]]
+D|337.5|TEKS='Card saved to Inventory!'
+T|FIRE TRAP! Burning for 3 turns!
+D|340.2|(kosong)
+T|Waiting for opponent...
+T|YOUR TURN! Choose Action or Roll Dice.
+EVENT ronde=12 aktif= terakhir=market_day
+G23|pemain|[1,-7,3][15,335,2]
+CEK#12 BEDA dgn client 312801970 (slot 1): jebakan host=["11:JebakanPetir:1:{ \"siluman\": false }", "15:JebakanApi:0:{ \"aktif_ulang\": 0 }", "18:KoinTercecer:<null>:{  }", "1:JebakanAngin:0:{ \"sisa_pindah\": 0 }", "3:JebakanAngin:1:{ \"sisa_pindah\": 0 }", "9:JebakanPetir:1:{ \"siluman\": false }", "9:KoinTercecer:<null>:{  }"] client=["11:JebakanPetir:1:{ \"siluman\": false }", "18:KoinTercecer:<null>:{  }", "1:JebakanAngin:0:{ \"sisa_pindah\": 0 }", "3:JebakanAngin:1:{ \"sisa_pindah\": 0 }", "9:JebakanPetir:1:{ \"siluman\": false }", "9:KoinTercecer:<null>:{  }"]
+R|dadu
+T|You are rolling dice...
+T|Your Roll: 4
+T|WIND TRAP! Lost 0 Coins!
+T|You found 0 Coins!
+R|jebakan|TombolTrapPetir
+T|Lightning Trap set! (Paralyzes victim)
+BOUNTY aktif=air terakhir=air bintang=[2, 2] stat_bounty=[0, 0]
+R|akhiri
+T|Enemy is burning! Lost 55 Coins. (2 turns left)
+HUTANG_PASANG ke-2 slot=0 petak=2 nilai_jual=420 uang=-1420 giliran=23
+G24|musuh|[5,-1420,2][15,280,2]
+T|Waiting for opponent...
+KARTU_BANTUAN stat=[2, 0] inv=[["pedang_1", "pedang_1"], []]
+D|362.3|ANIMASI_KARTU judul='ENEMY'S CARDS' target='HIGH ROLL for YOU (3 turns)' a_target=0.0 a_latar=0.00 kartu= kamera=P2
+D|362.3|ANIMASI_KARTU judul='ENEMY'S CARDS' target='HIGH ROLL for YOU (3 turns)' a_target=0.0 a_latar=0.20 kartu=HIGH ROLL kamera=P2
+D|362.4|ANIMASI_KARTU judul='ENEMY'S CARDS' target='HIGH ROLL for YOU (3 turns)' a_target=0.0 a_latar=0.40 kartu=HIGH ROLL kamera=P2
+D|362.4|ANIMASI_KARTU judul='ENEMY'S CARDS' target='HIGH ROLL for YOU (3 turns)' a_target=0.0 a_latar=0.60 kartu=HIGH ROLL kamera=P2
+D|362.5|ANIMASI_KARTU judul='ENEMY'S CARDS' target='HIGH ROLL for YOU (3 turns)' a_target=0.0 a_latar=0.80 kartu=HIGH ROLL kamera=P2
+D|363.4|ANIMASI_KARTU judul='ENEMY USED A CARD!' target='HIGH ROLL for YOU (3 turns)' a_target=0.0 a_latar=0.80 kartu=HIGH ROLL* kamera=P2
+D|365.8|ANIMASI_KARTU judul='ENEMY USED A CARD!' target='HIGH ROLL for YOU (3 turns)' a_target=0.2 a_latar=0.80 kartu=HIGH ROLL* kamera=P2
+D|365.9|ANIMASI_KARTU judul='ENEMY USED A CARD!' target='HIGH ROLL for YOU (3 turns)' a_target=0.4 a_latar=0.80 kartu=HIGH ROLL* kamera=P2
+D|365.9|ANIMASI_KARTU judul='ENEMY USED A CARD!' target='HIGH ROLL for YOU (3 turns)' a_target=0.6 a_latar=0.80 kartu=HIGH ROLL* kamera=P2
+D|366.0|ANIMASI_KARTU judul='ENEMY USED A CARD!' target='HIGH ROLL for YOU (3 turns)' a_target=0.8 a_latar=0.80 kartu=HIGH ROLL* kamera=P2
+D|366.0|ANIMASI_KARTU judul='ENEMY USED A CARD!' target='HIGH ROLL for YOU (3 turns)' a_target=1.0 a_latar=0.80 kartu=HIGH ROLL* kamera=P2
+D|367.0|ANIMASI_KARTU judul='ENEMY USED A CARD!' target='HIGH ROLL for YOU (3 turns)' a_target=0.9 a_latar=0.70 kartu=HIGH ROLL* kamera=P1
+D|367.1|ANIMASI_KARTU judul='ENEMY USED A CARD!' target='HIGH ROLL for YOU (3 turns)' a_target=0.8 a_latar=0.60 kartu=HIGH ROLL* kamera=P1
+D|367.1|ANIMASI_KARTU judul='ENEMY USED A CARD!' target='HIGH ROLL for YOU (3 turns)' a_target=0.6 a_latar=0.50 kartu=HIGH ROLL* kamera=P1
+D|367.2|ANIMASI_KARTU judul='ENEMY USED A CARD!' target='HIGH ROLL for YOU (3 turns)' a_target=0.5 a_latar=0.40 kartu=HIGH ROLL* kamera=P1
+D|367.2|ANIMASI_KARTU judul='ENEMY USED A CARD!' target='HIGH ROLL for YOU (3 turns)' a_target=0.4 a_latar=0.30 kartu=HIGH ROLL* kamera=P1
+D|367.3|ANIMASI_KARTU judul='ENEMY USED A CARD!' target='HIGH ROLL for YOU (3 turns)' a_target=0.2 a_latar=0.20 kartu=HIGH ROLL* kamera=P1
+D|367.3|ANIMASI_KARTU judul='ENEMY USED A CARD!' target='HIGH ROLL for YOU (3 turns)' a_target=0.1 a_latar=0.10 kartu=HIGH ROLL* kamera=P1
+D|367.4|ANIMASI_KARTU judul='ENEMY USED A CARD!' target='HIGH ROLL for YOU (3 turns)' a_target=0.0 a_latar=0.00 kartu=HIGH ROLL* kamera=P1
+T|Enemy inflicted HIGH ROLL to You for 3 Turns!
+D|369.9|TEKS='Enemy inflicted HIGH ROLL to You for 3 Turns!'
+T|You are rolling dice...
+D|370.9|(kosong)
+T|Enemy Roll: 2
+T|Enemy set a Lightning Trap!
+BOUNTY aktif=air terakhir=air bintang=[2, 1] stat_bounty=[0, 0]
+T|Everyone gets +1 Star!
+EVENT ronde=13 aktif= terakhir=star_shower
+BOUNTY aktif=air terakhir=air bintang=[3, 2] stat_bounty=[0, 0]
+T|YOUR TURN! Choose Action or Roll Dice.
+G25|pemain|[5,-1420,3][17,280,2]
+R|dadu
+T|You are rolling dice...
+T|Your Roll: 11
+T|LIGHTNING TRAP! Paralyzed & Stopped!
+T|Enemy Tile! Give Up (Pay 100) or Fight?
+R|menyerah
+T|You gave up. Paid fine: 100 Coins.
+T|YOU BANKRUPT! Money is minus.
+T|TAP YOUR TILE TO SELL (30% Discount)
+R|jual|2
+T|Tile sold: +210 Coins!
+T|Still in minus! Tap another tile to sell.
+R|jual|19
+T|Tile sold: +210 Coins!
+T|No more tiles! You carry the debt.
+HUTANG_BAWA ke-1 teks='No more tiles! You carry the debt.' giliran=25 uang=[-1100, 380] mode_jual=false membidik=false petak_slot=0
+T|Enemy is burning! Lost 55 Coins. (1 turns left)
+G26|musuh|[9,-1072,3][17,325,2]
+T|You are rolling dice...
+T|Enemy Roll: 2
+T|Enemy found 33 Coins!
+T|Enemy set a Lightning Trap!
+BOUNTY aktif=air terakhir=air bintang=[3, 1] stat_bounty=[0, 0]
+T|Waiting for opponent...
+T|You are paralyzed! Cannot move this turn.
+EVENT ronde=14 aktif= terakhir=star_shower
+G27|pemain|[9,-1072,3][19,58,1]
+HUTANG_LANJUT giliran=27 mode_jual=false uang=[-1072, 58]
+T|Enemy is burning! Lost 55 Coins. (0 turns left)
+G28|musuh|[9,-1044,3][19,3,1]
+T|You are rolling dice...
+T|Enemy Roll: 5
+T|Enemy collected [img=28]res://permata/permata_hijau.png[/img] Gem!
+BOUNTY aktif=air terakhir=air bintang=[3, 4] stat_bounty=[0, 0]
+T|Enemy passed Start! Bonus +580
+T|Your dice effect worn off!
+EVENT ronde=15 aktif= terakhir=star_shower
+G29|pemain|[9,-1044,3][0,583,4]
+T|YOUR TURN! Choose Action or Roll Dice.
+R|dadu
+T|You are rolling dice...
+T|Your Roll: 6
+T|You found 0 Coins!
+T|LIGHTNING TRAP! Paralyzed & Stopped!
+T|Enemy Tile! Give Up (Pay 100) or Fight?
+R|menyerah
+T|You gave up. Paid fine: 100 Coins.
+T|YOU BANKRUPT! Money is minus.
+T|No more tiles! You carry the debt.
+HUTANG_BAWA ke-2 teks='No more tiles! You carry the debt.' giliran=29 uang=[-1144, 683] mode_jual=false membidik=false petak_slot=0
+T|You are rolling dice...
+G30|musuh|[11,-1144,3][0,683,4]
+T|Enemy Roll: 3
+T|WIND TRAP! Lost 68 Coins!
+T|Enemy found 22 Coins!
+T|Enemy set a Wind Trap!
+BOUNTY aktif=air terakhir=air bintang=[3, 3] stat_bounty=[0, 0]
+T|Waiting for opponent...
+T|Tiles and towers -30% this round!
+EVENT ronde=16 aktif=market_day terakhir=market_day
+T|You are paralyzed! Cannot move this turn.
+G31|pemain|[11,-1144,3][3,137,3]
+HUTANG_LANJUT giliran=31 mode_jual=false uang=[-1144, 137]
+T|You are rolling dice...
+G32|musuh|[11,-1144,3][3,137,3]
+T|Enemy Roll: 3
+T|LIGHTNING TRAP! Paralyzed & Stopped!
+T|YOUR TURN! Choose Action or Roll Dice.
+EVENT ronde=17 aktif= terakhir=market_day
+G33|pemain|[11,-1144,3][5,137,3]
+R|dadu
+T|You are rolling dice...
+T|Your Roll: 2
+T|You found 22 Coins!
+T|You landed on a Card Tile!
+D|502.9|ANIMASI_KARTU judul='YOUR TURN / CHOOSE A CARD!' target='Tile Duel' a_target=1.0 a_latar=-1.00 kartu=,, kamera=P1 | TEKS='You landed on a Card Tile!'
+R|gacha|2
+D|502.9|ANIMASI_KARTU judul='CARD REVEALED!' target='Tile Duel' a_target=1.0 a_latar=-1.00 kartu=,, kamera=P1 | TEKS='You landed on a Card Tile!'
+D|503.1|ANIMASI_KARTU judul='CARD REVEALED!' target='Tile Duel' a_target=1.0 a_latar=-1.00 kartu=, kamera=P1 | TEKS='You landed on a Card Tile!'
+D|503.1|ANIMASI_KARTU judul='CARD REVEALED!' target='Tile Duel' a_target=1.0 a_latar=-1.00 kartu=,,JACKPOT!* kamera=P1 | TEKS='You landed on a Card Tile!'
+T|Card Effect Applied!
+D|505.8|TEKS='Card Effect Applied!'
+R|akhiri
+T|Enemy is paralyzed! Cannot move this turn.
+G34|musuh|[13,-122,3][5,137,3]
+D|507.2|(kosong)
+T|YOUR TURN! Choose Action or Roll Dice.
+EVENT ronde=18 aktif= terakhir=market_day
+G35|pemain|[13,-122,3][5,137,3]
+R|dadu
+T|You are rolling dice...
+T|Your Roll: 6
+T|You found 22 Coins!
+T|LIGHTNING TRAP! Paralyzed & Stopped!
+R|akhiri
+T|You are rolling dice...
+G36|musuh|[17,-100,3][5,137,3]
+T|Enemy Roll: 1
+T|Enemy set a Lightning Trap!
+BOUNTY aktif=air terakhir=air bintang=[3, 2] stat_bounty=[0, 0]
+T|Tile fees x2 this round!
+EVENT ronde=19 aktif=gold_rush terakhir=gold_rush
+T|You are paralyzed! Cannot move this turn.
+G37|pemain|[17,-100,3][6,137,2]
+T|You are rolling dice...
+G38|musuh|[17,-100,3][6,137,2]
+T|Enemy Roll: 1
+T|Enemy placed a Water Trap!
+BOUNTY aktif=air terakhir=air bintang=[3, 1] stat_bounty=[0, 0]
+T|YOUR TURN! Choose Action or Roll Dice.
+EVENT ronde=20 aktif= terakhir=gold_rush
+G39|pemain|[17,-100,3][7,137,1]
+R|dadu
+T|You are rolling dice...
+T|Your Roll: 1
+R|jebakan|TombolTrapPetir
+T|Lightning Trap set! (Paralyzes victim)
+BOUNTY aktif=air terakhir=air bintang=[2, 1] stat_bounty=[0, 0]
+R|akhiri
+T|You are rolling dice...
+G40|musuh|[18,-100,2][7,137,1]
+T|Enemy Roll: 1
+T|YOUR TURN! Choose Action or Roll Dice.
+EVENT ronde=21 aktif= terakhir=gold_rush
+G41|pemain|[18,-100,2][8,137,1]
+CEK_BD_JEBAKAN_AI s=0 role=api jebakan=api+angin+petir build={ "hot_flames": 2, "rock_breaker": 2, "heavy_pockets": 1, "fire_tax": 1, "ULT_api": true }
+CEK_BD_JEBAKAN_AI s=1 role=air jebakan=air+angin+petir build={ "frozen_bubble": 2, "heat_skin": 2, "rock_breaker": 1, "rapid_current": 1, "ULT_air": true }
+CEK_C5 { "cek_c5_guard": 0, "cek_c5_tornado": 0, "cek_c5_phoenix": 0, "cek_c5_rockbreaker0": 0 }
+CEK_BD { "cek_bd_sacred": 0, "cek_bd_guard_nol": 0, "cek_bd_fight_faktor": 0, "cek_bd_benteng_lewati": 0, "cek_bd_benteng_tahan_ai": 0 }
+SELESAI BATAS_GILIRAN peran=host giliran=41 cek_ok=16 cek_gagal=1 kartu_beda=0 detik=561 migrasi=0 cek_ok_migrasi=0 jaringan=host role=api:api+angin+petir:{ "hot_flames": 2, "rock_breaker": 2, "heavy_pockets": 1, "fire_tax": 1, "ULT_api": true },air:air+angin+petir:{ "frozen_bubble": 2, "heat_skin": 2, "rock_breaker": 1, "rapid_current": 1, "ULT_air": true }

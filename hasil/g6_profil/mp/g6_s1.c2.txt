@@ -1,0 +1,86 @@
+ROBOT client urut=2 mode=0 peta=alam skenario=client_keluar
+LOBBY client2: pemain = [b][color=#3380ff]P1[/color][/b]   Bot host1 [color=#9fd4ff]Lv3[/color] [color=#8a8a8a]HOST[/color]  [color=#e63333]FIRE[/color] | [b][color=#ff3333]P2[/color][/b]   Bot client1 [color=#9fd4ff]Lv3[/color]  [color=#3380e6]WATER[/color] | [b][color=#26cc4d]P3[/color][/b]   Bot client2 [color=#9fd4ff]Lv4[/color] (YOU)
+LOBBY client2: info = Waiting for players to choose a role...
+LOBBY client2: klik MY ROLE = true
+LOBBY client2: klik role EARTH = true
+LOBBY client2: klik OK = true
+MASUK_GAME slot_lokal=2 pemain=3 peran_jaringan=client
+START_DITEKAN
+T|Tekan SPASI untuk Melempar Dadu
+PROFIL_NAMA awal slot_lokal=2 profil_slot=[{ "nama": "Bot host1", "level": 3, "respect": 2, "mvp_total": 1 }, { "nama": "Bot client1", "level": 3, "respect": 2, "mvp_total": 1 }, { "nama": "Bot client2", "level": 4, "respect": 3, "mvp_total": 2 }] tampil=["Bot host1/Bot host1 Lv3/Bot host1 Lv3", "Bot client1/Bot client1 Lv3/Bot client1 Lv3", "Bot client2/Bot client2 Lv4/YOU"]
+EVENT ronde=1 aktif= terakhir=
+KARTU_BANTUAN stat=[0, 0, 0] inv=[[], [], []]
+BOUNTY aktif= terakhir= bintang=[4, 4, 4] stat_bounty=[0, 0, 0]
+G1|pemain|[0,2500,4][0,2500,4][0,2500,4]
+T|Waiting for Bot host1...
+T|Bot host1 Roll: 6
+T|Waiting for Bot host1...
+T|Bot host1 set a Fire Trap!
+BOUNTY aktif= terakhir= bintang=[3, 4, 4] stat_bounty=[0, 0, 0]
+T|Waiting for Bot host1...
+T|Waiting for Bot client1...
+G2|musuh|[6,2200,3][0,2500,4][0,2500,4]
+T|Bot client1 Roll: 6
+T|FIRE TRAP! Burning for 3 turns!
+T|Waiting for Bot client1...
+D|37.6|DUEL fase=MENUNGGU_MUSUH segelM=0 segelP=0 tonton=1 judul='BOT CLIENT1 ATTACKS! CHOOSING ELEMENTS...'
+D|40.6|DUEL fase=MENUNGGU_MUSUH segelM=1 segelP=0 tonton=1 judul='BOT HOST1 LOCKED IN!'
+D|40.7|DUEL fase=MENUNGGU_MUSUH segelM=1 segelP=1 tonton=1 judul='BOT CLIENT1 ATTACKS! BOTH LOCKED!'
+D|42.7|DUEL fase=SEGEL_KEDUANYA segelM=1 segelP=1 tonton=1 judul='UNLOCKING...'
+D|43.9|DUEL fase=FADE_OUT segelM=1 segelP=1 tonton=1 judul='UNLOCKING...'
+D|45.4|DUEL fase=ANIMASI_CORET segelM=1 segelP=1 tonton=1 judul='ELEMENT LOSE! BOT HOST1 +3'
+D|46.6|DUEL fase=ANIMASI_HILANG segelM=1 segelP=1 tonton=1 judul='ELEMENT LOSE! BOT HOST1 +3'
+D|47.0|DUEL fase=ANIMASI_MENANG segelM=1 segelP=1 tonton=1 judul='ELEMENT LOSE! BOT HOST1 +3'
+D|48.4|DUEL fase=ROLET_PEMAIN segelM=1 segelP=1 tonton=1 judul='BOT CLIENT1 WHEEL SPINNING...'
+D|53.2|DUEL fase=ROLET_MUSUH segelM=1 segelP=1 tonton=1 judul='BOT HOST1 WHEEL SPINNING...'
+D|57.5|DUEL fase=RANGKUMAN segelM=1 segelP=1 tonton=1 judul='CALCULATING TOTAL SCORE...'
+D|60.6|DUEL fase=PENGUMUMAN_TRANSISI segelM=1 segelP=1 tonton=1 judul='CALCULATING TOTAL SCORE...'
+D|61.1|DUEL fase=PENGUMUMAN_FINAL segelM=1 segelP=1 tonton=1 judul='BOT HOST1 WINS THE FIGHT!'
+D|65.6|(kosong)
+T|BOT CLIENT1 LOST THE FIGHT! Extra fine: 120 Coins.
+G3|pemain3|[6,2320,3][6,2380,4][0,2500,4]
+R|dadu
+T|Your Roll: 5
+R|jebakan|TombolTrapAngin
+T|Wind Trap set! Wait for victim.
+BOUNTY aktif= terakhir= bintang=[3, 4, 3] stat_bounty=[0, 0, 0]
+R|beli
+T|First to win a duel with LIGHTNING: +1 Star
+BOUNTY aktif=petir terakhir=petir bintang=[3, 4, 3] stat_bounty=[0, 0, 0]
+T|Waiting for Bot host1...
+EVENT ronde=2 aktif= terakhir=
+G4|pemain|[6,2320,3][6,2380,4][5,2200,3]
+T|Bot host1 Roll: 2
+T|Waiting for Bot host1...
+T|Bot host1 set a Wind Trap!
+BOUNTY aktif=petir terakhir=petir bintang=[2, 4, 3] stat_bounty=[0, 0, 0]
+T|Waiting for Bot host1...
+T|Bot client1 is burning! Lost 55 Coins. (2 turns left)
+T|Waiting for Bot client1...
+G5|musuh|[8,2048,2][6,2325,4][5,2200,3]
+T|Bot client1 Roll: 6
+T|WIND TRAP! Coins scattered!
+T|Bot client1 found 58 Coins!
+T|Waiting for Bot client1...
+T|Bot client1 set a Wind Trap!
+BOUNTY aktif=petir terakhir=petir bintang=[2, 3, 3] stat_bounty=[0, 0, 0]
+T|Waiting for Bot client1...
+G6|pemain3|[8,2048,2][12,1851,3][5,2200,3]
+R|dadu
+T|Your Roll: 3
+T|You found 58 Coins!
+T|Bot host1's Tile! Give Up (Pay 100) or Fight?
+R|menyerah
+T|You gave up. Paid fine: 100 Coins.
+T|Waiting for Bot host1...
+EVENT ronde=3 aktif= terakhir=
+G7|pemain|[8,2148,2][12,1851,3][8,2158,3]
+T|Bot host1 Roll: 3
+T|Waiting for Bot host1...
+T|Bot host1 set a Lightning Trap!
+BOUNTY aktif=petir terakhir=petir bintang=[1, 3, 3] stat_bounty=[0, 0, 0]
+T|Waiting for Bot host1...
+T|Bot client1 is burning! Lost 55 Coins. (1 turns left)
+T|Waiting for Bot client1...
+G8|musuh|[11,1876,1][12,1796,3][8,2158,3]
+SKENARIO: client2 keluar paksa di giliran 8

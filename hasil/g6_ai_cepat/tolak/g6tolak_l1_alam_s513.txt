@@ -1,0 +1,5 @@
+PUTAR_ULANG_TAWAR ke=1 skor_p=11 skor_m=12
+PUTAR_ULANG klik ke-1 (NO THANKS)
+SEIMBANG peta=alam seed=513 quick=0 roles=api,air pemenang=1 cara=batas_kaya giliran=71 detik=1431.0 pasang=1,6 kena=1,5 kaya=4500,8546 rinci=1/204/6/4/0/9,0/0/4/6/4/0 presets=- sacred=0 xprole0=-1
+PUTAR_ULANG_RINGKAS tawaran=1 klik=1 cek_ok=0 cek_gagal=0 stat_putar_ulang=0
+SIM BATAS_GILIRAN giliran=71 detik=1431

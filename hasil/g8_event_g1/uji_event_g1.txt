@@ -1,0 +1,42 @@
+Godot Engine v4.7.1.stable.official.a13da4feb - https://godotengine.org
+
+EVENT_G1 OK    Fire Week: event fire, 3 misi
+EVENT_G1 OK    laga 1: finish 1/5, duel 2/4, menang 1/2
+EVENT_G1 OK    mastery api = 1 + 2 + 2 = 5 (Lv 2 +30 Crowns), elemen lain 0
+EVENT_G1 OK    ringkasan kosong utk misi event belum selesai
+EVENT_G1 OK    laga 2: duel 4/4 selesai +30 token, menang 2/2 selesai +40
+EVENT_G1 OK    progres dibatasi target
+EVENT_G1 OK    laga ke-5 role api kalah: finish 5/5 +30 -> 100 token
+EVENT_G1 OK    misi sudah selesai tidak memberi token lagi
+EVENT_G1 OK    role air: misi Fire tidak maju
+EVENT_G1 OK    mastery air = 1+2+1 = 4, petir = 2 (duel), api tetap
+EVENT_G1 OK    tanpa role: hanya XP duel (tanah 1)
+EVENT_G1 OK    role tidak dikenal: mastery tidak berubah, tidak error
+EVENT_G1 OK    DOUBLE tidak mengubah token & mastery
+EVENT_G1 OK    token kurang: 'Need 10 more tokens'
+EVENT_G1 OK    beli pawn_ember (60): token 70, dimiliki, langsung dipakai
+EVENT_G1 OK    beli lagi ditolak
+EVENT_G1 OK    barang event minggu lain ditolak
+EVENT_G1 OK    barang toko Crowns / mastery / tak dikenal ditolak
+EVENT_G1 OK    beli Crowns utk barang event tetap ditolak
+EVENT_G1 OK    simpan-muat: token & barang event utuh
+EVENT_G1 OK    Wind Week: misi baru, token tetap
+EVENT_G1 OK    Wind Week: barang Fire ditolak, barang Wind (40) dibeli
+EVENT_G1 OK    Wind Week: role angin memajukan misi 1, 2 & 3
+EVENT_G1 OK    tanggal mundur
+EVENT_G1 OK    mundur: misi event & minggu tidak berubah
+EVENT_G1 OK    mundur: mastery tetap maju (+1+2+1)
+EVENT_G1 OK    mundur: toko event dikunci
+EVENT_G1 OK    tanggal kembali: toko terbuka
+EVENT_G1 OK    Duel Week
+EVENT_G1 OK    Duel: tebak 3/5, bounty 1/2, duel menang 5/8
+EVENT_G1 OK    Duel: semua selesai = 100 token (+ dari sebelumnya)
+EVENT_G1 OK    Duel: role apa pun (misi tak butuh role) -- misi 'role' tidak muncul
+EVENT_G1 OK    215 -> 218: tidak naik; 5 XP lagi
+EVENT_G1 OK    Lv 10 dicapai: Crowns 400 + gelar Fire Master, tidak otomatis dipakai
+EVENT_G1 OK    pakai gelar mastery
+EVENT_G1 OK    sudah maks: tidak ada hadiah lagi, gelar tidak dobel
+EVENT_G1 OK    loncat Lv1 -> Lv10: 9 hadiah, Crowns 1555, gelar Water Master
+EVENT_G1 OK    simpan-muat: gelar & mastery utuh
+EVENT_G1 OK    tanggal rusak: tidak error, mastery air = 4
+EVENT_G1 gagal=0

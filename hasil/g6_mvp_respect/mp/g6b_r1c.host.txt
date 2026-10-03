@@ -1,0 +1,242 @@
+ROBOT host urut=1 mode=4 peta=alam skenario=respect
+LOBBY host: klik mode '3 PLAYERS + 1 AI' = true
+LOBBY host: klik peta 'Grassland' = true
+LOBBY host: klik panjang 'QUICK' = true
+LOBBY host: klik MY ROLE = true
+LOBBY host: klik role FIRE = true
+LOBBY host: klik OK = true
+LOBBY host: pemain = [b][color=#3380ff]P1[/color][/b]   [url=1]Bot host1 [color=#9fd4ff]Lv3[/color][/url] (YOU) [color=#8a8a8a]HOST[/color]  [color=#e63333]FIRE[/color] | [b][color=#ff3333]P2[/color][/b]   [url=402277194]Bot client1 [color=#9fd4ff]Lv3[/color][/url]  [color=#3380e6]WATER[/color] | [b][color=#26cc4d]P3[/color][/b]   [url=1591244964]Bot client2 [color=#9fd4ff]Lv4[/color][/url]  [color=#996633]EARTH[/color] | [b][color=#ffcc1a]P4[/color][/b]   AI  [color=#e6cc1a]LIGHTNING[/color]
+LOBBY host: info = Everyone is here. Press START!
+LOBBY host: START = true
+MASUK_GAME slot_lokal=0 pemain=4 peran_jaringan=host
+START_DITEKAN
+T|YOUR TURN! Choose Action or Roll Dice.
+PROFIL_NAMA awal slot_lokal=0 profil_slot=[{ "nama": "Bot host1", "level": 3, "respect": 2, "mvp_total": 1, "role": "" }, { "nama": "Bot client1", "level": 3, "respect": 2, "mvp_total": 1, "role": "" }, { "nama": "Bot client2", "level": 4, "respect": 3, "mvp_total": 2, "role": "" }, {  }] tampil=["Bot host1/Bot host1 Lv3/YOU", "Bot client1/Bot client1 Lv3/Bot client1 Lv3", "Bot client2/Bot client2 Lv4/Bot client2 Lv4", "//P4"]
+EVENT ronde=1 aktif= terakhir=
+KARTU_BANTUAN stat=[0, 0, 0, 0] inv=[[], [], [], []]
+BOUNTY aktif= terakhir= bintang=[4, 4, 4, 4] stat_bounty=[0, 0, 0, 0]
+G1|pemain|[0,2500,4][0,2500,4][0,2500,4][0,2500,4]
+R|dadu
+T|You are rolling dice...
+T|Your Roll: 9
+R|jebakan|TombolTrapApi
+T|Fire Trap set! (Burns victim for 3 turns)
+BOUNTY aktif= terakhir= bintang=[3, 4, 4, 4] stat_bounty=[0, 0, 0, 0]
+R|beli
+T|Waiting for Bot client1...
+G2|musuh|[9,2200,3][0,2500,4][0,2500,4][0,2500,4]
+T|You are rolling dice...
+T|Bot client1 Roll: 7
+T|Bot client1 placed a Water Trap!
+BOUNTY aktif= terakhir= bintang=[3, 3, 4, 4] stat_bounty=[0, 0, 0, 0]
+T|Waiting for Bot client1...
+T|Waiting for Bot client2...
+G3|pemain3|[9,2200,3][7,2200,3][0,2500,4][0,2500,4]
+T|You are rolling dice...
+T|Bot client2 Roll: 6
+T|Waiting for Bot client2...
+T|Bot client2 set a Wind Trap!
+BOUNTY aktif= terakhir= bintang=[3, 3, 3, 4] stat_bounty=[0, 0, 0, 0]
+T|Waiting for Bot client2...
+T|P4 TURN! P4 is thinking...
+G4|pemain4|[9,2200,3][7,2200,3][6,2200,3][0,2500,4]
+T|P4 is rolling dice...
+T|P4 Roll: 12
+T|WIND TRAP! Lost 250 Coins!
+T|TRAPPED! Geyser Eruption!
+T|Landed randomly! Trapped in a Bubble for 1 turn!
+T|P4 is trapped in Bubble. Skips action.
+T|First to win a duel with EARTH: +1 Star
+EVENT ronde=2 aktif= terakhir=
+BOUNTY aktif=tanah terakhir=tanah bintang=[3, 3, 3, 4] stat_bounty=[0, 0, 0, 0]
+T|YOUR TURN! Choose Action or Roll Dice.
+G5|pemain|[7,2200,3][7,2200,3][4,2200,3][17,2250,4]
+R|dadu
+T|You are rolling dice...
+T|Your Roll: 12
+T|You found 125 Coins!
+T|You landed on a Card Tile!
+D|95.4|ANIMASI_KARTU judul='YOUR TURN / CHOOSE A CARD!' target='Tile Duel' a_target=1.0 a_latar=-1.00 kartu=,, kamera=P1 | TEKS='You landed on a Card Tile!'
+R|gacha|2
+D|95.5|ANIMASI_KARTU judul='CARD REVEALED!' target='Tile Duel' a_target=1.0 a_latar=-1.00 kartu=,, kamera=P1 | TEKS='You landed on a Card Tile!'
+D|95.6|ANIMASI_KARTU judul='CARD REVEALED!' target='Tile Duel' a_target=1.0 a_latar=-1.00 kartu=, kamera=P1 | TEKS='You landed on a Card Tile!'
+D|95.7|ANIMASI_KARTU judul='CARD REVEALED!' target='Tile Duel' a_target=1.0 a_latar=-1.00 kartu=,,SWORD LV 3* kamera=P1 | TEKS='You landed on a Card Tile!'
+T|Card saved to Inventory!
+KARTU_BANTUAN stat=[0, 0, 0, 0] inv=[["pedang_3"], [], [], []]
+D|98.4|TEKS='Card saved to Inventory!'
+T|You found 125 Coins!
+D|100.2|(kosong)
+R|jebakan|TombolTrapAngin
+T|Wind Trap set! Wait for victim.
+BOUNTY aktif=tanah terakhir=tanah bintang=[2, 3, 3, 4] stat_bounty=[0, 0, 0, 0]
+R|beli
+T|Waiting for Bot client1...
+G6|musuh|[19,2150,2][7,2200,3][4,2200,3][17,2250,4]
+T|You are rolling dice...
+T|Bot client1 Roll: 4
+T|FIRE TRAP! Burning for 3 turns!
+T|Bot client1 set a Wind Trap!
+BOUNTY aktif=tanah terakhir=tanah bintang=[2, 2, 3, 4] stat_bounty=[0, 0, 0, 0]
+T|Waiting for Bot client1...
+T|Waiting for Bot client2...
+G7|pemain3|[19,2150,2][11,1900,2][4,2200,3][17,2250,4]
+T|You are rolling dice...
+T|Bot client2 Roll: 3
+T|Waiting for Bot client2...
+T|Bot client2 gave up. Paid fine: 100 Coins.
+T|P4 TURN! P4 is thinking...
+G8|pemain4|[19,2150,2][11,2000,2][7,2100,3][17,2250,4]
+BOUNTY aktif=tanah terakhir=tanah bintang=[2, 2, 3, 3] stat_bounty=[0, 0, 0, 0]
+T|P4 is rolling dice...
+T|P4 Roll: 8
+T|WIND TRAP! Lost 225 Coins!
+T|P4 collected [img=28]res://permata/permata_hijau.png[/img] Gem!
+T|P4 found 56 Coins!
+BOUNTY aktif=tanah terakhir=tanah bintang=[2, 2, 3, 6] stat_bounty=[0, 0, 0, 0]
+T|P4 passed Start! Bonus +500
+T|P4 bought this tile!
+T|Tiles and towers -30% this round!
+EVENT ronde=3 aktif=market_day terakhir=market_day
+T|YOUR TURN! Choose Action or Roll Dice.
+G9|pemain|[19,2150,2][11,2000,2][7,2100,3][1,2281,6]
+R|dadu
+T|You are rolling dice...
+T|Your Roll: 6
+T|You collected [img=28]res://permata/permata_hijau.png[/img] Gem!
+BOUNTY aktif=tanah terakhir=tanah bintang=[5, 2, 3, 6] stat_bounty=[0, 0, 0, 0]
+T|You passed Start! Bonus +520
+T|P4's Tile! Give Up (Pay 100) or Fight?
+R|menyerah
+T|You gave up. Paid fine: 100 Coins.
+T|Bot client1 is burning! Lost 55 Coins. (2 turns left)
+G10|musuh|[1,2598,5][11,1945,2][7,2100,3][1,2381,6]
+T|You are rolling dice...
+T|Bot client1 Roll: 7
+T|Bot client1 landed on a Card Tile!
+D|195.6|ANIMASI_KARTU judul='CARD REVEALED!' target='Tile Duel' a_target=1.0 a_latar=-1.00 kartu=,, kamera=P2 | TEKS='Bot client1 landed on a Card Tile!'
+D|195.8|ANIMASI_KARTU judul='CARD REVEALED!' target='Tile Duel' a_target=1.0 a_latar=-1.00 kartu=, kamera=P2 | TEKS='Bot client1 landed on a Card Tile!'
+D|195.9|ANIMASI_KARTU judul='CARD REVEALED!' target='Tile Duel' a_target=1.0 a_latar=-1.00 kartu=,,JACKPOT!* kamera=P2 | TEKS='Bot client1 landed on a Card Tile!'
+T|Card Effect Applied!
+D|198.6|TEKS='Card Effect Applied!'
+T|Bot client1 found 56 Coins!
+D|201.4|(kosong)
+T|LIGHTNING TRAP! Paralyzed & Stopped!
+T|Waiting for Bot client1...
+T|Waiting for Bot client2...
+G11|pemain3|[1,2598,5][17,2901,2][7,2100,3][1,2381,6]
+T|You are rolling dice...
+T|Bot client2 Roll: 6
+T|WIND TRAP! Lost 158 Coins!
+T|Bot client2 landed on a Card Tile!
+D|219.8|ANIMASI_KARTU judul='CARD REVEALED!' target='Tile Duel' a_target=1.0 a_latar=-1.00 kartu=,, kamera=P3 | TEKS='Bot client2 landed on a Card Tile!'
+D|220.0|ANIMASI_KARTU judul='CARD REVEALED!' target='Tile Duel' a_target=1.0 a_latar=-1.00 kartu=, kamera=P3 | TEKS='Bot client2 landed on a Card Tile!'
+D|220.1|ANIMASI_KARTU judul='CARD REVEALED!' target='Tile Duel' a_target=1.0 a_latar=-1.00 kartu=,SHIELD*, kamera=P3 | TEKS='Bot client2 landed on a Card Tile!'
+T|Card saved to Inventory!
+KARTU_BANTUAN stat=[0, 0, 0, 0] inv=[["pedang_3"], [], ["pelindung"], []]
+D|222.8|TEKS='Card saved to Inventory!'
+T|Waiting for Bot client2...
+D|224.2|(kosong)
+T|P4 TURN! P4 is thinking...
+G12|pemain4|[1,2598,5][17,2901,2][13,1942,3][1,2381,6]
+BOUNTY aktif=tanah terakhir=tanah bintang=[5, 2, 3, 5] stat_bounty=[0, 0, 0, 0]
+T|P4 is rolling dice...
+T|P4 Roll: 12
+T|P4 found 79 Coins!
+T|P4 found 56 Coins!
+T|P4 landed on a Card Tile!
+D|248.9|ANIMASI_KARTU judul='P4 TURN / CHOOSE A CARD!' target='Tile Duel' a_target=1.0 a_latar=-1.00 kartu=,, kamera=P4 | TEKS='P4 landed on a Card Tile!'
+D|250.5|ANIMASI_KARTU judul='CARD REVEALED!' target='Tile Duel' a_target=1.0 a_latar=-1.00 kartu=,, kamera=P4 | TEKS='P4 landed on a Card Tile!'
+D|250.7|ANIMASI_KARTU judul='CARD REVEALED!' target='Tile Duel' a_target=1.0 a_latar=-1.00 kartu=, kamera=P4 | TEKS='P4 landed on a Card Tile!'
+D|250.7|ANIMASI_KARTU judul='CARD REVEALED!' target='Tile Duel' a_target=1.0 a_latar=-1.00 kartu=,,GET* kamera=P4 | TEKS='P4 landed on a Card Tile!'
+T|Card Effect Applied!
+D|253.4|TEKS='Card Effect Applied!'
+T|P4 stops on Card Tile. Turn ends.
+D|255.9|TEKS='P4 stops on Card Tile. Turn ends.'
+T|YOUR TURN! Choose Action or Roll Dice.
+EVENT ronde=4 aktif= terakhir=market_day
+G13|pemain|[1,2598,5][17,2901,2][13,1942,3][13,3072,5]
+D|257.5|(kosong)
+R|dadu
+T|You are rolling dice...
+T|Your Roll: 5
+T|Bot client2's Tile! Give Up (Pay 100) or Fight?
+R|menyerah
+T|You gave up. Paid fine: 100 Coins.
+T|Bot client1 is burning! Lost 55 Coins. (1 turns left)
+G14|musuh|[6,2526,5][17,2846,2][13,2042,3][13,3072,5]
+T|Bot client1 is paralyzed! Cannot move this turn.
+T|Waiting for Bot client2...
+G15|pemain3|[6,2526,5][17,2846,2][13,2042,3][13,3072,5]
+T|You are rolling dice...
+T|Bot client2 Roll: 12
+T|Bot client2 found 79 Coins!
+T|Bot client2 collected [img=28]res://permata/permata_hijau.png[/img] Gem!
+BOUNTY aktif=tanah terakhir=tanah bintang=[5, 2, 6, 5] stat_bounty=[0, 0, 0, 0]
+T|Bot client2 passed Start! Bonus +510
+T|LIGHTNING TRAP! Paralyzed & Stopped!
+T|Waiting for Bot client2...
+D|302.6|DUEL fase=MENUNGGU_MUSUH segelM=0 segelP=0 tonton=1 judul='BOT CLIENT2 ATTACKS! CHOOSING ELEMENTS...'
+D|304.7|DUEL fase=MENUNGGU_MUSUH segelM=1 segelP=0 tonton=1 judul='P4 LOCKED IN!'
+D|305.8|DUEL fase=MENUNGGU_MUSUH segelM=1 segelP=1 tonton=1 judul='BOT CLIENT2 ATTACKS! BOTH LOCKED!'
+D|307.8|DUEL fase=SEGEL_KEDUANYA segelM=1 segelP=1 tonton=1 judul='UNLOCKING...'
+D|309.1|DUEL fase=FADE_OUT segelM=1 segelP=1 tonton=1 judul='UNLOCKING...'
+D|310.6|DUEL fase=ANIMASI_CORET segelM=1 segelP=1 tonton=1 judul='ELEMENT WIN! BOT CLIENT2 +3'
+D|311.9|DUEL fase=ANIMASI_HILANG segelM=1 segelP=1 tonton=1 judul='ELEMENT WIN! BOT CLIENT2 +3'
+D|312.3|DUEL fase=ANIMASI_MENANG segelM=1 segelP=1 tonton=1 judul='ELEMENT WIN! BOT CLIENT2 +3'
+D|313.7|DUEL fase=ROLET_PEMAIN segelM=1 segelP=1 tonton=1 judul='BOT CLIENT2 WHEEL SPINNING...'
+D|318.5|DUEL fase=ROLET_MUSUH segelM=1 segelP=1 tonton=1 judul='P4 WHEEL SPINNING...'
+D|322.7|DUEL fase=RANGKUMAN segelM=1 segelP=1 tonton=1 judul='CALCULATING TOTAL SCORE...'
+D|325.8|DUEL fase=PENGUMUMAN_TRANSISI segelM=1 segelP=1 tonton=1 judul='CALCULATING TOTAL SCORE...'
+D|326.3|DUEL fase=PENGUMUMAN_FINAL segelM=1 segelP=1 tonton=1 judul='SCORE TIED! GET READY FOR TIE-BREAKER...'
+D|328.4|DUEL fase=PENGUMUMAN_FINAL segelM=1 segelP=1 tonton=1 judul='P4 DEFENDS, SO P4 PICKS FIRST...'
+D|329.9|DUEL fase=PENGUMUMAN_FINAL segelM=1 segelP=1 tonton=1 judul='P4 PICKED HEADS! BOT CLIENT2 GETS TAILS!'
+D|332.8|DUEL fase=PENGUMUMAN_FINAL segelM=1 segelP=1 tonton=1 judul='-'
+T|BOT CLIENT2 guessed TAILS. Flipping coin...
+D|333.5|DUEL fase=PENGUMUMAN_FINAL segelM=1 segelP=1 tonton=1 judul='-' | TEKS='BOT CLIENT2 guessed TAILS. Flipping coin...'
+T|RESULT: TAILS! RIGHT Guess!
+D|337.0|DUEL fase=PENGUMUMAN_FINAL segelM=1 segelP=1 tonton=1 judul='-'
+D|339.8|DUEL fase=PENGUMUMAN_FINAL segelM=1 segelP=1 tonton=1 judul='BOT CLIENT2 WON THE TIE-BREAKER!'
+T|Bot client2 WON! P4's tile is stolen!
+D|342.9|(kosong)
+T|P4 TURN! P4 is thinking...
+G16|pemain4|[6,2526,5][17,2846,2][1,2531,6][13,3072,5]
+BOUNTY aktif=tanah terakhir=tanah bintang=[5, 2, 6, 4] stat_bounty=[0, 0, 0, 0]
+T|P4 is rolling dice...
+T|P4 Roll: 9
+T|P4 collected [img=28]res://permata/permata_hijau.png[/img] Gem!
+T|P4 bought this tile!
+T|Tile fees x2 this round!
+EVENT ronde=5 aktif=gold_rush terakhir=gold_rush
+T|YOUR TURN! Choose Action or Roll Dice.
+G17|pemain|[6,2526,5][17,2846,2][1,2531,6][22,2772,4]
+R|serang|1
+T|Launching long range attack!
+BOUNTY aktif=tanah terakhir=tanah bintang=[0, 2, 6, 4] stat_bounty=[0, 0, 0, 0]
+T|Attack Hit! Bot client2's tile HP left: 2
+R|dadu
+T|You are rolling dice...
+T|Your Roll: 7
+KARTU_BANTUAN stat=[0, 0, 0, 0] inv=[[], [], ["pelindung"], ["pedang_3"]]
+T|LIGHTNING TRAP! Paralyzed & Stopped!
+R|akhiri
+T|Bot client1 is burning! Lost 55 Coins. (0 turns left)
+G18|musuh|[13,2454,0][17,2791,2][1,2531,6][22,2772,4]
+T|You are rolling dice...
+T|Bot client1 Roll: 9
+T|Bot client1 collected [img=28]res://permata/permata_hijau.png[/img] Gem!
+BOUNTY aktif=tanah terakhir=tanah bintang=[0, 5, 6, 4] stat_bounty=[0, 0, 0, 0]
+T|Bot client1 passed Start! Bonus +520
+T|GAME OVER! Bot client1 reached Start with 3000 Coins & Gems!
+PROFIL_NAMA akhir slot_lokal=0 profil_slot=[{ "nama": "Bot host1", "level": 3, "respect": 2, "mvp_total": 1, "role": "" }, { "nama": "Bot client1", "level": 3, "respect": 2, "mvp_total": 1, "role": "" }, { "nama": "Bot client2", "level": 4, "respect": 3, "mvp_total": 2, "role": "" }, {  }] tampil=["Bot host1/Bot host1 Lv3/YOU", "Bot client1/Bot client1 Lv3/Bot client1 Lv3", "Bot client2/Bot client2 Lv4/Bot client2 Lv4", "//P4"]
+AKHIR alasan=start pemenang=1 ronde=5/5 papan=[{ "slot": 1, "uang": 3311, "bintang": 5, "petak": 2, "permata": 0, "kekayaan": 3911, "stat": { "giliran": 5, "dadu_total": 27, "dadu_kali": 4, "duel_menang": 0, "duel_kalah": 0, "menang_elemen": { "api": 0, "air": 0, "tanah": 0, "petir": 0, "angin": 0 }, "petak_rebut": 0, "jebakan_pasang": 2, "jebakan_kena": 2, "koin_jebakan": 158, "petak_beli": 2, "menara_bangun": 0, "menara_lv2": 0, "permata": 1, "lewat_start": 1, "kartu_pakai": 0, "bounty": 0, "kartu_bantuan": 0, "tebak_benar": 0, "putar_ulang": 0, "jebakan_role_pasang": 1, "jebakan_role_kena": 1, "tahan_kurangi": 4 }, "penghargaan": ["landlord"] }, { "slot": 2, "uang": 2531, "bintang": 6, "petak": 2, "permata": 0, "kekayaan": 3131, "stat": { "giliran": 4, "dadu_total": 27, "dadu_kali": 4, "duel_menang": 1, "duel_kalah": 0, "menang_elemen": { "api": 1, "air": 0, "tanah": 0, "petir": 0, "angin": 0 }, "petak_rebut": 1, "jebakan_pasang": 1, "jebakan_kena": 1, "koin_jebakan": 250, "petak_beli": 1, "menara_bangun": 0, "menara_lv2": 0, "permata": 1, "lewat_start": 1, "kartu_pakai": 0, "bounty": 0, "kartu_bantuan": 0, "tebak_benar": 0, "putar_ulang": 0, "tahan_kurangi": 2 }, "penghargaan": ["duel_king", "landlord"] }, { "slot": 3, "uang": 2772, "bintang": 4, "petak": 1, "permata": 1, "kekayaan": 3072, "stat": { "giliran": 4, "dadu_total": 41, "dadu_kali": 4, "duel_menang": 0, "duel_kalah": 1, "menang_elemen": { "api": 0, "air": 0, "tanah": 0, "petir": 0, "angin": 0 }, "petak_rebut": 0, "jebakan_pasang": 3, "jebakan_kena": 3, "koin_jebakan": 300, "petak_beli": 0, "menara_bangun": 0, "menara_lv2": 0, "permata": 2, "lewat_start": 1, "kartu_pakai": 0, "bounty": 0, "kartu_bantuan": 0, "tebak_benar": 0, "putar_ulang": 0, "tahan_kurangi": 1, "jebakan_role_pasang": 3, "jebakan_role_kena": 3 }, "penghargaan": ["trap_master", "lucky_roller"] }, { "slot": 0, "uang": 2454, "bintang": 0, "petak": 2, "permata": 0, "kekayaan": 3054, "stat": { "giliran": 5, "dadu_total": 39, "dadu_kali": 5, "duel_menang": 0, "duel_kalah": 0, "menang_elemen": { "api": 0, "air": 0, "tanah": 0, "petir": 0, "angin": 0 }, "petak_rebut": 0, "jebakan_pasang": 2, "jebakan_kena": 2, "koin_jebakan": 390, "petak_beli": 2, "menara_bangun": 0, "menara_lv2": 0, "permata": 1, "lewat_start": 1, "kartu_pakai": 0, "bounty": 0, "kartu_bantuan": 0, "tebak_benar": 0, "putar_ulang": 0, "jebakan_role_pasang": 1, "jebakan_role_kena": 1 }, "penghargaan": ["landlord"] }]
+TEBAK_HADIAH_MP slot=0 tebak_benar_stat=0 xp_tebak=0 crowns_tebak=0 stat_seumur=0 cek=OK
+PROFIL_MP slot=0 menang=false giliran=5 xp 300->400 crowns 0->135 penghargaan=["landlord"] rumus=true sekali=true berkas=true cek=OK
+MVP_UJI slot_mvp=2 saya=false mvp_total=1
+RESPECT_UJI slot=0 lawan_manusia=[1, 2] kirim=["1:true/false/false", "2:true/false/false"] diri_ditolak=true ai_ditolak=true respect 2->4 diharapkan=+2 cek=OK
+CEK_BD_JEBAKAN_AI s=0 role=api jebakan=api+angin+petir build={ "hot_flames": 2, "rock_breaker": 2, "heavy_pockets": 1, "fire_tax": 1, "ULT_api": true }
+CEK_BD_JEBAKAN_AI s=1 role=air jebakan=air+angin+petir build={ "frozen_bubble": 2, "heat_skin": 2, "rock_breaker": 1, "rapid_current": 1, "ULT_air": true }
+CEK_BD_JEBAKAN_AI s=2 role=tanah jebakan=tanah+angin+petir build={ "hard_rock": 2, "grounded": 2, "heavy_pockets": 1, "fortress": 1, "ULT_tanah": true }
+CEK_BD_JEBAKAN_AI s=3 role=petir jebakan=petir+air+angin build={ "shock": 2, "heat_skin": 2, "steady_feet": 1, "card_magnet": 1, "ULT_petir": true }
+CEK_C5 { "cek_c5_guard": 0, "cek_c5_tornado": 0, "cek_c5_phoenix": 0, "cek_c5_rockbreaker0": 0 }
+CEK_BD { "cek_bd_sacred": 0, "cek_bd_guard_nol": 0, "cek_bd_fight_faktor": 0, "cek_bd_benteng_lewati": 0, "cek_bd_benteng_tahan_ai": 0 }
+SELESAI MENANG peran=host giliran=18 cek_ok=12 cek_gagal=0 kartu_beda=0 detik=434 migrasi=0 cek_ok_migrasi=0 jaringan=host role=api:api+angin+petir:{ "hot_flames": 2, "rock_breaker": 2, "heavy_pockets": 1, "fire_tax": 1, "ULT_api": true },air:air+angin+petir:{ "frozen_bubble": 2, "heat_skin": 2, "rock_breaker": 1, "rapid_current": 1, "ULT_air": true },tanah:tanah+angin+petir:{ "hard_rock": 2, "grounded": 2, "heavy_pockets": 1, "fortress": 1, "ULT_tanah": true },petir:petir+air+angin:{ "shock": 2, "heat_skin": 2, "steady_feet": 1, "card_magnet": 1, "ULT_petir": true }

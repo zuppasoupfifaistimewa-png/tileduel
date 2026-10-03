@@ -1,0 +1,137 @@
+MULAI-NYATA pemain=2 seed=812 peta=alam
+KARAKTER|0|Pemain|pos=(0.0, 0.0, 0.0)|warna=3380ff
+KARAKTER|1|Musuh|pos=(0.0, 0.0, 0.0)|warna=ff3333
+RONDE|[center]ROUND 1/8[/center]
+T|YOUR TURN! Choose Action or Roll Dice.
+G1|pemain|awal|[0,2500,4,g0,p0,b0,k1][0,2500,4,g0,p0,b0,k0]|o:-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1|xyz:(0.0, 0.0, 0.0);(0.0, 0.0, 0.0)|r1
+R|dadu
+T|You are rolling dice...
+T|Your Roll: 10
+R|beli
+T|ENEMY TURN! Enemy is thinking...
+G2|musuh|awal|[10,2200,4,g0,p0,b0,k1][0,2500,4,g0,p0,b0,k0]|o:-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,0,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1|xyz:(14.3, 0.0, -43.0);(0.0, 0.0, 0.0)|r1
+T|Enemy is rolling dice...
+T|Enemy Roll: 8
+T|Enemy bought this tile!
+RONDE|[center]ROUND 2/8[/center]
+T|First to win a duel with FIRE: +1 Star
+T|YOUR TURN! Choose Action or Roll Dice.
+G3|pemain|awal|[10,2200,4,g0,p0,b0,k1][8,2200,4,g0,p0,b0,k0]|o:-1,-1,-1,-1,-1,-1,-1,-1,1,-1,0,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1|xyz:(14.3, 0.0, -43.0);(14.4, 0.0, -28.7)|r2
+R|dadu
+T|You are rolling dice...
+T|Your Roll: 3
+T|You landed on a Card Tile!
+R|gacha|1
+T|Card saved to Inventory!
+R|akhiri
+T|ENEMY TURN! Enemy is thinking...
+G4|musuh|awal|[13,2200,4,g0,p0,b0,k2][8,2200,4,g0,p0,b0,k0]|o:-1,-1,-1,-1,-1,-1,-1,-1,1,-1,0,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1|xyz:(0.1, 0.0, -50.2);(14.4, 0.0, -28.7)|r2
+T|Enemy is rolling dice...
+T|Enemy Roll: 12
+T|Enemy landed on a Card Tile!
+T|Card saved to Inventory!
+T|Enemy bought this tile!
+RONDE|[center]ROUND 3/8[/center]
+T|Tiles and towers -30% this round!
+T|YOUR TURN! Choose Action or Roll Dice.
+G5|pemain|awal|[13,2200,4,g0,p0,b0,k2][20,1900,4,g0,p0,b0,k1]|o:-1,-1,-1,-1,-1,-1,-1,-1,1,-1,0,-1,-1,-1,-1,-1,-1,-1,-1,-1,1,-1,-1,-1|xyz:(0.1, 0.0, -50.2);(-14.3, 0.0, -14.3)|r3
+R|dadu
+T|You are rolling dice...
+T|Your Roll: 2
+R|beli
+T|ENEMY TURN! Enemy is thinking...
+G6|musuh|awal|[15,-1420,4,g0,p0,b0,k2][20,1900,4,g0,p0,b0,k1]|o:-1,-1,-1,-1,-1,-1,-1,-1,1,-1,0,-1,-1,-1,-1,0,-1,-1,-1,-1,1,-1,-1,-1|xyz:(-7.1, 0.0, -43.1);(-14.3, 0.0, -14.3)|r3
+T|Enemy set a Lightning Trap!
+T|Enemy is rolling dice...
+T|Enemy Roll: 8
+T|Enemy collected [img=28]res://permata/permata_hijau.png[/img] Gem!
+T|Enemy passed Start! Bonus +520
+T|Enemy bought this tile!
+RONDE|[center]ROUND 4/8[/center]
+T|YOUR TURN! Choose Action or Roll Dice.
+G7|pemain|awal|[15,-1420,4,g0,p0,b0,k2][4,2210,6,g0,p0,b0,k1]|o:-1,-1,-1,-1,1,-1,-1,-1,1,-1,0,-1,-1,-1,-1,0,-1,-1,-1,-1,1,-1,-1,-1|xyz:(-7.1, 0.0, -43.1);(21.5, 0.0, -7.2)|r4
+R|dadu
+T|You are rolling dice...
+T|Your Roll: 6
+T|LIGHTNING TRAP! Paralyzed & Stopped!
+T|Enemy Tile! Give Up (Pay 100) or Fight?
+R|menyerah
+T|You gave up. Paid fine: 100 Coins.
+T|YOU BANKRUPT! Money is minus.
+IKLAN_HUTANG|1|uang=-1520
+T|+300 Coins!
+T|Still in minus. Sell a tile.
+T|TAP YOUR TILE TO SELL (30% Discount)
+R|jual|10
+T|Tile sold: +210 Coins!
+T|Still in minus! Tap another tile to sell.
+R|jual|15
+T|Tile sold: +210 Coins!
+T|No more tiles! You carry the debt.
+T|ENEMY TURN! Enemy is thinking...
+G8|musuh|awal|[20,-800,4,g0,p2,b0,k2][4,2310,6,g0,p0,b0,k1]|o:-1,-1,-1,-1,1,-1,-1,-1,1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,1,-1,-1,-1|xyz:(-14.4, 0.0, -14.4);(21.5, 0.0, -7.2)|r4
+T|Enemy set a Lightning Trap!
+T|Enemy is rolling dice...
+T|Enemy Roll: 7
+T|Enemy bought this tile!
+RONDE|[center]ROUND 5/8[/center]
+T|Tile fees x2 this round!
+T|You are paralyzed! Cannot move this turn.
+G9|pemain|awal|[20,-800,4,g0,p1,b0,k2][11,2010,5,g0,p0,b0,k1]|o:-1,-1,-1,-1,1,-1,-1,-1,1,-1,-1,1,-1,-1,-1,-1,-1,-1,-1,-1,1,-1,-1,-1|xyz:(-14.4, 0.0, -14.3);(14.3, 0.0, -50.1)|r5
+T|ENEMY TURN! Enemy is thinking...
+G10|musuh|awal|[20,-800,4,g0,p1,b0,k2][11,2010,5,g0,p0,b0,k1]|o:-1,-1,-1,-1,1,-1,-1,-1,1,-1,-1,1,-1,-1,-1,-1,-1,-1,-1,-1,1,-1,-1,-1|xyz:(-14.4, 0.0, -14.3);(14.3, 0.0, -50.1)|r5
+T|Enemy is rolling dice...
+T|Enemy Roll: 2
+T|Enemy landed on a Card Tile!
+T|Card saved to Inventory!
+T|Enemy stops on Card Tile. Turn ends.
+RONDE|[center]ROUND 6/8[/center]
+T|YOUR TURN! Choose Action or Roll Dice.
+G11|pemain|awal|[20,-800,4,g0,p0,b0,k2][13,2010,5,g0,p0,b0,k2]|o:-1,-1,-1,-1,1,-1,-1,-1,1,-1,-1,1,-1,-1,-1,-1,-1,-1,-1,-1,1,-1,-1,-1|xyz:(-14.4, 0.0, -14.3);(0.1, 0.0, -50.2)|r6
+R|dadu
+T|You are rolling dice...
+T|Your Roll: 3
+T|You collected [img=28]res://permata/permata_hijau.png[/img] Gem!
+R|jebakan|TombolTrapAngin
+T|Wind Trap set! Wait for victim.
+R|akhiri
+T|ENEMY TURN! Enemy is thinking...
+G12|musuh|awal|[23,-800,3,g0,p0,b0,k2][13,2010,5,g0,p0,b0,k2]|o:-1,-1,-1,-1,1,-1,-1,-1,1,-1,-1,1,-1,-1,-1,-1,-1,-1,-1,-1,1,-1,-1,-1|xyz:(-7.2, 0.0, -0.1);(0.1, 0.0, -50.2)|r6
+T|Enemy is rolling dice...
+T|Enemy Roll: 7
+T|Enemy builds a tower!
+RONDE|[center]ROUND 7/8[/center]
+T|Everyone gets +1 Star!
+T|YOUR TURN! Choose Action or Roll Dice.
+G13|pemain|awal|[23,-800,4,g0,p0,b0,k2][20,1510,6,g0,p0,b0,k2]|o:-1,-1,-1,-1,1,-1,-1,-1,1,-1,-1,1,-1,-1,-1,-1,-1,-1,-1,-1,1,-1,-1,-1|xyz:(-7.2, 0.0, -0.1);(-14.3, 0.0, -14.3)|r7
+R|dadu
+T|You are rolling dice...
+T|Your Roll: 7
+T|You passed Start! Bonus +500
+T|You got SHIELD
+T|LIGHTNING TRAP! Paralyzed & Stopped!
+T|Enemy Tile! Give Up (Pay 100) or Fight?
+R|menyerah
+T|You gave up. Paid fine: 100 Coins.
+T|YOU BANKRUPT! Money is minus.
+T|No more tiles! You carry the debt.
+T|ENEMY TURN! Enemy is thinking...
+G14|musuh|awal|[4,-400,7,g0,p2,b0,k3][20,1610,6,g0,p0,b0,k2]|o:-1,-1,-1,-1,1,-1,-1,-1,1,-1,-1,1,-1,-1,-1,-1,-1,-1,-1,-1,1,-1,-1,-1|xyz:(21.3, 0.0, -7.5);(-14.3, 0.0, -14.3)|r7
+T|Enemy is rolling dice...
+T|Enemy Roll: 3
+T|Enemy collected [img=28]res://permata/permata_hijau.png[/img] Gem!
+T|WIND TRAP! Lost 161 Coins!
+T|Enemy bought this tile!
+RONDE|[center][color=#ff6644]FINAL ROUND 8/8[/color][/center]
+SPANDUK_FINAL_ROUND|giliran=14|ronde=8
+T|You are paralyzed! Cannot move this turn.
+G15|pemain|awal|[4,-400,7,g0,p1,b0,k3][23,1149,6,g0,p0,b0,k2]|o:-1,-1,-1,-1,1,-1,-1,-1,1,-1,-1,1,-1,-1,-1,-1,-1,-1,-1,-1,1,-1,-1,1|xyz:(21.4, 0.0, -7.4);(-7.1, 0.0, 0.0)|r8
+T|ENEMY TURN! Enemy is thinking...
+G16|musuh|awal|[4,-400,7,g0,p1,b0,k3][23,1149,6,g0,p0,b0,k2]|o:-1,-1,-1,-1,1,-1,-1,-1,1,-1,-1,1,-1,-1,-1,-1,-1,-1,-1,-1,1,-1,-1,1|xyz:(21.4, 0.0, -7.4);(-7.1, 0.0, 0.0)|r8
+T|Enemy is rolling dice...
+T|Enemy Roll: 2
+T|Enemy passed Start! Bonus +550
+T|Enemy bought this tile!
+T|TIME UP! Enemy is the richest!
+SELESAI|MENANG|G16|musuh|akhir|[4,-400,7,g0,p1,b0,k3][1,1399,9,g0,p0,b0,k2]|o:-1,1,-1,-1,1,-1,-1,-1,1,-1,-1,1,-1,-1,-1,-1,-1,-1,-1,-1,1,-1,-1,1|xyz:(21.4, 0.0, -7.4);(7.2, 0.0, 0.0)|r8
+AKHIR|alasan=ronde|pemenang=1|ronde=8/8|kaya=[-400, 3699]|petak=[0, 6]|cek=OK|giliran=16/16

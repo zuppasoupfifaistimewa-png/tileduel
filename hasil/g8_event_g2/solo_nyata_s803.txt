@@ -1,0 +1,192 @@
+Godot Engine v4.7.1.stable.official.a13da4feb - https://godotengine.org
+
+ERROR: Resource file not found: res://permata/permata_hijau.png (expected type: Texture2D)
+   at: _load (core/io/resource_loader.cpp:325)
+   GDScript backtrace (most recent call first):
+       [0] _ready (res://uji_nyata.gd:318)
+ERROR: Resource file not found: res://Mellow Shore.ogg (expected type: unknown)
+   at: _load (core/io/resource_loader.cpp:325)
+   GDScript backtrace (most recent call first):
+       [0] setup_sistem_audio (res://audio_grafis.gd:44)
+       [1] _ready (res://pemain.gd:82)
+       [2] _ready (res://uji_nyata.gd:319)
+ERROR: File 'Mellow Shore.ogg' tidak ditemukan. Pastikan sudah dimasukkan ke Godot.
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] setup_sistem_audio (res://audio_grafis.gd:51)
+       [1] _ready (res://pemain.gd:82)
+       [2] _ready (res://uji_nyata.gd:319)
+ERROR: Resource file not found: res://Iron Onslaught.ogg (expected type: unknown)
+   at: _load (core/io/resource_loader.cpp:325)
+   GDScript backtrace (most recent call first):
+       [0] setup_sistem_audio (res://audio_grafis.gd:59)
+       [1] _ready (res://pemain.gd:82)
+       [2] _ready (res://uji_nyata.gd:319)
+ERROR: File 'Iron Onslaught.ogg' tidak ditemukan di Godot.
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] setup_sistem_audio (res://audio_grafis.gd:65)
+       [1] _ready (res://pemain.gd:82)
+       [2] _ready (res://uji_nyata.gd:319)
+WARNING: res://PetaAlam.tscn:3 - ext_resource, invalid UID: uid://btbnxpictjrw2 - using text path instead: res://lingkungan_alam.gd
+     at: load (scene/resources/resource_format_text.cpp:501)
+     GDScript backtrace (most recent call first):
+         [0] _ready (res://pemain.gd:119)
+         [1] _ready (res://uji_nyata.gd:319)
+WARNING: res://PetaAlam.tscn:4 - ext_resource, invalid UID: uid://ce3ntygme0quk - using text path instead: res://petak_papan.gd
+     at: load (scene/resources/resource_format_text.cpp:501)
+     GDScript backtrace (most recent call first):
+         [0] _ready (res://pemain.gd:119)
+         [1] _ready (res://uji_nyata.gd:319)
+ERROR: Resource file not found: res://permata/permata_hijau.png (expected type: Texture2D)
+   at: _load (core/io/resource_loader.cpp:325)
+   GDScript backtrace (most recent call first):
+       [0] _ready (res://uji_nyata.gd:319)
+MENU ok: jumlah_ai_dipilih=3
+MENU panjang 'QUICK MATCH' = true; keterangan='5 rounds. The richest player wins.'
+MENU peta 'Grassland' klik1=true klik2=true
+MENU role klik FIRE = true
+WARNING: res://PetaAlam.tscn:3 - ext_resource, invalid UID: uid://btbnxpictjrw2 - using text path instead: res://lingkungan_alam.gd
+     at: load (scene/resources/resource_format_text.cpp:501)
+     GDScript backtrace (most recent call first):
+         [0] _siapkan_peta_dan_mulai (res://pemain.gd:1861)
+         [1] _mulai_terjun_ke_game (res://main_menu.gd:325)
+         [2] _mulai_sesudah_role (res://main_menu.gd:439)
+         [3] <anonymous lambda> (res://main_menu.gd:421)
+         [4] <anonymous lambda> (res://ui_role.gd:224)
+         [5] _klik_teks (res://uji_nyata.gd:580)
+         [6] _ready (res://uji_nyata.gd:360)
+WARNING: res://PetaAlam.tscn:4 - ext_resource, invalid UID: uid://ce3ntygme0quk - using text path instead: res://petak_papan.gd
+     at: load (scene/resources/resource_format_text.cpp:501)
+     GDScript backtrace (most recent call first):
+         [0] _siapkan_peta_dan_mulai (res://pemain.gd:1861)
+         [1] _mulai_terjun_ke_game (res://main_menu.gd:325)
+         [2] _mulai_sesudah_role (res://main_menu.gd:439)
+         [3] <anonymous lambda> (res://main_menu.gd:421)
+         [4] <anonymous lambda> (res://ui_role.gd:224)
+         [5] _klik_teks (res://uji_nyata.gd:580)
+         [6] _ready (res://uji_nyata.gd:360)
+ERROR: Resource file not found: res://Mellow Shore.ogg (expected type: unknown)
+   at: _load (core/io/resource_loader.cpp:325)
+   GDScript backtrace (most recent call first):
+       [0] _siapkan_peta_dan_mulai (res://pemain.gd:1868)
+       [1] _mulai_terjun_ke_game (res://main_menu.gd:325)
+       [2] _mulai_sesudah_role (res://main_menu.gd:439)
+       [3] <anonymous lambda> (res://main_menu.gd:421)
+       [4] <anonymous lambda> (res://ui_role.gd:224)
+       [5] _klik_teks (res://uji_nyata.gd:580)
+       [6] _ready (res://uji_nyata.gd:360)
+MENU role START = true
+PANEL_HOW_TO_WIN jumlah=1
+SYARAT | QUICK MATCH: 5 rounds, then the richest player wins | Richest = coins + tiles + towers | Collect the gem on the board | Win early: reach START with 3000+ coins and the gem | Salary at START: +500, +10 per tile you own, +3 stars | Buy a tile, then STOP on it again to build a tower
+ATURAN mode_quick=true batas_ronde=5 target_permata=1 permata_peta=1 rolet_double=true
+START ditekan setelah 0.0 dtk; pemain=4 target_permata=1 petak=24
+ROLE_SLOT api:api+angin air:air+angin petir:petir+angin angin:angin+petir
+EVENT ronde=1 aktif= terakhir=
+BOUNTY ronde=1 aktif= terakhir= klaim_per_slot=[0, 0, 0, 0] bintang=[4, 4, 4, 4]
+EVENT ronde=2 aktif= terakhir=
+BOUNTY ronde=2 aktif=api terakhir=api klaim_per_slot=[0, 0, 0, 0] bintang=[4, 4, 4, 4]
+JEBAKAN_AI s=1 e=angin petak=12 menara=0 sacred=0
+EVENT ronde=3 aktif=market_day terakhir=market_day
+JEBAKAN_AI s=1 e=angin petak=16 menara=0 sacred=0
+JEBAKAN_AI s=2 e=petir petak=15 menara=0 sacred=0
+EVENT ronde=4 aktif= terakhir=market_day
+ERROR: Resource file not found: res://permata/permata_hijau.png (expected type: Texture2D)
+   at: _load (core/io/resource_loader.cpp:325)
+   GDScript backtrace (most recent call first):
+       [0] bergerak_maju (res://pemain.gd:903)
+ERROR: Resource file not found: res://permata/permata_hijau.png (expected type: Texture2D)
+   at: _load (core/io/resource_loader.cpp:325)
+   GDScript backtrace (most recent call first):
+       [0] _render_hud_banyak_pemain (res://pemain_tampilan.gd:564)
+       [1] _render_uang_tampil (res://pemain_tampilan.gd:527)
+       [2] update_ui_status (res://pemain_tampilan.gd:500)
+       [3] bergerak_maju (res://pemain.gd:904)
+ERROR: Resource file not found: res://permata/permata_hijau.png (expected type: Texture2D)
+   at: _load (core/io/resource_loader.cpp:325)
+   GDScript backtrace (most recent call first):
+       [0] _render_hud_banyak_pemain (res://pemain_tampilan.gd:564)
+       [1] _render_uang_tampil (res://pemain_tampilan.gd:527)
+ERROR: Resource file not found: res://permata/permata_hijau.png (expected type: Texture2D)
+   at: _load (core/io/resource_loader.cpp:325)
+   GDScript backtrace (most recent call first):
+       [0] _render_hud_banyak_pemain (res://pemain_tampilan.gd:564)
+       [1] _render_uang_tampil (res://pemain_tampilan.gd:527)
+ERROR: Resource file not found: res://permata/permata_hijau.png (expected type: Texture2D)
+   at: _load (core/io/resource_loader.cpp:325)
+   GDScript backtrace (most recent call first):
+       [0] _render_hud_banyak_pemain (res://pemain_tampilan.gd:564)
+       [1] _render_uang_tampil (res://pemain_tampilan.gd:527)
+ERROR: Resource file not found: res://permata/permata_hijau.png (expected type: Texture2D)
+   at: _load (core/io/resource_loader.cpp:325)
+   GDScript backtrace (most recent call first):
+       [0] _render_hud_banyak_pemain (res://pemain_tampilan.gd:564)
+       [1] _render_uang_tampil (res://pemain_tampilan.gd:527)
+ERROR: Resource file not found: res://permata/permata_hijau.png (expected type: Texture2D)
+   at: _load (core/io/resource_loader.cpp:325)
+   GDScript backtrace (most recent call first):
+       [0] _render_hud_banyak_pemain (res://pemain_tampilan.gd:564)
+       [1] _render_uang_tampil (res://pemain_tampilan.gd:527)
+ERROR: Resource file not found: res://permata/permata_hijau.png (expected type: Texture2D)
+   at: _load (core/io/resource_loader.cpp:325)
+   GDScript backtrace (most recent call first):
+       [0] _render_hud_banyak_pemain (res://pemain_tampilan.gd:564)
+       [1] _render_uang_tampil (res://pemain_tampilan.gd:527)
+ERROR: Resource file not found: res://permata/permata_hijau.png (expected type: Texture2D)
+   at: _load (core/io/resource_loader.cpp:325)
+   GDScript backtrace (most recent call first):
+       [0] _render_hud_banyak_pemain (res://pemain_tampilan.gd:564)
+       [1] _render_uang_tampil (res://pemain_tampilan.gd:527)
+ERROR: Resource file not found: res://permata/permata_hijau.png (expected type: Texture2D)
+   at: _load (core/io/resource_loader.cpp:325)
+   GDScript backtrace (most recent call first):
+       [0] _render_hud_banyak_pemain (res://pemain_tampilan.gd:564)
+       [1] _render_uang_tampil (res://pemain_tampilan.gd:527)
+ERROR: Resource file not found: res://permata/permata_hijau.png (expected type: Texture2D)
+   at: _load (core/io/resource_loader.cpp:325)
+   GDScript backtrace (most recent call first):
+       [0] _render_hud_banyak_pemain (res://pemain_tampilan.gd:564)
+       [1] _render_uang_tampil (res://pemain_tampilan.gd:527)
+ERROR: Resource file not found: res://permata/permata_hijau.png (expected type: Texture2D)
+   at: _load (core/io/resource_loader.cpp:325)
+   GDScript backtrace (most recent call first):
+       [0] _render_hud_banyak_pemain (res://pemain_tampilan.gd:564)
+       [1] _render_uang_tampil (res://pemain_tampilan.gd:527)
+ERROR: Resource file not found: res://permata/permata_hijau.png (expected type: Texture2D)
+   at: _load (core/io/resource_loader.cpp:325)
+   GDScript backtrace (most recent call first):
+       [0] _render_hud_banyak_pemain (res://pemain_tampilan.gd:564)
+       [1] _render_uang_tampil (res://pemain_tampilan.gd:527)
+       [2] <anonymous lambda> (res://pemain_tampilan.gd:516)
+JEBAKAN_AI s=1 e=angin petak=18 menara=0 sacred=0
+ERROR: Resource file not found: res://permata/permata_hijau.png (expected type: Texture2D)
+   at: _load (core/io/resource_loader.cpp:325)
+   GDScript backtrace (most recent call first):
+       [0] bergerak_maju (res://pemain.gd:903)
+ERROR: Resource file not found: res://permata/permata_hijau.png (expected type: Texture2D)
+   at: _load (core/io/resource_loader.cpp:325)
+   GDScript backtrace (most recent call first):
+       [0] bergerak_maju (res://pemain.gd:903)
+ERROR: Resource file not found: res://permata/permata_hijau.png (expected type: Texture2D)
+   at: _load (core/io/resource_loader.cpp:325)
+   GDScript backtrace (most recent call first):
+       [0] bergerak_maju (res://pemain.gd:903)
+EVENT ronde=5 aktif= terakhir=earthquake
+SPANDUK_FINAL_ROUND giliran=16 ronde=5/5
+GETAR_KAMERA maks_h=0.189 akhir_h=0.000 akhir_v=0.000
+BOUNTY_KLAIM slot=3 bintang_sebelum=7 bintang_sesudah=8
+BOUNTY ronde=5 aktif= terakhir=api klaim_per_slot=[0, 0, 0, 1] bintang=[6, 1, 6, 8]
+DIAG_PROGRES giliran=20 detik=431
+JEBAKAN_AI s=3 e=petir petak=6 menara=0 sacred=0
+SEIMBANG peta=alam seed=803 quick=1 roles=api,air,petir,angin pemenang=1 cara=ronde giliran=20 detik=453.3 pasang=0,3,1,1 kena=0,2,0,0 kaya=2953,3414,3354,2858 rinci=0/0/0/2/0/3,0/412/1/0/0/0,1/0/0/0/0/0,0/0/1/0/0/0 presets=- sacred=0 xprole0=-1 f5=2/1/1/0/0
+AKHIR alasan=ronde pemenang=1 ronde=5/5 kaya=[2953, 3414, 3354, 2858] cek=OK giliran=20/20
+STAT_CEK OK duel=<null> kena=2 teks_jebakan=2 | g5 d5 m0 k0 j0 ; g5 d5 m1 k2 j3 ; g5 d5 m0 k0 j1 ; g5 d5 m1 k0 j1 
+SIM MENANG giliran=20 detik=453
+WARNING: 3 RIDs of type "CanvasItem" were leaked.
+   at: _free_rids (servers/rendering/renderer_canvas_cull.cpp:2735)
+WARNING: 215 ObjectDB instances were leaked at exit (run with `--verbose` for details).
+   at: cleanup (core/object/object.cpp:2536)
+ERROR: 56 RID allocations of type 'PN13RendererDummy14TextureStorage12DummyTextureE' were leaked at exit.
+ERROR: 1 RID allocations of type 'N17RendererSceneCull8InstanceE' were leaked at exit.
+ERROR: 31 RID allocations of type 'PN18TextServerAdvanced22ShapedTextDataAdvancedE' were leaked at exit.
+ERROR: 2 RID allocations of type 'PN18TextServerAdvanced12FontAdvancedE' were leaked at exit.

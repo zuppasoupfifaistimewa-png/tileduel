@@ -1,0 +1,14 @@
+HUTANG_PASANG ke-1 slot=1 petak=2 nilai_jual=420 uang=-1420 giliran=5
+HUTANG_BAWA ke-1 teks='No more tiles! P2 accepts debt.' giliran=8 uang=[1600, -1029, 2000] mode_jual=false membidik=false petak_slot=0
+HUTANG_LANJUT giliran=10 mode_jual=false uang=[1600, -1029, 1629]
+HUTANG_BAWA ke-2 teks='No more tiles! P2 accepts debt.' giliran=14 uang=[1550, -1129, 1429] mode_jual=false membidik=false petak_slot=0
+HUTANG_LANJUT giliran=16 mode_jual=false uang=[1550, -1129, 1129]
+HUTANG_BAWA ke-3 teks='No more tiles! P2 accepts debt.' giliran=26 uang=[840, -1229, 1329] mode_jual=false membidik=false petak_slot=0
+HUTANG_LANJUT giliran=28 mode_jual=false uang=[840, -1229, 1029]
+HUTANG_BAWA ke-4 teks='No more tiles! P2 accepts debt.' giliran=29 uang=[840, -829, 1129] mode_jual=false membidik=false petak_slot=0
+HUTANG_LANJUT giliran=31 mode_jual=false uang=[840, -829, 1189]
+HUTANG_BAWA ke-5 teks='No more tiles! P2 accepts debt.' giliran=41 uang=[480, -929, 389] mode_jual=false membidik=false petak_slot=0
+HUTANG_LANJUT giliran=43 mode_jual=false uang=[480, -929, 339]
+HUTANG_BAWA ke-6 teks='No more tiles! P2 accepts debt.' giliran=47 uang=[180, -1029, 439] mode_jual=false membidik=false petak_slot=0
+HUTANG_LANJUT giliran=49 mode_jual=false uang=[180, -1029, 1439]
+SIM BATAS_GILIRAN giliran=61 detik=1125

@@ -1,0 +1,42 @@
+Godot Engine v4.7.1.stable.official.a13da4feb - https://godotengine.org
+
+EVENT_UI OK    layar EVENT terbuka
+EVENT_UI OK    teks: nama event, TOKENS 70, EVENT SHOP
+ERROR: Parameter "t" is null.
+   at: texture_2d_get (./servers/rendering/dummy/storage/texture_storage.h:110)
+   GDScript backtrace (most recent call first):
+       [0] _foto (res://uji_event_foto.gd:88)
+       [1] _ready (res://uji_event_foto.gd:25)
+       [2] _tunggu (res://uji_event_foto.gd:84)
+EVENT_UI OK    EVENT SHOP membuka toko tab EVENT (3 barang Fire)
+ERROR: Parameter "t" is null.
+   at: texture_2d_get (./servers/rendering/dummy/storage/texture_storage.h:110)
+   GDScript backtrace (most recent call first):
+       [0] _foto (res://uji_event_foto.gd:88)
+       [1] _ready (res://uji_event_foto.gd:31)
+       [2] _tunggu (res://uji_event_foto.gd:84)
+EVENT_UI OK    beli lewat tombol: token 10, pawn_ember dipakai
+EVENT_UI OK    barang jadi EQUIPPED, sisa BUY menampilkan alasan token
+ERROR: Parameter "t" is null.
+   at: texture_2d_get (./servers/rendering/dummy/storage/texture_storage.h:110)
+   GDScript backtrace (most recent call first):
+       [0] _foto (res://uji_event_foto.gd:88)
+       [1] _ready (res://uji_event_foto.gd:38)
+       [2] _tunggu (res://uji_event_foto.gd:84)
+EVENT_UI OK    tab TITLE memuat gelar mastery yang dimiliki
+EVENT_UI OK    tab PAWN memuat pawn event yang dimiliki
+EVENT_UI OK    tanggal mundur: tab EVENT menampilkan 'Event paused'
+EVENT_UI OK    layar MASTERY: 5 elemen, Lv api 5 (40 XP), petir MASTER
+ERROR: Parameter "t" is null.
+   at: texture_2d_get (./servers/rendering/dummy/storage/texture_storage.h:110)
+   GDScript backtrace (most recent call first):
+       [0] _foto (res://uji_event_foto.gd:88)
+       [1] _ready (res://uji_event_foto.gd:62)
+       [2] _tunggu (res://uji_event_foto.gd:84)
+EVENT_UI kartu: EVENT MISSION DONE: Win 2 matches as FIRE  +40 tokens | FIRE MASTERY Lv 6  +150 Crowns | WATER MASTERY Lv 10  +400 Crowns  + title! | 
+EVENT_UI OK    kartu hadiah: misi event + mastery (maks 3 baris)
+EVENT_UI gagal=0
+WARNING: 2 ObjectDB instances were leaked at exit (run with `--verbose` for details).
+   at: cleanup (core/object/object.cpp:2536)
+ERROR: 1 resources still in use at exit (run with --verbose for details).
+   at: clear (core/io/resource.cpp:822)

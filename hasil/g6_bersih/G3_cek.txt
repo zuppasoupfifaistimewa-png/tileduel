@@ -1,0 +1,10 @@
+Fase 6 G3 (03-10, Sonnet) -- bersih-bersih pola F7, dijalankan di komit cc398c7
+1) grep di game/*.gd: print( / TODO / FIXME / breakpoint / get_cmdline* / PROFIL_NAMA / MVP_UJI = 0 (push_warning lama = sah).
+   Saklar uji (semua false): pemain_dasar.gd UJI_DUEL, UJI_SERI; petak_kartu.gd UJI_SELALU_PEDANG. UJI_DADU_ANGKA=3 = nilai lama, hanya dipakai bila UJI_DUEL.
+   profil_pemain.gd _tanggal_uji = "" (kait uji lama, bawaan kosong).
+2) game/ vs rig/proj_tanpa_uji: 34/35 identik; beda hanya pengelola_iklan.gd (stub iklan rig, disengaja).
+3) .gd game/ TIDAK diubah di G3 (kode = akhir G2). cek_muat 26/26, uji_profil_v3 22/22, MP Q1/S1/M2, R1 Respect dari G2 tetap berlaku
+   (hasil/g6_mvp_respect/); TIDAK diulang (hemat kredit; Godot tidak dipasang di sesi ini).
+4) kiriman/TileDuel_Fase6_b11.zip: 29 .gd resmi (daftar sama dgn b10), dibuat dari game/; diverifikasi byte-per-byte; 9 berbeda dari b10:
+   layar_local_play pemain pemain_dasar pemain_duel pemain_kartu profil_pemain status_jaringan ui_dinamis ui_profil.
+   6 file pendukung (petak_papan koin_tercecer petak_permata lingkungan_pantai rolet pengelola_iklan) tidak dikirim.

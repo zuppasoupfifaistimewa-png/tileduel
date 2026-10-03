@@ -173,7 +173,7 @@ func _bebaskan_penantian_slot(slot: int) -> void:
 		cabang_client_dijawab.emit(0)
 	# Elemen duel
 	if _duel_mengumpulkan and (slot == _duel_slot_penyerang or slot == _duel_slot_pembela) and not _pilihan_elemen_jaringan.has(slot):
-		_kunci_elemen_peserta(slot, ui_elemen._pilih_elemen_adaptif("menyerang" if slot == _duel_slot_penyerang else "bertahan"))
+		_kunci_elemen_peserta(slot, _elemen_ai_duel("menyerang" if slot == _duel_slot_penyerang else "bertahan"))
 	# Lempar koin penentu seri
 	if _koin_seri_wajib.has(slot):
 		if slot == _duel_slot_pembela and not _koin_seri_pilihan.has(slot):

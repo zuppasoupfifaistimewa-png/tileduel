@@ -1,0 +1,21 @@
+Godot Engine v4.7.1.stable.official.a13da4feb - https://godotengine.org
+
+PROFIL_V3 OK    v2 id utuh
+PROFIL_V3 OK    v2 nama utuh
+PROFIL_V3 OK    v2 xp utuh
+PROFIL_V3 OK    v2 crowns utuh
+PROFIL_V3 OK    v2 statistik utuh
+PROFIL_V3 OK    v2 role utuh
+PROFIL_V3 OK    v2 respect=0
+PROFIL_V3 OK    v2 mvp_total=0
+PROFIL_V3 OK    simpan versi=3
+PROFIL_V3 OK    simpan respect=2
+PROFIL_V3 OK    simpan mvp=1
+PROFIL_V3 OK    muat ulang v3 respect=2
+PROFIL_V3 OK    muat ulang v3 mvp=1
+PROFIL_V3 OK    muat ulang v3 data lama utuh
+PROFIL_V3 OK    rusak -> respect 0
+PROFIL_V3 OK    rusak -> mvp 0
+PROFIL_V3 OK    baru id terisi (16 hex)
+PROFIL_V3 OK    baru respect/mvp 0
+PROFIL_V3 gagal=0

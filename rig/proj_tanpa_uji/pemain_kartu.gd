@@ -458,6 +458,9 @@ func _nama_layar(slot: int) -> String:
 	# _nama_slot: "YOU" untuk device sendiri, bukan cuma nama slot).
 	if slot == slot_lokal:
 		return "YOU"
+	var nm = _nama_manusia(slot).to_upper() # Fase 6
+	if nm != "":
+		return nm
 	if jumlah_pemain() <= 2:
 		return "ENEMY"
 	return "P%d" % (slot + 1)

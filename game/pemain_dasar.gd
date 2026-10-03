@@ -55,6 +55,7 @@ var tombol_trap_batal: Button
 
 # ---> TAMBAHKAN BARIS INI <---
 var tombol_seting: Button 
+var tombol_ai_cepat: Button  # Fase 5 G6: tombol >> (solo saja)
 
 var target_kamera: Node3D
 var geser_kamera = Vector3.ZERO
@@ -254,6 +255,7 @@ const SYARAT_KOIN_MENANG := 3000        # dipakai syarat menang DAN panel HOW TO
 
 # --- QUICK MATCH (Fase 1) ---
 const KECEPATAN_QUICK := 1.5
+const KECEPATAN_AI_CEPAT := 2.0     # Fase 5 G6: giliran AI saat tombol >> aktif (solo; Quick juga 2x, bukan 1,5x)
 var mode_quick: bool = false
 var batas_ronde: int = 0             # 0 = tanpa batas (Classic)
 var ronde_sekarang: int = 1
@@ -282,6 +284,9 @@ var bounty_elemen: String = ""       # "" = tidak ada bounty aktif; selain itu i
 var bounty_terakhir: String = ""     # elemen bounty sebelumnya (tidak diundi dua kali berturut-turut)
 var label_bounty: RichTextLabel = null
 const BOUNTY_RONDE_PERTAMA := 2
+# Tebak Duel solo (Fase 5 G8): tambahan waktu maks sebelum penyerang AI mengunci, HANYA saat pemain bisa menebak
+# (jendela 2,5 dtk terlalu ketat; berhenti begitu pemain menebak).
+const TEBAK_SOLO_TAMBAHAN := 2.0
 var jumlah_permata_peta: int = 0     # permata di peta (target Quick = separuh)
 
 var label_ronde: RichTextLabel = null
@@ -297,7 +302,11 @@ const KARTU_BANTUAN_MAKS_INVENTARIS := 3
 # Dihitung di device yang menjalankan logika (solo / host), ikut siaran state ke client,
 # ikut baris papan skor di akhir pertandingan.
 var statistik_slot: Array = []
+var _tebak_beruntun_slot: Dictionary = {} # HOST/SOLO (Fase 9): slot -> tebakan benar berturut-turut saat ini
 var _hadiah_akhir_diproses: bool = false  # hadiah profil sudah dicatat (sekali per pertandingan)
+var _respect_terkirim: Dictionary = {}   # Fase 6: slot target -> true (Respect yang saya kirim di laga ini)
+var _respect_pasangan: Dictionary = {}   # HOST: "pengirim>target" -> true (satu Respect per pasangan per laga)
+var _respect_diterima: Dictionary = {}   # slot pengirim -> true (Respect yang sudah saya terima di laga ini)
 var _ringkasan_hadiah: Dictionary = {}    # hasil ProfilPemain.catat_akhir_match untuk layar akhir
 
 # --- MIGRASI HOST: host keluar -> pemain lain lanjut BERSAMA (lihat bagian MIGRASI HOST) ---
@@ -380,9 +389,38 @@ func _material_slot(slot: int) -> StandardMaterial3D:
 		_material_slot_cadangan[slot] = m
 	return _material_slot_cadangan[slot]
 
+func _nama_manusia(slot: int, dengan_level: bool = false) -> String:
+	# Fase 6: nama pemain MANUSIA di multiplayer dari profil lobby ("" = solo / AI / tidak ada profil).
+	# Sama di semua HP (StatusJaringan.profil_slot dikirim host saat START).
+	if StatusJaringan.peran_multiplayer == "" or slot < 0 or slot >= StatusJaringan.profil_slot.size():
+		return ""
+	var d = StatusJaringan.profil_slot[slot]
+	if not (d is Dictionary) or (d as Dictionary).is_empty():
+		return ""
+	var nama = str(d.get("nama", ""))
+	return "%s Lv%d" % [nama, int(d.get("level", 1))] if dengan_level else nama
+
+func _kosmetik_slot(slot: int) -> Dictionary:
+	# Fase 7 G3: {pawn, title, frame} sah untuk slot. Solo: slot 0 = profil sendiri, AI = AWAL.
+	# Multiplayer: dari profil lobby (divalidasi host, sama di semua HP).
+	if StatusJaringan.peran_multiplayer == "":
+		return DataKosmetik.sah_semua(ProfilPemain.kosmetik_pakai_semua() if slot == 0 else {})
+	var d = StatusJaringan.profil_slot[slot] if slot >= 0 and slot < StatusJaringan.profil_slot.size() else {}
+	return DataKosmetik.sah_semua((d as Dictionary).get("kosmetik", {}) if d is Dictionary else {})
+
+func _gelar_manusia(slot: int) -> String:
+	# Teks gelar pemain MANUSIA di multiplayer ("" = solo / AI / tidak ada profil).
+	if _nama_manusia(slot) == "":
+		return ""
+	return DataKosmetik.nama_barang(str(_kosmetik_slot(slot)["title"]))
+
 func _nama_slot(slot: int) -> String:
 	# Nama pemain lain di teks. Permainan 2 pemain tetap "Enemy" seperti dulu;
 	# 3-4 pemain memakai "P1".."P4" (P1 biru, P2 merah, P3 hijau, P4 kuning).
+	# Fase 6: multiplayer dgn profil -> nama pemain aslinya.
+	var nm = _nama_manusia(slot)
+	if nm != "":
+		return nm
 	if jumlah_pemain() <= 2:
 		return "Enemy"
 	return "P%d" % (slot + 1)
@@ -396,7 +434,8 @@ func _nama_ui(slot: int) -> String:
 	# permainan 2 pemain -> layar itu tetap memakai kalimat lamanya ("ENEMY ...").
 	if jumlah_pemain() <= 2:
 		return ""
-	return "P%d" % (slot + 1)
+	var nm = _nama_manusia(slot) # Fase 6
+	return nm if nm != "" else "P%d" % (slot + 1)
 
 func _aktor_ui_kartu(slot: int) -> String:
 	# petak_kartu.gd mengenal dua sisi: "pemain" = pemain di device ini, "musuh"
@@ -431,7 +470,7 @@ func _siapkan_slot_pemain(tunda_tambah: bool = false) -> void:
 		daftar_model.append(model)
 		daftar_anim.append(anim)
 		if baru:
-			_warnai_karakter(model, _warna_slot(s))
+			_warnai_karakter(model, _warna_slot(s), str(_kosmetik_slot(s)["pawn"]))
 			if tunda_tambah:
 				get_parent().add_child.call_deferred(node)
 				anim.play.call_deferred("idle")
@@ -625,11 +664,15 @@ func _teks_narasi(kunci: String, slot: int, angka: int = 0, slot_lain: int = -1)
 # ========================================================
 func _reset_statistik() -> void:
 	statistik_slot = []
+	_tebak_beruntun_slot.clear()
 	for s in range(jumlah_pemain()):
 		statistik_slot.append(ProfilPemain.statistik_kosong())
 	if statistik_slot.size() > 0:
 		statistik_slot[0]["giliran"] = 1 # giliran pertama P1 tidak lewat ganti_giliran
 	_hadiah_akhir_diproses = false
+	_respect_terkirim.clear()
+	_respect_pasangan.clear()
+	_respect_diterima.clear()
 	_ringkasan_hadiah = {}
 
 func _tambah_stat(slot: int, kunci: String, n: int = 1) -> void:
@@ -648,7 +691,7 @@ func _tambah_stat_elemen(slot: int, elemen: String) -> void:
 # ========================================================
 # FUNGSI BARU: PEWARNAAN KARAKTER OTOMATIS (SMART RECOLOR)
 # ========================================================
-func _warnai_karakter(model: Node3D, warna_target: Color):
+func _warnai_karakter(model: Node3D, warna_target: Color, id_pawn: String = ""):
 	# 1. Cari semua objek jaring (Mesh) di dalam model .glb secara rekursif
 	var daftar_mesh = model.find_children("*", "MeshInstance3D", true)
 	
@@ -662,7 +705,10 @@ func _warnai_karakter(model: Node3D, warna_target: Color):
 			
 			if mat_asli and mat_asli is StandardMaterial3D:
 				# 3. WAJIB DIDUPLIKAT! Agar warna Pemain & Musuh punya memori sendiri-sendiri
-				var mat_baru = mat_asli.duplicate()
+				# Fase 7 G3: nilai & mulai dari bahan ASLI mesh (karakter slot 3-4 menyalin musuh yang sudah diwarnai;
+				# trim jenuh seperti Lava tidak boleh salah dikira badan).
+				var dasar = mesh.mesh.surface_get_material(i)
+				var mat_baru = (dasar if dasar is StandardMaterial3D else mat_asli).duplicate()
 				
 				var warna_lama = mat_baru.albedo_color
 				
@@ -671,9 +717,27 @@ func _warnai_karakter(model: Node3D, warna_target: Color):
 				# Syarat ini akan MENGABAIKAN sarung tangan (putih) dan sepatu (abu-abu)
 				if warna_lama.r > warna_lama.g + 0.1 and warna_lama.r > warna_lama.b + 0.1:
 					mat_baru.albedo_color = warna_target
+				else:
+					# Fase 7 G3: bagian BUKAN-badan (sarung tangan putih, sepatu hitam) = "trim" kosmetik bidak. Badan tetap warna slot.
+					# Hanya bahan tak berwarna (saturasi rendah: tangan putih, sepatu hitam di beras.glb); bahan berwarna lain tidak ikut berubah.
+					if mat_baru.albedo_color.s < 0.2:
+						_terapkan_trim(mat_baru, id_pawn)
 					
 				# 5. Pasang kembali material yang sudah diperbarui secara paksa (override)
 				mesh.set_surface_override_material(i, mat_baru)
+
+func _terapkan_trim(mat: StandardMaterial3D, id_pawn: String) -> void:
+	var b: Dictionary = DataKosmetik.KATALOG.get(id_pawn, {})
+	if not b.has("warna"):
+		return # pawn_classic / tak dikenal: bahan asli
+	mat.albedo_color = b["warna"]
+	if b.has("emisi"):
+		mat.emission_enabled = true
+		mat.emission = b["warna"]
+		mat.emission_energy_multiplier = float(b["emisi"])
+	if b.has("logam"):
+		mat.metallic = float(b["logam"])
+		mat.roughness = float(b["kasar"])
 
 func _teks_kartu_dadu(jenis: String, slot: int, slot_target: int, ada_target: bool) -> String:
 	# "You inflicted LOW ROLL to Enemy for 3 Turns!" -- dari sudut pandang device ini.

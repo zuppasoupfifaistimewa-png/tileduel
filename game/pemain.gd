@@ -11,6 +11,7 @@ extends "res://pemain_jaringan.gd"
 signal siap_mulai_diklik
 
 var _giliran_berjalan: bool = false  # sejak START ditekan semua (kecepatan 1,5x)
+var _pengumuman_papan_berjalan: bool = false  # Fase 5 G6: spanduk event/bounty antar-ronde sedang tampil (tombol AI cepat tidak mempercepatnya)
 
 # --- SISTEM CABANG & VALIDASI ---
 signal arah_cabang_terpilih(node_tujuan)
@@ -57,8 +58,8 @@ func _ready():
 	target_kamera = model_pemain 
 	
 	# MEWARNAI KARAKTER SAAT GAME DIMULAI
-	_warnai_karakter(model_pemain, Color(0.2, 0.5, 1.0)) # Pemain jadi Biru
-	_warnai_karakter(model_musuh, Color(1.0, 0.2, 0.2))  # Musuh jadi Merah
+	_warnai_karakter(model_pemain, Color(0.2, 0.5, 1.0), str(_kosmetik_slot(0)["pawn"])) # Pemain jadi Biru (+ trim kosmetik Fase 7)
+	_warnai_karakter(model_musuh, Color(1.0, 0.2, 0.2), str(_kosmetik_slot(1)["pawn"]))  # Musuh jadi Merah
 	# Karakter slot 3-4 (hijau, kuning) dibuat di sini kalau jumlah pemainnya
 	# sudah diketahui (multiplayer). Solo: menyusul setelah jumlah lawan dipilih.
 	_siapkan_slot_pemain(true)
@@ -200,6 +201,8 @@ func _mulai_transisi_game():
 
 	# ---> TAMBAHKAN BARIS INI <---
 	tombol_seting.show() 
+	if StatusJaringan.peran_multiplayer == "" and tombol_ai_cepat != null:
+		tombol_ai_cepat.show() # Fase 5 G6: solo saja
 	
 	# Panel penjelasan syarat kemenangan. Di multiplayer kedua device harus
 	# menekan START dulu -- kalau tidak, host sudah melempar dadu sementara layar
@@ -1429,10 +1432,12 @@ func ganti_giliran():
 	if slot == 0:
 		ronde_event += 1 # Fase 5: penghitung ronde untuk jadwal event (semua mode; ronde_sekarang hanya Quick)
 		event_aktif = ""
+		_pengumuman_papan_berjalan = true
 		if _ronde_jadwal_event():
 			await _mulai_event_papan()
 		if _bounty_perlu_muncul():
 			await _mulai_bounty()
+		_pengumuman_papan_berjalan = false
 	_tambah_stat(slot, "giliran")
 	giliran_sekarang = _aktor_dari_slot(slot)
 	fase_giliran = "awal"
@@ -1579,17 +1584,39 @@ func cek_game_over(): return false
 # ========================================================
 # QUICK MATCH (Fase 1): ronde, kekayaan, kecepatan 1,5x
 # ========================================================
+func _ai_cepat_berlaku() -> bool:
+	# Fase 5 G6 (tombol >>): SOLO saja, saklar profil hidup, sekarang giliran AI, dan tidak ada layar yang
+	# butuh pemain (duel/tebak duel, menu aksi). Layar pemain tampil -> kecepatan lama (Quick 1,5x / Classic 1x).
+	if StatusJaringan.peran_multiplayer != "" or not ProfilPemain.ai_cepat:
+		return false
+	if not _giliran_berjalan or _permainan_selesai or _pengumuman_papan_berjalan:
+		return false
+	if not _is_ai(_slot_dari_aktor(giliran_sekarang)):
+		return false
+	if ui_elemen != null and ui_elemen.visible:
+		return false
+	if menu_aksi != null and menu_aksi.visible:
+		return false
+	return true
+
 func _atur_kecepatan_permainan() -> void:
 	# QUICK MATCH: 1,5x selama giliran berjalan normal; panel yang menghentikan
 	# permainan kembali 1x (batas waktu jaringan di sana memakai jam permainan).
-	# Classic TIDAK PERNAH menyentuh Engine.time_scale (rig & uji lama tetap sama).
-	if not mode_quick:
+	# Classic TIDAK PERNAH menyentuh Engine.time_scale (rig & uji lama tetap sama) --
+	# kecuali tombol AI cepat (Fase 5 G6) pernah menyala di pertandingan ini.
+	var ai_cepat = _ai_cepat_berlaku()
+	if not mode_quick and not ai_cepat and StatusJaringan.skala_waktu_dasar < 0.0:
 		return
 	if StatusJaringan.skala_waktu_dasar < 0.0:
 		StatusJaringan.skala_waktu_dasar = Engine.time_scale # 1 di HP, 3 di rig uji
-	var cepat = _giliran_berjalan and not _permainan_selesai and not _migrasi_berjalan \
-		and not _mode_jaringan_putus and not _panel_putus_terbuka
-	var target = StatusJaringan.skala_waktu_dasar * (KECEPATAN_QUICK if cepat else 1.0)
+	var kali = 1.0
+	if mode_quick:
+		var cepat = _giliran_berjalan and not _permainan_selesai and not _migrasi_berjalan \
+			and not _mode_jaringan_putus and not _panel_putus_terbuka
+		kali = KECEPATAN_QUICK if cepat else 1.0
+	if ai_cepat:
+		kali = KECEPATAN_AI_CEPAT # Quick juga 2x (bukan 1,5x)
+	var target = StatusJaringan.skala_waktu_dasar * kali
 	if not is_equal_approx(Engine.time_scale, target):
 		Engine.time_scale = target
 
@@ -1687,6 +1714,75 @@ func _akhiri_karena_ronde_habis() -> void:
 	_alasan_akhir = "ronde_koin" if hasil["koin"] else "ronde"
 	await _akhiri_permainan(hasil["slot"])
 
+# --- Fase 6 G2: RESPECT (layar akhir multiplayer) ---
+# Alur: tombol -> kirim_respect -> (client) RPC ke HOST -> host memvalidasi & meneruskan ke target -> target +1 Respect.
+# Dua RPC baru SENGAJA bernama "rpc_zrespect_*": Godot mengurutkan RPC satu node menurut nama, nama yang jatuh
+# SESUDAH semua RPC lama (terakhir: rpc_umumkan) tidak menggeser nomor RPC lama. Beri nama RPC baru berikutnya awalan "rpc_z".
+func bisa_beri_respect(slot: int) -> bool:
+	# Hanya lawan MANUSIA di multiplayer (bukan AI / slot yang diambil alih AI setelah pemain keluar).
+	if StatusJaringan.peran_multiplayer == "" or slot == slot_lokal or slot < 0 or slot >= jumlah_pemain():
+		return false
+	return daftar_pemain[slot].jenis_kontrol != DataPemain.JenisKontrol.AI and _nama_manusia(slot) != ""
+
+func kirim_respect(slot_target: int) -> bool:
+	# Dipanggil tombol RESPECT di layar akhir. Satu kali per lawan per laga (ketukan ganda ditolak di sini).
+	if not (_permainan_selesai or _akhir_diterima) or not bisa_beri_respect(slot_target) or _respect_terkirim.has(slot_target):
+		return false
+	_respect_terkirim[slot_target] = true
+	if StatusJaringan.peran_multiplayer == "host":
+		_host_proses_respect(slot_lokal, slot_target)
+	else:
+		rpc_id(1, "rpc_zrespect_kirim", slot_target)
+	return true
+
+func _host_proses_respect(slot_pengirim: int, slot_target: int) -> bool:
+	# HOST: validasi (laga selesai, keduanya manusia & beda, belum pernah per pasangan) lalu teruskan ke target.
+	if not (_permainan_selesai or _akhir_diterima) or slot_pengirim == slot_target:
+		return false
+	if slot_pengirim < 0 or slot_pengirim >= jumlah_pemain() or slot_target < 0 or slot_target >= jumlah_pemain():
+		return false
+	if daftar_pemain[slot_pengirim].jenis_kontrol == DataPemain.JenisKontrol.AI or daftar_pemain[slot_target].jenis_kontrol == DataPemain.JenisKontrol.AI:
+		return false
+	var kunci = "%d>%d" % [slot_pengirim, slot_target]
+	if _respect_pasangan.has(kunci):
+		return false # kirim ganda ditolak
+	var peer_target = -1
+	if slot_target != slot_lokal:
+		peer_target = _peer_slot(slot_target)
+		if peer_target <= 0:
+			return false
+	_respect_pasangan[kunci] = true
+	if peer_target < 0:
+		_terima_respect(slot_pengirim)
+	else:
+		rpc_id(peer_target, "rpc_zrespect_terima", slot_pengirim)
+	return true
+
+@rpc("any_peer", "call_remote", "reliable")
+func rpc_zrespect_kirim(slot_target: int) -> void:
+	# Diterima HOST dari client (pengirim ditentukan dari id peer, bukan dari kiriman).
+	if StatusJaringan.peran_multiplayer != "host" or _migrasi_berjalan:
+		return
+	var slot_pengirim = _slot_dari_peer(multiplayer.get_remote_sender_id())
+	if slot_pengirim < 0:
+		return
+	_host_proses_respect(slot_pengirim, slot_target)
+
+@rpc("authority", "call_remote", "reliable")
+func rpc_zrespect_terima(slot_pengirim: int) -> void:
+	# Diterima TARGET dari host.
+	if multiplayer.get_remote_sender_id() != 1:
+		return
+	_terima_respect(slot_pengirim)
+
+func _terima_respect(slot_pengirim: int) -> void:
+	# Satu Respect per pengirim per laga (penjaga kedua di sisi penerima).
+	if slot_pengirim < 0 or slot_pengirim >= jumlah_pemain() or slot_pengirim == slot_lokal or _respect_diterima.has(slot_pengirim):
+		return
+	_respect_diterima[slot_pengirim] = true
+	ProfilPemain.tambah_respect()
+	UiProfil.tampilkan_toast(self, "%s gave you Respect!" % _nama_slot(slot_pengirim))
+
 func _proses_hadiah_akhir(slot_pemenang: int, papan_skor: Array) -> void:
 	# Hadiah profil untuk pemain di HP ini, SEKALI per pertandingan, langsung tersimpan
 	# (sebelum animasi/menunggu replay -- HP yang ditutup di layar akhir tetap dapat).
@@ -1694,6 +1790,9 @@ func _proses_hadiah_akhir(slot_pemenang: int, papan_skor: Array) -> void:
 		return
 	_hadiah_akhir_diproses = true
 	_ringkasan_hadiah = ProfilPemain.catat_akhir_match(_data_akhir_profil(slot_pemenang, papan_skor))
+	# Fase 6 G2: MVP dihitung lokal dari papan skor (sama di semua HP); +1 mvp_total kalau saya MVP.
+	if ProfilPemain.hitung_mvp(papan_skor) == slot_lokal:
+		ProfilPemain.catat_mvp()
 
 func _data_akhir_profil(slot_pemenang: int, papan_skor: Array) -> Dictionary:
 	var stat_lokal = {}
@@ -1721,6 +1820,7 @@ func _siapkan_peta_dan_mulai(pilihan_peta: String, jumlah_ai: int = 1, quick: bo
 	_ronde_spanduk = -1
 	_iklan_hutang_terpakai = false
 	_putar_ulang_terpakai = false
+	_putar_ulang_ditolak = false
 
 	if StatusJaringan.peran_multiplayer == "":
 		# Solo: 1 pemain manusia (slot 0) + 1-3 lawan AI, dipilih di menu SINGLE PLAYER.

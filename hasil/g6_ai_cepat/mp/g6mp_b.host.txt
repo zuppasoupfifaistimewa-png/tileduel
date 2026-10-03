@@ -1,0 +1,2 @@
+AI_CEPAT_MP_RINGKAS peran=host profil=true frame=5000 frame_2x=0 frame_tombol_terlihat=0
+SELESAI MENANG peran=host giliran=20 cek_ok=4 cek_gagal=0 kartu_beda=0 detik=376 migrasi=0 cek_ok_migrasi=0 jaringan=host role=api:api+angin+petir:{ "hot_flames": 2, "rock_breaker": 2, "heavy_pockets": 1, "fire_tax": 1, "ULT_api": true },air:air+angin+petir:{ "frozen_bubble": 2, "heat_skin": 2, "roc

@@ -1,0 +1,1 @@
+S1 100 pertandingan (hasil/g0_refactor/s1_100.tugas, semua_ai, saklar AI cepat MATI = bawaan, stub iklan tidak tersedia): kode G6 vs G4 (hasil/g4_tebak/reg/s1_100_g4.txt) dan G5 -> sort|diff IDENTIK (100/100), err=0. batch_reg10 identik dgn G5; cek_nilai 8/8.

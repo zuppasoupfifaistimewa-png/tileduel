@@ -24,6 +24,12 @@ var role_slot: Array = []
 # Nomor acak permainan ini (dibuat host saat START di lobby). Dipakai migrasi host
 # supaya device tidak menyambung ke permainan LAIN di jaringan yang sama.
 var id_sesi: int = 0
+# Fase 6: penjaga versi lobby. Naikkan angka ini tiap kali RPC lobby / permainan berubah
+# (lobby menolak client yang versinya beda, supaya RPC tidak salah panggil).
+const VERSI_PROTOKOL := 2
+# Fase 6: profil tiap slot -- [{"nama", "level", "respect", "mvp_total"}, ...] sejajar dgn jenis_slot
+# ({} untuk slot AI). Dikirim host saat START dan disimpan di SEMUA HP -> host pengganti (migrasi) sudah punya.
+var profil_slot: Array = []
 
 # --- QUICK MATCH (Fase 1) ---
 # Jumlah ronde menurut jumlah pemain.
@@ -52,6 +58,7 @@ func reset_susunan() -> void:
 	jenis_slot = []
 	peer_slot = {}
 	role_slot = []
+	profil_slot = []
 	id_sesi = 0
 	mode_quick = false
 

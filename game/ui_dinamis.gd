@@ -36,6 +36,28 @@ static func upgrade_ke_richtext(node_lama, gaya):
 
 	return node_lama
 
+static func ganti_ai_cepat(main_node: Node) -> void:
+	# Fase 5 G6: ketuk tombol >> = hidup/mati; pilihan diingat di profil.
+	ProfilPemain.atur_ai_cepat(not ProfilPemain.ai_cepat)
+	perbarui_tombol_ai_cepat(main_node)
+
+static func perbarui_tombol_ai_cepat(main_node: Node) -> void:
+	# Mati = abu-abu seperti tombol seting; hidup = emas.
+	var tombol = main_node.tombol_ai_cepat
+	if tombol == null:
+		return
+	var hidup = ProfilPemain.ai_cepat
+	var gaya = StyleBoxFlat.new()
+	gaya.bg_color = Color(0.5, 0.35, 0.05, 0.9) if hidup else Color(0.1, 0.1, 0.15, 0.8)
+	gaya.set_corner_radius_all(10)
+	gaya.set_border_width_all(2)
+	gaya.border_color = Color(1.0, 0.85, 0.2) if hidup else Color(0.8, 0.8, 0.8)
+	for nama_gaya in ["normal", "hover", "pressed"]:
+		tombol.add_theme_stylebox_override(nama_gaya, gaya)
+	tombol.add_theme_color_override("font_color", Color(1.0, 0.9, 0.3) if hidup else Color.WHITE)
+	tombol.add_theme_color_override("font_hover_color", Color(1.0, 0.9, 0.3) if hidup else Color.WHITE)
+	tombol.add_theme_color_override("font_pressed_color", Color(1.0, 0.9, 0.3) if hidup else Color.WHITE)
+
 static func buka_menu_jeda(main_node: Node) -> void:
 	var canvas_jeda = CanvasLayer.new()
 	canvas_jeda.layer = 105 # Pastikan di atas layer gameplay biasa
@@ -584,12 +606,16 @@ static func _panel_papan_skor(main_node: Node, menang: bool, papan_skor: Array, 
 	kolom_kiri.size_flags_vertical = Control.SIZE_SHRINK_BEGIN
 	dua_kolom.add_child(kolom_kiri)
 
+	var slot_mvp: int = ProfilPemain.hitung_mvp(papan_skor)
 	for i in range(papan_skor.size()):
 		var data = papan_skor[i]
 		var slot_baris = int(data["slot"])
 		var nama = "YOU" if slot_baris == main_node.slot_lokal else "ENEMY"
 		if main_node.daftar_pemain.size() > 2:
 			nama = "YOU (P%d)" % (slot_baris + 1) if slot_baris == main_node.slot_lokal else "P%d" % (slot_baris + 1)
+		var nm_mp: String = main_node._nama_manusia(slot_baris, true) # Fase 6: nama + level lawan manusia
+		if nm_mp != "" and slot_baris != main_node.slot_lokal:
+			nama = nm_mp
 		var baris = Label.new()
 		if quick:
 			baris.text = "%d.  %s  —  %d total" % [i + 1, nama, int(data.get("kekayaan", data["uang"]))]
@@ -600,7 +626,19 @@ static func _panel_papan_skor(main_node: Node, menang: bool, papan_skor: Array, 
 		baris.add_theme_color_override("font_color", Color(1.0, 0.85, 0.2) if i == 0 else Color.WHITE)
 		baris.add_theme_color_override("font_outline_color", Color.BLACK)
 		baris.add_theme_constant_override("outline_size", 6)
-		kolom_kiri.add_child(baris)
+		if nm_mp != "":
+			# Fase 6 G2: multiplayer -- ketuk baris = kartu profil; lawan manusia punya tombol RESPECT.
+			kolom_kiri.add_child(_baris_pemain_mp(main_node, slot_baris, baris, banyak))
+			var gelar: String = main_node._gelar_manusia(slot_baris) # Fase 7 G3: gelar di bawah nama
+			if gelar != "":
+				var lbl_gelar = Label.new()
+				lbl_gelar.text = gelar
+				lbl_gelar.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+				lbl_gelar.add_theme_font_size_override("font_size", 16 if banyak else 18)
+				lbl_gelar.add_theme_color_override("font_color", Color(0.85, 0.76, 0.48))
+				kolom_kiri.add_child(lbl_gelar)
+		else:
+			kolom_kiri.add_child(baris)
 
 		var detail = Label.new()
 		if quick:
@@ -612,6 +650,16 @@ static func _panel_papan_skor(main_node: Node, menang: bool, papan_skor: Array, 
 		detail.add_theme_color_override("font_color", Color(0.75, 0.75, 0.8))
 		kolom_kiri.add_child(detail)
 
+		# Fase 6 G2: MVP = penghargaan terbanyak (seri -> pemenang), dihitung sama di semua HP.
+		if slot_baris == slot_mvp:
+			var lbl_mvp = Label.new()
+			lbl_mvp.text = "MVP"
+			lbl_mvp.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+			lbl_mvp.add_theme_font_size_override("font_size", 20)
+			lbl_mvp.add_theme_color_override("font_color", Color(1.0, 0.6, 0.15))
+			lbl_mvp.add_theme_color_override("font_outline_color", Color.BLACK)
+			lbl_mvp.add_theme_constant_override("outline_size", 5)
+			kolom_kiri.add_child(lbl_mvp)
 		# Fase 2: penghargaan akhir milik pemain di baris ini (juga AI).
 		var daftar_penghargaan: Array = data.get("penghargaan", [])
 		if not daftar_penghargaan.is_empty():
@@ -646,6 +694,42 @@ static func _panel_papan_skor(main_node: Node, menang: bool, papan_skor: Array, 
 	canvas.add_child(btn_exit)
 
 	main_node.get_tree().current_scene.add_child(canvas)
+
+static func _baris_pemain_mp(main_node: Node, slot_baris: int, baris: Label, banyak: bool) -> Control:
+	# Fase 6 G2: baris peringkat multiplayer = tombol datar (ketuk -> kartu profil) + tombol RESPECT untuk lawan manusia.
+	var kotak = HBoxContainer.new()
+	kotak.alignment = BoxContainer.ALIGNMENT_CENTER
+	kotak.add_theme_constant_override("separation", 12)
+	var nama = Button.new()
+	nama.flat = true
+	nama.text = baris.text
+	nama.add_theme_font_size_override("font_size", baris.get_theme_font_size("font_size"))
+	for k in ["font_color", "font_hover_color", "font_pressed_color", "font_focus_color"]:
+		nama.add_theme_color_override(k, baris.get_theme_color("font_color"))
+	nama.add_theme_color_override("font_outline_color", Color.BLACK)
+	nama.add_theme_constant_override("outline_size", 6)
+	nama.pressed.connect(func():
+		var d: Dictionary = {}
+		if slot_baris == main_node.slot_lokal:
+			d = {"nama": ProfilPemain.nama, "level": ProfilPemain.level_sekarang(), "respect": ProfilPemain.respect,
+				"mvp_total": ProfilPemain.mvp_total, "role": ProfilPemain.role_terakhir,
+				"kosmetik": ProfilPemain.kosmetik_pakai_semua()}
+		elif slot_baris < StatusJaringan.profil_slot.size():
+			d = StatusJaringan.profil_slot[slot_baris]
+		UiProfil.tampilkan_kartu_profil(main_node, d, 140))
+	kotak.add_child(nama)
+	if main_node.bisa_beri_respect(slot_baris):
+		var r = Button.new()
+		r.text = "RESPECT"
+		r.custom_minimum_size = Vector2(130, 40 if banyak else 46)
+		r.add_theme_font_size_override("font_size", 18)
+		_gaya_tombol(r, Color(0.2, 0.6, 0.3))
+		r.pressed.connect(func():
+			if main_node.kirim_respect(slot_baris):
+				r.disabled = true
+				r.text = "SENT")
+		kotak.add_child(r)
+	return kotak
 
 static func tampilkan_panel_lawan_keluar(main_node: Node) -> void:
 	# Muncul di device yang MASIH hidup ketika lawannya keluar/putus koneksi.
@@ -1012,6 +1096,20 @@ static func setup_ui_elegan(main_node: Node) -> void:
 
 	var canvas_utama = main_node.teks_dadu.get_parent()
 	canvas_utama.add_child(main_node.tombol_seting)
+
+	# Fase 5 G6: tombol AI cepat ">>" di kiri tombol seting (hanya tampil di solo; lihat pemain.gd _mulai_transisi_game).
+	main_node.tombol_ai_cepat = Button.new()
+	main_node.tombol_ai_cepat.text = ">>"
+	main_node.tombol_ai_cepat.custom_minimum_size = Vector2(50, 50)
+	main_node.tombol_ai_cepat.add_theme_font_size_override("font_size", 24)
+	main_node.tombol_ai_cepat.focus_mode = Control.FOCUS_NONE # Spasi (lempar dadu) tidak boleh menekan tombol ini
+	main_node.tombol_ai_cepat.set_anchors_preset(Control.PRESET_TOP_RIGHT)
+	main_node.tombol_ai_cepat.position = Vector2(-130, 20)
+	main_node.tombol_ai_cepat.tooltip_text = "Fast AI turns"
+	main_node.tombol_ai_cepat.hide()
+	main_node.tombol_ai_cepat.pressed.connect(ganti_ai_cepat.bind(main_node))
+	canvas_utama.add_child(main_node.tombol_ai_cepat)
+	perbarui_tombol_ai_cepat(main_node)
 
 	main_node.label_fps = Label.new()
 	main_node.label_fps.set_anchors_preset(Control.PRESET_TOP_LEFT)

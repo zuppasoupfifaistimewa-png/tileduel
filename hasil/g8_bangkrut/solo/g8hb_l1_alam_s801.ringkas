@@ -1,0 +1,25 @@
+HUTANG_PASANG ke-1 slot=0 petak=2 nilai_jual=420 uang=-1420 giliran=3
+HUTANG_BAWA ke-1 teks='No more tiles! You carry the debt.' giliran=9 uang=[-1100, 1600] mode_jual=false membidik=false petak_slot=0
+HUTANG_LANJUT giliran=11 mode_jual=false uang=[-1100, 1300]
+HUTANG_BAWA ke-2 teks='No more tiles! You carry the debt.' giliran=13 uang=[-1200, 1100] mode_jual=false membidik=false petak_slot=0
+HUTANG_LANJUT giliran=15 mode_jual=false uang=[-1200, 1350]
+HUTANG_BAWA ke-3 teks='No more tiles! You carry the debt.' giliran=17 uang=[-1300, 1150] mode_jual=false membidik=false petak_slot=0
+HUTANG_LANJUT giliran=19 mode_jual=false uang=[-1300, 850]
+HUTANG_BAWA ke-4 teks='No more tiles! You carry the debt.' giliran=29 uang=[-900, 740] mode_jual=false membidik=false petak_slot=0
+HUTANG_LANJUT giliran=31 mode_jual=false uang=[-900, 240]
+HUTANG_BAWA ke-5 teks='No more tiles! You carry the debt.' giliran=31 uang=[-1000, 340] mode_jual=false membidik=false petak_slot=0
+HUTANG_LANJUT giliran=33 mode_jual=false uang=[-1000, 130]
+HUTANG_BAWA ke-6 teks='No more tiles! You carry the debt.' giliran=35 uang=[-1300, 1030] mode_jual=false membidik=false petak_slot=0
+HUTANG_LANJUT giliran=37 mode_jual=false uang=[-1300, 1730]
+HUTANG_BAWA ke-7 teks='No more tiles! You carry the debt.' giliran=39 uang=[-900, 1330] mode_jual=false membidik=false petak_slot=0
+HUTANG_LANJUT giliran=41 mode_jual=false uang=[-900, 1030]
+HUTANG_BAWA ke-8 teks='No more tiles! You carry the debt.' giliran=43 uang=[-1200, 1950] mode_jual=false membidik=false petak_slot=0
+HUTANG_LANJUT giliran=45 mode_jual=false uang=[-1200, 1740]
+HUTANG_BAWA ke-9 teks='No more tiles! You carry the debt.' giliran=51 uang=[-580, 440] mode_jual=false membidik=false petak_slot=0
+HUTANG_LANJUT giliran=53 mode_jual=false uang=[-580, 440]
+HUTANG_BAWA ke-10 teks='No more tiles! You carry the debt.' giliran=53 uang=[-700, 560] mode_jual=false membidik=false petak_slot=0
+HUTANG_LANJUT giliran=55 mode_jual=false uang=[-700, 560]
+HUTANG_BAWA ke-11 teks='No more tiles! You carry the debt.' giliran=55 uang=[-1300, 1160] mode_jual=false membidik=false petak_slot=0
+HUTANG_LANJUT giliran=57 mode_jual=false uang=[-1300, 1500]
+HUTANG_BAWA ke-12 teks='No more tiles! You carry the debt.' giliran=59 uang=[-1400, 1100] mode_jual=false membidik=false petak_slot=0
+SIM BATAS_GILIRAN giliran=61 detik=1014

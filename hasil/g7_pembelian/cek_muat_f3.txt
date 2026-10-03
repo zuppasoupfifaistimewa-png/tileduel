@@ -1,0 +1,58 @@
+Godot Engine v4.7.1.stable.official.a13da4feb - https://godotengine.org
+
+### MUAT status_jaringan.gd
+### HASIL status_jaringan.gd OK
+### MUAT pengelola_iklan.gd
+### HASIL pengelola_iklan.gd OK
+### MUAT profil_pemain.gd
+### HASIL profil_pemain.gd OK
+### MUAT pembelian_asli_uji.gd
+### HASIL pembelian_asli_uji.gd OK
+### MUAT ui_profil.gd
+### HASIL ui_profil.gd OK
+### MUAT ui_toko.gd
+### HASIL ui_toko.gd OK
+### MUAT ui_role.gd
+### HASIL ui_role.gd OK
+### MUAT data_pemain.gd
+### HASIL data_pemain.gd OK
+### MUAT data_role.gd
+### HASIL data_role.gd OK
+### MUAT ui_elemen.gd
+### HASIL ui_elemen.gd OK
+### MUAT ui_petak.gd
+### HASIL ui_petak.gd OK
+### MUAT petak_kartu.gd
+### HASIL petak_kartu.gd OK
+### MUAT ai_musuh.gd
+### HASIL ai_musuh.gd OK
+### MUAT ai_jebakan.gd
+### HASIL ai_jebakan.gd OK
+### MUAT jebakan_air.gd
+### HASIL jebakan_air.gd OK
+### MUAT jebakan_api.gd
+### HASIL jebakan_api.gd OK
+### MUAT migrasi_host.gd
+### HASIL migrasi_host.gd OK
+### MUAT ui_dinamis.gd
+### HASIL ui_dinamis.gd OK
+### MUAT pemain_dasar.gd
+### HASIL pemain_dasar.gd OK
+### MUAT pemain_tampilan.gd
+### HASIL pemain_tampilan.gd OK
+### MUAT pemain_role.gd
+### HASIL pemain_role.gd OK
+### MUAT pemain_papan.gd
+### HASIL pemain_papan.gd OK
+### MUAT pemain_kartu.gd
+### HASIL pemain_kartu.gd OK
+### MUAT pemain_duel.gd
+### HASIL pemain_duel.gd OK
+### MUAT pemain_jaringan.gd
+### HASIL pemain_jaringan.gd OK
+### MUAT pemain.gd
+### HASIL pemain.gd OK
+### MUAT main_menu.gd
+### HASIL main_menu.gd OK
+### MUAT layar_local_play.gd
+### HASIL layar_local_play.gd OK

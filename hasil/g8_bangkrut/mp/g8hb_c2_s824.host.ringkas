@@ -1,0 +1,4 @@
+HUTANG_PASANG ke-1 slot=2 petak=2 nilai_jual=420 uang=-1420 giliran=6
+HUTANG_BAWA ke-1 teks='No more tiles! P3 carries the debt.' giliran=15 uang=[1846, 2264, -1020] mode_jual=false membidik=false petak_slot=0
+HUTANG_LANJUT giliran=17 mode_jual=false uang=[2629, 2264, -1020]
+SELESAI BATAS_GILIRAN peran=host giliran=41 cek_ok=22 cek_gagal=0 kartu_beda=0 detik=735 migrasi=0 cek_ok_migrasi=0 jaringan=host role=api:api+angin+petir:{ "hot_flames": 2, "rock_breaker": 2, "heavy_pockets": 1, "fire_tax": 1, "ULT_api": true },air:air+angin+petir:{ "frozen_bubble": 2, "heat_skin": 2, "rock_breaker": 1, "rapid_current": 1, "ULT_air": true },tanah:tanah+angin+petir:{ "hard_rock": 

@@ -32,6 +32,7 @@ var benih = 7
 var skenario = ""
 var giliran_keluar = 8
 var urut_keluar = 2
+var respect_awal_uji = 0
 var panjang_uji = "classic" # Fase 1: "quick" | "classic" (bawaan classic: skenario lama tidak berubah)
 # C2 (B-c, 26-09): "" (bawaan, ProfilPemain.arena kosong -> host jatuh balik ke
 # Balanced, K16) | "attack" | "defense" (preset sungguhan lewat build_dari_preset)
@@ -44,6 +45,7 @@ var arena_uji = ""
 # jangkauan = jatuh balik ke pemilihan bawaan (variasi per device), TIDAK error.
 var role_ai_uji: Array = []
 var _akhir_dicatat = false
+var _nama_dicatat := false # Fase 6
 var _xp0 = 0   # Fase 2: profil di awal (HOME tiap proses terpisah -> biasanya 0)
 var _cr0 = 0
 
@@ -54,7 +56,17 @@ var jumlah_giliran = 0
 var _sig_event = "" # Fase 5 G1: log EVENT tiap perubahan (ronde_event/aktif/terakhir)
 var _sig_bounty = "" # Fase 5 G2: log BOUNTY tiap perubahan (aktif/terakhir/bintang tiap slot)
 var _sig_bantuan = "" # Fase 5 G3: log KARTU_BANTUAN tiap perubahan (stat kartu_bantuan + isi inventaris per slot)
+# Fase 5 G6 (rig-only): ai_cepat=1 -> profil dihidupkan; di multiplayer tombol >> TIDAK boleh muncul dan Engine.time_scale TIDAK boleh 2x (6.0 = 3.0 x 2).
+var ai_cepat_uji = false
+var _acmp_frame = 0
+var _acmp_2x = 0
+var _acmp_tombol = 0
 var kaya_awal = false # Fase 5 G3 (rig-only): host mulai +3000 koin -> pemain lain tertinggal >= 1000 -> kartu bantuan muncul saat lewat START
+var hutang_habis_slot := -1 # Fase 5 G8 (rig-only): hutang_habis=SLOT -> paksa jalur "petak terakhir terjual, masih minus"
+var _hb_teks_terakhir := ""
+var _hb_bawa := 0
+var _hb_pasang := 0
+var _hb_giliran_bawa := -1
 var _kaya_diberikan = false
 # --- Fase 5 G4 (rig-only): tebak=1 -> robot penonton menebak tiap duel yang ditonton (selang-seling penyerang/pembela)
 # dan mencocokkan stat tebak_benar + teks "Good guess!"/"Wrong guess." dengan pemenang duel sebenarnya (log TEBAK_*).
@@ -132,6 +144,8 @@ func _ready():
 		if a == "tebak=1": tebak_uji = true # Fase 5 G4
 		if a == "tebak_telat=1": tebak_telat_uji = true; tebak_uji = true # Fase 5 G4
 		if a == "kaya_awal=1": kaya_awal = true
+		if a.begins_with("hutang_habis="): hutang_habis_slot = int(a.substr(13)) # Fase 5 G8
+		if a == "ai_cepat=1": ai_cepat_uji = true # Fase 5 G6
 		if a.begins_with("arena="): arena_uji = a.substr(6)
 		if a == "arena_palsu=1": arena_uji = "custom_ilegal" # F0 (B-f, 14.19, U10): alias -- mekanisme SAMA "custom_ilegal" (B-c/C2) yang sudah menguji rpc_role_lobby/build_arena K16, cuma nama argumen sesuai rencana
 		if a.begins_with("role_ai="): role_ai_uji = a.substr(8).split(",") # D6 (B-d, rig-only)
@@ -143,6 +157,21 @@ func _ready():
 	process_mode = Node.PROCESS_MODE_ALWAYS
 	Engine.max_fps = 60
 	Engine.time_scale = 3.0
+	if ai_cepat_uji:
+		ProfilPemain.atur_ai_cepat(true) # Fase 5 G6
+	# Fase 6 (rig-only): identitas berbeda per robot -> lobby/papan harus menampilkan nama + level yang benar.
+	ProfilPemain.nama = "Bot %s%d" % [peran, urut]
+	ProfilPemain.xp_total = 150 * (urut + 1) # level 2-3 (100 + 20 per level)
+	ProfilPemain.respect = urut + 1
+	respect_awal_uji = ProfilPemain.respect # G2: baseline Respect sebelum laga (Respect bisa tiba sebelum _respect_uji mulai)
+	ProfilPemain.mvp_total = urut
+	# Fase 7 G3 (rig-only): kosmetik berbeda per robot; client3 sengaja mengirim id RUSAK -> host harus menjadikannya AWAL.
+	var kos_uji = {"host1": {"pawn": "pawn_gold", "title": "title_duelist", "frame": "frame_royal"},
+		"client1": {"pawn": "pawn_lava", "title": "title_tile_legend", "frame": "frame_bronze"},
+		"client2": {"pawn": "pawn_shadow", "title": "title_storm_caller", "frame": "frame_gold"},
+		"client3": {"pawn": "zzz", "title": "pawn_rose", "frame": "frame_silver"}}
+	if kos_uji.has("%s%d" % [peran, urut]):
+		ProfilPemain.kosmetik_dipakai = kos_uji["%s%d" % [peran, urut]]
 	seed(benih * 101 + urut)
 	_xp0 = ProfilPemain.xp_total
 	_cr0 = ProfilPemain.crowns
@@ -206,6 +235,10 @@ func _akhiri(alasan: String) -> void:
 		_catat("CEK_BD %s" % str(totbd))
 	if tebak_uji and p != null:
 		_catat("TEBAK_RINGKAS slot=%d tebakan=%d benar=%d telat_kirim=%d telat_ditolak=%d cek_ok=%d cek_gagal=%d tebak_benar_per_slot=%s" % [p.slot_lokal, _tebak_total, _tebak_benar_total, _tebak_telat_kirim, _tebak_telat_ditolak, _tebak_cek_ok, _tebak_cek_gagal, str(p.statistik_slot.map(func(st): return int(st.get("tebak_benar", 0))))])
+	if ai_cepat_uji:
+		_catat("AI_CEPAT_MP_RINGKAS peran=%s profil=%s frame=%d frame_2x=%d frame_tombol_terlihat=%d" % [peran, str(ProfilPemain.ai_cepat), _acmp_frame, _acmp_2x, _acmp_tombol])
+	if p != null and is_instance_valid(p) and migrasi_selesai > 0:
+		_catat_profil_nama("sesudah_migrasi") # Fase 6: nama tetap benar sesudah host pindah
 	_catat("SELESAI %s peran=%s giliran=%d cek_ok=%d cek_gagal=%d kartu_beda=%d detik=%.0f migrasi=%d cek_ok_migrasi=%d jaringan=%s role=%s" % [alasan, peran, jumlah_giliran, cek_ok, cek_gagal, kartu_beda, detik_total, migrasi_selesai, cek_ok_migrasi, StatusJaringan.peran_multiplayer, ",".join(cetak_role)])
 	_tulis_log()
 	get_tree().quit()
@@ -328,6 +361,10 @@ func _process(delta):
 	detik_total += delta
 	var adegan = get_tree().current_scene
 	if adegan == null: return
+	if ai_cepat_uji and p != null:
+		_acmp_frame += 1
+		if is_equal_approx(Engine.time_scale, 6.0): _acmp_2x += 1
+		if p.tombol_ai_cepat != null and p.tombol_ai_cepat.visible: _acmp_tombol += 1
 	if tahap == "awal":
 		if adegan.get_script() != null and adegan.get_script().resource_path.ends_with("layar_local_play.gd"):
 			tahap = "lobby"
@@ -438,6 +475,47 @@ func _jalankan_lobby(lobby) -> void:
 				await _pilih_role_lobby("client%d" % urut)
 
 # ---------------------------------------------------------------- permainan
+func _urus_hutang_habis(cetak: Callable) -> void:
+	# Fase 5 G8 (rig-only, hutang_habis=SLOT): begitu SLOT punya >= 2 petak dan uang >= 0, uangnya dibuat
+	# minus melebihi nilai jual semua petaknya -> denda berikutnya = bangkrut, petak terakhir terjual, masih
+	# minus -> harus "No more tiles! ... carry the debt." dan giliran lanjut (dulu macet). Dipasang ulang
+	# sampai jalur itu terjadi sekali. Host/solo saja yang memasang; semua device mencatat.
+	var s = hutang_habis_slot
+	if s < 0 or s >= p.jumlah_pemain():
+		return
+	var teks = p.teks_dadu.text
+	if teks.begins_with("No more tiles!") and not _hb_teks_terakhir.begins_with("No more tiles!"):
+		_hb_bawa += 1
+		_hb_giliran_bawa = jumlah_giliran
+		cetak.call("HUTANG_BAWA ke-%d teks='%s' giliran=%d uang=%s mode_jual=%s membidik=%s petak_slot=%d" % [_hb_bawa, teks, jumlah_giliran,
+			str(p.daftar_pemain.map(func(d): return d.uang)), str(p.mode_jual_aset), str(p.mode_membidik), _hb_jumlah_petak(s)])
+	_hb_teks_terakhir = teks
+	if _hb_giliran_bawa >= 0 and jumlah_giliran >= _hb_giliran_bawa + 2:
+		cetak.call("HUTANG_LANJUT giliran=%d mode_jual=%s uang=%s" % [jumlah_giliran, str(p.mode_jual_aset), str(p.daftar_pemain.map(func(d): return d.uang))])
+		_hb_giliran_bawa = -1
+	if _hb_bawa > 0 or StatusJaringan.peran_multiplayer == "client":
+		return
+	if p.mode_jual_aset or p.daftar_pemain[s].uang < 0 or _hb_jumlah_petak(s) < 2:
+		return
+	var nilai = 0
+	for i in range(p.rute_papan.size()):
+		if p.pemilik_petak[i] == s:
+			var lv = p.level_menara_petak[i]
+			var n = p.harga_tanah
+			if lv >= 1: n += p.harga_menara_lv1
+			if lv == 2: n += p.harga_menara_lv2
+			nilai += int(n * 0.7)
+	p.daftar_pemain[s].uang = -nilai - 1000
+	p.update_ui_status()
+	_hb_pasang += 1
+	cetak.call("HUTANG_PASANG ke-%d slot=%d petak=%d nilai_jual=%d uang=%d giliran=%d" % [_hb_pasang, s, _hb_jumlah_petak(s), nilai, p.daftar_pemain[s].uang, jumlah_giliran])
+
+func _hb_jumlah_petak(s: int) -> int:
+	var n = 0
+	for i in range(p.rute_papan.size()):
+		if p.pemilik_petak[i] == s: n += 1
+	return n
+
 func _langkah_main(delta) -> void:
 	detik_diam += delta
 	var teks = p.teks_dadu.text
@@ -445,6 +523,9 @@ func _langkah_main(delta) -> void:
 		teks_terakhir = teks
 		jejak.append("T|" + teks.replace("\n", " / "))
 		detik_diam = 0.0
+	if not _nama_dicatat:
+		_nama_dicatat = true
+		_catat_profil_nama("awal")
 	var sig_event = "%d|%s|%s" % [p.ronde_event, p.event_aktif, p.event_terakhir]
 	if sig_event != _sig_event:
 		_sig_event = sig_event
@@ -458,6 +539,7 @@ func _langkah_main(delta) -> void:
 		_sig_bounty = sig_bounty
 		_catat("BOUNTY aktif=%s terakhir=%s bintang=%s stat_bounty=%s" % [p.bounty_elemen, p.bounty_terakhir,
 			str(p.daftar_pemain.map(func(d): return d.bintang)), str(p.statistik_slot.map(func(st): return int(st.get("bounty", 0))))])
+	_urus_hutang_habis(func(t): _catat(t))
 	if p.giliran_sekarang != giliran_terakhir:
 		giliran_terakhir = p.giliran_sekarang
 		jumlah_giliran += 1
@@ -484,7 +566,7 @@ func _langkah_main(delta) -> void:
 			# Beri waktu client menampilkan layar akhirnya sendiri (replay, iklan stub).
 			await get_tree().create_timer(6.0).timeout
 			rpc("rpc_uji_selesai")
-		await get_tree().create_timer(2.0).timeout
+		await get_tree().create_timer(10.0 if skenario == "respect" else 2.0).timeout
 		_akhiri("MENANG")
 		return
 	if detik_diam > 150.0:
@@ -857,8 +939,71 @@ func _catat_akhir() -> void:
 	if _akhir_dicatat or p == null:
 		return
 	_akhir_dicatat = true
+	_catat_profil_nama("akhir")
 	_catat("AKHIR alasan=%s pemenang=%d ronde=%d/%d papan=%s" % [p._alasan_akhir, p._slot_pemenang_akhir, p.ronde_sekarang, p.batas_ronde, str(p._papan_skor_akhir)])
 	_cek_profil_mp()
+	_catat("MVP_UJI slot_mvp=%d saya=%s mvp_total=%d" % [ProfilPemain.hitung_mvp(p._papan_skor_akhir), str(ProfilPemain.hitung_mvp(p._papan_skor_akhir) == p.slot_lokal), ProfilPemain.mvp_total])
+	if skenario == "respect":
+		_respect_uji()
+
+func _respect_uji() -> void:
+	# Fase 6 G2 (rig-only, skenario "respect"): tiap HP memberi Respect SEKALI ke tiap lawan MANUSIA, lalu mencoba kirim ganda
+	# (penjaga lokal + paksa lewat RPC / _host_proses_respect). Harapan: respect saya naik TEPAT sebanyak lawan manusia (1 per lawan),
+	# AI / diri sendiri ditolak.
+	var awal = respect_awal_uji
+	var manusia = []
+	var ditolak_benar = true
+	for s in range(p.jumlah_pemain()):
+		if s == p.slot_lokal:
+			continue
+		if p.bisa_beri_respect(s):
+			manusia.append(s)
+		elif p.kirim_respect(s):
+			ditolak_benar = false # AI / bukan manusia tidak boleh bisa dikirimi
+	var rinci = []
+	for s in manusia:
+		var pertama = p.kirim_respect(s)
+		var kedua_lokal = p.kirim_respect(s)
+		if StatusJaringan.peran_multiplayer == "host":
+			var kedua_host = p._host_proses_respect(p.slot_lokal, s)
+			rinci.append("%d:%s/%s/%s" % [s, str(pertama), str(kedua_lokal), str(kedua_host)])
+		else:
+			p.rpc_id(1, "rpc_zrespect_kirim", s) # kirim ganda PAKSA (melewati penjaga lokal) -- host harus menolak
+			rinci.append("%d:%s/%s/paksa" % [s, str(pertama), str(kedua_lokal)])
+	var diri = p.kirim_respect(p.slot_lokal)
+	if StatusJaringan.peran_multiplayer == "host":
+		diri = diri or p._host_proses_respect(p.slot_lokal, p.slot_lokal)
+	# Client lain bisa mencapai layar akhirnya beberapa detik lebih lambat -> tunggu sampai semua Respect tiba (maks 7 dtk).
+	var t = 0.0
+	while t < 7.0 and ProfilPemain.respect - awal < manusia.size():
+		await get_tree().create_timer(0.25).timeout
+		t += 0.25
+	await get_tree().create_timer(1.0).timeout # sisa waktu: kiriman berlebih (kalau ada) sempat tiba
+	var akhir = ProfilPemain.respect
+	var ok = (akhir - awal == manusia.size()) and ditolak_benar and not diri
+	_catat("RESPECT_UJI slot=%d lawan_manusia=%s kirim=%s diri_ditolak=%s ai_ditolak=%s respect %d->%d diharapkan=+%d cek=%s" % [p.slot_lokal, str(manusia), str(rinci), str(not diri), str(ditolak_benar), awal, akhir, manusia.size(), "OK" if ok else "GAGAL"])
+
+func _catat_profil_nama(kapan: String) -> void:
+	# Fase 6: nama/level tiap slot menurut HP ini -- HARUS sama di semua HP (dan tetap sama sesudah migrasi host).
+	var nm = []
+	for s in range(p.jumlah_pemain()):
+		nm.append("%s/%s/%s" % [p._nama_manusia(s), p._nama_manusia(s, true), UiProfil.nama_slot_papan(p, s)])
+	_catat("PROFIL_NAMA %s slot_lokal=%d profil_slot=%s tampil=%s" % [kapan, p.slot_lokal, str(StatusJaringan.profil_slot), str(nm)])
+	# Fase 7 G3: kosmetik tiap slot menurut HP ini (HARUS sama di semua HP, juga sesudah migrasi) + warna trim/badan model nyata.
+	var ko = []
+	for s in range(p.jumlah_pemain()):
+		var k: Dictionary = p._kosmetik_slot(s)
+		var trim = "-"
+		var badan = "-"
+		if s < p.daftar_model.size():
+			for m in (p.daftar_model[s] as Node).find_children("*", "MeshInstance3D", true, false):
+				var c: Color = (m as MeshInstance3D).get_active_material(0).albedo_color
+				if m.name == "Kaki": # model uji beras_uji.tscn: Kaki = sepatu (trim), Badan = badan
+					trim = c.to_html(false)
+				elif m.name == "Badan":
+					badan = c.to_html(false)
+		ko.append("%s/%s/%s/gelar=%s/trim=%s/badan=%s" % [k["pawn"], k["title"], k["frame"], p._gelar_manusia(s), trim, badan])
+	_catat("KOSMETIK_UJI %s slot_lokal=%d %s" % [kapan, p.slot_lokal, str(ko)])
 
 func _cek_profil_mp() -> void:
 	# Fase 2: tiap HP mencatat hadiah untuk slot_lokal-nya sendiri, TEPAT sekali (juga sesudah migrasi).
@@ -872,9 +1017,13 @@ func _cek_profil_mp() -> void:
 	var menang = p._slot_pemenang_akhir == p.slot_lokal
 	var pengali = (1.0 if p.mode_quick else 1.6) * (1.5 if menang else 1.0)
 	var ok_rumus = not r.is_empty() and r["xp_match"] == roundi(5 * int(st.get("giliran", 0)) * pengali) and r["crowns_match"] == roundi(2 * int(st.get("giliran", 0)) * pengali) and r["xp_penghargaan"] == 15 * peng.size() and r["crowns_penghargaan"] == 10 * peng.size()
-	var xp_tambah = int(r.get("xp_match", 0)) + int(r.get("xp_penghargaan", 0)) + int(r.get("xp_misi", 0))
-	var cr_tambah = int(r.get("crowns_match", 0)) + int(r.get("crowns_penghargaan", 0)) + int(r.get("crowns_misi", 0)) + int(r.get("crowns_naik_level", 0))
+	var xp_tambah = int(r.get("xp_match", 0)) + int(r.get("xp_penghargaan", 0)) + int(r.get("xp_misi", 0)) + int(r.get("xp_tebak", 0))
+	var cr_tambah = int(r.get("crowns_match", 0)) + int(r.get("crowns_penghargaan", 0)) + int(r.get("crowns_misi", 0)) + int(r.get("crowns_tebak", 0)) + int(r.get("crowns_naik_level", 0))
 	var ok_sekali = ProfilPemain.xp_total == _xp0 + xp_tambah and ProfilPemain.crowns == _cr0 + cr_tambah
+	# Fase 5 G7: hadiah Tebak Duel = 5 XP / 3 Crowns per tebakan benar (maks 5) dari stat tebak_benar slot ini (identik di semua HP).
+	var tebak_stat = int(st.get("tebak_benar", 0))
+	var ok_tebak = int(r.get("xp_tebak", -1)) == 5 * mini(tebak_stat, 5) and int(r.get("crowns_tebak", -1)) == 3 * mini(tebak_stat, 5) and int(ProfilPemain.statistik.get("tebak_benar", 0)) == tebak_stat
+	_catat("TEBAK_HADIAH_MP slot=%d tebak_benar_stat=%d xp_tebak=%d crowns_tebak=%d stat_seumur=%d cek=%s" % [p.slot_lokal, tebak_stat, int(r.get("xp_tebak", -1)), int(r.get("crowns_tebak", -1)), int(ProfilPemain.statistik.get("tebak_benar", 0)), "OK" if ok_tebak else "GAGAL"])
 	var c = ConfigFile.new()
 	var ok_berkas = c.load(ProfilPemain.BERKAS) == OK and int(c.get_value("profil", "xp", -1)) == ProfilPemain.xp_total
 	var ok = ok_rumus and ok_sekali and ok_berkas and int(st.get("giliran", 0)) > 0

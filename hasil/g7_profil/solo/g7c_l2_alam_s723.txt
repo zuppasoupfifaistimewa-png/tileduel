@@ -1,0 +1,3 @@
+IKLAN_KARTU klik=true kartu=0->1 id=dadu_rendah teks='You got LOW ROLL! Tap Use Card in your turn.' cek=OK
+TEBAK_RINGKAS tebakan=8 benar=3 cek_ok=8 cek_gagal=0 stat_tebak_benar_slot0=3
+SIM MACET giliran=82 detik=2139

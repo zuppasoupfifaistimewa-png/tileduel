@@ -1,0 +1,22 @@
+G7 profil: hadiah Tebak Duel (5 XP / 3 Crowns per tebakan benar, maks 5 dihitung), baris kartu hadiah 'Duel guesses', tebak_benar di STAT_SEUMUR.
+Solo penuh (opsi rig profil=1 tebak=1 iklan=1; PROFIL_CEK memeriksa rumus, profil naik tepat sebesar hadiah, berkas, muat ulang, kartu, DOUBLE, EXIT; + TEBAK_HADIAH):
+g7c_l3_alam_s702: SIM MENANG giliran=108 detik=2651 | tebak_benar_stat=9 dihitung=5 xp_tebak=25 crowns_tebak=15 stat_seumur=0->9 baris_kartu=true | PROFIL_CEK OK menang=false quick=false giliran=27 xp=216/216 | tebakan=16 benar=9 cek_ok=16 cek_gagal=0 stat_tebak_benar_slot0=9 err=0
+g7c_l3_alam_s721: SIM MENANG giliran=82 detik=1772 | tebak_benar_stat=5 dihitung=5 xp_tebak=25 crowns_tebak=15 stat_seumur=0->5 baris_kartu=true | PROFIL_CEK OK menang=false quick=false giliran=21 xp=168/168 | tebakan=11 benar=5 cek_ok=11 cek_gagal=0 stat_tebak_benar_slot0=5 err=0
+g7c_l3_pantai_s722: SIM MENANG giliran=234 detik=6888 | tebak_benar_stat=12 dihitung=5 xp_tebak=25 crowns_tebak=15 stat_seumur=0->12 baris_kartu=true | PROFIL_CEK OK menang=false quick=false giliran=59 xp=472/472 | tebakan=31 benar=12 cek_ok=31 cek_gagal=0 stat_tebak_benar_slot0=12 err=0
+g7c_l3_alam_s724: SIM MENANG giliran=105 detik=3014 | tebak_benar_stat=9 dihitung=5 xp_tebak=25 crowns_tebak=15 stat_seumur=0->9 baris_kartu=true | PROFIL_CEK OK menang=true quick=false giliran=27 xp=324/324  | tebakan=16 benar=9 cek_ok=16 cek_gagal=0 stat_tebak_benar_slot0=9 err=0
+g7q_l2_pantai_s703: SIM MENANG giliran=18 detik=347 | tebak_benar_stat=0 dihitung=0 xp_tebak=0 crowns_tebak=0 stat_seumur=0->0 baris_kartu=false | PROFIL_CEK OK menang=false quick=true giliran=6 xp=30/30 cr= | tebakan=0 benar=0 cek_ok=0 cek_gagal=0 stat_tebak_benar_slot0=0 err=0
+g7q_l3_alam_s704: SIM MENANG giliran=20 detik=523 | tebak_benar_stat=0 dihitung=0 xp_tebak=0 crowns_tebak=0 stat_seumur=0->0 baris_kartu=false | PROFIL_CEK OK menang=true quick=true giliran=5 xp=38/38 cr=1 | tebakan=0 benar=0 cek_ok=0 cek_gagal=0 stat_tebak_benar_slot0=0 err=0
+
+Run yang berakhir MACET (BUKAN hasil G6/G7 -- temuan lama, lihat HANDOFF 'Temuan'): g7c_l2_pantai_s701 (giliran 163), g7c_l2_alam_s723 (giliran 82): pemain bangkrut, semua petak sudah dijual, masih minus -> 'Still in minus! Tap another tile to sell.' tanpa petak tersisa.
+g7c_l2_pantai_s701: SIM MACET giliran=163 detik=3867 | tebakan=5 benar=1 cek_ok=5 cek_gagal=0 stat_tebak_benar_slot0=1
+T|Tile sold: +210 Coins!
+T|Still in minus! Tap another tile to sell.
+R|jual|29
+T|Tile sold: +210 Coins!
+T|Still in minus! Tap another tile to sell.
+g7c_l2_alam_s723: SIM MACET giliran=82 detik=2139 | tebakan=8 benar=3 cek_ok=8 cek_gagal=0 stat_tebak_benar_slot0=3
+T|YOU BANKRUPT! Money is minus.
+T|TAP YOUR TILE TO SELL (30% Discount)
+R|jual|23
+T|Tile sold: +210 Coins!
+T|Still in minus! Tap another tile to sell.

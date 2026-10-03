@@ -34,6 +34,7 @@ var _tebak_terbuka: bool = false    # HOST/SOLO: jendela tebakan masih terbuka
 var _tebak_nomor_lokal: int = -1    # device INI: nomor duel yang sedang bisa ditebak (-1 = tidak ada)
 # Fase 5 G5: putar ulang rolet setelah kalah duel solo (iklan berhadiah) -- sekali per pertandingan.
 var _putar_ulang_terpakai: bool = false
+var _putar_ulang_ditolak: bool = false  # pemain menekan NO THANKS -> tidak ditawari lagi di pertandingan ini
 # CLIENT: naik setiap kali device ini mengambil alih permainan karena host keluar.
 # Coroutine lama yang masih menunggu klik untuk dikirim ke host jadi tahu diri.
 var _generasi_jaringan: int = 0
@@ -175,6 +176,11 @@ func _atur_nama_duel(slot_a: int, slot_d: int) -> void:
 	if tonton and jumlah_pemain() <= 2:
 		nama_p = "P%d" % (sisi_p + 1)
 		nama_m = "P%d" % (sisi_m + 1)
+	# Fase 6: multiplayer -> nama pemain asli (huruf besar, gaya label duel).
+	if _nama_manusia(sisi_p) != "" and tonton:
+		nama_p = _nama_manusia(sisi_p).to_upper()
+	if _nama_manusia(sisi_m) != "":
+		nama_m = _nama_manusia(sisi_m).to_upper()
 	ui_elemen.atur_sudut_pandang(nama_p, nama_m, tonton)
 
 func _jalankan_duel(slot_a: int, slot_d: int, nyawa_kandang: int, bonus_pedang: int) -> Dictionary:
@@ -188,6 +194,7 @@ func _jalankan_duel(slot_a: int, slot_d: int, nyawa_kandang: int, bonus_pedang: 
 	if StatusJaringan.peran_multiplayer == "" and manusia_lokal_ikut:
 		# Solo manusia vs AI: alur asli (AI memilih elemen di dalam jalankan_duel).
 		var siapa = "pemain" if slot_a == slot_lokal else "musuh"
+		ui_elemen.elemen_ai_bounty = AiMusuh.elemen_bounty_ai(self) # Fase 9 G2
 		hasil_ui = await ui_elemen.jalankan_duel(siapa, nyawa_kandang, kamera, teks_dadu, bonus_pedang)
 	else:
 		var naskah: Dictionary
@@ -238,6 +245,13 @@ func _tonton_ai_pilih_elemen(slot_a: int, slot_d: int) -> void:
 	_tebakan_duel.clear()
 	_tebak_terbuka = true # Fase 5 G4: jendela tebakan = selama kedua segel belum terkunci
 	_buka_tebak_duel(slot_a, slot_d, 0)
+	if _tebak_nomor_lokal >= 0:
+		# Fase 5 G8: tombol tebak tampil -> penyerang "berpikir" lebih lama (maks TEBAK_SOLO_TAMBAHAN dtk),
+		# berhenti begitu pemain menebak. Tanpa penonton manusia (rig semua AI) tidak ada tambahan.
+		var tambahan := 0.0
+		while tambahan < TEBAK_SOLO_TAMBAHAN and not _tebakan_duel.has(slot_lokal):
+			await get_tree().create_timer(0.1).timeout
+			tambahan += 0.1
 	await get_tree().create_timer(1.5).timeout
 	_tampilkan_segel_terkunci(slot_a)
 	await get_tree().create_timer(1.0).timeout
@@ -249,8 +263,8 @@ func _naskah_duel_ai(slot_a: int, slot_d: int, nyawa_kandang: int, bonus_pedang:
 	# pemain manusia menonton duelnya.
 	var naskah = {
 		"slot_a": slot_a, "slot_d": slot_d,
-		"elemen_a": ui_elemen._pilih_elemen_adaptif("menyerang"),
-		"elemen_d": ui_elemen._pilih_elemen_adaptif("bertahan"),
+		"elemen_a": _elemen_ai_duel("menyerang"),
+		"elemen_d": _elemen_ai_duel("bertahan"),
 		"angka_a": ui_elemen.angka_penyerang[mesin_acak.randi_range(0, ui_elemen.angka_penyerang.size() - 1)],
 		"angka_d": ui_elemen.angka_pembela[mesin_acak.randi_range(0, ui_elemen.angka_pembela.size() - 1)],
 		"bonus_pedang": bonus_pedang,
@@ -275,6 +289,11 @@ func _lengkapi_koin_naskah(naskah: Dictionary, nyawa_kandang: int) -> void:
 		if not _is_ai(s) and not _koin_seri_wajib.has(s):
 			_koin_seri_wajib.append(s)
 
+func _elemen_ai_duel(peran: String) -> String:
+	# Fase 9 G2: AI kadang mengejar bounty (AiMusuh.elemen_bounty_ai), selain itu pilihan adaptif lama.
+	var el = AiMusuh.elemen_bounty_ai(self)
+	return el if el != "" else ui_elemen._pilih_elemen_adaptif(peran)
+
 func _ai_kunci_elemen_tertunda(slot: int, jeda: float, nomor: int) -> void:
 	# HOST: AI "berpikir" sebentar sebelum mengunci elemen duel (lihat
 	# _kumpulkan_naskah_duel). "nomor" menjaga supaya timer dari duel SEBELUMNYA
@@ -283,7 +302,7 @@ func _ai_kunci_elemen_tertunda(slot: int, jeda: float, nomor: int) -> void:
 	await get_tree().create_timer(jeda).timeout
 	if nomor != _nomor_duel or not _duel_mengumpulkan:
 		return
-	_kunci_elemen_peserta(slot, ui_elemen._pilih_elemen_adaptif("menyerang" if slot == _duel_slot_penyerang else "bertahan"))
+	_kunci_elemen_peserta(slot, _elemen_ai_duel("menyerang" if slot == _duel_slot_penyerang else "bertahan"))
 
 func _kumpulkan_naskah_duel(slot_a: int, slot_d: int, nyawa_kandang: int, bonus_pedang: int) -> Dictionary:
 	# HOST ONLY.
@@ -568,6 +587,7 @@ func _saat_tebakan_dipilih(sisi: String) -> void:
 		ui_elemen.tebak_telat()
 		return
 	var slot_ditebak = _duel_slot_penyerang if sisi == "pemain" else _duel_slot_pembela
+	ui_elemen.taruhan_terpasang = ProfilPemain.pasang_taruhan(ui_elemen.taruhan_pilihan) == "" if ui_elemen.taruhan_pilihan > 0 else false # Fase 9 F9.2
 	if StatusJaringan.peran_multiplayer == "client":
 		rpc_id(1, "rpc_kirim_tebakan", _tebak_nomor_lokal, slot_ditebak)
 	elif not _catat_tebakan(slot_lokal, slot_ditebak):
@@ -607,6 +627,13 @@ func _nilai_tebakan_duel(slot_menang: int) -> void:
 	for s in _tebakan_duel:
 		if int(_tebakan_duel[s]) == slot_menang:
 			_tambah_stat(int(s), "tebak_benar")
+			# Fase 9 F9.1: rekor tebakan benar berturut-turut (stat "tebak_beruntun" = nilai terbaik).
+			var urut = int(_tebak_beruntun_slot.get(int(s), 0)) + 1
+			_tebak_beruntun_slot[int(s)] = urut
+			if StatusJaringan.peran_multiplayer != "client" and int(s) < statistik_slot.size():
+				statistik_slot[int(s)]["tebak_beruntun"] = maxi(int(statistik_slot[int(s)].get("tebak_beruntun", 0)), urut)
+		else:
+			_tebak_beruntun_slot[int(s)] = 0
 	_tebakan_duel.clear()
 	_tebak_nomor_lokal = -1
 
@@ -710,10 +737,11 @@ func _tawarkan_putar_ulang() -> bool:
 	# KALAH skor di duel lawan AI. true = iklan ditonton sampai habis -> ui_elemen memutar
 	# ulang rolet pemain. Pola _tawarkan_iklan_hutang; tanpa tawaran fungsi ini kembali
 	# tanpa menunggu satu frame pun (jejak uji tidak berubah kalau iklan tidak tersedia).
-	if StatusJaringan.peran_multiplayer != "" or _putar_ulang_terpakai or not PengelolaIklan.rewarded_tersedia():
+	if StatusJaringan.peran_multiplayer != "" or _putar_ulang_terpakai or _putar_ulang_ditolak or not PengelolaIklan.rewarded_tersedia():
 		return false
 	var mau = await UiDinamis.tanya_putar_ulang(self)
 	if not mau:
+		_putar_ulang_ditolak = true # NO THANKS = jangan tawari lagi (iklan GAGAL di bawah tetap boleh ditawari lagi)
 		return false
 	var dapat = await PengelolaIklan.tonton_rewarded()
 	if not dapat:

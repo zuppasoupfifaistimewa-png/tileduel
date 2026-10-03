@@ -1,0 +1,15 @@
+g6b_m2.host.txt:  | 
+g6b_q1.host.txt: SELESAI MENANG peran=host giliran=16 cek_ok=8 cek_gagal=0 kartu_beda=0 detik=304 migrasi=0 cek_ok_migrasi=0 jaringan=hos | 
+g6b_r1b.host.txt: SELESAI MENANG peran=host giliran=9 cek_ok=8 cek_gagal=0 kartu_beda=0 detik=208 migrasi=0 cek_ok_migrasi=0 jaringan=host | respect 4->4 diharapkan=+2 cek=GAGAL
+g6b_r1c.host.txt: SELESAI MENANG peran=host giliran=18 cek_ok=12 cek_gagal=0 kartu_beda=0 detik=434 migrasi=0 cek_ok_migrasi=0 jaringan=ho | respect 2->4 diharapkan=+2 cek=OK
+g6b_s1.host.txt: SELESAI MENANG peran=host giliran=10 cek_ok=9 cek_gagal=0 kartu_beda=0 detik=253 migrasi=0 cek_ok_migrasi=0 jaringan=hos | 
+g6b_m2.c1.txt: SELESAI MENANG peran=client giliran=20 cek_ok=6 cek_gagal=0 kartu_beda=0 detik=468 migrasi=1 cek_ok_migrasi=6 jaringan=h | 
+g6b_m2.c2.txt: SELESAI MENANG peran=client giliran=19 cek_ok=0 cek_gagal=0 kartu_beda=0 detik=462 migrasi=1 cek_ok_migrasi=0 jaringan=c | 
+g6b_m2.c3.txt: SELESAI MENANG peran=client giliran=19 cek_ok=0 cek_gagal=0 kartu_beda=0 detik=462 migrasi=1 cek_ok_migrasi=0 jaringan=c | 
+g6b_q1.c1.txt: SELESAI MENANG peran=client giliran=14 cek_ok=0 cek_gagal=0 kartu_beda=0 detik=298 migrasi=0 cek_ok_migrasi=0 jaringan=c | 
+g6b_r1b.c1.txt: SELESAI HOST_SELESAI peran=client giliran=9 cek_ok=0 cek_gagal=0 kartu_beda=0 detik=199 migrasi=0 cek_ok_migrasi=0 jarin | respect 2->4 diharapkan=+2 cek=OK
+g6b_r1b.c2.txt: SELESAI HOST_SELESAI peran=client giliran=9 cek_ok=0 cek_gagal=0 kartu_beda=0 detik=199 migrasi=0 cek_ok_migrasi=0 jarin | respect 3->5 diharapkan=+2 cek=OK
+g6b_r1c.c1.txt: SELESAI HOST_SELESAI peran=client giliran=17 cek_ok=0 cek_gagal=0 kartu_beda=0 detik=424 migrasi=0 cek_ok_migrasi=0 jari | respect 2->4 diharapkan=+2 cek=OK
+g6b_r1c.c2.txt: SELESAI HOST_SELESAI peran=client giliran=17 cek_ok=0 cek_gagal=0 kartu_beda=0 detik=424 migrasi=0 cek_ok_migrasi=0 jari | respect 3->5 diharapkan=+2 cek=OK
+g6b_s1.c1.txt: SELESAI MENANG peran=client giliran=10 cek_ok=0 cek_gagal=0 kartu_beda=0 detik=246 migrasi=0 cek_ok_migrasi=0 jaringan=c | 
+g6b_s1.c2.txt:  | 

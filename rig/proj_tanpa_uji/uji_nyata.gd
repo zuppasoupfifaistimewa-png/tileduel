@@ -16,6 +16,17 @@ var panjang_uji = "classic"   # panjang=quick|classic -> tombol QUICK MATCH / CL
 var iklan_uji = false         # iklan=1 -> stub iklan berhadiah "tersedia"; robot menonton FREE CARD & +300
 var klik_iklan_hutang = 0
 var uang0_uji = -1 # uang0=N -> uang slot 0 diset N setelah START (memancing hutang)
+var hutang_habis_slot := -1 # Fase 5 G8 (rig-only): hutang_habis=SLOT -> paksa jalur "petak terakhir terjual, masih minus"
+var _hb_teks_terakhir := ""
+var _hb_bawa := 0
+var _hb_pasang := 0
+var _hb_giliran_bawa := -1
+var _f5_ev := 0 # Fase 5 G8 (rig-only): jumlah event papan, bounty muncul, hutang dibawa -> kolom f5= baris SEIMBANG
+var _f5_bm := 0
+var _f5_hb := 0
+var _f5_ev_prev := ""
+var _f5_bm_prev := ""
+var _f5_teks_prev := ""
 var _spanduk_dicatat = false
 var _teks_ronde_terakhir = ""
 var _sig_event = "" # Fase 5 G1: log EVENT tiap perubahan
@@ -29,7 +40,20 @@ var _bantuan_prev: Array = []   # Fase 5 G3: stat kartu_bantuan per slot (log KA
 # --- Fase 5 G5 (rig-only): iklan=1 (stub iklan tersedia) -> robot menanggapi tawaran "SPIN AGAIN" (kalah skor di duel solo).
 # putar_tolak=1 -> klik NO THANKS; iklan_gagal=1 -> stub: tersedia tapi gagal ditonton ("No ad right now.").
 var putar_tolak = false
+var bebas_iklan_uji = false   # Fase 7 G4: bebas_iklan=1 -> Remove Ads aktif; robot memeriksa interstisial/banner TIDAK tayang
 var iklan_gagal = false
+# --- Fase 5 G6 (rig-only): tombol AI cepat. ai_cepat=1 -> robot menekan tombol >> (hidup di awal, mati di giliran 24, hidup lagi di 34);
+# ai_cepat=0 -> tombol tidak ditekan (kecepatan tetap diukur: tidak boleh ada 2x); ai_cepat=ingat -> tidak menekan, profil (HOME dipakai ulang) sudah hidup.
+var ai_cepat_uji := ""
+var _ac_klik := 0
+var _ac_mulai_ms := -1
+var _ac_frame := 0
+var _ac_frame_2x := 0
+var _ac_beda := 0
+var _ac_beruntun := 0
+var _ac_beruntun_maks := 0
+var _ac_salah := 0
+var _ac_tombol_dicatat := false
 var _putar_tawar_prev = false
 var _putar_tawaran = 0
 var _putar_klik = 0
@@ -40,6 +64,15 @@ var _putar_gagal_teks = false
 var _putar_cek_ok = 0
 var _putar_cek_gagal = 0
 var tebak_uji = false
+var taruhan_uji = false      # Fase 9: robot memasang taruhan (10/25/50 bergantian) sebelum menebak
+var _tar_n := 0
+var _tar_nominal := 0
+var _tar_crowns0 := 0
+var _tar_ok := 0
+var _tar_gagal := 0
+var _tar_dipasang := 0
+var tebak_jeda_uji := 0.6
+var _tj_buka := -1.0 # Fase 5 G8: detik_total saat jendela tebak (_tebak_terbuka) terbuka
 var _tebak_sejak = -1.0
 var _tebak_n = 0
 var _tebak_menunggu = -1          # slot yang ditebak di duel yang belum selesai (-1 = tidak menebak)
@@ -60,6 +93,7 @@ var cek_profil = false
 var _profil_dicek = false
 var xp0 = -1
 var cr0 = -1
+var tebak_seumur0 = 0 # Fase 5 G7: statistik seumur tebak_benar di awal pertandingan
 # --- Fase 4 U3 (keseimbangan): semua_ai=1 -> slot 0 juga AI; role=api,air,.. per
 # slot (dipasang langsung ke DataPemain sesudah START, tidak diundi); jenis=N jumlah
 # jenis jebakan dibawa tiap slot (bawaan 3 = SLOT_JEBAKAN_MP).
@@ -247,10 +281,15 @@ func _ready():
 		if a.begins_with("panjang="): panjang_uji = a.substr(8)
 		if a == "iklan=1": iklan_uji = true
 		if a.begins_with("uang0="): uang0_uji = int(a.substr(6))
+		if a.begins_with("hutang_habis="): hutang_habis_slot = int(a.substr(13)) # Fase 5 G8
 		if a == "profil=1": cek_profil = true
 		if a == "tebak=1": tebak_uji = true # Fase 5 G4
+		if a == "taruhan=1": taruhan_uji = true # Fase 9
+		if a.begins_with("tebak_jeda="): tebak_jeda_uji = float(a.substr(11)) # Fase 5 G8: robot menebak N dtk setelah tombol muncul (bawaan 0.6; >= 99 = tidak pernah)
 		if a == "putar_tolak=1": putar_tolak = true # Fase 5 G5
+		if a == "bebas_iklan=1": bebas_iklan_uji = true # Fase 7 G4
 		if a == "iklan_gagal=1": iklan_gagal = true # Fase 5 G5
+		if a.begins_with("ai_cepat="): ai_cepat_uji = a.substr(9) # Fase 5 G6
 		if a == "semua_ai=1": semua_ai = true
 		if a.begins_with("role="): role_uji = Array(a.substr(5).split(","))
 		if a.begins_with("jenis="): jenis_uji = int(a.substr(6))
@@ -305,6 +344,7 @@ func _ready():
 	# Fase 1: sakelar QUICK MATCH / CLASSIC, lalu tombol peta ASLI (tanpa iklan wajib).
 	var nama_panjang = "QUICK MATCH" if panjang_uji == "quick" else "CLASSIC"
 	print("MENU panjang '%s' = %s; keterangan='%s'" % [nama_panjang, str(_klik_teks(nama_panjang)), menu.label_ket_mode.text])
+	PengelolaIklan.bebas_iklan = bebas_iklan_uji # Fase 7 G4
 	if iklan_uji:
 		PengelolaIklan.uji_rewarded = true
 		PengelolaIklan.uji_tonton_gagal = iklan_gagal # Fase 5 G5
@@ -366,6 +406,8 @@ func _ready():
 	print("START ditekan setelah %.1f dtk; pemain=%d target_permata=%d petak=%d" % [t, p.jumlah_pemain(), p.target_permata_menang, p.rute_papan.size()])
 	xp0 = ProfilPemain.xp_total
 	cr0 = ProfilPemain.crowns
+	tebak_seumur0 = int(ProfilPemain.statistik.get("tebak_benar", 0))
+	if taruhan_uji: ProfilPemain.crowns = 500 # Fase 9: modal taruhan
 	if uang0_uji >= 0:
 		p.daftar_pemain[0].uang = uang0_uji
 		p.update_ui_status()
@@ -500,12 +542,16 @@ func _tulis_dan_keluar(alasan: String) -> void:
 		var xprole0 = -1
 		if p.get("_permainan_selesai") and not role_uji.is_empty():
 			xprole0 = int(ProfilPemain.xp_role.get(str(role_uji[0]), 0)) - _xprole0_awal
-		print("SEIMBANG peta=%s seed=%d quick=%d roles=%s pemenang=%d cara=%s giliran=%d detik=%.1f pasang=%s kena=%s kaya=%s rinci=%s presets=%s sacred=%d xprole0=%d" % [nama_peta, benih, int(p.mode_quick), ",".join(roles), pm, cara, jumlah_giliran, detik_total, ",".join(pasang), ",".join(kena), ",".join(kaya), ",".join(rinci), presets_teks, _hitung_sacred(), xprole0])
+		print("SEIMBANG peta=%s seed=%d quick=%d roles=%s pemenang=%d cara=%s giliran=%d detik=%.1f pasang=%s kena=%s kaya=%s rinci=%s presets=%s sacred=%d xprole0=%d f5=%s" % [nama_peta, benih, int(p.mode_quick), ",".join(roles), pm, cara, jumlah_giliran, detik_total, ",".join(pasang), ",".join(kena), ",".join(kaya), ",".join(rinci), presets_teks, _hitung_sacred(), xprole0, _f5_kolom()])
 	if iklan_uji:
 		print("PUTAR_ULANG_RINGKAS tawaran=%d klik=%d cek_ok=%d cek_gagal=%d stat_putar_ulang=%d" % [_putar_tawaran, _putar_klik, _putar_cek_ok, _putar_cek_gagal, int(p.statistik_slot[p.slot_lokal].get("putar_ulang", 0)) if p != null and p.statistik_slot.size() > p.slot_lokal else -1])
 	if tebak_uji:
 		var stat_tebak = p.statistik_slot[p.slot_lokal].get("tebak_benar", 0) if p != null and p.statistik_slot.size() > p.slot_lokal else -1
+		if p != null and p.statistik_slot.size() > p.slot_lokal: print("TEBAK_BERUNTUN stat=%d" % int(p.statistik_slot[p.slot_lokal].get("tebak_beruntun", 0)))
+		if taruhan_uji: print("TARUHAN_RINGKAS dipasang=%d ok=%d gagal=%d crowns_akhir=%d" % [_tar_dipasang, _tar_ok, _tar_gagal, ProfilPemain.crowns])
 		print("TEBAK_RINGKAS tebakan=%d benar=%d cek_ok=%d cek_gagal=%d stat_tebak_benar_slot%d=%d" % [_tebak_total, _tebak_benar_total, _tebak_cek_ok, _tebak_cek_gagal, p.slot_lokal if p != null else -1, int(stat_tebak)])
+	if ai_cepat_uji != "":
+		print("AI_CEPAT_RINGKAS mode=%s klik=%d profil_akhir=%s berkas_akhir=%s frame=%d frame_2x=%d frame_beda=%d salah=%d beruntun_maks=%d giliran=%d detik_game=%.0f detik_nyata=%.1f" % [ai_cepat_uji, _ac_klik, str(ProfilPemain.ai_cepat), _berkas_ai_cepat(), _ac_frame, _ac_frame_2x, _ac_beda, _ac_salah, _ac_beruntun_maks, jumlah_giliran, detik_total, (Time.get_ticks_msec() - _ac_mulai_ms) / 1000.0 if _ac_mulai_ms >= 0 else -1.0])
 	super(alasan)
 
 func _hitung_sacred() -> int: # F0 (B-f, 14.19): pemindai papan, dipakai baris SEIMBANG
@@ -637,6 +683,18 @@ func _process(delta):
 		_urus_tebak()
 	if iklan_uji:
 		_urus_putar_ulang()
+	if ai_cepat_uji != "":
+		_urus_ai_cepat()
+	_urus_hutang_habis(func(t): print(t))
+	if p.event_terakhir != _f5_ev_prev:
+		_f5_ev_prev = p.event_terakhir
+		if _f5_ev_prev != "": _f5_ev += 1
+	if p.bounty_elemen != _f5_bm_prev:
+		_f5_bm_prev = p.bounty_elemen
+		if _f5_bm_prev != "": _f5_bm += 1
+	if p.teks_dadu.text != _f5_teks_prev:
+		_f5_teks_prev = p.teks_dadu.text
+		if _f5_teks_prev.begins_with("No more tiles!"): _f5_hb += 1
 	var g_lama = jumlah_giliran
 	super(delta)
 	if jumlah_giliran != g_lama and jumlah_giliran % 20 == 0:
@@ -649,6 +707,56 @@ func _process(delta):
 			jejak.append("D|%.1f|%s" % [detik_total, sig])
 	if awalan_foto != "" and jumlah_giliran != g_lama and jumlah_giliran in [4, 9]:
 		_foto("giliran%d" % jumlah_giliran)
+
+func _urus_hutang_habis(cetak: Callable) -> void:
+	# Fase 5 G8 (rig-only, hutang_habis=SLOT): begitu SLOT punya >= 2 petak dan uang >= 0, uangnya dibuat
+	# minus melebihi nilai jual semua petaknya -> denda berikutnya = bangkrut, petak terakhir terjual, masih
+	# minus -> harus "No more tiles! ... carry the debt." dan giliran lanjut (dulu macet). Dipasang ulang
+	# sampai jalur itu terjadi sekali. Host/solo saja yang memasang; semua device mencatat.
+	var s = hutang_habis_slot
+	if s < 0 or s >= p.jumlah_pemain():
+		return
+	var teks = p.teks_dadu.text
+	if teks.begins_with("No more tiles!") and not _hb_teks_terakhir.begins_with("No more tiles!"):
+		_hb_bawa += 1
+		_hb_giliran_bawa = jumlah_giliran
+		cetak.call("HUTANG_BAWA ke-%d teks='%s' giliran=%d uang=%s mode_jual=%s membidik=%s petak_slot=%d" % [_hb_bawa, teks, jumlah_giliran,
+			str(p.daftar_pemain.map(func(d): return d.uang)), str(p.mode_jual_aset), str(p.mode_membidik), _hb_jumlah_petak(s)])
+	_hb_teks_terakhir = teks
+	if _hb_giliran_bawa >= 0 and jumlah_giliran >= _hb_giliran_bawa + 2:
+		cetak.call("HUTANG_LANJUT giliran=%d mode_jual=%s uang=%s" % [jumlah_giliran, str(p.mode_jual_aset), str(p.daftar_pemain.map(func(d): return d.uang))])
+		_hb_giliran_bawa = -1
+	if _hb_bawa > 0 or StatusJaringan.peran_multiplayer == "client":
+		return
+	if p.mode_jual_aset or p.daftar_pemain[s].uang < 0 or _hb_jumlah_petak(s) < 2:
+		return
+	var nilai = 0
+	for i in range(p.rute_papan.size()):
+		if p.pemilik_petak[i] == s:
+			var lv = p.level_menara_petak[i]
+			var n = p.harga_tanah
+			if lv >= 1: n += p.harga_menara_lv1
+			if lv == 2: n += p.harga_menara_lv2
+			nilai += int(n * 0.7)
+	p.daftar_pemain[s].uang = -nilai - 1000
+	p.update_ui_status()
+	_hb_pasang += 1
+	cetak.call("HUTANG_PASANG ke-%d slot=%d petak=%d nilai_jual=%d uang=%d giliran=%d" % [_hb_pasang, s, _hb_jumlah_petak(s), nilai, p.daftar_pemain[s].uang, jumlah_giliran])
+
+func _hb_jumlah_petak(s: int) -> int:
+	var n = 0
+	for i in range(p.rute_papan.size()):
+		if p.pemilik_petak[i] == s: n += 1
+	return n
+
+func _f5_kolom() -> String:
+	# ev/bounty_muncul/bounty_klaim/kartu_bantuan/hutang_dibawa (rig-only, Fase 5 G8)
+	var bk = 0
+	var kb = 0
+	for st in p.statistik_slot:
+		bk += int(st.get("bounty", 0))
+		kb += int(st.get("kartu_bantuan", 0))
+	return "%d/%d/%d/%d/%d" % [_f5_ev, _f5_bm, bk, kb, _f5_hb]
 
 func _skor_dari_teks(t: String) -> int:
 	var rx = RegEx.new()
@@ -666,8 +774,8 @@ func _urus_putar_ulang() -> void:
 		var sp = _skor_dari_teks(ui.teks_p.text)
 		var sm = _skor_dari_teks(ui.teks_m.text)
 		print("PUTAR_ULANG_TAWAR ke=%d skor_p=%d skor_m=%d%s" % [_putar_tawaran, sp, sm, "" if sp < sm else "  GAGAL: bukan kalah skor"])
-		if _putar_klik > 0 and not putar_tolak and not iklan_gagal:
-			print("PUTAR_ULANG GAGAL: ditawarkan lagi padahal sudah dipakai di pertandingan ini")
+		if _putar_klik > 0 and not iklan_gagal:
+			print("PUTAR_ULANG GAGAL: ditawarkan lagi padahal sudah dipakai/ditolak di pertandingan ini")
 		_putar_skor_m = sm
 		_putar_skor_baru = -1
 	_putar_tawar_prev = tawar
@@ -697,22 +805,84 @@ func _urus_putar_ulang() -> void:
 				_putar_skor_baru = -1
 	_putar_menang_prev = menang_kini
 
+func _berkas_ai_cepat() -> String:
+	# Nilai ai_cepat yang SUNGGUH tersimpan di user://profil.cfg ("?" = berkas tidak terbaca).
+	var c = ConfigFile.new()
+	if c.load("user://profil.cfg") != OK:
+		return "?"
+	return str(bool(c.get_value("pengaturan", "ai_cepat", false)))
+
+func _urus_ai_cepat() -> void:
+	# Fase 5 G6 (rig-only). (1) Robot menekan tombol >> (mode "1"). (2) Tiap frame cocokkan Engine.time_scale dengan keadaan:
+	# 2x hanya kalau profil hidup + giliran AI + tidak ada layar duel/menu aksi/spanduk event; selain itu kecepatan lama
+	# (Quick 1,5x, Classic 1x). Selisih >= 3 frame berturut-turut dihitung SALAH (1-2 frame = urutan _process, wajar).
+	# (3) Waktu nyata dicatat untuk membandingkan jalan biasa vs AI cepat.
+	if _ac_mulai_ms < 0:
+		_ac_mulai_ms = Time.get_ticks_msec()
+	var tombol = p.tombol_ai_cepat
+	if tombol != null and tombol.is_visible_in_tree() and not _ac_tombol_dicatat:
+		_ac_tombol_dicatat = true
+		print("AI_CEPAT_TOMBOL terlihat=true teks='%s' profil_awal=%s berkas_awal=%s" % [tombol.text, str(ProfilPemain.ai_cepat), _berkas_ai_cepat()])
+	if ai_cepat_uji == "1" and tombol != null and tombol.is_visible_in_tree():
+		var harus_hidup = jumlah_giliran < 24 or jumlah_giliran >= 34
+		if ProfilPemain.ai_cepat != harus_hidup:
+			tombol.pressed.emit()
+			_ac_klik += 1
+			print("AI_CEPAT klik ke-%d giliran=%d profil=%s berkas=%s" % [_ac_klik, jumlah_giliran, str(ProfilPemain.ai_cepat), _berkas_ai_cepat()])
+	if not p.get("_giliran_berjalan"):
+		return
+	var selesai = bool(p.get("_permainan_selesai"))
+	var layar = (ui != null and ui.visible) or p.menu_aksi.visible
+	var slot_kini = p._slot_dari_aktor(p.giliran_sekarang)
+	var harap_2x = ProfilPemain.ai_cepat and not selesai and not p._pengumuman_papan_berjalan and p._is_ai(slot_kini) and not layar
+	var harap = _escala_diag * 2.0 if harap_2x else _escala_diag * (1.5 if p.mode_quick and not selesai else 1.0)
+	_ac_frame += 1
+	if is_equal_approx(Engine.time_scale, _escala_diag * 2.0):
+		_ac_frame_2x += 1
+	if is_equal_approx(Engine.time_scale, harap):
+		_ac_beruntun = 0
+	else:
+		_ac_beda += 1
+		_ac_beruntun += 1
+		_ac_beruntun_maks = maxi(_ac_beruntun_maks, _ac_beruntun)
+		if _ac_beruntun == 3:
+			_ac_salah += 1
+			print("AI_CEPAT_SALAH giliran=%d skala=%.2f harap=%.2f profil=%s slot=%d selesai=%s layar=%s spanduk=%s" % [jumlah_giliran, Engine.time_scale, harap, str(ProfilPemain.ai_cepat), slot_kini, str(selesai), str(layar), str(p._pengumuman_papan_berjalan)])
+
 func _urus_tebak() -> void:
 	# Fase 5 G4 (rig-only): robot penonton. Menebak ~0.6 dtk setelah tombol muncul
 	# (selang-seling penyerang/pembela), lalu saat duel selesai (duel_menang slot
 	# mana pun naik) mencocokkan stat tebak_benar dan teks hasil di layar duel.
+	if p._tebak_terbuka and _tj_buka < 0.0:
+		_tj_buka = detik_total
+	elif not p._tebak_terbuka and _tj_buka >= 0.0:
+		print("TEBAK_JENDELA dtk_game=%.2f tombol=%s" % [detik_total - _tj_buka, str(ui.tombol_tebak_p.is_visible_in_tree() or not ui.teks_tebak.text.is_empty())])
+		_tj_buka = -1.0
 	var tb = ui.tombol_tebak_p
 	if tb.is_visible_in_tree():
 		if _tebak_sejak < 0.0:
 			_tebak_sejak = detik_total
-		if detik_total - _tebak_sejak >= 0.6:
+		if detik_total - _tebak_sejak >= tebak_jeda_uji:
 			_tebak_sejak = -1.0
 			var pakai_p = (_tebak_n % 2 == 0)
 			_tebak_n += 1
 			_tebak_menunggu = p._duel_slot_penyerang if pakai_p else p._duel_slot_pembela
 			_tebak_total += 1
 			print("TEBAK_PILIH slot=%d tebak=%d penyerang=%d pembela=%d" % [p.slot_lokal, _tebak_menunggu, p._duel_slot_penyerang, p._duel_slot_pembela])
+			_tar_nominal = 0
+			if taruhan_uji and _tar_n % 4 != 3: # tiap 4 duel, 1 tanpa taruhan
+				var tbt = ui.tombol_taruhan[_tar_n % 3]
+				if not tbt.disabled:
+					_tar_crowns0 = ProfilPemain.crowns
+					tbt.button_pressed = true
+					_tar_nominal = ProfilPemain.TARUHAN_PILIHAN[_tar_n % 3]
+			_tar_n += 1
 			(ui.tombol_tebak_p if pakai_p else ui.tombol_tebak_m).pressed.emit()
+			if _tar_nominal > 0:
+				var pot = ProfilPemain.crowns == _tar_crowns0 - _tar_nominal
+				_tar_dipasang += 1
+				print("TARUHAN_PASANG nominal=%d crowns %d->%d potong=%s" % [_tar_nominal, _tar_crowns0, ProfilPemain.crowns, "OK" if pot else "GAGAL"])
+				if not pot: _tar_gagal += 1
 	else:
 		_tebak_sejak = -1.0
 	var sig_ui = "%d|%s" % [int(ui.teks_tebak.visible), ui.teks_tebak.text]
@@ -721,7 +891,14 @@ func _urus_tebak() -> void:
 		if ui.teks_tebak.visible:
 			print("TEBAK_UI '%s'" % ui.teks_tebak.text)
 			if ui.teks_tebak.text.begins_with("Good") or ui.teks_tebak.text.begins_with("Wrong"):
-				_tebak_ui_hasil = ui.teks_tebak.text
+				_tebak_ui_hasil = ui.teks_tebak.text.split("  ")[0]
+				if _tar_nominal > 0:
+					var harap = _tar_crowns0 + (_tar_nominal if _tebak_ui_hasil.begins_with("Good") else -_tar_nominal)
+					var oke = ProfilPemain.crowns == harap and ui.teks_tebak.text.contains("Crowns")
+					print("TARUHAN_HASIL '%s' crowns %d harap=%d cek=%s" % [ui.teks_tebak.text, ProfilPemain.crowns, harap, "OK" if oke else "GAGAL"])
+					if oke: _tar_ok += 1
+					else: _tar_gagal += 1
+					_tar_nominal = 0
 	var menang_kini: Array = p.statistik_slot.map(func(st): return int(st.get("duel_menang", 0)))
 	var benar_kini = int(p.statistik_slot[p.slot_lokal].get("tebak_benar", 0))
 	if _tebak_menang_prev.size() == menang_kini.size():
@@ -782,9 +959,18 @@ func _cek_profil_akhir() -> void:
 	var xp_harus = roundi(5 * int(st.get("giliran", 0)) * pengali)
 	var cr_harus = roundi(2 * int(st.get("giliran", 0)) * pengali)
 	hasil.append(["rumus", not r.is_empty() and r["xp_match"] == xp_harus and r["crowns_match"] == cr_harus and r["xp_penghargaan"] == 15 * peng.size() and r["crowns_penghargaan"] == 10 * peng.size()])
-	var xp_tambah = int(r.get("xp_match", 0)) + int(r.get("xp_penghargaan", 0)) + int(r.get("xp_misi", 0))
-	var cr_tambah = int(r.get("crowns_match", 0)) + int(r.get("crowns_penghargaan", 0)) + int(r.get("crowns_misi", 0)) + int(r.get("crowns_naik_level", 0))
+	var xp_tambah = int(r.get("xp_match", 0)) + int(r.get("xp_penghargaan", 0)) + int(r.get("xp_misi", 0)) + int(r.get("xp_tebak", 0))
+	var cr_tambah = int(r.get("crowns_match", 0)) + int(r.get("crowns_penghargaan", 0)) + int(r.get("crowns_misi", 0)) + int(r.get("crowns_tebak", 0)) + int(r.get("crowns_naik_level", 0))
 	hasil.append(["profil", ProfilPemain.xp_total == xp0 + xp_tambah and ProfilPemain.crowns == cr0 + cr_tambah])
+	# Fase 5 G7: hadiah Tebak Duel = 5 XP / 3 Crowns per tebakan benar (maks 5), stat seumur penuh, baris kartu hadiah, tidak ikut DOUBLE.
+	var tebak_stat = int(st.get("tebak_benar", 0))
+	var tebak_hit = mini(tebak_stat, 5)
+	var ok_tebak = int(r.get("tebak_benar", -1)) == tebak_stat and int(r.get("xp_tebak", -1)) == 5 * tebak_hit and int(r.get("crowns_tebak", -1)) == 3 * tebak_hit \
+		and int(ProfilPemain.statistik.get("tebak_benar", 0)) == tebak_seumur0 + tebak_stat
+	hasil.append(["tebak_hadiah", ok_tebak])
+	var teks_baris_tebak = "Duel guesses: %d right  +%d XP  +%d Crowns" % [tebak_hit, 5 * tebak_hit, 3 * tebak_hit]
+	hasil.append(["tebak_baris_kartu", (tebak_hit == 0) != not _cari_label(teks_baris_tebak).is_empty()])
+	print("TEBAK_HADIAH tebak_benar_stat=%d dihitung=%d xp_tebak=%d crowns_tebak=%d stat_seumur=%d->%d baris_kartu=%s" % [tebak_stat, tebak_hit, int(r.get("xp_tebak", -1)), int(r.get("crowns_tebak", -1)), tebak_seumur0, int(ProfilPemain.statistik.get("tebak_benar", 0)), str(not _cari_label(teks_baris_tebak).is_empty())])
 	var c = ConfigFile.new()
 	var ok_berkas = c.load(ProfilPemain.BERKAS) == OK and int(c.get_value("profil", "xp", -1)) == ProfilPemain.xp_total and int(c.get_value("profil", "crowns", -1)) == ProfilPemain.crowns
 	hasil.append(["berkas", ok_berkas])
@@ -815,11 +1001,20 @@ func _cek_profil_akhir() -> void:
 	# EXIT -> interstisial dipanggil di sini (bukan sebelum papan skor)
 	PengelolaIklan.uji_jeda_interstisial = 3.0
 	var klik_exit = _klik_teks("EXIT TO MAIN MENU")
-	for i in 20: await get_tree().process_frame
-	hasil.append(["iklan_saat_exit", klik_exit and PengelolaIklan.jumlah_interstisial == 1])
+	# Remove Ads: tanpa interstisial EXIT langsung pindah adegan (node uji ikut dibuang) -> jangan menunggu frame.
+	if not bebas_iklan_uji:
+		for i in 20: await get_tree().process_frame
+	hasil.append(["iklan_saat_exit", klik_exit and PengelolaIklan.jumlah_interstisial == (0 if bebas_iklan_uji else 1)])
+	if bebas_iklan_uji:
+		hasil.append(["bebas_iklan_banner", PengelolaIklan.bebas_iklan and PengelolaIklan.jumlah_banner == 0])
+	print("BEBAS_IKLAN aktif=%s interstisial=%d banner=%d" % [str(bebas_iklan_uji), PengelolaIklan.jumlah_interstisial, PengelolaIklan.jumlah_banner])
 	var gagal = []
 	for h in hasil:
 		if not h[1]:
 			gagal.append(h[0])
 	print("PROFIL_CEK %s menang=%s quick=%s giliran=%d xp=%d/%d cr=%d/%d peng=%s misi=%d lv=%d->%d double=%s semua_peng=%s %s" % ["OK" if gagal.is_empty() else "GAGAL", str(menang), str(p.mode_quick), int(st.get("giliran", 0)), int(r.get("xp_match", -1)), xp_harus, int(r.get("crowns_match", -1)), cr_harus, str(peng), r.get("misi_selesai", []).size(), int(r.get("level_awal", 0)), int(r.get("level_akhir", 0)), teks_double, " ".join(semua_peng), " ".join(gagal)])
+	if bebas_iklan_uji:
+		# Tanpa interstisial, EXIT langsung pindah adegan: node uji sudah keluar dari pohon -> berhenti lewat MainLoop.
+		(Engine.get_main_loop() as SceneTree).quit()
+		return
 	_tulis_dan_keluar("MENANG")

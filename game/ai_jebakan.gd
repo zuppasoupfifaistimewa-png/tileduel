@@ -54,6 +54,9 @@ const NILAI_KUNCI_KARTU := 20.0     # air: frozen_bubble, per giliran kartu terk
 const NILAI_LOW_ROLL := 40.0        # air: frozen_bubble Lv3, LOW ROLL sekali
 const NILAI_BINTANG := 100.0        # air: nilai dasar +1 bintang (high_tide)
 const NILAI_KARTU := 60.0           # petir: nilai 1 kartu dicuri (card_magnet)
+# r7 (Fase 9 keseimbangan): nilai jebakan api x ini kalau korban punya heat_skin -- bakaran nyata
+# vs pemilik heat_skin (petir/air) jauh di bawah taksiran; AI api dulu hampir tak pernah pakai petir/angin.
+const FAKTOR_API_TAHAN_PANAS := 0.5
 const FAKTOR_ULANG_ULTIMATE := 1.2  # F5 r4: 1.5 -> 1.2 -- Phoenix (api) / Tornado (angin): korban terulang
 const FAKTOR_DUEL_TAMBAHAN := 0.5   # tanah: hard_rock, per duel TAMBAHAN di atas 1
 const FAKTOR_HP_AWAL := 1.3         # tanah: hard_rock Lv3, +HP awal duel
@@ -129,6 +132,8 @@ static func _nilai_korban(main_node: Node, slot: int, lawan: int, elemen: String
 		"api":
 			var pot = 1.0 - DataRole.potongan_tahan(main_node._tahan(lawan, "api"))
 			var nilai = float(angka["bakar_per_giliran"]) * float(angka["bakar_giliran"]) * pot * (1.0 + float(angka["fire_tax"]))
+			if main_node._tahan(lawan, "api") > 0:
+				nilai *= FAKTOR_API_TAHAN_PANAS # r7: korban heat_skin
 			if bool(angka.get("phoenix", false)):
 				nilai *= FAKTOR_ULANG_ULTIMATE # Phoenix: jebakan hidup lagi -> korban terulang
 			return nilai

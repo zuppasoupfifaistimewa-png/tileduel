@@ -78,10 +78,24 @@ static func _layar_gelap(induk: Node, lapisan: int) -> CanvasLayer:
 	induk.add_child(kanvas)
 	return kanvas
 
-static func _kartu_tengah(kanvas: CanvasLayer, atas: bool) -> VBoxContainer:
+static func _gaya_bingkai(id_frame: String) -> StyleBoxFlat:
+	# Fase 7 G3: gaya kartu profil dengan bingkai kosmetik (data tampilan dari DataKosmetik; frame_plain / tak dikenal = gaya biasa).
+	var g = _gaya_kartu()
+	var b: Dictionary = DataKosmetik.KATALOG.get(id_frame, {})
+	if str(b.get("jenis", "")) != "frame" or not b.has("border"):
+		return g
+	g.border_color = b["border"]
+	g.set_border_width_all(int(b["lebar"]))
+	g.set_corner_radius_all(14 + int(b.get("radius_tambah", 0)))
+	if b.has("bayangan"):
+		g.shadow_color = b["bayangan"]
+		g.shadow_size = int(b["bayangan_ukuran"])
+	return g
+
+static func _kartu_tengah(kanvas: CanvasLayer, atas: bool, gaya: StyleBoxFlat = null) -> VBoxContainer:
 	# Kartu di tengah layar (atas = di tengah-ATAS, supaya keyboard HP tidak menutupinya).
 	var kartu = PanelContainer.new()
-	kartu.add_theme_stylebox_override("panel", _gaya_kartu())
+	kartu.add_theme_stylebox_override("panel", gaya if gaya != null else _gaya_kartu())
 	if atas:
 		kartu.set_anchors_preset(Control.PRESET_CENTER_TOP)
 		kartu.offset_top = 16
@@ -100,6 +114,9 @@ static func nama_slot_papan(main_node: Node, slot: int) -> String:
 	# Nama seperti di papan peringkat: YOU / ENEMY (2 pemain), YOU / Pn (3-4 pemain).
 	if slot == int(main_node.slot_lokal):
 		return "YOU"
+	var nm: String = main_node._nama_manusia(slot, true) # Fase 6: "Nama Lv5" di multiplayer
+	if nm != "":
+		return nm
 	if main_node.daftar_pemain.size() <= 2:
 		return "ENEMY"
 	return "P%d" % (slot + 1)
@@ -109,6 +126,45 @@ static func teks_penghargaan(daftar: Array) -> String:
 	for p in daftar:
 		nama_nama.append(str(ProfilPemain.NAMA_PENGHARGAAN.get(str(p), str(p))))
 	return "  ".join(nama_nama)
+
+# ------------------------------------------------------------
+# FASE 6: KARTU PROFIL pemain lain + TOAST
+# ------------------------------------------------------------
+static func tampilkan_kartu_profil(induk: Node, d: Dictionary, lapisan: int = 130) -> void:
+	# Kartu kecil dari data profil lobby ({"nama","level","respect","mvp_total","role","kosmetik"}); data kosong = tidak tampil.
+	if d.is_empty() or not is_instance_valid(induk) or not induk.is_inside_tree():
+		return
+	var kanvas = _layar_gelap(induk, lapisan)
+	var kos: Dictionary = DataKosmetik.sah_semua(d.get("kosmetik", {})) # Fase 7 G3: bingkai + gelar
+	var isi = _kartu_tengah(kanvas, false, _gaya_bingkai(str(kos["frame"])))
+	isi.add_child(_label(str(d.get("nama", "?")), 34, EMAS))
+	isi.add_child(_label(DataKosmetik.nama_barang(str(kos["title"])), 20, Color(0.85, 0.76, 0.48)))
+	isi.add_child(_label("Level %d" % int(d.get("level", 1)), 24))
+	isi.add_child(_label("Respect: %d" % int(d.get("respect", 0)), 22, HIJAU))
+	isi.add_child(_label("MVP awards: %d" % int(d.get("mvp_total", 0)), 22, EMAS))
+	var role = str(d.get("role", ""))
+	if role != "" and DataRole.ROLE.has(role):
+		isi.add_child(_label("Role: " + DataRole.nama_role(role), 22, DataRole.warna_role(role)))
+	var tutup = _tombol("CLOSE", Color(0.5, 0.5, 0.55), Vector2(220, 56))
+	tutup.pressed.connect(func(): kanvas.queue_free())
+	isi.add_child(tutup)
+
+static func tampilkan_toast(induk: Node, teks: String) -> void:
+	# Pesan singkat di atas layar (muncul ~2,5 dtk), tidak menahan ketukan.
+	if not is_instance_valid(induk) or not induk.is_inside_tree():
+		return
+	var kanvas = CanvasLayer.new()
+	kanvas.layer = 135
+	var l = _label(teks, 26, HIJAU)
+	l.set_anchors_preset(Control.PRESET_CENTER_TOP)
+	l.offset_top = 40
+	l.grow_horizontal = Control.GROW_DIRECTION_BOTH
+	kanvas.add_child(l)
+	induk.get_tree().current_scene.add_child(kanvas)
+	var tw = l.create_tween()
+	tw.tween_interval(1.8)
+	tw.tween_property(l, "modulate:a", 0.0, 0.7)
+	tw.tween_callback(func(): kanvas.queue_free())
 
 # ------------------------------------------------------------
 # KARTU HADIAH (kolom kanan papan peringkat)
@@ -221,20 +277,26 @@ static func _tonton_double(r: Dictionary, canvas: CanvasLayer, lbl_angka: Label,
 		_tulis_baris_role(lbl_role, batang_role, r)
 
 static func _tulis_angka(lbl: Label, r: Dictionary) -> void:
-	var xp = int(r["xp_match"]) + int(r["xp_penghargaan"]) + int(r.get("xp_misi", 0)) + int(r.get("xp_double", 0))
-	var cr = int(r["crowns_match"]) + int(r["crowns_penghargaan"]) + int(r.get("crowns_misi", 0)) \
+	var xp = int(r["xp_match"]) + int(r["xp_penghargaan"]) + int(r.get("xp_misi", 0)) + int(r.get("xp_tebak", 0)) + int(r.get("xp_double", 0))
+	var cr = int(r["crowns_match"]) + int(r["crowns_penghargaan"]) + int(r.get("crowns_misi", 0)) + int(r.get("crowns_tebak", 0)) \
 		+ int(r.get("crowns_naik_level", 0)) + int(r.get("crowns_double", 0))
 	lbl.text = "+%d XP     +%d CROWNS" % [xp, cr]
 
 static func _isi_baris_hadiah(kotak: VBoxContainer, r: Dictionary) -> void:
-	# Paling banyak 3 baris: naik level, misi selesai, penghargaan sendiri.
+	# Paling banyak 3 baris: naik level, tebakan duel (Fase 5 G7), misi selesai, penghargaan sendiri.
 	for anak in kotak.get_children():
 		anak.queue_free()
 	var daftar = []
 	if int(r["level_akhir"]) > int(r["level_awal"]):
 		daftar.append(["LEVEL UP! Lv %d  +%d Crowns" % [int(r["level_akhir"]), int(r.get("crowns_naik_level", 0))], HIJAU])
+	if int(r.get("tebak_dihitung", 0)) > 0:
+		daftar.append(["Duel guesses: %d right  +%d XP  +%d Crowns" % [int(r["tebak_dihitung"]), int(r.get("xp_tebak", 0)), int(r.get("crowns_tebak", 0))], Color.WHITE])
 	for m in r.get("misi_selesai", []):
 		daftar.append(["MISSION DONE: %s" % str(m["teks"]), EMAS])
+	for m in r.get("misi_event_selesai", []): # Fase 8 G2
+		daftar.append(["EVENT MISSION DONE: %s  +%d tokens" % [str(m["teks"]), int(m["token"])], Color(0.8, 0.6, 1.0)])
+	for n in r.get("mastery_naik", []):
+		daftar.append(["%s MASTERY Lv %d  +%d Crowns%s" % [str(DataEvent.NAMA_ELEMEN.get(str(n["elemen"]), "")), int(n["level"]), int(n["crowns"]), "  + title!" if str(n["gelar"]) != "" else ""], Color(0.8, 0.6, 1.0)])
 	for p in r.get("penghargaan", []):
 		daftar.append(["%s  +%d XP  +%d Crowns" % [str(ProfilPemain.NAMA_PENGHARGAAN.get(str(p), str(p))), ProfilPemain.XP_PENGHARGAAN, ProfilPemain.CROWNS_PENGHARGAAN], Color.WHITE])
 	var tampil = daftar
@@ -328,8 +390,28 @@ static func pasang_di_menu(menu: Node) -> void:
 	tombol.pressed.connect(func(): buka_panel_misi(menu))
 	menu.add_child(tombol)
 
+	var tombol_toko = _tombol("SHOP", Color(0.75, 0.55, 0.1), Vector2(190, 56), 20)
+	tombol_toko.set_anchors_preset(Control.PRESET_TOP_RIGHT)
+	tombol_toko.offset_left = -16 - 190
+	tombol_toko.offset_right = -16
+	tombol_toko.offset_top = 20 + 56 + 8
+	tombol_toko.offset_bottom = 20 + 56 + 8 + 56
+	tombol_toko.pressed.connect(func(): UiToko.buka_toko(menu))
+	menu.add_child(tombol_toko)
+
+	var tombol_event = _tombol("EVENT", Color(0.55, 0.3, 0.75), Vector2(190, 56), 20) # Fase 8 G2
+	tombol_event.set_anchors_preset(Control.PRESET_TOP_RIGHT)
+	tombol_event.offset_left = -16 - 190
+	tombol_event.offset_right = -16
+	tombol_event.offset_top = 20 + 2 * (56 + 8)
+	tombol_event.offset_bottom = 20 + 2 * (56 + 8) + 56
+	tombol_event.pressed.connect(func(): UiEvent.buka_event(menu))
+	menu.add_child(tombol_event)
+
 	menu.bar_profil = bar
 	menu.tombol_misi = tombol
+	menu.tombol_toko = tombol_toko
+	menu.set("tombol_event", tombol_event) # set(): menu uji tanpa variabel ini tetap jalan
 	segarkan_menu(menu)
 
 static func segarkan_menu(menu: Node) -> void:
@@ -344,6 +426,10 @@ static func segarkan_menu(menu: Node) -> void:
 	var tombol = menu.get("tombol_misi")
 	if tombol != null and is_instance_valid(tombol):
 		tombol.text = "MISSIONS %d/3%s" % [ProfilPemain.jumlah_misi_selesai(), "  !" if ProfilPemain.login_bisa_diklaim() else ""]
+	var tombol_event = menu.get("tombol_event")
+	if tombol_event != null and is_instance_valid(tombol_event):
+		ProfilPemain.segarkan_event()
+		tombol_event.text = "EVENT %d/3" % UiEvent.jumlah_misi_event_selesai()
 
 # ------------------------------------------------------------
 # PANEL PROFILE
@@ -390,7 +476,16 @@ static func buka_panel_profil(menu: Node) -> void:
 	baris_lv.add_child(_label("%d/%d XP to Lv %d" % [int(info["xp_dalam"]), int(info["xp_butuh"]), int(info["level"]) + 1], 16, ABU))
 
 	isi.add_child(_label("CROWNS %d" % ProfilPemain.crowns, 24, EMAS))
-	isi.add_child(_label("Crowns will unlock items soon.", 16, ABU))
+	var baris_toko = HBoxContainer.new()
+	baris_toko.alignment = BoxContainer.ALIGNMENT_CENTER
+	baris_toko.add_theme_constant_override("separation", 10)
+	isi.add_child(baris_toko)
+	var btn_toko = _tombol("SHOP", Color(0.75, 0.55, 0.1), Vector2(200, 52), 22)
+	btn_toko.pressed.connect(func(): UiToko.buka_toko(menu))
+	baris_toko.add_child(btn_toko)
+	var btn_mastery = _tombol("MASTERY", Color(0.55, 0.3, 0.75), Vector2(200, 52), 22) # Fase 8 G2
+	btn_mastery.pressed.connect(func(): UiEvent.buka_mastery(menu))
+	baris_toko.add_child(btn_mastery)
 
 	var kisi = GridContainer.new()
 	kisi.columns = 4

@@ -16,7 +16,7 @@ signal profil_berubah
 const BERKAS := "user://profil.cfg"
 const BERKAS_SEMENTARA := "user://profil.cfg.tmp"
 const BERKAS_CADANGAN := "user://profil.cfg.bak"
-const VERSI := 2 # Fase 4: + role_terakhir, jebakan_role (A), xp_role/build_solo/arena (B, T19: sudah dipakai sejak B-c/B-e -- lihat catat_akhir_match/build_solo/build_arena)
+const VERSI := 6 # Fase 9: + taruhan_hari, taruhan_jumlah. Fase 8: + token_event, misi_event, minggu_event, tanggal_maks, mastery. Fase 7: + kosmetik_dimiliki, kosmetik_dipakai. Fase 6: + respect, mvp_total. Fase 4: + role_terakhir, jebakan_role (A), xp_role/build_solo/arena (B, T19: sudah dipakai sejak B-c/B-e -- lihat catat_akhir_match/build_solo/build_arena)
 
 # --- XP & Crowns per pertandingan ---
 const XP_PER_GILIRAN := 5
@@ -26,6 +26,13 @@ const PENGALI_CLASSIC := 1.6
 const BONUS_MENANG := 1.5
 const XP_PENGHARGAAN := 15
 const CROWNS_PENGHARGAAN := 10
+# --- Fase 5 G7: hadiah Tebak Duel (K6) -- per tebakan benar, paling banyak TEBAK_MAKS_HADIAH per pertandingan; TIDAK ikut DOUBLE ---
+const XP_PER_TEBAKAN := 5
+const CROWNS_PER_TEBAKAN := 3
+const TEBAK_MAKS_HADIAH := 5
+# --- Fase 9 F9.2: taruhan Crowns Tebak Duel (lokal; Crowns tidak bisa dibeli dengan uang) ---
+const TARUHAN_PILIHAN := [10, 25, 50]
+const TARUHAN_MAKS_HARI := 10
 # --- Level: Lv L -> L+1 butuh 100 + 25 x (L-1) XP. Tanpa batas. ---
 const XP_LEVEL_AWAL := 100
 const XP_TAMBAH_PER_LEVEL := 25
@@ -49,6 +56,7 @@ const MISI := {
 	"pasang_jebakan": {"tingkat": 0, "teks": "Set 3 traps", "target": 3, "stat": "jebakan_pasang"},
 	"beli_petak": {"tingkat": 0, "teks": "Buy 5 tiles", "target": 5, "stat": "petak_beli"},
 	"lewat_start": {"tingkat": 0, "teks": "Pass START 3 times", "target": 3, "stat": "lewat_start"},
+	"tebak_tiga": {"tingkat": 1, "teks": "Guess 3 duels right", "target": 3, "stat": "tebak_benar", "bobot": 1},
 	"menang_match": {"tingkat": 1, "teks": "Win 1 match", "target": 1, "stat": "_menang"},
 	"menang_duel": {"tingkat": 1, "teks": "Win 2 duels", "target": 2, "stat": "duel_menang"},
 	"permata": {"tingkat": 1, "teks": "Collect 2 gems", "target": 2, "stat": "permata"},
@@ -57,11 +65,12 @@ const MISI := {
 	"duel_elemen": {"tingkat": 2, "teks": "Win a duel with %s", "target": 1, "stat": "_elemen"},
 	"kena_jebakan": {"tingkat": 2, "teks": "Catch rivals with your traps 2 times", "target": 2, "stat": "jebakan_kena"},
 	"menara_lv2": {"tingkat": 2, "teks": "Build a Lv 2 tower", "target": 1, "stat": "menara_lv2"},
+	"tebak_beruntun": {"tingkat": 2, "teks": "Guess 2 duels in a row", "target": 2, "stat": "tebak_beruntun", "maks": true, "bobot": 1},
 }
 const HADIAH_MISI := [{"crowns": 20, "xp": 15}, {"crowns": 30, "xp": 25}, {"crowns": 45, "xp": 35}]
 const NAMA_ELEMEN := {"api": "FIRE", "air": "WATER", "tanah": "EARTH", "petir": "LIGHTNING", "angin": "WIND"}
 # Statistik pertandingan yang dijumlahkan ke statistik seumur main.
-const STAT_SEUMUR := ["giliran", "duel_menang", "jebakan_pasang", "jebakan_kena", "petak_beli", "menara_lv2", "permata", "kartu_pakai", "lewat_start"]
+const STAT_SEUMUR := ["giliran", "duel_menang", "jebakan_pasang", "jebakan_kena", "petak_beli", "menara_lv2", "permata", "kartu_pakai", "lewat_start", "tebak_benar"]
 # Filter nama sederhana (boleh ditambah). KATA_KASAR dicari di BAGIAN mana saja nama (setelah
 # spasi dibuang dan angka mirip huruf diganti: 0->o 1->i 3->e 4->a 5->s 7->t @->a $->s);
 # KATA_KASAR_UTUH hanya kalau SAMA dengan satu kata utuh (supaya "Asuka", "Taiga",
@@ -98,11 +107,33 @@ var jebakan_role := {}         # role -> Array jenis jebakan tambahan yang terak
 var xp_role := {}              # role -> XP Role
 var build_solo := {}           # role -> {"preset": "balanced"|"attack"|"defense"|"custom", "node": {...}} (P7)
 var arena := {}                # role -> {"preset": "balanced"|"attack"|"defense"|"custom", "node": {...}}
+# --- Fase 5 G6: tombol AI cepat (solo). Bagian "pengaturan" tidak ada di berkas lama -> nilai bawaan false; VERSI tidak perlu naik. ---
+var ai_cepat := false          # true = giliran AI berjalan 2x selama tidak ada layar untuk pemain (solo saja)
+# --- Fase 6 (VERSI 3): identitas multiplayer. Berkas VERSI 1/2 tidak punya bagian "sosial" -> 0. ---
+var respect := 0               # Respect yang pernah diterima dari pemain lain
+var mvp_total := 0             # berapa kali jadi MVP di akhir laga
+# --- Fase 7 (VERSI 4): toko Crowns. Berkas VERSI 1-3 tidak punya bagian "kosmetik" -> kosong (barang AWAL otomatis). ---
+var kosmetik_dimiliki: Array = []   # id barang yang dibeli (barang AWAL tidak disimpan, selalu dimiliki)
+var kosmetik_dipakai := {}          # jenis -> id; jenis yang kosong/rusak = barang AWAL
+# --- Fase 7 G4: Remove Ads. Bagian "pembelian" tidak ada di berkas lama -> false; VERSI tidak perlu naik. ---
+var remove_ads := false             # CADANGAN lokal; sumber kebenaran = query Google Play (PengelolaPembelian)
+var bonus_remove_ads_diambil := false # bonus Crowns Remove Ads hanya sekali per profil
+# --- Fase 8 (VERSI 5): event mingguan + mastery. Berkas VERSI 1-4 tidak punya bagian "event"/"mastery" -> nilai awal. ---
+var token_event := 0                # Event Tokens (tidak hangus)
+var misi_event: Array = []          # 3 x {"progres", "selesai"}; definisi dari DataEvent.daftar_misi(minggu_event)
+var minggu_event := -1              # nomor minggu (DataEvent.minggu_dari_tanggal) milik misi_event; -1 = belum ada
+var tanggal_maks := ""              # tanggal HP terbesar yang pernah terlihat (K12: tanggal mundur -> event berhenti)
+var mastery := {}                   # elemen (DataRole.ROLE) -> XP mastery
+# --- Fase 9 (VERSI 6): taruhan Tebak Duel. Berkas lama tidak punya bagian "tebak" -> 0. ---
+var taruhan_hari := ""              # tanggal hitungan taruhan_jumlah
+var taruhan_jumlah := 0             # taruhan yang sudah dipasang pada taruhan_hari (maks TARUHAN_MAKS_HARI)
+var _taruhan_aktif := 0             # taruhan yang sedang berjalan (Crowns sudah dipotong di memori, belum disimpan)
 
 func _ready() -> void:
 	_rng.randomize()
 	muat()
 	segarkan_hari()
+	segarkan_event()
 
 # ============================================================
 # SIMPAN / MUAT
@@ -143,6 +174,16 @@ func muat() -> void:
 	build_solo = bs if bs is Dictionary else {}
 	var ar = c.get_value("role", "arena", {})
 	arena = ar if ar is Dictionary else {}
+	ai_cepat = bool(c.get_value("pengaturan", "ai_cepat", false)) # Fase 5 G6
+	respect = maxi(0, int(c.get_value("sosial", "respect", 0))) # Fase 6
+	mvp_total = maxi(0, int(c.get_value("sosial", "mvp_total", 0)))
+	_muat_kosmetik(c.get_value("kosmetik", "dimiliki", []), c.get_value("kosmetik", "dipakai", {})) # Fase 7
+	remove_ads = bool(c.get_value("pembelian", "remove_ads", false)) # Fase 7 G4
+	bonus_remove_ads_diambil = bool(c.get_value("pembelian", "bonus_diambil", false))
+	_muat_event(c) # Fase 8
+	taruhan_hari = str(c.get_value("tebak", "taruhan_hari", "")) # Fase 9
+	taruhan_jumlah = clampi(int(c.get_value("tebak", "taruhan_jumlah", 0)), 0, TARUHAN_MAKS_HARI)
+	_taruhan_aktif = 0
 
 func _baca_berkas(jalur: String):
 	# ConfigFile yang sah (terbaca & punya id), atau null.
@@ -171,6 +212,20 @@ func simpan() -> void:
 	c.set_value("role", "xp", xp_role)
 	c.set_value("role", "build_solo", build_solo)
 	c.set_value("role", "arena", arena)
+	c.set_value("pengaturan", "ai_cepat", ai_cepat) # Fase 5 G6
+	c.set_value("sosial", "respect", respect) # Fase 6
+	c.set_value("sosial", "mvp_total", mvp_total)
+	c.set_value("kosmetik", "dimiliki", kosmetik_dimiliki) # Fase 7
+	c.set_value("kosmetik", "dipakai", kosmetik_dipakai)
+	c.set_value("pembelian", "remove_ads", remove_ads) # Fase 7 G4
+	c.set_value("pembelian", "bonus_diambil", bonus_remove_ads_diambil)
+	c.set_value("event", "token", token_event) # Fase 8
+	c.set_value("event", "misi", misi_event)
+	c.set_value("event", "minggu", minggu_event)
+	c.set_value("event", "tanggal_maks", tanggal_maks)
+	c.set_value("mastery", "xp", mastery)
+	c.set_value("tebak", "taruhan_hari", taruhan_hari) # Fase 9
+	c.set_value("tebak", "taruhan_jumlah", taruhan_jumlah)
 	var err = c.save(BERKAS_SEMENTARA)
 	if err != OK:
 		push_warning("Profil gagal disimpan (kode %d)." % err)
@@ -200,6 +255,130 @@ func _profil_baru() -> void:
 	xp_role = {}
 	build_solo = {}
 	arena = {}
+	ai_cepat = false
+	respect = 0
+	mvp_total = 0
+	kosmetik_dimiliki = []
+	kosmetik_dipakai = {}
+	remove_ads = false
+	bonus_remove_ads_diambil = false
+	token_event = 0
+	misi_event = []
+	minggu_event = -1
+	tanggal_maks = ""
+	mastery = {}
+	taruhan_hari = ""
+	taruhan_jumlah = 0
+	_taruhan_aktif = 0
+	simpan()
+
+func tambah_respect() -> void:
+	# Fase 6: dipanggil saat pemain lain memberi Respect.
+	respect += 1
+	simpan()
+
+func catat_mvp() -> void:
+	# Fase 6: dipanggil sekali per laga bila saya MVP.
+	mvp_total += 1
+	simpan()
+
+# ============================================================
+# KOSMETIK (Fase 7): beli / pakai. Katalog & harga: data_kosmetik.gd.
+# ============================================================
+func _muat_kosmetik(dimiliki, dipakai) -> void:
+	# Data rusak/id tak dikenal dibuang; yang dipakai harus dimiliki & jenisnya cocok.
+	kosmetik_dimiliki = []
+	if dimiliki is Array:
+		for b in dimiliki:
+			var k = str(b)
+			if DataKosmetik.ada(k) and not _awal(k) and not kosmetik_dimiliki.has(k):
+				kosmetik_dimiliki.append(k)
+	kosmetik_dipakai = {}
+	if dipakai is Dictionary:
+		for jenis in DataKosmetik.JENIS:
+			var k = str(dipakai.get(jenis, ""))
+			if k != "" and not _awal(k) and DataKosmetik.jenis_dari(k) == jenis and kosmetik_dimiliki.has(k):
+				kosmetik_dipakai[jenis] = k
+
+func _awal(id_barang: String) -> bool:
+	return DataKosmetik.AWAL.values().has(id_barang)
+
+func punya_kosmetik(id_barang: String) -> bool:
+	return DataKosmetik.ada(id_barang) and (_awal(id_barang) or kosmetik_dimiliki.has(id_barang))
+
+func kosmetik_pakai(jenis: String) -> String:
+	# id yang sedang dipakai untuk jenis itu (AWAL bila belum memilih).
+	return str(kosmetik_dipakai.get(jenis, DataKosmetik.AWAL.get(jenis, "")))
+
+func kosmetik_pakai_semua() -> Dictionary:
+	# Fase 7 G3: {pawn, title, frame} yang dipakai -- dikirim di profil lobby & dipakai kartu profil sendiri.
+	var hasil := {}
+	for j in DataKosmetik.JENIS:
+		hasil[j] = kosmetik_pakai(j)
+	return hasil
+
+func alasan_tolak_beli(id_barang: String) -> String:
+	# "" = boleh beli; selain itu pesan untuk pemain (bahasa Inggris sederhana) -- dipakai tombol toko (G2).
+	if not DataKosmetik.ada(id_barang):
+		return "Unknown item."
+	if punya_kosmetik(id_barang):
+		return "You already own this."
+	match DataKosmetik.sumber_dari(id_barang): # Fase 8: barang event/mastery tidak dijual dgn Crowns
+		"event":
+			return "Event item"
+		"mastery":
+			return "Reach Mastery Lv %d" % DataEvent.LEVEL_MAKS
+	var b: Dictionary = DataKosmetik.KATALOG[id_barang]
+	if level_sekarang() < int(b["lv"]):
+		return "Reach Lv %d" % int(b["lv"])
+	if crowns < int(b["harga"]):
+		return "Need %d more Crowns" % (int(b["harga"]) - crowns)
+	return ""
+
+func beli(id_barang: String) -> String:
+	# "" = berhasil (Crowns berkurang, barang dimiliki & LANGSUNG dipakai, simpan sekali); selain itu alasan tolak.
+	var alasan = alasan_tolak_beli(id_barang)
+	if alasan != "":
+		return alasan
+	crowns = maxi(0, crowns - int(DataKosmetik.KATALOG[id_barang]["harga"]))
+	kosmetik_dimiliki.append(id_barang)
+	kosmetik_dipakai[DataKosmetik.jenis_dari(id_barang)] = id_barang
+	simpan()
+	return ""
+
+func pakai(id_barang: String) -> bool:
+	# Hanya barang yang dimiliki; jenis dari katalog. Barang AWAL = kembali ke bawaan.
+	if not punya_kosmetik(id_barang):
+		return false
+	var jenis = DataKosmetik.jenis_dari(id_barang)
+	if _awal(id_barang):
+		kosmetik_dipakai.erase(jenis)
+	else:
+		kosmetik_dipakai[jenis] = id_barang
+	simpan()
+	return true
+
+func atur_remove_ads(nilai: bool) -> void:
+	# Fase 7 G4: cadangan lokal status Remove Ads (dipanggil PengelolaPembelian).
+	if remove_ads == nilai:
+		return
+	remove_ads = nilai
+	simpan()
+
+func ambil_bonus_remove_ads(jumlah: int) -> bool:
+	# Fase 7 G4: bonus Crowns pembelian Remove Ads, SEKALI per profil. true = baru diberikan.
+	if bonus_remove_ads_diambil or jumlah <= 0:
+		return false
+	bonus_remove_ads_diambil = true
+	crowns += jumlah
+	simpan()
+	return true
+
+func atur_ai_cepat(nilai: bool) -> void:
+	# Fase 5 G6: pilihan tombol AI cepat diingat di profil.
+	if ai_cepat == nilai:
+		return
+	ai_cepat = nilai
 	simpan()
 
 func _nama_bawaan() -> String:
@@ -243,7 +422,7 @@ func statistik_kosong() -> Dictionary:
 		"menang_elemen": {"api": 0, "air": 0, "tanah": 0, "petir": 0, "angin": 0}, "petak_rebut": 0,
 		"jebakan_pasang": 0, "jebakan_kena": 0, "koin_jebakan": 0, "petak_beli": 0, "menara_bangun": 0,
 		"menara_lv2": 0, "permata": 0, "lewat_start": 0, "kartu_pakai": 0, "bounty": 0, "kartu_bantuan": 0,
-		"tebak_benar": 0, "putar_ulang": 0}
+		"tebak_benar": 0, "tebak_beruntun": 0, "putar_ulang": 0}
 
 func _nilai_stat(baris: Dictionary, kunci: String) -> int:
 	var st = baris.get("stat", {})
@@ -272,6 +451,25 @@ func hitung_penghargaan(papan: Array) -> Dictionary:
 	# LUCKY ROLLER: rata-rata dadu tertinggi (minimal 3 lemparan).
 	_beri_tertinggi(hasil, papan, "lucky_roller", func(b): return [_rata_dadu(b)], 0.0)
 	return hasil
+
+func hitung_mvp(papan: Array) -> int:
+	# Fase 6: slot MVP = penghargaan terbanyak di laga itu; seri -> pemenang (baris pertama papan),
+	# masih seri -> slot terkecil. Hanya membaca papan (penghargaan sama di semua HP -> hasil sama).
+	var terbaik = -1
+	var calon: Array = []
+	for baris in papan:
+		var n = (baris.get("penghargaan", []) as Array).size()
+		if n > terbaik:
+			terbaik = n
+			calon = [int(baris["slot"])]
+		elif n == terbaik:
+			calon.append(int(baris["slot"]))
+	if calon.is_empty():
+		return -1
+	if papan.size() > 0 and calon.has(int(papan[0]["slot"])):
+		return int(papan[0]["slot"])
+	calon.sort()
+	return calon[0]
 
 func _beri_tertinggi(hasil: Dictionary, papan: Array, id_penghargaan: String, nilai: Callable, minimal: float) -> void:
 	# nilai(baris) -> [utama, penentu...]; dibandingkan berurutan. Utama < minimal = tidak ikut.
@@ -308,6 +506,7 @@ func _banding(a: Array, b: Array) -> int:
 # ============================================================
 func catat_akhir_match(d: Dictionary) -> Dictionary:
 	segarkan_hari()
+	segarkan_event()
 	_double_terpakai = false
 	var st: Dictionary = d.get("stat", {})
 	var menang: bool = bool(d.get("menang", false))
@@ -319,6 +518,11 @@ func catat_akhir_match(d: Dictionary) -> Dictionary:
 	var cr_match = roundi(CROWNS_PER_GILIRAN * giliran * pengali)
 	var xp_peng = XP_PENGHARGAAN * peng.size()
 	var cr_peng = CROWNS_PENGHARGAAN * peng.size()
+	# Fase 5 G7: Tebak Duel -- tebakan benar yang dihitung maks TEBAK_MAKS_HADIAH; stat seumur memakai angka penuh.
+	var tebak_benar = int(st.get("tebak_benar", 0))
+	var tebak_dihitung = mini(tebak_benar, TEBAK_MAKS_HADIAH)
+	var xp_tebak = XP_PER_TEBAKAN * tebak_dihitung
+	var cr_tebak = CROWNS_PER_TEBAKAN * tebak_dihitung
 	# Statistik seumur main.
 	for k in STAT_SEUMUR:
 		statistik[k] = int(statistik.get(k, 0)) + int(st.get(k, 0))
@@ -356,19 +560,28 @@ func catat_akhir_match(d: Dictionary) -> Dictionary:
 		role_lv_awal = int(DataRole.info_level_role(int(xp_role.get(role, 0)))["level"])
 		xp_role[role] = int(xp_role.get(role, 0)) + xp_role_match
 		role_lv_akhir = int(DataRole.info_level_role(int(xp_role[role]))["level"])
+	# Fase 8 G1: misi event (token; berhenti kalau tanggal HP mundur) + mastery elemen (selalu jalan).
+	var misi_ev_selesai: Array = [] if tanggal_mundur() else _majukan_misi_event(st, menang, role)
+	var token_ev = 0
+	for me_s in misi_ev_selesai:
+		token_ev += int(me_s["token"])
+	token_event += token_ev
+	var mastery_naik = _majukan_mastery(st, menang, role)
 	var xp_awal = xp_total
-	crowns += cr_match + cr_peng + cr_misi
-	var naik = _tambah_xp(xp_match + xp_peng + xp_misi)
+	crowns += cr_match + cr_peng + cr_misi + cr_tebak
+	var naik = _tambah_xp(xp_match + xp_peng + xp_misi + xp_tebak)
 	simpan()
 	return {
 		"xp_match": xp_match, "crowns_match": cr_match,
 		"xp_penghargaan": xp_peng, "crowns_penghargaan": cr_peng, "penghargaan": peng.duplicate(),
 		"misi_selesai": selesai, "xp_misi": xp_misi, "crowns_misi": cr_misi,
+		"tebak_benar": tebak_benar, "tebak_dihitung": tebak_dihitung, "xp_tebak": xp_tebak, "crowns_tebak": cr_tebak,
 		"level_awal": naik["level_lama"], "level_akhir": naik["level_baru"], "crowns_naik_level": naik["crowns_level"],
 		"xp_total_awal": xp_awal, "xp_total": xp_total,
 		"bisa_double": (xp_match + xp_peng) > 0, "sudah_double": false,
 		"role": role, "xp_role_match": xp_role_match,
 		"role_level_awal": role_lv_awal, "role_level_akhir": role_lv_akhir,
+		"misi_event_selesai": misi_ev_selesai, "token_event_didapat": token_ev, "mastery_naik": mastery_naik,
 	}
 
 func tambah_double(r: Dictionary) -> bool:
@@ -399,6 +612,58 @@ func tambah_double(r: Dictionary) -> bool:
 	simpan()
 	return true
 
+# ============================================================
+# TARUHAN TEBAK DUEL (Fase 9 F9.2) -- lokal di HP ini; tanpa RPC
+# pasang: Crowns dipotong di memori (belum disimpan -> HP mati saat duel = tidak rugi);
+# selesai: benar = +2x taruhan, salah = hilang, lalu simpan. batal: kembalikan penuh.
+# ============================================================
+func taruhan_hari_ini() -> int:
+	return taruhan_jumlah if taruhan_hari == _hari_ini() else 0
+
+func alasan_tolak_taruhan(n: int) -> String:
+	if not TARUHAN_PILIHAN.has(n):
+		return "Invalid bet."
+	if _taruhan_aktif > 0:
+		return "Bet already placed."
+	if taruhan_hari_ini() >= TARUHAN_MAKS_HARI:
+		return "Daily bet limit reached."
+	if crowns < n:
+		return "Not enough Crowns."
+	return ""
+
+func pasang_taruhan(n: int) -> String:
+	# "" = berhasil; selain itu alasan tolak.
+	var alasan = alasan_tolak_taruhan(n)
+	if alasan != "":
+		return alasan
+	if taruhan_hari != _hari_ini():
+		taruhan_hari = _hari_ini()
+		taruhan_jumlah = 0
+	taruhan_jumlah += 1
+	crowns -= n
+	_taruhan_aktif = n
+	return ""
+
+func selesai_taruhan(benar: bool) -> int:
+	# Mengembalikan selisih bersih untuk teks: +n (benar) / -n (salah) / 0 (tidak ada taruhan).
+	var n = _taruhan_aktif
+	if n <= 0:
+		return 0
+	_taruhan_aktif = 0
+	if benar:
+		crowns += 2 * n
+	simpan()
+	return n if benar else -n
+
+func batal_taruhan() -> void:
+	# Tebakan ditolak ("Too late!") atau duel dibatalkan: Crowns dan hitungan harian kembali.
+	var n = _taruhan_aktif
+	if n <= 0:
+		return
+	_taruhan_aktif = 0
+	crowns += n
+	taruhan_jumlah = maxi(0, taruhan_jumlah - 1)
+
 func _tambah_statistik(kunci: String, n: int = 1) -> void:
 	statistik[kunci] = int(statistik.get(kunci, 0)) + n
 
@@ -421,6 +686,64 @@ func segarkan_hari() -> void:
 	ganti_misi_dipakai = false
 	simpan()
 
+# ============================================================
+# EVENT MINGGUAN (Fase 8) -- minggu dari tanggal HP; tanggal mundur -> event berhenti (K12=a)
+# ============================================================
+func _muat_event(c: ConfigFile) -> void:
+	# Data rusak dibuang ke nilai awal; misi yang rusak dibuat ulang oleh segarkan_event().
+	token_event = maxi(0, int(c.get_value("event", "token", 0)))
+	var me = c.get_value("event", "misi", [])
+	misi_event = me if me is Array else []
+	minggu_event = int(c.get_value("event", "minggu", -1))
+	tanggal_maks = str(c.get_value("event", "tanggal_maks", ""))
+	if not DataEvent.tanggal_sah(tanggal_maks):
+		tanggal_maks = ""
+	mastery = {}
+	var ms = c.get_value("mastery", "xp", {})
+	if ms is Dictionary:
+		for el in DataRole.ROLE:
+			if ms.has(el):
+				mastery[el] = maxi(0, int(ms[el]))
+
+func tanggal_mundur() -> bool:
+	# true = tanggal HP lebih awal dari tanggal terbesar yang pernah terlihat: misi event tidak maju,
+	# hadiah event & toko event dikunci sampai tanggal kembali (tanpa hukuman lain).
+	return tanggal_maks != "" and _hari_ini() < tanggal_maks
+
+func _misi_event_sah() -> bool:
+	if misi_event.size() != DataEvent.daftar_misi(minggu_event).size():
+		return false
+	for m in misi_event:
+		if not (m is Dictionary) or not m.has("progres") or not m.has("selesai"):
+			return false
+	return true
+
+func segarkan_event() -> void:
+	# Panggil saat start, sebelum mencatat laga, dan saat membuka layar EVENT. Minggu baru -> 3 misi event baru.
+	var hari = _hari_ini()
+	if not DataEvent.tanggal_sah(hari) or tanggal_mundur():
+		return
+	var berubah = false
+	if hari > tanggal_maks:
+		tanggal_maks = hari
+		berubah = true
+	var minggu = DataEvent.minggu_dari_tanggal(hari)
+	if minggu != minggu_event or not _misi_event_sah():
+		minggu_event = minggu
+		misi_event = []
+		for i in range(DataEvent.daftar_misi(minggu).size()):
+			misi_event.append({"progres": 0, "selesai": false})
+		berubah = true
+	if berubah:
+		simpan()
+
+func event_sekarang() -> Dictionary:
+	# Event minggu misi_event (sama dgn minggu tanggal HP kecuali tanggal mundur).
+	return DataEvent.event_minggu(minggu_event)
+
+func xp_mastery(elemen: String) -> int:
+	return int(mastery.get(elemen, 0))
+
 func _misi_sah() -> bool:
 	for m in misi:
 		if not (m is Dictionary) or not MISI.has(str(m.get("id", ""))):
@@ -428,10 +751,11 @@ func _misi_sah() -> bool:
 	return true
 
 func _misi_baru(tingkat: int, kecuali: Array) -> Dictionary:
-	var calon = []
+	var calon = [] # misi berbobot rendah ("bobot": 1) masuk sekali, yang lain dua kali
 	for k in MISI:
 		if int(MISI[k]["tingkat"]) == tingkat and not kecuali.has(k):
-			calon.append(k)
+			for _i in range(int(MISI[k].get("bobot", 2))):
+				calon.append(k)
 	if calon.is_empty():
 		for k in MISI:
 			if int(MISI[k]["tingkat"]) == tingkat:
@@ -491,12 +815,103 @@ func _majukan_misi(st: Dictionary, menang: bool, jumlah_penghargaan: int) -> Arr
 				tambah = int(st.get(kunci, 0))
 		if tambah <= 0:
 			continue
-		m["progres"] = mini(target_misi(m), int(m.get("progres", 0)) + tambah)
+		if bool(_definisi(m).get("maks", false)):
+			m["progres"] = mini(target_misi(m), maxi(int(m.get("progres", 0)), tambah)) # nilai terbaik, bukan jumlah
+		else:
+			m["progres"] = mini(target_misi(m), int(m.get("progres", 0)) + tambah)
 		if int(m["progres"]) >= target_misi(m):
 			m["selesai"] = true
 			var hd = hadiah_misi(m)
 			selesai.append({"teks": teks_misi(m), "xp": int(hd["xp"]), "crowns": int(hd["crowns"])})
 	return selesai
+
+func _majukan_misi_event(st: Dictionary, menang: bool, role: String) -> Array:
+	# Fase 8 G1: kemajuan misi event dari SATU laga tuntas. Hasil: [{"teks", "token"}] yang baru selesai (hadiah di pemanggil).
+	var selesai = []
+	var ev: Dictionary = event_sekarang()
+	var elemen = str(ev["elemen"])
+	var me = st.get("menang_elemen", {})
+	var ms: Array = DataEvent.daftar_misi(minggu_event)
+	for i in range(mini(ms.size(), misi_event.size())):
+		var m = misi_event[i]
+		if not (m is Dictionary) or bool(m.get("selesai", false)):
+			continue
+		var tambah = 0
+		match str(ms[i]["stat"]):
+			"_match_role":
+				tambah = 1 if elemen != "" and role == elemen else 0
+			"_menang_role":
+				tambah = 1 if menang and elemen != "" and role == elemen else 0
+			"_duel_elemen":
+				tambah = int(me.get(elemen, 0)) if me is Dictionary and elemen != "" else 0
+			var kunci:
+				tambah = int(st.get(kunci, 0))
+		if tambah <= 0:
+			continue
+		var target = int(ms[i]["target"])
+		m["progres"] = mini(target, int(m.get("progres", 0)) + tambah)
+		if int(m["progres"]) >= target:
+			m["selesai"] = true
+			selesai.append({"teks": DataEvent.teks_misi(minggu_event, i), "token": int(ms[i]["token"])})
+	return selesai
+
+func _tambah_xp_mastery(elemen: String, n: int, naik: Array) -> void:
+	# Tambah XP mastery satu elemen; tiap level baru -> Crowns, Lv maks -> gelar (dimiliki, tidak otomatis dipakai).
+	if n <= 0 or not DataRole.ROLE.has(elemen):
+		return
+	var lama = DataEvent.level_mastery(xp_mastery(elemen))
+	mastery[elemen] = xp_mastery(elemen) + n
+	var baru = DataEvent.level_mastery(xp_mastery(elemen))
+	for lv in range(lama + 1, baru + 1):
+		var cr = int(DataEvent.CROWNS_LEVEL.get(lv, 0))
+		crowns += cr
+		var gelar = ""
+		if lv >= DataEvent.LEVEL_MAKS:
+			gelar = str(DataEvent.GELAR_MASTERY.get(elemen, ""))
+			if gelar != "" and not kosmetik_dimiliki.has(gelar):
+				kosmetik_dimiliki.append(gelar)
+		naik.append({"elemen": elemen, "level": lv, "crowns": cr, "gelar": gelar})
+
+func _majukan_mastery(st: Dictionary, menang: bool, role: String) -> Array:
+	# Fase 8 G1: XP mastery -- role = elemen: +main, +menang kalau menang; tiap duel menang dgn elemen: +duel.
+	# Selalu jalan (tidak terpengaruh tanggal mundur). Hasil: [{"elemen","level","crowns","gelar"}] level yang baru dicapai.
+	var naik = []
+	var xp_role_el = 0
+	if DataRole.ROLE.has(role):
+		xp_role_el = int(DataEvent.XP_MASTERY["main"]) + (int(DataEvent.XP_MASTERY["menang"]) if menang else 0)
+	var me = st.get("menang_elemen", {})
+	for el in DataRole.ROLE:
+		var n = xp_role_el if el == role else 0
+		if me is Dictionary:
+			n += int(me.get(el, 0)) * int(DataEvent.XP_MASTERY["duel"])
+		_tambah_xp_mastery(el, n, naik)
+	return naik
+
+func alasan_tolak_beli_event(id_barang: String) -> String:
+	# "" = boleh beli dgn Event Tokens; selain itu pesan untuk pemain (dipakai tab EVENT di toko, G2).
+	if not DataKosmetik.ada(id_barang) or DataKosmetik.sumber_dari(id_barang) != "event":
+		return "Unknown item."
+	if punya_kosmetik(id_barang):
+		return "You already own this."
+	if tanggal_mundur():
+		return "Event paused: check your date"
+	var b: Dictionary = DataKosmetik.KATALOG[id_barang]
+	if str(b["event"]) != str(event_sekarang()["id"]):
+		return "Not in this event"
+	if token_event < int(b["token"]):
+		return "Need %d more tokens" % (int(b["token"]) - token_event)
+	return ""
+
+func beli_event(id_barang: String) -> String:
+	# "" = berhasil (token berkurang, barang dimiliki & LANGSUNG dipakai, simpan sekali); selain itu alasan tolak.
+	var alasan = alasan_tolak_beli_event(id_barang)
+	if alasan != "":
+		return alasan
+	token_event = maxi(0, token_event - int(DataKosmetik.KATALOG[id_barang]["token"]))
+	kosmetik_dimiliki.append(id_barang)
+	kosmetik_dipakai[DataKosmetik.jenis_dari(id_barang)] = id_barang
+	simpan()
+	return ""
 
 func boleh_ganti_misi(i: int) -> bool:
 	return not ganti_misi_dipakai and i >= 0 and i < misi.size() and not bool(misi[i].get("selesai", false))
