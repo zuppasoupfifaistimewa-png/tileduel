@@ -194,6 +194,7 @@ func _jalankan_duel(slot_a: int, slot_d: int, nyawa_kandang: int, bonus_pedang: 
 	if StatusJaringan.peran_multiplayer == "" and manusia_lokal_ikut:
 		# Solo manusia vs AI: alur asli (AI memilih elemen di dalam jalankan_duel).
 		var siapa = "pemain" if slot_a == slot_lokal else "musuh"
+		ui_elemen.elemen_ai_bounty = AiMusuh.elemen_bounty_ai(self) # Fase 9 G2
 		hasil_ui = await ui_elemen.jalankan_duel(siapa, nyawa_kandang, kamera, teks_dadu, bonus_pedang)
 	else:
 		var naskah: Dictionary
@@ -262,8 +263,8 @@ func _naskah_duel_ai(slot_a: int, slot_d: int, nyawa_kandang: int, bonus_pedang:
 	# pemain manusia menonton duelnya.
 	var naskah = {
 		"slot_a": slot_a, "slot_d": slot_d,
-		"elemen_a": ui_elemen._pilih_elemen_adaptif("menyerang"),
-		"elemen_d": ui_elemen._pilih_elemen_adaptif("bertahan"),
+		"elemen_a": _elemen_ai_duel("menyerang"),
+		"elemen_d": _elemen_ai_duel("bertahan"),
 		"angka_a": ui_elemen.angka_penyerang[mesin_acak.randi_range(0, ui_elemen.angka_penyerang.size() - 1)],
 		"angka_d": ui_elemen.angka_pembela[mesin_acak.randi_range(0, ui_elemen.angka_pembela.size() - 1)],
 		"bonus_pedang": bonus_pedang,
@@ -288,6 +289,11 @@ func _lengkapi_koin_naskah(naskah: Dictionary, nyawa_kandang: int) -> void:
 		if not _is_ai(s) and not _koin_seri_wajib.has(s):
 			_koin_seri_wajib.append(s)
 
+func _elemen_ai_duel(peran: String) -> String:
+	# Fase 9 G2: AI kadang mengejar bounty (AiMusuh.elemen_bounty_ai), selain itu pilihan adaptif lama.
+	var el = AiMusuh.elemen_bounty_ai(self)
+	return el if el != "" else ui_elemen._pilih_elemen_adaptif(peran)
+
 func _ai_kunci_elemen_tertunda(slot: int, jeda: float, nomor: int) -> void:
 	# HOST: AI "berpikir" sebentar sebelum mengunci elemen duel (lihat
 	# _kumpulkan_naskah_duel). "nomor" menjaga supaya timer dari duel SEBELUMNYA
@@ -296,7 +302,7 @@ func _ai_kunci_elemen_tertunda(slot: int, jeda: float, nomor: int) -> void:
 	await get_tree().create_timer(jeda).timeout
 	if nomor != _nomor_duel or not _duel_mengumpulkan:
 		return
-	_kunci_elemen_peserta(slot, ui_elemen._pilih_elemen_adaptif("menyerang" if slot == _duel_slot_penyerang else "bertahan"))
+	_kunci_elemen_peserta(slot, _elemen_ai_duel("menyerang" if slot == _duel_slot_penyerang else "bertahan"))
 
 func _kumpulkan_naskah_duel(slot_a: int, slot_d: int, nyawa_kandang: int, bonus_pedang: int) -> Dictionary:
 	# HOST ONLY.

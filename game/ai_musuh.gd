@@ -9,6 +9,17 @@ extends RefCounted
 ## bisa bermain di slot mana pun -- untuk mode 1 vs 2/3 AI, dan untuk mengambil
 ## alih pemain yang keluar dari permainan (slot & warnanya tetap seperti semula).
 
+# Fase 9 G2 (F9.3): peluang (1-100, mesin_acak) AI peserta duel memakai elemen bounty aktif.
+const PELUANG_BOUNTY_AI := 50
+
+static func elemen_bounty_ai(main_node: Node) -> String:
+	# "" = tidak ada bounty / undian gagal -> pakai pilihan adaptif biasa. Host/solo saja.
+	if main_node.bounty_elemen == "":
+		return ""
+	if main_node.mesin_acak.randi_range(1, 100) <= PELUANG_BOUNTY_AI:
+		return main_node.bounty_elemen
+	return ""
+
 static func _boleh_bangun_menara(main_node: Node, slot: int = 1) -> bool:
 	# Syarat menara sekarang: AI harus BERHENTI lagi di petaknya sendiri (bukan
 	# menunggu putaran papan). Aturannya sama persis dengan pemain manusia.

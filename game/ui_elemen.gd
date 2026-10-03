@@ -66,6 +66,7 @@ var memori_serang_pemain = {"api": 0, "air": 0, "angin": 0, "tanah": 0, "petir":
 var memori_bertahan_pemain = {"api": 0, "air": 0, "angin": 0, "tanah": 0, "petir": 0}
 var lubang_koin_progress = 0.0
 var elemen_pilihan_musuh = ""
+var elemen_ai_bounty: String = "" # Fase 9 G2: diisi pemain_duel (solo manusia vs AI); "" = pilihan adaptif
 var elemen_pilihan_pemain = ""
 var teks_judul: Label
 var teks_bantuan: Label 
@@ -1136,11 +1137,11 @@ func jalankan_duel(siapa_penyerang, nyawa_kandang = 0, kamera_node = null, teks_
 		if siapa_penyerang == "pemain":
 			teks_judul.text = _kata_serang(nama_sisi_p) + " " + nama_sisi_m + " IS THINKING..."
 			teks_judul.modulate = Color.CYAN
-			elemen_pilihan_musuh = _pilih_elemen_adaptif("bertahan")
+			elemen_pilihan_musuh = elemen_ai_bounty if elemen_ai_bounty != "" else _pilih_elemen_adaptif("bertahan")
 		else:
 			teks_judul.text = _kata_serang(nama_sisi_m) + " " + nama_sisi_m + " IS THINKING..."
 			teks_judul.modulate = Color.RED
-			elemen_pilihan_musuh = _pilih_elemen_adaptif("menyerang")
+			elemen_pilihan_musuh = elemen_ai_bounty if elemen_ai_bounty != "" else _pilih_elemen_adaptif("menyerang")
 			
 		await get_tree().create_timer(2.0).timeout
 		musuh_siap = true
