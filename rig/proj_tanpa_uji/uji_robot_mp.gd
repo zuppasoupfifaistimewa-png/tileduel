@@ -998,9 +998,9 @@ func _catat_profil_nama(kapan: String) -> void:
 		if s < p.daftar_model.size():
 			for m in (p.daftar_model[s] as Node).find_children("*", "MeshInstance3D", true, false):
 				var c: Color = (m as MeshInstance3D).get_active_material(0).albedo_color
-				if c.s < 0.2 and c.v > 0.3:
+				if m.name == "Kaki": # model uji beras_uji.tscn: Kaki = sepatu (trim), Badan = badan
 					trim = c.to_html(false)
-				else:
+				elif m.name == "Badan":
 					badan = c.to_html(false)
 		ko.append("%s/%s/%s/gelar=%s/trim=%s/badan=%s" % [k["pawn"], k["title"], k["frame"], p._gelar_manusia(s), trim, badan])
 	_catat("KOSMETIK_UJI %s slot_lokal=%d %s" % [kapan, p.slot_lokal, str(ko)])
