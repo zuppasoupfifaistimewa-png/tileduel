@@ -1,0 +1,39 @@
+== semua: 1200 baris, 1200 sah, 0 gagal/macet/error
+  per role (menang / tampil, 95% CI):
+    air     240/ 480 =  50.0%  [ 45.5 -  54.5]
+    angin   287/ 480 =  59.8%  [ 55.3 -  64.1]
+    api     169/ 480 =  35.2%  [ 31.1 -  39.6]
+    petir   252/ 480 =  52.5%  [ 48.0 -  56.9]
+    tanah   252/ 480 =  52.5%  [ 48.0 -  56.9]
+  per pasangan (baris menang lawan kolom), tanda ! = batas bawah CI > 55%:
+    air    vs angin   49/120 =  40.8% [ 32.5- 49.8]
+   !air    vs api     83/120 =  69.2% [ 60.4- 76.7]
+    air    vs petir   57/120 =  47.5% [ 38.8- 56.4]
+    air    vs tanah   51/120 =  42.5% [ 34.0- 51.4]
+    angin  vs api     74/120 =  61.7% [ 52.7- 69.9]
+    angin  vs petir   74/120 =  61.7% [ 52.7- 69.9]
+    angin  vs tanah   68/120 =  56.7% [ 47.7- 65.2]
+   !api    vs petir   38/120 =  31.7% [ 24.0- 40.4]
+    api    vs tanah   48/120 =  40.0% [ 31.7- 48.9]
+    petir  vs tanah   61/120 =  50.8% [ 42.0- 59.6]
+  jebakan/AI/pertandingan: rata2 2.20 median 2.0 dalam 2-6: 1529/2400 (64%)  sebaran {0: 372, 1: 491, 2: 539, 3: 533, 4: 279, 5: 124, 6: 54, 7: 8}
+  detik 2 pemain: n=1200 rata2 304.5 (+-5.0 CI95)
+  cara berakhir: {'ronde': 886, 'start': 314}
+  sel role x preset (P14 TAMBAHAN B-f: ! wajib batas bawah CI>55%, x mati batas atas CI<42%):
+    air    x attack       83/ 164 =  50.6%  [ 43.0 -  58.2]
+    air    x balanced     83/ 166 =  50.0%  [ 42.5 -  57.5]
+    air    x defense      74/ 150 =  49.3%  [ 41.4 -  57.3]
+    angin  x attack       87/ 152 =  57.2%  [ 49.3 -  64.8]
+    angin  x balanced     99/ 160 =  61.9%  [ 54.2 -  69.0]
+    angin  x defense     101/ 168 =  60.1%  [ 52.6 -  67.2]
+    api    x attack       69/ 180 =  38.3%  [ 31.5 -  45.6]
+   xapi    x balanced     50/ 158 =  31.6%  [ 24.9 -  39.3]
+    api    x defense      50/ 142 =  35.2%  [ 27.8 -  43.4]
+    petir  x attack       77/ 150 =  51.3%  [ 43.4 -  59.2]
+    petir  x balanced     88/ 168 =  52.4%  [ 44.9 -  59.8]
+    petir  x defense      87/ 162 =  53.7%  [ 46.0 -  61.2]
+    tanah  x attack       78/ 157 =  49.7%  [ 42.0 -  57.4]
+    tanah  x balanced     80/ 152 =  52.6%  [ 44.7 -  60.4]
+    tanah  x defense      94/ 171 =  55.0%  [ 47.5 -  62.2]
+  sacred/pertandingan: rata2 0.07 (n=1200, dari 1200 baris sah)
+  xprole0 slot 0: rata2 153.4 (n=1200) -- 0 baris dilewati (tidak tersedia)
