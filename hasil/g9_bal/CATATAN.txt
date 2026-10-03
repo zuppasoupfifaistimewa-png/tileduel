@@ -30,3 +30,10 @@ Kode b10 = commit b22f27b (git worktree di scratchpad + --import), rig/proj_tanp
    - Fitur Fase 5 TIDAK menguntungkan petir: laga dgn klaim bounty api 23/46 = 50%; kartu bantuan jarang (0.03-0.06/laga); hutang 0.
    - Dua matchup terburuk api (petir 36.1, air 40.6) = dua pemilik heat_skin. api vs tanah 41.7 / angin 45.6 (r6 menaikkan dua ini, bukan petir/air).
    USULAN r7 (tuas 1 P14, ai_jebakan.gd saja, belum diterapkan): FAKTOR_API_TAHAN_PANAS = 0.5 -> nilai jebakan api x0.5 kalau korban punya heat_skin.
+7) r7 DITERAPKAN di rig (FAKTOR_API_TAHAN_PANAS 0.5, ai_jebakan.gd). Uji berpasangan r7_berpasangan.txt (960, benih sama dgn pembanding):
+   api 38.6 -> 45.3 (+6.7); vs petir 80000 38->60, 110000 41->56 (/120); vs air 37->54, 56->62; vs angin 46->50, 57->57; vs tanah 48->48, 48->48.
+   jebakan/AI 2.26; 295.1 dtk.
+8) KONFIRMASI benih BARU 140000 (tugas_b140000/, kode HEAD + r7): S1 (1200) air 45.4 / angin 54.6 / api 48.5 / petir 48.3 / tanah 53.1
+   -> semua 44-56 OK; 0 pasangan "!" (api>petir 41.7, api>tanah 41.7); 0 sel wajib/mati; jebakan/AI 2.14; 294.0 dtk (<= 318.1).
+   S2 4P (400): air 23.1 / angin 26.1 / api 21.6 / petir 24.7 / tanah 29.6 -> semua 20-30 OK; 397.6 dtk (<= 463.8); jebakan/AI 2.05.
+   => P14 LOLOS. game/ai_jebakan.gd BELUM disalin (izin ditolak pengaman sesi; menunggu pemilik).

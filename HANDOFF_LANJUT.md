@@ -310,6 +310,10 @@ Rig-only lain: `uji_*`, `cek_muat_f3.gd` (alat), dan 5 file proyek yang tidak ad
   **ANALISIS API vs PETIR SELESAI (Opus, 03-10, tanpa sim; CATATAN butir 6, `analisis_api_petir.txt`):** matchup lemah sejak pra-F5 (36.1% pasca-F5);
   tiap kena jebakan petir = api -15..20 poin; AI api hampir selalu pasang API vs pemilik heat_skin (petir/air), padahal laga dgn jebakan non-api api menang 58%.
   F5 tidak menguntungkan petir. **USULAN r7 (menunggu pemilik):** `FAKTOR_API_TAHAN_PANAS` 0.5 di `ai_jebakan.gd` -> uji berpasangan 960 -> konfirmasi 140000.
+  **r7 DISETUJUI & DIUJI -> P14 LOLOS (Opus, 03-10; CATATAN butir 7-8):** berpasangan 960: api 38.6 -> 45.3, vs petir 32.9 -> 48.3. Konfirmasi benih 140000:
+  S1 45.4/54.6/48.5/48.3/53.1 (air/angin/api/petir/tanah), 0 pasangan "!", 0 sel wajib/mati, jebakan/AI 2.14, 294 dtk; S2 4P 23.1/26.1/21.6/24.7/29.6, 398 dtk.
+  **BERIKUTNYA:** salin `rig/proj_tanpa_uji/ai_jebakan.gd` -> `game/ai_jebakan.gd` (identik; satu-satunya beda = r7; tertunda karena izin sesi) + ZIP b16 (1 file).
+  Opsional nanti: api vs tanah 41.7% (bukan heat_skin) -- pantau, belum perlu disetel.
 - **RENCANA FASE 6-9 DISETUJUI (Opus, 02-10): `docs/RENCANA_fase6_9.md`** -- pemilik "setuju semua a" (K1-K15). Tujuan: retensi.
   F6 identitas MP ringan (nama/level, MVP, Respect, penjaga versi) -> F7 toko Crowns + Remove Ads (regresi MP 37 SEKALI di F7 G5)
   -> F8 event mingguan offline + mastery -> F9 misi/taruhan Tebak Duel + penutup. Kredit ~US$25, perkiraan ~23.5 (urutan pangkas: bagian 6).
