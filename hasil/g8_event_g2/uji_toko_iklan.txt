@@ -1,0 +1,16 @@
+Godot Engine v4.7.1.stable.official.a13da4feb - https://godotengine.org
+
+TOKO_IKLAN OK    stub: baris REMOVE ADS tampil
+TOKO_IKLAN OK    stub: tombol BUY & RESTORE ada
+TOKO_IKLAN OK    stub: pesan 'Store is not available on this device.'
+TOKO_IKLAN OK    asli: tombol 'BUY $2.99' (harga dari Play)
+TOKO_IKLAN OK    beli: bebas_iklan + profil + bonus 500
+TOKO_IKLAN OK    beli: baris jadi 'Ads removed. Thank you!', tombol BUY/RESTORE hilang
+TOKO_IKLAN OK    beli: pesan sukses tampil + label Crowns 600
+TOKO_IKLAN OK    refund saat panel terbuka: baris kembali BUY
+TOKO_IKLAN OK    tanpa autoload: toko terbuka, tanpa baris Remove Ads
+TOKO_IKLAN gagal=0
+WARNING: 5 ObjectDB instances were leaked at exit (run with `--verbose` for details).
+   at: cleanup (core/object/object.cpp:2536)
+ERROR: 2 resources still in use at exit (run with --verbose for details).
+   at: clear (core/io/resource.cpp:822)

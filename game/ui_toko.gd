@@ -9,16 +9,19 @@ const EMAS := Color(1.0, 0.85, 0.2)
 const ABU := Color(0.75, 0.75, 0.8)
 const HIJAU := Color(0.45, 0.95, 0.5)
 const MERAH := Color(1.0, 0.45, 0.4)
-const NAMA_TAB := {"pawn": "PAWN", "title": "TITLE", "frame": "FRAME"}
+const NAMA_TAB := {"pawn": "PAWN", "title": "TITLE", "frame": "FRAME", "event": "EVENT"}
+const TAB := ["pawn", "title", "frame", "event"] # Fase 8: tab EVENT = barang event yang sedang berjalan (token)
 const KETERANGAN := {
 	"pawn": "Pawn colors tint your gloves and boots.",
 	"title": "Titles show under your name.",
 	"frame": "Frames decorate your profile card.",
+	"event": "Buy with Event Tokens. Items return when the event comes back.",
 }
 
 static func buka_toko(induk: Node, tab: String = "pawn") -> void:
 	if not is_instance_valid(induk) or not induk.is_inside_tree():
 		return
+	ProfilPemain.segarkan_event()
 	var kanvas = UiProfil._layar_gelap(induk, 12)
 	kanvas.name = "PanelToko"
 	var isi = UiProfil._kartu_tengah(kanvas, true)
@@ -48,18 +51,22 @@ static func buka_toko(induk: Node, tab: String = "pawn") -> void:
 	tutup.size_flags_horizontal = Control.SIZE_SHRINK_CENTER
 	tutup.pressed.connect(kanvas.queue_free)
 	isi.add_child(tutup)
-	var keadaan = {"tab": tab if DataKosmetik.JENIS.has(tab) else "pawn"}
+	var keadaan = {"tab": tab if TAB.has(tab) else "pawn"}
 	# Lambda menangkap variabel per NILAI -> rujukan ke dirinya lewat Dictionary (keadaan["segarkan"]).
 	keadaan["segarkan"] = func():
 		lbl_pesan.add_theme_color_override("font_color", HIJAU if bool(lbl_pesan.get_meta("ok", false)) else MERAH) # pesan sukses (Remove Ads) hijau, sisanya merah
 		lbl_pesan.set_meta("ok", false)
 		lbl_crowns.text = "CROWNS %d   |   Lv %d" % [ProfilPemain.crowns, ProfilPemain.level_sekarang()]
+		if keadaan["tab"] == "event":
+			lbl_crowns.text = "TOKENS %d" % ProfilPemain.token_event
 		lbl_ket.text = str(KETERANGAN[keadaan["tab"]])
+		if keadaan["tab"] == "event":
+			lbl_ket.text = "%s: %s" % [str(ProfilPemain.event_sekarang()["nama"]), "Event paused: check your date" if ProfilPemain.tanggal_mundur() else UiEvent.teks_sisa_sekarang()]
 		for t in baris_tab.get_children():
 			t.queue_free()
-		for jenis in DataKosmetik.JENIS:
+		for jenis in TAB:
 			var aktif = jenis == keadaan["tab"]
-			var tb = UiProfil._tombol(str(NAMA_TAB[jenis]), Color(0.75, 0.55, 0.1) if aktif else Color(0.25, 0.25, 0.32), Vector2(150, 48), 20)
+			var tb = UiProfil._tombol(str(NAMA_TAB[jenis]), Color(0.75, 0.55, 0.1) if aktif else Color(0.25, 0.25, 0.32), Vector2(120, 48), 20)
 			tb.pressed.connect(func():
 				keadaan["tab"] = jenis
 				lbl_pesan.text = ""
@@ -68,8 +75,8 @@ static func buka_toko(induk: Node, tab: String = "pawn") -> void:
 			baris_tab.add_child(tb)
 		for b in daftar.get_children():
 			b.queue_free()
-		for id_barang in DataKosmetik.daftar(str(keadaan["tab"])):
-			daftar.add_child(_baris_barang(str(id_barang), lbl_pesan, keadaan["segarkan"]))
+		for id_barang in _isi_tab(str(keadaan["tab"])):
+			daftar.add_child(_baris_barang(str(id_barang), lbl_pesan, keadaan["segarkan"], keadaan["tab"] == "event"))
 		for b in kotak_iklan.get_children():
 			b.queue_free()
 		var baris_iklan = _baris_remove_ads(kanvas, lbl_pesan, keadaan["segarkan"])
@@ -86,6 +93,18 @@ static func buka_toko(induk: Node, tab: String = "pawn") -> void:
 			if pp.status_berubah.is_connected(saat_berubah):
 				pp.status_berubah.disconnect(saat_berubah)
 		)
+
+static func _isi_tab(tab: String) -> Array:
+	# Tab Pawn/Title/Frame: barang toko Crowns + barang event/mastery yang SUDAH dimiliki (supaya bisa dipakai).
+	# Tab Event: 3 barang event yang sedang berjalan.
+	if tab == "event":
+		return DataKosmetik.daftar_event(str(ProfilPemain.event_sekarang()["id"]))
+	var hasil = DataKosmetik.daftar(tab)
+	for sumber in ["event", "mastery"]:
+		for id_barang in DataKosmetik.daftar(tab, sumber):
+			if ProfilPemain.punya_kosmetik(str(id_barang)):
+				hasil.append(id_barang)
+	return hasil
 
 static func _pengelola_pembelian() -> Node:
 	# Lewat pohon (bukan nama autoload) supaya layar toko tetap termuat walau autoload belum didaftarkan -> baris Remove Ads hilang saja.
@@ -137,7 +156,7 @@ static func _baris_remove_ads(kanvas: Node, lbl_pesan: Label, segarkan: Callable
 	baris.add_child(pulih)
 	return kartu
 
-static func _baris_barang(id_barang: String, lbl_pesan: Label, segarkan: Callable) -> Control:
+static func _baris_barang(id_barang: String, lbl_pesan: Label, segarkan: Callable, event: bool = false) -> Control:
 	var b: Dictionary = DataKosmetik.KATALOG[id_barang]
 	var jenis = str(b["jenis"])
 	var punya = ProfilPemain.punya_kosmetik(id_barang)
@@ -157,9 +176,11 @@ static func _baris_barang(id_barang: String, lbl_pesan: Label, segarkan: Callabl
 	var l_nama = UiProfil._label(str(b["nama"]), 22, EMAS if dipakai else Color.WHITE)
 	l_nama.horizontal_alignment = HORIZONTAL_ALIGNMENT_LEFT
 	kiri.add_child(l_nama)
-	var alasan = "" if punya else ProfilPemain.alasan_tolak_beli(id_barang)
-	var teks_info = "Owned" if punya else "%d Crowns" % int(b["harga"])
-	if not punya and int(b["lv"]) > 0:
+	var alasan = "" if punya else (ProfilPemain.alasan_tolak_beli_event(id_barang) if event else ProfilPemain.alasan_tolak_beli(id_barang))
+	var teks_info = "Owned" if punya else ("%d tokens" % int(b["token"]) if event else "%d Crowns" % int(b["harga"]))
+	if punya and not event and DataKosmetik.sumber_dari(id_barang) != "":
+		teks_info = "Owned (%s)" % ("event" if DataKosmetik.sumber_dari(id_barang) == "event" else "mastery")
+	if not punya and not event and int(b["lv"]) > 0:
 		teks_info += "  (Lv %d)" % int(b["lv"])
 	var l_info = UiProfil._label(teks_info, 16, HIJAU if punya else ABU)
 	l_info.horizontal_alignment = HORIZONTAL_ALIGNMENT_LEFT
@@ -179,7 +200,7 @@ static func _baris_barang(id_barang: String, lbl_pesan: Label, segarkan: Callabl
 		# Terkunci (level/Crowns kurang) tetap terlihat sebagai tujuan; ketukan menampilkan alasannya.
 		tombol = UiProfil._tombol("BUY", Color(0.15, 0.55, 0.25) if alasan == "" else Color(0.35, 0.35, 0.4), Vector2(150, 50), 18)
 		tombol.pressed.connect(func():
-			var pesan = ProfilPemain.beli(id_barang)
+			var pesan = ProfilPemain.beli_event(id_barang) if event else ProfilPemain.beli(id_barang)
 			if pesan == "":
 				lbl_pesan.text = ""
 			else:

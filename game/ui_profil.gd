@@ -293,6 +293,10 @@ static func _isi_baris_hadiah(kotak: VBoxContainer, r: Dictionary) -> void:
 		daftar.append(["Duel guesses: %d right  +%d XP  +%d Crowns" % [int(r["tebak_dihitung"]), int(r.get("xp_tebak", 0)), int(r.get("crowns_tebak", 0))], Color.WHITE])
 	for m in r.get("misi_selesai", []):
 		daftar.append(["MISSION DONE: %s" % str(m["teks"]), EMAS])
+	for m in r.get("misi_event_selesai", []): # Fase 8 G2
+		daftar.append(["EVENT MISSION DONE: %s  +%d tokens" % [str(m["teks"]), int(m["token"])], Color(0.8, 0.6, 1.0)])
+	for n in r.get("mastery_naik", []):
+		daftar.append(["%s MASTERY Lv %d  +%d Crowns%s" % [str(DataEvent.NAMA_ELEMEN.get(str(n["elemen"]), "")), int(n["level"]), int(n["crowns"]), "  + title!" if str(n["gelar"]) != "" else ""], Color(0.8, 0.6, 1.0)])
 	for p in r.get("penghargaan", []):
 		daftar.append(["%s  +%d XP  +%d Crowns" % [str(ProfilPemain.NAMA_PENGHARGAAN.get(str(p), str(p))), ProfilPemain.XP_PENGHARGAAN, ProfilPemain.CROWNS_PENGHARGAAN], Color.WHITE])
 	var tampil = daftar
@@ -395,9 +399,19 @@ static func pasang_di_menu(menu: Node) -> void:
 	tombol_toko.pressed.connect(func(): UiToko.buka_toko(menu))
 	menu.add_child(tombol_toko)
 
+	var tombol_event = _tombol("EVENT", Color(0.55, 0.3, 0.75), Vector2(190, 56), 20) # Fase 8 G2
+	tombol_event.set_anchors_preset(Control.PRESET_TOP_RIGHT)
+	tombol_event.offset_left = -16 - 190
+	tombol_event.offset_right = -16
+	tombol_event.offset_top = 20 + 2 * (56 + 8)
+	tombol_event.offset_bottom = 20 + 2 * (56 + 8) + 56
+	tombol_event.pressed.connect(func(): UiEvent.buka_event(menu))
+	menu.add_child(tombol_event)
+
 	menu.bar_profil = bar
 	menu.tombol_misi = tombol
 	menu.tombol_toko = tombol_toko
+	menu.set("tombol_event", tombol_event) # set(): menu uji tanpa variabel ini tetap jalan
 	segarkan_menu(menu)
 
 static func segarkan_menu(menu: Node) -> void:
@@ -412,6 +426,10 @@ static func segarkan_menu(menu: Node) -> void:
 	var tombol = menu.get("tombol_misi")
 	if tombol != null and is_instance_valid(tombol):
 		tombol.text = "MISSIONS %d/3%s" % [ProfilPemain.jumlah_misi_selesai(), "  !" if ProfilPemain.login_bisa_diklaim() else ""]
+	var tombol_event = menu.get("tombol_event")
+	if tombol_event != null and is_instance_valid(tombol_event):
+		ProfilPemain.segarkan_event()
+		tombol_event.text = "EVENT %d/3" % UiEvent.jumlah_misi_event_selesai()
 
 # ------------------------------------------------------------
 # PANEL PROFILE
@@ -458,10 +476,16 @@ static func buka_panel_profil(menu: Node) -> void:
 	baris_lv.add_child(_label("%d/%d XP to Lv %d" % [int(info["xp_dalam"]), int(info["xp_butuh"]), int(info["level"]) + 1], 16, ABU))
 
 	isi.add_child(_label("CROWNS %d" % ProfilPemain.crowns, 24, EMAS))
+	var baris_toko = HBoxContainer.new()
+	baris_toko.alignment = BoxContainer.ALIGNMENT_CENTER
+	baris_toko.add_theme_constant_override("separation", 10)
+	isi.add_child(baris_toko)
 	var btn_toko = _tombol("SHOP", Color(0.75, 0.55, 0.1), Vector2(200, 52), 22)
-	btn_toko.size_flags_horizontal = Control.SIZE_SHRINK_CENTER
 	btn_toko.pressed.connect(func(): UiToko.buka_toko(menu))
-	isi.add_child(btn_toko)
+	baris_toko.add_child(btn_toko)
+	var btn_mastery = _tombol("MASTERY", Color(0.55, 0.3, 0.75), Vector2(200, 52), 22) # Fase 8 G2
+	btn_mastery.pressed.connect(func(): UiEvent.buka_mastery(menu))
+	baris_toko.add_child(btn_mastery)
 
 	var kisi = GridContainer.new()
 	kisi.columns = 4

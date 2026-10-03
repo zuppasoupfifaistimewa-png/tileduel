@@ -5,7 +5,9 @@ harus tercatat di sini, di `HANDOFF_LANJUT.md`, atau di RENCANA.
 
 ## 2026-10-03 -- sesi Claude Code cloud (Sonnet 5.5): Fase 8 G1 (progres misi event + mastery + beli_event) lalu G2
 - Branch `claude/tile-duel-fase7-g4-autoload-90q9ed`. Kredit pemilik ~US$3 -> sesi hemat. Hanya `profil_pemain.gd` berubah di G1; `uji_event_g1` 0 gagal, uji lama 0 gagal, `cek_muat_f3` 30/30, solo nyata 0 SCRIPT ERROR. Bukti `hasil/g8_event_g1/`. Godot 4.7.1 diunduh ke /opt/godot, `--import` ~8 dtk.
-- Langkah berikutnya: G2 UI (lihat HANDOFF 5 entri "FASE 8 G1").
+- G2 UI: `ui_event.gd` (layar EVENT + MASTERY), tab EVENT di `ui_toko.gd`, tombol EVENT di menu, MASTERY di PROFILE, kartu hadiah; `uji_event_foto` 11/11, `cek_muat_f3` 31/31, tangkapan layar di `hasil/g8_event_g2/`. G4: `kiriman/TileDuel_Fase8_b13.zip` 35 .gd. G3 Opus & regresi MP sengaja dilewati (hemat kredit).
+- Pelajaran: autoload profil memakai tanggal SISTEM saat start -> uji UI harus mengosongkan `tanggal_maks` sebelum `_tanggal_uji` mundur; `menu.tombol_x = ...` pada menu uji tanpa var -> pakai `menu.set()`; `pkill -f Godot` membunuh shell sendiri (jangan); `rm -rf *` setelah `cd` ditolak izin.
+- Langkah berikutnya: pemilik TIMPA 35 file + uji HP b13 (HANDOFF 5), rilis; lalu Fase 9.
 
 ## 2026-10-03 -- sesi Claude Code cloud (Opus 5.5): Fase 8 G0 (angka event/mastery + data + profil v5)
 - Branch `claude/tile-duel-fase7-g4-autoload-90q9ed` (lanjutan; CLAUDE.md masih menyebut branch lama). Pemilik: uji HP b12 lolos semua; K9-K12 = a; tanpa U9/regresi MP. Kredit sisa ~US$6 -> sesi dibuat pendek.

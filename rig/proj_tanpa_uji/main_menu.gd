@@ -20,6 +20,7 @@ var _role_terbuka: bool = false
 var bar_profil: Button = null
 var tombol_misi: Button = null
 var tombol_toko: Button = null
+var tombol_event: Button = null # Fase 8 G2
 # Menu SINGLE PLAYER: pilih dulu berapa lawan AI (1-3), baru pilih peta.
 var panel_lawan: VBoxContainer
 var jumlah_ai_dipilih: int = 1
@@ -327,7 +328,7 @@ func _mulai_terjun_ke_game(pilihan: String):
 	tw.tween_property(latar_belakang, "modulate:a", 0.0, 1.0)
 	tw.tween_property(judul, "modulate:a", 0.0, 1.0)
 	tw.tween_property(panel_map, "modulate:a", 0.0, 1.0)
-	for b in [bar_profil, tombol_misi, tombol_toko]:
+	for b in [bar_profil, tombol_misi, tombol_toko, tombol_event]:
 		if b != null:
 			tw.tween_property(b, "modulate:a", 0.0, 1.0)
 	await tw.finished
@@ -428,7 +429,7 @@ func _mulai_sesudah_role(pilihan: String) -> void:
 	_sudah_mulai = true
 	panel_map.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	# Fase 2: bar profil & MISSIONS tidak boleh dibuka selama menu memudar.
-	for b in [bar_profil, tombol_misi, tombol_toko]:
+	for b in [bar_profil, tombol_misi, tombol_toko, tombol_event]:
 		if b != null:
 			b.disabled = true
 	panel_map.get_child(0).text = "- STARTING... -"
