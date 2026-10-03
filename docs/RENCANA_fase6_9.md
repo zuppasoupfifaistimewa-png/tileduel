@@ -224,3 +224,15 @@ itu + HANDOFF 0 & 5 + entri LOG teratas; gabungkan beberapa G dalam satu sesi se
   - F6.5 Kartu profil: `UiProfil.tampilkan_kartu_profil` (nama, level, Respect, MVP, role); dibuka dengan mengetuk nama di lobby (`[url]` pada RichTextLabel) atau baris layar akhir. Profil lobby + field `role` (`role_terakhir`, divalidasi host lewat `_role_aman`; tanpa RPC/param baru).
   - Bukti: `uji_profil_v3` 22/22; `cek_muat_f3` 26/26; MP quick Q1 / S1 / M2 0 beda 0 SCRIPT ERROR (migrasi: cek_ok_migrasi=6); R1 (skenario robot `respect`, 3P+1AI, benih 31): c1 2->4, c2 3->5, host 2->4 = +2 tepat, kirim ganda ditolak, AI/diri ditolak, MVP slot sama di semua HP (`MVP_UJI`). Catatan: run `r1`/`r1b` awal memberi GAGAL host karena tes mengambil nilai awal terlambat (Respect sudah tiba) -> tes diperbaiki (`respect_awal_uji`); `r1c` = run sah. Run `r1` Classic tidak selesai dlm 30 giliran (bukan bug), diganti quick.
   - BELUM: tampilan layar sungguhan (tata letak 4 pemain, toast) + jalur TOLAK versi -> uji 2 HP di G3. Berikutnya: **G3 (Sonnet)**.
+- 03-10 (Sonnet): **F6 G3 SELESAI** (bukti `hasil/g6_bersih/G3_cek.txt`).
+  - Bersih-bersih pola F7: grep debug/print/TODO = 0, saklar `UJI_*` false, `game/` 34/35 identik dgn rig (beda hanya stub iklan). Tidak ada .gd `game/` berubah di G3 -> cek_muat/uji G2 tetap berlaku (tidak diulang).
+  - `kiriman/TileDuel_Fase6_b11.zip` = 29 .gd resmi dari `game/` (9 berbeda dari b10: layar_local_play, pemain, pemain_dasar, pemain_duel, pemain_kartu, profil_pemain, status_jaringan, ui_dinamis, ui_profil). Pemilik: buang unduhan lama, TIMPA ke-29 file, buka Godot, tunggu impor.
+  - **DAFTAR UJI HP b11 (butuh 2 HP; HP-A = build b11, HP-B = b11 juga; satu HP lagi dgn build LAMA b10 untuk uji ke-6):**
+    1. Nama: ubah nama di menu (mis. "Andi" dan "Budi"); HP-A buat room, HP-B gabung -> lobby tampil "Andi Lv N" & "Budi Lv N" di kedua HP (nama & level benar).
+    2. Level: mulai laga Quick -> teks giliran, papan skor, layar akhir memakai nama + "Lv N" yang sama di kedua HP; solo/AI tetap "P2"/"Enemy".
+    3. MVP: akhir laga -> tepat satu baris bertanda "MVP", sama di kedua HP; buka Profile: MVP total +1 hanya di HP pemilik MVP (solo juga dihitung).
+    4. Respect: di layar akhir ketuk "RESPECT" pada baris lawan manusia -> tombol nonaktif (1x per lawan per laga); HP lawan muncul toast "<nama> gave you Respect!"; Respect di Profile lawan +1. Tidak ada tombol untuk AI/diri sendiri. Layar 4 pemain (kalau ada 3-4 HP): baris & tombol tidak terpotong.
+    5. Kartu profil: ketuk nama di lobby dan di baris layar akhir -> popup nama, level, Respect, MVP, role terakhir; tutup normal, tidak menutupi tombol penting.
+    6. Versi beda ditolak: HP dgn build LAMA (b10, atau versi Play) gabung ke room HP b11 (dan sebaliknya) -> muncul "Please update the game to play together." (client lama ke host baru: diputus <=4 dtk; client baru ke host lama: pesan dalam 6 dtk); host b11 tidak ikut macet, bisa membuka room lagi.
+    7. Profil lama utuh: timpa di atas versi lama -> Crowns/XP/role tidak hilang, Respect & MVP mulai 0.
+    Laporkan angka/teks yang aneh; bug -> Opus dulu.
