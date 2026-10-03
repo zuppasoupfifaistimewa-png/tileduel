@@ -8,3 +8,9 @@ Kode b10 = commit b22f27b (git worktree di scratchpad + --import), rig/proj_tanp
 3) Pecahan api (tanpa sim): defisit merata di semua peta/slot/lawan/preset dan kedua paruh benih (34.6/35.8) -- tidak ada
    satu penyebab (event/bounty/bantuan) yang menonjol. Selisih 10.4 poin = ~3.3 sigma (SE binomial 480+480).
    => derau benih yang sangat besar (langka, ~0.1%) ATAU api memang ~40% (gabungan b10 dua benih 388/960 = 40.4% [37.3-43.5]).
+4) s1_b110000.txt (S1 1200, benih BARU 110000, kode HEAD = b15, tugas tugas/s1_b110000.tugas): air 43.8 / angin 54.8 / api 42.1 /
+   petir 55.4 / tanah 54.0; pasangan "!" api vs petir 34.2% (petir batas bawah >55); 0 sel wajib/mati; jebakan/AI 2.19; 300.4 dtk.
+   => P14 GAGAL lagi (api, air < 44; pasangan api-petir). Gabungan 3 benih kode Fase 5+ (50000/80000/110000, 1440 laga per role):
+   air 47.5 / angin 56.4 / api 41.0 / petir 52.1 / tanah 53.1. Api lemah NYATA (bukan derau); angin sedikit di atas 56.
+   (Konfirmasi F5 benih 20000 = kode SEBELUM fitur Fase 5 -> api 46.5; penurunan muncul setelah Fase 5.)
+   Catatan: run pertama gagal 1200/1200 karena PROJ tidak di-set (SP diarahkan ke scratchpad) -- dihapus & diulang.

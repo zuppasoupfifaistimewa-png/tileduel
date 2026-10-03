@@ -295,6 +295,12 @@ Rig-only lain: `uji_*`, `cek_muat_f3.gd` (alat), dan 5 file proyek yang tidak ad
   **BERIKUTNYA (menunggu keputusan pemilik):** S1 penuh di benih BARU (mis. 110000, kode HEAD, 1200 laga ~20 mnt) sebagai pemutus: api >=44 & angin <=56 ->
   80000 kebetulan, tidak menyetel; api <44 lagi -> setel per tuas P14 (NODE_LV api/angin dulu; frekuensi jebakan 2.2 sudah OK), konfirmasi di benih baru lain.
   S2 4P (angin 33, air 19) hanya bila S1 menunjukkan ketimpangan nyata.
+  **S1 PEMUTUS benih 110000 SELESAI (Opus, 03-10; `hasil/g9_bal/s1_b110000*`):** air 43.8 / angin 54.8 / api 42.1 / petir 55.4 / tanah 54.0; pasangan "!"
+  api vs petir 34.2; jebakan/AI 2.19; 300 dtk. P14 GAGAL lagi. Gabungan 3 benih kode Fase 5+ (1440/role): air 47.5 / angin 56.4 / **api 41.0 [38.5-43.5]** /
+  petir 52.1 / tanah 53.1 -> api lemah NYATA (konfirmasi F5 benih 20000 = kode sebelum fitur Fase 5, api 46.5). Angka BELUM disetel.
+  **USULAN (menunggu persetujuan pemilik):** r6 = `hot_flames` 90/110/130 -> 100/125/150 saja (tuas 2, `data_role.gd` rig). Uji BERPASANGAN pada
+  benih yang sama: api-subset 80000 (`hasil/g9_g2/tugas/kontrol_api.tugas`) + api-subset 110000 (960 laga ~16 mnt; pembanding 169/480 & 202/480).
+  Naik >= ~4 poin -> konfirmasi S1+S2 benih BARU 140000 (~30 mnt) -> salin identik ke `game/` + ZIP b16. Kalau kurang -> Opus pilih tuas berikut (AI api vs petir).
 - **RENCANA FASE 6-9 DISETUJUI (Opus, 02-10): `docs/RENCANA_fase6_9.md`** -- pemilik "setuju semua a" (K1-K15). Tujuan: retensi.
   F6 identitas MP ringan (nama/level, MVP, Respect, penjaga versi) -> F7 toko Crowns + Remove Ads (regresi MP 37 SEKALI di F7 G5)
   -> F8 event mingguan offline + mastery -> F9 misi/taruhan Tebak Duel + penutup. Kredit ~US$25, perkiraan ~23.5 (urutan pangkas: bagian 6).
