@@ -3,6 +3,13 @@
 Satu entri per sesi, terbaru di atas. Sesi baru tidak bisa membaca percakapan lama, jadi apa pun yang penting
 harus tercatat di sini, di `HANDOFF_LANJUT.md`, atau di RENCANA.
 
+## 2026-10-03 -- sesi Claude Code cloud (Sonnet 5.5): Fase 6 G2 (MVP + Respect + kartu profil)
+- Branch `claude/ecstatic-pascal-bo2bno` (mulai dari 74996eb). Hemat kredit: hanya baca dokumen yang disebut + kode layar akhir/lobby/RPC.
+- MVP lokal tanpa RPC; Respect lewat 2 RPC baru `rpc_zrespect_kirim/terima` di `pemain.gd` (awalan `rpc_z` = sesudah semua RPC lama); kartu profil dari ketuk nama (lobby & layar akhir); profil lobby + `role`.
+- Bukti `hasil/g6_mvp_respect/`: uji_profil_v3 22/22, cek_muat 26/26, MP quick Q1/S1/M2 0 beda 0 SCRIPT ERROR, skenario Respect R1 (3P+1AI) +2 tepat per HP, kirim ganda/AI/diri ditolak.
+- Pelajaran rig: Godot dipasang di `/opt/godot` (unduhan lolos proxy); jangan `pkill -f` dengan pola yang cocok baris perintah sendiri (mematikan shell) -> pakai `ps | awk | kill`; MP Classic 30 giliran tidak selesai -> pakai `EXTRA="panjang=quick"`.
+- Belum teruji: tampilan nyata di HP + jalur tolak versi (G3, 2 HP). Langkah berikutnya: sesi Sonnet Fase 6 G3 (bersih-bersih + ZIP b11 + daftar uji HP).
+
 ## 2026-10-02 -- sesi Claude Code cloud (Sonnet 5.5): Fase 6 G0 + G1
 - Branch `claude/wonderful-gates-8v431l-ewjtrm` (di-fast-forward ke 4d7117a, rencana Fase 6-9). Hemat kredit: hanya baca dokumen yang disebut + kode lobby/profil.
 - G0: `profil_pemain.gd` VERSI 3 (`respect`, `mvp_total`), uji headless 18/18 (`hasil/g6_profil/uji_profil_v3.txt`), `cek_muat_f3` 26/26.

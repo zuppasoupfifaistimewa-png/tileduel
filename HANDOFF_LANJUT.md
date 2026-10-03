@@ -1,4 +1,4 @@
-# HANDOFF -- lanjutkan proyek Tile Duel (Fase 4 SELESAI; Fase 5 SELESAI: G0-G9 + uji HP b10 LANCAR (02-10); rencana Fase 6-9 DISETUJUI 02-10 (`docs/RENCANA_fase6_9.md`); Fase 6 G0+G1 SELESAI (02-10); berikutnya Fase 6 G2 (Sonnet))
+# HANDOFF -- lanjutkan proyek Tile Duel (Fase 4 SELESAI; Fase 5 SELESAI: G0-G9 + uji HP b10 LANCAR (02-10); rencana Fase 6-9 DISETUJUI 02-10 (`docs/RENCANA_fase6_9.md`); Fase 6 G0+G1+G2 SELESAI (02-10/03-10); berikutnya Fase 6 G3 (Sonnet: bersih-bersih + ZIP b11))
 
 Dokumen ini ditulis 02-10-2026 supaya sesi Claude Code (cloud / web, tanpa CLI) mana pun bisa melanjutkan
 pekerjaan TANPA riwayat percakapan. BACA INI DULU, lalu `docs/RENCANA_fase4_role.md` bagian 14.19 & **14.21-14.24** (paling akhir).
@@ -248,7 +248,12 @@ Rig-only lain: `uji_*`, `cek_muat_f3.gd` (alat), dan 5 file proyek yang tidak ad
 - **FASE 6 G0+G1 SELESAI (Sonnet, 02-10; rincian RENCANA_fase6_9 bagian 9, bukti `hasil/g6_profil/`):** profil VERSI 3 (`respect`, `mvp_total`; uji headless 18/18), penjaga versi lobby BARU
   (`VERSI_PROTOKOL=2`, `rpc_sosial_profil`/`rpc_tolak_versi` -- nama RPC baru harus jatuh SESUDAH `rpc_role_lobby` secara abjad), profil lobby -> `StatusJaringan.profil_slot` (semua HP), nama+level tampil di lobby/teks/papan/akhir.
   `game/` & rig identik (beda hanya stub iklan); rig-only: `uji_profil_v3.gd/.tscn`, `uji_robot_mp.gd` (nama "Bot ..." + log `PROFIL_NAMA`). Subset MP 1v1 / 3P client keluar / 4P migrasi host: 0 beda, 0 SCRIPT ERROR; `cek_muat_f3` 26/26. `game/` BERUBAH (8 .gd) -> ZIP b11 dibuat di G3.
-  **BERIKUTNYA: sesi SONNET Fase 6 G2** (MVP + Respect + kartu profil; RENCANA_fase6_9 bagian 1 F6.3-F6.5) + MP subset sama + 1 skenario Respect.
+- **FASE 6 G2 SELESAI (Sonnet, 03-10; rincian RENCANA_fase6_9 bagian 9, bukti `hasil/g6_mvp_respect/`):** MVP (`ProfilPemain.hitung_mvp`, dihitung lokal dari penghargaan; seri -> pemenang -> slot terkecil; `catat_mvp()` di `_proses_hadiah_akhir`; label "MVP" di layar akhir),
+  Respect (`kirim_respect` -> client `rpc_zrespect_kirim` ke host -> host validasi -> `rpc_zrespect_terima` ke target; 1x per pasangan per laga; AI/diri sendiri ditolak; toast "<nama> gave you Respect!"),
+  kartu profil (`UiProfil.tampilkan_kartu_profil`: ketuk nama di lobby [RichTextLabel url] atau baris layar akhir; profil lobby + field `role`). **ATURAN RPC pemain: nama RPC baru HARUS diawali `rpc_z`** (sesudah `rpc_umumkan` = RPC terakhir lama); di `layar_local_play.gd` awalan > `rpc_role_lobby` (mis. `rpc_s*`/`rpc_t*`/`rpc_z*`).
+  Bukti: `uji_profil_v3` 22/22 (+5 uji MVP), `cek_muat_f3` 26/26, MP quick: Q1 1v1, S1 3P client keluar, M2 4P migrasi host = 0 beda/0 SCRIPT ERROR; R1 (3P+1AI skenario `respect`): tiap HP menerima TEPAT +1 per lawan manusia (+2), kirim ganda (lokal & paksa lewat RPC / `_host_proses_respect`) tidak menambah, diri sendiri & AI ditolak. MVP sama di semua HP. `game/` & rig identik (beda hanya stub iklan); `game/` BERUBAH (6 .gd) -> ZIP b11 di G3.
+  BELUM teruji: tampilan nyata (tombol RESPECT/kartu/toast di layar HP, tata letak 4 pemain) dan jalur TOLAK versi -> uji 2 HP di G3.
+  **BERIKUTNYA: sesi SONNET Fase 6 G3** (bersih-bersih pola F7 + `kiriman/TileDuel_Fase6_b11.zip` + daftar uji HP; RENCANA_fase6_9 bagian 1 tabel G3).
 - **RENCANA FASE 6-9 DISETUJUI (Opus, 02-10): `docs/RENCANA_fase6_9.md`** -- pemilik "setuju semua a" (K1-K15). Tujuan: retensi.
   F6 identitas MP ringan (nama/level, MVP, Respect, penjaga versi) -> F7 toko Crowns + Remove Ads (regresi MP 37 SEKALI di F7 G5)
   -> F8 event mingguan offline + mastery -> F9 misi/taruhan Tebak Duel + penutup. Kredit ~US$25, perkiraan ~23.5 (urutan pangkas: bagian 6).
