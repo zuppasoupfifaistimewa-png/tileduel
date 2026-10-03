@@ -33,13 +33,15 @@ static func buka_toko(induk: Node, tab: String = "pawn") -> void:
 	var lbl_ket = UiProfil._label("", 16, ABU)
 	isi.add_child(lbl_ket)
 	var gulir = ScrollContainer.new()
-	gulir.custom_minimum_size = Vector2(560, 330)
+	gulir.custom_minimum_size = Vector2(560, 260)
 	gulir.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
 	isi.add_child(gulir)
 	var daftar = VBoxContainer.new()
 	daftar.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	daftar.add_theme_constant_override("separation", 8)
 	gulir.add_child(daftar)
+	var kotak_iklan = VBoxContainer.new() # Fase 7 G4: baris Remove Ads (diisi ulang tiap segarkan)
+	isi.add_child(kotak_iklan)
 	var lbl_pesan = UiProfil._label("", 18, MERAH)
 	isi.add_child(lbl_pesan)
 	var tutup = UiProfil._tombol("CLOSE", Color(0.6, 0.2, 0.2), Vector2(200, 52), 20)
@@ -49,6 +51,8 @@ static func buka_toko(induk: Node, tab: String = "pawn") -> void:
 	var keadaan = {"tab": tab if DataKosmetik.JENIS.has(tab) else "pawn"}
 	# Lambda menangkap variabel per NILAI -> rujukan ke dirinya lewat Dictionary (keadaan["segarkan"]).
 	keadaan["segarkan"] = func():
+		lbl_pesan.add_theme_color_override("font_color", HIJAU if bool(lbl_pesan.get_meta("ok", false)) else MERAH) # pesan sukses (Remove Ads) hijau, sisanya merah
+		lbl_pesan.set_meta("ok", false)
 		lbl_crowns.text = "CROWNS %d   |   Lv %d" % [ProfilPemain.crowns, ProfilPemain.level_sekarang()]
 		lbl_ket.text = str(KETERANGAN[keadaan["tab"]])
 		for t in baris_tab.get_children():
@@ -66,7 +70,72 @@ static func buka_toko(induk: Node, tab: String = "pawn") -> void:
 			b.queue_free()
 		for id_barang in DataKosmetik.daftar(str(keadaan["tab"])):
 			daftar.add_child(_baris_barang(str(id_barang), lbl_pesan, keadaan["segarkan"]))
+		for b in kotak_iklan.get_children():
+			b.queue_free()
+		var baris_iklan = _baris_remove_ads(kanvas, lbl_pesan, keadaan["segarkan"])
+		if baris_iklan != null:
+			kotak_iklan.add_child(baris_iklan)
 	keadaan["segarkan"].call()
+	var pp = _pengelola_pembelian()
+	if pp != null: # status berubah dari luar (restore selesai, refund) -> gambar ulang selagi panel terbuka
+		var saat_berubah = func(_punya):
+			if is_instance_valid(kanvas):
+				keadaan["segarkan"].call()
+		pp.status_berubah.connect(saat_berubah)
+		kanvas.tree_exiting.connect(func():
+			if pp.status_berubah.is_connected(saat_berubah):
+				pp.status_berubah.disconnect(saat_berubah)
+		)
+
+static func _pengelola_pembelian() -> Node:
+	# Lewat pohon (bukan nama autoload) supaya layar toko tetap termuat walau autoload belum didaftarkan -> baris Remove Ads hilang saja.
+	var pohon = Engine.get_main_loop() as SceneTree
+	return pohon.root.get_node_or_null("PengelolaPembelian") if pohon != null else null
+
+static func _baris_remove_ads(kanvas: Node, lbl_pesan: Label, segarkan: Callable) -> Control:
+	var pp = _pengelola_pembelian()
+	if pp == null:
+		return null
+	var punya: bool = pp.punya_remove_ads()
+	var kartu = PanelContainer.new()
+	kartu.name = "BarisRemoveAds"
+	kartu.add_theme_stylebox_override("panel", _gaya_baris(punya))
+	var baris = HBoxContainer.new()
+	baris.add_theme_constant_override("separation", 10)
+	kartu.add_child(baris)
+	var kiri = VBoxContainer.new()
+	kiri.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	kiri.alignment = BoxContainer.ALIGNMENT_CENTER
+	baris.add_child(kiri)
+	var l_nama = UiProfil._label("REMOVE ADS", 20, EMAS if punya else Color.WHITE)
+	l_nama.horizontal_alignment = HORIZONTAL_ALIGNMENT_LEFT
+	kiri.add_child(l_nama)
+	var l_info = UiProfil._label("Ads removed. Thank you!" if punya else "No banners or match-end ads. +500 Crowns!", 14, HIJAU if punya else ABU)
+	l_info.horizontal_alignment = HORIZONTAL_ALIGNMENT_LEFT
+	kiri.add_child(l_info)
+	if punya:
+		return kartu
+	var harga: String = pp.harga_remove_ads()
+	var beli = UiProfil._tombol("BUY " + harga if harga != "" else "BUY", Color(0.15, 0.55, 0.25), Vector2(150, 50), 18)
+	beli.pressed.connect(func():
+		lbl_pesan.text = ""
+		beli.disabled = true
+		var saat_selesai = func(ok, pesan):
+			if is_instance_valid(kanvas):
+				lbl_pesan.text = str(pesan)
+				lbl_pesan.set_meta("ok", ok)
+				segarkan.call()
+		pp.pembelian_selesai.connect(saat_selesai, CONNECT_ONE_SHOT)
+		pp.beli_remove_ads()
+	)
+	baris.add_child(beli)
+	var pulih = UiProfil._tombol("RESTORE", Color(0.25, 0.25, 0.32), Vector2(110, 50), 16)
+	pulih.pressed.connect(func():
+		lbl_pesan.text = ""
+		pp.restore()
+	)
+	baris.add_child(pulih)
+	return kartu
 
 static func _baris_barang(id_barang: String, lbl_pesan: Label, segarkan: Callable) -> Control:
 	var b: Dictionary = DataKosmetik.KATALOG[id_barang]

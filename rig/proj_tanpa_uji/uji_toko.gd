@@ -12,7 +12,7 @@ func _ready() -> void:
 	var kv = get_node_or_null("PanelToko")
 	gagal += _cek("panel SHOP terbuka", kv != null)
 	gagal += _cek("tab PAWN/TITLE/FRAME ada", _tombol(kv, "PAWN") != null and _tombol(kv, "TITLE") != null and _tombol(kv, "FRAME") != null)
-	gagal += _cek("8 baris pawn (1 EQUIPPED)", _hitung(kv, "BUY") + _hitung(kv, "EQUIP") + _hitung(kv, "EQUIPPED") == 8 and _hitung(kv, "EQUIPPED") == 1)
+	gagal += _cek("8 baris pawn (1 EQUIPPED)", _hitung(kv, "BUY") - 1 + _hitung(kv, "EQUIP") + _hitung(kv, "EQUIPPED") == 8 and _hitung(kv, "EQUIPPED") == 1)
 	gagal += _cek("label Crowns/Lv", _ada_teks(kv, "CROWNS 200   |   Lv 1"))
 	gagal += _cek("alasan 'Need 100 more Crowns' (Ocean 300)", _ada_teks(kv, "Need 100 more Crowns"))
 	gagal += _cek("alasan 'Reach Lv 5' (Violet)", _ada_teks(kv, "Reach Lv 5"))
@@ -40,11 +40,11 @@ func _ready() -> void:
 	_tombol(kv, "TITLE").pressed.emit()
 	await get_tree().process_frame
 	await get_tree().process_frame
-	gagal += _cek("tab TITLE 10 baris", _hitung(kv, "BUY") + _hitung(kv, "EQUIP") + _hitung(kv, "EQUIPPED") == 10 and _ada_teks(kv, "Tile Legend"))
+	gagal += _cek("tab TITLE 10 baris", _hitung(kv, "BUY") - 1 + _hitung(kv, "EQUIP") + _hitung(kv, "EQUIPPED") == 10 and _ada_teks(kv, "Tile Legend"))
 	_tombol(kv, "FRAME").pressed.emit()
 	await get_tree().process_frame
 	await get_tree().process_frame
-	gagal += _cek("tab FRAME 6 baris", _hitung(kv, "BUY") + _hitung(kv, "EQUIP") + _hitung(kv, "EQUIPPED") == 6 and _ada_teks(kv, "Royal"))
+	gagal += _cek("tab FRAME 6 baris", _hitung(kv, "BUY") - 1 + _hitung(kv, "EQUIP") + _hitung(kv, "EQUIPPED") == 6 and _ada_teks(kv, "Royal"))
 	# CLOSE
 	_tombol(kv, "CLOSE").pressed.emit()
 	await get_tree().process_frame
