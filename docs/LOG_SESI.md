@@ -3,6 +3,13 @@
 Satu entri per sesi, terbaru di atas. Sesi baru tidak bisa membaca percakapan lama, jadi apa pun yang penting
 harus tercatat di sini, di `HANDOFF_LANJUT.md`, atau di RENCANA.
 
+## 2026-10-03 -- sesi Claude Code cloud (Sonnet 5.5): Fase 7 G4 (Remove Ads / pengelola_pembelian)
+- Branch kerja `claude/tile-duel-fase7-g4-autoload-90q9ed` (di-fast-forward ke ujung `claude/elegant-bohr-tl3fps` = G3; branch lama itu dibiarkan). Hanya baca dokumen yang diminta + sumber plugin Play Billing di GitHub (satu kali, untuk memastikan nama singleton/sinyal/kunci).
+- `game/pengelola_pembelian.gd` baru (autoload `PengelolaPembelian`, mode stub tanpa plugin, acknowledge, bonus 500 Crowns sekali, restore otomatis, refund mencabut, offline mempertahankan cadangan); `profil_pemain.gd` +`remove_ads`/`bonus_remove_ads_diambil`; `pengelola_iklan.gd` banner ikut mati saat `bebas_iklan`.
+- Rig: stub `pengelola_pembelian.gd` (JANGAN ke game/), `pembelian_asli_uji.gd` (salinan asli), `uji_pembelian` 27/27 dgn plugin tiruan, `uji_nyata bebas_iklan=1` (interstisial 0, banner 0 vs 1/1), `cek_muat_f3` 28/28. Bukti `hasil/g7_pembelian/`. Godot 4.7.1 diunduh ke /opt/godot, `--import` ~7 dtk.
+- Pelajaran: `git reset --hard` ditolak izin sesi -> pakai `git merge --ff-only`. Tanpa interstisial, EXIT langsung pindah adegan (node uji ikut dibuang) -> uji berhenti lewat MainLoop.
+- Belum ada tombol beli di UI; pemilik harus daftar autoload + pasang plugin + produk Play. Langkah berikutnya: Sonnet Fase 7 G5 (tombol Remove Ads bila disetujui, regresi MP 37, ZIP b12 32 .gd).
+
 ## 2026-10-03 -- sesi Claude Code cloud (Sonnet 5.5): Fase 7 G3 (kosmetik tampil di HP sendiri & teman)
 - Branch `claude/elegant-bohr-tl3fps`. `kosmetik` masuk payload profil lobby (tanpa RPC baru, VERSI_PROTOKOL tetap 2) + validasi host `DataKosmetik.sah_semua`; trim bidak di `_warnai_karakter`; gelar di lobby/layar akhir/kartu profil; bingkai di kartu profil. `game/` berubah 7 .gd (`data_kosmetik`, `profil_pemain`, `layar_local_play`, `pemain`, `pemain_dasar`, `ui_dinamis`, `ui_profil`), rig identik.
 - Bukti (`hasil/g7_tampil/`): `uji_kosmetik_tampil` 33/33, `cek_muat_f3` 27/27, MP Q1 1v1 + M2 4P migrasi host 0 beda/0 SCRIPT ERROR, log `KOSMETIK_UJI` identik semua HP. Regresi 37 skenario TIDAK dijalankan (jatah G5).

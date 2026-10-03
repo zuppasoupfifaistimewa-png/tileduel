@@ -110,6 +110,9 @@ var mvp_total := 0             # berapa kali jadi MVP di akhir laga
 # --- Fase 7 (VERSI 4): toko Crowns. Berkas VERSI 1-3 tidak punya bagian "kosmetik" -> kosong (barang AWAL otomatis). ---
 var kosmetik_dimiliki: Array = []   # id barang yang dibeli (barang AWAL tidak disimpan, selalu dimiliki)
 var kosmetik_dipakai := {}          # jenis -> id; jenis yang kosong/rusak = barang AWAL
+# --- Fase 7 G4: Remove Ads. Bagian "pembelian" tidak ada di berkas lama -> false; VERSI tidak perlu naik. ---
+var remove_ads := false             # CADANGAN lokal; sumber kebenaran = query Google Play (PengelolaPembelian)
+var bonus_remove_ads_diambil := false # bonus Crowns Remove Ads hanya sekali per profil
 
 func _ready() -> void:
 	_rng.randomize()
@@ -159,6 +162,8 @@ func muat() -> void:
 	respect = maxi(0, int(c.get_value("sosial", "respect", 0))) # Fase 6
 	mvp_total = maxi(0, int(c.get_value("sosial", "mvp_total", 0)))
 	_muat_kosmetik(c.get_value("kosmetik", "dimiliki", []), c.get_value("kosmetik", "dipakai", {})) # Fase 7
+	remove_ads = bool(c.get_value("pembelian", "remove_ads", false)) # Fase 7 G4
+	bonus_remove_ads_diambil = bool(c.get_value("pembelian", "bonus_diambil", false))
 
 func _baca_berkas(jalur: String):
 	# ConfigFile yang sah (terbaca & punya id), atau null.
@@ -192,6 +197,8 @@ func simpan() -> void:
 	c.set_value("sosial", "mvp_total", mvp_total)
 	c.set_value("kosmetik", "dimiliki", kosmetik_dimiliki) # Fase 7
 	c.set_value("kosmetik", "dipakai", kosmetik_dipakai)
+	c.set_value("pembelian", "remove_ads", remove_ads) # Fase 7 G4
+	c.set_value("pembelian", "bonus_diambil", bonus_remove_ads_diambil)
 	var err = c.save(BERKAS_SEMENTARA)
 	if err != OK:
 		push_warning("Profil gagal disimpan (kode %d)." % err)
@@ -226,6 +233,8 @@ func _profil_baru() -> void:
 	mvp_total = 0
 	kosmetik_dimiliki = []
 	kosmetik_dipakai = {}
+	remove_ads = false
+	bonus_remove_ads_diambil = false
 	simpan()
 
 func tambah_respect() -> void:
@@ -306,6 +315,22 @@ func pakai(id_barang: String) -> bool:
 		kosmetik_dipakai.erase(jenis)
 	else:
 		kosmetik_dipakai[jenis] = id_barang
+	simpan()
+	return true
+
+func atur_remove_ads(nilai: bool) -> void:
+	# Fase 7 G4: cadangan lokal status Remove Ads (dipanggil PengelolaPembelian).
+	if remove_ads == nilai:
+		return
+	remove_ads = nilai
+	simpan()
+
+func ambil_bonus_remove_ads(jumlah: int) -> bool:
+	# Fase 7 G4: bonus Crowns pembelian Remove Ads, SEKALI per profil. true = baru diberikan.
+	if bonus_remove_ads_diambil or jumlah <= 0:
+		return false
+	bonus_remove_ads_diambil = true
+	crowns += jumlah
 	simpan()
 	return true
 

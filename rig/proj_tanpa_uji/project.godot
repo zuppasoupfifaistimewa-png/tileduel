@@ -8,6 +8,7 @@ run/main_scene="res://uji_parse.tscn"
 PengelolaIklan="*res://pengelola_iklan.gd"
 StatusJaringan="*res://status_jaringan.gd"
 ProfilPemain="*res://profil_pemain.gd"
+PengelolaPembelian="*res://pengelola_pembelian.gd"
 UjiRobotMP="*res://uji_robot_mp.gd"
 
 [display]

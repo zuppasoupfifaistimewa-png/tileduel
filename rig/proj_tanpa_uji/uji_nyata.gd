@@ -40,6 +40,7 @@ var _bantuan_prev: Array = []   # Fase 5 G3: stat kartu_bantuan per slot (log KA
 # --- Fase 5 G5 (rig-only): iklan=1 (stub iklan tersedia) -> robot menanggapi tawaran "SPIN AGAIN" (kalah skor di duel solo).
 # putar_tolak=1 -> klik NO THANKS; iklan_gagal=1 -> stub: tersedia tapi gagal ditonton ("No ad right now.").
 var putar_tolak = false
+var bebas_iklan_uji = false   # Fase 7 G4: bebas_iklan=1 -> Remove Ads aktif; robot memeriksa interstisial/banner TIDAK tayang
 var iklan_gagal = false
 # --- Fase 5 G6 (rig-only): tombol AI cepat. ai_cepat=1 -> robot menekan tombol >> (hidup di awal, mati di giliran 24, hidup lagi di 34);
 # ai_cepat=0 -> tombol tidak ditekan (kecepatan tetap diukur: tidak boleh ada 2x); ai_cepat=ingat -> tidak menekan, profil (HOME dipakai ulang) sudah hidup.
@@ -278,6 +279,7 @@ func _ready():
 		if a == "tebak=1": tebak_uji = true # Fase 5 G4
 		if a.begins_with("tebak_jeda="): tebak_jeda_uji = float(a.substr(11)) # Fase 5 G8: robot menebak N dtk setelah tombol muncul (bawaan 0.6; >= 99 = tidak pernah)
 		if a == "putar_tolak=1": putar_tolak = true # Fase 5 G5
+		if a == "bebas_iklan=1": bebas_iklan_uji = true # Fase 7 G4
 		if a == "iklan_gagal=1": iklan_gagal = true # Fase 5 G5
 		if a.begins_with("ai_cepat="): ai_cepat_uji = a.substr(9) # Fase 5 G6
 		if a == "semua_ai=1": semua_ai = true
@@ -334,6 +336,7 @@ func _ready():
 	# Fase 1: sakelar QUICK MATCH / CLASSIC, lalu tombol peta ASLI (tanpa iklan wajib).
 	var nama_panjang = "QUICK MATCH" if panjang_uji == "quick" else "CLASSIC"
 	print("MENU panjang '%s' = %s; keterangan='%s'" % [nama_panjang, str(_klik_teks(nama_panjang)), menu.label_ket_mode.text])
+	PengelolaIklan.bebas_iklan = bebas_iklan_uji # Fase 7 G4
 	if iklan_uji:
 		PengelolaIklan.uji_rewarded = true
 		PengelolaIklan.uji_tonton_gagal = iklan_gagal # Fase 5 G5
@@ -967,11 +970,20 @@ func _cek_profil_akhir() -> void:
 	# EXIT -> interstisial dipanggil di sini (bukan sebelum papan skor)
 	PengelolaIklan.uji_jeda_interstisial = 3.0
 	var klik_exit = _klik_teks("EXIT TO MAIN MENU")
-	for i in 20: await get_tree().process_frame
-	hasil.append(["iklan_saat_exit", klik_exit and PengelolaIklan.jumlah_interstisial == 1])
+	# Remove Ads: tanpa interstisial EXIT langsung pindah adegan (node uji ikut dibuang) -> jangan menunggu frame.
+	if not bebas_iklan_uji:
+		for i in 20: await get_tree().process_frame
+	hasil.append(["iklan_saat_exit", klik_exit and PengelolaIklan.jumlah_interstisial == (0 if bebas_iklan_uji else 1)])
+	if bebas_iklan_uji:
+		hasil.append(["bebas_iklan_banner", PengelolaIklan.bebas_iklan and PengelolaIklan.jumlah_banner == 0])
+	print("BEBAS_IKLAN aktif=%s interstisial=%d banner=%d" % [str(bebas_iklan_uji), PengelolaIklan.jumlah_interstisial, PengelolaIklan.jumlah_banner])
 	var gagal = []
 	for h in hasil:
 		if not h[1]:
 			gagal.append(h[0])
 	print("PROFIL_CEK %s menang=%s quick=%s giliran=%d xp=%d/%d cr=%d/%d peng=%s misi=%d lv=%d->%d double=%s semua_peng=%s %s" % ["OK" if gagal.is_empty() else "GAGAL", str(menang), str(p.mode_quick), int(st.get("giliran", 0)), int(r.get("xp_match", -1)), xp_harus, int(r.get("crowns_match", -1)), cr_harus, str(peng), r.get("misi_selesai", []).size(), int(r.get("level_awal", 0)), int(r.get("level_akhir", 0)), teks_double, " ".join(semua_peng), " ".join(gagal)])
+	if bebas_iklan_uji:
+		# Tanpa interstisial, EXIT langsung pindah adegan: node uji sudah keluar dari pohon -> berhenti lewat MainLoop.
+		(Engine.get_main_loop() as SceneTree).quit()
+		return
 	_tulis_dan_keluar("MENANG")

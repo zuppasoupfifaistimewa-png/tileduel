@@ -1,0 +1,30 @@
+Godot Engine v4.7.1.stable.official.a13da4feb - https://godotengine.org
+
+PEMBELIAN OK    salinan asli identik dgn game/pengelola_pembelian.gd
+PEMBELIAN OK    autoload stub rig ada, mode_stub
+PEMBELIAN OK    tanpa plugin: mode_stub true
+PEMBELIAN OK    tanpa plugin: beli ditolak sopan
+PEMBELIAN OK    bebas_iklan=false: interstisial & banner tayang
+PEMBELIAN OK    cadangan profil -> bebas_iklan true
+PEMBELIAN OK    bebas_iklan=true: TIDAK ada interstisial & banner
+PEMBELIAN OK    iklan berhadiah tetap (pilihan pemain)
+PEMBELIAN OK    plugin: startConnection dipanggil, mode bukan stub
+PEMBELIAN OK    plugin: toko tersedia, harga $2.99, belum punya
+PEMBELIAN OK    beli: purchase() dipanggil sekali
+PEMBELIAN OK    beli: acknowledge dengan token benar
+PEMBELIAN OK    beli: punya + bebas_iklan + profil
+PEMBELIAN OK    beli: bonus 500 Crowns tepat sekali
+PEMBELIAN OK    beli: sinyal selesai ok + status_berubah true
+PEMBELIAN OK    beli: berkas profil tersimpan (remove_ads, bonus)
+PEMBELIAN OK    restore: tetap punya, tanpa bonus & tanpa ack baru
+PEMBELIAN OK    belum di-ack lagi: di-ack ulang, bonus TIDAK dobel
+PEMBELIAN OK    query gagal: tidak dicabut
+PEMBELIAN OK    daftar kosong: dicabut (bebas_iklan false, profil false)
+PEMBELIAN OK    setelah dicabut: interstisial tayang lagi
+PEMBELIAN OK    batal: pesan 'cancelled', tetap belum punya
+PEMBELIAN OK    pending: belum dianggap punya, tanpa ack/bonus
+PEMBELIAN OK    purchase() langsung gagal: pesan gagal & bisa coba lagi
+PEMBELIAN OK    sudah dimiliki (kode 7): disinkronkan lewat query
+PEMBELIAN OK    beli saat sudah punya: tidak memanggil purchase()
+PEMBELIAN OK    putus/gagal sambung: tidak crash, status tetap
+PEMBELIAN gagal=0

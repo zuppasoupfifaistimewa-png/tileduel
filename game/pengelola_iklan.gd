@@ -43,7 +43,7 @@ const UMUR_MAKS_IKLAN := 3300.0      # dtk; interstisial & berhadiah kedaluwarsa
 const UMUR_MAKS_APP_OPEN := 14000.0  # dtk; app open kedaluwarsa setelah 4 jam (Google)
 const MIN_DI_LATAR_APP_OPEN := 30.0  # app open hanya kalau aplikasi ditinggal >= 30 dtk
 const BERKAS_CATATAN := "user://iklan.cfg"
-var bebas_iklan := false             # untuk Remove Ads (Fase 7); selalu false sekarang
+var bebas_iklan := false             # Remove Ads (Fase 7): diatur PengelolaPembelian; true = tanpa interstisial, app open, banner (berhadiah tetap)
 
 var _catatan := ConfigFile.new()
 var _geser_jam := 0.0                # HANYA uji: memajukan jam tanpa menunggu
@@ -186,6 +186,8 @@ func _pada_app_open_gagal_tampil_layar(_err):
 # 3. SISTEM IKLAN BANNER
 # ==========================================
 func tampilkan_banner():
+	if bebas_iklan:
+		return
 	if banner_view:
 		banner_view.destroy()
 		

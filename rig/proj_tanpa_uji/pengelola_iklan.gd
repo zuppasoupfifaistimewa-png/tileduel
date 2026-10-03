@@ -11,10 +11,14 @@ var jumlah_match_tuntas := 0
 var jumlah_rewarded := 0
 var uji_rewarded := false          # true = iklan berhadiah "tersedia" & selalu memberi hadiah
 var uji_tonton_gagal := false      # Fase 5 G5: true = "tersedia" tapi tonton_rewarded() gagal (tidak ada iklan saat ditekan)
+var bebas_iklan := false           # Fase 7 G4: sama dgn pengelola_iklan.gd asli (diatur PengelolaPembelian)
+var jumlah_banner := 0
 var uji_jeda_interstisial := 0.0   # > 0 = interstisial pura-pura tampil selama sekian detik
 
 func tampilkan_banner() -> void:
-	pass
+	if bebas_iklan:
+		return
+	jumlah_banner += 1
 
 func sembunyikan_banner() -> void:
 	pass
@@ -26,6 +30,8 @@ func catat_match_tuntas() -> void:
 	jumlah_match_tuntas += 1
 
 func tampilkan_interstisial_akhir_match() -> void:
+	if bebas_iklan:
+		return
 	jumlah_interstisial += 1
 	if uji_jeda_interstisial > 0.0:
 		await get_tree().create_timer(uji_jeda_interstisial).timeout
