@@ -288,6 +288,13 @@ Rig-only lain: `uji_*`, `cek_muat_f3.gd` (alat), dan 5 file proyek yang tidak ad
   derau benih lebih besar dari perkiraan. Cek murah: kode b10 (commit b22f27b, `git worktree` + `--import`) jalankan `hasil/g9_g2/tugas/kontrol_api.tugas`
   (480 laga, ~8 mnt). api ~35 -> derau/penyetelan ulang role (tuas P14); api ~46 -> bisect Fase 6-9. Skrip pecah klaim/tanpa klaim: lihat LOG_SESI 03-10 G2.
   **BERIKUTNYA (pemilik): TIMPA ke-35 file b15 (buang unduhan lama), uji HP b14 (daftar di atas) + b15: di duel melawan AI saat ada BOUNTY, AI sering memakai elemen bounty; tidak ada error.**
+  **KESEIMBANGAN LANGKAH 1 SELESAI (Opus, 03-10; bukti `hasil/g9_bal/CATATAN.txt`):** kode b10 (b22f27b) pada `kontrol_api.tugas` = api 35.2%,
+  480/480 baris IDENTIK dgn kode b14 -> **BUKAN regresi Fase 6-9** (gameplay tidak berubah sama sekali). 40 laga benih 50000 diulang dgn b10 = 40/40 identik
+  dgn data lama -> sim deterministik, tidak bergantung lingkungan. Jadi kode sama: benih 50000 api 45.6, benih 80000 api 35.2 (~3.3 sigma; defisit merata
+  di peta/slot/lawan/preset/paruh benih). Gabungan dua benih api 40.4% [37.3-43.5]. Angka BELUM disetel.
+  **BERIKUTNYA (menunggu keputusan pemilik):** S1 penuh di benih BARU (mis. 110000, kode HEAD, 1200 laga ~20 mnt) sebagai pemutus: api >=44 & angin <=56 ->
+  80000 kebetulan, tidak menyetel; api <44 lagi -> setel per tuas P14 (NODE_LV api/angin dulu; frekuensi jebakan 2.2 sudah OK), konfirmasi di benih baru lain.
+  S2 4P (angin 33, air 19) hanya bila S1 menunjukkan ketimpangan nyata.
 - **RENCANA FASE 6-9 DISETUJUI (Opus, 02-10): `docs/RENCANA_fase6_9.md`** -- pemilik "setuju semua a" (K1-K15). Tujuan: retensi.
   F6 identitas MP ringan (nama/level, MVP, Respect, penjaga versi) -> F7 toko Crowns + Remove Ads (regresi MP 37 SEKALI di F7 G5)
   -> F8 event mingguan offline + mastery -> F9 misi/taruhan Tebak Duel + penutup. Kredit ~US$25, perkiraan ~23.5 (urutan pangkas: bagian 6).

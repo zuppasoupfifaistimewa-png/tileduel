@@ -1,0 +1,10 @@
+Fase 9 keseimbangan (Opus, 03-10) -- langkah 1: regresi Fase 6-9 atau derau benih?
+Kode b10 = commit b22f27b (git worktree di scratchpad + --import), rig/proj_tanpa_uji, PARALEL=4.
+1) kontrol_api_b10.txt: hasil/g9_g2/tugas/kontrol_api.tugas (480 laga api, benih 80000):
+   api 169/480 = 35.2% [31.1-39.6] -> 480/480 baris IDENTIK byte dgn hasil/g9_g2/kontrol_s1_kodelama.txt (b14 tanpa G2).
+   => Fase 6-9 (sebelum G2) TIDAK mengubah satu laga pun. BUKAN regresi.
+2) identitas_b50000_40_b10.txt: 40 laga api pertama dari hasil/g8_u9_b50000/s1.tugas -> 40/40 identik dgn hasil_s1.txt lama.
+   => sim deterministik & tidak bergantung lingkungan/tanggal. Kode SAMA: benih 50000 api 45.6%, benih 80000 api 35.2%.
+3) Pecahan api (tanpa sim): defisit merata di semua peta/slot/lawan/preset dan kedua paruh benih (34.6/35.8) -- tidak ada
+   satu penyebab (event/bounty/bantuan) yang menonjol. Selisih 10.4 poin = ~3.3 sigma (SE binomial 480+480).
+   => derau benih yang sangat besar (langka, ~0.1%) ATAU api memang ~40% (gabungan b10 dua benih 388/960 = 40.4% [37.3-43.5]).

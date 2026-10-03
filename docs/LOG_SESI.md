@@ -3,6 +3,12 @@
 Satu entri per sesi, terbaru di atas. Sesi baru tidak bisa membaca percakapan lama, jadi apa pun yang penting
 harus tercatat di sini, di `HANDOFF_LANJUT.md`, atau di RENCANA.
 
+## 2026-10-03 -- sesi Claude Code cloud (Opus 5.5): keseimbangan benih 80000, langkah 1 (regresi atau derau?)
+- Branch `claude/kind-turing-b71jzs`. Kode b10 (b22f27b) lewat `git worktree` di scratchpad + `--import` (~8 dtk); `PROJ=<worktree>/rig/proj_tanpa_uji` ke `uji_seimbang.sh`.
+- `kontrol_api.tugas` (480) dgn b10: api 35.2%, 480/480 identik dgn kode b14 -> bukan regresi. 40 laga benih 50000 dgn b10 = 40/40 identik dgn data G8 -> deterministik.
+- Kesimpulan: selisih 50000 (45.6) vs 80000 (35.2) = derau benih besar (~3.3 sigma) atau api sebenarnya ~40%. Angka TIDAK disetel; data `hasil/g9_bal/`.
+- Langkah berikutnya (tunggu pemilik): S1 benih baru (110000, kode HEAD) sebagai pemutus; setel per P14 hanya kalau api <44 lagi.
+
 ## 2026-10-03 -- sesi Claude Code cloud (Opus 5.5): Fase 9 G2 (AI mengejar bounty + U9 benih 80000, ZIP b15)
 - Branch `claude/kind-turing-b71jzs` (atas permintaan pemilik; CLAUDE.md menyebut `claude/wonderful-gates-8v431l`). Rancangan disetujui pemilik sebelum kode.
 - `AiMusuh.elemen_bounty_ai` + `PELUANG_BOUNTY_AI := 50` (mesin_acak, host/solo); 5 titik pilihan elemen AI memakainya. game/ = rig/ (kecuali 2 stub). `cek_muat_f3` 31/31.
