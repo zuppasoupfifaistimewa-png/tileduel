@@ -307,6 +307,9 @@ Rig-only lain: `uji_*`, `cek_muat_f3.gd` (alat), dan 5 file proyek yang tidak ad
   laga api-petir; jenis jebakan yang dipasang AI api; apakah fitur Fase 5 [event/bounty/kartu bantuan] menguntungkan tempo petir). Tuas kandidat: `ai_jebakan.gd`
   penilaian jebakan AI api vs petir (P14 tuas 1, pola F5 r4) atau node petir yang menang tempo (tuas 2). Rancang -> lapor pemilik -> uji berpasangan
   (`hasil/g9_bal/tugas/r6_berpasangan.tugas`, ~16 mnt, pembanding `kontrol_api_b10.txt` + subset `s1_b110000.txt`) -> konfirmasi S1+S2 benih 140000.
+  **ANALISIS API vs PETIR SELESAI (Opus, 03-10, tanpa sim; CATATAN butir 6, `analisis_api_petir.txt`):** matchup lemah sejak pra-F5 (36.1% pasca-F5);
+  tiap kena jebakan petir = api -15..20 poin; AI api hampir selalu pasang API vs pemilik heat_skin (petir/air), padahal laga dgn jebakan non-api api menang 58%.
+  F5 tidak menguntungkan petir. **USULAN r7 (menunggu pemilik):** `FAKTOR_API_TAHAN_PANAS` 0.5 di `ai_jebakan.gd` -> uji berpasangan 960 -> konfirmasi 140000.
 - **RENCANA FASE 6-9 DISETUJUI (Opus, 02-10): `docs/RENCANA_fase6_9.md`** -- pemilik "setuju semua a" (K1-K15). Tujuan: retensi.
   F6 identitas MP ringan (nama/level, MVP, Respect, penjaga versi) -> F7 toko Crowns + Remove Ads (regresi MP 37 SEKALI di F7 G5)
   -> F8 event mingguan offline + mastery -> F9 misi/taruhan Tebak Duel + penutup. Kredit ~US$25, perkiraan ~23.5 (urutan pangkas: bagian 6).

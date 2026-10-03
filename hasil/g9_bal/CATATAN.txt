@@ -20,3 +20,13 @@ Kode b10 = commit b22f27b (git worktree di scratchpad + --import), rig/proj_tanp
    => kekuatan bakar TIDAK menyentuh masalah api vs petir (0 perubahan, 32.9% gabungan). Penyebab utama = matchup api-petir
       (lihat RENCANA_fase4 F5 r3/r4: petir menang lewat TEMPO lumpuh+sewa, bukan koin; tuas r4 NILAI_PETIR_LEWAT_GILIRAN).
    Jebakan/AI 2.32; 305.7 dtk. data_role.gd rig dikembalikan = game/ (tidak ada angka produksi berubah).
+6) Analisis api vs petir TANPA sim (Opus, 03-10; rig/skrip/f9_api_petir.py -> analisis_api_petir.txt; 4 benih x 120 laga api-petir):
+   api>petir: 20000 (pra-F5) 40.0 / 50000 42.5 / 80000 31.7 / 110000 34.2 -> pasca-F5 130/360 = 36.1%. Matchup lemah SUDAH ADA sebelum Fase 5.
+   - Tempo petir menentukan: api menang 57% kalau 0x kena jebakan petir, 42% (1x), 22% (2x), 4% (3x+). Jebakan api yg kena petir hampir
+     tidak berpengaruh (0x 34% ... 3x+ 51%). Api tak punya grounded (TAHAN_ROLE api = rock_breaker, heavy_pockets) -> lumpuh penuh 2 giliran.
+   - AI api memasang jebakan non-api (angin/petir) vs petir: 0 -> 84/281 = 30%; 1 -> 24/45 = 53%; 2 -> 22/34 = 65%. Jumlah jebakan API
+     tidak berkorelasi (39/30/36/40%). Nilai AI api (bakar x giliran x (1+tax) x 1.2 x 1.2, potong heat_skin 25-50%) ~320-490 > petir
+     225 -> AI hampir selalu pilih api; padahal koin_jebakan api nyata ~123/kena. (Sesuai D2 F5: tanpa api vs heat_skin -> 34.2 -> 45.8.)
+   - Fitur Fase 5 TIDAK menguntungkan petir: laga dgn klaim bounty api 23/46 = 50%; kartu bantuan jarang (0.03-0.06/laga); hutang 0.
+   - Dua matchup terburuk api (petir 36.1, air 40.6) = dua pemilik heat_skin. api vs tanah 41.7 / angin 45.6 (r6 menaikkan dua ini, bukan petir/air).
+   USULAN r7 (tuas 1 P14, ai_jebakan.gd saja, belum diterapkan): FAKTOR_API_TAHAN_PANAS = 0.5 -> nilai jebakan api x0.5 kalau korban punya heat_skin.
