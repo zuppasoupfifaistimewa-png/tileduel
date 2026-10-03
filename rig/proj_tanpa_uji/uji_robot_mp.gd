@@ -32,6 +32,7 @@ var benih = 7
 var skenario = ""
 var giliran_keluar = 8
 var urut_keluar = 2
+var respect_awal_uji = 0
 var panjang_uji = "classic" # Fase 1: "quick" | "classic" (bawaan classic: skenario lama tidak berubah)
 # C2 (B-c, 26-09): "" (bawaan, ProfilPemain.arena kosong -> host jatuh balik ke
 # Balanced, K16) | "attack" | "defense" (preset sungguhan lewat build_dari_preset)
@@ -162,6 +163,7 @@ func _ready():
 	ProfilPemain.nama = "Bot %s%d" % [peran, urut]
 	ProfilPemain.xp_total = 150 * (urut + 1) # level 2-3 (100 + 20 per level)
 	ProfilPemain.respect = urut + 1
+	respect_awal_uji = ProfilPemain.respect # G2: baseline Respect sebelum laga (Respect bisa tiba sebelum _respect_uji mulai)
 	ProfilPemain.mvp_total = urut
 	seed(benih * 101 + urut)
 	_xp0 = ProfilPemain.xp_total
@@ -941,7 +943,7 @@ func _respect_uji() -> void:
 	# Fase 6 G2 (rig-only, skenario "respect"): tiap HP memberi Respect SEKALI ke tiap lawan MANUSIA, lalu mencoba kirim ganda
 	# (penjaga lokal + paksa lewat RPC / _host_proses_respect). Harapan: respect saya naik TEPAT sebanyak lawan manusia (1 per lawan),
 	# AI / diri sendiri ditolak.
-	var awal = ProfilPemain.respect
+	var awal = respect_awal_uji
 	var manusia = []
 	var ditolak_benar = true
 	for s in range(p.jumlah_pemain()):
