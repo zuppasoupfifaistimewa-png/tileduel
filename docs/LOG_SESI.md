@@ -3,6 +3,14 @@
 Satu entri per sesi, terbaru di atas. Sesi baru tidak bisa membaca percakapan lama, jadi apa pun yang penting
 harus tercatat di sini, di `HANDOFF_LANJUT.md`, atau di RENCANA.
 
+## 2026-10-03 -- sesi Claude Code cloud (Sonnet 5.5): Fase 7 G3 (kosmetik tampil di HP sendiri & teman)
+- Branch `claude/elegant-bohr-tl3fps`. `kosmetik` masuk payload profil lobby (tanpa RPC baru, VERSI_PROTOKOL tetap 2) + validasi host `DataKosmetik.sah_semua`; trim bidak di `_warnai_karakter`; gelar di lobby/layar akhir/kartu profil; bingkai di kartu profil. `game/` berubah 7 .gd (`data_kosmetik`, `profil_pemain`, `layar_local_play`, `pemain`, `pemain_dasar`, `ui_dinamis`, `ui_profil`), rig identik.
+- Bukti (`hasil/g7_tampil/`): `uji_kosmetik_tampil` 33/33, `cek_muat_f3` 27/27, MP Q1 1v1 + M2 4P migrasi host 0 beda/0 SCRIPT ERROR, log `KOSMETIK_UJI` identik semua HP. Regresi 37 skenario TIDAK dijalankan (jatah G5).
+- Bug ditemukan lewat log MP & diperbaiki: slot 3-4 (duplikat musuh) salah mewarnai sepatu ber-trim jenuh dengan warna slot -> penilaian dari bahan asli mesh.
+- **TEMUAN:** model .glb asli tidak ada di repo (rig = stand-in tanpa sarung tangan). Terwarnainya sarung tangan + sepatu di model asli belum terbukti; cek di HP/editor (G5), kalau tidak layak -> Opus.
+- Pelajaran rig: Godot di `/opt/godot` (unduh dari godot-builds lolos proxy); `--import` dulu; skrip MP `rig/skrip/jalankan_mp3.sh` disalin ke scratchpad dengan SP/G diganti, `PROJ=rig/proj_tanpa_uji EXTRA="panjang=quick"`; Q1 ~6 mnt, M2 ~5-8 mnt.
+- Langkah berikutnya: Sonnet Fase 7 G4 (`pengelola_pembelian.gd`, Remove Ads).
+
 ## 2026-10-03 -- sesi Claude Code cloud (Sonnet 5.5): Fase 7 G2 (layar SHOP)
 - Branch `claude/elegant-bohr-tl3fps`. `game/ui_toko.gd` baru (SHOP: tab Pawn/Title/Frame, BUY/EQUIP, alasan terkunci, pratinjau); tombol SHOP di panel PROFILE (ganti teks lama) dan menu utama (`main_menu.gd` `tombol_toko`); rig identik; `cek_muat_f3.gd` +ui_toko.
 - Bukti (`hasil/g7_kosmetik/`): `uji_toko` 0 gagal, `cek_muat_f3` 27/27, `uji_kosmetik` 33/33, tangkapan layar nyata (xvfb+opengl3) pawn/title/frame. Layout dirapikan dari tangkapan (tinggi daftar 330, pratinjau lebih terang). Tanpa jaringan.
