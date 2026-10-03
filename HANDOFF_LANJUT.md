@@ -301,6 +301,12 @@ Rig-only lain: `uji_*`, `cek_muat_f3.gd` (alat), dan 5 file proyek yang tidak ad
   **USULAN (menunggu persetujuan pemilik):** r6 = `hot_flames` 90/110/130 -> 100/125/150 saja (tuas 2, `data_role.gd` rig). Uji BERPASANGAN pada
   benih yang sama: api-subset 80000 (`hasil/g9_g2/tugas/kontrol_api.tugas`) + api-subset 110000 (960 laga ~16 mnt; pembanding 169/480 & 202/480).
   Naik >= ~4 poin -> konfirmasi S1+S2 benih BARU 140000 (~30 mnt) -> salin identik ke `game/` + ZIP b16. Kalau kurang -> Opus pilih tuas berikut (AI api vs petir).
+  **r6 DIUJI (pemilik setuju), GAGAL syarat -> DIKEMBALIKAN (rig = game/, tidak ada angka berubah):** berpasangan 960 laga: api 38.6 -> 40.3 (+1.6 < +4);
+  vs petir TEPAT 0 perubahan (38->38, 41->41; gabungan 32.9%). Bukti `hasil/g9_bal/r6_berpasangan*`, CATATAN butir 5.
+  **BERIKUTNYA (sesi Opus BARU):** selidiki matchup api vs petir TANPA sim dulu (data `r6_berpasangan.txt` + `s1_b110000.txt`: kolom pasang/kena/rinci/f5 untuk
+  laga api-petir; jenis jebakan yang dipasang AI api; apakah fitur Fase 5 [event/bounty/kartu bantuan] menguntungkan tempo petir). Tuas kandidat: `ai_jebakan.gd`
+  penilaian jebakan AI api vs petir (P14 tuas 1, pola F5 r4) atau node petir yang menang tempo (tuas 2). Rancang -> lapor pemilik -> uji berpasangan
+  (`hasil/g9_bal/tugas/r6_berpasangan.tugas`, ~16 mnt, pembanding `kontrol_api_b10.txt` + subset `s1_b110000.txt`) -> konfirmasi S1+S2 benih 140000.
 - **RENCANA FASE 6-9 DISETUJUI (Opus, 02-10): `docs/RENCANA_fase6_9.md`** -- pemilik "setuju semua a" (K1-K15). Tujuan: retensi.
   F6 identitas MP ringan (nama/level, MVP, Respect, penjaga versi) -> F7 toko Crowns + Remove Ads (regresi MP 37 SEKALI di F7 G5)
   -> F8 event mingguan offline + mastery -> F9 misi/taruhan Tebak Duel + penutup. Kredit ~US$25, perkiraan ~23.5 (urutan pangkas: bagian 6).

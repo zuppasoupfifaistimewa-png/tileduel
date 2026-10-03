@@ -8,6 +8,8 @@ harus tercatat di sini, di `HANDOFF_LANJUT.md`, atau di RENCANA.
 - `kontrol_api.tugas` (480) dgn b10: api 35.2%, 480/480 identik dgn kode b14 -> bukan regresi. 40 laga benih 50000 dgn b10 = 40/40 identik dgn data G8 -> deterministik.
 - Kesimpulan: selisih 50000 (45.6) vs 80000 (35.2) = derau benih besar (~3.3 sigma) atau api sebenarnya ~40%. Angka TIDAK disetel; data `hasil/g9_bal/`.
 - Pemilik setuju S1 benih 110000 (kode HEAD): api 42.1, air 43.8, pasangan api-petir "!" -> gabungan 3 benih api 41.0% = lemah NYATA. Usulan r6 `hot_flames` 100/125/150 + uji berpasangan 960 laga (menunggu persetujuan).
+- r6 (disetujui pemilik) diuji berpasangan 960 laga: api +1.6 saja, vs petir 0 perubahan -> dikembalikan (rig = game/). Masalah inti = matchup api vs petir (32.9%).
+- Commit terakhir: lihat `git log`. Langkah berikutnya: sesi Opus baru, analisis api vs petir dari data yang ada (tanpa sim), rancang tuas, lapor pemilik, uji berpasangan, konfirmasi benih 140000.
 - Pelajaran: `uji_seimbang.sh` dengan `SP=` di luar rig WAJIB juga `PROJ=` (kalau tidak, 1200 laga gagal tanpa baris dalam ~1 mnt).
 
 ## 2026-10-03 -- sesi Claude Code cloud (Opus 5.5): Fase 9 G2 (AI mengejar bounty + U9 benih 80000, ZIP b15)

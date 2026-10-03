@@ -14,3 +14,9 @@ Kode b10 = commit b22f27b (git worktree di scratchpad + --import), rig/proj_tanp
    air 47.5 / angin 56.4 / api 41.0 / petir 52.1 / tanah 53.1. Api lemah NYATA (bukan derau); angin sedikit di atas 56.
    (Konfirmasi F5 benih 20000 = kode SEBELUM fitur Fase 5 -> api 46.5; penurunan muncul setelah Fase 5.)
    Catatan: run pertama gagal 1200/1200 karena PROJ tidak di-set (SP diarahkan ke scratchpad) -- dihapus & diulang.
+5) r6 (rig saja, DIKEMBALIKAN): hot_flames 90/110/130 -> 100/125/150. Uji berpasangan r6_berpasangan.txt (api-subset benih 80000 + 110000,
+   960 laga, benih SAMA dgn pembanding): 80000 35.2 -> 37.5, 110000 42.1 -> 43.1, gabungan 38.6 -> 40.3 (+1.6, < syarat +4).
+   Per lawan (lama->baru /120): 80000 air 37->38 angin 46->51 petir 38->38 tanah 48->53; 110000 air 56->56 angin 57->60 petir 41->41 tanah 48->50.
+   => kekuatan bakar TIDAK menyentuh masalah api vs petir (0 perubahan, 32.9% gabungan). Penyebab utama = matchup api-petir
+      (lihat RENCANA_fase4 F5 r3/r4: petir menang lewat TEMPO lumpuh+sewa, bukan koin; tuas r4 NILAI_PETIR_LEWAT_GILIRAN).
+   Jebakan/AI 2.32; 305.7 dtk. data_role.gd rig dikembalikan = game/ (tidak ada angka produksi berubah).

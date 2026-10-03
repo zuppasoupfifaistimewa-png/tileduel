@@ -1,0 +1,33 @@
+== semua: 960 baris, 960 sah, 0 gagal/macet/error
+  per role (menang / tampil, 95% CI):
+    air     146/ 240 =  60.8%  [ 54.5 -  66.8]
+    angin   129/ 240 =  53.8%  [ 47.4 -  59.9]
+    api     387/ 960 =  40.3%  [ 37.3 -  43.4]
+    petir   161/ 240 =  67.1%  [ 60.9 -  72.7]
+    tanah   137/ 240 =  57.1%  [ 50.8 -  63.2]
+  per pasangan (baris menang lawan kolom), tanda ! = batas bawah CI > 55%:
+    air    vs api    146/240 =  60.8% [ 54.5- 66.8]
+    angin  vs api    129/240 =  53.8% [ 47.4- 59.9]
+   !api    vs petir   79/240 =  32.9% [ 27.3- 39.1]
+    api    vs tanah  103/240 =  42.9% [ 36.8- 49.2]
+  jebakan/AI/pertandingan: rata2 2.32 median 2.0 dalam 2-6: 1270/1920 (66%)  sebaran {0: 253, 1: 388, 2: 441, 3: 414, 4: 256, 5: 107, 6: 52, 7: 9}
+  detik 2 pemain: n=960 rata2 305.7 (+-5.4 CI95)
+  cara berakhir: {'ronde': 729, 'start': 231}
+  sel role x preset (P14 TAMBAHAN B-f: ! wajib batas bawah CI>55%, x mati batas atas CI<42%):
+   !air    x attack       54/  81 =  66.7%  [ 55.9 -  76.0]
+    air    x balanced     50/  79 =  63.3%  [ 52.3 -  73.1]
+    air    x defense      42/  80 =  52.5%  [ 41.7 -  63.1]
+    angin  x attack       42/  80 =  52.5%  [ 41.7 -  63.1]
+    angin  x balanced     35/  72 =  48.6%  [ 37.4 -  59.9]
+    angin  x defense      52/  88 =  59.1%  [ 48.6 -  68.8]
+    api    x attack      139/ 327 =  42.5%  [ 37.3 -  47.9]
+    api    x balanced    124/ 331 =  37.5%  [ 32.4 -  42.8]
+    api    x defense     124/ 302 =  41.1%  [ 35.7 -  46.7]
+    petir  x attack       45/  73 =  61.6%  [ 50.2 -  71.9]
+   !petir  x balanced     63/  91 =  69.2%  [ 59.1 -  77.8]
+   !petir  x defense      53/  76 =  69.7%  [ 58.7 -  78.9]
+    tanah  x attack       36/  77 =  46.8%  [ 36.0 -  57.8]
+    tanah  x balanced     54/  87 =  62.1%  [ 51.6 -  71.5]
+    tanah  x defense      47/  76 =  61.8%  [ 50.6 -  71.9]
+  sacred/pertandingan: rata2 0.06 (n=960, dari 960 baris sah)
+  xprole0 slot 0: rata2 164.7 (n=960) -- 0 baris dilewati (tidak tersedia)
